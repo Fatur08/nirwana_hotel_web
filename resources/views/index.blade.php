@@ -87,7 +87,7 @@
 
         .kotak-std {
             background-color: #f7fc57ff;
-            color: white;
+            color: black;
             padding: 12px;
             border-radius: 10px;
             font-weight: bold;
