@@ -64,6 +64,17 @@
             width: 80%;
             border-radius: 10px;
         }
+
+
+
+        .kotak-dlx {
+            background-color: #ff3838ff;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +86,11 @@
         <img src="{{ asset('assets/img/nirwana_hotel.png') }}" 
              alt="Logo Hotel Nirwana" 
              style="width:290px; height:220px; margin-bottom: 15px;">
+        
+        
+        <div class="kotak-dlx">
+            Kamar Deluxe
+        </div>
 
         <div class="role-grid">
 
