@@ -75,6 +75,24 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+
+        .kotak-spr {
+            background-color: #25a6fbff;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .kotak-std {
+            background-color: #f7fc57ff;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +108,14 @@
         
         <div class="kotak-dlx">
             Kamar Deluxe
+        </div>
+
+        <div class="kotak-spr">
+            Kamar Superior
+        </div>
+
+        <div class="kotak-std">
+            Kamar Standar
         </div>
 
         <div class="role-grid">
