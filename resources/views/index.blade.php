@@ -97,6 +97,7 @@
         <div class="role-grid">
           <!-- Owner -->
           <div class="role-card">
+            <p><strong>DLX1</strong></p>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDLX">
               Informasi Kamar
             </button>
@@ -150,7 +151,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="modalDLXLabel">Informasi Kamar - Tipe Owner</h5>
+          <h5 class="modal-title" id="modalDLXLabel">Informasi Kamar - Tipe Deluxe</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
