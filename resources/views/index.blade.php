@@ -97,7 +97,7 @@
         <div class="role-grid">
           <!-- Owner -->
           <div class="role-card">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalOwner">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDLX">
               Informasi Kamar
             </button>
           </div>
@@ -144,7 +144,28 @@
     </div>
   </div>
 
-    <!-- Modal Owner -->
+
+  <!-- Modal Kamar Deluxe (DLX) -->
+  <div class="modal fade" id="modalDLX" tabindex="-1" aria-labelledby="modalDLXLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="modalDLXLabel">Informasi Kamar - Tipe Owner</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Tipe Kamar:</strong> Deluxe Room</p>
+          <p><strong>Fasilitas:</strong> AC, TV, WiFi, Kamar Mandi Dalam, Sarapan Gratis</p>
+          <p><strong>Harga:</strong> Rp 500.000 / malam</p>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  
+  
+  
+  <!-- Modal Owner -->
     <div class="modal fade" id="modalOwner" tabindex="-1" aria-labelledby="modalOwnerLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
