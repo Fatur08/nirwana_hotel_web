@@ -98,7 +98,7 @@
         <div class="role-grid">
           <!-- Owner -->
           <div class="role-card">
-            <h3><strong>DLX1</strong></h3>
+            <h5><strong>DLX1</strong></h5>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDLX">
               Informasi Kamar
             </button>
