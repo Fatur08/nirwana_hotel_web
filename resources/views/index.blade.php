@@ -97,7 +97,6 @@
         <div class="role-grid">
           <!-- Owner -->
           <div class="role-card">
-            <img src="{{ asset('assets/img/owner/login/loginowner.png') }}" alt="Login Owner">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalOwner">
               Informasi Kamar
             </button>
