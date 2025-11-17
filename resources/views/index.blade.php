@@ -37,7 +37,8 @@
       margin-top: 10px;
     }
     .role-card {
-      background-color: #000000ff;
+      background-color: #f8f9fa;
+      color: black;
       border-radius: 10px;
       padding: 15px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
