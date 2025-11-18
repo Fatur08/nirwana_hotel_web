@@ -86,7 +86,7 @@
 <body>
   <div class="login-container">
     <div class="login-title">
-        Aplikasi Manajemen<br>Hotel Nirwana
+        <h3>Aplikasi Manajemen<br>Hotel Nirwana</h3>
     </div>
     <img src="{{ asset('assets/img/nirwana_hotel.png') }}" 
          alt="Logo Hotel Nirwana" 
@@ -94,7 +94,7 @@
       
       
     <div class="kotak-dlx">
-        Kamar Deluxe
+        <h3>Kamar Deluxe</h3>
         <div class="role-grid">
           <!-- Owner -->
           <div class="role-card">
