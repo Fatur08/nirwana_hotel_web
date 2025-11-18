@@ -3,7 +3,7 @@
     <input type="text" readonly value="{{ $nomor_kamar }}" id="nomor_kamar" class="form-control" name="nomor_kamar" placeholder="nomor_kamar">
     <div class="row">
         <div class="col-12">
-            Nama Tamu   
+            <p><strong>Nama Tamu</strong></p>   
         </div>
     </div>
     <div class="row">
