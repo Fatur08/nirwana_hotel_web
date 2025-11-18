@@ -9,12 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class HotelController extends HotelController
 {
-    public function edit_owner_admin(Request $request)
+    public function modalDLX(Request $request)
     {
-        $id = $request->id;
-        $admin = DB::table('admin')->get();
-        $data = DB::table('admin')->where('id_admin', $id)->first();
-        return view('owner.data_induk.admin.edit_admin',compact('admin','data'));
+        $nomor_kamar = $request->nomor_kamar;
+        return view('modalDLX',compact('nomor_kamar'));
     }
 
     public function update_owner_admin($id_admin, Request $request)
