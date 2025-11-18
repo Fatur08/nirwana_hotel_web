@@ -14,7 +14,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Dashboard - Admin</title>
+    <title>Home Page - Hotel Nirwana</title>
     <script defer data-api="/stats/api/event" data-domain="preview.tabler.io" src="/stats/js/script.js"></script>
     <meta name="msapplication-TileColor" content=""/>
     <meta name="theme-color" content=""/>
@@ -105,12 +105,12 @@
     <script src="{{ asset('tabler/dist/js/demo-theme.min.js?1685973381') }}"></script>
     <div class="page">
       <!-- Sidebar -->
-      @include('layouts.admin.sidebar')
+      @include('layouts.sidebar')
       <!-- Navbar -->
-      @include('layouts.admin.header')
+      @include('layouts.header')
       <div class="page-wrapper">
         @yield('content')
-        @include('layouts.admin.footer')
+        @include('layouts.footer')
       </div>
     </div>
     <!-- Libs JS -->
