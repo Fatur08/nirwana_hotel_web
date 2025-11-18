@@ -2,7 +2,7 @@
 @section('content')
 <form action="/modalDLX/update_modalDLX" method="POST" id="frmmodalDLX" enctype="multipart/form-data">
     @csrf
-    <input type="text" readonly value="{{ $nomor_kamar }}" id="nomor_kamar" class="form-control" name="nomor_kamar" placeholder="nomor_kamar">
+    <input type="text" readonly value="{{ $nomor_kamar }}" id="nomor_kamar" class="form-control" name="nomor_kamar" placeholder="nomor_kamar" hidden>
     <div class="row">
         <div class="col-12">
             <h5>Nama Tamu</h5>
