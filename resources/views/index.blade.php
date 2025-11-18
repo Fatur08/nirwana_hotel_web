@@ -77,7 +77,7 @@
     margin-bottom: 10px;
   }
 </style>
-<div class="body">
+<div class="body" style="margin-top: 70px;">
   <div class="login-container">
     <div class="login-title">
         <h3>Aplikasi Manajemen<br>Hotel Nirwana</h3>
