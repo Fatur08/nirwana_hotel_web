@@ -104,13 +104,8 @@
   <body >
     <script src="{{ asset('tabler/dist/js/demo-theme.min.js?1685973381') }}"></script>
     <div class="page">
-      <!-- Sidebar -->
-      @include('layouts.sidebar')
-      <!-- Navbar -->
-      @include('layouts.header')
       <div class="page-wrapper">
         @yield('content')
-        @include('layouts.footer')
       </div>
     </div>
     <!-- Libs JS -->
