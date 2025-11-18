@@ -99,9 +99,9 @@
           <!-- Owner -->
           <div class="role-card">
             <h5><strong>DLX1</strong></h5>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDLX">
+            <a href="#" class="modalDLX btn btn-primary" nomor_kamar="1">
               Informasi Kamar
-            </button>
+            </a>
           </div>
         </div>
     </div>
@@ -113,128 +113,44 @@
     <div class="kotak-std">
         Kamar Standar
     </div>
-
-    <div class="role-grid">
-        <!-- Owner -->
-        <div class="role-card">
-            <img src="{{ asset('assets/img/owner/login/loginowner.png') }}" alt="Login Owner">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalOwner">
-                Informasi Kamar
-            </button>
-        </div>
-        <!-- Admin -->
-        <div class="role-card">
-            <img src="{{ asset('assets/img/owner/login/loginadmin.png') }}" alt="Login Admin">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAdmin">
-                Informasi Kamar
-            </button>
-        </div>
-        <!-- Kepala Dapur -->
-        <div class="role-card">
-            <img src="{{ asset('assets/img/login/login_chef.png') }}" alt="Login Kepala Dapur">
-            <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#modalKepalaDapur">
-                Informasi Kamar
-            </button>
-        </div>
-        <!-- Distributor -->
-        <div class="role-card">
-            <img src="{{ asset('assets/img/login/login_distributor.png') }}" alt="Login Distributor">
-            <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#modalDistributor">
-                Informasi Kamar
-            </button>
-        </div>
-    </div>
   </div>
 
 
   <!-- Modal Kamar Deluxe (DLX) -->
-  <div class="modal fade" id="modalDLX" tabindex="-1" aria-labelledby="modalDLXLabel" aria-hidden="true">
+  <div class="modal fade" id="modal-DLX" tabindex="-1" aria-labelledby="modalDLXLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="modalDLXLabel">Informasi Kamar - Tipe Deluxe</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body">
-          <p><strong>Tipe Kamar:</strong> Deluxe Room</p>
-          <p><strong>Fasilitas:</strong> AC, TV, WiFi, Kamar Mandi Dalam, Sarapan Gratis</p>
-          <p><strong>Harga:</strong> Rp 500.000 / malam</p>
+        <div class="modal-body" id="loadmodalDLX">
         </div>
       </div>
     </div>
   </div>
-    
-  
-  
-  
-  <!-- Modal Owner -->
-    <div class="modal fade" id="modalOwner" tabindex="-1" aria-labelledby="modalOwnerLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-primary text-white">
-            <h5 class="modal-title" id="modalOwnerLabel">Informasi Kamar - Tipe Owner</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <p><strong>Tipe Kamar:</strong> Deluxe Room</p>
-            <p><strong>Fasilitas:</strong> AC, TV, WiFi, Kamar Mandi Dalam, Sarapan Gratis</p>
-            <p><strong>Harga:</strong> Rp 500.000 / malam</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Modal Admin -->
-    <div class="modal fade" id="modalAdmin" tabindex="-1" aria-labelledby="modalAdminLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-success text-white">
-            <h5 class="modal-title" id="modalAdminLabel">Informasi Kamar - Tipe Admin</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <p><strong>Tipe Kamar:</strong> Superior Room</p>
-            <p><strong>Fasilitas:</strong> AC, TV, WiFi</p>
-            <p><strong>Harga:</strong> Rp 350.000 / malam</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Kepala Dapur -->
-    <div class="modal fade" id="modalKepalaDapur" tabindex="-1" aria-labelledby="modalKepalaDapurLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-warning text-white">
-            <h5 class="modal-title" id="modalKepalaDapurLabel">Informasi Kamar - Tipe Chef</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <p><strong>Tipe Kamar:</strong> Standard Room</p>
-            <p><strong>Fasilitas:</strong> Kipas Angin, TV</p>
-            <p><strong>Harga:</strong> Rp 250.000 / malam</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Distributor -->
-    <div class="modal fade" id="modalDistributor" tabindex="-1" aria-labelledby="modalDistributorLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header bg-info text-white">
-            <h5 class="modal-title" id="modalDistributorLabel">Informasi Kamar - Tipe Distributor</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <p><strong>Tipe Kamar:</strong> Family Room</p>
-            <p><strong>Fasilitas:</strong> 2 Tempat Tidur, AC, TV, Kulkas Mini</p>
-            <p><strong>Harga:</strong> Rp 600.000 / malam</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(function(){
+      $(".modalDLX").click(function(){
+        var nomor_kamar = $(this).attr('nomor_kamar');
+        $.ajax({
+          type:'POST',
+          url:'/murid/edit',
+          cache:false,
+          data:{
+            _token : "{{ csrf_token() }}",
+            nomor_kamar : nomor_kamar
+          },
+          success:function(respond){
+            $("#loadmodalDLX").html(respond);
+          }
+        });
+        $("#modal-DLX").modal("show");
+      });
+    });
+  </script>
 </body>
 </html>
