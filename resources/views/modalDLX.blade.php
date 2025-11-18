@@ -3,7 +3,7 @@
     <input type="text" readonly value="{{ $nomor_kamar }}" id="nomor_kamar" class="form-control" name="nomor_kamar" placeholder="nomor_kamar">
     <div class="row">
         <div class="col-12">
-            <p><strong>Nama Tamu</strong></p>   
+            <h5>Nama Tamu</h5>
         </div>
     </div>
     <div class="row">
@@ -19,7 +19,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            Jumlah Kamar Dipesan    
+            <h5>Jumlah Kamar Dipesan</h5>
         </div>
     </div>
     <div class="row">
@@ -35,7 +35,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            Check-In    
+            <h5>Check-In</h5>
         </div>
     </div>
     <div class="row">
@@ -51,7 +51,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            Check-Out   
+            <h5>Check-Out</h5>
         </div>
     </div>
     <div class="row">
@@ -67,7 +67,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            Biaya Tambahan (Opsional)   
+            <h5>Biaya Tambahan (Opsional)</h5>
         </div>
     </div>
     <div class="row">
