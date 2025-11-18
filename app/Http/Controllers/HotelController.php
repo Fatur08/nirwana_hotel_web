@@ -11,6 +11,4 @@ class HotelController extends Controller
         $nomor_kamar = $request->nomor_kamar;
         return view('modalDLX',compact('nomor_kamar'));
     }
-
-    
 }

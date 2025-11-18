@@ -103,33 +103,6 @@
             autoclose: true,
             todayHighlight: true
         })
-
-        $("#frmmodalDLX").submit(function(){
-            var modal_masuk = $("#modal_masuk").val();
-            var modal_keluar = $("#modal_keluar").val();
-            var tanggal_data_koperasi = $("#tanggal_data_koperasi").val();
-            if(modal_masuk=0){
-                Swal.fire({
-                    title: 'Warning!',
-                    text: 'Modal Masuk Harus Diisi',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                  }).then(()=> {
-                      $("#modal_masuk").focus();
-                  });
-                return false;
-            } else if (modal_keluar=0){
-                Swal.fire({
-                    title: 'Warning!',
-                    text: 'Modal Keluar Harus Diisi',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                  }).then(()=> {
-                      $("#modal_keluar").focus();
-                  });
-                return false;
-            }
-        });
     });
 </script>
 @endpush
