@@ -138,7 +138,7 @@
         var nomor_kamar = $(this).attr('nomor_kamar');
         $.ajax({
           type:'POST',
-          url:'/murid/edit',
+          url:'/modalDLX',
           cache:false,
           data:{
             _token : "{{ csrf_token() }}",
