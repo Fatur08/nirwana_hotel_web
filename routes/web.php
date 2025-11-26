@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::post('/modalDLX', [HotelController::class,'modalDLX']);
+Route::post('/TambahModalDLX', [HotelController::class,'TambahModalDLX']);

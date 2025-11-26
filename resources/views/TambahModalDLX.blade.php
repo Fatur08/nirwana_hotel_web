@@ -24,15 +24,20 @@
             <h5>Jumlah Kamar Dipesan</h5>
         </div>
     </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <select id="jumlah_kamar_dipesan" class="form-control">
+            </select>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
-            <div class="input-icon mb-3">
-                <span class="input-icon-addon">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/user -->
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-barcode"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7v-1a2 2 0 0 1 2 -2h2" /><path d="M4 17v1a2 2 0 0 0 2 2h2" /><path d="M16 4h2a2 2 0 0 1 2 2v1" /><path d="M16 20h2a2 2 0 0 0 2 -2v-1" /><path d="M5 11h1v2h-1z" /><path d="M10 11l0 2" /><path d="M14 11h1v2h-1z" /><path d="M19 11l0 2" /></svg>
-                </span>
-                <input type="text" value="" id="jumlah_kamar_dipesan" class="form-control" name="jumlah_kamar_dipesan" placeholder="Masukkan Jumlah Kamar">
-            </div>
+            <h5>Kamar Yang Tersedia</h5>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div id="list_nomor_kamar"></div>
         </div>
     </div>
     <div class="row">
@@ -86,7 +91,7 @@
     <div class="row">
         <div class="col-12">
             <div class="form-group">
-                <button class="btn btn-primary w-100">
+                <button class="btn btn-danger w-100">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-send"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14l11 -11" /><path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" /></svg>
                     Simpan
                 </button>
@@ -104,5 +109,75 @@
             todayHighlight: true
         })
     });
+
+
+
+    const kamar = {
+        DLX: @json($kamar_DLX),
+        SPR: @json($kamar_SPR),
+        STD: @json($kamar_STD)
+    };
+
+    // ✅ Ambil tipe dari hidden input/config kamu
+    const tipe = "{{ $nomor_kamar == 1 ? 'DLX' : ($nomor_kamar == 2 ? 'SPR' : 'STD') }}";
+
+    const kamarTersedia = kamar[tipe];
+
+    // ✅ Isi select jumlah kamar otomatis
+    let jumlahHTML = '';
+    for(let i = 1; i <= kamarTersedia.length; i++){
+        jumlahHTML += `<option value="${i}">${i} Kamar</option>`;
+    }
+    $("#jumlah_kamar_dipesan").html(jumlahHTML);
+
+    // ✅ Render select kamar
+    function renderSelect(jumlah){
+        let html = "";
+
+        for (let i = 1; i <= jumlah; i++) {
+            html += `
+                <div class="mt-2">
+                    <label>Pilih Nomor Kamar ${i}</label>
+                    <select name="nomor_kamar_dipilih[]" class="form-control kamar-select">
+                        <option value="">-- Pilih Kamar --</option>
+                        ${kamarTersedia.map(k => 
+                            `<option value="${k.nomor_kamar}">
+                                ${k.kode_kamar}-${k.nomor_kamar}
+                            </option>`
+                        ).join("")}
+                    </select>
+                </div>
+            `;
+        }
+
+        $("#list_nomor_kamar").html(html);
+    }
+
+    // ✅ Saat jumlah kamar berubah
+    $("#jumlah_kamar_dipesan").on("change", function () {
+        renderSelect($(this).val());
+    });
+
+    // ✅ Agar tidak bisa pilih kamar yang sama
+    $(document).on("change", ".kamar-select", function () {
+        let selected = [];
+
+        $(".kamar-select").each(function () {
+            if ($(this).val()) {
+                selected.push($(this).val());
+            }
+        });
+
+        $(".kamar-select option").prop("disabled", false);
+
+        selected.forEach(function (val) {
+            $(".kamar-select").not(function () {
+                return $(this).val() == val;
+            }).find(`option[value="${val}"]`).prop("disabled", true);
+        });
+    });
+
+    // ✅ Auto trigger saat pertama kali dibuka
+    $("#jumlah_kamar_dipesan").trigger("change");
 </script>
 @endpush

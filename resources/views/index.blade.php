@@ -89,11 +89,14 @@
       
     <div class="kotak-dlx">
         <h3>Kamar Deluxe</h3>
+        <a href="#" class="TambahModalDLX btn btn-success mb-2" nomor_kamar="1">
+          Tambah Pemesanan
+        </a>
         <div class="role-grid">
           <!-- Owner -->
           <div class="role-card">
             <h5><strong>DLX1</strong></h5>
-            <a href="#" class="modalDLX btn btn-primary" nomor_kamar="1">
+            <a href="#" class="TambahModalDLX btn btn-primary" nomor_kamar="1">
               Informasi Kamar
             </a>
           </div>
@@ -111,14 +114,14 @@
 
 
   <!-- Modal Kamar Deluxe (DLX) -->
-  <div class="modal fade" id="modal-DLX" tabindex="-1" aria-labelledby="modalDLXLabel" aria-hidden="true">
+  <div class="modal fade" id="modal-DLX" tabindex="-1" aria-labelledby="TambahModalDLXLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="modalDLXLabel">Informasi Kamar - Tipe Deluxe</h5>
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="TambahModalDLXLabel">Tambah Pemesanan Kamar - Tipe Deluxe</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body" id="loadmodalDLX">
+        <div class="modal-body" id="loadTambahModalDLX">
         </div>
       </div>
     </div>
@@ -128,18 +131,18 @@
 @push('myscript')
 <script>
   $(function(){
-    $(".modalDLX").click(function(){
+    $(".TambahModalDLX").click(function(){
       var nomor_kamar = $(this).attr('nomor_kamar');
       $.ajax({
         type:'POST',
-        url:'/modalDLX',
+        url:'/TambahModalDLX',
         cache:false,
         data:{
           _token : "{{ csrf_token() }}",
           nomor_kamar : nomor_kamar
         },
         success:function(respond){
-          $("#loadmodalDLX").html(respond);
+          $("#loadTambahModalDLX").html(respond);
         }
       });
       $("#modal-DLX").modal("show");
