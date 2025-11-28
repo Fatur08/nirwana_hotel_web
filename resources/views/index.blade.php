@@ -217,12 +217,6 @@ $(function(){
   });
 });
 
-// ✅ RESET SAAT MODAL DIBUKA
-$(document).on('shown.bs.modal', '#modal-DLX', function () {
-    $('#list_nomor_kamar').html('');
-    window.kamar = [];
-});
-
 
 
 // ✅ GENERATE NOMOR KAMAR
@@ -232,33 +226,51 @@ $(document).on('click', '.TambahModalDLX', function(e){
    let tipe = $(this).attr('tipe_kamar');
    let tanggal = $(this).data('tanggal');
 
+   console.log('TANGGAL:', tanggal);
+   console.log('TIPE:', tipe);
+
    if(!tanggal){
       $('#jumlah_kamar_dipesan').html(`<option value="">Silakan cari tanggal dulu</option>`);
       return;
    }
 
-   $.post('/getKamarTersedia',{
-      tanggal: tanggal,
-      tipe_kamar: tipe
-   }, function(res){
+   $.ajax({
+      url: '/getKamarTersedia',
+      type: 'POST',
+      dataType: 'json', // ✅ INI KUNCI UTAMANYA
+      data: {
+         tanggal: tanggal,
+         tipe_kamar: tipe
+      },
+      success: function(res){
+         console.log("RESPON FINAL:", res);
 
-      console.log("RESPON FINAL:", res);
+         if (!res || res.length === 0) {
+            $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
+            return;
+         }
 
-      if(res.length == 0){
-         $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
-         return;
+         let opt = `<option value="">-- Pilih --</option>`;
+         for(let i = 1; i <= res.length; i++){
+            opt += `<option value="${i}">${i}</option>`;
+         }
+
+         $('#jumlah_kamar_dipesan').html(opt);
+
+         // ✅ simpan untuk select nomor kamar
+         window.kamar = res;
+      },
+      error: function(xhr){
+         console.error("AJAX ERROR:", xhr.responseText);
       }
-
-      let opt = `<option value="">-- Pilih --</option>`;
-      for(let i = 1; i <= res.length; i++){
-         opt += `<option value="${i}">${i}</option>`;
-      }
-
-      $('#jumlah_kamar_dipesan').html(opt);
-
-      // ✅ simpan untuk select nomor kamar
-      window.kamar = res;
    });
+});
+
+
+// ✅ RESET SAAT MODAL DIBUKA
+$(document).on('shown.bs.modal', '#modal-DLX', function () {
+    $('#list_nomor_kamar').html('');
+    window.kamar = [];
 });
 
 
