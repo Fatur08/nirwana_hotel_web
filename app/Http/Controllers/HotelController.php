@@ -113,9 +113,8 @@ class HotelController extends Controller
             $biaya = $request->jumlah_kamar_dipesan * $after_10_persen * $lama_inap;
             $pajak = $biaya * 0.19;
             $biaya_tambahan = $request->biaya_tambahan ?? 0;
-            $diskon = 0;
 
-            $total_diterima = ($biaya - $pajak) + $biaya_tambahan - $diskon;
+            $total_diterima = ($biaya - $pajak) + $biaya_tambahan;
 
             // ==============================
             // 4. INSERT LAPORAN KEUANGAN
@@ -134,7 +133,6 @@ class HotelController extends Controller
                 'biaya' => $biaya,
                 'biaya_tambahan' => $biaya_tambahan,
                 'pajak' => $pajak,
-                'diskon' => $diskon,
                 'total_diterima' => $total_diterima,
             ]);
 
