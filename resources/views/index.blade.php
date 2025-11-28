@@ -219,7 +219,6 @@ $(function(){
 
 // ✅ RESET SAAT MODAL DIBUKA
 $(document).on('shown.bs.modal', '#modal-DLX', function () {
-    $('#jumlah_kamar_dipesan').html('');
     $('#list_nomor_kamar').html('');
     window.kamar = [];
 });
@@ -233,47 +232,33 @@ $(document).on('click', '.TambahModalDLX', function(e){
    let tipe = $(this).attr('tipe_kamar');
    let tanggal = $(this).data('tanggal');
 
-   console.log("TANGGAL DI MODAL:", tanggal);
-
    if(!tanggal){
       $('#jumlah_kamar_dipesan').html(`<option value="">Silakan cari tanggal dulu</option>`);
       return;
    }
 
-    $.post('/getKamarTersedia',{
-       tanggal: tanggal,
-       tipe_kamar: tipe
-    }, function(res){
-    
-       console.log("RESPON KAMAR:", res); // WAJIB cek ini
-    
-       let dataKamar = [];
-    
-       // ✅ Jika response berbentuk object: { kamar: [...] }
-       if(res.kamar){
-          dataKamar = res.kamar;
-       } 
-       // ✅ Jika response langsung array
-       else if(Array.isArray(res)){
-          dataKamar = res;
-       }
-     
-       if(dataKamar.length == 0){
-          $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
-          return;
-       }
-     
-       let opt = `<option value="">-- Pilih --</option>`;
-       for(let i = 1; i <= dataKamar.length; i++){
-          opt += `<option value="${i}">${i}</option>`;
-       }
-     
-       $('#jumlah_kamar_dipesan').html(opt);
-     
-       // ✅ Simpan global untuk select nomor kamar
-       window.kamar = dataKamar;
-       console.log(res);
-    });
+   $.post('/getKamarTersedia',{
+      tanggal: tanggal,
+      tipe_kamar: tipe
+   }, function(res){
+
+      console.log("RESPON FINAL:", res);
+
+      if(res.length == 0){
+         $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
+         return;
+      }
+
+      let opt = `<option value="">-- Pilih --</option>`;
+      for(let i = 1; i <= res.length; i++){
+         opt += `<option value="${i}">${i}</option>`;
+      }
+
+      $('#jumlah_kamar_dipesan').html(opt);
+
+      // ✅ simpan untuk select nomor kamar
+      window.kamar = res;
+   });
 });
 
 
