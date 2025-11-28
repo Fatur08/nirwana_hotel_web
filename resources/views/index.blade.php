@@ -113,7 +113,20 @@
     <img src="{{ asset('assets/img/nirwana_hotel.png') }}" 
          alt="Logo Hotel Nirwana" 
          style="width:290px; height:220px; margin-bottom: 15px;">
-      
+    
+         
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
       
     <div class="kotak-cari">
       <h3>Cari Tanggal</h3>
