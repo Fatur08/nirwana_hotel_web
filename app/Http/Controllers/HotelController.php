@@ -7,41 +7,65 @@ use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
+    public function index(Request $request)
+    {
+        $cari_tanggal = $request->cari_tanggal;
+        
+        $kamarDLX = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->where('k.kode_kamar', 'DLX')
+            ->select('nk.id_nomor_kamar', 'nk.nomor_kamar', 'k.kode_kamar')
+            ->get();
+
+        $kamarSPR = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->where('k.kode_kamar', 'SPR')
+            ->select('nk.id_nomor_kamar', 'nk.nomor_kamar', 'k.kode_kamar')
+            ->get();
+
+        $kamarSTD = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->where('k.kode_kamar', 'STD')
+            ->select('nk.id_nomor_kamar', 'nk.nomor_kamar', 'k.kode_kamar')
+            ->get();
+
+        return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarSPR', 'kamarSTD'));
+    }
+    
+    
     public function TambahModalDLX(Request $request)
     {
         $nomor_kamar = $request->nomor_kamar;
+        return view('TambahModalDLX',compact('nomor_kamar'));
+    }
 
-        // Ambil kamar yang masih tersedia
-        $kamar_DLX = DB::table('nomor_kamar')
-            ->join('kamar', 'nomor_kamar.id_kamar', '=', 'kamar.id_kamar')
-            ->where('nomor_kamar.status_dipesan', 0)
-            ->where('nomor_kamar.id_kamar', 1)
+    public function getKamarTersedia(Request $request)
+    {
+        $tanggal = $request->tanggal;
+        $tipe = $request->tipe_kamar;
+    
+        // ✅ PROTEKSI AGAR TIDAK ERROR
+        if (!$tanggal || !$tipe) {
+            return response()->json([]);
+        }
+    
+        $kamarTersedia = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->where('k.id_kamar', $tipe)
+            ->whereNotIn('nk.id_nomor_kamar', function($q) use ($tanggal){
+                $q->select('id_nomor_kamar')
+                  ->from('histori_kamar')
+                  ->whereDate('check_in', '<=', $tanggal)
+                  ->whereDate('check_out', '>', $tanggal);
+            })
             ->select(
-                'nomor_kamar.nomor_kamar',
-                'kamar.kode_kamar'
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'k.kode_kamar',
+                'k.tipe_kamar'
             )
             ->get();
             
-        $kamar_SPR = DB::table('nomor_kamar')
-            ->join('kamar', 'nomor_kamar.id_kamar', '=', 'kamar.id_kamar')
-            ->where('nomor_kamar.status_dipesan', 0)
-            ->where('nomor_kamar.id_kamar', 2)
-            ->select(
-                'nomor_kamar.nomor_kamar',
-                'kamar.kode_kamar'
-            )
-            ->get();
-            
-        $kamar_STD = DB::table('nomor_kamar')
-            ->join('kamar', 'nomor_kamar.id_kamar', '=', 'kamar.id_kamar')
-            ->where('nomor_kamar.status_dipesan', 0)
-            ->where('nomor_kamar.id_kamar', 3)
-            ->select(
-                'nomor_kamar.nomor_kamar',
-                'kamar.kode_kamar'
-            )
-            ->get();
-
-        return view('TambahModalDLX',compact('nomor_kamar', 'kamar_DLX', 'kamar_SPR', 'kamar_STD'));
+        return response()->json($kamarTersedia);
     }
 }

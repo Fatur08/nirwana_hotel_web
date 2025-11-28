@@ -1,5 +1,3 @@
-@extends('layouts.tabler')
-@section('content')
 <form action="/modalDLX/update_modalDLX" method="POST" id="frmmodalDLX" enctype="multipart/form-data">
     @csrf
     <input type="text" readonly value="{{ $nomor_kamar }}" id="nomor_kamar" class="form-control" name="nomor_kamar" placeholder="nomor_kamar" hidden>
@@ -26,7 +24,7 @@
     </div>
     <div class="row mb-3">
         <div class="col-12">
-            <select id="jumlah_kamar_dipesan" class="form-control">
+            <select id="jumlah_kamar_dipesan" name="jumlah_kamar_dipesan" class="form-control">
             </select>
         </div>
     </div>
@@ -99,85 +97,3 @@
         </div>
     </div>
 </form>
-@endsection
-@push('myscript')
-<script>
-    $(function(){
-        $(".flatpickr").datepicker({
-            format: "yyyy-mm-dd",
-            autoclose: true,
-            todayHighlight: true
-        })
-    });
-
-
-
-    const kamar = {
-        DLX: @json($kamar_DLX),
-        SPR: @json($kamar_SPR),
-        STD: @json($kamar_STD)
-    };
-
-    // ✅ Ambil tipe dari hidden input/config kamu
-    const tipe = "{{ $nomor_kamar == 1 ? 'DLX' : ($nomor_kamar == 2 ? 'SPR' : 'STD') }}";
-
-    const kamarTersedia = kamar[tipe];
-
-    // ✅ Isi select jumlah kamar otomatis
-    let jumlahHTML = '';
-    for(let i = 1; i <= kamarTersedia.length; i++){
-        jumlahHTML += `<option value="${i}">${i} Kamar</option>`;
-    }
-    $("#jumlah_kamar_dipesan").html(jumlahHTML);
-
-    // ✅ Render select kamar
-    function renderSelect(jumlah){
-        let html = "";
-
-        for (let i = 1; i <= jumlah; i++) {
-            html += `
-                <div class="mt-2">
-                    <label>Pilih Nomor Kamar ${i}</label>
-                    <select name="nomor_kamar_dipilih[]" class="form-control kamar-select">
-                        <option value="">-- Pilih Kamar --</option>
-                        ${kamarTersedia.map(k => 
-                            `<option value="${k.nomor_kamar}">
-                                ${k.kode_kamar}-${k.nomor_kamar}
-                            </option>`
-                        ).join("")}
-                    </select>
-                </div>
-            `;
-        }
-
-        $("#list_nomor_kamar").html(html);
-    }
-
-    // ✅ Saat jumlah kamar berubah
-    $("#jumlah_kamar_dipesan").on("change", function () {
-        renderSelect($(this).val());
-    });
-
-    // ✅ Agar tidak bisa pilih kamar yang sama
-    $(document).on("change", ".kamar-select", function () {
-        let selected = [];
-
-        $(".kamar-select").each(function () {
-            if ($(this).val()) {
-                selected.push($(this).val());
-            }
-        });
-
-        $(".kamar-select option").prop("disabled", false);
-
-        selected.forEach(function (val) {
-            $(".kamar-select").not(function () {
-                return $(this).val() == val;
-            }).find(`option[value="${val}"]`).prop("disabled", true);
-        });
-    });
-
-    // ✅ Auto trigger saat pertama kali dibuka
-    $("#jumlah_kamar_dipesan").trigger("change");
-</script>
-@endpush
