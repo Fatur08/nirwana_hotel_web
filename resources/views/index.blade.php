@@ -197,73 +197,56 @@
 @endsection
 @push('myscript')
 <script>
-$(function(){
-  $(".TambahModalDLX").click(function(){
-    var tipe_kamar = $(this).attr('tipe_kamar');
+$(document).on('click', '.TambahModalDLX', function(e){
+    e.preventDefault();
+
+    let tipe = $(this).attr('tipe_kamar');
+    let tanggal = $(this).data('tanggal');
 
     $.ajax({
-      type:'POST',
-      url:'/TambahModalDLX',
-      cache:false,
-      data:{
-        _token : "{{ csrf_token() }}",
-        tipe_kamar : tipe_kamar
-      },
-      success:function(respond){
-        $("#loadTambahModalDLX").html(respond);
-        $("#modal-DLX").modal("show"); // ✅ DIPINDAH KE SINI
-      }
+        type:'POST',
+        url:'/TambahModalDLX',
+        data:{
+            _token : "{{ csrf_token() }}",
+            tipe_kamar : tipe
+        },
+        success:function(respond){
+            $("#loadTambahModalDLX").html(respond);
+            $("#modal-DLX").modal("show");
+
+            // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
+            if(!tanggal){
+                $('#jumlah_kamar_dipesan').html(`<option value="">Silakan cari tanggal dulu</option>`);
+                return;
+            }
+
+            $.ajax({
+                url: '/getKamarTersedia',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    tanggal: tanggal,
+                    tipe_kamar: tipe
+                },
+                success: function(res){
+                    console.log("RESPON FINAL:", res);
+
+                    if (!res || res.length === 0) {
+                        $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
+                        return;
+                    }
+
+                    let opt = `<option value="">-- Pilih --</option>`;
+                    for(let i = 1; i <= res.length; i++){
+                        opt += `<option value="${i}">${i}</option>`;
+                    }
+
+                    $('#jumlah_kamar_dipesan').html(opt);
+                    window.kamar = res;
+                }
+            });
+        }
     });
-  });
-});
-
-
-
-// ✅ GENERATE NOMOR KAMAR
-$(document).on('click', '.TambahModalDLX', function(e){
-   e.preventDefault();
-
-   let tipe = $(this).attr('tipe_kamar');
-   let tanggal = $(this).data('tanggal');
-
-   console.log('TANGGAL:', tanggal);
-   console.log('TIPE:', tipe);
-
-   if(!tanggal){
-      $('#jumlah_kamar_dipesan').html(`<option value="">Silakan cari tanggal dulu</option>`);
-      return;
-   }
-
-   $.ajax({
-      url: '/getKamarTersedia',
-      type: 'POST',
-      dataType: 'json', // ✅ INI KUNCI UTAMANYA
-      data: {
-         tanggal: tanggal,
-         tipe_kamar: tipe
-      },
-      success: function(res){
-         console.log("RESPON FINAL:", res);
-
-         if (!res || res.length === 0) {
-            $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
-            return;
-         }
-
-         let opt = `<option value="">-- Pilih --</option>`;
-         for(let i = 1; i <= res.length; i++){
-            opt += `<option value="${i}">${i}</option>`;
-         }
-
-         $('#jumlah_kamar_dipesan').html(opt);
-
-         // ✅ simpan untuk select nomor kamar
-         window.kamar = res;
-      },
-      error: function(xhr){
-         console.error("AJAX ERROR:", xhr.responseText);
-      }
-   });
 });
 
 
