@@ -29,24 +29,24 @@
         </tr>
 
         <tr>
-    <td><b>Check In</b></td>
-        <td>
-            {{ $histori_kamar->check_in
-                ? \Carbon\Carbon::parse($histori_kamar->check_in)->translatedFormat('d F Y')
-                : '-' 
-            }}
-        </td>
-    </tr>
-        
-    <tr>
-        <td><b>Check Out</b></td>
-        <td>
-            {{ $histori_kamar->check_out
-                ? \Carbon\Carbon::parse($histori_kamar->check_out)->translatedFormat('d F Y')
-                : '-' 
-            }}
-        </td>
-    </tr>
+            <td><b>Check In</b></td>
+            <td>
+                {{ $histori_kamar->check_in
+                    ? \Carbon\Carbon::parse($histori_kamar->check_in)->translatedFormat('l, d F Y')
+                    : '-' 
+                }}
+            </td>
+        </tr>
+            
+        <tr>
+            <td><b>Check Out</b></td>
+            <td>
+                {{ $histori_kamar->check_out
+                    ? \Carbon\Carbon::parse($histori_kamar->check_out)->translatedFormat('l, d F Y')
+                    : '-' 
+                }}
+            </td>
+        </tr>
     </table>
 
     <button class="btn btn-danger w-100 mt-3" type="submit">
