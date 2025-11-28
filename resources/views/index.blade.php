@@ -120,7 +120,7 @@
             {{ session('success') }}
         </div>
     @endif
-    
+
     @if (session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -173,7 +173,7 @@
               <h5><strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong></h5>
 
               <a href="#" 
-                 class="TambahModalDLX btn btn-primary w-100"
+                 class="ModalDLX btn btn-primary w-100"
                  nomor_kamar="{{ $dlx->id_nomor_kamar }}"
                  tipe_kamar="1">
                  Informasi Kamar
@@ -193,7 +193,7 @@
   </div>
 
 
-  <!-- Modal Kamar Deluxe (DLX) -->
+  <!-- Modal Tambah Kamar Deluxe (DLX) -->
   <div class="modal fade" id="modal-DLX" tabindex="-1" aria-labelledby="TambahModalDLXLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -206,10 +206,92 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Modal Informasi Kamar Deluxe (DLX) -->
+  <div class="modal fade" id="modalinfo-DLX" tabindex="-1" aria-labelledby="ModalDLXLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="ModalDLXLabel">Informasi Kamar - Tipe Deluxe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="loadModalDLX">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 @push('myscript')
 <script>
+$(document).on('change', '#tgl_tampil', function(){
+    let tanggal = $(this).val(); // contoh: 27 November 2025
+
+    let parts = tanggal.split(" ");
+    let hari = parts[0];
+    let bulanText = parts[1];
+    let tahun = parts[2];
+
+    let bulanMap = {
+        "Januari":"01","Februari":"02","Maret":"03","April":"04","Mei":"05","Juni":"06",
+        "Juli":"07","Agustus":"08","September":"09","Oktober":"10","November":"11","Desember":"12"
+    };
+
+    let formatDB = `${tahun}-${bulanMap[bulanText]}-${hari}`;
+
+    $('#cari_tanggal').val(formatDB);
+});
+
+
+$(document).on('focus', '.flatpickr', function () {
+    $(this).datepicker({
+        format: "dd MM yyyy",   // format tampilan untuk user
+        autoclose: true,
+        todayHighlight: true,
+        language: "id"
+    }).on('changeDate', function (e) {
+        let tanggalDB = e.format('yyyy-mm-dd'); // format database
+
+        // simpan ke hidden input yang sesuai
+        if($(this).attr('id') === 'check_in_tampil') {
+            $('#check_in').val(tanggalDB);
+        } else if($(this).attr('id') === 'check_out_tampil') {
+            $('#check_out').val(tanggalDB);
+        } else if($(this).attr('id') === 'tgl_tampil') {
+            $('#cari_tanggal').val(tanggalDB);
+        }
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let today = new Date();
+
+    // ✅ FORMAT UNTUK DATABASE (YYYY-MM-DD)
+    let yyyy = today.getFullYear();
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let dd = String(today.getDate()).padStart(2, '0');
+    let formatDB = `${yyyy}-${mm}-${dd}`;
+
+    // ✅ FORMAT UNTUK TAMPILAN (27 November 2025)
+    let bulanIndo = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+
+    let formatView = `${dd} ${bulanIndo[today.getMonth()]} ${yyyy}`;
+
+    // ✅ SET OTOMATIS KE INPUT
+    document.getElementById("tgl_tampil").value = formatView;
+    document.getElementById("cari_tanggal").value = formatDB;
+
+    console.log("AUTO TANGGAL AKTIF:", formatDB);
+});
+
+
+
+
 $(document).on('click', '.TambahModalDLX', function(e){
     e.preventDefault();
 
@@ -339,68 +421,31 @@ $(document).on('change', '.select-kamar', function () {
 
 
 
-$(document).on('focus', '.flatpickr', function () {
-    $(this).datepicker({
-        format: "dd MM yyyy",   // format tampilan untuk user
-        autoclose: true,
-        todayHighlight: true,
-        language: "id"
-    }).on('changeDate', function (e) {
-        let tanggalDB = e.format('yyyy-mm-dd'); // format database
+$(document).on('click', '.ModalDLX', function(e){
+    e.preventDefault();
 
-        // simpan ke hidden input yang sesuai
-        if($(this).attr('id') === 'check_in_tampil') {
-            $('#check_in').val(tanggalDB);
-        } else if($(this).attr('id') === 'check_out_tampil') {
-            $('#check_out').val(tanggalDB);
-        } else if($(this).attr('id') === 'tgl_tampil') {
-            $('#cari_tanggal').val(tanggalDB);
+    let nomor_kamar = $(this).attr('nomor_kamar');
+    let tipe = $(this).attr('tipe_kamar');
+
+    $.ajax({
+        type:'POST',
+        url:'/ModalDLX',
+        data:{
+            _token : "{{ csrf_token() }}",
+            nomor_kamar : nomor_kamar,
+            tipe_kamar : tipe
+        },
+        success:function(respond){
+            $("#loadModalDLX").html(respond);
+            $("#modalinfo-DLX").modal("show");
         }
     });
 });
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    let today = new Date();
-
-    // ✅ FORMAT UNTUK DATABASE (YYYY-MM-DD)
-    let yyyy = today.getFullYear();
-    let mm = String(today.getMonth() + 1).padStart(2, '0');
-    let dd = String(today.getDate()).padStart(2, '0');
-    let formatDB = `${yyyy}-${mm}-${dd}`;
-
-    // ✅ FORMAT UNTUK TAMPILAN (27 November 2025)
-    let bulanIndo = [
-        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
-
-    let formatView = `${dd} ${bulanIndo[today.getMonth()]} ${yyyy}`;
-
-    // ✅ SET OTOMATIS KE INPUT
-    document.getElementById("tgl_tampil").value = formatView;
-    document.getElementById("cari_tanggal").value = formatDB;
-
-    console.log("AUTO TANGGAL AKTIF:", formatDB);
-});
-
-
-$(document).on('change', '#tgl_tampil', function(){
-    let tanggal = $(this).val(); // contoh: 27 November 2025
-
-    let parts = tanggal.split(" ");
-    let hari = parts[0];
-    let bulanText = parts[1];
-    let tahun = parts[2];
-
-    let bulanMap = {
-        "Januari":"01","Februari":"02","Maret":"03","April":"04","Mei":"05","Juni":"06",
-        "Juli":"07","Agustus":"08","September":"09","Oktober":"10","November":"11","Desember":"12"
-    };
-
-    let formatDB = `${tahun}-${bulanMap[bulanText]}-${hari}`;
-
-    $('#cari_tanggal').val(formatDB);
+$(document).on('shown.bs.modal', '#modalinfo-DLX', function () {
+    $('#list_nomor_kamar').html('');
+    window.kamar = [];
 });
 
 
