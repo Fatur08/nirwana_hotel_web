@@ -4,11 +4,11 @@
     <input type="text" readonly value="{{ $tipe_kamar }}" id="tipe_kamar" class="form-control" name="tipe_kamar" placeholder="tipe_kamar" hidden>
     @php
         if ($tipe_kamar == 1) {
-            $labelKamar = 'DLX ' . $histori_kamar->nomor_kamar;
+            $labelKamar = 'DLX' . $histori_kamar->nomor_kamar;
         } elseif ($tipe_kamar == 2) {
-            $labelKamar = 'SPR ' . $histori_kamar->nomor_kamar;
+            $labelKamar = 'SPR' . $histori_kamar->nomor_kamar;
         } else {
-            $labelKamar = 'STD ' . $histori_kamar->nomor_kamar;
+            $labelKamar = 'STD' . $histori_kamar->nomor_kamar;
         }
     @endphp
 

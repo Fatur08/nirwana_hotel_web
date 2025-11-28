@@ -11,11 +11,21 @@ class HotelController extends Controller
     public function index(Request $request)
     {
         $cari_tanggal = $request->cari_tanggal;
-        
+
         $kamarDLX = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->leftJoin('histori_kamar as hk', function ($join) use ($cari_tanggal) {
+                $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                     ->whereDate('hk.check_in', '<=', $cari_tanggal)
+                     ->whereDate('hk.check_out', '>=', $cari_tanggal);
+            })
             ->where('k.kode_kamar', 'DLX')
-            ->select('nk.id_nomor_kamar', 'nk.nomor_kamar', 'k.kode_kamar')
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'k.kode_kamar',
+                'hk.id as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+            )
             ->get();
 
         $kamarSPR = DB::table('nomor_kamar as nk')

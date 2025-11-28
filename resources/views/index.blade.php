@@ -169,16 +169,22 @@
         </a>
         <div class="role-grid">
           @foreach($kamarDLX as $dlx)
-            <div class="role-card">
-              <h5><strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong></h5>
-
-              <a href="#" 
-                 class="ModalDLX btn btn-primary w-100"
+        
+            <div class="role-card {{ $dlx->histori_aktif ? 'bg-success text-white' : '' }}">
+        
+              <h5>
+                <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
+              </h5>
+        
+              <a href="#"
+                 class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
                  nomor_kamar="{{ $dlx->id_nomor_kamar }}"
                  tipe_kamar="1">
                  Informasi Kamar
               </a>
+        
             </div>
+        
           @endforeach
         </div>
     </div>
