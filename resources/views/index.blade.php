@@ -303,6 +303,32 @@ $(document).on('change', '#jumlah_kamar_dipesan', function () {
 
 
 
+$(document).on('change', '.select-kamar', function () {
+    let selectedValues = [];
+
+    $('.select-kamar').each(function () {
+        let val = $(this).val();
+        if (val) selectedValues.push(val);
+    });
+
+    $('.select-kamar').each(function () {
+        let currentSelect = $(this);
+        let currentValue = currentSelect.val();
+
+        currentSelect.find('option').each(function () {
+            let optionVal = $(this).val();
+
+            if (selectedValues.includes(optionVal) && optionVal !== currentValue) {
+                $(this).prop('disabled', true);
+            } else {
+                $(this).prop('disabled', false);
+            }
+        });
+    });
+});
+
+
+
 $(document).on('focus', '.flatpickr', function () {
     $(this).datepicker({
         format: "dd MM yyyy",   // format tampilan untuk user

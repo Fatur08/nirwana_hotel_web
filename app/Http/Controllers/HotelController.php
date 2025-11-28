@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,8 +36,8 @@ class HotelController extends Controller
     
     public function TambahModalDLX(Request $request)
     {
-        $nomor_kamar = $request->nomor_kamar;
-        return view('TambahModalDLX',compact('nomor_kamar'));
+        $tipe_kamar = $request->tipe_kamar;
+        return view('TambahModalDLX',compact('tipe_kamar'));
     }
 
     public function getKamarTersedia(Request $request)
@@ -67,5 +68,104 @@ class HotelController extends Controller
             ->get();
             
         return response()->json($kamarTersedia);
+    }
+
+
+    public function store_TambahModalDLX(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            // ==============================
+            // 1. KONVERSI TIPE KAMAR
+            // ==============================
+            if ($request->tipe_kamar == 1) {
+                $kode_kamar = 'DLX';
+                $tipe_kamar = 'Deluxe';
+                $tarif_per_hari = 300000;
+                $before_10 = 397000;
+                $after_10 = 357300;
+            } elseif ($request->tipe_kamar == 2) {
+                $kode_kamar = 'SPR';
+                $tipe_kamar = 'Superior';
+                $tarif_per_hari = 280000;
+                $before_10 = 369000;
+                $after_10 = 332100;
+            } else {
+                $kode_kamar = 'STD';
+                $tipe_kamar = 'Standar';
+                $tarif_per_hari = 240000;
+                $before_10 = 310000;
+                $after_10 = 279000;
+            }
+
+            // ==============================
+            // 2. HITUNG LAMA INAP
+            // ==============================
+            $checkIn  = Carbon::parse($request->check_in);
+            $checkOut = Carbon::parse($request->check_out);
+            $lama_inap = $checkOut->diffInDays($checkIn);
+
+            // ==============================
+            // 3. HITUNG BIAYA
+            // ==============================
+            $biaya = $request->jumlah_kamar_dipesan * $after_10 * $lama_inap;
+            $pajak = $biaya * 0.19;
+            $biaya_tambahan = $request->biaya_tambahan ?? 0;
+            $diskon = 0;
+
+            $total_diterima = ($biaya - $pajak) + $biaya_tambahan - $diskon;
+
+            // ==============================
+            // 4. INSERT KE LAPORAN_KEUANGAN
+            // ==============================
+            $id_laporan = DB::table('laporan_keuangan')->insertGetId([
+                'kode_kamar' => $kode_kamar,
+                'nama_tamu' => $request->nama_tamu,
+                'tipe_kamar' => $tipe_kamar,
+                'jumlah_kamar_dipesan' => $request->jumlah_kamar_dipesan,
+                'tarif_per_hari' => $tarif_per_hari,
+                'before_10%' => $before_10,
+                'after_10%' => $after_10,
+                'check_in' => $request->check_in,
+                'check_out' => $request->check_out,
+                'lama_inap' => $lama_inap,
+                'biaya' => $biaya,
+                'biaya_tambahan' => $biaya_tambahan,
+                'pajak' => $pajak,
+                'diskon' => $diskon,
+                'total_diterima' => $total_diterima,
+                'created_at' => now(),
+            ]);
+
+            // ==============================
+            // 5. INSERT KE HISTORI_KAMAR
+            // ==============================
+            // contoh yang dikirim dari form:
+            // nomor_kamar[] = ["DLX1","DLX2"]
+            foreach ($request->nomor_kamar as $nk) {
+
+                DB::table('histori_kamar')->insert([
+                    'id_laporan_keuangan' => $id_laporan,
+                    'id_nomor_kamar' => $nk,
+                    'nama_tamu' => $request->nama_tamu,
+                    'nomor_ktp_tamu' => $request->nomor_ktp_tamu,
+                    'check_in' => $request->check_in,
+                    'check_out' => $request->check_out,
+                    'created_at' => now(),
+                ]);
+            }
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Data berhasil disimpan!');
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+
+        }
     }
 }

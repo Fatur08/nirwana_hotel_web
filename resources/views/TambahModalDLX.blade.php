@@ -1,6 +1,6 @@
-<form action="/modalDLX/update_modalDLX" method="POST" id="frmmodalDLX" enctype="multipart/form-data">
+<form action="/TambahModalDLX/store_TambahModalDLX" method="POST" id="frmmodalDLX" enctype="multipart/form-data">
     @csrf
-    <input type="text" readonly value="{{ $nomor_kamar }}" id="nomor_kamar" class="form-control" name="nomor_kamar" placeholder="nomor_kamar" hidden>
+    <input type="text" readonly value="{{ $tipe_kamar }}" id="tipe_kamar" class="form-control" name="tipe_kamar" placeholder="tipe_kamar" hidden>
     <div class="row">
         <div class="col-12">
             <h5>Nama Tamu</h5>
