@@ -84,33 +84,33 @@ class HotelController extends Controller
                 $kode_kamar = 'DLX';
                 $tipe_kamar = 'Deluxe';
                 $tarif_per_hari = 300000;
-                $before_10 = 397000;
-                $after_10 = 357300;
+                $before_10_persen = 397000;
+                $after_10_persen = 357300;
             } elseif ($request->tipe_kamar == 2) {
                 $kode_kamar = 'SPR';
                 $tipe_kamar = 'Superior';
                 $tarif_per_hari = 280000;
-                $before_10 = 369000;
-                $after_10 = 332100;
+                $before_10_persen = 369000;
+                $after_10_persen = 332100;
             } else {
                 $kode_kamar = 'STD';
                 $tipe_kamar = 'Standar';
                 $tarif_per_hari = 240000;
-                $before_10 = 310000;
-                $after_10 = 279000;
+                $before_10_persen = 310000;
+                $after_10_persen = 279000;
             }
 
             // ==============================
-            // 2. HITUNG LAMA INAP
+            // 2. LAMA INAP
             // ==============================
-            $checkIn  = Carbon::parse($request->check_in);
-            $checkOut = Carbon::parse($request->check_out);
+            $checkIn  = \Carbon\Carbon::parse($request->check_in);
+            $checkOut = \Carbon\Carbon::parse($request->check_out);
             $lama_inap = $checkOut->diffInDays($checkIn);
 
             // ==============================
             // 3. HITUNG BIAYA
             // ==============================
-            $biaya = $request->jumlah_kamar_dipesan * $after_10 * $lama_inap;
+            $biaya = $request->jumlah_kamar_dipesan * $after_10_persen * $lama_inap;
             $pajak = $biaya * 0.19;
             $biaya_tambahan = $request->biaya_tambahan ?? 0;
             $diskon = 0;
@@ -118,7 +118,7 @@ class HotelController extends Controller
             $total_diterima = ($biaya - $pajak) + $biaya_tambahan - $diskon;
 
             // ==============================
-            // 4. INSERT KE LAPORAN_KEUANGAN
+            // 4. INSERT LAPORAN KEUANGAN
             // ==============================
             $id_laporan = DB::table('laporan_keuangan')->insertGetId([
                 'kode_kamar' => $kode_kamar,
@@ -126,8 +126,8 @@ class HotelController extends Controller
                 'tipe_kamar' => $tipe_kamar,
                 'jumlah_kamar_dipesan' => $request->jumlah_kamar_dipesan,
                 'tarif_per_hari' => $tarif_per_hari,
-                'before_10%' => $before_10,
-                'after_10%' => $after_10,
+                'before_10_persen' => $before_10_persen,
+                'after_10_persen' => $after_10_persen,
                 'check_in' => $request->check_in,
                 'check_out' => $request->check_out,
                 'lama_inap' => $lama_inap,
@@ -140,12 +140,9 @@ class HotelController extends Controller
             ]);
 
             // ==============================
-            // 5. INSERT KE HISTORI_KAMAR
+            // 5. INSERT HISTORI KAMAR
             // ==============================
-            // contoh yang dikirim dari form:
-            // nomor_kamar[] = ["DLX1","DLX2"]
             foreach ($request->nomor_kamar as $nk) {
-
                 DB::table('histori_kamar')->insert([
                     'id_laporan_keuangan' => $id_laporan,
                     'id_nomor_kamar' => $nk,
@@ -159,13 +156,19 @@ class HotelController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Data berhasil disimpan!');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data berhasil disimpan'
+            ]);
 
         } catch (\Exception $e) {
 
             DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
 
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 }
