@@ -305,13 +305,21 @@ $(document).on('change', '#jumlah_kamar_dipesan', function () {
 
 $(document).on('focus', '.flatpickr', function () {
     $(this).datepicker({
-        format: "dd MM yyyy",   // ✅ untuk tampilan
+        format: "dd MM yyyy",   // format tampilan untuk user
         autoclose: true,
         todayHighlight: true,
         language: "id"
     }).on('changeDate', function (e) {
-        let tanggalDB = e.format('yyyy-mm-dd'); // ✅ format untuk database
-        $('#cari_tanggal').val(tanggalDB);
+        let tanggalDB = e.format('yyyy-mm-dd'); // format database
+
+        // simpan ke hidden input yang sesuai
+        if($(this).attr('id') === 'check_in_tampil') {
+            $('#check_in').val(tanggalDB);
+        } else if($(this).attr('id') === 'check_out_tampil') {
+            $('#check_out').val(tanggalDB);
+        } else if($(this).attr('id') === 'tgl_tampil') {
+            $('#cari_tanggal').val(tanggalDB);
+        }
     });
 });
 
