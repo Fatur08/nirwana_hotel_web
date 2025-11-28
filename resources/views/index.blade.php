@@ -224,35 +224,7 @@ $(document).on('shown.bs.modal', '#modal-DLX', function () {
     window.kamar = [];
 });
 
-// ✅ SAAT TANGGAL DIUBAH
-$(document).on('click', '.TambahModalDLX', function(e){
-   e.preventDefault();
 
-   let tipe = $(this).attr('tipe_kamar');
-   let tanggal = $(this).data('tanggal'); // ✅ AMBIL DARI BUTTON
-
-   console.log("Tanggal:", tanggal);
-   console.log("Tipe:", tipe);
-
-   if(!tanggal){
-      $('#jumlah_kamar_dipesan').html(`<option value="">Silakan cari tanggal dulu</option>`);
-      return;
-   }
-
-   $.ajax({
-      url: "/getKamarTersedia",
-      type: "POST",
-      data: {
-         _token: $('meta[name="csrf-token"]').attr('content'),
-         tanggal: tanggal,
-         tipe_kamar: tipe
-      },
-      success: function(res){
-         console.log("RESPON:", res);
-         $('#jumlah_kamar_dipesan').val(res.jumlah);
-      }
-   });
-});
 
 // ✅ GENERATE NOMOR KAMAR
 $(document).on('click', '.TambahModalDLX', function(e){
@@ -268,24 +240,39 @@ $(document).on('click', '.TambahModalDLX', function(e){
       return;
    }
 
-   $.post('/getKamarTersedia',{
-      tanggal: tanggal,
-      tipe_kamar: tipe
-   }, function(res){
-
-      if(res.length == 0){
-         $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
-         return;
-      }
-
-      let opt = `<option value="">-- Pilih --</option>`;
-      for(let i=1; i<=res.length; i++){
-         opt += `<option value="${i}">${i}</option>`;
-      }
-
-      $('#jumlah_kamar_dipesan').html(opt);
-      window.kamar = res;
-   });
+    $.post('/getKamarTersedia',{
+       tanggal: tanggal,
+       tipe_kamar: tipe
+    }, function(res){
+    
+       console.log("RESPON KAMAR:", res); // WAJIB cek ini
+    
+       let dataKamar = [];
+    
+       // ✅ Jika response berbentuk object: { kamar: [...] }
+       if(res.kamar){
+          dataKamar = res.kamar;
+       } 
+       // ✅ Jika response langsung array
+       else if(Array.isArray(res)){
+          dataKamar = res;
+       }
+     
+       if(dataKamar.length == 0){
+          $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
+          return;
+       }
+     
+       let opt = `<option value="">-- Pilih --</option>`;
+       for(let i = 1; i <= dataKamar.length; i++){
+          opt += `<option value="${i}">${i}</option>`;
+       }
+     
+       $('#jumlah_kamar_dipesan').html(opt);
+     
+       // ✅ Simpan global untuk select nomor kamar
+       window.kamar = dataKamar;
+    });
 });
 
 
