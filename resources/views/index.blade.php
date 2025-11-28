@@ -169,22 +169,22 @@
         </a>
         <div class="role-grid">
           @foreach($kamarDLX as $dlx)
-        
+
             <div class="role-card {{ $dlx->histori_aktif ? 'bg-success text-white' : '' }}">
-        
+
               <h5>
                 <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
               </h5>
-        
+
               <a href="#"
                  class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
                  nomor_kamar="{{ $dlx->id_nomor_kamar }}"
                  tipe_kamar="1">
                  Informasi Kamar
               </a>
-        
+
             </div>
-        
+
           @endforeach
         </div>
     </div>
@@ -231,22 +231,31 @@
 @endsection
 @push('myscript')
 <script>
-$(document).on('change', '#tgl_tampil', function(){
-    let tanggal = $(this).val(); // contoh: 27 November 2025
-
-    let parts = tanggal.split(" ");
-    let hari = parts[0];
-    let bulanText = parts[1];
-    let tahun = parts[2];
+$(document).on('change', '#tgl_tampil', function () {
+    let tanggal = $(this).val(); // contoh: 01 November 2025
 
     let bulanMap = {
         "Januari":"01","Februari":"02","Maret":"03","April":"04","Mei":"05","Juni":"06",
         "Juli":"07","Agustus":"08","September":"09","Oktober":"10","November":"11","Desember":"12"
     };
 
-    let formatDB = `${tahun}-${bulanMap[bulanText]}-${hari}`;
+    let parts = tanggal.trim().split(/\s+/); // lebih aman dari spasi ganda
+
+    let hari  = parts[0];
+    let bulanText = parts[1];
+    let tahun = parts[2];
+
+    // ✅ CEGAH undefined
+    if (!bulanMap[bulanText]) {
+        alert('Format bulan tidak dikenali!');
+        return;
+    }
+
+    let formatDB = `${tahun}-${bulanMap[bulanText]}-${hari.padStart(2,'0')}`;
 
     $('#cari_tanggal').val(formatDB);
+
+    console.log("Tanggal DB:", formatDB);
 });
 
 
