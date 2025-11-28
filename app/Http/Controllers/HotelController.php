@@ -154,7 +154,7 @@ class HotelController extends Controller
 
             // ✅ INI YANG PENTING → BALIK KE HALAMAN INDEX
             return redirect()
-                ->route('index') // ✅ sesuaikan dengan route halaman utama Anda
+                ->route('/') // ✅ sesuaikan dengan route halaman utama Anda
                 ->with('success', 'Data berhasil disimpan!');
 
         } catch (\Exception $e) {
