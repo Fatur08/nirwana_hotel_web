@@ -3,12 +3,12 @@
     <input type="text" readonly value="{{ $nomor_kamar }}" id="nomor_kamar" class="form-control" name="nomor_kamar" placeholder="nomor_kamar" hidden>
     <input type="text" readonly value="{{ $tipe_kamar }}" id="tipe_kamar" class="form-control" name="tipe_kamar" placeholder="tipe_kamar" hidden>
     @php
-        if ($kamar->id_kamar == 1) {
-            $labelKamar = 'DLX ' . $kamar->nomor_kamar;
-        } elseif ($kamar->id_kamar == 2) {
-            $labelKamar = 'SPR ' . $kamar->nomor_kamar;
+        if ($tipe_kamar == 1) {
+            $labelKamar = 'DLX ' . $histori->nomor_kamar;
+        } elseif ($tipe_kamar == 2) {
+            $labelKamar = 'SPR ' . $histori->nomor_kamar;
         } else {
-            $labelKamar = 'STD ' . $kamar->nomor_kamar;
+            $labelKamar = 'STD ' . $histori->nomor_kamar;
         }
     @endphp
 
