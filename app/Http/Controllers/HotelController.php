@@ -173,7 +173,7 @@ class HotelController extends Controller
         $histori_kamar = DB::table('histori_kamar')
             ->join('nomor_kamar', 'histori_kamar.id_nomor_kamar', '=', 'nomor_kamar.id_nomor_kamar')
             ->where('histori_kamar.id_nomor_kamar', $nomor_kamar)
-            ->orderByDesc('histori_kamar.id')
+            ->orderByDesc('histori_kamar.id_histori_kamar')
             ->first();
         return view('ModalDLX',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
     }
