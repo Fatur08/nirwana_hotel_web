@@ -10,7 +10,7 @@ class HotelController extends Controller
 {
     public function index(Request $request)
     {
-        $cari_tanggal = $request->cari_tanggal;
+        $cari_tanggal = $request->cari_tanggal ?? date('Y-m-d');
 
         $kamarDLX = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
