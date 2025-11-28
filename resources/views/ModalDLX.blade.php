@@ -20,22 +20,22 @@
 
         <tr>
             <td><b>Nama Tamu</b></td>
-            <td>{{ $histori->nama_tamu ?? '-' }}</td>
+            <td>{{ $histori_kamar->nama_tamu ?? '-' }}</td>
         </tr>
 
         <tr>
             <td><b>Nomor KTP Tamu</b></td>
-            <td>{{ $histori->nomor_ktp_tamu ?? '-' }}</td>
+            <td>{{ $histori_kamar->nomor_ktp_tamu ?? '-' }}</td>
         </tr>
 
         <tr>
             <td><b>Check In</b></td>
-            <td>{{ $histori->check_in ?? '-' }}</td>
+            <td>{{ $histori_kamar->check_in ?? '-' }}</td>
         </tr>
 
         <tr>
             <td><b>Check Out</b></td>
-            <td>{{ $histori->check_out ?? '-' }}</td>
+            <td>{{ $histori_kamar->check_out ?? '-' }}</td>
         </tr>
     </table>
 
