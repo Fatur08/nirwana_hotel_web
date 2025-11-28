@@ -284,15 +284,12 @@ $(document).on('change', '#jumlah_kamar_dipesan', function () {
         $('.select-kamar').each(function () {
             let select = $(this);
             select.html('<option value="">-- Pilih Nomor Kamar --</option>');
-
+                
             window.kamar.forEach(function (k) {
-                let nomor = k.nomor_kamar ?? k.no_kamar ?? k.kamar;
-
-                // ✅ PAKSA FORMAT DLX1, DLX2, ...
-                let nomorFormatted = 'DLX' + nomor;
-
+                // angka pemformatan tetap untuk tampilan, tapi value = id_nomor_kamar
+                let nomorFormatted = 'DLX' + (k.nomor_kamar ?? k.no_kamar ?? k.kamar);
                 select.append(`
-                    <option value="${nomorFormatted}">
+                    <option value="${k.id_nomor_kamar}">
                         ${nomorFormatted}
                     </option>
                 `);

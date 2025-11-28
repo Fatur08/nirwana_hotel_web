@@ -141,14 +141,15 @@ class HotelController extends Controller
             // ==============================
             // 5. INSERT HISTORI KAMAR
             // ==============================
-            foreach ($request->nomor_kamar as $nk) {
+            foreach ($request->nomor_kamar as $idNomorKamar) {
                 DB::table('histori_kamar')->insert([
                     'id_laporan_keuangan' => $id_laporan,
-                    'id_nomor_kamar' => $nk,
+                    'id_nomor_kamar' => $idNomorKamar, // sudah integer
                     'nama_tamu' => $request->nama_tamu,
                     'nomor_ktp_tamu' => $request->nomor_ktp_tamu,
                     'check_in' => $request->check_in,
                     'check_out' => $request->check_out,
+                    'created_at' => now(),
                 ]);
             }
 
