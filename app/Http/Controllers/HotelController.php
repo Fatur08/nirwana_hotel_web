@@ -164,4 +164,17 @@ class HotelController extends Controller
             ], 500);
         }
     }
+
+
+    public function ModalDLX(Request $request)
+    {
+        $nomor_kamar = $request->nomor_kamar;
+        $tipe_kamar  = $request->tipe_kamar;
+        $histori_kamar = DB::table('histori_kamar')
+            ->join('nomor_kamar', 'histori_kamar.id_nomor_kamar', '=', 'nomor_kamar.id_nomor_kamar')
+            ->where('histori_kamar.id_nomor_kamar', $nomor_kamar)
+            ->orderByDesc('histori_kamar.id')
+            ->first();
+        return view('ModalDLX',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
+    }
 }

@@ -130,7 +130,7 @@
       
     <div class="kotak-cari">
       <h3>Cari Tanggal</h3>
-      <form action="/" method="GET" id="frmmodalDLX" enctype="multipart/form-data">
+      <form action="/" method="GET" id="frmCariTanggal" enctype="multipart/form-data">
         @csrf
         <div class="row">
           <div class="col-8">
