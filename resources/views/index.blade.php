@@ -272,6 +272,7 @@ $(document).on('click', '.TambahModalDLX', function(e){
      
        // ✅ Simpan global untuk select nomor kamar
        window.kamar = dataKamar;
+       console.log(res);
     });
 });
 
