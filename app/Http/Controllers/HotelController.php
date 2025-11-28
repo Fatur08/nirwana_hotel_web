@@ -136,7 +136,6 @@ class HotelController extends Controller
                 'pajak' => $pajak,
                 'diskon' => $diskon,
                 'total_diterima' => $total_diterima,
-                'created_at' => now(),
             ]);
 
             // ==============================
@@ -150,7 +149,6 @@ class HotelController extends Controller
                     'nomor_ktp_tamu' => $request->nomor_ktp_tamu,
                     'check_in' => $request->check_in,
                     'check_out' => $request->check_out,
-                    'created_at' => now(),
                 ]);
             }
 
