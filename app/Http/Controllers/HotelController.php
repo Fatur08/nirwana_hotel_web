@@ -152,10 +152,10 @@ class HotelController extends Controller
 
             DB::commit();
 
-            return response()->json([
-                'status' => 'success',
-                'redirect' => url('/')
-            ]);
+            // ✅ INI YANG PENTING → BALIK KE HALAMAN INDEX
+            return redirect()
+                ->route('/') // ✅ sesuaikan dengan route halaman utama Anda
+                ->with('success', 'Data berhasil disimpan!');
 
         } catch (\Exception $e) {
 
