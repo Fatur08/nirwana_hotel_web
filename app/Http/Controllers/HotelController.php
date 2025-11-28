@@ -24,7 +24,7 @@ class HotelController extends Controller
                 'nk.id_nomor_kamar',
                 'nk.nomor_kamar',
                 'k.kode_kamar',
-                'hk.id as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+                'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
             )
             ->get();
 
