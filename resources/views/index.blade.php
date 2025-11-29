@@ -181,11 +181,11 @@
         
                 {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
                 @if($dlx->histori_aktif)
-                  <button 
+                  <a href="#"
                     class="btn btn-danger btn-sm btn-hapus-kamar"
                     data-id="{{ $dlx->histori_aktif }}">
                     Hapus
-                  </button>
+                  </a>
                 @endif
         
               </div>
