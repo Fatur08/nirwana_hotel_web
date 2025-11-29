@@ -535,7 +535,7 @@ $(document).on('change', '#jumlah_kamar_dipesan_dlx', function () {
         let selectHTML = `
             <div class="mb-2">
                 <label>Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar" required>
+                <select name="nomor_kamar[]" class="form-control select-kamar-dlx" required>
                     <option value="">-- Pilih Nomor Kamar --</option>
                 </select>
             </div>
@@ -801,7 +801,7 @@ $(document).on('change', '#jumlah_kamar_dipesan_spr', function () {
         let selectHTML = `
             <div class="mb-2">
                 <label>Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar" required>
+                <select name="nomor_kamar[]" class="form-control select-kamar-spr" required>
                     <option value="">-- Pilih Nomor Kamar --</option>
                 </select>
             </div>
