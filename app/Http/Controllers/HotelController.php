@@ -181,12 +181,15 @@ class HotelController extends Controller
 
     public function ModalDLX(Request $request)
     {
-        $nomor_kamar = $request->nomor_kamar;
-        $tipe_kamar  = $request->tipe_kamar;
-        $histori_kamar = DB::table('histori_kamar')
-            ->join('nomor_kamar', 'histori_kamar.id_nomor_kamar', '=', 'nomor_kamar.id_nomor_kamar')
-            ->where('histori_kamar.id_nomor_kamar', $nomor_kamar)
-            ->orderByDesc('histori_kamar.id_histori_kamar')
+        $cari_tanggal = $request->cari_tanggal;
+        $nomor_kamar  = $request->nomor_kamar;
+        $tipe_kamar   = $request->tipe_kamar;
+        $histori_kamar = DB::table('histori_kamar as hk')
+            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
+            ->where('hk.id_nomor_kamar', $nomor_kamar)
+            ->whereDate('hk.check_in', '<=', $cari_tanggal)
+            ->whereDate('hk.check_out', '>=', $cari_tanggal)
+            ->select('hk.*', 'nk.nomor_kamar')
             ->first();
         return view('ModalDLX',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
     }

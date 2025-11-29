@@ -178,6 +178,7 @@
 
               <a href="#"
                  class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 data-tanggal="{{ $cari_tanggal }}"
                  nomor_kamar="{{ $dlx->id_nomor_kamar }}"
                  tipe_kamar="1">
                  Informasi Kamar
@@ -469,6 +470,7 @@ $(document).on('change', '.select-kamar', function () {
 $(document).on('click', '.ModalDLX', function(e){
     e.preventDefault();
 
+    let tanggal = $(this).data('tanggal');
     let nomor_kamar = $(this).attr('nomor_kamar');
     let tipe = $(this).attr('tipe_kamar');
 
@@ -477,6 +479,7 @@ $(document).on('click', '.ModalDLX', function(e){
         url:'/ModalDLX',
         data:{
             _token : "{{ csrf_token() }}",
+            tanggal : tanggal,
             nomor_kamar : nomor_kamar,
             tipe_kamar : tipe
         },
