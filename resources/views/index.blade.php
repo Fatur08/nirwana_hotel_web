@@ -169,33 +169,44 @@
         </a>
         <div class="role-grid">
           @foreach($kamarDLX as $dlx)
-
-              <div class="role-card {{ $dlx->histori_aktif ? 'bg-success text-white' : '' }}">
-
-                  <div class="position-relative mb-2 text-center">
-                      <h5 class="mb-0">
-                          <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
-                      </h5>
-
-                      @if($dlx->histori_aktif)
-                          <button class="btn btn-danger btn-sm btn-hapus-kamar position-absolute end-0 top-50"
-                                  style="transform: translateY(-50%); padding: 2px 8px; font-size: 12px;"
-                                  data-id="{{ $dlx->histori_aktif }}">
-                              Hapus
-                          </button>
-                      @endif
-                  </div>
-
-                  <a href="#"
-                     class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
-                     data-tanggal="{{ $cari_tanggal }}"
-                     nomor_kamar="{{ $dlx->id_nomor_kamar }}"
-                     tipe_kamar="1">
-                     Informasi Kamar
-                  </a>
-
+        
+            <div class="role-card {{ $dlx->histori_aktif ? 'bg-success text-white' : '' }}">
+        
+              {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                
+                {{-- Spacer kiri agar judul tetap di tengah --}}
+                <div style="width:400px"></div>
+        
+                <h5 class="text-center flex-grow-1 mb-0">
+                  <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
+                </h5>
+        
+                {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
+                @if($dlx->histori_aktif)
+                  <button 
+                    class="btn btn-danger btn-sm btn-hapus-kamar"
+                    data-id="{{ $dlx->histori_aktif }}">
+                    Hapus
+                  </button>
+                @else
+                  {{-- Spacer kanan agar tetap simetris --}}
+                  <div style="width:40px"></div>
+                @endif
+        
               </div>
-
+        
+              {{-- ✅ TOMBOL INFORMASI --}}
+              <a href="#"
+                 class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 data-tanggal="{{ $cari_tanggal }}"
+                 nomor_kamar="{{ $dlx->id_nomor_kamar }}"
+                 tipe_kamar="1">
+                 Informasi Kamar
+              </a>
+        
+            </div>
+        
           @endforeach
         </div>
     </div>
