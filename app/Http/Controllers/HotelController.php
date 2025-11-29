@@ -33,18 +33,42 @@ class HotelController extends Controller
 
         $kamarSPR = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->leftJoin('histori_kamar as hk', function ($join) use ($cari_tanggal) {
+                $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                     ->whereDate('hk.check_in', '<=', $cari_tanggal)
+                     ->whereDate('hk.check_out', '>=', $cari_tanggal);
+            })
             ->where('k.kode_kamar', 'SPR')
-            ->select('nk.id_nomor_kamar', 'nk.nomor_kamar', 'k.kode_kamar')
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'k.kode_kamar',
+                'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+            )
             ->get();
 
         $kamarSTD = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->leftJoin('histori_kamar as hk', function ($join) use ($cari_tanggal) {
+                $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                     ->whereDate('hk.check_in', '<=', $cari_tanggal)
+                     ->whereDate('hk.check_out', '>=', $cari_tanggal);
+            })
             ->where('k.kode_kamar', 'STD')
-            ->select('nk.id_nomor_kamar', 'nk.nomor_kamar', 'k.kode_kamar')
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'k.kode_kamar',
+                'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+            )
             ->get();
 
         return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarSPR', 'kamarSTD'));
     }
+
+
+
+
 
 
 
@@ -59,6 +83,9 @@ class HotelController extends Controller
         $tipe_kamar = $request->tipe_kamar;
         return view('TambahModalDLX',compact('tipe_kamar'));
     }
+
+
+
 
 
 
@@ -286,5 +313,22 @@ class HotelController extends Controller
             DB::rollBack();
             return redirect('/')->with('error', 'Data kamar gagal dihapus & laporan diperbarui');
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    public function TambahModalSPR(Request $request)
+    {
+        $tipe_kamar = $request->tipe_kamar;
+        return view('TambahModalSPR',compact('tipe_kamar'));
     }
 }

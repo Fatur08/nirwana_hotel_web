@@ -216,6 +216,45 @@
 
     <div class="kotak-spr">
         <h1>Kamar Superior</h1>
+        <a href="#" class="TambahModalSPR btn btn-success mb-2 w-100" tipe_kamar="2" data-tanggal="{{ $cari_tanggal }}">
+          Tambah Pemesanan
+        </a>
+        <div class="role-grid">
+          @foreach($kamarDLX as $dlx)
+        
+            <div class="role-card {{ $dlx->histori_aktif ? 'bg-success text-white' : '' }}">
+        
+              {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
+              <div class="d-flex align-items-center justify-content-between mb-2">
+        
+                <h5 class="text-center flex-grow-1 mb-0">
+                  <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
+                </h5>
+        
+                {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
+                @if($dlx->histori_aktif)
+                  <a href="#"
+                    class="btn btn-danger btn-sm btn-hapus-kamar"
+                    data-id="{{ $dlx->histori_aktif }}">
+                    Hapus
+                  </a>
+                @endif
+        
+              </div>
+        
+              {{-- ✅ TOMBOL INFORMASI --}}
+              <a href="#"
+                 class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 data-tanggal="{{ $cari_tanggal }}"
+                 nomor_kamar="{{ $dlx->id_nomor_kamar }}"
+                 tipe_kamar="1">
+                 Informasi Kamar
+              </a>
+        
+            </div>
+        
+          @endforeach
+        </div>
     </div>
 
     <div class="kotak-std">
@@ -224,6 +263,10 @@
   </div>
 
 
+
+
+
+  <!-- BAGIAN KAMAR DELUXE (DLX) -->
   <!-- Modal Tambah Kamar Deluxe (DLX) -->
   <div class="modal fade" id="modal-DLX" tabindex="-1" aria-labelledby="TambahModalDLXLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -248,6 +291,46 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadModalDLX">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <!-- BAGIAN KAMAR SUPERIOR (SPR) -->
+  <!-- Modal Tambah Kamar Superior (SPR) -->
+  <div class="modal fade" id="modal-SPR" tabindex="-1" aria-labelledby="TambahModalSPRLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="TambahModalSPRLabel">Tambah Pemesanan Kamar - Tipe Deluxe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="loadTambahModalSPR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Informasi Kamar Deluxe (DLX) -->
+  <div class="modal fade" id="modalinfo-DLX1" tabindex="-1" aria-labelledby="ModalDLXLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="ModalDLXLabel1">Informasi Kamar - Tipe Deluxe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="loadModalDLX1">
         </div>
       </div>
     </div>
@@ -567,7 +650,7 @@ $(document).on('shown.bs.modal', '#modalinfo-DLX', function () {
 
 
 
-// BAGIAN DARI HAPUS DATA HISTORI KAMAR
+// BAGIAN DARI HAPUS DATA HISTORI KAMAR DELUXE
 $(document).on('click', '.btn-hapus-kamar', function() {
     let id = $(this).data('id');
 
@@ -613,6 +696,161 @@ $(document).on('click', '.btn-hapus-kamar', function() {
             });
 
         }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI FORM TAMBAH MODAL SUPERIOR
+$(document).on('click', '.TambahModalSPR', function(e){
+    e.preventDefault();
+
+    let tipe = $(this).attr('tipe_kamar');
+    let tanggal = $(this).data('tanggal');
+
+    $.ajax({
+        type:'POST',
+        url:'/TambahModalSPR',
+        data:{
+            _token : "{{ csrf_token() }}",
+            tipe_kamar : tipe
+        },
+        success:function(respond){
+            $("#loadTambahModalSPR").html(respond);
+            $("#modal-SPR").modal("show");
+
+            // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
+            if(!tanggal){
+                $('#jumlah_kamar_dipesan').html(`<option value="">Silakan cari tanggal dulu</option>`);
+                return;
+            }
+
+            $.ajax({
+                url: '/getKamarTersedia',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    tanggal: tanggal,
+                    tipe_kamar: tipe
+                },
+                success: function(res){
+                    console.log("RESPON FINAL:", res);
+
+                    if (!res || res.length === 0) {
+                        $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
+                        return;
+                    }
+
+                    let opt = `<option value="">-- Pilih --</option>`;
+                    for(let i = 1; i <= res.length; i++){
+                        opt += `<option value="${i}">${i}</option>`;
+                    }
+
+                    $('#jumlah_kamar_dipesan').html(opt);
+                    window.kamar = res;
+                }
+            });
+        }
+    });
+});
+
+
+// ✅ RESET SAAT MODAL DIBUKA
+$(document).on('shown.bs.modal', '#modal-SPR', function () {
+    $('#list_nomor_kamar').html('');
+    window.kamar = [];
+});
+
+
+// ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
+$(document).on('change', '#jumlah_kamar_dipesan', function () {
+    let jumlah = parseInt($(this).val());
+    let list = $('#list_nomor_kamar');
+
+    list.html(''); // reset dulu
+
+    if (!jumlah || jumlah < 1) return;
+
+    // ✅ looping sesuai jumlah kamar yang dipilih
+    for (let i = 1; i <= jumlah; i++) {
+        let selectHTML = `
+            <div class="mb-2">
+                <label>Nomor Kamar ${i}</label>
+                <select name="nomor_kamar[]" class="form-control select-kamar" required>
+                    <option value="">-- Pilih Nomor Kamar --</option>
+                </select>
+            </div>
+        `;
+        list.append(selectHTML);
+    }
+
+    // ✅ ISI SEMUA SELECT DENGAN DATA KAMAR DARI window.kamar
+    if (window.kamar && window.kamar.length > 0) {
+        $('.select-kamar').each(function () {
+            let select = $(this);
+            select.html('<option value="">-- Pilih Nomor Kamar --</option>');
+                
+            window.kamar.forEach(function (k) {
+                // ✅ value = id_nomor_kamar (ANGKA)
+                // ✅ text = DLX + nomor kamar
+                select.append(`
+                    <option value="${k.id_nomor_kamar}">
+                        DLX${k.nomor_kamar}
+                    </option>
+                `);
+            });
+        });
+    }
+});
+
+
+
+$(document).on('change', '.select-kamar', function () {
+    let selectedValues = [];
+
+    $('.select-kamar').each(function () {
+        let val = $(this).val();
+        if (val) selectedValues.push(val);
+    });
+
+    $('.select-kamar').each(function () {
+        let currentSelect = $(this);
+        let currentValue = currentSelect.val();
+
+        currentSelect.find('option').each(function () {
+            let optionVal = $(this).val();
+
+            if (selectedValues.includes(optionVal) && optionVal !== currentValue) {
+                $(this).prop('disabled', true);
+            } else {
+                $(this).prop('disabled', false);
+            }
+        });
     });
 });
 

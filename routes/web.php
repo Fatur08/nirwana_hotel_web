@@ -23,3 +23,8 @@ Route::post('/ModalDLX', [HotelController::class,'ModalDLX']);
 
 
 Route::post('/hapus-histori-kamar', [HotelController::class, 'hapusHistoriKamar']);
+
+
+
+
+Route::post('/TambahModalSPR', [HotelController::class,'TambahModalSPR']);
