@@ -562,18 +562,47 @@ $(document).on('shown.bs.modal', '#modalinfo-DLX', function () {
 $(document).on('click', '.btn-hapus-kamar', function() {
     let id = $(this).data('id');
 
-    if (!confirm('Yakin ingin menghapus pesanan kamar ini?')) return;
+    Swal.fire({
+        title: 'Yakin ingin menghapus?',
+        text: 'Data pesanan kamar ini akan dihapus permanen!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
 
-    $.ajax({
-        type: 'POST',
-        url: '/hapus-histori-kamar',
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            id_histori_kamar: id
-        },
-        success: function(res) {
-            alert(res.message);
-            location.reload(); // refresh tampilan role-grid
+            $.ajax({
+                type: 'POST',
+                url: '/hapus-histori-kamar',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id_histori_kamar: id
+                },
+                success: function(res) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: res.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+
+                    setTimeout(function () {
+                        location.reload(); // refresh role-grid
+                    }, 2000);
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Data gagal dihapus.'
+                    });
+                }
+            });
+
         }
     });
 });
