@@ -1,4 +1,4 @@
-<form action="/TambahModalDLX/store_TambahModalDLX" method="POST" id="frmTambahModalDLX" enctype="multipart/form-data">
+<form action="/TambahModalSPR/store_TambahModalSPR" method="POST" id="frmTambahModalSPR" enctype="multipart/form-data">
     @csrf
     <input type="text" readonly value="{{ $tipe_kamar }}" id="tipe_kamar" class="form-control" name="tipe_kamar" placeholder="tipe_kamar" hidden>
     <div class="row">

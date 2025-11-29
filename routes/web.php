@@ -28,3 +28,6 @@ Route::post('/hapus-histori-kamar', [HotelController::class, 'hapusHistoriKamar'
 
 
 Route::post('/TambahModalSPR', [HotelController::class,'TambahModalSPR']);
+
+
+Route::post('/TambahModalSPR/store_TambahModalSPR', [HotelController::class, 'store_TambahModalSPR']);

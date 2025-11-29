@@ -817,10 +817,10 @@ $(document).on('change', '#jumlah_kamar_dipesan', function () {
                 
             window.kamar.forEach(function (k) {
                 // ✅ value = id_nomor_kamar (ANGKA)
-                // ✅ text = DLX + nomor kamar
+                // ✅ text = SPR + nomor kamar
                 select.append(`
                     <option value="${k.id_nomor_kamar}">
-                        DLX${k.nomor_kamar}
+                        SPR${k.nomor_kamar}
                     </option>
                 `);
             });
