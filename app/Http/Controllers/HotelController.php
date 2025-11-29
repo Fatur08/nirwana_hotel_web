@@ -439,4 +439,39 @@ class HotelController extends Controller
             return redirect('/')->with('error', 'Data gagal disimpan!');
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function ModalSPR(Request $request)
+    {
+        $cari_tanggal = $request->tanggal;
+        $nomor_kamar  = $request->nomor_kamar;
+        $tipe_kamar   = $request->tipe_kamar;
+        $histori_kamar = DB::table('histori_kamar as hk')
+            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
+            ->where('hk.id_nomor_kamar', $nomor_kamar)
+            ->whereDate('hk.check_in', '<=', $cari_tanggal)
+            ->whereDate('hk.check_out', '>=', $cari_tanggal)
+            ->select('hk.*', 'nk.nomor_kamar')
+            ->first();
+        return view('ModalSPR',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
+    }
 }
