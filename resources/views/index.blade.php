@@ -8,6 +8,7 @@
     min-height: 100vh;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
   .login-container {
     text-align: center;
@@ -17,6 +18,7 @@
     padding: 15px;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
   .login-title {
     background-color: #007bff;
@@ -26,6 +28,7 @@
     font-weight: bold;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
   .role-grid {
     display: grid;
@@ -34,6 +37,7 @@
     margin-top: 10px;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
   .role-card {
     background-color: #f8f9fa;
@@ -44,6 +48,7 @@
     cursor: pointer;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
   .role-card:hover {
     transform: translateY(-5px);
@@ -61,6 +66,7 @@
     max-width: 100%;
     width: 100%;
     border-radius: 10px;
+    font-size: 16px;
   }
   
   .kotak-cari {
@@ -72,6 +78,7 @@
     margin-bottom: 10px;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
   .kotak-dlx {
     background-color: #ff3838ff;
@@ -82,6 +89,7 @@
     margin-bottom: 10px;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
   .kotak-spr {
     background-color: #25a6fbff;
@@ -92,6 +100,7 @@
     margin-bottom: 10px;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
   .kotak-std {
     background-color: #f7fc57ff;
@@ -102,6 +111,7 @@
     margin-bottom: 10px;
     max-width: 100%;
     width: 100%;
+    font-size: 16px;
   }
 </style>
 <div class="body" style="margin-top: 10px;">
