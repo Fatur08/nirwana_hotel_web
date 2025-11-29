@@ -128,7 +128,7 @@
 
       
     <div class="kotak-cari">
-      <h3>Cari Tanggal</h3>
+      <h1>Cari Tanggal</h1>
       <form action="/" method="GET" id="frmCariTanggal" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -153,16 +153,16 @@
       </form>
     </div>
     
-    <h3>
+    <h1>
       @if(request('cari_tanggal'))
           {{ \Carbon\Carbon::parse(request('cari_tanggal'))->locale('id')->translatedFormat('l, d F Y') }}
       @else
           {{ now()->locale('id')->translatedFormat('l, d F Y') }}
       @endif
-    </h3>
+    </h1>
     
     <div class="kotak-dlx">
-        <h3>Kamar Deluxe</h3>
+        <h1>Kamar Deluxe</h1>
         <a href="#" class="TambahModalDLX btn btn-success mb-2 w-100" tipe_kamar="1" data-tanggal="{{ $cari_tanggal }}">
           Tambah Pemesanan
         </a>
