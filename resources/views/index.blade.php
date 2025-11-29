@@ -244,7 +244,7 @@
         
               {{-- ✅ TOMBOL INFORMASI --}}
               <a href="#"
-                 class="ModalDLX btn {{ $spr->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 class="ModalSPR btn {{ $spr->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
                  data-tanggal="{{ $cari_tanggal }}"
                  nomor_kamar="{{ $spr->id_nomor_kamar }}"
                  tipe_kamar="2">
@@ -259,6 +259,45 @@
 
     <div class="kotak-std">
         <h1>Kamar Standar</h1>
+        <a href="#" class="TambahModalSPR1 btn btn-success mb-2 w-100" tipe_kamar="3" data-tanggal="{{ $cari_tanggal }}">
+          Tambah Pemesanan
+        </a>
+        <div class="role-grid">
+          @foreach($kamarSTD as $std)
+        
+            <div class="role-card {{ $std->histori_aktif ? 'bg-success text-white' : '' }}">
+        
+              {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
+              <div class="d-flex align-items-center justify-content-between mb-2">
+        
+                <h5 class="text-center flex-grow-1 mb-0">
+                  <strong>{{ $std->kode_kamar }}{{ $std->nomor_kamar }}</strong>
+                </h5>
+        
+                {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
+                @if($std->histori_aktif)
+                  <a href="#"
+                    class="btn btn-danger btn-sm btn-hapus-kamar"
+                    data-id="{{ $std->histori_aktif }}">
+                    Hapus
+                  </a>
+                @endif
+        
+              </div>
+        
+              {{-- ✅ TOMBOL INFORMASI --}}
+              <a href="#"
+                 class="ModalDLX btn {{ $std->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 data-tanggal="{{ $cari_tanggal }}"
+                 nomor_kamar="{{ $std->id_nomor_kamar }}"
+                 tipe_kamar="3">
+                 Informasi Kamar
+              </a>
+        
+            </div>
+        
+          @endforeach
+        </div>
     </div>
   </div>
 
@@ -322,15 +361,15 @@
   </div>
 
 
-  <!-- Modal Informasi Kamar Deluxe (DLX) -->
-  <div class="modal fade" id="modalinfo-DLX1" tabindex="-1" aria-labelledby="ModalDLXLabel1" aria-hidden="true">
+  <!-- Modal Informasi Kamar Superior (SPR) -->
+  <div class="modal fade" id="modalinfo-SPR" tabindex="-1" aria-labelledby="ModalSPRLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="ModalDLXLabel1">Informasi Kamar - Tipe Deluxe</h5>
+        <div class="modal-header bg-secondary text-white">
+          <h5 class="modal-title" id="ModalSPRLabel">Informasi Kamar - Tipe Superior</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body" id="loadModalDLX1">
+        <div class="modal-body" id="loadModalSPR">
         </div>
       </div>
     </div>
@@ -852,6 +891,60 @@ $(document).on('change', '.select-kamar-spr', function () {
             }
         });
     });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI TABEL MODAL SUPERIOR
+$(document).on('click', '.ModalSPR', function(e){
+    e.preventDefault();
+
+    let tanggal = $(this).data('tanggal');
+    let nomor_kamar = $(this).attr('nomor_kamar');
+    let tipe = $(this).attr('tipe_kamar');
+
+    $.ajax({
+        type:'POST',
+        url:'/ModalSPR',
+        data:{
+            _token : "{{ csrf_token() }}",
+            tanggal : tanggal,
+            nomor_kamar : nomor_kamar,
+            tipe_kamar : tipe
+        },
+        success:function(respond){
+            $("#loadModalSPR").html(respond);
+            $("#modalinfo-SPR").modal("show");
+        }
+    });
+});
+
+
+$(document).on('shown.bs.modal', '#modalinfo-SPR', function () {
+    $('#list_nomor_kamar_dlx').html('');
+    window.kamar = [];
 });
 
 
