@@ -184,7 +184,7 @@
         
                 {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
                 @if($dlx->histori_aktif)
-                  <button class="btn btn-danger btn-sm btn-hapus-kamar position-absolute end-0 top-50"
+                  <button class="btn btn-danger btn-sm btn-hapus-kamar position-absolute"
                           data-id="{{ $dlx->histori_aktif }}">
                       Hapus
                   </button>
