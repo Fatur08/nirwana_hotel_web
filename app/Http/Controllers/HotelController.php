@@ -45,6 +45,13 @@ class HotelController extends Controller
 
         return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarSPR', 'kamarSTD'));
     }
+
+
+
+
+
+
+
     
     
     public function TambahModalDLX(Request $request)
@@ -52,6 +59,15 @@ class HotelController extends Controller
         $tipe_kamar = $request->tipe_kamar;
         return view('TambahModalDLX',compact('tipe_kamar'));
     }
+
+
+
+
+
+
+
+
+
 
     public function getKamarTersedia(Request $request)
     {
@@ -82,6 +98,17 @@ class HotelController extends Controller
             
         return response()->json($kamarTersedia);
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function store_TambahModalDLX(Request $request)
@@ -168,15 +195,20 @@ class HotelController extends Controller
             return redirect('/')->with('success', 'Data berhasil disimpan!');
 
         } catch (\Exception $e) {
-
             DB::rollBack();
-
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 500);
+            return redirect('/')->with('error', 'Data gagal disimpan!');
         }
     }
+
+
+
+
+
+
+
+
+
+
 
 
     public function ModalDLX(Request $request)
@@ -192,5 +224,67 @@ class HotelController extends Controller
             ->select('hk.*', 'nk.nomor_kamar')
             ->first();
         return view('ModalDLX',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
+    }
+
+
+
+
+
+
+
+
+
+
+    public function hapusHistoriKamar(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $histori = DB::table('histori_kamar')
+                ->where('id_histori_kamar', $request->id_histori_kamar)
+                ->first();
+
+            if (!$histori) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data histori tidak ditemukan'
+                ]);
+            }
+
+            // ✅ Ambil laporan keuangan terkait
+            $laporan = DB::table('laporan_keuangan')
+                ->where('id_laporan_keuangan', $histori->id_laporan_keuangan)
+                ->first();
+
+            // ✅ Hapus histori kamar
+            DB::table('histori_kamar')
+                ->where('id_histori_kamar', $request->id_histori_kamar)
+                ->delete();
+
+            // ✅ Jika laporan ditemukan, update jumlah kamar
+            if ($laporan) {
+
+                if ($laporan->jumlah_kamar_dipesan > 1) {
+                    // ✅ Jika sebelumnya > 1 → kurangi 1
+                    DB::table('laporan_keuangan')
+                        ->where('id_laporan_keuangan', $laporan->id_laporan_keuangan)
+                        ->update([
+                            'jumlah_kamar_dipesan' => $laporan->jumlah_kamar_dipesan - 1
+                        ]);
+                } else {
+                    // ✅ Jika tersisa 0 → hapus laporan keuangan
+                    DB::table('laporan_keuangan')
+                        ->where('id_laporan_keuangan', $laporan->id_laporan_keuangan)
+                        ->delete();
+                }
+            }
+
+            DB::commit();
+            return redirect('/')->with('success', 'Data kamar berhasil dihapus & laporan diperbarui');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/')->with('error', 'Data kamar gagal dihapus & laporan diperbarui');
+        }
     }
 }

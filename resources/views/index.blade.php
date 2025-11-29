@@ -247,6 +247,7 @@
 @endsection
 @push('myscript')
 <script>
+// BAGIAN DARI FORM PENCARIAN TANGGAL
 $(document).on('change', '#tgl_tampil', function () {
     let tanggal = $(this).val(); // contoh: "01 Desember 2025" atau "01 December 2025"
     if (!tanggal) return;
@@ -353,6 +354,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI FORM TAMBAH MODAL DELUXE
 $(document).on('click', '.TambahModalDLX', function(e){
     e.preventDefault();
 
@@ -482,6 +498,21 @@ $(document).on('change', '.select-kamar', function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI TABEL MODAL DELUXE
 $(document).on('click', '.ModalDLX', function(e){
     e.preventDefault();
 
@@ -509,6 +540,42 @@ $(document).on('click', '.ModalDLX', function(e){
 $(document).on('shown.bs.modal', '#modalinfo-DLX', function () {
     $('#list_nomor_kamar').html('');
     window.kamar = [];
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI HAPUS DATA HISTORI KAMAR
+$(document).on('click', '.btn-hapus-kamar', function() {
+    let id = $(this).data('id');
+
+    if (!confirm('Yakin ingin menghapus pesanan kamar ini?')) return;
+
+    $.ajax({
+        type: 'POST',
+        url: '/hapus-histori-kamar',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            id_histori_kamar: id
+        },
+        success: function(res) {
+            alert(res.message);
+            location.reload(); // refresh tampilan role-grid
+        }
+    });
 });
 
 
