@@ -480,7 +480,7 @@ $(document).on('click', '.TambahModalDLX', function(e){
 
             // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
             if(!tanggal){
-                $('#jumlah_kamar_dipesan').html(`<option value="">Silakan cari tanggal dulu</option>`);
+                $('#jumlah_kamar_dipesan_dlx').html(`<option value="">Silakan cari tanggal dulu</option>`);
                 return;
             }
 
@@ -496,7 +496,7 @@ $(document).on('click', '.TambahModalDLX', function(e){
                     console.log("RESPON FINAL:", res);
 
                     if (!res || res.length === 0) {
-                        $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
+                        $('#jumlah_kamar_dipesan_dlx').html(`<option value="">Kamar Penuh</option>`);
                         return;
                     }
 
@@ -505,7 +505,7 @@ $(document).on('click', '.TambahModalDLX', function(e){
                         opt += `<option value="${i}">${i}</option>`;
                     }
 
-                    $('#jumlah_kamar_dipesan').html(opt);
+                    $('#jumlah_kamar_dipesan_dlx').html(opt);
                     window.kamar = res;
                 }
             });
@@ -516,15 +516,15 @@ $(document).on('click', '.TambahModalDLX', function(e){
 
 // ✅ RESET SAAT MODAL DIBUKA
 $(document).on('shown.bs.modal', '#modal-DLX', function () {
-    $('#list_nomor_kamar').html('');
+    $('#list_nomor_kamar_dlx').html('');
     window.kamar = [];
 });
 
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-$(document).on('change', '#jumlah_kamar_dipesan', function () {
+$(document).on('change', '#jumlah_kamar_dipesan_dlx', function () {
     let jumlah = parseInt($(this).val());
-    let list = $('#list_nomor_kamar');
+    let list = $('#list_nomor_kamar_dlx');
 
     list.html(''); // reset dulu
 
@@ -545,7 +545,7 @@ $(document).on('change', '#jumlah_kamar_dipesan', function () {
 
     // ✅ ISI SEMUA SELECT DENGAN DATA KAMAR DARI window.kamar
     if (window.kamar && window.kamar.length > 0) {
-        $('.select-kamar').each(function () {
+        $('.select-kamar-dlx').each(function () {
             let select = $(this);
             select.html('<option value="">-- Pilih Nomor Kamar --</option>');
                 
@@ -564,15 +564,15 @@ $(document).on('change', '#jumlah_kamar_dipesan', function () {
 
 
 
-$(document).on('change', '.select-kamar', function () {
+$(document).on('change', '.select-kamar-dlx', function () {
     let selectedValues = [];
 
-    $('.select-kamar').each(function () {
+    $('.select-kamar-dlx').each(function () {
         let val = $(this).val();
         if (val) selectedValues.push(val);
     });
 
-    $('.select-kamar').each(function () {
+    $('.select-kamar-dlx').each(function () {
         let currentSelect = $(this);
         let currentValue = currentSelect.val();
 
@@ -630,7 +630,7 @@ $(document).on('click', '.ModalDLX', function(e){
 
 
 $(document).on('shown.bs.modal', '#modalinfo-DLX', function () {
-    $('#list_nomor_kamar').html('');
+    $('#list_nomor_kamar_dlx').html('');
     window.kamar = [];
 });
 
@@ -746,7 +746,7 @@ $(document).on('click', '.TambahModalSPR', function(e){
 
             // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
             if(!tanggal){
-                $('#jumlah_kamar_dipesan').html(`<option value="">Silakan cari tanggal dulu</option>`);
+                $('#jumlah_kamar_dipesan_spr').html(`<option value="">Silakan cari tanggal dulu</option>`);
                 return;
             }
 
@@ -762,7 +762,7 @@ $(document).on('click', '.TambahModalSPR', function(e){
                     console.log("RESPON FINAL:", res);
 
                     if (!res || res.length === 0) {
-                        $('#jumlah_kamar_dipesan').html(`<option value="">Kamar Penuh</option>`);
+                        $('#jumlah_kamar_dipesan_spr').html(`<option value="">Kamar Penuh</option>`);
                         return;
                     }
 
@@ -771,7 +771,7 @@ $(document).on('click', '.TambahModalSPR', function(e){
                         opt += `<option value="${i}">${i}</option>`;
                     }
 
-                    $('#jumlah_kamar_dipesan').html(opt);
+                    $('#jumlah_kamar_dipesan_spr').html(opt);
                     window.kamar = res;
                 }
             });
@@ -782,15 +782,15 @@ $(document).on('click', '.TambahModalSPR', function(e){
 
 // ✅ RESET SAAT MODAL DIBUKA
 $(document).on('shown.bs.modal', '#modal-SPR', function () {
-    $('#list_nomor_kamar').html('');
+    $('#list_nomor_kamar_spr').html('');
     window.kamar = [];
 });
 
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-$(document).on('change', '#jumlah_kamar_dipesan', function () {
+$(document).on('change', '#jumlah_kamar_dipesan_spr', function () {
     let jumlah = parseInt($(this).val());
-    let list = $('#list_nomor_kamar');
+    let list = $('#list_nomor_kamar_spr');
 
     list.html(''); // reset dulu
 
@@ -811,7 +811,7 @@ $(document).on('change', '#jumlah_kamar_dipesan', function () {
 
     // ✅ ISI SEMUA SELECT DENGAN DATA KAMAR DARI window.kamar
     if (window.kamar && window.kamar.length > 0) {
-        $('.select-kamar').each(function () {
+        $('.select-kamar-spr').each(function () {
             let select = $(this);
             select.html('<option value="">-- Pilih Nomor Kamar --</option>');
                 
@@ -830,15 +830,15 @@ $(document).on('change', '#jumlah_kamar_dipesan', function () {
 
 
 
-$(document).on('change', '.select-kamar', function () {
+$(document).on('change', '.select-kamar-spr', function () {
     let selectedValues = [];
 
-    $('.select-kamar').each(function () {
+    $('.select-kamar-spr').each(function () {
         let val = $(this).val();
         if (val) selectedValues.push(val);
     });
 
-    $('.select-kamar').each(function () {
+    $('.select-kamar-spr').each(function () {
         let currentSelect = $(this);
         let currentValue = currentSelect.val();
 

@@ -39,7 +39,7 @@
     </div>
     <div class="row mb-3">
         <div class="col-12">
-            <select id="jumlah_kamar_dipesan" name="jumlah_kamar_dipesan" class="form-control">
+            <select id="jumlah_kamar_dipesan_spr" name="jumlah_kamar_dipesan_spr" class="form-control">
             </select>
         </div>
     </div>
@@ -50,7 +50,7 @@
     </div>
     <div class="row mb-3">
         <div class="col-12">
-            <div id="list_nomor_kamar"></div>
+            <div id="list_nomor_kamar_spr"></div>
         </div>
     </div>
     <div class="row">
