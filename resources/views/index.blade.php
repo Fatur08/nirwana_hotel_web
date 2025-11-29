@@ -174,9 +174,6 @@
         
               {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
               <div class="d-flex align-items-center justify-content-between mb-2">
-                
-                {{-- Spacer kiri agar judul tetap di tengah --}}
-                <div style="width:40px"></div>
         
                 <h5 class="text-center flex-grow-1 mb-0">
                   <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
@@ -189,9 +186,6 @@
                     data-id="{{ $dlx->histori_aktif }}">
                     Hapus
                   </button>
-                @else
-                  {{-- Spacer kanan agar tetap simetris --}}
-                  <div style="width:40px"></div>
                 @endif
         
               </div>
