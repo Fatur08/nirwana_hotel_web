@@ -41,6 +41,6 @@
         </td>
     </tr>
 </table>
-<a href="{{ route('index') }}" class="btn btn-danger w-100 mt-3">
+<a href="/" class="btn btn-danger btn-close w-100 mt-3">
     Kembali
 </a>
