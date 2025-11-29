@@ -474,4 +474,181 @@ class HotelController extends Controller
             ->first();
         return view('ModalSPR',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function TambahModalSTD(Request $request)
+    {
+        $tipe_kamar = $request->tipe_kamar;
+        return view('TambahModalSTD',compact('tipe_kamar'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function store_TambahModalSTD(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            // ==============================
+            // 1. KONVERSI TIPE KAMAR
+            // ==============================
+            if ($request->tipe_kamar == 1) {
+                $kode_kamar = 'DLX';
+                $tipe_kamar = 'Deluxe';
+                $tarif_per_hari = 300000;
+                $before_10_persen = 397000;
+                $after_10_persen = 357300;
+            } elseif ($request->tipe_kamar == 2) {
+                $kode_kamar = 'SPR';
+                $tipe_kamar = 'Superior';
+                $tarif_per_hari = 280000;
+                $before_10_persen = 369000;
+                $after_10_persen = 332100;
+            } else {
+                $kode_kamar = 'STD';
+                $tipe_kamar = 'Standar';
+                $tarif_per_hari = 240000;
+                $before_10_persen = 310000;
+                $after_10_persen = 279000;
+            }
+
+            // ==============================
+            // 2. LAMA INAP
+            // ==============================
+            $checkIn  = \Carbon\Carbon::parse($request->check_in);
+            $checkOut = \Carbon\Carbon::parse($request->check_out);
+            $lama_inap = $checkOut->diffInDays($checkIn);
+
+            // ==============================
+            // 3. HITUNG BIAYA
+            // ==============================
+            $biaya = $request->jumlah_kamar_dipesan * $after_10_persen * $lama_inap;
+            $pajak = $biaya * 0.19;
+            $biaya_tambahan = $request->biaya_tambahan ?? 0;
+
+            $total_diterima = ($biaya - $pajak) + $biaya_tambahan;
+
+            // ==============================
+            // 4. INSERT LAPORAN KEUANGAN
+            // ==============================
+            $id_laporan = DB::table('laporan_keuangan')->insertGetId([
+                'kode_kamar' => $kode_kamar,
+                'nama_tamu' => $request->nama_tamu,
+                'tipe_kamar' => $tipe_kamar,
+                'jumlah_kamar_dipesan' => $request->jumlah_kamar_dipesan,
+                'tarif_per_hari' => $tarif_per_hari,
+                'before_10_persen' => $before_10_persen,
+                'after_10_persen' => $after_10_persen,
+                'check_in' => $request->check_in,
+                'check_out' => $request->check_out,
+                'lama_inap' => $lama_inap,
+                'biaya' => $biaya,
+                'biaya_tambahan' => $biaya_tambahan,
+                'pajak' => $pajak,
+                'total_diterima' => $total_diterima,
+            ]);
+
+            // ==============================
+            // 5. INSERT HISTORI KAMAR
+            // ==============================
+            foreach ($request->nomor_kamar as $idNomorKamar) {
+                DB::table('histori_kamar')->insert([
+                    'id_laporan_keuangan' => $id_laporan,
+                    'id_nomor_kamar' => $idNomorKamar, // sudah integer
+                    'nama_tamu' => $request->nama_tamu,
+                    'nomor_ktp_tamu' => $request->nomor_ktp_tamu,
+                    'check_in' => $request->check_in,
+                    'check_out' => $request->check_out,
+                ]);
+            }
+
+            DB::commit();
+
+            return redirect('/')->with('success', 'Data berhasil disimpan!');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/')->with('error', 'Data gagal disimpan!');
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function ModalSTD(Request $request)
+    {
+        $cari_tanggal = $request->tanggal;
+        $nomor_kamar  = $request->nomor_kamar;
+        $tipe_kamar   = $request->tipe_kamar;
+        $histori_kamar = DB::table('histori_kamar as hk')
+            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
+            ->where('hk.id_nomor_kamar', $nomor_kamar)
+            ->whereDate('hk.check_in', '<=', $cari_tanggal)
+            ->whereDate('hk.check_out', '>=', $cari_tanggal)
+            ->select('hk.*', 'nk.nomor_kamar')
+            ->first();
+        return view('ModalSTD',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
+    }
 }

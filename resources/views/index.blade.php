@@ -214,6 +214,30 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="kotak-spr">
         <h1>Kamar Superior</h1>
         <a href="#" class="TambahModalSPR btn btn-success mb-2 w-100" tipe_kamar="2" data-tanggal="{{ $cari_tanggal }}">
@@ -257,9 +281,38 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="kotak-std">
         <h1>Kamar Standar</h1>
-        <a href="#" class="TambahModalSPR1 btn btn-success mb-2 w-100" tipe_kamar="3" data-tanggal="{{ $cari_tanggal }}">
+        <a href="#" class="TambahModalSTD btn btn-success mb-2 w-100" tipe_kamar="3" data-tanggal="{{ $cari_tanggal }}">
           Tambah Pemesanan
         </a>
         <div class="role-grid">
@@ -287,7 +340,7 @@
         
               {{-- ✅ TOMBOL INFORMASI --}}
               <a href="#"
-                 class="ModalDLX btn {{ $std->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 class="ModalDLX1 btn {{ $std->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
                  data-tanggal="{{ $cari_tanggal }}"
                  nomor_kamar="{{ $std->id_nomor_kamar }}"
                  tipe_kamar="3">
@@ -370,6 +423,51 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadModalSPR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- BAGIAN KAMAR STANDAR (STD) -->
+  <!-- Modal Tambah Kamar Standar (STD) -->
+  <div class="modal fade" id="modal-STD" tabindex="-1" aria-labelledby="TambahModalSTDLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-warning text-white">
+          <h5 class="modal-title" id="TambahModalSTDLabel">Tambah Pemesanan Kamar - Tipe Standar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="loadTambahModalSTD">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Informasi Kamar Standar (STD) -->
+  <div class="modal fade" id="modalinfo-STD" tabindex="-1" aria-labelledby="ModalDLXLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="ModalDLXLabel">Informasi Kamar - Tipe Deluxe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="loadModalSTD">
         </div>
       </div>
     </div>
@@ -689,71 +787,6 @@ $(document).on('shown.bs.modal', '#modalinfo-DLX', function () {
 
 
 
-// BAGIAN DARI HAPUS DATA HISTORI KAMAR DELUXE
-$(document).on('click', '.btn-hapus-kamar', function() {
-    let id = $(this).data('id');
-
-    Swal.fire({
-        title: 'Yakin ingin menghapus?',
-        text: 'Data pesanan kamar ini akan dihapus permanen!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Ya, Hapus!',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-
-            $.ajax({
-                type: 'POST',
-                url: '/hapus-histori-kamar',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    id_histori_kamar: id
-                },
-                success: function(res) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: res.message,
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
-
-                    setTimeout(function () {
-                        location.reload(); // refresh role-grid
-                    }, 2000);
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Gagal!',
-                        text: 'Data gagal dihapus.'
-                    });
-                }
-            });
-
-        }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -946,6 +979,295 @@ $(document).on('shown.bs.modal', '#modalinfo-SPR', function () {
     $('#list_nomor_kamar_dlx').html('');
     window.kamar = [];
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI FORM TAMBAH MODAL STANDAR
+$(document).on('click', '.TambahModalSTD', function(e){
+    e.preventDefault();
+
+    let tipe = $(this).attr('tipe_kamar');
+    let tanggal = $(this).data('tanggal');
+
+    $.ajax({
+        type:'POST',
+        url:'/TambahModalSTD',
+        data:{
+            _token : "{{ csrf_token() }}",
+            tipe_kamar : tipe
+        },
+        success:function(respond){
+            $("#loadTambahModalSTD").html(respond);
+            $("#modal-STD").modal("show");
+
+            // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
+            if(!tanggal){
+                $('#jumlah_kamar_dipesan_std').html(`<option value="">Silakan cari tanggal dulu</option>`);
+                return;
+            }
+
+            $.ajax({
+                url: '/getKamarTersedia',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    tanggal: tanggal,
+                    tipe_kamar: tipe
+                },
+                success: function(res){
+                    console.log("RESPON FINAL:", res);
+
+                    if (!res || res.length === 0) {
+                        $('#jumlah_kamar_dipesan_std').html(`<option value="">Kamar Penuh</option>`);
+                        return;
+                    }
+
+                    let opt = `<option value="">-- Pilih --</option>`;
+                    for(let i = 1; i <= res.length; i++){
+                        opt += `<option value="${i}">${i}</option>`;
+                    }
+
+                    $('#jumlah_kamar_dipesan_std').html(opt);
+                    window.kamar = res;
+                }
+            });
+        }
+    });
+});
+
+
+// ✅ RESET SAAT MODAL DIBUKA
+$(document).on('shown.bs.modal', '#modal-STD', function () {
+    $('#list_nomor_kamar_std').html('');
+    window.kamar = [];
+});
+
+
+// ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
+$(document).on('change', '#jumlah_kamar_dipesan_std', function () {
+    let jumlah = parseInt($(this).val());
+    let list = $('#list_nomor_kamar_std');
+
+    list.html(''); // reset dulu
+
+    if (!jumlah || jumlah < 1) return;
+
+    // ✅ looping sesuai jumlah kamar yang dipilih
+    for (let i = 1; i <= jumlah; i++) {
+        let selectHTML = `
+            <div class="mb-2">
+                <label>Nomor Kamar ${i}</label>
+                <select name="nomor_kamar[]" class="form-control select-kamar-std" required>
+                    <option value="">-- Pilih Nomor Kamar --</option>
+                </select>
+            </div>
+        `;
+        list.append(selectHTML);
+    }
+
+    // ✅ ISI SEMUA SELECT DENGAN DATA KAMAR DARI window.kamar
+    if (window.kamar && window.kamar.length > 0) {
+        $('.select-kamar-std').each(function () {
+            let select = $(this);
+            select.html('<option value="">-- Pilih Nomor Kamar --</option>');
+                
+            window.kamar.forEach(function (k) {
+                // ✅ value = id_nomor_kamar (ANGKA)
+                // ✅ text = STD + nomor kamar
+                select.append(`
+                    <option value="${k.id_nomor_kamar}">
+                        STD${k.nomor_kamar}
+                    </option>
+                `);
+            });
+        });
+    }
+});
+
+
+
+$(document).on('change', '.select-kamar-std', function () {
+    let selectedValues = [];
+
+    $('.select-kamar-std').each(function () {
+        let val = $(this).val();
+        if (val) selectedValues.push(val);
+    });
+
+    $('.select-kamar-std').each(function () {
+        let currentSelect = $(this);
+        let currentValue = currentSelect.val();
+
+        currentSelect.find('option').each(function () {
+            let optionVal = $(this).val();
+
+            if (selectedValues.includes(optionVal) && optionVal !== currentValue) {
+                $(this).prop('disabled', true);
+            } else {
+                $(this).prop('disabled', false);
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI TABEL MODAL STANDAR
+$(document).on('click', '.ModalDLX1', function(e){
+    e.preventDefault();
+
+    let tanggal = $(this).data('tanggal');
+    let nomor_kamar = $(this).attr('nomor_kamar');
+    let tipe = $(this).attr('tipe_kamar');
+
+    $.ajax({
+        type:'POST',
+        url:'/ModalDLX1',
+        data:{
+            _token : "{{ csrf_token() }}",
+            tanggal : tanggal,
+            nomor_kamar : nomor_kamar,
+            tipe_kamar : tipe
+        },
+        success:function(respond){
+            $("#loadModalSTD").html(respond);
+            $("#modalinfo-STD").modal("show");
+        }
+    });
+});
+
+
+$(document).on('shown.bs.modal', '#modalinfo-STD', function () {
+    $('#list_nomor_kamar_std').html('');
+    window.kamar = [];
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI HAPUS DATA HISTORI KAMAR DELUXE / SUPERIOR / STANDAR
+$(document).on('click', '.btn-hapus-kamar', function() {
+    let id = $(this).data('id');
+
+    Swal.fire({
+        title: 'Yakin ingin menghapus?',
+        text: 'Data pesanan kamar ini akan dihapus permanen!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/hapus-histori-kamar',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id_histori_kamar: id
+                },
+                success: function(res) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: res.message,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+
+                    setTimeout(function () {
+                        location.reload(); // refresh role-grid
+                    }, 2000);
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Data gagal dihapus.'
+                    });
+                }
+            });
+
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

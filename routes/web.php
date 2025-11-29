@@ -38,3 +38,17 @@ Route::post('/TambahModalSPR/store_TambahModalSPR', [HotelController::class, 'st
 
 
 Route::post('/ModalSPR', [HotelController::class,'ModalSPR']);
+
+
+
+
+
+
+
+Route::post('/TambahModalSTD', [HotelController::class,'TambahModalSTD']);
+
+
+Route::post('/TambahModalSTD/store_TambahModalSTD', [HotelController::class, 'store_TambahModalSTD']);
+
+
+Route::post('/ModalSTD', [HotelController::class,'ModalSTD']);
