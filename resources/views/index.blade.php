@@ -232,29 +232,59 @@
 @push('myscript')
 <script>
 $(document).on('change', '#tgl_tampil', function () {
-    let tanggal = $(this).val(); // contoh: 01 November 2025
+    let tanggal = $(this).val(); // contoh: "01 Desember 2025" atau "01 December 2025"
+    if (!tanggal) return;
 
-    let bulanMap = {
-        "Januari":"01","Februari":"02","Maret":"03","April":"04","Mei":"05","Juni":"06",
-        "Juli":"07","Agustus":"08","September":"09","Oktober":"10","November":"11","Desember":"12"
+    // map bahasa indonesia + english ke angka
+    const bulanMap = {
+        "Januari":"01","Jan":"01","January":"01",
+        "Februari":"02","Feb":"02","February":"02",
+        "Maret":"03","Mar":"03","March":"03",
+        "April":"04","Apr":"04","April":"04",
+        "Mei":"05","May":"05",
+        "Juni":"06","Jun":"06","June":"06",
+        "Juli":"07","Jul":"07","July":"07",
+        "Agustus":"08","Aug":"08","August":"08",
+        "September":"09","Sep":"09","September":"09",
+        "Oktober":"10","Oct":"10","October":"10",
+        "November":"11","Nov":"11","November":"11",
+        "Desember":"12","Dec":"12","December":"12"
     };
 
-    let parts = tanggal.trim().split(/\s+/); // lebih aman dari spasi ganda
-
-    let hari  = parts[0];
-    let bulanText = parts[1];
-    let tahun = parts[2];
-
-    // ✅ CEGAH undefined
-    if (!bulanMap[bulanText]) {
-        alert('Format bulan tidak dikenali!');
+    // split aman (hilangkan spasi berlebih)
+    let parts = tanggal.trim().split(/\s+/);
+    if (parts.length < 3) {
+        // fallback: kalau format beda, coba parse dengan Date
+        let parsed = new Date(tanggal);
+        if (!isNaN(parsed)) {
+            let yyyy = parsed.getFullYear();
+            let mm = String(parsed.getMonth() + 1).padStart(2,'0');
+            let dd = String(parsed.getDate()).padStart(2,'0');
+            $('#cari_tanggal').val(`${yyyy}-${mm}-${dd}`);
+        } else {
+            console.warn('Format tanggal tidak dikenali:', tanggal);
+        }
         return;
     }
 
-    let formatDB = `${tahun}-${bulanMap[bulanText]}-${hari.padStart(2,'0')}`;
+    let hari = parts[0].padStart(2,'0'); // "1" -> "01"
+    let bulanText = parts[1];
+    let tahun = parts[2];
 
+    let bulanNum = bulanMap[bulanText];
+    if (!bulanNum) {
+        // coba lowercase & capitalize
+        let keyLower = bulanText.charAt(0).toUpperCase() + bulanText.slice(1).toLowerCase();
+        bulanNum = bulanMap[keyLower];
+    }
+
+    if (!bulanNum) {
+        alert('Format bulan tidak dikenali: ' + bulanText);
+        return;
+    }
+
+    let formatDB = `${tahun}-${bulanNum}-${hari}`;
     $('#cari_tanggal').val(formatDB);
-
     console.log("Tanggal DB:", formatDB);
 });
 
