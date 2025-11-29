@@ -340,7 +340,7 @@
         
               {{-- ✅ TOMBOL INFORMASI --}}
               <a href="#"
-                 class="ModalDLX1 btn {{ $std->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 class="ModalSTD btn {{ $std->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
                  data-tanggal="{{ $cari_tanggal }}"
                  nomor_kamar="{{ $std->id_nomor_kamar }}"
                  tipe_kamar="3">
@@ -1144,7 +1144,7 @@ $(document).on('change', '.select-kamar-std', function () {
 
 
 // BAGIAN DARI TABEL MODAL STANDAR
-$(document).on('click', '.ModalDLX1', function(e){
+$(document).on('click', '.ModalSTD', function(e){
     e.preventDefault();
 
     let tanggal = $(this).data('tanggal');
@@ -1153,7 +1153,7 @@ $(document).on('click', '.ModalDLX1', function(e){
 
     $.ajax({
         type:'POST',
-        url:'/ModalDLX1',
+        url:'/ModalSTD',
         data:{
             _token : "{{ csrf_token() }}",
             tanggal : tanggal,
