@@ -365,7 +365,7 @@
   <div class="modal fade" id="modalinfo-SPR" tabindex="-1" aria-labelledby="ModalSPRLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-secondary text-white">
+        <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="ModalSPRLabel">Informasi Kamar - Tipe Superior</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>

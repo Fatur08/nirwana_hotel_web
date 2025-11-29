@@ -41,6 +41,6 @@
         </td>
     </tr>
 </table>
-<a href="/" class="btn btn-danger w-100 mt-3">
+<a href="/" class="btn btn-primary w-100 mt-3">
     Kembali
 </a>
