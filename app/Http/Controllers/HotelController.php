@@ -181,7 +181,7 @@ class HotelController extends Controller
 
     public function ModalDLX(Request $request)
     {
-        $cari_tanggal = $request->cari_tanggal;
+        $cari_tanggal = $request->tanggal;
         $nomor_kamar  = $request->nomor_kamar;
         $tipe_kamar   = $request->tipe_kamar;
         $histori_kamar = DB::table('histori_kamar as hk')
