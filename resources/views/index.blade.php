@@ -220,22 +220,22 @@
           Tambah Pemesanan
         </a>
         <div class="role-grid">
-          @foreach($kamarDLX as $dlx)
+          @foreach($kamarSPR as $spr)
         
-            <div class="role-card {{ $dlx->histori_aktif ? 'bg-success text-white' : '' }}">
+            <div class="role-card {{ $spr->histori_aktif ? 'bg-success text-white' : '' }}">
         
               {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
               <div class="d-flex align-items-center justify-content-between mb-2">
         
                 <h5 class="text-center flex-grow-1 mb-0">
-                  <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
+                  <strong>{{ $spr->kode_kamar }}{{ $spr->nomor_kamar }}</strong>
                 </h5>
         
                 {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
-                @if($dlx->histori_aktif)
+                @if($spr->histori_aktif)
                   <a href="#"
                     class="btn btn-danger btn-sm btn-hapus-kamar"
-                    data-id="{{ $dlx->histori_aktif }}">
+                    data-id="{{ $spr->histori_aktif }}">
                     Hapus
                   </a>
                 @endif
@@ -244,10 +244,10 @@
         
               {{-- ✅ TOMBOL INFORMASI --}}
               <a href="#"
-                 class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 class="ModalDLX btn {{ $spr->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
                  data-tanggal="{{ $cari_tanggal }}"
-                 nomor_kamar="{{ $dlx->id_nomor_kamar }}"
-                 tipe_kamar="1">
+                 nomor_kamar="{{ $spr->id_nomor_kamar }}"
+                 tipe_kamar="2">
                  Informasi Kamar
               </a>
         
