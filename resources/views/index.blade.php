@@ -680,7 +680,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     }
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: "/getKamarTersedia",
         success: function (res) {
             $('.select-kamar-dlx').each(function () {
