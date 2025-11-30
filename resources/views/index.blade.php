@@ -682,6 +682,11 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     $.ajax({
         type: 'POST',
         url: "/getKamarTersedia",
+        dataType: 'json',
+        data: {
+            tanggal: tanggal,
+            tipe_kamar: tipe
+        },
         success: function (res) {
             $('.select-kamar-dlx').each(function () {
                 let select = $(this);
