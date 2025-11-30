@@ -659,15 +659,14 @@ $(document).on('shown.bs.modal', '#modal-DLX', function () {
 
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-$(document).on('change', '#jumlah_kamar_dipesan_dlx', function () {
+$('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_dlx');
 
-    list.html(''); // reset dulu
+    list.html('');
 
     if (!jumlah || jumlah < 1) return;
 
-    // ✅ looping sesuai jumlah kamar yang dipilih
     for (let i = 1; i <= jumlah; i++) {
         let selectHTML = `
             <div class="mb-2">
@@ -680,23 +679,24 @@ $(document).on('change', '#jumlah_kamar_dipesan_dlx', function () {
         list.append(selectHTML);
     }
 
-    // ✅ ISI SEMUA SELECT DENGAN DATA KAMAR DARI window.kamar
-    if (window.kamar && window.kamar.length > 0) {
-        $('.select-kamar-dlx').each(function () {
-            let select = $(this);
-            select.html('<option value="">-- Pilih Nomor Kamar --</option>');
-                
-            window.kamar.forEach(function (k) {
-                // ✅ value = id_nomor_kamar (ANGKA)
-                // ✅ text = DLX + nomor kamar
-                select.append(`
-                    <option value="${k.id_nomor_kamar}">
-                        DLX${k.nomor_kamar}
-                    </option>
-                `);
+    $.ajax({
+        type: 'GET',
+        url: "{{ url('/get-kamar-dlx') }}",
+        success: function (res) {
+            $('.select-kamar-dlx').each(function () {
+                let select = $(this);
+                select.html('<option value="">-- Pilih Nomor Kamar --</option>');
+
+                res.forEach(function (k) {
+                    select.append(`
+                        <option value="${k.id_nomor_kamar}">
+                            DLX${k.nomor_kamar}
+                        </option>
+                    `);
+                });
             });
-        });
-    }
+        }
+    });
 });
 
 
