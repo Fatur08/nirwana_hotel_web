@@ -681,7 +681,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
 
     $.ajax({
         type: 'GET',
-        url: "{{ url('/get-kamar-dlx') }}",
+        url: "/getKamarTersedia",
         success: function (res) {
             $('.select-kamar-dlx').each(function () {
                 let select = $(this);
