@@ -660,11 +660,12 @@ $(document).on('shown.bs.modal', '#modal-DLX', function () {
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
 $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
+
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_dlx');
-    
-    let tipe = $(this).attr('tipe_kamar');
-    let tanggal = $(this).data('tanggal');
+
+    let tipe = 1; // ✅ DLX
+    let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
 
     list.html('');
 
@@ -674,7 +675,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
         let selectHTML = `
             <div class="mb-2">
                 <label>Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar-dlx" required>
+                <select name="nomor_kamar[]" class="form-control select-kamar-dlx">
                     <option value="">-- Pilih Nomor Kamar --</option>
                 </select>
             </div>
@@ -692,6 +693,9 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
             tipe_kamar: tipe
         },
         success: function (res) {
+
+            console.log('DATA KAMAR:', res); // ✅ untuk debug
+
             $('.select-kamar-dlx').each(function () {
                 let select = $(this);
                 select.html('<option value="">-- Pilih Nomor Kamar --</option>');
@@ -706,6 +710,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
             });
         }
     });
+
 });
 
 
