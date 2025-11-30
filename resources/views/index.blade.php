@@ -662,6 +662,9 @@ $(document).on('shown.bs.modal', '#modal-DLX', function () {
 $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_dlx');
+    
+    let tipe = $(this).attr('tipe_kamar');
+    let tanggal = $(this).data('tanggal');
 
     list.html('');
 
@@ -684,6 +687,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
         url: "/getKamarTersedia",
         dataType: 'json',
         data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
             tanggal: tanggal,
             tipe_kamar: tipe
         },
