@@ -1094,7 +1094,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_std', function () {
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_std');
 
-    let tipe = 1; // ✅ DLX
+    let tipe = 3; // ✅ STD
     let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
 
     list.html('');
