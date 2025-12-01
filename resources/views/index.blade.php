@@ -699,9 +699,9 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
 
     for (let i = 1; i <= jumlah; i++) {
         let selectHTML = `
-            <div class="mb-2" style="font-size:16pt;">
-                <label>Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar-dlx">
+            <div class="mb-2">
+                <label style="font-size:16pt;">Nomor Kamar ${i}</label>
+                <select name="nomor_kamar[]" class="form-control select-kamar-dlx" style="font-size:16pt;">
                     <option value="">-- Pilih Nomor Kamar --</option>
                 </select>
             </div>
