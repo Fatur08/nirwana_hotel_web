@@ -874,20 +874,23 @@ $(document).on('shown.bs.modal', '#modal-SPR', function () {
 
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-$(document).on('change', '#jumlah_kamar_dipesan_spr', function () {
+$('body').on('change', '#jumlah_kamar_dipesan_spr', function () {
+
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_spr');
 
-    list.html(''); // reset dulu
+    let tipe = 2; // ✅ SPR
+    let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
+
+    list.html('');
 
     if (!jumlah || jumlah < 1) return;
 
-    // ✅ looping sesuai jumlah kamar yang dipilih
     for (let i = 1; i <= jumlah; i++) {
         let selectHTML = `
             <div class="mb-2">
                 <label>Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar-spr" required>
+                <select name="nomor_kamar[]" class="form-control select-kamar-spr">
                     <option value="">-- Pilih Nomor Kamar --</option>
                 </select>
             </div>
@@ -895,23 +898,34 @@ $(document).on('change', '#jumlah_kamar_dipesan_spr', function () {
         list.append(selectHTML);
     }
 
-    // ✅ ISI SEMUA SELECT DENGAN DATA KAMAR DARI window.kamar
-    if (window.kamar && window.kamar.length > 0) {
-        $('.select-kamar-spr').each(function () {
-            let select = $(this);
-            select.html('<option value="">-- Pilih Nomor Kamar --</option>');
-                
-            window.kamar.forEach(function (k) {
-                // ✅ value = id_nomor_kamar (ANGKA)
-                // ✅ text = SPR + nomor kamar
-                select.append(`
-                    <option value="${k.id_nomor_kamar}">
-                        SPR${k.nomor_kamar}
-                    </option>
-                `);
+    $.ajax({
+        type: 'POST',
+        url: "/getKamarTersedia",
+        dataType: 'json',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            tanggal: tanggal,
+            tipe_kamar: tipe
+        },
+        success: function (res) {
+
+            console.log('DATA KAMAR:', res); // ✅ untuk debug
+
+            $('.select-kamar-spr').each(function () {
+                let select = $(this);
+                select.html('<option value="">-- Pilih Nomor Kamar --</option>');
+
+                res.forEach(function (k) {
+                    select.append(`
+                        <option value="${k.id_nomor_kamar}">
+                            SPR${k.nomor_kamar}
+                        </option>
+                    `);
+                });
             });
-        });
-    }
+        }
+    });
+
 });
 
 
