@@ -643,7 +643,7 @@ $(document).on('click', '.TambahModalDLX', function(e){
 
             // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
             if(!tanggal){
-                $('#jumlah_kamar_dipesan_dlx').html(`<option value="">Silakan cari tanggal dulu</option>`);
+                $('#jumlah_kamar_dipesan_dlx').html(`<option style="font-size:16pt;" value="">Silakan cari tanggal dulu</option>`);
                 return;
             }
 
@@ -659,13 +659,13 @@ $(document).on('click', '.TambahModalDLX', function(e){
                     console.log("RESPON FINAL:", res);
 
                     if (!res || res.length === 0) {
-                        $('#jumlah_kamar_dipesan_dlx').html(`<option value="">Kamar Penuh</option>`);
+                        $('#jumlah_kamar_dipesan_dlx').html(`<option style="font-size:16pt;" value="">Kamar Penuh</option>`);
                         return;
                     }
 
-                    let opt = `<option value="">-- Pilih --</option>`;
+                    let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
                     for(let i = 1; i <= res.length; i++){
-                        opt += `<option value="${i}">${i}</option>`;
+                        opt += `<option style="font-size:16pt;" value="${i}">${i}</option>`;
                     }
 
                     $('#jumlah_kamar_dipesan_dlx').html(opt);
@@ -699,7 +699,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
 
     for (let i = 1; i <= jumlah; i++) {
         let selectHTML = `
-            <div class="mb-2">
+            <div class="mb-2" style="font-size:16pt;">
                 <label>Nomor Kamar ${i}</label>
                 <select name="nomor_kamar[]" class="form-control select-kamar-dlx">
                     <option value="">-- Pilih Nomor Kamar --</option>
@@ -724,11 +724,11 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
 
             $('.select-kamar-dlx').each(function () {
                 let select = $(this);
-                select.html('<option value="">-- Pilih Nomor Kamar --</option>');
+                select.html('<option style="font-size:16pt;" value="">-- Pilih Nomor Kamar --</option>');
 
                 res.forEach(function (k) {
                     select.append(`
-                        <option value="${k.id_nomor_kamar}">
+                        <option style="font-size:16pt;" value="${k.id_nomor_kamar}">
                             DLX${k.nomor_kamar}
                         </option>
                     `);
