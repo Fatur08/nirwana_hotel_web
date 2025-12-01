@@ -1133,7 +1133,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_std', function () {
                 res.forEach(function (k) {
                     select.append(`
                         <option value="${k.id_nomor_kamar}">
-                            DLX${k.nomor_kamar}
+                            STD${k.nomor_kamar}
                         </option>
                     `);
                 });
