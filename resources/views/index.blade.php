@@ -262,7 +262,7 @@
 
     <div class="kotak-spr">
         <h1>Kamar Superior</h1>
-        <a href="#" class="TambahModalSPR btn btn-success mb-2 w-100" tipe_kamar="2" data-tanggal="{{ $cari_tanggal }}">
+        <a href="#" class="TambahModalSPR btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="2" data-tanggal="{{ $cari_tanggal }}">
           Tambah Pemesanan
         </a>
         <div class="role-grid">
@@ -273,7 +273,7 @@
               {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
               <div class="d-flex align-items-center justify-content-between mb-2">
         
-                <h5 class="text-center flex-grow-1 mb-0">
+                <h5 class="text-center flex-grow-1 mb-0" style="font-size:16pt;">
                   <strong>{{ $spr->kode_kamar }}{{ $spr->nomor_kamar }}</strong>
                 </h5>
         
@@ -281,6 +281,7 @@
                 @if($spr->histori_aktif)
                   <a href="#"
                     class="btn btn-danger btn-sm btn-hapus-kamar"
+                    style="font-size:16pt;"
                     data-id="{{ $spr->histori_aktif }}">
                     Hapus
                   </a>
@@ -291,6 +292,7 @@
               {{-- ✅ TOMBOL INFORMASI --}}
               <a href="#"
                  class="ModalSPR btn {{ $spr->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 style="font-size:16pt;"
                  data-tanggal="{{ $cari_tanggal }}"
                  nomor_kamar="{{ $spr->id_nomor_kamar }}"
                  tipe_kamar="2">
@@ -334,7 +336,7 @@
 
     <div class="kotak-std">
         <h1>Kamar Standar</h1>
-        <a href="#" class="TambahModalSTD btn btn-success mb-2 w-100" tipe_kamar="3" data-tanggal="{{ $cari_tanggal }}">
+        <a href="#" class="TambahModalSTD btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="3" data-tanggal="{{ $cari_tanggal }}">
           Tambah Pemesanan
         </a>
         <div class="role-grid">
@@ -345,7 +347,7 @@
               {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
               <div class="d-flex align-items-center justify-content-between mb-2">
         
-                <h5 class="text-center flex-grow-1 mb-0">
+                <h5 class="text-center flex-grow-1 mb-0" style="font-size:16pt;">
                   <strong>{{ $std->kode_kamar }}{{ $std->nomor_kamar }}</strong>
                 </h5>
         
@@ -353,6 +355,7 @@
                 @if($std->histori_aktif)
                   <a href="#"
                     class="btn btn-danger btn-sm btn-hapus-kamar"
+                    style="font-size:16pt;"
                     data-id="{{ $std->histori_aktif }}">
                     Hapus
                   </a>
@@ -363,6 +366,7 @@
               {{-- ✅ TOMBOL INFORMASI --}}
               <a href="#"
                  class="ModalSTD btn {{ $std->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 style="font-size:16pt;"
                  data-tanggal="{{ $cari_tanggal }}"
                  nomor_kamar="{{ $std->id_nomor_kamar }}"
                  tipe_kamar="3">
@@ -386,7 +390,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="TambahModalDLXLabel">Tambah Pemesanan Kamar - Tipe Deluxe</h5>
+          <h5 class="modal-title" id="TambahModalDLXLabel" style="font-size:16pt;">Tambah Pemesanan Kamar - Tipe Deluxe</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadTambahModalDLX">
@@ -401,7 +405,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="ModalDLXLabel">Informasi Kamar - Tipe Deluxe</h5>
+          <h5 class="modal-title" id="ModalDLXLabel" style="font-size:16pt;">Informasi Kamar - Tipe Deluxe</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadModalDLX">
@@ -426,7 +430,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="TambahModalSPRLabel">Tambah Pemesanan Kamar - Tipe Superior</h5>
+          <h5 class="modal-title" id="TambahModalSPRLabel" style="font-size:16pt;">Tambah Pemesanan Kamar - Tipe Superior</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadTambahModalSPR">
@@ -441,7 +445,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="ModalSPRLabel">Informasi Kamar - Tipe Superior</h5>
+          <h5 class="modal-title" id="ModalSPRLabel" style="font-size:16pt;">Informasi Kamar - Tipe Superior</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadModalSPR">
@@ -471,7 +475,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-warning text-white">
-          <h5 class="modal-title" id="TambahModalSTDLabel">Tambah Pemesanan Kamar - Tipe Standar</h5>
+          <h5 class="modal-title" id="TambahModalSTDLabel" style="font-size:16pt;">Tambah Pemesanan Kamar - Tipe Standar</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadTambahModalSTD">
@@ -486,7 +490,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-warning text-white">
-          <h5 class="modal-title" id="ModalSTDLabel">Informasi Kamar - Tipe Standar</h5>
+          <h5 class="modal-title" id="ModalSTDLabel" style="font-size:16pt;">Informasi Kamar - Tipe Standar</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadModalSTD">
