@@ -157,20 +157,20 @@
                               <path d="M8 15h2v2h-2z" />
                           </svg>
                       </span>
-      
+
                       <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                       <input type="text" 
                              id="tgl_tampil" 
                              class="form-control flatpickr"
                              placeholder="Masukkan Tanggal"
                              autocomplete="off"
-                             style="font-size:16pt; padding:10px;">
-                       
+                             style="font-size:16pt;">
+
                       <!-- INPUT ASLI UNTUK DATABASE -->
                       <input type="hidden" id="cari_tanggal" name="cari_tanggal">
                   </div>
               </div>
-      
+
               <div class="col-4">
                   <!-- ✅ TOMBOL CARI (FONT 16pt) -->
                   <button class="btn btn-success w-100" 
