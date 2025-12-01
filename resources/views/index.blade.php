@@ -858,7 +858,7 @@ $(document).on('click', '.TambahModalSPR', function(e){
 
             // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
             if(!tanggal){
-                $('#jumlah_kamar_dipesan_spr').html(`<option value="">Silakan cari tanggal dulu</option>`);
+                $('#jumlah_kamar_dipesan_spr').html(`<option style="font-size:16pt;" value="">Silakan cari tanggal dulu</option>`);
                 return;
             }
 
@@ -874,13 +874,13 @@ $(document).on('click', '.TambahModalSPR', function(e){
                     console.log("RESPON FINAL:", res);
 
                     if (!res || res.length === 0) {
-                        $('#jumlah_kamar_dipesan_spr').html(`<option value="">Kamar Penuh</option>`);
+                        $('#jumlah_kamar_dipesan_spr').html(`<option style="font-size:16pt;" value="">Kamar Penuh</option>`);
                         return;
                     }
 
-                    let opt = `<option value="">-- Pilih --</option>`;
+                    let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
                     for(let i = 1; i <= res.length; i++){
-                        opt += `<option value="${i}">${i}</option>`;
+                        opt += `<option style="font-size:16pt;" value="${i}">${i}</option>`;
                     }
 
                     $('#jumlah_kamar_dipesan_spr').html(opt);
@@ -915,8 +915,8 @@ $('body').on('change', '#jumlah_kamar_dipesan_spr', function () {
     for (let i = 1; i <= jumlah; i++) {
         let selectHTML = `
             <div class="mb-2">
-                <label>Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar-spr">
+                <label style="font-size:16pt;">Nomor Kamar ${i}</label>
+                <select name="nomor_kamar[]" class="form-control select-kamar-spr" style="font-size:16pt;">
                     <option value="">-- Pilih Nomor Kamar --</option>
                 </select>
             </div>
@@ -939,11 +939,11 @@ $('body').on('change', '#jumlah_kamar_dipesan_spr', function () {
 
             $('.select-kamar-spr').each(function () {
                 let select = $(this);
-                select.html('<option value="">-- Pilih Nomor Kamar --</option>');
+                select.html('<option style="font-size:16pt;" value="">-- Pilih Nomor Kamar --</option>');
 
                 res.forEach(function (k) {
                     select.append(`
-                        <option value="${k.id_nomor_kamar}">
+                        <option style="font-size:16pt;" value="${k.id_nomor_kamar}">
                             SPR${k.nomor_kamar}
                         </option>
                     `);
@@ -1073,7 +1073,7 @@ $(document).on('click', '.TambahModalSTD', function(e){
 
             // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
             if(!tanggal){
-                $('#jumlah_kamar_dipesan_std').html(`<option value="">Silakan cari tanggal dulu</option>`);
+                $('#jumlah_kamar_dipesan_std').html(`<option style="font-size:16pt;" value="">Silakan cari tanggal dulu</option>`);
                 return;
             }
 
@@ -1089,13 +1089,13 @@ $(document).on('click', '.TambahModalSTD', function(e){
                     console.log("RESPON FINAL:", res);
 
                     if (!res || res.length === 0) {
-                        $('#jumlah_kamar_dipesan_std').html(`<option value="">Kamar Penuh</option>`);
+                        $('#jumlah_kamar_dipesan_std').html(`<option style="font-size:16pt;" value="">Kamar Penuh</option>`);
                         return;
                     }
 
-                    let opt = `<option value="">-- Pilih --</option>`;
+                    let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
                     for(let i = 1; i <= res.length; i++){
-                        opt += `<option value="${i}">${i}</option>`;
+                        opt += `<option style="font-size:16pt;" value="${i}">${i}</option>`;
                     }
 
                     $('#jumlah_kamar_dipesan_std').html(opt);
@@ -1130,8 +1130,8 @@ $('body').on('change', '#jumlah_kamar_dipesan_std', function () {
     for (let i = 1; i <= jumlah; i++) {
         let selectHTML = `
             <div class="mb-2">
-                <label>Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar-std">
+                <label style="font-size:16pt;">Nomor Kamar ${i}</label>
+                <select name="nomor_kamar[]" class="form-control select-kamar-std" style="font-size:16pt;">
                     <option value="">-- Pilih Nomor Kamar --</option>
                 </select>
             </div>
@@ -1154,11 +1154,11 @@ $('body').on('change', '#jumlah_kamar_dipesan_std', function () {
 
             $('.select-kamar-std').each(function () {
                 let select = $(this);
-                select.html('<option value="">-- Pilih Nomor Kamar --</option>');
+                select.html('<option style="font-size:16pt;" value="">-- Pilih Nomor Kamar --</option>');
 
                 res.forEach(function (k) {
                     select.append(`
-                        <option value="${k.id_nomor_kamar}">
+                        <option style="font-size:16pt;" value="${k.id_nomor_kamar}">
                             STD${k.nomor_kamar}
                         </option>
                     `);
