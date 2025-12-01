@@ -193,7 +193,7 @@
     
     <div class="kotak-dlx">
         <h1>Kamar Deluxe</h1>
-        <a href="#" class="TambahModalDLX btn btn-success mb-2 w-100" tipe_kamar="1" data-tanggal="{{ $cari_tanggal }}">
+        <a href="#" class="TambahModalDLX btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="1" data-tanggal="{{ $cari_tanggal }}">
           Tambah Pemesanan
         </a>
         <div class="role-grid">
@@ -204,7 +204,7 @@
               {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
               <div class="d-flex align-items-center justify-content-between mb-2">
         
-                <h5 class="text-center flex-grow-1 mb-0">
+                <h5 class="text-center flex-grow-1 mb-0" style="font-size:16pt;">
                   <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
                 </h5>
         
@@ -212,6 +212,7 @@
                 @if($dlx->histori_aktif)
                   <a href="#"
                     class="btn btn-danger btn-sm btn-hapus-kamar"
+                    style="font-size:16pt;"
                     data-id="{{ $dlx->histori_aktif }}">
                     Hapus
                   </a>
@@ -222,6 +223,7 @@
               {{-- ✅ TOMBOL INFORMASI --}}
               <a href="#"
                  class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 style="font-size:16pt;"
                  data-tanggal="{{ $cari_tanggal }}"
                  nomor_kamar="{{ $dlx->id_nomor_kamar }}"
                  tipe_kamar="1">
