@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 28, 2025 at 02:26 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Host: 127.0.0.1:3306
+-- Generation Time: Feb 03, 2026 at 05:27 PM
+-- Server version: 11.8.3-MariaDB-log
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_nirwana`
+-- Database: `u859704623_db_nirwana`
 --
 
 -- --------------------------------------------------------
@@ -32,10 +32,20 @@ CREATE TABLE `histori_kamar` (
   `id_laporan_keuangan` int(255) DEFAULT NULL,
   `id_nomor_kamar` int(255) DEFAULT NULL,
   `nama_tamu` varchar(255) DEFAULT NULL,
-  `nomor_ktp_tamu` int(255) DEFAULT NULL,
+  `nomor_ktp_tamu` varchar(255) DEFAULT NULL,
   `check_in` date DEFAULT NULL,
   `check_out` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `histori_kamar`
+--
+
+INSERT INTO `histori_kamar` (`id_histori_kamar`, `id_laporan_keuangan`, `id_nomor_kamar`, `nama_tamu`, `nomor_ktp_tamu`, `check_in`, `check_out`) VALUES
+(37, 37, 1, 'Tasor', '1801066969690069', '2025-12-01', '2025-12-02'),
+(39, 39, 7, 'Tasor2', '1801066969690069', '2025-12-01', '2025-12-02'),
+(41, 41, 14, 'Tasor3', '1801066969690069', '2025-12-01', '2025-12-02'),
+(42, 42, 7, 'Dumex', '180162825960002', '2025-12-04', '2025-12-05');
 
 -- --------------------------------------------------------
 
@@ -48,8 +58,8 @@ CREATE TABLE `kamar` (
   `kode_kamar` varchar(255) DEFAULT NULL,
   `tarif_per_hari` bigint(255) DEFAULT NULL,
   `tipe_kamar` varchar(255) DEFAULT NULL,
-  `before_10%` bigint(255) DEFAULT NULL,
-  `after_10%` bigint(255) DEFAULT NULL,
+  `before_10_persen` bigint(255) DEFAULT NULL,
+  `after_10_persen` bigint(255) DEFAULT NULL,
   `rate_net` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -57,7 +67,7 @@ CREATE TABLE `kamar` (
 -- Dumping data for table `kamar`
 --
 
-INSERT INTO `kamar` (`id_kamar`, `kode_kamar`, `tarif_per_hari`, `tipe_kamar`, `before_10%`, `after_10%`, `rate_net`) VALUES
+INSERT INTO `kamar` (`id_kamar`, `kode_kamar`, `tarif_per_hari`, `tipe_kamar`, `before_10_persen`, `after_10_persen`, `rate_net`) VALUES
 (1, 'DLX', 300000, 'Deluxe', 397000, 357300, 289413),
 (2, 'SPR', 280000, 'Superior', 369000, 332100, 269001),
 (3, 'STD', 240000, 'Standar', 310000, 279000, 225990);
@@ -75,17 +85,26 @@ CREATE TABLE `laporan_keuangan` (
   `tipe_kamar` varchar(255) DEFAULT NULL,
   `jumlah_kamar_dipesan` int(255) DEFAULT NULL,
   `tarif_per_hari` bigint(255) DEFAULT NULL,
-  `before_10%` bigint(255) DEFAULT NULL,
-  `after_10%` bigint(255) DEFAULT NULL,
+  `before_10_persen` bigint(255) DEFAULT NULL,
+  `after_10_persen` bigint(255) DEFAULT NULL,
   `check_in` date DEFAULT NULL,
   `check_out` date DEFAULT NULL,
   `lama_inap` int(255) DEFAULT NULL,
   `biaya` bigint(255) DEFAULT NULL,
   `biaya_tambahan` bigint(255) DEFAULT NULL,
   `pajak` bigint(255) DEFAULT NULL,
-  `diskon` bigint(255) DEFAULT NULL,
   `total_diterima` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `laporan_keuangan`
+--
+
+INSERT INTO `laporan_keuangan` (`id_laporan_keuangan`, `kode_kamar`, `nama_tamu`, `tipe_kamar`, `jumlah_kamar_dipesan`, `tarif_per_hari`, `before_10_persen`, `after_10_persen`, `check_in`, `check_out`, `lama_inap`, `biaya`, `biaya_tambahan`, `pajak`, `total_diterima`) VALUES
+(37, 'DLX', 'Tasor', 'Deluxe', NULL, 300000, 397000, 357300, '2025-12-01', '2025-12-02', 1, 0, 100000, 0, 100000),
+(39, 'SPR', 'Tasor2', 'Superior', NULL, 280000, 369000, 332100, '2025-12-01', '2025-12-02', 1, 0, 0, 0, 0),
+(41, 'STD', 'Tasor3', 'Standar', NULL, 240000, 310000, 279000, '2025-12-01', '2025-12-02', 1, 0, 100000, 0, 100000),
+(42, 'SPR', 'Dumex', 'Superior', NULL, 280000, 369000, 332100, '2025-12-04', '2025-12-05', 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -160,7 +179,7 @@ ALTER TABLE `nomor_kamar`
 -- AUTO_INCREMENT for table `histori_kamar`
 --
 ALTER TABLE `histori_kamar`
-  MODIFY `id_histori_kamar` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_histori_kamar` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `kamar`
@@ -172,7 +191,7 @@ ALTER TABLE `kamar`
 -- AUTO_INCREMENT for table `laporan_keuangan`
 --
 ALTER TABLE `laporan_keuangan`
-  MODIFY `id_laporan_keuangan` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_laporan_keuangan` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `nomor_kamar`
