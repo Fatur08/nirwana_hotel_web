@@ -138,7 +138,7 @@
 
       
     <div class="kotak-cari">
-      <h1>Cari Tanggal</h1>
+      <h1>Cari Tanggalku dan Kamu</h1>
       <form action="/" method="GET" id="frmCariTanggal" enctype="multipart/form-data">
           @csrf
           <div class="row">
