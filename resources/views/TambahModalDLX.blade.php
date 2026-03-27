@@ -203,7 +203,9 @@
 
 @push('myscript')
 <script>
-$(document).on('change', '#request', function () {
+$(document).on('change', '.request', function () {
+
+    console.log('KEPILIH'); // debug
 
     let value = $(this).val();
     let biaya = 0;
