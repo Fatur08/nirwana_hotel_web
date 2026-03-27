@@ -85,6 +85,36 @@
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <h5 style="font-size:16pt;">Upload Foto KTP</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="input-icon mb-3">
+                <span class="input-icon-addon">
+                    <!-- Icon kamera -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-camera">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 7h2l1 -2h8l1 2h2a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2"/>
+                        <path d="M12 13m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
+                    </svg>
+                </span>
+                <input type="file" 
+                       id="foto_ktp" 
+                       name="foto_ktp" 
+                       class="form-control" 
+                       style="font-size:16pt;"
+                       accept="image/*">
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <h5 style="font-size:16pt;">Biaya Tambahan (Opsional)</h5>
