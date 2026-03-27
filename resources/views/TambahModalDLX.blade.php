@@ -154,6 +154,7 @@
                 </span>
                 <input type="text" id="biaya_request" class="form-control" 
                        style="font-size:16pt;" readonly>
+                <input type="hidden" id="biaya_request_value" name="biaya_request">
             </div>
         </div>
     </div>
