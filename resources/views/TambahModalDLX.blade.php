@@ -201,7 +201,7 @@
     </div>
 </form>
 
-@push('scripts')
+@push('myscript')
 <script>
 $(document).on('change', '#request', function () {
 
