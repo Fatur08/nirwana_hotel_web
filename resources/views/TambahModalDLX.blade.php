@@ -124,7 +124,7 @@
     </div>
     <div class="row mb-3">
         <div class="col-12">
-            <select id="request" name="request" class="form-control" style="font-size:16pt;">
+            <select id="request" name="request" class="request form-control" style="font-size:16pt;">
                 <option value="">-- Pilih Request --</option>
                 <option value="extra_bed">Ekstra Bed</option>
                 <option value="breakfast">Breakfast</option>
