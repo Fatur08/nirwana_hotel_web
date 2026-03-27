@@ -8085,3 +8085,25 @@ body.dark-mode-active .cart-item .cart-item-footer {
   width: 100%;
   height: 500px;
 }
+
+
+
+
+.datepicker td, 
+.datepicker th {
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
+}
+
+.datepicker {
+    font-size: 16px;
+}
+
+
+
+.datepicker td span {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+}
