@@ -115,7 +115,51 @@
             </div>
         </div>
     </div>
+
+
     <div class="row">
+        <div class="col-12">
+            <h5 style="font-size:16pt;">Request</h5>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <select id="request" name="request" class="form-control" style="font-size:16pt;">
+                <option value="">-- Pilih Request --</option>
+                <option value="extra_bed">Ekstra Bed</option>
+                <option value="breakfast">Breakfast</option>
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="row" id="biaya_container" style="display: none;">
+        <div class="col-12">
+            <h5 style="font-size:16pt;">Biaya Tambahan</h5>
+        </div>
+    </div>
+    <div class="row" id="biaya_input_container" style="display: none;">
+        <div class="col-12">
+            <div class="input-icon mb-3">
+                <span class="input-icon-addon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-currency-dollar">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"/>
+                        <path d="M12 3v3m0 12v3"/>
+                    </svg>
+                </span>
+                <input type="text" id="biaya_request" class="form-control" 
+                       style="font-size:16pt;" readonly>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="row">
         <div class="col-12">
             <h5 style="font-size:16pt;">Request</h5>
         </div>
@@ -124,7 +168,6 @@
         <div class="col-12">
             <div class="input-icon mb-3">
                 <span class="input-icon-addon">
-                  <!-- Download SVG icon from http://tabler-icons.io/i/user -->
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c7.2 0 9 1.8 9 9c0 7.2 -1.8 9 -9 9c-7.2 0 -9 -1.8 -9 -9c0 -7.2 1.8 -9 9 -9" /><path d="M15 12h-6" /><path d="M12 9v6" /></svg>
                 </span>
                 <input type="text" value="" id="request" class="form-control" style="font-size:16pt;" name="request" placeholder="Masukkan Request">
@@ -140,13 +183,12 @@
         <div class="col-12">
             <div class="input-icon mb-3">
                 <span class="input-icon-addon">
-                  <!-- Download SVG icon from http://tabler-icons.io/i/user -->
                   <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-currency-dollar"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" /><path d="M12 3v3m0 12v3" /></svg>
                 </span>
                 <input type="number" value="" id="biaya_tambahan" class="form-control" style="font-size:16pt;" name="biaya_tambahan" placeholder="Masukkan Biaya Tambahan">
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="row">
         <div class="col-12">
             <div class="form-group">
@@ -158,3 +200,33 @@
         </div>
     </div>
 </form>
+
+@push('scripts')
+<script>
+$(document).on('change', '#request', function () {
+
+    let value = $(this).val();
+    let biaya = 0;
+
+    if (value === 'extra_bed') {
+        biaya = 150000;
+    } else if (value === 'breakfast') {
+        biaya = 50000;
+    }
+
+    if (value !== '') {
+        $('#biaya_container').show();
+        $('#biaya_input_container').show();
+
+        $('#biaya_request').val('Rp ' + biaya.toLocaleString('id-ID'));
+        $('#biaya_request_value').val(biaya);
+    } else {
+        $('#biaya_container').hide();
+        $('#biaya_input_container').hide();
+        $('#biaya_request').val('');
+        $('#biaya_request_value').val('');
+    }
+
+});
+</script>
+@endpush
