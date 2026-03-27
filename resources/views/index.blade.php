@@ -561,30 +561,24 @@ $(document).on('change', '#tgl_tampil', function () {
 });
 
 
-document.addEventListener("DOMContentLoaded", function () {
+$(document).on('focus', '.flatpickr', function () {
+    $(this).datepicker({
+        format: "dd MM yyyy",   // format tampilan untuk user
+        autoclose: true,
+        todayHighlight: true,
+        language: "id"
+    }).on('changeDate', function (e) {
+        let tanggalDB = e.format('yyyy-mm-dd'); // format database
 
-    flatpickr(".flatpickr", {
-        dateFormat: "Y-m-d",       // format untuk database
-        altInput: true,            // input tampilan user
-        altFormat: "d F Y",        // format tampilan (contoh: 27 Maret 2026)
-        locale: "id",              // bahasa Indonesia
-        onChange: function(selectedDates, dateStr, instance) {
-
-            let inputId = instance.element.id;
-
-            // simpan ke hidden input sesuai id
-            if(inputId === 'check_in_tampil') {
-                document.getElementById('check_in').value = dateStr;
-            } 
-            else if(inputId === 'check_out_tampil') {
-                document.getElementById('check_out').value = dateStr;
-            } 
-            else if(inputId === 'tgl_tampil') {
-                document.getElementById('cari_tanggal').value = dateStr;
-            }
+        // simpan ke hidden input yang sesuai
+        if($(this).attr('id') === 'check_in_tampil') {
+            $('#check_in').val(tanggalDB);
+        } else if($(this).attr('id') === 'check_out_tampil') {
+            $('#check_out').val(tanggalDB);
+        } else if($(this).attr('id') === 'tgl_tampil') {
+            $('#cari_tanggal').val(tanggalDB);
         }
     });
-
 });
 
 
