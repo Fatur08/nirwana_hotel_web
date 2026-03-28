@@ -690,6 +690,15 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_dlx');
 
+    // ✅ TAMPILKAN BAGIAN KAMAR TERSEDIA
+    if(jumlah && jumlah > 0){
+        $('#kamar_tersedia_title').show();
+        $('#kamar_tersedia_list').show();
+    }else{
+        $('#kamar_tersedia_title').hide();
+        $('#kamar_tersedia_list').hide();
+    }
+
     let tipe = 1; // ✅ DLX
     let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
 

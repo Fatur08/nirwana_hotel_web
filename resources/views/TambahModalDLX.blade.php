@@ -43,12 +43,12 @@
             </select>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="kamar_tersedia_title" style="display:none;">
         <div class="col-12">
             <h5 style="font-size:16pt;">Kamar Yang Tersedia</h5>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-3" id="kamar_tersedia_list" style="display:none;">
         <div class="col-12">
             <div id="list_nomor_kamar_dlx"></div>
         </div>
