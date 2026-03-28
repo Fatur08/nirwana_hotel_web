@@ -204,33 +204,29 @@
 
 @push('myscript')
 <script>
-$(document).ready(function(){
+$(document).on('change', '#request', function(){
 
-    $('#request').change(function(){
+    console.log('KEPILIH');
 
-        console.log('KEPILIH');
+    let value = $(this).val();
+    let biaya = 0;
 
-        let value = $(this).val();
-        let biaya = 0;
+    if (value === 'extra_bed') {
+        biaya = 150000;
+    } else if (value === 'breakfast') {
+        biaya = 50000;
+    }
 
-        if(value === 'extra_bed'){
-            biaya = 150000;
-        }else if(value === 'breakfast'){
-            biaya = 50000;
-        }
+    if (value !== '') {
+        $('#biaya_container').show();
+        $('#biaya_input_container').show();
 
-        if(value !== ''){
-            $('#biaya_container').show();
-            $('#biaya_input_container').show();
-
-            $('#biaya_request').val('Rp ' + biaya.toLocaleString('id-ID'));
-            $('#biaya_request_value').val(biaya);
-        }else{
-            $('#biaya_container').hide();
-            $('#biaya_input_container').hide();
-        }
-
-    });
+        $('#biaya_request').val('Rp ' + biaya.toLocaleString('id-ID'));
+        $('#biaya_request_value').val(biaya);
+    } else {
+        $('#biaya_container').hide();
+        $('#biaya_input_container').hide();
+    }
 
 });
 </script>
