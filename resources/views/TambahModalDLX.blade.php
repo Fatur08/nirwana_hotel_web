@@ -204,31 +204,33 @@
 
 @push('myscript')
 <script>
-$(document).on('change', '.request', function () {
+$(document).ready(function(){
 
-    console.log('KEPILIH'); // debug
+    $('#request').change(function(){
 
-    let value = $(this).val();
-    let biaya = 0;
+        console.log('KEPILIH');
 
-    if (value === 'extra_bed') {
-        biaya = 150000;
-    } else if (value === 'breakfast') {
-        biaya = 50000;
-    }
+        let value = $(this).val();
+        let biaya = 0;
 
-    if (value !== '') {
-        $('#biaya_container').show();
-        $('#biaya_input_container').show();
+        if(value === 'extra_bed'){
+            biaya = 150000;
+        }else if(value === 'breakfast'){
+            biaya = 50000;
+        }
 
-        $('#biaya_request').val('Rp ' + biaya.toLocaleString('id-ID'));
-        $('#biaya_request_value').val(biaya);
-    } else {
-        $('#biaya_container').hide();
-        $('#biaya_input_container').hide();
-        $('#biaya_request').val('');
-        $('#biaya_request_value').val('');
-    }
+        if(value !== ''){
+            $('#biaya_container').show();
+            $('#biaya_input_container').show();
+
+            $('#biaya_request').val('Rp ' + biaya.toLocaleString('id-ID'));
+            $('#biaya_request_value').val(biaya);
+        }else{
+            $('#biaya_container').hide();
+            $('#biaya_input_container').hide();
+        }
+
+    });
 
 });
 </script>
