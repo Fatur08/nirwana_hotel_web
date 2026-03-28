@@ -767,6 +767,37 @@ $(document).on('change', '.select-kamar-dlx', function () {
 
 
 
+// ✅ REQUEST EXTRA BED / BREAKFAST
+$(document).on('change', '#request', function(){
+
+    let value = $(this).val();
+    let biaya = 0;
+
+    if(value === 'extra_bed'){
+        biaya = 150000;
+    } 
+    else if(value === 'breakfast'){
+        biaya = 50000;
+    }
+
+    if(value !== ''){
+        $('#biaya_container').show();
+        $('#biaya_input_container').show();
+
+        $('#biaya_request').val('Rp ' + biaya.toLocaleString('id-ID'));
+        $('#biaya_request_value').val(biaya);
+    } 
+    else{
+        $('#biaya_container').hide();
+        $('#biaya_input_container').hide();
+        $('#biaya_request').val('');
+        $('#biaya_request_value').val('');
+    }
+
+});
+
+
+
 
 
 
