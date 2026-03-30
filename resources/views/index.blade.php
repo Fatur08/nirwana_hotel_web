@@ -397,7 +397,7 @@
                 <p class="mb-1">Tersedia 5 Kamar</p>
                 <p class="mb-0">
                     Mulai dari 
-                    <span style="font-size:22px; font-weight:700; color:white;">Rp.240.000</span> 
+                    <span style="font-size:22px; font-weight:700; color:#8F00FF;">Rp.240.000</span> 
                     / malam
                 </p>
             </div>
