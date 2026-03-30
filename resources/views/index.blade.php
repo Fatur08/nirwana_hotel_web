@@ -324,7 +324,6 @@
                 <h1 class="mb-1">Kamar Deluxe</h1>
                 <p class="mb-1">Tersedia 6 Kamar</p>
                 <p class="mb-0">
-                    Mulai dari 
                     <span style="font-size:22px; font-weight:700; color:#00a850;">Rp.300.000</span> 
                     / malam
                 </p>
@@ -333,7 +332,7 @@
             <!-- TOMBOL -->
             <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
                 <a href="#"
-                   class="TambahModalDLX btn btn-success px-3 py-2"
+                   class="TambahModalDLX btn btn-dark px-3 py-2"
                    style="font-size:14pt; white-space:nowrap;"
                    tipe_kamar="1"
                    data-tanggal="{{ $cari_tanggal }}">
@@ -359,7 +358,6 @@
                 <h1 class="mb-1">Kamar Superior</h1>
                 <p class="mb-1">Tersedia 7 Kamar</p>
                 <p class="mb-0">
-                    Mulai dari 
                     <span style="font-size:22px; font-weight:700; color:#f9a31c;">Rp.280.000</span> 
                     / malam
                 </p>
@@ -368,7 +366,7 @@
             <!-- TOMBOL -->
             <div class="col-md-3 col-12 d-flex justify-content-center text-center mt-3 mt-md-0">
                 <a href="#" 
-                   class="TambahModalDLX btn btn-success"
+                   class="TambahModalDLX btn btn-dark"
                    style="font-size:16pt;"
                    tipe_kamar="1"
                    data-tanggal="{{ $cari_tanggal }}">
@@ -393,10 +391,9 @@
 
             <!-- KONTEN KAMAR -->
             <div class="col-md-6 col-12 text-start">
-                <h1 class="mb-1">Kamar Superior</h1>
+                <h1 class="mb-1">Kamar Standar</h1>
                 <p class="mb-1">Tersedia 5 Kamar</p>
                 <p class="mb-0">
-                    Mulai dari 
                     <span style="font-size:22px; font-weight:700; color:#8F00FF;">Rp.240.000</span> 
                     / malam
                 </p>
@@ -405,7 +402,7 @@
             <!-- TOMBOL -->
             <div class="col-md-3 col-12 d-flex justify-content-center text-center mt-3 mt-md-0">
                 <a href="#" 
-                   class="TambahModalDLX btn btn-success"
+                   class="TambahModalDLX btn btn-dark"
                    style="font-size:16pt;"
                    tipe_kamar="1"
                    data-tanggal="{{ $cari_tanggal }}">
