@@ -320,10 +320,82 @@
             <!-- KONTEN KAMAR -->
             <div class="col-md-6 col-12 text-start">
                 <h1 class="mb-1">Kamar Deluxe</h1>
-                <p class="mb-1">Tersedia 7 Kamar</p>
+                <p class="mb-1">Tersedia 6 Kamar</p>
                 <p class="mb-0">
                     Mulai dari 
                     <span style="font-size:22px; font-weight:700; color:black;">Rp.300.000</span> 
+                    / malam
+                </p>
+            </div>
+
+            <!-- TOMBOL -->
+            <div class="col-md-3 col-12 d-flex justify-content-center text-center mt-3 mt-md-0">
+                <a href="#" 
+                   class="TambahModalDLX btn btn-success"
+                   style="font-size:16pt;"
+                   tipe_kamar="1"
+                   data-tanggal="{{ $cari_tanggal }}">
+                   Tambah Pemesanan
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="kotak-spr mt-3 p-3">
+        <div class="row align-items-center">
+
+            <!-- FOTO -->
+            <div class="col-md-3 col-12 d-flex justify-content-center text-center mb-3 mb-md-0">
+                <img src="{{ asset('assets/img/kamar_superior.jpg') }}" class="img-fluid rounded" style="max-height:120px;">
+            </div>
+
+            <!-- KONTEN KAMAR -->
+            <div class="col-md-6 col-12 text-start">
+                <h1 class="mb-1">Kamar Superior</h1>
+                <p class="mb-1">Tersedia 7 Kamar</p>
+                <p class="mb-0">
+                    Mulai dari 
+                    <span style="font-size:22px; font-weight:700; color:black;">Rp.280.000</span> 
+                    / malam
+                </p>
+            </div>
+
+            <!-- TOMBOL -->
+            <div class="col-md-3 col-12 d-flex justify-content-center text-center mt-3 mt-md-0">
+                <a href="#" 
+                   class="TambahModalDLX btn btn-success"
+                   style="font-size:16pt;"
+                   tipe_kamar="1"
+                   data-tanggal="{{ $cari_tanggal }}">
+                   Tambah Pemesanan
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="kotak-std mt-3 p-3">
+        <div class="row align-items-center">
+
+            <!-- FOTO -->
+            <div class="col-md-3 col-12 d-flex justify-content-center text-center mb-3 mb-md-0">
+                <img src="{{ asset('assets/img/kamar_standar.jpg') }}" class="img-fluid rounded" style="max-height:120px;">
+            </div>
+
+            <!-- KONTEN KAMAR -->
+            <div class="col-md-6 col-12 text-start">
+                <h1 class="mb-1">Kamar Superior</h1>
+                <p class="mb-1">Tersedia 5 Kamar</p>
+                <p class="mb-0">
+                    Mulai dari 
+                    <span style="font-size:22px; font-weight:700; color:black;">Rp.240.000</span> 
                     / malam
                 </p>
             </div>
