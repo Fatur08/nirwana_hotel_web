@@ -298,6 +298,7 @@
                         <th>Status</th>
                         <th>Check-In</th>
                         <th>Check-Out</th>
+                        <th>Resi</th>
                     </tr>
                 </thead>
                 <tbody>
