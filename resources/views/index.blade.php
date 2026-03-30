@@ -21,14 +21,26 @@
     font-size: 20px;
   }
   .login-title {
-    background-color: #007bff;
-    color: white;
-    padding: 12px;
-    border-radius: 10px;
-    font-weight: bold;
-    max-width: 100%;
-    width: 100%;
-    font-size: 20px;
+      background: linear-gradient(135deg, #3a8dde, #1c6ed5);
+      color: white;
+      padding: 18px;
+      border-radius: 10px;
+      font-weight: bold;
+      max-width: 100%;
+      width: 100%;
+      font-size: 20px;
+  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  
+  .login-title h1{
+      margin:0;
+      font-size:22px;
   }
   .role-grid {
     display: grid;
@@ -194,7 +206,7 @@
 <div class="body" style="margin-top: 10px;">
   <div class="login-container">
     <div class="login-title">
-        <h1>Aplikasi Manajemen<br>Hotel Nirwana</h>
+        <h1>Aplikasi Manajemen<br>Hotel Nirwana</h1>
     </div>
     <img src="{{ asset('assets/img/Nirwana_Logo.png') }}" 
          alt="Logo Hotel Nirwana" 
