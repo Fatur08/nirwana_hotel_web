@@ -308,6 +308,25 @@
     </div>
 
 
+
+    <div class="kotak-dlx mt-3">
+        <div class="row">
+            <div class="col-3"><h1>Buat Foto</h1></div>
+            <div class="col-6"><h1>Kamar Deluxe</h1></div>
+            <div class="col-3">
+                <a href="#" class="TambahModalDLX btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="1" data-tanggal="{{ $cari_tanggal }}">
+                  Tambah Pemesanan
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
     <div class="kotak-cari">
       <h1>Cari Tanggal</h1>
       <form action="/" method="GET" id="frmCariTanggal" enctype="multipart/form-data">
