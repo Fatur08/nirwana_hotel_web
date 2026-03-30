@@ -81,7 +81,7 @@
     font-size: 20px;
   }
   .kotak-dlx {
-    background-color: #ea3438;
+    background: linear-gradient(to right, #ea3438, #f39c12, #28a745);
     color: white;
     padding: 12px;
     border-radius: 10px;
@@ -90,6 +90,7 @@
     max-width: 100%;
     width: 100%;
     font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   }
   .kotak-spr {
     background-color: #99caeb;
