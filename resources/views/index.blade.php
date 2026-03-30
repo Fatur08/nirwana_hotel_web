@@ -370,7 +370,7 @@
                    style="font-size:16pt;"
                    tipe_kamar="1"
                    data-tanggal="{{ $cari_tanggal }}">
-                   Tambah Pemesanan
+                   Pesan Kamar
                 </a>
             </div>
 
@@ -407,7 +407,7 @@
                    style="font-size:16pt;"
                    tipe_kamar="1"
                    data-tanggal="{{ $cari_tanggal }}">
-                   Tambah Pemesanan
+                   Pesan Kamar
                 </a>
             </div>
 
