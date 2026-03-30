@@ -312,7 +312,11 @@
     <div class="kotak-dlx mt-3">
         <div class="row">
             <div class="col-3"><h1>Buat Foto</h1></div>
-            <div class="col-6"><h1>Kamar Deluxe</h1></div>
+            <div class="col-6">
+                <h1>Kamar Deluxe</h1><br>
+                <h3>Tersedia 7 Kamar</h3>
+                <h3>Mulai dari</h3><h2>Rp.300.000</h2><h3> / malam</h3>
+            </div>
             <div class="col-3">
                 <a href="#" class="TambahModalDLX btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="1" data-tanggal="{{ $cari_tanggal }}">
                   Tambah Pemesanan
