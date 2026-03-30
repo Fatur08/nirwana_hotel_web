@@ -2,7 +2,7 @@
 @section('content')
 <style>
   body {
-    background: linear-gradient(to bottom, #eaf3ff, #e8dbb9);
+    background: linear-gradient(to bottom, #e8dbb9, #eaf3ff);
     margin: 0;
     padding: 15px;
     min-height: 100vh;
@@ -12,7 +12,7 @@
   }
   .login-container {
     text-align: center;
-    background: #fff;
+    background: #e8dbb9;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     padding: 15px;
