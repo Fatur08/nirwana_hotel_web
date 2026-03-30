@@ -3,7 +3,7 @@
     <input type="text" readonly value="{{ $tipe_kamar }}" id="tipe_kamar" class="form-control" name="tipe_kamar" placeholder="tipe_kamar" hidden>
     <div class="row">
         <div class="col-12">
-            <h5 style="font-size:16pt;">Nama Tamu</h5>
+            <h5 class="text-start" style="font-size:16pt;">Nama Tamu</h5>
         </div>
     </div>
     <div class="row">
@@ -17,7 +17,7 @@
               </div>
         </div>
     </div>
-    <div class="row">
+    <!--<div class="row">
         <div class="col-12">
             <h5 style="font-size:16pt;">Nomor KTP Tamu</h5>
         </div>
@@ -31,10 +31,10 @@
                 <input type="number" value="" id="nomor_ktp_tamu" class="form-control" style="font-size:16pt;" name="nomor_ktp_tamu" placeholder="Masukkan Nomor KTP Tamu">
               </div>
         </div>
-    </div>
+    </div>-->
     <div class="row">
         <div class="col-12">
-            <h5 style="font-size:16pt;">Jumlah Kamar Dipesan</h5>
+            <h5 class="text-start" style="font-size:16pt;">Jumlah Kamar Dipesan</h5>
         </div>
     </div>
     <div class="row mb-3">
@@ -45,7 +45,7 @@
     </div>
     <div class="row" id="kamar_tersedia_title" style="display:none;">
         <div class="col-12">
-            <h5 style="font-size:16pt;">Kamar Yang Tersedia</h5>
+            <h5 class="text-start" style="font-size:16pt;">Kamar Yang Tersedia</h5>
         </div>
     </div>
     <div class="row mb-3" id="kamar_tersedia_list" style="display:none;">
@@ -55,7 +55,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <h5 style="font-size:16pt;">Check-In</h5>
+            <h5 class="text-start" style="font-size:16pt;">Check-In</h5>
         </div>
     </div>
     <div class="row">
@@ -71,7 +71,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <h5 style="font-size:16pt;">Check-Out</h5>
+            <h5 class="text-start" style="font-size:16pt;">Check-Out</h5>
         </div>
     </div>
     <div class="row">
@@ -89,7 +89,7 @@
 
     <div class="row">
         <div class="col-12">
-            <h5 style="font-size:16pt;">Upload Foto KTP</h5>
+            <h5 class="text-start" style="font-size:16pt;">Upload Foto KTP</h5>
         </div>
     </div>
     <div class="row">
@@ -119,7 +119,7 @@
 
     <div class="row">
         <div class="col-12">
-            <h5 style="font-size:16pt;">Request</h5>
+            <h5 class="text-start" style="font-size:16pt;">Request</h5>
         </div>
     </div>
     <div class="row mb-3">
@@ -136,7 +136,7 @@
 
     <div class="row" id="biaya_container" style="display: none;">
         <div class="col-12">
-            <h5 style="font-size:16pt;">Biaya Tambahan</h5>
+            <h5 class="text-start" style="font-size:16pt;">Biaya Tambahan</h5>
         </div>
     </div>
     <div class="row" id="biaya_input_container" style="display: none;">

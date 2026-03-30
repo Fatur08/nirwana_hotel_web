@@ -207,7 +207,7 @@
 <div class="body" style="margin-top: 10px;">
   <div class="login-container">
     <div class="login-title">
-        <h1>Aplikasi Manajemen Tes 123<br>Hotel Nirwana</h1>
+        <h1>Aplikasi Manajemen<br>Hotel Nirwana</h1>
     </div>
     <img src="{{ asset('assets/img/Nirwana_Logo.png') }}" 
          alt="Logo Hotel Nirwana" 
