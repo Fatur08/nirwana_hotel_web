@@ -237,7 +237,7 @@
                         <input type="text" 
                             id="tgl_tampil" 
                             class="form-control flatpickr"
-                            placeholder="Masukkan Tanggal Check-In"
+                            placeholder="Tanggal Check-In"
                             autocomplete="off"
                             style="font-size:16pt;"> 
                         <!-- INPUT ASLI UNTUK DATABASE -->
@@ -263,7 +263,7 @@
                         <input type="text" 
                             id="tgl_tampil" 
                             class="form-control flatpickr"
-                            placeholder="Masukkan Tanggal Check-Out"
+                            placeholder="Tanggal Check-Out"
                             autocomplete="off"
                             style="font-size:16pt;"> 
                         <!-- INPUT ASLI UNTUK DATABASE -->
