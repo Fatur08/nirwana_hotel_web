@@ -329,10 +329,10 @@
             </div>
 
             <!-- TOMBOL -->
-            <div class="col-md-3 col-12 d-flex justify-content-center text-center mt-3 mt-md-0">
-                <a href="#" 
-                   class="TambahModalDLX btn btn-success"
-                   style="font-size:16pt;"
+            <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
+                <a href="#"
+                   class="TambahModalDLX btn btn-success px-3 py-2"
+                   style="font-size:14pt; white-space:nowrap;"
                    tipe_kamar="1"
                    data-tanggal="{{ $cari_tanggal }}">
                    Tambah Pemesanan
