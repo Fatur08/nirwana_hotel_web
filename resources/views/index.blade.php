@@ -93,7 +93,7 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   }
   .kotak-spr {
-    background: linear-gradient(to right, #99caeb, #5daee6, #2b86d9);
+    background: linear-gradient(to right, #99caeb, #5daee6, #f39c12);
     color: black;
     padding: 12px;
     border-radius: 10px;
@@ -104,7 +104,7 @@
     font-size: 20px;
   }
   .kotak-std {
-    background: linear-gradient(to right, #f6df07, #f4c20d, #e6a700);
+    background: linear-gradient(to right, #f6df07, #f4c20d, #ff7f50, #c0392b, #8e44ad);
     color: black;
     padding: 12px;
     border-radius: 10px;
