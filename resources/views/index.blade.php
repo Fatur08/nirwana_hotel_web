@@ -2,7 +2,7 @@
 @section('content')
 <style>
   body {
-    background: linear-gradient(to bottom, #eaf3ff, #ffffff);
+    background: linear-gradient(to bottom, #eaf3ff, #e8dbb9);
     margin: 0;
     padding: 15px;
     min-height: 100vh;
