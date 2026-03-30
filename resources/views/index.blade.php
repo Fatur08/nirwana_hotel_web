@@ -289,29 +289,27 @@
     </div>
 
 
-    <div>
-        <div class="container-xl">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="table-wrapper">
-                            <div class="table-responsive">
-                                <table class="table custom-table">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Nama</th>
-                                            <th>Divisi</th>
-                                            <th>No. HP</th>
-                                            <th>Foto</th>
-                                            <th>KTP</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="table-wrapper">
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Nama</th>
+                                        <th>Divisi</th>
+                                        <th>No. HP</th>
+                                        <th>Foto</th>
+                                        <th>KTP</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
