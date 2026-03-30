@@ -295,12 +295,9 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Nama</th>
-                        <th>Divisi</th>
-                        <th>No. HP</th>
-                        <th>Foto</th>
-                        <th>KTP</th>
                         <th>Status</th>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
                     </tr>
                 </thead>
                 <tbody>
