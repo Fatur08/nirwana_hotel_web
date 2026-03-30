@@ -314,7 +314,7 @@
 
             <!-- FOTO -->
             <div class="col-md-3 col-12 d-flex justify-content-center text-center mb-3 mb-md-0">
-                <img src="/gambar/kamar_deluxe.jpg" class="img-fluid rounded" style="max-height:120px;">
+                <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded" style="max-height:120px;">
             </div>
 
             <!-- KONTEN KAMAR -->
