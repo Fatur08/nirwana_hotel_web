@@ -309,19 +309,36 @@
 
 
 
-    <div class="kotak-dlx mt-3">
-        <div class="row">
-            <div class="col-3"><h1>Buat Foto</h1></div>
-            <div class="col-6">
-                <h1>Kamar Deluxe</h1><br>
-                <p>Tersedia 7 Kamar</p><br>
-                <p>Mulai dari <strong>Rp.300.000</strong> / malam</p>
+    <div class="kotak-dlx mt-3 p-3">
+        <div class="row align-items-center">
+
+            <!-- FOTO -->
+            <div class="col-md-3 col-12 d-flex justify-content-center text-center mb-3 mb-md-0">
+                <img src="/gambar/kamar_deluxe.jpg" class="img-fluid rounded" style="max-height:120px;">
             </div>
-            <div class="col-3">
-                <a href="#" class="TambahModalDLX btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="1" data-tanggal="{{ $cari_tanggal }}">
-                  Tambah Pemesanan
+
+            <!-- KONTEN KAMAR -->
+            <div class="col-md-6 col-12 text-start">
+                <h4 class="mb-1">Kamar Deluxe</h4>
+                <p class="mb-1">Tersedia 7 Kamar</p>
+                <p class="mb-0">
+                    Mulai dari 
+                    <span style="font-size:22px; font-weight:700; color:#198754;">Rp.300.000</span> 
+                    / malam
+                </p>
+            </div>
+
+            <!-- TOMBOL -->
+            <div class="col-md-3 col-12 d-flex justify-content-center text-center mt-3 mt-md-0">
+                <a href="#" 
+                   class="TambahModalDLX btn btn-success"
+                   style="font-size:16pt;"
+                   tipe_kamar="1"
+                   data-tanggal="{{ $cari_tanggal }}">
+                   Tambah Pemesanan
                 </a>
             </div>
+
         </div>
     </div>
 
