@@ -319,11 +319,11 @@
 
             <!-- KONTEN KAMAR -->
             <div class="col-md-6 col-12 text-start">
-                <h4 class="mb-1">Kamar Deluxe</h4>
+                <h1 class="mb-1">Kamar Deluxe</h1>
                 <p class="mb-1">Tersedia 7 Kamar</p>
                 <p class="mb-0">
                     Mulai dari 
-                    <span style="font-size:22px; font-weight:700; color:#198754;">Rp.300.000</span> 
+                    <span style="font-size:22px; font-weight:700; color:black;">Rp.300.000</span> 
                     / malam
                 </p>
             </div>
