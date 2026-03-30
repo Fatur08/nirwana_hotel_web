@@ -93,7 +93,7 @@
   }
   .kotak-spr {
     background-color: #99caeb;
-    color: white;
+    color: black;
     padding: 12px;
     border-radius: 10px;
     font-weight: bold;
@@ -325,7 +325,7 @@
                 <p class="mb-1">Tersedia 6 Kamar</p>
                 <p class="mb-0">
                     Mulai dari 
-                    <span style="font-size:22px; font-weight:700; color:black;">Rp.300.000</span> 
+                    <span style="font-size:22px; font-weight:700; color:#00a850;">Rp.300.000</span> 
                     / malam
                 </p>
             </div>
@@ -360,7 +360,7 @@
                 <p class="mb-1">Tersedia 7 Kamar</p>
                 <p class="mb-0">
                     Mulai dari 
-                    <span style="font-size:22px; font-weight:700; color:black;">Rp.280.000</span> 
+                    <span style="font-size:22px; font-weight:700; color:#f9a31c;">Rp.280.000</span> 
                     / malam
                 </p>
             </div>
