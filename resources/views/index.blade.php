@@ -289,7 +289,7 @@
     </div>
 
 
-    <div class="table-wrapper">
+    <div class="table-wrapper mt-3">
         <div class="table-responsive">
             <table class="table custom-table">
                 <thead>
