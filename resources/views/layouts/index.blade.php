@@ -41,13 +41,14 @@
     <meta property="og:title" content="Tabler: Premium and Open Source dashboard template with responsive and high quality UI.">
     <meta property="og:url" content="https://preview.tabler.io/static/og.png">
     <meta property="og:description" content="Tabler comes with tons of well-designed components and features. Start your adventure with Tabler and make your dashboard great again. For free!">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- CSS files -->
     <link href="{{ asset('tabler/dist/css/tabler.min.css?1685973381') }}" rel="stylesheet"/>
     <link href="{{ asset('tabler/dist/css/tabler-flags.min.css?1685973381') }}" rel="stylesheet"/>
     <link href="{{ asset('tabler/dist/css/tabler-payments.min.css?1685973381') }}" rel="stylesheet"/>
     <link href="{{ asset('tabler/dist/css/tabler-vendors.min.css?1685973381') }}" rel="stylesheet"/>
     <link href="{{ asset('tabler/dist/css/demo.min.css?1685973381') }}" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     
     <script src = "../../assets/js/main.js" defer></script>

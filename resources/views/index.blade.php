@@ -3,6 +3,7 @@
 <style>
   body {
     background: linear-gradient(to bottom, #e8dbb9, #eaf3ff);
+    font-family: 'Be Vietnam Pro', sans-serif;
     margin: 0;
     padding: 15px;
     min-height: 100vh;
