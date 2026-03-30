@@ -372,7 +372,7 @@
                 <h1 class="mb-1">Kamar Superior</h1>
                 <p class="mb-1">Tersedia 7 Kamar</p>
                 <p class="mb-0">
-                    <span style="font-size:22px; font-weight:700; color:#ffb034;">Rp.280.000</span> 
+                    <span style="font-size:22px; font-weight:700; color:#d68300;">Rp.280.000</span> 
                     / malam
                 </p>
             </div>
