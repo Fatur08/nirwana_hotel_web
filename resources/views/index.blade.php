@@ -324,7 +324,7 @@
                 <h1 class="mb-1">Kamar Deluxe</h1>
                 <p class="mb-1">Tersedia 6 Kamar</p>
                 <p class="mb-0">
-                    <span style="font-size:22px; font-weight:700; color:#00a850;">Rp.300.000</span> 
+                    <span style="font-size:22px; font-weight:700; color:#00ff79;">Rp.300.000</span> 
                     / malam
                 </p>
             </div>
@@ -358,13 +358,13 @@
                 <h1 class="mb-1">Kamar Superior</h1>
                 <p class="mb-1">Tersedia 7 Kamar</p>
                 <p class="mb-0">
-                    <span style="font-size:22px; font-weight:700; color:#f9a31c;">Rp.280.000</span> 
+                    <span style="font-size:22px; font-weight:700; color:#e88e00;">Rp.280.000</span> 
                     / malam
                 </p>
             </div>
 
             <!-- TOMBOL -->
-            <div class="col-md-3 col-12 d-flex justify-content-center text-center mt-3 mt-md-0">
+            <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
                 <a href="#" 
                    class="TambahModalDLX btn btn-dark"
                    style="font-size:16pt;"
@@ -400,7 +400,7 @@
             </div>
 
             <!-- TOMBOL -->
-            <div class="col-md-3 col-12 d-flex justify-content-center text-center mt-3 mt-md-0">
+            <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
                 <a href="#" 
                    class="TambahModalDLX btn btn-dark"
                    style="font-size:16pt;"
