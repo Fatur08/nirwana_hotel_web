@@ -418,6 +418,255 @@
 
 
 
+
+
+    <div class="kotak-cari">
+      <h1>Cari Tanggal</h1>
+      <form action="/" method="GET" id="frmCariTanggal" enctype="multipart/form-data">
+          @csrf
+          <div class="row">
+              <div class="col-8">
+                  <div class="input-icon mb-3">
+                      <span class="input-icon-addon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                               viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                               class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-event">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                              <path d="M16 3l0 4" />
+                              <path d="M8 3l0 4" />
+                              <path d="M4 11l16 0" />
+                              <path d="M8 15h2v2h-2z" />
+                          </svg>
+                      </span>
+
+                      <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
+                      <input type="text" 
+                             id="tgl_tampil" 
+                             class="form-control flatpickr"
+                             placeholder="Masukkan Tanggal"
+                             autocomplete="off"
+                             style="font-size:16pt;">
+
+                      <!-- INPUT ASLI UNTUK DATABASE -->
+                      <input type="hidden" id="cari_tanggal" name="cari_tanggal">
+                  </div>
+              </div>
+
+              <div class="col-4">
+                  <!-- ✅ TOMBOL CARI (FONT 16pt) -->
+                  <button class="btn btn-success w-100" 
+                          type="submit"
+                          style="font-size:16pt; padding:10px;">
+                      Cari
+                  </button>
+              </div>
+          </div>
+      </form>
+    </div>
+    
+    <h1>
+      @if(request('cari_tanggal'))
+          {{ \Carbon\Carbon::parse(request('cari_tanggal'))->locale('id')->translatedFormat('l, d F Y') }}
+      @else
+          {{ now()->locale('id')->translatedFormat('l, d F Y') }}
+      @endif
+    </h1>
+    
+    <div class="kotak-dlx">
+        <h1>Kamar Deluxe</h1>
+        <a href="#" class="TambahModalDLX btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="1" data-tanggal="{{ $cari_tanggal }}">
+          Tambah Pemesanan
+        </a>
+        <div class="role-grid">
+          @foreach($kamarDLX as $dlx)
+        
+            <div class="role-card {{ $dlx->histori_aktif ? 'bg-success text-white' : '' }}">
+        
+              {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
+              <div class="d-flex align-items-center justify-content-between mb-2">
+        
+                <h5 class="text-center flex-grow-1 mb-0" style="font-size:16pt;">
+                  <strong>{{ $dlx->kode_kamar }}{{ $dlx->nomor_kamar }}</strong>
+                </h5>
+        
+                {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
+                @if($dlx->histori_aktif)
+                  <a href="#"
+                    class="btn btn-danger btn-sm btn-hapus-kamar"
+                    style="font-size:16pt;"
+                    data-id="{{ $dlx->histori_aktif }}">
+                    Hapus
+                  </a>
+                @endif
+        
+              </div>
+        
+              {{-- ✅ TOMBOL INFORMASI --}}
+              <a href="#"
+                 class="ModalDLX btn {{ $dlx->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 style="font-size:16pt;"
+                 data-tanggal="{{ $cari_tanggal }}"
+                 nomor_kamar="{{ $dlx->id_nomor_kamar }}"
+                 tipe_kamar="1">
+                 Informasi Kamar
+              </a>
+        
+            </div>
+        
+          @endforeach
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="kotak-spr">
+        <h1>Kamar Superior</h1>
+        <a href="#" class="TambahModalSPR btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="2" data-tanggal="{{ $cari_tanggal }}">
+          Tambah Pemesanan
+        </a>
+        <div class="role-grid">
+          @foreach($kamarSPR as $spr)
+        
+            <div class="role-card {{ $spr->histori_aktif ? 'bg-success text-white' : '' }}">
+        
+              {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
+              <div class="d-flex align-items-center justify-content-between mb-2">
+        
+                <h5 class="text-center flex-grow-1 mb-0" style="font-size:16pt;">
+                  <strong>{{ $spr->kode_kamar }}{{ $spr->nomor_kamar }}</strong>
+                </h5>
+        
+                {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
+                @if($spr->histori_aktif)
+                  <a href="#"
+                    class="btn btn-danger btn-sm btn-hapus-kamar"
+                    style="font-size:16pt;"
+                    data-id="{{ $spr->histori_aktif }}">
+                    Hapus
+                  </a>
+                @endif
+        
+              </div>
+        
+              {{-- ✅ TOMBOL INFORMASI --}}
+              <a href="#"
+                 class="ModalSPR btn {{ $spr->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 style="font-size:16pt;"
+                 data-tanggal="{{ $cari_tanggal }}"
+                 nomor_kamar="{{ $spr->id_nomor_kamar }}"
+                 tipe_kamar="2">
+                 Informasi Kamar
+              </a>
+        
+            </div>
+        
+          @endforeach
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="kotak-std">
+        <h1>Kamar Standar</h1>
+        <a href="#" class="TambahModalSTD btn btn-success mb-2 w-100" style="font-size:16pt;" tipe_kamar="3" data-tanggal="{{ $cari_tanggal }}">
+          Tambah Pemesanan
+        </a>
+        <div class="role-grid">
+          @foreach($kamarSTD as $std)
+        
+            <div class="role-card {{ $std->histori_aktif ? 'bg-success text-white' : '' }}">
+        
+              {{-- ✅ HEADER: JUDUL TENGAH + TOMBOL HAPUS KANAN --}}
+              <div class="d-flex align-items-center justify-content-between mb-2">
+        
+                <h5 class="text-center flex-grow-1 mb-0" style="font-size:16pt;">
+                  <strong>{{ $std->kode_kamar }}{{ $std->nomor_kamar }}</strong>
+                </h5>
+        
+                {{-- Tombol Hapus hanya muncul jika kamar sedang terisi --}}
+                @if($std->histori_aktif)
+                  <a href="#"
+                    class="btn btn-danger btn-sm btn-hapus-kamar"
+                    style="font-size:16pt;"
+                    data-id="{{ $std->histori_aktif }}">
+                    Hapus
+                  </a>
+                @endif
+        
+              </div>
+        
+              {{-- ✅ TOMBOL INFORMASI --}}
+              <a href="#"
+                 class="ModalSTD btn {{ $std->histori_aktif ? 'btn-light' : 'btn-primary' }} w-100"
+                 style="font-size:16pt;"
+                 data-tanggal="{{ $cari_tanggal }}"
+                 nomor_kamar="{{ $std->id_nomor_kamar }}"
+                 tipe_kamar="3">
+                 Informasi Kamar
+              </a>
+        
+            </div>
+        
+          @endforeach
+        </div>
+    </div>
+  </div>
+
+
+
+
+
   <!-- BAGIAN KAMAR DELUXE (DLX) -->
   <!-- Modal Tambah Kamar Deluxe (DLX) -->
   <div class="modal fade" id="modal-DLX" tabindex="-1" aria-labelledby="TambahModalDLXLabel" aria-hidden="true">
