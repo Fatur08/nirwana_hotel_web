@@ -218,14 +218,7 @@
         <form action="/" method="GET" id="frmCariTanggal" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-3">
-                    <select id="status" name="status" class="form-control" style="font-size:16pt;">
-                        <option value="">-- Pilih Status --</option>
-                        <option value="booking">Booking</option>
-                        <option value="check-in">Check-In</option>
-                    </select>
-                </div>
-                <div class="col-3">
+                <div class="col-6">
                     <div class="input-icon mb-3">
                         <span class="input-icon-addon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
@@ -251,7 +244,7 @@
                         <input type="hidden" id="cari_tanggal" name="cari_tanggal">
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-6">
                     <div class="input-icon mb-3">
                         <span class="input-icon-addon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
@@ -277,7 +270,16 @@
                         <input type="hidden" id="cari_tanggal" name="cari_tanggal">
                     </div>
                 </div>
-                <div class="col-3">
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <select id="status" name="status" class="form-control" style="font-size:16pt;">
+                        <option value="">-- Pilih Status --</option>
+                        <option value="booking">Booking</option>
+                        <option value="check-in">Check-In</option>
+                    </select>
+                </div>
+                <div class="col-6">
                     <button class="btn btn-success w-100" 
                         type="submit"
                         style="font-size:16pt; padding:10px;">
