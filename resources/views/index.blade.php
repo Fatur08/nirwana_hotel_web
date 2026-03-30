@@ -113,6 +113,82 @@
     width: 100%;
     font-size: 20px;
   }
+
+
+  /* === Table Style === */
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+}
+
+.custom-table thead th {
+    background: linear-gradient(135deg, #007bff, #00bcd4);
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    padding: 12px;
+    border: none;
+}
+
+.custom-table thead tr:first-child th {
+    background: linear-gradient(135deg, #0069d9, #17a2b8);
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.custom-table tbody td, 
+.custom-table tbody th {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #dee2e6;
+    font-size: 16px;
+    color: #333;
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #e9f5ff;
+    transition: 0.3s;
+}
+
+.table-container {
+    max-width: 1600px;
+}
+
+/* === Buttons === */
+.btn-status {
+    font-size: 13px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    border: none;
+    color: #fff;
+}
+.btn-menunggu {
+    background-color: #facc15;
+    color: #111827;
+}
+.btn-validasi {
+    background-color: #38bdf8;
+}
+.btn-menunggu:hover {
+    background-color: #eab308;
+}
+.btn-validasi:hover {
+    background-color: #0ea5e9;
+}
 </style>
 <div class="body" style="margin-top: 10px;">
   <div class="login-container">
@@ -210,6 +286,37 @@
                 </div>
             </div>
         </form>
+    </div>
+
+
+    <div>
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="table-wrapper">
+                            <div class="table-responsive">
+                                <table class="table custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Nama</th>
+                                            <th>Divisi</th>
+                                            <th>No. HP</th>
+                                            <th>Foto</th>
+                                            <th>KTP</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
