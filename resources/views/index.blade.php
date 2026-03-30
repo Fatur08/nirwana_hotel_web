@@ -81,7 +81,7 @@
     font-size: 20px;
   }
   .kotak-dlx {
-    background-color: #ff3838ff;
+    background-color: #ea3438;
     color: white;
     padding: 12px;
     border-radius: 10px;
@@ -92,7 +92,7 @@
     font-size: 20px;
   }
   .kotak-spr {
-    background-color: #25a6fbff;
+    background-color: #99caeb;
     color: white;
     padding: 12px;
     border-radius: 10px;
@@ -103,7 +103,7 @@
     font-size: 20px;
   }
   .kotak-std {
-    background-color: #f7fc57ff;
+    background-color: #f6df07;
     color: black;
     padding: 12px;
     border-radius: 10px;
