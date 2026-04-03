@@ -31,6 +31,7 @@ class HotelController extends Controller
                 'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
             )
             ->get();
+        $kamarTersediaDLX = $kamarDLX->whereNull('histori_aktif')->count();
             
 
         $kamarSPR = DB::table('nomor_kamar as nk')
@@ -65,7 +66,7 @@ class HotelController extends Controller
             )
             ->get();
 
-        return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarSPR', 'kamarSTD'));
+        return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarTersediaDLX', 'kamarSPR', 'kamarSTD'));
     }
 
 
