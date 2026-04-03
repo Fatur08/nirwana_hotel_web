@@ -27,13 +27,27 @@ class HotelController extends Controller
             ->select(
                 'nk.id_nomor_kamar',
                 'nk.nomor_kamar',
+                'nk.jenis_bed',
                 'k.kode_kamar',
                 'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
             )
             ->get();
         $kamarTersediaDLX = $kamarDLX->whereNull('histori_aktif')->count();
+        $kamarSingleDLX = $kamarDLX
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 1)
+            ->count();
+
+        $kamarDoubleDLX = $kamarDLX
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 2)
+            ->count();
             
 
+
+
+
+        
         $kamarSPR = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
             ->leftJoin('histori_kamar as hk', function ($join) use ($cari_tanggal) {
@@ -66,7 +80,7 @@ class HotelController extends Controller
             )
             ->get();
 
-        return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarTersediaDLX', 'kamarSPR', 'kamarSTD'));
+        return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSTD'));
     }
 
 
