@@ -337,8 +337,9 @@
             <div class="col-md-6 col-12 text-start">
                 <h1 class="mb-1">Kamar Deluxe</h1>
                 <p class="mb-1">
-                    Tersedia {{ $kamarSingleDLX }} Kamar Single Bed 
-                    dan {{ $kamarDoubleDLX }} Kamar Double Bed
+                    Tersedia <br> 
+                    {{ $kamarSingleDLX }} Kamar Single Bed 
+                    <br>{{ $kamarDoubleDLX }} Kamar Double Bed
                 </p>
                 <p class="mb-0">
                     <span style="font-size:22px; font-weight:700; color:#00ff79;">Rp.300.000</span> 
