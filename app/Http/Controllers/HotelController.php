@@ -165,6 +165,7 @@ class HotelController extends Controller
 
     public function store_TambahModalDLX(Request $request)
     {
+        dd($request->all());
         DB::beginTransaction();
     
         try {
