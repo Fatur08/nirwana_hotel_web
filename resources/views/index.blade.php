@@ -772,7 +772,6 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_dlx');
 
-    // ✅ TAMPILKAN BAGIAN KAMAR TERSEDIA
     if(jumlah && jumlah > 0){
         $('#kamar_tersedia_title').show();
         $('#kamar_tersedia_list').show();
@@ -781,23 +780,24 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
         $('#kamar_tersedia_list').hide();
     }
 
-    let tipe = 1; // ✅ DLX
-    //let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
-    let tanggal = $('#check_in').val(); // ✅ GANTI DISINI
+    let tipe = 1;
+    let tanggal = $('#check_in').val();
 
     list.html('');
 
     if (!jumlah || jumlah < 1) return;
 
     for (let i = 1; i <= jumlah; i++) {
+
         let selectHTML = `
-            <div class="mb-2">
-                <label style="font-size:16pt;">Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar-dlx" style="font-size:16pt;">
-                    <option value="">-- Pilih Nomor Kamar --</option>
-                </select>
-            </div>
+        <div class="mb-2">
+            <label style="font-size:16pt;">Jenis Bed ${i}</label>
+            <select name="jenis_bed[]" class="form-control select-bed-dlx" style="font-size:16pt;">
+                <option value="">-- Pilih Jenis Bed --</option>
+            </select>
+        </div>
         `;
+
         list.append(selectHTML);
     }
 
@@ -812,20 +812,19 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
         },
         success: function (res) {
 
-            console.log('DATA KAMAR:', res); // ✅ untuk debug
+            console.log("DATA KAMAR:", res);
 
-            $('.select-kamar-dlx').each(function () {
-                let select = $(this);
-                select.html('<option style="font-size:16pt;" value="">-- Pilih Nomor Kamar --</option>');
+            // hitung stok bed
+            let single = res.filter(k => k.jenis_bed == 1).length;
+            let dbl = res.filter(k => k.jenis_bed == 2).length;
 
-                res.forEach(function (k) {
-                    select.append(`
-                        <option style="font-size:16pt;" value="${k.id_nomor_kamar}">
-                            DLX${k.nomor_kamar}
-                        </option>
-                    `);
-                });
-            });
+            window.stokBed = {
+                single: single,
+                double: dbl
+            };
+
+            updateBedSelect();
+
         }
     });
 
@@ -833,28 +832,46 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
 
 
 
-$(document).on('change', '.select-kamar-dlx', function () {
-    let selectedValues = [];
+function updateBedSelect(){
 
-    $('.select-kamar-dlx').each(function () {
+    let usedSingle = 0;
+    let usedDouble = 0;
+
+    $('.select-bed-dlx').each(function(){
+
         let val = $(this).val();
-        if (val) selectedValues.push(val);
+
+        if(val == 1) usedSingle++;
+        if(val == 2) usedDouble++;
+
     });
 
-    $('.select-kamar-dlx').each(function () {
-        let currentSelect = $(this);
-        let currentValue = currentSelect.val();
+    $('.select-bed-dlx').each(function(){
 
-        currentSelect.find('option').each(function () {
-            let optionVal = $(this).val();
+        let current = $(this).val();
+        let select = $(this);
 
-            if (selectedValues.includes(optionVal) && optionVal !== currentValue) {
-                $(this).prop('disabled', true);
-            } else {
-                $(this).prop('disabled', false);
-            }
-        });
+        select.html(`<option value="">-- Pilih Jenis Bed --</option>`);
+
+        // Single Bed
+        if(window.stokBed.single - usedSingle > 0 || current == 1){
+            select.append(`<option value="1" ${current==1?'selected':''}>Single Bed</option>`);
+        }
+
+        // Double Bed
+        if(window.stokBed.double - usedDouble > 0 || current == 2){
+            select.append(`<option value="2" ${current==2?'selected':''}>Double Bed</option>`);
+        }
+
     });
+
+}
+
+
+$(document).on('change', '.select-bed-dlx', function(){
+
+    updateBedSelect();
+
 });
 
 
