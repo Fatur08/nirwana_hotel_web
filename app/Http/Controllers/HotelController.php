@@ -15,6 +15,7 @@ class HotelController extends Controller
         if (!$cari_tanggal || !strtotime($cari_tanggal)) {
             $cari_tanggal = date('Y-m-d');
         }
+        dd($tanggalHariIni);
 
         $kamarDLX = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
