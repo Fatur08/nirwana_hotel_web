@@ -752,7 +752,8 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     }
 
     let tipe = 1; // ✅ DLX
-    let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
+    //let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
+    let tanggal = $('#check_in').val(); // ✅ GANTI DISINI
 
     list.html('');
 
