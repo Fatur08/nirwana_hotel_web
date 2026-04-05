@@ -166,9 +166,9 @@ class HotelController extends Controller
     public function store_TambahModalDLX(Request $request)
     {
         DB::beginTransaction();
-
+    
         try {
-
+    
             // ==============================
             // 1. KONVERSI TIPE KAMAR
             // ==============================
@@ -191,31 +191,48 @@ class HotelController extends Controller
                 $before_10_persen = 310000;
                 $after_10_persen = 279000;
             }
-
+    
             // ==============================
             // 2. LAMA INAP
             // ==============================
             $checkIn  = \Carbon\Carbon::parse($request->check_in);
             $checkOut = \Carbon\Carbon::parse($request->check_out);
             $lama_inap = $checkOut->diffInDays($checkIn);
-
+    
             // ==============================
-            // 3. HITUNG BIAYA
+            // 3. JUMLAH KAMAR
             // ==============================
-            $biaya = $request->jumlah_kamar_dipesan * $after_10_persen * $lama_inap;
+            $jumlah_kamar = $request->jumlah_kamar_dipesan_dlx;
+    
+            // ==============================
+            // 4. REQUEST TAMBAHAN
+            // ==============================
+            $request_tambahan = $request->request;
+            $biaya_request = 0;
+    
+            if ($request_tambahan == 'breakfast') {
+                $biaya_request = 50000;
+            } elseif ($request_tambahan == 'extra_bed') {
+                $biaya_request = 150000;
+            }
+    
+            // ==============================
+            // 5. HITUNG BIAYA
+            // ==============================
+            $biaya = $jumlah_kamar * $after_10_persen * $lama_inap;
+    
             $pajak = $biaya * 0.19;
-            $biaya_tambahan = $request->biaya_tambahan ?? 0;
-
-            $total_diterima = ($biaya - $pajak) + $biaya_tambahan;
-
+    
+            $total_diterima = ($biaya - $pajak) + $biaya_request;
+    
             // ==============================
-            // 4. INSERT LAPORAN KEUANGAN
+            // 6. INSERT LAPORAN KEUANGAN
             // ==============================
             $id_laporan = DB::table('laporan_keuangan')->insertGetId([
                 'kode_kamar' => $kode_kamar,
                 'nama_tamu' => $request->nama_tamu,
                 'tipe_kamar' => $tipe_kamar,
-                'jumlah_kamar_dipesan' => $request->jumlah_kamar_dipesan,
+                'jumlah_kamar_dipesan' => $jumlah_kamar,
                 'tarif_per_hari' => $tarif_per_hari,
                 'before_10_persen' => $before_10_persen,
                 'after_10_persen' => $after_10_persen,
@@ -223,32 +240,49 @@ class HotelController extends Controller
                 'check_out' => $request->check_out,
                 'lama_inap' => $lama_inap,
                 'biaya' => $biaya,
-                'biaya_tambahan' => $biaya_tambahan,
+                'request' => $request_tambahan,
                 'pajak' => $pajak,
                 'total_diterima' => $total_diterima,
             ]);
-
+    
             // ==============================
-            // 5. INSERT HISTORI KAMAR
+            // 7. AMBIL KAMAR TERSEDIA
             // ==============================
-            foreach ($request->nomor_kamar as $idNomorKamar) {
+            $kamarTersedia = DB::table('nomor_kamar as nk')
+                ->where('nk.id_kamar', $request->tipe_kamar)
+                ->whereNotIn('nk.id_nomor_kamar', function($q) use ($request){
+                    $q->select('id_nomor_kamar')
+                      ->from('histori_kamar')
+                      ->whereDate('check_in','<=',$request->check_in)
+                      ->whereDate('check_out','>',$request->check_in);
+                })
+                ->limit($jumlah_kamar)
+                ->get();
+    
+            // ==============================
+            // 8. INSERT HISTORI KAMAR
+            // ==============================
+            foreach ($kamarTersedia as $kamar) {
+    
                 DB::table('histori_kamar')->insert([
                     'id_laporan_keuangan' => $id_laporan,
-                    'id_nomor_kamar' => $idNomorKamar, // sudah integer
+                    'id_nomor_kamar' => $kamar->id_nomor_kamar,
                     'nama_tamu' => $request->nama_tamu,
-                    'nomor_ktp_tamu' => $request->nomor_ktp_tamu,
                     'check_in' => $request->check_in,
                     'check_out' => $request->check_out,
                 ]);
+    
             }
-
+    
             DB::commit();
-
-            return redirect('/')->with('success', 'Data berhasil disimpan!');
-
+    
+            return redirect('/')->with('success','Data berhasil disimpan!');
+    
         } catch (\Exception $e) {
+    
             DB::rollBack();
-            return redirect('/')->with('error', 'Data gagal disimpan!');
+    
+            return redirect('/')->with('error','Data gagal disimpan!');
         }
     }
 
