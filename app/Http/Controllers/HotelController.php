@@ -225,6 +225,40 @@ class HotelController extends Controller
     
             $total_diterima = ($biaya - $pajak) + $biaya_request;
     
+            
+            
+            $namaFileKtp = null;
+            if ($request->hasFile('foto_ktp')) {
+                $file = $request->file('foto_ktp');
+                $namaFileKtp = time().'_'.$file->getClientOriginalName();
+                $file->move(public_path('foto_ktp'), $namaFileKtp);
+            }
+
+
+
+
+            /* ===============================
+               UPLOAD FOTO KTP
+            ================================*/
+            $foto_ktp = null;
+
+
+            if ($request->hasFile('foto_ktp')) {
+                $foto_ktp = "Foto KTP_".$request->nama_tamu.".".$request
+                    ->file('foto_ktp')
+                    ->getClientOriginalExtension();
+                $storagePath = 'public/uploads/foto_ktp/';
+                $request->file('foto_ktp')->storeAs($storagePath, $foto_ktp);
+                $publicPath = public_path('storage/uploads/foto_ktp/');
+                if (!is_dir($publicPath)) {
+                    mkdir($publicPath, 0777, true);
+                }
+                $sourceFile = storage_path('app/' . $storagePath . $foto_ktp);
+                $destinationFile = public_path('storage/uploads/foto_ktp/' . $foto_ktp);
+                copy($sourceFile, $destinationFile);
+            }
+            
+            
             // ==============================
             // 6. INSERT LAPORAN KEUANGAN
             // ==============================
@@ -243,6 +277,7 @@ class HotelController extends Controller
                 'request' => $request_tambahan,
                 'pajak' => $pajak,
                 'total_diterima' => $total_diterima,
+                'foto_ktp' => $foto_ktp
             ]);
     
             // ==============================
