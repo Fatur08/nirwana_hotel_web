@@ -615,21 +615,24 @@ $(document).on('change', '#tgl_tampil', function () {
 
 $(document).on('focus', '.flatpickr', function () {
     $(this).datepicker({
-        format: "dd MM yyyy",   // format tampilan untuk user
+        format: "dd MM yyyy",
         autoclose: true,
         todayHighlight: true,
         language: "id"
     }).on('changeDate', function (e) {
-        let tanggalDB = e.format('yyyy-mm-dd'); // format database
 
-        // simpan ke hidden input yang sesuai
+        let tanggalDB = e.format('yyyy-mm-dd');
+
         if($(this).attr('id') === 'check_in_tampil') {
-            $('#check_in').val(tanggalDB);
-        } else if($(this).attr('id') === 'check_out_tampil') {
+            $('#check_in').val(tanggalDB).trigger('change');
+        } 
+        else if($(this).attr('id') === 'check_out_tampil') {
             $('#check_out').val(tanggalDB);
-        } else if($(this).attr('id') === 'tgl_tampil') {
+        } 
+        else if($(this).attr('id') === 'tgl_tampil') {
             $('#cari_tanggal').val(tanggalDB);
         }
+
     });
 });
 
