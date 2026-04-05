@@ -265,24 +265,26 @@ class HotelController extends Controller
             ]);
     
             // ==============================
-            // 7. AMBIL KAMAR TERSEDIA
+            // 7. INSERT HISTORI KAMAR
             // ==============================
-            $kamarTersedia = DB::table('nomor_kamar as nk')
-                ->where('nk.id_kamar', $request->tipe_kamar)
-                ->whereNotIn('nk.id_nomor_kamar', function($q) use ($request){
-                    $q->select('id_nomor_kamar')
-                      ->from('histori_kamar')
-                      ->whereDate('check_in','<=',$request->check_in)
-                      ->whereDate('check_out','>',$request->check_in);
-                })
-                ->limit($jumlah_kamar)
-                ->get();
-    
-            // ==============================
-            // 8. INSERT HISTORI KAMAR
-            // ==============================
-            foreach ($kamarTersedia as $kamar) {
-    
+            foreach ($request->jenis_bed as $bed) {
+
+                $kamar = DB::table('nomor_kamar as nk')
+                    ->where('nk.id_kamar', $request->tipe_kamar) // filter tipe kamar
+                    ->where('nk.jenis_bed', $bed) // filter jenis bed
+                    ->whereNotIn('nk.id_nomor_kamar', function($q) use ($request){
+                        $q->select('id_nomor_kamar')
+                          ->from('histori_kamar')
+                          ->whereDate('check_in','<=',$request->check_out)
+                          ->whereDate('check_out','>=',$request->check_in);
+                    })
+                    ->orderBy('nk.id_nomor_kamar') // supaya konsisten ambil kamar pertama
+                    ->first();
+
+                if(!$kamar){
+                    throw new \Exception('Kamar dengan tipe dan bed tersebut tidak tersedia');
+                }
+
                 DB::table('histori_kamar')->insert([
                     'id_laporan_keuangan' => $id_laporan,
                     'id_nomor_kamar' => $kamar->id_nomor_kamar,
@@ -290,7 +292,7 @@ class HotelController extends Controller
                     'check_in' => $request->check_in,
                     'check_out' => $request->check_out,
                 ]);
-    
+
             }
     
             DB::commit();
