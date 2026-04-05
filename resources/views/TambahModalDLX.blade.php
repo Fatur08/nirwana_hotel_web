@@ -100,8 +100,7 @@
                        id="foto_ktp" 
                        name="foto_ktp" 
                        class="form-control" 
-                       style="font-size:16pt;"
-                       accept="image/*">
+                       style="font-size:16pt;">
             </div>
         </div>
     </div>
