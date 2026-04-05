@@ -265,7 +265,7 @@ class HotelController extends Controller
                 'check_out' => $request->check_out,
                 'lama_inap' => $lama_inap,
                 'biaya' => $biaya,
-                'request' => $request_tambahan,
+                'biaya_tambahan' => $biaya_request,
                 'pajak' => $pajak,
                 'total_diterima' => $total_diterima,
                 'foto_ktp' => $foto_ktp
