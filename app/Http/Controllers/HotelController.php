@@ -32,6 +32,7 @@ class HotelController extends Controller
                 'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
             )
             ->get();
+        dd($kamarDLX->toArray());
         $kamarTersediaDLX = $kamarDLX->whereNull('histori_aktif')->count();
         $kamarSingleDLX = $kamarDLX
             ->whereNull('histori_aktif')
