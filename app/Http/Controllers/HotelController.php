@@ -165,7 +165,6 @@ class HotelController extends Controller
 
     public function store_TambahModalDLX(Request $request)
     {
-        dd($request->all());
         DB::beginTransaction();
     
         try {
@@ -208,14 +207,7 @@ class HotelController extends Controller
             // ==============================
             // 4. REQUEST TAMBAHAN
             // ==============================
-            $request_tambahan = $request->request;
-            $biaya_request = 0;
-    
-            if ($request_tambahan == 'breakfast') {
-                $biaya_request = 50000;
-            } elseif ($request_tambahan == 'extra_bed') {
-                $biaya_request = 150000;
-            }
+            $biaya_request = $request->input('biaya_request', 0);
     
             // ==============================
             // 5. HITUNG BIAYA
