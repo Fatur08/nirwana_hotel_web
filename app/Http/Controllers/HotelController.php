@@ -118,28 +118,36 @@ class HotelController extends Controller
         $tanggal = $request->tanggal;
         $tipe = $request->tipe_kamar;
     
-        // ✅ PROTEKSI AGAR TIDAK ERROR
+        // ✅ Proteksi agar tidak error
         if (!$tanggal || !$tipe) {
             return response()->json([]);
         }
     
         $kamarTersedia = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+    
             ->where('k.id_kamar', $tipe)
+    
+            // ✅ HANYA AMBIL BED 1 ATAU 2
+            ->whereIn('nk.jenis_bed', [1,2])
+    
+            // cek kamar yang sedang terpakai
             ->whereNotIn('nk.id_nomor_kamar', function($q) use ($tanggal){
                 $q->select('id_nomor_kamar')
                   ->from('histori_kamar')
                   ->whereDate('check_in', '<=', $tanggal)
                   ->whereDate('check_out', '>', $tanggal);
             })
+    
             ->select(
                 'nk.id_nomor_kamar',
                 'nk.nomor_kamar',
+                'nk.jenis_bed',
                 'k.kode_kamar',
                 'k.tipe_kamar'
             )
             ->get();
-            
+    
         return response()->json($kamarTersedia);
     }
 
