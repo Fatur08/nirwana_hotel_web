@@ -165,7 +165,6 @@ class HotelController extends Controller
 
     public function store_TambahModalDLX(Request $request)
     {
-        dd($request->all());
         DB::beginTransaction();
     
         try {
@@ -225,15 +224,6 @@ class HotelController extends Controller
             $pajak = $biaya * 0.19;
     
             $total_diterima = ($biaya - $pajak) + $biaya_request;
-    
-            
-            
-            $namaFileKtp = null;
-            if ($request->hasFile('foto_ktp')) {
-                $file = $request->file('foto_ktp');
-                $namaFileKtp = time().'_'.$file->getClientOriginalName();
-                $file->move(public_path('foto_ktp'), $namaFileKtp);
-            }
 
 
 
@@ -312,13 +302,18 @@ class HotelController extends Controller
     
             DB::commit();
     
-            return redirect('/')->with('success','Data berhasil disimpan!');
+            return response()->json([
+                'status' => 'success'
+            ]);
     
         } catch (\Exception $e) {
     
             DB::rollBack();
     
-            return redirect('/')->with('error','Data gagal disimpan!');
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
         }
     }
 
