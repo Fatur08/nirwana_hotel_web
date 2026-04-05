@@ -746,7 +746,7 @@ $(document).on('change', '#check_in', function(){
             let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
 
             for(let i = 1; i <= res.length; i++){
-                opt += `<option style="font-size:16pt;" value="${i}">${i}</option>`;
+                opt += `<option style="font-size:16pt;" value="${i}">${i} Kamar</option>`;
             }
 
             $('#jumlah_kamar_dipesan_dlx').html(opt);
