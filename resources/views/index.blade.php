@@ -680,7 +680,6 @@ $(document).on('click', '.TambahModalDLX', function(e){
     e.preventDefault();
 
     let tipe = $(this).attr('tipe_kamar');
-    let tanggal = $(this).data('tanggal');
 
     $.ajax({
         type:'POST',
@@ -693,39 +692,67 @@ $(document).on('click', '.TambahModalDLX', function(e){
             $("#loadTambahModalDLX").html(respond);
             $("#modal-DLX").modal("show");
 
-            // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
-            if(!tanggal){
-                $('#jumlah_kamar_dipesan_dlx').html(`<option style="font-size:16pt;" value="">Silakan cari tanggal dulu</option>`);
+            // default isi dropdown
+            $('#jumlah_kamar_dipesan_dlx').html(`
+                <option style="font-size:16pt;" value="">
+                    Silakan pilih tanggal check-in
+                </option>
+            `);
+        }
+    });
+});
+
+
+
+$(document).on('change', '#check_in', function(){
+
+    let tanggal = $(this).val();
+    let tipe = 1; // DLX
+
+    if(!tanggal){
+        $('#jumlah_kamar_dipesan_dlx').html(`
+            <option style="font-size:16pt;" value="">
+                Silakan pilih tanggal check-in
+            </option>
+        `);
+        return;
+    }
+
+    $.ajax({
+        url: '/getKamarTersedia',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            tanggal: tanggal,
+            tipe_kamar: tipe
+        },
+        success: function(res){
+
+            console.log("RESPON FINAL:", res);
+
+            if (!res || res.length === 0) {
+                $('#jumlah_kamar_dipesan_dlx').html(`
+                    <option style="font-size:16pt;" value="">
+                        Kamar Penuh
+                    </option>
+                `);
                 return;
             }
 
-            $.ajax({
-                url: '/getKamarTersedia',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    tanggal: tanggal,
-                    tipe_kamar: tipe
-                },
-                success: function(res){
-                    console.log("RESPON FINAL:", res);
+            let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
 
-                    if (!res || res.length === 0) {
-                        $('#jumlah_kamar_dipesan_dlx').html(`<option style="font-size:16pt;" value="">Kamar Penuh</option>`);
-                        return;
-                    }
+            for(let i = 1; i <= res.length; i++){
+                opt += `<option style="font-size:16pt;" value="${i}">${i}</option>`;
+            }
 
-                    let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
-                    for(let i = 1; i <= res.length; i++){
-                        opt += `<option style="font-size:16pt;" value="${i}">${i}</option>`;
-                    }
+            $('#jumlah_kamar_dipesan_dlx').html(opt);
 
-                    $('#jumlah_kamar_dipesan_dlx').html(opt);
-                    window.kamar = res;
-                }
-            });
+            // simpan data kamar
+            window.kamar = res;
         }
     });
+
 });
 
 
@@ -752,8 +779,8 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     }
 
     let tipe = 1; // ✅ DLX
-    let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
-    //let tanggal = $('#check_in').val(); // ✅ GANTI DISINI
+    //let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
+    let tanggal = $('#check_in').val(); // ✅ GANTI DISINI
 
     list.html('');
 
