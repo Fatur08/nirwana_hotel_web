@@ -21,7 +21,7 @@ class HotelController extends Controller
             ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
                 $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
                      ->whereDate('hk.check_in', '<=', $tanggalHariIni)
-                     ->whereDate('hk.check_out', '>=', $tanggalHariIni);
+                     ->whereDate('hk.check_out', '>', $tanggalHariIni);
             })
             ->where('k.kode_kamar', 'DLX')
             ->select(
