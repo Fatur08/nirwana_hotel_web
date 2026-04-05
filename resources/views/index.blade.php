@@ -907,6 +907,41 @@ $(document).on('change', '#request', function(){
 
 
 
+$(document).on('submit', '#frmTambahModalDLX', function(e){
+
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success: function(res){
+
+            alert('Data berhasil disimpan');
+
+            $('#modal-DLX').modal('hide');
+
+            location.reload();
+
+        },
+
+        error: function(xhr){
+
+            console.log(xhr.responseText);
+            alert('Terjadi kesalahan');
+
+        }
+    });
+
+});
+
+
+
 
 
 
