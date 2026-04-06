@@ -613,10 +613,10 @@ $(document).on('focus', '.flatpickr', function () {
         let tanggalDB = e.format('yyyy-mm-dd');
 
         if($(this).attr('id') === 'check_in_tampil') {
-            $('#check_in').val(tanggalDB);
+            $('#cari_check_in').val(tanggalDB);
         } 
         else if($(this).attr('id') === 'check_out_tampil') {
-            $('#check_out').val(tanggalDB);
+            $('#cari_check_out').val(tanggalDB);
         }
 
     });
