@@ -418,8 +418,7 @@
                 <a href="#"
                    class="TambahModalDLX btn btn-dark px-3 py-2"
                    style="font-size:14pt; white-space:nowrap;"
-                   tipe_kamar="1"
-                   data-tanggal="{{ $cari_tanggal }}">
+                   tipe_kamar="1">
                    Pesan Kamar
                 </a>
             </div>
@@ -452,8 +451,7 @@
                 <a href="#"
                    class="TambahModalDLX btn btn-dark px-3 py-2"
                    style="font-size:14pt; white-space:nowrap;"
-                   tipe_kamar="1"
-                   data-tanggal="{{ $cari_tanggal }}">
+                   tipe_kamar="1">
                    Pesan Kamar
                 </a>
             </div>
@@ -489,8 +487,7 @@
                 <a href="#"
                    class="TambahModalDLX btn btn-dark px-3 py-2"
                    style="font-size:14pt; white-space:nowrap;"
-                   tipe_kamar="1"
-                   data-tanggal="{{ $cari_tanggal }}">
+                   tipe_kamar="1">
                    Pesan Kamar
                 </a>
             </div>
@@ -1091,7 +1088,6 @@ $('body').on('change', '#jumlah_kamar_dipesan_spr', function () {
     let list = $('#list_nomor_kamar_spr');
 
     let tipe = 2; // ✅ SPR
-    let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
 
     list.html('');
 
@@ -1306,7 +1302,6 @@ $('body').on('change', '#jumlah_kamar_dipesan_std', function () {
     let list = $('#list_nomor_kamar_std');
 
     let tipe = 3; // ✅ STD
-    let tanggal = $('#cari_tanggal').val(); // ✅ dari input hidden
 
     list.html('');
 
