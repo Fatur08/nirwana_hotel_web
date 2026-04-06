@@ -23,20 +23,20 @@ class HotelController extends Controller
             $cari_check_out = date('Y-m-d');
         }
 
-        // ambil histori kamar
         $histori = DB::table('histori_kamar as hk')
             ->join('nomor_kamar as nk','hk.id_nomor_kamar','=','nk.id_nomor_kamar')
             ->join('kamar as k','nk.id_kamar','=','k.id_kamar')
             ->select(
-                'hk.id_histori_kamar',
                 'hk.nama_tamu',
                 'hk.check_in',
                 'hk.check_out',
-                'nk.nomor_kamar',
-                'k.kode_kamar'
+                DB::raw('GROUP_CONCAT(nk.nomor_kamar ORDER BY nk.nomor_kamar SEPARATOR ", ") as nomor_kamar'),
+                DB::raw('GROUP_CONCAT(k.kode_kamar SEPARATOR ", ") as tipe_kamar'),
+                DB::raw('COUNT(nk.id_nomor_kamar) as jumlah_kamar')
             )
             ->whereDate('hk.check_in','<=',$cari_check_out)
             ->whereDate('hk.check_out','>=',$cari_check_in)
+            ->groupBy('hk.nama_tamu','hk.check_in','hk.check_out')
             ->orderBy('hk.check_in','desc')
             ->get();
 
