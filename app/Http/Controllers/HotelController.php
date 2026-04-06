@@ -250,7 +250,7 @@ class HotelController extends Controller
             // ==============================
             // 2. LAMA INAP
             // ==============================
-            $checkIn  = \Carbon\Carbon::parse($request->check_in);
+            $checkIn  = \Carbon\Carbon::parse($request->check_in_modal);
             $checkOut = \Carbon\Carbon::parse($request->check_out);
             $lama_inap = $checkOut->diffInDays($checkIn);
     
@@ -309,7 +309,7 @@ class HotelController extends Controller
                 'tarif_per_hari' => $tarif_per_hari,
                 'before_10_persen' => $before_10_persen,
                 'after_10_persen' => $after_10_persen,
-                'check_in' => $request->check_in,
+                'check_in' => $request->check_in_modal,
                 'check_out' => $request->check_out,
                 'lama_inap' => $lama_inap,
                 'biaya' => $biaya,
