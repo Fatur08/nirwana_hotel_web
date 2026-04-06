@@ -10,10 +10,6 @@ class HotelController extends Controller
 {
     public function index(Request $request)
     {
-        $cari_tanggal = $request->cari_tanggal ?? date('Y-m-d');
-
-
-        
         // ambil data dari form
         $cari_check_in = $request->cari_check_in;
         $cari_check_out = $request->cari_check_out;
@@ -39,8 +35,8 @@ class HotelController extends Controller
                 'nk.nomor_kamar',
                 'k.kode_kamar'
             )
+            ->whereDate('hk.check_in','<=',$cari_check_out)
             ->whereDate('hk.check_out','>=',$cari_check_in)
-            ->whereDate('hk.check_out','<=',$cari_check_out)
             ->orderBy('hk.check_in','desc')
             ->get();
 
@@ -66,14 +62,7 @@ class HotelController extends Controller
             });
         }
 
-
-
-
-
         $tanggalHariIni = Carbon::today();
-        if (!$cari_tanggal || !strtotime($cari_tanggal)) {
-            $cari_tanggal = date('Y-m-d');
-        }
 
         $kamarDLX = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
@@ -106,13 +95,15 @@ class HotelController extends Controller
 
 
 
+
+
         
         $kamarSPR = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
-            ->leftJoin('histori_kamar as hk', function ($join) use ($cari_tanggal) {
+            ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
                 $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
-                     ->whereDate('hk.check_in', '<=', $cari_tanggal)
-                     ->whereDate('hk.check_out', '>=', $cari_tanggal);
+                     ->whereDate('hk.check_in', '<=', $tanggalHariIni)
+                     ->whereDate('hk.check_out', '>=', $tanggalHariIni);
             })
             ->where('k.kode_kamar', 'SPR')
             ->select(
@@ -123,12 +114,17 @@ class HotelController extends Controller
             )
             ->get();
 
+
+
+
+
+
         $kamarSTD = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
-            ->leftJoin('histori_kamar as hk', function ($join) use ($cari_tanggal) {
+            ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
                 $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
-                     ->whereDate('hk.check_in', '<=', $cari_tanggal)
-                     ->whereDate('hk.check_out', '>=', $cari_tanggal);
+                     ->whereDate('hk.check_in', '<=', $tanggalHariIni)
+                     ->whereDate('hk.check_out', '>=', $tanggalHariIni);
             })
             ->where('k.kode_kamar', 'STD')
             ->select(
@@ -139,7 +135,7 @@ class HotelController extends Controller
             )
             ->get();
 
-        return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSTD', 'histori'));
+        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSTD', 'histori'));
     }
 
 
