@@ -612,14 +612,20 @@ $(document).on('focus', '.flatpickr', function () {
 
         let tanggalDB = e.format('yyyy-mm-dd');
 
+        // FORM PENCARIAN
         if($(this).attr('id') === 'check_in_tampil') {
             $('#cari_check_in').val(tanggalDB);
         } 
         else if($(this).attr('id') === 'check_out_tampil') {
             $('#cari_check_out').val(tanggalDB);
         }
+
+        // FORM MODAL
         else if($(this).attr('id') === 'check_in_tampil_modal') {
-            $('#check_in_modal').val(tanggalDB).trigger('change');
+            $('#check_in_modal').val(tanggalDB);
+        }
+        else if($(this).attr('id') === 'check_out_tampil_modal') {
+            $('#check_out_modal').val(tanggalDB);
         }
 
     });
@@ -646,13 +652,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let formatView = `${dd} ${bulanIndo[today.getMonth()]} ${yyyy}`;
 
-    // input tampilan
-    document.getElementById("check_in_tampil").value = formatView;
-    document.getElementById("check_out_tampil").value = formatView;
+    // INPUT TAMPILAN
+    if(document.getElementById("check_in_tampil"))
+        document.getElementById("check_in_tampil").value = formatView;
 
-    // input database
-    document.getElementById("cari_check_in").value = formatDB;
-    document.getElementById("cari_check_out").value = formatDB;
+    if(document.getElementById("check_out_tampil"))
+        document.getElementById("check_out_tampil").value = formatView;
+
+    if(document.getElementById("check_in_tampil_modal"))
+        document.getElementById("check_in_tampil_modal").value = formatView;
+
+    if(document.getElementById("check_out_tampil_modal"))
+        document.getElementById("check_out_tampil_modal").value = formatView;
+
+
+    // INPUT DATABASE
+    if(document.getElementById("cari_check_in"))
+        document.getElementById("cari_check_in").value = formatDB;
+
+    if(document.getElementById("cari_check_out"))
+        document.getElementById("cari_check_out").value = formatDB;
+
+    if(document.getElementById("check_in_modal"))
+        document.getElementById("check_in_modal").value = formatDB;
+
+    if(document.getElementById("check_out_modal"))
+        document.getElementById("check_out_modal").value = formatDB;
 
 });
 

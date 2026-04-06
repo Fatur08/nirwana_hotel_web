@@ -251,7 +251,7 @@ class HotelController extends Controller
             // 2. LAMA INAP
             // ==============================
             $checkIn  = \Carbon\Carbon::parse($request->check_in_modal);
-            $checkOut = \Carbon\Carbon::parse($request->check_out);
+            $checkOut = \Carbon\Carbon::parse($request->check_out_modal);
             $lama_inap = $checkOut->diffInDays($checkIn);
     
             // ==============================
@@ -310,7 +310,7 @@ class HotelController extends Controller
                 'before_10_persen' => $before_10_persen,
                 'after_10_persen' => $after_10_persen,
                 'check_in' => $request->check_in_modal,
-                'check_out' => $request->check_out,
+                'check_out' => $request->check_out_modal,
                 'lama_inap' => $lama_inap,
                 'biaya' => $biaya,
                 'biaya_tambahan' => $biaya_request,
@@ -330,7 +330,7 @@ class HotelController extends Controller
                     ->whereNotIn('nk.id_nomor_kamar', function($q) use ($request){
                         $q->select('id_nomor_kamar')
                           ->from('histori_kamar')
-                          ->whereDate('check_in','<=',$request->check_out)
+                          ->whereDate('check_in','<=',$request->check_out_modal)
                           ->whereDate('check_out','>=',$request->check_in_modal);
                     })
                     ->orderBy('nk.id_nomor_kamar') // supaya konsisten ambil kamar pertama
@@ -345,7 +345,7 @@ class HotelController extends Controller
                     'id_nomor_kamar' => $kamar->id_nomor_kamar,
                     'nama_tamu' => $request->nama_tamu,
                     'check_in' => $request->check_in_modal,
-                    'check_out' => $request->check_out,
+                    'check_out' => $request->check_out_modal,
                 ]);
 
             }
