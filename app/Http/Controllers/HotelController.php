@@ -331,7 +331,7 @@ class HotelController extends Controller
                         $q->select('id_nomor_kamar')
                           ->from('histori_kamar')
                           ->whereDate('check_in','<=',$request->check_out)
-                          ->whereDate('check_out','>=',$request->check_in);
+                          ->whereDate('check_out','>=',$request->check_in_modal);
                     })
                     ->orderBy('nk.id_nomor_kamar') // supaya konsisten ambil kamar pertama
                     ->first();
@@ -344,7 +344,7 @@ class HotelController extends Controller
                     'id_laporan_keuangan' => $id_laporan,
                     'id_nomor_kamar' => $kamar->id_nomor_kamar,
                     'nama_tamu' => $request->nama_tamu,
-                    'check_in' => $request->check_in,
+                    'check_in' => $request->check_in_modal,
                     'check_out' => $request->check_out,
                 ]);
 
