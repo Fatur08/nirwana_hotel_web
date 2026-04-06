@@ -311,7 +311,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>No.Kamar</th>
+                        <th>Tamu</th>
                         <th>Status</th>
                         <th>Check-In</th>
                         <th>Check-Out</th>
@@ -321,7 +321,7 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>DLX1</td>
+                        <td>Aziz</td>
                         <td>Booking</td>
                         <td>06 April 2026</td>
                         <td>07 April 2026</td>
