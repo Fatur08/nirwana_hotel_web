@@ -311,6 +311,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
+                        <th>No.Kamar</th>
                         <th>Status</th>
                         <th>Check-In</th>
                         <th>Check-Out</th>
