@@ -319,6 +319,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>DLX1</td>
+                        <td>Booking</td>
+                        <td>06 April 2026</td>
+                        <td>07 April 2026</td>
+                        <td>
+                            <a href="#"
+                               class="TambahModalDLX btn btn-dark px-3 py-2"
+                               style="font-size:14pt; white-space:nowrap;"
+                               tipe_kamar="1"
+                               data-tanggal="{{ $cari_tanggal }}">
+                               Cetak
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
