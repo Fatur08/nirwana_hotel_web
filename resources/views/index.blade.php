@@ -619,7 +619,7 @@ $(document).on('focus', '.flatpickr', function () {
             $('#cari_check_out').val(tanggalDB);
         }
         else if($(this).attr('id') === 'check_in_tampil_modal') {
-            $('#check_in_modal').val(tanggalDB);
+            $('#check_in_modal').val(tanggalDB).trigger('change');
         }
 
     });
