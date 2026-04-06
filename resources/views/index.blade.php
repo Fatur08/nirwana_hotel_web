@@ -702,7 +702,7 @@ $(document).on('click', '.TambahModalDLX', function(e){
 
 
 
-$(document).on('change', '#check_in', function(){
+$(document).on('change', '#check_in_modal', function(){
 
     let tanggal = $(this).val();
     let tipe = 1; // DLX
@@ -776,7 +776,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     }
 
     let tipe = 1;
-    let tanggal = $('#check_in').val();
+    let tanggal = $('#check_in_modal').val();
 
     list.html('');
 
