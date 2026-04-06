@@ -327,7 +327,7 @@
                         <td>07 April 2026</td>
                         <td>
                             <a href="#"
-                               class="TambahModalDLX btn btn-dark px-3 py-2"
+                               class="TambahModalDLX btn btn-success px-3 py-2"
                                style="font-size:14pt; white-space:nowrap;"
                                tipe_kamar="1"
                                data-tanggal="{{ $cari_tanggal }}">
