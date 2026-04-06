@@ -618,10 +618,15 @@ $(document).on('focus', '.flatpickr', function () {
         else if($(this).attr('id') === 'check_out_tampil') {
             $('#cari_check_out').val(tanggalDB);
         }
+        else if($(this).attr('id') === 'check_in_tampil_modal') {
+            $('#check_in_modal').val(tanggalDB);
+        }
 
     });
 
 });
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
