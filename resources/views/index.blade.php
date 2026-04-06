@@ -249,13 +249,13 @@
                         </span> 
                         <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                         <input type="text" 
-                            id="tgl_tampil" 
+                            id="check_in_tampil" 
                             class="form-control flatpickr"
                             placeholder="Tanggal Check-In"
                             autocomplete="off"
                             style="font-size:16pt;"> 
                         <!-- INPUT ASLI UNTUK DATABASE -->
-                        <input type="hidden" id="cari_tanggal" name="cari_tanggal">
+                        <input type="hidden" id="cari_check_in" name="cari_check_in">
                     </div>
                 </div>
                 <div class="col-6">
@@ -275,13 +275,13 @@
                         </span> 
                         <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                         <input type="text" 
-                            id="tgl_tampil" 
+                            id="check_out_tampil" 
                             class="form-control flatpickr"
                             placeholder="Tanggal Check-Out"
                             autocomplete="off"
                             style="font-size:16pt;"> 
                         <!-- INPUT ASLI UNTUK DATABASE -->
-                        <input type="hidden" id="cari_tanggal" name="cari_tanggal">
+                        <input type="hidden" id="cari_check_out" name="cari_check_out">
                     </div>
                 </div>
             </div>
@@ -290,7 +290,7 @@
                     <select id="status" name="status" class="form-control" style="font-size:16pt;">
                         <option value="">-- Pilih Status --</option>
                         <option value="booking">Booking</option>
-                        <option value="check-in">Check-In</option>
+                        <option value="check_in">Check-In</option>
                     </select>
                 </div>
                 <div class="col-6">
@@ -340,6 +340,73 @@
                             </a>
                         </td>
                     </tr>
+
+
+                    @forelse($histori as $no => $row)
+                        <tr>
+                            <td>{{ $no + 1 }}</td>
+                            <td>{{ $row->nama_tamu }}</td>
+                            <td>
+                                @if($row->status == 'booking')
+                                <span class="badge bg-secondary">Booking</span>
+                                @else
+                                <span class="badge bg-success">Check-In</span>
+                                @endif
+                            </td>
+
+                            <td>
+                            {{ \Carbon\Carbon::parse($row->check_in)->translatedFormat('d F Y') }}
+                            </td>
+
+                            <td>
+                            {{ \Carbon\Carbon::parse($row->check_out)->translatedFormat('d F Y') }}
+                            </td>
+
+                            <td class="text-center">
+
+                            <div class="d-flex justify-content-center gap-2">
+
+                            <a href="/resi/{{ $row->id_histori_kamar }}"
+                            class="btn btn-success">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor">
+
+                            <path d="M17 17h2a2 2 0 0 0 2 -2v-4"/>
+
+                            </svg>
+
+                            </a>
+
+                            <a href="/detail/{{ $row->id_histori_kamar }}"
+                            class="btn btn-info">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor">
+
+                            <circle cx="12" cy="12" r="9"/>
+
+                            </svg>
+
+                            </a>
+
+                            </div>
+
+                            </td>
+
+                            </tr>
+
+                            @empty
+
+                            <tr>
+
+                            <td colspan="6" class="text-center">
+                            Tidak ada data pemesanan
+                            </td>
+
+                        </tr>
+
+                    @endforelse
                 </tbody>
             </table>
         </div>

@@ -11,6 +11,65 @@ class HotelController extends Controller
     public function index(Request $request)
     {
         $cari_tanggal = $request->cari_tanggal ?? date('Y-m-d');
+
+
+        
+        // ambil data dari form
+        $cari_check_in = $request->cari_check_in;
+        $cari_check_out = $request->cari_check_out;
+        $status = $request->status;
+        // default jika kosong
+        if(!$cari_check_in){
+            $cari_check_in = date('Y-m-d');
+        }
+
+        if(!$cari_check_out){
+            $cari_check_out = date('Y-m-d');
+        }
+
+        // ambil histori kamar
+        $histori = DB::table('histori_kamar as hk')
+            ->join('nomor_kamar as nk','hk.id_nomor_kamar','=','nk.id_nomor_kamar')
+            ->join('kamar as k','nk.id_kamar','=','k.id_kamar')
+            ->select(
+                'hk.id_histori_kamar',
+                'hk.nama_tamu',
+                'hk.check_in',
+                'hk.check_out',
+                'nk.nomor_kamar',
+                'k.kode_kamar'
+            )
+            ->whereDate('hk.check_out','>=',$cari_check_in)
+            ->whereDate('hk.check_out','<=',$cari_check_out)
+            ->orderBy('hk.check_in','desc')
+            ->get();
+
+
+        // tentukan status otomatis
+        $today = Carbon::today();
+
+        foreach($histori as $row){
+
+            if($today < Carbon::parse($row->check_in)){
+                $row->status = 'booking';
+            }else{
+                $row->status = 'check_in';
+            }
+
+        }
+
+
+        // filter status jika dipilih
+        if($status){
+            $histori = $histori->filter(function($item) use ($status){
+                return $item->status == $status;
+            });
+        }
+
+
+
+
+
         $tanggalHariIni = Carbon::today();
         if (!$cari_tanggal || !strtotime($cari_tanggal)) {
             $cari_tanggal = date('Y-m-d');
@@ -80,7 +139,7 @@ class HotelController extends Controller
             )
             ->get();
 
-        return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSTD'));
+        return view('index', compact('cari_tanggal', 'kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSTD', 'histori'));
     }
 
 
