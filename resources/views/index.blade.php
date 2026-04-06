@@ -622,7 +622,7 @@ $(document).on('focus', '.flatpickr', function () {
 
         // FORM MODAL
         else if($(this).attr('id') === 'check_in_tampil_modal') {
-            $('#check_in_modal').val(tanggalDB);
+            $('#check_in_modal').val(tanggalDB).trigger('change');
         }
         else if($(this).attr('id') === 'check_out_tampil_modal') {
             $('#check_out_modal').val(tanggalDB);
