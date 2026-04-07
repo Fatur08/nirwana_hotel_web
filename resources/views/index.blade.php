@@ -791,18 +791,12 @@ $(document).on('shown.bs.modal', '#modal-DLX', function () {
 
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-$('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
+$('#jumlah_kamar_dipesan_dlx').html(opt);
+
+$('#jumlah_kamar_dipesan_dlx').off('change').on('change', function(){
 
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_dlx');
-
-    if(jumlah && jumlah > 0){
-        $('#kamar_tersedia_title_dlx').show();
-        $('#kamar_tersedia_list_dlx').show();
-    }else{
-        $('#kamar_tersedia_title_dlx').hide();
-        $('#kamar_tersedia_list_dlx').hide();
-    }
 
     let tipe = 1;
     let tanggal = $('#check_in_modal_dlx').val();
@@ -837,18 +831,18 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
         success: function (res) {
 
             console.log("DATA KAMAR:", res);
-        
+
             let single = res.filter(k => k.jenis_bed == 1).length;
             let dbl = res.filter(k => k.jenis_bed == 2).length;
-        
+
             console.log("STOK SINGLE:", single);
             console.log("STOK DOUBLE:", dbl);
-        
+
             window.stokBed = {
                 single: single,
                 double: dbl
             };
-        
+
             updateBedSelect();
         }
     });
