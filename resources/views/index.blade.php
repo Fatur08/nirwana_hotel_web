@@ -436,7 +436,7 @@
             <!-- TOMBOL -->
             <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
                 <a href="#"
-                   class="TambahModalDLX btn btn-dark px-3 py-2"
+                   class="TambahModalSPR btn btn-dark px-3 py-2"
                    style="font-size:14pt; white-space:nowrap;"
                    tipe_kamar="1">
                    Pesan Kamar
