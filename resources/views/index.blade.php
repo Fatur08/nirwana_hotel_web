@@ -837,18 +837,19 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
         success: function (res) {
 
             console.log("DATA KAMAR:", res);
-
-            // hitung stok bed
+        
             let single = res.filter(k => k.jenis_bed == 1).length;
             let dbl = res.filter(k => k.jenis_bed == 2).length;
-
+        
+            console.log("STOK SINGLE:", single);
+            console.log("STOK DOUBLE:", dbl);
+        
             window.stokBed = {
                 single: single,
                 double: dbl
             };
-
+        
             updateBedSelect();
-
         }
     });
 
