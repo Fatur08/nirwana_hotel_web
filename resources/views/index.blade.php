@@ -438,7 +438,7 @@
                 <a href="#"
                    class="TambahModalSPR btn btn-dark px-3 py-2"
                    style="font-size:14pt; white-space:nowrap;"
-                   tipe_kamar="1">
+                   tipe_kamar="2">
                    Pesan Kamar
                 </a>
             </div>
@@ -1058,7 +1058,7 @@ $(document).on('click', '.TambahModalSPR', function(e){
         },
         success:function(respond){
             $("#loadTambahModalSPR").html(respond);
-            $("#modal-DLX").modal("show");
+            $("#modal-SPR").modal("show");
 
             // default isi dropdown
             $('#jumlah_kamar_dipesan_spr').html(`
@@ -1075,7 +1075,7 @@ $(document).on('click', '.TambahModalSPR', function(e){
 $(document).on('change', '#check_in_modal', function(){
 
     let tanggal = $(this).val();
-    let tipe = 1; // DLX
+    let tipe = 2; // SPR
 
     if(!tanggal){
         $('#jumlah_kamar_dipesan_spr').html(`
