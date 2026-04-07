@@ -908,17 +908,17 @@ $(document).on('change', '#request_dlx', function(){
     }
 
     if(value !== ''){
-        $('#biaya_container').show();
-        $('#biaya_input_container').show();
+        $('#biaya_container_dlx').show();
+        $('#biaya_input_container_dlx').show();
 
-        $('#biaya_request').val('Rp ' + biaya.toLocaleString('id-ID'));
-        $('#biaya_request_value').val(biaya);
+        $('#biaya_request_dlx').val('Rp ' + biaya.toLocaleString('id-ID'));
+        $('#biaya_request_value_dlx').val(biaya);
     } 
     else{
-        $('#biaya_container').hide();
-        $('#biaya_input_container').hide();
-        $('#biaya_request').val('');
-        $('#biaya_request_value').val('');
+        $('#biaya_container_dlx').hide();
+        $('#biaya_input_container_dlx').hide();
+        $('#biaya_request_dlx').val('');
+        $('#biaya_request_value_dlx').val('');
     }
 
 });

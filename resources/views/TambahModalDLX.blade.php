@@ -14,7 +14,7 @@
                   <!-- Download SVG icon from http://tabler-icons.io/i/user -->
                   <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
                 </span>
-                <input type="text" value="" id="nama_tamu" class="form-control" style="font-size:16pt;" name="nama_tamu" placeholder="Masukkan Nama Tamu">
+                <input type="text" value="" id="nama_tamu_dlx" class="form-control" style="font-size:16pt;" name="nama_tamu_dlx" placeholder="Masukkan Nama Tamu">
               </div>
         </div>
     </div>
@@ -97,8 +97,8 @@
                     </svg>
                 </span>
                 <input type="file" 
-                       id="foto_ktp" 
-                       name="foto_ktp" 
+                       id="foto_ktp_dlx" 
+                       name="foto_ktp_dlx" 
                        class="form-control" 
                        style="font-size:16pt;">
             </div>
@@ -120,12 +120,12 @@
             </select>
         </div>
     </div>
-    <div class="row" id="biaya_container" style="display: none;">
+    <div class="row" id="biaya_container_dlx" style="display: none;">
         <div class="col-12">
             <h5 class="text-start" style="font-size:16pt;">Biaya Tambahan</h5>
         </div>
     </div>
-    <div class="row" id="biaya_input_container" style="display: none;">
+    <div class="row" id="biaya_input_container_dlx" style="display: none;">
         <div class="col-12">
             <div class="input-icon mb-3">
                 <span class="input-icon-addon">
@@ -138,9 +138,9 @@
                         <path d="M12 3v3m0 12v3"/>
                     </svg>
                 </span>
-                <input type="text" id="biaya_request" class="form-control" 
+                <input type="text" id="biaya_request_dlx" class="form-control" 
                        style="font-size:16pt;" readonly>
-                <input type="hidden" id="biaya_request_value" name="biaya_request">
+                <input type="hidden" id="biaya_request_value_dlx" name="biaya_request_dlx">
             </div>
         </div>
     </div>
