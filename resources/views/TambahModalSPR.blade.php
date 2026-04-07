@@ -59,7 +59,7 @@
     </div>
     <div class="row mb-3">
         <div class="col-12">
-            <select id="jumlah_kamar_dipesan_dlx" name="jumlah_kamar_dipesan_dlx" class="form-control" style="font-size:16pt;">
+            <select id="jumlah_kamar_dipesan_spr" name="jumlah_kamar_dipesan_spr" class="form-control" style="font-size:16pt;">
             </select>
         </div>
     </div>
@@ -70,7 +70,7 @@
     </div>
     <div class="row mb-3" id="kamar_tersedia_list" style="display:none;">
         <div class="col-12">
-            <div id="list_nomor_kamar_dlx"></div>
+            <div id="list_nomor_kamar_spr"></div>
         </div>
     </div>
     
