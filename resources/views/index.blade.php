@@ -836,12 +836,12 @@ $(document).on('change', '#jumlah_kamar_dipesan_dlx', function(){
             console.log("STOK SINGLE:", single);
             console.log("STOK DOUBLE:", dbl);
 
-            window.stokBed = {
+            window.stokBedDLX = {
                 single: single,
                 double: dbl
             };
 
-            updateBedSelect();
+            updateBedSelectDLX();
         }
     });
 
@@ -849,7 +849,7 @@ $(document).on('change', '#jumlah_kamar_dipesan_dlx', function(){
 
 
 
-function updateBedSelect(){
+function updateBedSelectDLX(){
 
     let usedSingle = 0;
     let usedDouble = 0;
@@ -872,11 +872,11 @@ function updateBedSelect(){
 
         select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
 
-        if(window.stokBed.single - usedSingle > 0){
+        if(window.stokBedDLX.single - usedSingle > 0){
             select.append(`<option value="1">Single Bed</option>`);
         }
 
-        if(window.stokBed.double - usedDouble > 0){
+        if(window.stokBedDLX.double - usedDouble > 0){
             select.append(`<option value="2">Double Bed</option>`);
         }
 
@@ -889,13 +889,13 @@ function updateBedSelect(){
 }
 
 $(document).on('change', '.select-bed-dlx', function(){
-    updateBedSelect();
+    updateBedSelectDLX();
 });
 
 
 
 // ✅ REQUEST EXTRA BED / BREAKFAST
-$(document).on('change', '#request', function(){
+$(document).on('change', '#request_dlx', function(){
 
     let value = $(this).val();
     let biaya = 0;
