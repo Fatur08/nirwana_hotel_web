@@ -103,16 +103,27 @@ class HotelController extends Controller
             ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
                 $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
                      ->whereDate('hk.check_in', '<=', $tanggalHariIni)
-                     ->whereDate('hk.check_out', '>=', $tanggalHariIni);
+                     ->whereDate('hk.check_out', '>', $tanggalHariIni);
             })
             ->where('k.kode_kamar', 'SPR')
             ->select(
                 'nk.id_nomor_kamar',
                 'nk.nomor_kamar',
+                'nk.jenis_bed',
                 'k.kode_kamar',
                 'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
             )
             ->get();
+        $kamarTersediaSPR = $kamarSPR->whereNull('histori_aktif')->count();
+        $kamarSingleSPR = $kamarSPR
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 1)
+            ->count();
+
+        $kamarDoubleSPR = $kamarSPR
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 2)
+            ->count();
 
 
 
@@ -135,7 +146,7 @@ class HotelController extends Controller
             )
             ->get();
 
-        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSTD', 'histori'));
+        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSTD', 'histori'));
     }
 
 
