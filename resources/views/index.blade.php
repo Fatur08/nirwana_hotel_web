@@ -875,16 +875,22 @@ function updateBedSelect(){
         let current = $(this).val();
         let select = $(this);
 
-        select.html(`<option value="">-- Pilih Jenis Bed --</option>`);
+        select.empty();
+
+        select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
 
         // Single Bed
-        if(window.stokBed.single - usedSingle > 0 || current == 1){
-            select.append(`<option value="1" ${current==1?'selected':''}>Single Bed</option>`);
+        if(window.stokBed.single > 0){
+            select.append(`<option value="1">Single Bed</option>`);
         }
 
         // Double Bed
-        if(window.stokBed.double - usedDouble > 0 || current == 2){
-            select.append(`<option value="2" ${current==2?'selected':''}>Double Bed</option>`);
+        if(window.stokBed.double > 0){
+            select.append(`<option value="2">Double Bed</option>`);
+        }
+
+        if(current){
+            select.val(current);
         }
 
     });
