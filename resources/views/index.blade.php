@@ -797,11 +797,11 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     let list = $('#list_nomor_kamar_dlx');
 
     if(jumlah && jumlah > 0){
-        $('#kamar_tersedia_title').show();
-        $('#kamar_tersedia_list').show();
+        $('#kamar_tersedia_title_dlx').show();
+        $('#kamar_tersedia_list_dlx').show();
     }else{
-        $('#kamar_tersedia_title').hide();
-        $('#kamar_tersedia_list').hide();
+        $('#kamar_tersedia_title_dlx').hide();
+        $('#kamar_tersedia_list_dlx').hide();
     }
 
     let tipe = 1;
