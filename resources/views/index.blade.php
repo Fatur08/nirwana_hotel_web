@@ -625,11 +625,11 @@ $(document).on('focus', '.flatpickr', function () {
         }
 
         // FORM MODAL
-        else if($(this).attr('id') === 'check_in_tampil_modal') {
-            $('#check_in_modal').val(tanggalDB).trigger('change');
+        else if($(this).attr('id') === 'check_in_tampil_modal_dlx') {
+            $('#check_in_modal_dlx').val(tanggalDB).trigger('change');
         }
-        else if($(this).attr('id') === 'check_out_tampil_modal') {
-            $('#check_out_modal').val(tanggalDB);
+        else if($(this).attr('id') === 'check_out_tampil_modal_dlx') {
+            $('#check_out_modal_dlx').val(tanggalDB);
         }
 
     });
@@ -663,11 +663,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if(document.getElementById("check_out_tampil"))
         document.getElementById("check_out_tampil").value = formatView;
 
-    if(document.getElementById("check_in_tampil_modal"))
-        document.getElementById("check_in_tampil_modal").value = formatView;
+    if(document.getElementById("check_in_tampil_modal_dlx"))
+        document.getElementById("check_in_tampil_modal_dlx").value = formatView;
 
-    if(document.getElementById("check_out_tampil_modal"))
-        document.getElementById("check_out_tampil_modal").value = formatView;
+    if(document.getElementById("check_out_tampil_modal_dlx"))
+        document.getElementById("check_out_tampil_modal_dlx").value = formatView;
 
 
     // INPUT DATABASE
@@ -677,11 +677,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if(document.getElementById("cari_check_out"))
         document.getElementById("cari_check_out").value = formatDB;
 
-    if(document.getElementById("check_in_modal"))
-        document.getElementById("check_in_modal").value = formatDB;
+    if(document.getElementById("check_in_modal_dlx"))
+        document.getElementById("check_in_modal_dlx").value = formatDB;
 
-    if(document.getElementById("check_out_modal"))
-        document.getElementById("check_out_modal").value = formatDB;
+    if(document.getElementById("check_out_modal_dlx"))
+        document.getElementById("check_out_modal_dlx").value = formatDB;
 
 });
 
@@ -731,7 +731,7 @@ $(document).on('click', '.TambahModalDLX', function(e){
 
 
 
-$(document).on('change', '#check_in_modal', function(){
+$(document).on('change', '#check_in_modal_dlx', function(){
 
     let tanggal = $(this).val();
     let tipe = 1; // DLX
@@ -805,7 +805,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_dlx', function () {
     }
 
     let tipe = 1;
-    let tanggal = $('#check_in_modal').val();
+    let tanggal = $('#check_in_modal_dlx').val();
 
     list.html('');
 
