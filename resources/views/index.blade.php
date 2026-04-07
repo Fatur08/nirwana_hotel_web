@@ -791,9 +791,7 @@ $(document).on('shown.bs.modal', '#modal-DLX', function () {
 
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-$('#jumlah_kamar_dipesan_dlx').html(opt);
-
-$('#jumlah_kamar_dipesan_dlx').off('change').on('change', function(){
+$(document).on('change', '#jumlah_kamar_dipesan_dlx', function(){
 
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_dlx');
@@ -874,13 +872,11 @@ function updateBedSelect(){
 
         select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
 
-        // Single Bed
-        if(window.stokBed.single > 0){
+        if(window.stokBed.single - usedSingle > 0){
             select.append(`<option value="1">Single Bed</option>`);
         }
 
-        // Double Bed
-        if(window.stokBed.double > 0){
+        if(window.stokBed.double - usedDouble > 0){
             select.append(`<option value="2">Double Bed</option>`);
         }
 
@@ -892,11 +888,8 @@ function updateBedSelect(){
 
 }
 
-
 $(document).on('change', '.select-bed-dlx', function(){
-
     updateBedSelect();
-
 });
 
 
