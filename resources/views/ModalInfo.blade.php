@@ -11,14 +11,18 @@
     <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Check In</b></td>
 </tr>
 <tr>
-    <td class="text-start">{{ $data->check_in }}</td>
+    <td class="text-start">
+        {{ \Carbon\Carbon::parse($data->check_in)->locale('id')->translatedFormat('l, d F Y') }}
+    </td>
 </tr>
 
 <tr>
     <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Check Out</b></td>
 </tr>
 <tr>
-    <td class="text-start">{{ $data->check_out }}</td>
+    <td class="text-start">
+        {{ \Carbon\Carbon::parse($data->check_out)->locale('id')->translatedFormat('l, d F Y') }}
+    </td>
 </tr>
 
 <tr>
