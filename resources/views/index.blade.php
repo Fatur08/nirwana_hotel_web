@@ -1637,7 +1637,7 @@ $(document).on('click', '.Modalinfo', function(e){
 
     $.ajax({
         type:'POST',
-        url:'/Modalinfo',
+        url:'/ModalInfo',
         data:{
             _token : "{{ csrf_token() }}",
             tipe_kamar : tipe
