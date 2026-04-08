@@ -1629,7 +1629,7 @@ $(document).on('submit', '#frmTambahModalSTD', function(e){
 
 
 
-// BAGIAN DARI FORM TAMBAH MODAL DELUXE
+// BAGIAN DARI MODAL INFO
 $(document).on('click', '.ModalInfo', function(e){
     e.preventDefault();
 
@@ -1643,15 +1643,8 @@ $(document).on('click', '.ModalInfo', function(e){
             tipe_kamar : tipe
         },
         success:function(respond){
-            $("#loadModalinfo").html(respond);
+            $("#loadModalInfo").html(respond);
             $("#modal-info").modal("show");
-
-            // default isi dropdown
-            $('#jumlah_kamar_dipesan_dlx').html(`
-                <option style="font-size:16pt;" value="">
-                    Silakan pilih tanggal check-in
-                </option>
-            `);
         }
     });
 });
