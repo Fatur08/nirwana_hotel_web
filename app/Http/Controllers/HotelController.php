@@ -28,6 +28,7 @@ class HotelController extends Controller
             ->join('kamar as k','nk.id_kamar','=','k.id_kamar')
             ->select(
                 'hk.nama_tamu',
+                'hk.id_laporan_keuangan',
                 'hk.check_in',
                 'hk.check_out',
                 DB::raw('GROUP_CONCAT(nk.nomor_kamar ORDER BY nk.nomor_kamar SEPARATOR ", ") as nomor_kamar'),

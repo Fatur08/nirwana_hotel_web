@@ -1,8 +1,5 @@
 <table class="table table-bordered">
     <tr>
-        <td width="40%"><b>Nomor Kamar</b></td>
-    </tr>
-    <tr>
         <td><b>Nama Tamu</b></td>
     </tr>
     <tr>
