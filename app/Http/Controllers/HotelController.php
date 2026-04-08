@@ -222,7 +222,7 @@ class HotelController extends Controller
 
     public function ModalInfo(Request $request)
     {
-        return view('ModalInfo');
+        return view('ModalInf');
     }
 
 
