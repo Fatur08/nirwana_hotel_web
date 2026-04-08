@@ -253,7 +253,8 @@ class HotelController extends Controller
             ->join('nomor_kamar as nk','hk.id_nomor_kamar','=','nk.id_nomor_kamar')
             ->select(
                 'nk.nomor_kamar',
-                'nk.jenis_bed'
+                'nk.jenis_bed',
+                'nk.id_nomor_kamar'
             )
             ->where('hk.id_laporan_keuangan',$id)
             ->get();

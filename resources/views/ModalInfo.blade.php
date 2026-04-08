@@ -31,7 +31,25 @@
 <tr>
     <td>
         @foreach($kamar as $k)
-            {{ $k->nomor_kamar }} ({{ $k->jenis_bed }}) <br>
+
+            @php
+                switch($k->id_kamar){
+                    case 1:
+                        $tipe = "DLX";
+                        break;
+                    case 2:
+                        $tipe = "SPR";
+                        break;
+                    case 3:
+                        $tipe = "STD";
+                        break;
+                    default:
+                        $tipe = "-";
+                }
+            @endphp
+
+            {{ $tipe }}{{ $k->nomor_kamar }} - {{ $k->jenis_bed }} <br>
+
         @endforeach
     </td>
 </tr>
