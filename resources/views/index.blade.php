@@ -1426,7 +1426,6 @@ $(document).on('click', '.TambahModalSTD', function(e){
     e.preventDefault();
 
     let tipe = $(this).attr('tipe_kamar');
-    let tanggal = $(this).data('tanggal');
 
     $.ajax({
         type:'POST',
@@ -1439,70 +1438,114 @@ $(document).on('click', '.TambahModalSTD', function(e){
             $("#loadTambahModalSTD").html(respond);
             $("#modal-STD").modal("show");
 
-            // 🟩 PANGGIL GET KAMAR TERSEDIA SETELAH MODAL DILOAD
-            if(!tanggal){
-                $('#jumlah_kamar_dipesan_std').html(`<option style="font-size:16pt;" value="">Silakan cari tanggal dulu</option>`);
-                return;
-            }
-
-            $.ajax({
-                url: '/getKamarTersedia',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    tanggal: tanggal,
-                    tipe_kamar: tipe
-                },
-                success: function(res){
-                    console.log("RESPON FINAL:", res);
-
-                    if (!res || res.length === 0) {
-                        $('#jumlah_kamar_dipesan_std').html(`<option style="font-size:16pt;" value="">Kamar Penuh</option>`);
-                        return;
-                    }
-
-                    let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
-                    for(let i = 1; i <= res.length; i++){
-                        opt += `<option style="font-size:16pt;" value="${i}">${i}</option>`;
-                    }
-
-                    $('#jumlah_kamar_dipesan_std').html(opt);
-                    window.kamar = res;
-                }
-            });
+            // default isi dropdown
+            $('#jumlah_kamar_dipesan_std').html(`
+                <option style="font-size:16pt;" value="">
+                    Silakan pilih tanggal check-in
+                </option>
+            `);
         }
     });
 });
 
 
+
+$(document).on('change', '#check_in_std', function(){
+
+    let tanggal = $(this).val();
+    let tipe = 3; // STD
+
+    if(!tanggal){
+        $('#jumlah_kamar_dipesan_std').html(`
+            <option style="font-size:16pt;" value="">
+                Silakan pilih tanggal check-in
+            </option>
+        `);
+        return;
+    }
+
+    $.ajax({
+        url: '/getKamarTersedia',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            tanggal: tanggal,
+            tipe_kamar: tipe
+        },
+        success: function(res){
+
+            console.log("RESPON FINAL:", res);
+
+            if (!res || res.length === 0) {
+                $('#jumlah_kamar_dipesan_std').html(`
+                    <option style="font-size:16pt;" value="">
+                        Kamar Penuh
+                    </option>
+                `);
+                return;
+            }
+
+            let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
+
+            for(let i = 1; i <= res.length; i++){
+                opt += `<option style="font-size:16pt;" value="${i}">${i} Kamar</option>`;
+            }
+
+            $('#jumlah_kamar_dipesan_std').html(opt);
+
+            // simpan data kamar
+            window.kamar = res;
+        }
+    });
+
+});
+
+
 // ✅ RESET SAAT MODAL DIBUKA
 $(document).on('shown.bs.modal', '#modal-STD', function () {
+
     $('#list_nomor_kamar_std').html('');
+
+    $('#kamar_tersedia_title_std').hide();
+    $('#kamar_tersedia_list_std').hide();
+
     window.kamar = [];
 });
 
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-$('body').on('change', '#jumlah_kamar_dipesan_std', function () {
+$(document).on('change', '#jumlah_kamar_dipesan_std', function(){
 
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_std');
 
-    let tipe = 3; // ✅ STD
+    if(jumlah && jumlah > 0){
+        $('#kamar_tersedia_title_std').show();
+        $('#kamar_tersedia_list_std').show();
+    }else{
+        $('#kamar_tersedia_title_std').hide();
+        $('#kamar_tersedia_list_std').hide();
+    }
+
+    let tipe = 3;
+    let tanggal = $('#check_in_std').val();
 
     list.html('');
 
     if (!jumlah || jumlah < 1) return;
 
     for (let i = 1; i <= jumlah; i++) {
+
         let selectHTML = `
-            <div class="mb-2">
-                <label style="font-size:16pt;">Nomor Kamar ${i}</label>
-                <select name="nomor_kamar[]" class="form-control select-kamar-std" style="font-size:16pt;">
-                    <option value="">-- Pilih Nomor Kamar --</option>
-                </select>
-            </div>
+        <div class="mb-2">
+            <label style="font-size:16pt;">Jenis Bed ${i}</label>
+            <select name="jenis_bed[]" class="form-control select-bed-std" style="font-size:16pt;">
+                <option value="">-- Pilih Jenis Bed --</option>
+            </select>
+        </div>
         `;
+
         list.append(selectHTML);
     }
 
@@ -1517,20 +1560,22 @@ $('body').on('change', '#jumlah_kamar_dipesan_std', function () {
         },
         success: function (res) {
 
-            console.log('DATA KAMAR:', res); // ✅ untuk debug
+            console.log("DATA KAMAR:", res);
+        
+            let single = res.filter(k => k.jenis_bed == 1).length;
+            let dbl = res.filter(k => k.jenis_bed == 2).length;
+        
+            console.log("STOK SINGLE:", single);
+            console.log("STOK DOUBLE:", dbl);
+        
+            window.stokBedSTD = {
+                single: single,
+                double: dbl
+            };
 
-            $('.select-kamar-std').each(function () {
-                let select = $(this);
-                select.html('<option style="font-size:16pt;" value="">-- Pilih Nomor Kamar --</option>');
-
-                res.forEach(function (k) {
-                    select.append(`
-                        <option style="font-size:16pt;" value="${k.id_nomor_kamar}">
-                            STD${k.nomor_kamar}
-                        </option>
-                    `);
-                });
-            });
+            setTimeout(function(){
+                updateBedSelectSTD();
+            },100);
         }
     });
 
@@ -1538,28 +1583,115 @@ $('body').on('change', '#jumlah_kamar_dipesan_std', function () {
 
 
 
-$(document).on('change', '.select-kamar-std', function () {
-    let selectedValues = [];
+function updateBedSelectSTD(){
 
-    $('.select-kamar-std').each(function () {
+    let usedSingle = 0;
+    let usedDouble = 0;
+
+    $('.select-bed-std').each(function(){
+
         let val = $(this).val();
-        if (val) selectedValues.push(val);
+
+        if(val == 1) usedSingle++;
+        if(val == 2) usedDouble++;
+
     });
 
-    $('.select-kamar-std').each(function () {
-        let currentSelect = $(this);
-        let currentValue = currentSelect.val();
+    $('.select-bed-std').each(function(){
 
-        currentSelect.find('option').each(function () {
-            let optionVal = $(this).val();
+        let current = $(this).val();
+        let select = $(this);
 
-            if (selectedValues.includes(optionVal) && optionVal !== currentValue) {
-                $(this).prop('disabled', true);
-            } else {
-                $(this).prop('disabled', false);
-            }
-        });
+        select.empty();
+
+        select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
+
+        // Single Bed
+        if(window.stokBedSTD.single - usedSingle > 0 || current == 1){
+            select.append(`<option value="1">Single Bed</option>`);
+        }
+
+        // Double Bed
+        if(window.stokBedSTD.double - usedDouble > 0 || current == 2){
+            select.append(`<option value="2">Double Bed</option>`);
+        }
+
+        if(current){
+            select.val(current);
+        }
+
     });
+
+}
+
+$(document).on('change', '.select-bed-std', function(){
+    updateBedSelectSTD();
+});
+
+
+
+// ✅ REQUEST EXTRA BED / BREAKFAST
+$(document).on('change', '#request_std', function(){
+
+    let value = $(this).val();
+    let biaya = 0;
+
+    if(value === 'extra_bed'){
+        biaya = 150000;
+    } 
+    else if(value === 'breakfast'){
+        biaya = 50000;
+    }
+
+    if(value !== ''){
+        $('#biaya_container_std').show();
+        $('#biaya_input_container_std').show();
+
+        $('#biaya_request_std').val('Rp ' + biaya.toLocaleString('id-ID'));
+        $('#biaya_request_value_std').val(biaya);
+    } 
+    else{
+        $('#biaya_container_std').hide();
+        $('#biaya_input_container_std').hide();
+        $('#biaya_request_std').val('');
+        $('#biaya_request_value_std').val('');
+    }
+
+});
+
+
+
+$(document).on('submit', '#frmTambahModalSTD', function(e){
+
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success: function(res){
+
+            alert('Data berhasil disimpan');
+
+            $('#modal-SPR').modal('hide');
+
+            location.reload();
+
+        },
+
+        error: function(xhr){
+
+            console.log(xhr.responseText);
+            alert('Terjadi kesalahan');
+
+        }
+    });
+
 });
 
 
