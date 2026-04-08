@@ -785,7 +785,12 @@ $(document).on('change', '#check_in_dlx', function(){
 
 // ✅ RESET SAAT MODAL DIBUKA
 $(document).on('shown.bs.modal', '#modal-DLX', function () {
+
     $('#list_nomor_kamar_dlx').html('');
+
+    $('#kamar_tersedia_title_dlx').hide();
+    $('#kamar_tersedia_list_dlx').hide();
+
     window.kamar = [];
 });
 
@@ -795,6 +800,14 @@ $(document).on('change', '#jumlah_kamar_dipesan_dlx', function(){
 
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_dlx');
+
+    if(jumlah && jumlah > 0){
+        $('#kamar_tersedia_title_dlx').show();
+        $('#kamar_tersedia_list_dlx').show();
+    }else{
+        $('#kamar_tersedia_title_dlx').hide();
+        $('#kamar_tersedia_list_dlx').hide();
+    }
 
     let tipe = 1;
     let tanggal = $('#check_in_dlx').val();
