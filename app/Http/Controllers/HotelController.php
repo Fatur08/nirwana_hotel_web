@@ -261,8 +261,8 @@ class HotelController extends Controller
             // ==============================
             // 2. LAMA INAP
             // ==============================
-            $checkIn  = \Carbon\Carbon::parse($request->check_in_modal);
-            $checkOut = \Carbon\Carbon::parse($request->check_out_modal);
+            $checkIn  = \Carbon\Carbon::parse($request->check_in_dlx);
+            $checkOut = \Carbon\Carbon::parse($request->check_out_dlx);
             $lama_inap = $checkOut->diffInDays($checkIn);
     
             // ==============================
@@ -273,7 +273,7 @@ class HotelController extends Controller
             // ==============================
             // 4. REQUEST TAMBAHAN
             // ==============================
-            $biaya_request = $request->input('biaya_request', 0);
+            $biaya_request = $request->input('biaya_request_dlx', 0);
     
             // ==============================
             // 5. HITUNG BIAYA
@@ -290,21 +290,21 @@ class HotelController extends Controller
             /* ===============================
                UPLOAD FOTO KTP
             ================================*/
-            $foto_ktp = null;
+            $foto_ktp_dlx = null;
 
 
-            if ($request->hasFile('foto_ktp')) {
-                $foto_ktp = "Foto KTP_".$request->nama_tamu.".".$request
-                    ->file('foto_ktp')
+            if ($request->hasFile('foto_ktp_dlx')) {
+                $foto_ktp_dlx = "Foto KTP_".$request->nama_tamu.".".$request
+                    ->file('foto_ktp_dlx')
                     ->getClientOriginalExtension();
                 $storagePath = 'public/uploads/foto_ktp/';
-                $request->file('foto_ktp')->storeAs($storagePath, $foto_ktp);
+                $request->file('foto_ktp_dlx')->storeAs($storagePath, $foto_ktp_dlx);
                 $publicPath = public_path('storage/uploads/foto_ktp/');
                 if (!is_dir($publicPath)) {
                     mkdir($publicPath, 0777, true);
                 }
-                $sourceFile = storage_path('app/' . $storagePath . $foto_ktp);
-                $destinationFile = public_path('storage/uploads/foto_ktp/' . $foto_ktp);
+                $sourceFile = storage_path('app/' . $storagePath . $foto_ktp_dlx);
+                $destinationFile = public_path('storage/uploads/foto_ktp/' . $foto_ktp_dlx);
                 copy($sourceFile, $destinationFile);
             }
             
@@ -320,14 +320,14 @@ class HotelController extends Controller
                 'tarif_per_hari' => $tarif_per_hari,
                 'before_10_persen' => $before_10_persen,
                 'after_10_persen' => $after_10_persen,
-                'check_in' => $request->check_in_modal,
-                'check_out' => $request->check_out_modal,
+                'check_in' => $request->check_in_dlx,
+                'check_out' => $request->check_out_dlx,
                 'lama_inap' => $lama_inap,
                 'biaya' => $biaya,
                 'biaya_tambahan' => $biaya_request,
                 'pajak' => $pajak,
                 'total_diterima' => $total_diterima,
-                'foto_ktp' => $foto_ktp
+                'foto_ktp' => $foto_ktp_dlx
             ]);
     
             // ==============================
@@ -341,8 +341,8 @@ class HotelController extends Controller
                     ->whereNotIn('nk.id_nomor_kamar', function($q) use ($request){
                         $q->select('id_nomor_kamar')
                           ->from('histori_kamar')
-                          ->whereDate('check_in','<=',$request->check_out_modal)
-                          ->whereDate('check_out','>=',$request->check_in_modal);
+                          ->whereDate('check_in','<=',$request->check_out_dlx)
+                          ->whereDate('check_out','>=',$request->check_in_dlx);
                     })
                     ->orderBy('nk.id_nomor_kamar') // supaya konsisten ambil kamar pertama
                     ->first();
@@ -355,8 +355,8 @@ class HotelController extends Controller
                     'id_laporan_keuangan' => $id_laporan,
                     'id_nomor_kamar' => $kamar->id_nomor_kamar,
                     'nama_tamu' => $request->nama_tamu,
-                    'check_in' => $request->check_in_modal,
-                    'check_out' => $request->check_out_modal,
+                    'check_in' => $request->check_in_dlx,
+                    'check_out' => $request->check_out_dlx,
                 ]);
 
             }
