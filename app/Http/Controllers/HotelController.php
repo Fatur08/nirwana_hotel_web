@@ -498,9 +498,9 @@ class HotelController extends Controller
 
 
             if ($request->hasFile('foto_ktp_spr')) {
-                $foto_ktp_spr = "Foto KTP_".$request->nama_tamu_spr.".".$request
-                    ->file('foto_ktp_spr')
-                    ->getClientOriginalExtension();
+                $timestamp = now()->format('Y-m-d_H-i-s');
+                $nama = str_replace(' ', '_', $request->nama_tamu_spr);
+                $foto_ktp_spr = "Foto_KTP_" . $nama . "_" . $timestamp . "." . $request->file('foto_ktp_spr')->extension();
                 $storagePath = 'public/uploads/foto_ktp/';
                 $request->file('foto_ktp_spr')->storeAs($storagePath, $foto_ktp_spr);
                 $publicPath = public_path('storage/uploads/foto_ktp/');
@@ -671,9 +671,9 @@ class HotelController extends Controller
 
 
             if ($request->hasFile('foto_ktp_std')) {
-                $foto_ktp_std = "Foto KTP_".$request->nama_tamu_std.".".$request
-                    ->file('foto_ktp_std')
-                    ->getClientOriginalExtension();
+                $timestamp = now()->format('Y-m-d_H-i-s');
+                $nama = str_replace(' ', '_', $request->nama_tamu_std);
+                $foto_ktp_std = "Foto_KTP_" . $nama . "_" . $timestamp . "." . $request->file('foto_ktp_std')->extension();
                 $storagePath = 'public/uploads/foto_ktp/';
                 $request->file('foto_ktp_std')->storeAs($storagePath, $foto_ktp_std);
                 $publicPath = public_path('storage/uploads/foto_ktp/');
