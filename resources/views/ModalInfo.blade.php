@@ -26,7 +26,7 @@
 </tr>
 
 <tr>
-    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan : {{ $data->nama_tamu }} Kamar</b></td>
+    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan : {{ $data->jumlah_kamar_dipesan }} Kamar</b></td>
 </tr>
 <tr>
     <td class="text-start">
