@@ -1182,7 +1182,7 @@ $(document).on('change', '#jumlah_kamar_dipesan_spr', function(){
         $('#kamar_tersedia_list_spr').hide();
     }
 
-    let tipe = 1;
+    let tipe = 2;
     let tanggal = $('#check_in_spr').val();
 
     list.html('');
