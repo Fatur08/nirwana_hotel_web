@@ -478,7 +478,7 @@
                 <a href="#"
                    class="TambahModalSTD btn btn-dark px-3 py-2"
                    style="font-size:14pt; white-space:nowrap;"
-                   tipe_kamar="1">
+                   tipe_kamar="3">
                    Pesan Kamar
                 </a>
             </div>
