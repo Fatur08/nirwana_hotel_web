@@ -10,6 +10,9 @@ Route::get('/', function () {
 Route::get('/', [HotelController::class,'index']);
 
 
+Route::post('/ModalInfo', [HotelController::class,'ModalInfo']);
+
+
 Route::post('/TambahModalDLX', [HotelController::class,'TambahModalDLX']);
 
 

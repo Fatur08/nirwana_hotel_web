@@ -168,6 +168,30 @@ class HotelController extends Controller
 
 
 
+
+
+
+
+    
+    
+    public function TambahModalDLX(Request $request)
+    {
+        $tipe_kamar = $request->tipe_kamar;
+        return view('TambahModalDLX',compact('tipe_kamar'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function getKamarTersedia(Request $request)
     {
         $tanggal = $request->tanggal;
@@ -215,42 +239,6 @@ class HotelController extends Controller
 
 
 
-
-
-
-
-
-    public function ModalInfo(Request $request)
-    {
-        $cari_tanggal = $request->tanggal;
-        $nomor_kamar  = $request->nomor_kamar;
-        $tipe_kamar   = $request->tipe_kamar;
-        $histori_kamar = DB::table('histori_kamar as hk')
-            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
-            ->where('hk.id_nomor_kamar', $nomor_kamar)
-            ->whereDate('hk.check_in', '<=', $cari_tanggal)
-            ->whereDate('hk.check_out', '>=', $cari_tanggal)
-            ->select('hk.*', 'nk.nomor_kamar')
-            ->first();
-        return view('ModalInfo',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
-    }
-
-
-
-
-
-
-
-
-
-
-    
-    
-    public function TambahModalDLX(Request $request)
-    {
-        $tipe_kamar = $request->tipe_kamar;
-        return view('TambahModalDLX',compact('tipe_kamar'));
-    }
 
 
 
@@ -402,6 +390,89 @@ class HotelController extends Controller
 
 
 
+    public function ModalDLX(Request $request)
+    {
+        $cari_tanggal = $request->tanggal;
+        $nomor_kamar  = $request->nomor_kamar;
+        $tipe_kamar   = $request->tipe_kamar;
+        $histori_kamar = DB::table('histori_kamar as hk')
+            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
+            ->where('hk.id_nomor_kamar', $nomor_kamar)
+            ->whereDate('hk.check_in', '<=', $cari_tanggal)
+            ->whereDate('hk.check_out', '>=', $cari_tanggal)
+            ->select('hk.*', 'nk.nomor_kamar')
+            ->first();
+        return view('ModalDLX',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
+    }
+
+
+
+
+
+
+
+
+
+
+    public function hapusHistoriKamar(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $histori = DB::table('histori_kamar')
+                ->where('id_histori_kamar', $request->id_histori_kamar)
+                ->first();
+
+            if (!$histori) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data histori tidak ditemukan'
+                ]);
+            }
+
+            // ✅ Ambil laporan keuangan terkait
+            $laporan = DB::table('laporan_keuangan')
+                ->where('id_laporan_keuangan', $histori->id_laporan_keuangan)
+                ->first();
+
+            // ✅ Hapus histori kamar
+            DB::table('histori_kamar')
+                ->where('id_histori_kamar', $request->id_histori_kamar)
+                ->delete();
+
+            // ✅ Jika laporan ditemukan, update jumlah kamar
+            if ($laporan) {
+
+                if ($laporan->jumlah_kamar_dipesan > 1) {
+                    // ✅ Jika sebelumnya > 1 → kurangi 1
+                    DB::table('laporan_keuangan')
+                        ->where('id_laporan_keuangan', $laporan->id_laporan_keuangan)
+                        ->update([
+                            'jumlah_kamar_dipesan' => $laporan->jumlah_kamar_dipesan - 1
+                        ]);
+                } else {
+                    // ✅ Jika tersisa 0 → hapus laporan keuangan
+                    DB::table('laporan_keuangan')
+                        ->where('id_laporan_keuangan', $laporan->id_laporan_keuangan)
+                        ->delete();
+                }
+            }
+
+            DB::commit();
+            return redirect('/')->with('success', 'Data kamar berhasil dihapus & laporan diperbarui');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/')->with('error', 'Data kamar gagal dihapus & laporan diperbarui');
+        }
+    }
+
+
+
+
+
+
+
 
 
 
@@ -412,6 +483,24 @@ class HotelController extends Controller
         $tipe_kamar = $request->tipe_kamar;
         return view('TambahModalSPR',compact('tipe_kamar'));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function store_TambahModalSPR(Request $request)
@@ -571,6 +660,41 @@ class HotelController extends Controller
 
 
 
+    public function ModalSPR(Request $request)
+    {
+        $cari_tanggal = $request->tanggal;
+        $nomor_kamar  = $request->nomor_kamar;
+        $tipe_kamar   = $request->tipe_kamar;
+        $histori_kamar = DB::table('histori_kamar as hk')
+            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
+            ->where('hk.id_nomor_kamar', $nomor_kamar)
+            ->whereDate('hk.check_in', '<=', $cari_tanggal)
+            ->whereDate('hk.check_out', '>=', $cari_tanggal)
+            ->select('hk.*', 'nk.nomor_kamar')
+            ->first();
+        return view('ModalSPR',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -584,6 +708,23 @@ class HotelController extends Controller
         $tipe_kamar = $request->tipe_kamar;
         return view('TambahModalSTD',compact('tipe_kamar'));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -722,5 +863,40 @@ class HotelController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function ModalSTD(Request $request)
+    {
+        $cari_tanggal = $request->tanggal;
+        $nomor_kamar  = $request->nomor_kamar;
+        $tipe_kamar   = $request->tipe_kamar;
+        $histori_kamar = DB::table('histori_kamar as hk')
+            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
+            ->where('hk.id_nomor_kamar', $nomor_kamar)
+            ->whereDate('hk.check_in', '<=', $cari_tanggal)
+            ->whereDate('hk.check_out', '>=', $cari_tanggal)
+            ->select('hk.*', 'nk.nomor_kamar')
+            ->first();
+        return view('ModalSTD',compact('nomor_kamar', 'tipe_kamar', 'histori_kamar'));
     }
 }

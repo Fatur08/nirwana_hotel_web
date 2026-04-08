@@ -347,7 +347,7 @@
                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-printer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
                                     </a>
                                     <a href="#"
-                                       class="TambahModalDLX btn btn-info"
+                                       class="ModalInfo btn btn-info"
                                        tipe_kamar="1">
                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-info-circle"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg>
                                     </a>
@@ -506,21 +506,6 @@
   </div>
 
 
-  <!-- Modal Informasi Kamar Deluxe (DLX) -->
-  <div class="modal fade" id="modalinfo-DLX" tabindex="-1" aria-labelledby="ModalDLXLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="ModalDLXLabel" style="font-size:16pt;">Informasi Kamar - Tipe Deluxe</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body" id="loadModalDLX">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
 
 
 
@@ -540,21 +525,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadTambahModalSPR">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Modal Informasi Kamar Superior (SPR) -->
-  <div class="modal fade" id="modalinfo-SPR" tabindex="-1" aria-labelledby="ModalSPRLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="ModalSPRLabel" style="font-size:16pt;">Informasi Kamar - Tipe Superior</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body" id="loadModalSPR">
         </div>
       </div>
     </div>
@@ -591,15 +561,44 @@
   </div>
 
 
-  <!-- Modal Informasi Kamar Standar (STD) -->
-  <div class="modal fade" id="modalinfo-STD" tabindex="-1" aria-labelledby="ModalSTDLabel" aria-hidden="true">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Modal Informasi Pemesanan -->
+  <div class="modal fade" id="modal-info" tabindex="-1" aria-labelledby="ModalInfoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-warning text-white">
-          <h5 class="modal-title" id="ModalSTDLabel" style="font-size:16pt;">Informasi Kamar - Tipe Standar</h5>
+          <h5 class="modal-title" id="ModalInfoLabel" style="font-size:16pt;">Informasi Pemesanan</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body" id="loadModalSTD">
+        <div class="modal-body" id="loadModalInfo">
         </div>
       </div>
     </div>
@@ -1037,52 +1036,6 @@ $(document).on('submit', '#frmTambahModalDLX', function(e){
 
 
 
-// BAGIAN DARI TABEL MODAL DELUXE
-$(document).on('click', '.ModalDLX', function(e){
-    e.preventDefault();
-
-    let tanggal = $(this).data('tanggal');
-    let nomor_kamar = $(this).attr('nomor_kamar');
-    let tipe = $(this).attr('tipe_kamar');
-
-    $.ajax({
-        type:'POST',
-        url:'/ModalDLX',
-        data:{
-            _token : "{{ csrf_token() }}",
-            tanggal : tanggal,
-            nomor_kamar : nomor_kamar,
-            tipe_kamar : tipe
-        },
-        success:function(respond){
-            $("#loadModalDLX").html(respond);
-            $("#modalinfo-DLX").modal("show");
-        }
-    });
-});
-
-
-$(document).on('shown.bs.modal', '#modalinfo-DLX', function () {
-    $('#list_nomor_kamar_dlx').html('');
-    window.kamar = [];
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1392,60 +1345,6 @@ $(document).on('submit', '#frmTambahModalSPR', function(e){
 
 
 
-
-
-
-
-
-// BAGIAN DARI TABEL MODAL SUPERIOR
-$(document).on('click', '.ModalSPR', function(e){
-    e.preventDefault();
-
-    let tanggal = $(this).data('tanggal');
-    let nomor_kamar = $(this).attr('nomor_kamar');
-    let tipe = $(this).attr('tipe_kamar');
-
-    $.ajax({
-        type:'POST',
-        url:'/ModalSPR',
-        data:{
-            _token : "{{ csrf_token() }}",
-            tanggal : tanggal,
-            nomor_kamar : nomor_kamar,
-            tipe_kamar : tipe
-        },
-        success:function(respond){
-            $("#loadModalSPR").html(respond);
-            $("#modalinfo-SPR").modal("show");
-        }
-    });
-});
-
-
-$(document).on('shown.bs.modal', '#modalinfo-SPR', function () {
-    $('#list_nomor_kamar_dlx').html('');
-    window.kamar = [];
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // BAGIAN DARI FORM TAMBAH MODAL STANDAR
 $(document).on('click', '.TambahModalSTD', function(e){
     e.preventDefault();
@@ -1730,124 +1629,32 @@ $(document).on('submit', '#frmTambahModalSTD', function(e){
 
 
 
-
-
-
-
-
-// BAGIAN DARI TABEL MODAL STANDAR
-$(document).on('click', '.ModalSTD', function(e){
+// BAGIAN DARI FORM TAMBAH MODAL DELUXE
+$(document).on('click', '.Modalinfo', function(e){
     e.preventDefault();
 
-    let tanggal = $(this).data('tanggal');
-    let nomor_kamar = $(this).attr('nomor_kamar');
     let tipe = $(this).attr('tipe_kamar');
 
     $.ajax({
         type:'POST',
-        url:'/ModalSTD',
+        url:'/Modalinfo',
         data:{
             _token : "{{ csrf_token() }}",
-            tanggal : tanggal,
-            nomor_kamar : nomor_kamar,
             tipe_kamar : tipe
         },
         success:function(respond){
-            $("#loadModalSTD").html(respond);
-            $("#modalinfo-STD").modal("show");
+            $("#loadModalinfo").html(respond);
+            $("#modal-info").modal("show");
+
+            // default isi dropdown
+            $('#jumlah_kamar_dipesan_dlx').html(`
+                <option style="font-size:16pt;" value="">
+                    Silakan pilih tanggal check-in
+                </option>
+            `);
         }
     });
 });
-
-
-$(document).on('shown.bs.modal', '#modalinfo-STD', function () {
-    $('#list_nomor_kamar_std').html('');
-    window.kamar = [];
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// BAGIAN DARI HAPUS DATA HISTORI KAMAR DELUXE / SUPERIOR / STANDAR
-$(document).on('click', '.btn-hapus-kamar', function() {
-    let id = $(this).data('id');
-
-    Swal.fire({
-        title: 'Yakin ingin menghapus?',
-        text: 'Data pesanan kamar ini akan dihapus permanen!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Ya, Hapus!',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-
-            $.ajax({
-                type: 'POST',
-                url: '/hapus-histori-kamar',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    id_histori_kamar: id
-                },
-                success: function(res) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: res.message,
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
-
-                    setTimeout(function () {
-                        location.reload(); // refresh role-grid
-                    }, 2000);
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Gagal!',
-                        text: 'Data gagal dihapus.'
-                    });
-                }
-            });
-
-        }
-    });
-});
-
-
-
-
-
-
 
 
 
