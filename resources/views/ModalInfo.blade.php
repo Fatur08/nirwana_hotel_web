@@ -1,28 +1,28 @@
 <table class="table table-bordered">
 
 <tr>
-    <td style="background:#f5f5f5;font-weight:bold;"><b>Nama Tamu</b></td>
+    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Nama Tamu</b></td>
 </tr>
 <tr>
-    <td>{{ $data->nama_tamu }}</td>
-</tr>
-
-<tr>
-    <td style="background:#f5f5f5;font-weight:bold;"><b>Check In</b></td>
-</tr>
-<tr>
-    <td>{{ $data->check_in }}</td>
+    <td class="text-start">{{ $data->nama_tamu }}</td>
 </tr>
 
 <tr>
-    <td style="background:#f5f5f5;font-weight:bold;"><b>Check Out</b></td>
+    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Check In</b></td>
 </tr>
 <tr>
-    <td>{{ $data->check_out }}</td>
+    <td class="text-start">{{ $data->check_in }}</td>
 </tr>
 
 <tr>
-    <td style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan</b></td>
+    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Check Out</b></td>
+</tr>
+<tr>
+    <td class="text-start">{{ $data->check_out }}</td>
+</tr>
+
+<tr>
+    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan</b></td>
 </tr>
 <tr>
     <td>
@@ -33,7 +33,7 @@
 </tr>
 
 <tr>
-    <td style="background:#f5f5f5;font-weight:bold;"><b>Foto KTP</b></td>
+    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Foto KTP</b></td>
 </tr>
 <tr>
     <td>
@@ -42,10 +42,10 @@
 </tr>
 
 <tr>
-    <td style="background:#f5f5f5;font-weight:bold;"><b>Request</b></td>
+    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Request</b></td>
 </tr>
 <tr>
-    <td>{{ $requestTambahan }}</td>
+    <td class="text-start">{{ $requestTambahan }}</td>
 </tr>
 
 </table>
