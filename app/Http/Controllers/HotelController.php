@@ -135,18 +135,31 @@ class HotelController extends Controller
             ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
                 $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
                      ->whereDate('hk.check_in', '<=', $tanggalHariIni)
-                     ->whereDate('hk.check_out', '>=', $tanggalHariIni);
+                     ->whereDate('hk.check_out', '>', $tanggalHariIni);
             })
             ->where('k.kode_kamar', 'STD')
             ->select(
                 'nk.id_nomor_kamar',
                 'nk.nomor_kamar',
+                'nk.jenis_bed',
                 'k.kode_kamar',
                 'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
             )
             ->get();
+        $kamarTersediaSTD = $kamarSTD->whereNull('histori_aktif')->count();
+        $kamarSingleSTD = $kamarSTD
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 1)
+            ->count();
 
-        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSTD', 'histori'));
+        $kamarDoubleSTD = $kamarSTD
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 2)
+            ->count();
+
+
+
+        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSTD', 'kamarSingleSTD', 'kamarDoubleSTD', 'histori'));
     }
 
 

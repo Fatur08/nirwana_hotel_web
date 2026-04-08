@@ -461,7 +461,11 @@
             <!-- KONTEN KAMAR -->
             <div class="col-md-6 col-12 text-start">
                 <h1 class="mb-1">Kamar Standar</h1>
-                <p class="mb-1">Tersedia 5 Kamar</p>
+                <p class="mb-1">
+                    Tersedia <br> 
+                    {{ $kamarSingleSTD }} Kamar Single Bed 
+                    <br>{{ $kamarDoubleSTD }} Kamar Double Bed
+                </p>
                 <p class="mb-0">
                     <span style="font-size:22px; font-weight:700; color:#8F00FF;">Rp.240.000</span> 
                     / malam
