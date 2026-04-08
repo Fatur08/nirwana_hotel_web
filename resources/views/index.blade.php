@@ -472,7 +472,7 @@
             <!-- TOMBOL -->
             <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
                 <a href="#"
-                   class="TambahModalDLX btn btn-dark px-3 py-2"
+                   class="TambahModalSTD btn btn-dark px-3 py-2"
                    style="font-size:14pt; white-space:nowrap;"
                    tipe_kamar="1">
                    Pesan Kamar
@@ -625,11 +625,11 @@ $(document).on('focus', '.flatpickr', function () {
         }
 
         // FORM MODAL
-        else if($(this).attr('id') === 'check_in_tampil_modal_dlx') {
-            $('#check_in_modal_dlx').val(tanggalDB).trigger('change');
+        else if($(this).attr('id') === 'check_in_tampil_dlx') {
+            $('#check_in_dlx').val(tanggalDB).trigger('change');
         }
-        else if($(this).attr('id') === 'check_out_tampil_modal_dlx') {
-            $('#check_out_modal_dlx').val(tanggalDB);
+        else if($(this).attr('id') === 'check_out_tampil_dlx') {
+            $('#check_out_dlx').val(tanggalDB);
         }
 
     });
@@ -663,11 +663,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if(document.getElementById("check_out_tampil"))
         document.getElementById("check_out_tampil").value = formatView;
 
-    if(document.getElementById("check_in_tampil_modal_dlx"))
-        document.getElementById("check_in_tampil_modal_dlx").value = formatView;
+    if(document.getElementById("check_in_tampil_dlx"))
+        document.getElementById("check_in_tampil_dlx").value = formatView;
 
-    if(document.getElementById("check_out_tampil_modal_dlx"))
-        document.getElementById("check_out_tampil_modal_dlx").value = formatView;
+    if(document.getElementById("check_out_tampil_dlx"))
+        document.getElementById("check_out_tampil_dlx").value = formatView;
 
 
     // INPUT DATABASE
@@ -677,11 +677,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if(document.getElementById("cari_check_out"))
         document.getElementById("cari_check_out").value = formatDB;
 
-    if(document.getElementById("check_in_modal_dlx"))
-        document.getElementById("check_in_modal_dlx").value = formatDB;
+    if(document.getElementById("check_in_dlx"))
+        document.getElementById("check_in_dlx").value = formatDB;
 
-    if(document.getElementById("check_out_modal_dlx"))
-        document.getElementById("check_out_modal_dlx").value = formatDB;
+    if(document.getElementById("check_out_dlx"))
+        document.getElementById("check_out_dlx").value = formatDB;
 
 });
 
@@ -731,7 +731,7 @@ $(document).on('click', '.TambahModalDLX', function(e){
 
 
 
-$(document).on('change', '#check_in_modal_dlx', function(){
+$(document).on('change', '#check_in_dlx', function(){
 
     let tanggal = $(this).val();
     let tipe = 1; // DLX
@@ -797,7 +797,7 @@ $(document).on('change', '#jumlah_kamar_dipesan_dlx', function(){
     let list = $('#list_nomor_kamar_dlx');
 
     let tipe = 1;
-    let tanggal = $('#check_in_modal_dlx').val();
+    let tanggal = $('#check_in_dlx').val();
 
     list.html('');
 
@@ -840,10 +840,10 @@ $(document).on('change', '#jumlah_kamar_dipesan_dlx', function(){
                 single: single,
                 double: dbl
             };
-        
-            console.log("stokBedDLX:", window.stokBedDLX);
-        
-            updateBedSelectDLX();
+
+            setTimeout(function(){
+                updateBedSelectDLX();
+            },100);
         }
     });
 
@@ -853,6 +853,8 @@ $(document).on('change', '#jumlah_kamar_dipesan_dlx', function(){
 
 function updateBedSelectDLX(){
 
+    console.log("SELECT DITEMUKAN:", $('.select-bed-dlx').length);
+    
     if(!window.stokBedDLX){
         console.log("stokBedDLX belum tersedia");
         return;
