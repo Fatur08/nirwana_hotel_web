@@ -254,7 +254,7 @@ class HotelController extends Controller
             ->select(
                 'nk.nomor_kamar',
                 'nk.jenis_bed',
-                'nk.id_nomor_kamar'
+                'nk.id_kamar'
             )
             ->where('hk.id_laporan_keuangan',$id)
             ->get();
