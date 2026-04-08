@@ -1630,7 +1630,7 @@ $(document).on('submit', '#frmTambahModalSTD', function(e){
 
 
 // BAGIAN DARI FORM TAMBAH MODAL DELUXE
-$(document).on('click', '.Modalinfo', function(e){
+$(document).on('click', '.ModalInfo', function(e){
     e.preventDefault();
 
     let tipe = $(this).attr('tipe_kamar');
