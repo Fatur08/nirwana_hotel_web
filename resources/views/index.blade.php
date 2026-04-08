@@ -594,7 +594,7 @@
   <div class="modal fade" id="modal-info" tabindex="-1" aria-labelledby="ModalInfoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-warning text-white">
+        <div class="modal-header bg-secondary text-white">
           <h5 class="modal-title" id="ModalInfoLabel" style="font-size:16pt;">Informasi Pemesanan</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>

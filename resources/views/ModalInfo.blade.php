@@ -16,6 +16,6 @@
         <td><b>Check Out</b></td>
     </tr>
 </table>
-<a href="/" class="btn btn-danger w-100 mt-3">
+<button type="button" class="btn btn-secondary w-100 mt-3" data-bs-dismiss="modal">
     Kembali
-</a>
+</button>
