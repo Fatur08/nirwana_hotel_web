@@ -641,6 +641,15 @@ $(document).on('focus', '.flatpickr', function () {
             $('#check_out_spr').val(tanggalDB);
         }
 
+
+        // FORM MODAL STD
+        else if($(this).attr('id') === 'check_in_tampil_std') {
+            $('#check_in_std').val(tanggalDB).trigger('change');
+        }
+        else if($(this).attr('id') === 'check_out_tampil_std') {
+            $('#check_out_std').val(tanggalDB);
+        }
+
     });
 
 });
@@ -684,6 +693,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if(document.getElementById("check_out_tampil_spr"))
         document.getElementById("check_out_tampil_spr").value = formatView;
 
+    if(document.getElementById("check_in_tampil_std"))
+        document.getElementById("check_in_tampil_std").value = formatView;
+
+    if(document.getElementById("check_out_tampil_std"))
+        document.getElementById("check_out_tampil_std").value = formatView;
+
 
     // INPUT DATABASE
     if(document.getElementById("cari_check_in"))
@@ -703,6 +718,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if(document.getElementById("check_out_spr"))
         document.getElementById("check_out_spr").value = formatDB;
+
+    if(document.getElementById("check_in_std"))
+        document.getElementById("check_in_std").value = formatDB;
+
+    if(document.getElementById("check_out_std"))
+        document.getElementById("check_out_std").value = formatDB;
 
 });
 
