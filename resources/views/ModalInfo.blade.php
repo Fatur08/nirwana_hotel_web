@@ -26,29 +26,40 @@
 </tr>
 
 <tr>
-    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan</b></td>
+    <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan : {{ $data->nama_tamu }} Kamar</b></td>
 </tr>
 <tr>
-    <td>
+    <td class="text-start">
         @foreach($kamar as $k)
 
             @php
                 switch($k->id_kamar){
                     case 1:
-                        $tipe = "DLX";
+                        $tipe = "Deluxe ";
                         break;
                     case 2:
-                        $tipe = "SPR";
+                        $tipe = "Superior ";
                         break;
                     case 3:
-                        $tipe = "STD";
+                        $tipe = "Standar ";
                         break;
                     default:
                         $tipe = "-";
                 }
+
+                switch($k->jenis_bed){
+                    case 1:
+                        $bed = "Single Bed";
+                        break;
+                    case 2:
+                        $bed = "Double Bed";
+                        break;
+                    default:
+                        $bed = "-";
+                }
             @endphp
 
-            {{ $tipe }}{{ $k->nomor_kamar }} - {{ $k->jenis_bed }} <br>
+            {{ $loop->iteration }}. {{ $tipe }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
 
         @endforeach
     </td>
