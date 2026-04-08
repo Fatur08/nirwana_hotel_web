@@ -624,12 +624,21 @@ $(document).on('focus', '.flatpickr', function () {
             $('#cari_check_out').val(tanggalDB);
         }
 
-        // FORM MODAL
+        // FORM MODAL DLX
         else if($(this).attr('id') === 'check_in_tampil_dlx') {
             $('#check_in_dlx').val(tanggalDB).trigger('change');
         }
         else if($(this).attr('id') === 'check_out_tampil_dlx') {
             $('#check_out_dlx').val(tanggalDB);
+        }
+
+
+        // FORM MODAL SPR
+        else if($(this).attr('id') === 'check_in_tampil_spr') {
+            $('#check_in_spr').val(tanggalDB).trigger('change');
+        }
+        else if($(this).attr('id') === 'check_out_tampil_spr') {
+            $('#check_out_spr').val(tanggalDB);
         }
 
     });
@@ -669,6 +678,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if(document.getElementById("check_out_tampil_dlx"))
         document.getElementById("check_out_tampil_dlx").value = formatView;
 
+    if(document.getElementById("check_in_tampil_spr"))
+        document.getElementById("check_in_tampil_spr").value = formatView;
+
+    if(document.getElementById("check_out_tampil_spr"))
+        document.getElementById("check_out_tampil_spr").value = formatView;
+
 
     // INPUT DATABASE
     if(document.getElementById("cari_check_in"))
@@ -682,6 +697,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if(document.getElementById("check_out_dlx"))
         document.getElementById("check_out_dlx").value = formatDB;
+
+    if(document.getElementById("check_in_spr"))
+        document.getElementById("check_in_spr").value = formatDB;
+
+    if(document.getElementById("check_out_spr"))
+        document.getElementById("check_out_spr").value = formatDB;
 
 });
 
@@ -1083,7 +1104,7 @@ $(document).on('click', '.TambahModalSPR', function(e){
 
 
 
-$(document).on('change', '#check_in', function(){
+$(document).on('change', '#check_in_spr', function(){
 
     let tanggal = $(this).val();
     let tipe = 2; // SPR
@@ -1137,27 +1158,32 @@ $(document).on('change', '#check_in', function(){
 
 // ✅ RESET SAAT MODAL DIBUKA
 $(document).on('shown.bs.modal', '#modal-SPR', function () {
+
     $('#list_nomor_kamar_spr').html('');
+
+    $('#kamar_tersedia_title_spr').hide();
+    $('#kamar_tersedia_list_spr').hide();
+
     window.kamar = [];
 });
 
 
 // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-$('body').on('change', '#jumlah_kamar_dipesan_spr', function () {
+$(document).on('change', '#jumlah_kamar_dipesan_spr', function(){
 
     let jumlah = parseInt($(this).val());
     let list = $('#list_nomor_kamar_spr');
 
     if(jumlah && jumlah > 0){
-        $('#kamar_tersedia_title').show();
-        $('#kamar_tersedia_list').show();
+        $('#kamar_tersedia_title_spr').show();
+        $('#kamar_tersedia_list_spr').show();
     }else{
-        $('#kamar_tersedia_title').hide();
-        $('#kamar_tersedia_list').hide();
+        $('#kamar_tersedia_title_spr').hide();
+        $('#kamar_tersedia_list_spr').hide();
     }
 
     let tipe = 1;
-    let tanggal = $('#check_in').val();
+    let tanggal = $('#check_in_spr').val();
 
     list.html('');
 
@@ -1189,18 +1215,21 @@ $('body').on('change', '#jumlah_kamar_dipesan_spr', function () {
         success: function (res) {
 
             console.log("DATA KAMAR:", res);
-
-            // hitung stok bed
+        
             let single = res.filter(k => k.jenis_bed == 1).length;
             let dbl = res.filter(k => k.jenis_bed == 2).length;
-
-            window.stokBed = {
+        
+            console.log("STOK SINGLE:", single);
+            console.log("STOK DOUBLE:", dbl);
+        
+            window.stokBedSPR = {
                 single: single,
                 double: dbl
             };
 
-            updateBedSelect();
-
+            setTimeout(function(){
+                updateBedSelectSPR();
+            },100);
         }
     });
 
@@ -1208,7 +1237,7 @@ $('body').on('change', '#jumlah_kamar_dipesan_spr', function () {
 
 
 
-function updateBedSelect(){
+function updateBedSelectSPR(){
 
     let usedSingle = 0;
     let usedDouble = 0;
@@ -1227,33 +1256,36 @@ function updateBedSelect(){
         let current = $(this).val();
         let select = $(this);
 
-        select.html(`<option value="">-- Pilih Jenis Bed --</option>`);
+        select.empty();
+
+        select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
 
         // Single Bed
-        if(window.stokBed.single - usedSingle > 0 || current == 1){
-            select.append(`<option value="1" ${current==1?'selected':''}>Single Bed</option>`);
+        if(window.stokBedSPR.single - usedSingle > 0 || current == 1){
+            select.append(`<option value="1">Single Bed</option>`);
         }
 
         // Double Bed
-        if(window.stokBed.double - usedDouble > 0 || current == 2){
-            select.append(`<option value="2" ${current==2?'selected':''}>Double Bed</option>`);
+        if(window.stokBedSPR.double - usedDouble > 0 || current == 2){
+            select.append(`<option value="2">Double Bed</option>`);
+        }
+
+        if(current){
+            select.val(current);
         }
 
     });
 
 }
 
-
 $(document).on('change', '.select-bed-spr', function(){
-
-    updateBedSelect();
-
+    updateBedSelectSPR();
 });
 
 
 
 // ✅ REQUEST EXTRA BED / BREAKFAST
-$(document).on('change', '#request', function(){
+$(document).on('change', '#request_spr', function(){
 
     let value = $(this).val();
     let biaya = 0;
@@ -1266,17 +1298,17 @@ $(document).on('change', '#request', function(){
     }
 
     if(value !== ''){
-        $('#biaya_container').show();
-        $('#biaya_input_container').show();
+        $('#biaya_container_spr').show();
+        $('#biaya_input_container_spr').show();
 
-        $('#biaya_request').val('Rp ' + biaya.toLocaleString('id-ID'));
-        $('#biaya_request_value').val(biaya);
+        $('#biaya_request_spr').val('Rp ' + biaya.toLocaleString('id-ID'));
+        $('#biaya_request_value_spr').val(biaya);
     } 
     else{
-        $('#biaya_container').hide();
-        $('#biaya_input_container').hide();
-        $('#biaya_request').val('');
-        $('#biaya_request_value').val('');
+        $('#biaya_container_spr').hide();
+        $('#biaya_input_container_spr').hide();
+        $('#biaya_request_spr').val('');
+        $('#biaya_request_value_spr').val('');
     }
 
 });

@@ -244,18 +244,6 @@ class HotelController extends Controller
                 $tarif_per_hari = 300000;
                 $before_10_persen = 397000;
                 $after_10_persen = 357300;
-            } elseif ($request->tipe_kamar == 2) {
-                $kode_kamar = 'SPR';
-                $tipe_kamar = 'Superior';
-                $tarif_per_hari = 280000;
-                $before_10_persen = 369000;
-                $after_10_persen = 332100;
-            } else {
-                $kode_kamar = 'STD';
-                $tipe_kamar = 'Standar';
-                $tarif_per_hari = 240000;
-                $before_10_persen = 310000;
-                $after_10_persen = 279000;
             }
     
             // ==============================
@@ -505,9 +493,9 @@ class HotelController extends Controller
     public function store_TambahModalSPR(Request $request)
     {
         DB::beginTransaction();
-
+    
         try {
-
+    
             // ==============================
             // 1. KONVERSI TIPE KAMAR
             // ==============================
@@ -530,64 +518,124 @@ class HotelController extends Controller
                 $before_10_persen = 310000;
                 $after_10_persen = 279000;
             }
-
+    
             // ==============================
             // 2. LAMA INAP
             // ==============================
-            $checkIn  = \Carbon\Carbon::parse($request->check_in);
-            $checkOut = \Carbon\Carbon::parse($request->check_out);
+            $checkIn  = \Carbon\Carbon::parse($request->check_in_spr);
+            $checkOut = \Carbon\Carbon::parse($request->check_out_spr);
             $lama_inap = $checkOut->diffInDays($checkIn);
-
+    
             // ==============================
-            // 3. HITUNG BIAYA
+            // 3. JUMLAH KAMAR
             // ==============================
-            $biaya = $request->jumlah_kamar_dipesan * $after_10_persen * $lama_inap;
+            $jumlah_kamar = $request->jumlah_kamar_dipesan_spr;
+    
+            // ==============================
+            // 4. REQUEST TAMBAHAN
+            // ==============================
+            $biaya_request = $request->input('biaya_request_spr', 0);
+    
+            // ==============================
+            // 5. HITUNG BIAYA
+            // ==============================
+            $biaya = $jumlah_kamar * $after_10_persen * $lama_inap;
+    
             $pajak = $biaya * 0.19;
-            $biaya_tambahan = $request->biaya_tambahan ?? 0;
+    
+            $total_diterima = ($biaya - $pajak) + $biaya_request;
 
-            $total_diterima = ($biaya - $pajak) + $biaya_tambahan;
 
+
+
+            /* ===============================
+               UPLOAD FOTO KTP
+            ================================*/
+            $foto_ktp_spr = null;
+
+
+            if ($request->hasFile('foto_ktp_spr')) {
+                $foto_ktp_spr = "Foto KTP_".$request->nama_tamu_spr.".".$request
+                    ->file('foto_ktp_spr')
+                    ->getClientOriginalExtension();
+                $storagePath = 'public/uploads/foto_ktp/';
+                $request->file('foto_ktp_spr')->storeAs($storagePath, $foto_ktp_spr);
+                $publicPath = public_path('storage/uploads/foto_ktp/');
+                if (!is_dir($publicPath)) {
+                    mkdir($publicPath, 0777, true);
+                }
+                $sourceFile = storage_path('app/' . $storagePath . $foto_ktp_spr);
+                $destinationFile = public_path('storage/uploads/foto_ktp/' . $foto_ktp_spr);
+                copy($sourceFile, $destinationFile);
+            }
+            
+            
             // ==============================
-            // 4. INSERT LAPORAN KEUANGAN
+            // 6. INSERT LAPORAN KEUANGAN
             // ==============================
             $id_laporan = DB::table('laporan_keuangan')->insertGetId([
                 'kode_kamar' => $kode_kamar,
-                'nama_tamu' => $request->nama_tamu,
+                'nama_tamu' => $request->nama_tamu_spr,
                 'tipe_kamar' => $tipe_kamar,
-                'jumlah_kamar_dipesan' => $request->jumlah_kamar_dipesan,
+                'jumlah_kamar_dipesan' => $jumlah_kamar,
                 'tarif_per_hari' => $tarif_per_hari,
                 'before_10_persen' => $before_10_persen,
                 'after_10_persen' => $after_10_persen,
-                'check_in' => $request->check_in,
-                'check_out' => $request->check_out,
+                'check_in' => $request->check_in_spr,
+                'check_out' => $request->check_out_spr,
                 'lama_inap' => $lama_inap,
                 'biaya' => $biaya,
-                'biaya_tambahan' => $biaya_tambahan,
+                'biaya_tambahan' => $biaya_request,
                 'pajak' => $pajak,
                 'total_diterima' => $total_diterima,
+                'foto_ktp' => $foto_ktp_spr
             ]);
+    
+            // ==============================
+            // 7. INSERT HISTORI KAMAR
+            // ==============================
+            foreach ($request->jenis_bed as $bed) {
 
-            // ==============================
-            // 5. INSERT HISTORI KAMAR
-            // ==============================
-            foreach ($request->nomor_kamar as $idNomorKamar) {
+                $kamar = DB::table('nomor_kamar as nk')
+                    ->where('nk.id_kamar', $request->tipe_kamar) // filter tipe kamar
+                    ->where('nk.jenis_bed', $bed) // filter jenis bed
+                    ->whereNotIn('nk.id_nomor_kamar', function($q) use ($request){
+                        $q->select('id_nomor_kamar')
+                          ->from('histori_kamar')
+                          ->whereDate('check_in','<=',$request->check_out_spr)
+                          ->whereDate('check_out','>=',$request->check_in_spr);
+                    })
+                    ->orderBy('nk.id_nomor_kamar') // supaya konsisten ambil kamar pertama
+                    ->first();
+
+                if(!$kamar){
+                    throw new \Exception('Kamar dengan tipe dan bed tersebut tidak tersedia');
+                }
+
                 DB::table('histori_kamar')->insert([
                     'id_laporan_keuangan' => $id_laporan,
-                    'id_nomor_kamar' => $idNomorKamar, // sudah integer
-                    'nama_tamu' => $request->nama_tamu,
-                    'nomor_ktp_tamu' => $request->nomor_ktp_tamu,
-                    'check_in' => $request->check_in,
-                    'check_out' => $request->check_out,
+                    'id_nomor_kamar' => $kamar->id_nomor_kamar,
+                    'nama_tamu' => $request->nama_tamu_spr,
+                    'check_in' => $request->check_in_spr,
+                    'check_out' => $request->check_out_spr,
                 ]);
+
             }
-
+    
             DB::commit();
-
-            return redirect('/')->with('success', 'Data berhasil disimpan!');
-
+    
+            return response()->json([
+                'status' => 'success'
+            ]);
+    
         } catch (\Exception $e) {
+    
             DB::rollBack();
-            return redirect('/')->with('error', 'Data gagal disimpan!');
+    
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
         }
     }
 
