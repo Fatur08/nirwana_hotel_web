@@ -294,7 +294,7 @@ class HotelController extends Controller
 
 
             if ($request->hasFile('foto_ktp_dlx')) {
-                $foto_ktp_dlx = "Foto KTP_".$request->nama_tamu.".".$request
+                $foto_ktp_dlx = "Foto KTP_".$request->nama_tamu_dlx.".".$request
                     ->file('foto_ktp_dlx')
                     ->getClientOriginalExtension();
                 $storagePath = 'public/uploads/foto_ktp/';
@@ -314,7 +314,7 @@ class HotelController extends Controller
             // ==============================
             $id_laporan = DB::table('laporan_keuangan')->insertGetId([
                 'kode_kamar' => $kode_kamar,
-                'nama_tamu' => $request->nama_tamu,
+                'nama_tamu' => $request->nama_tamu_dlx,
                 'tipe_kamar' => $tipe_kamar,
                 'jumlah_kamar_dipesan' => $jumlah_kamar,
                 'tarif_per_hari' => $tarif_per_hari,
@@ -354,7 +354,7 @@ class HotelController extends Controller
                 DB::table('histori_kamar')->insert([
                     'id_laporan_keuangan' => $id_laporan,
                     'id_nomor_kamar' => $kamar->id_nomor_kamar,
-                    'nama_tamu' => $request->nama_tamu,
+                    'nama_tamu' => $request->nama_tamu_dlx,
                     'check_in' => $request->check_in_dlx,
                     'check_out' => $request->check_out_dlx,
                 ]);
