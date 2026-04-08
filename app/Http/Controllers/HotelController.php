@@ -37,7 +37,12 @@ class HotelController extends Controller
             )
             ->whereDate('hk.check_in','<=',$cari_check_out)
             ->whereDate('hk.check_out','>=',$cari_check_in)
-            ->groupBy('hk.nama_tamu','hk.check_in','hk.check_out')
+            ->groupBy(
+                'hk.nama_tamu',
+                'hk.id_laporan_keuangan',
+                'hk.check_in',
+                'hk.check_out'
+            )
             ->orderBy('hk.check_in','desc')
             ->get();
 
