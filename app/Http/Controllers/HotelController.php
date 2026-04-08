@@ -338,9 +338,9 @@ class HotelController extends Controller
 
 
             if ($request->hasFile('foto_ktp_dlx')) {
-                $foto_ktp_dlx = "Foto KTP_".$request->nama_tamu_dlx.".".$request
-                    ->file('foto_ktp_dlx')
-                    ->getClientOriginalExtension();
+                $timestamp = now()->format('Y-m-d_H-i-s');
+                $nama = str_replace(' ', '_', $request->nama_tamu_dlx);
+                $foto_ktp_dlx = "Foto_KTP_" . $nama . "_" . $timestamp . "." . $request->file('foto_ktp_dlx')->extension();
                 $storagePath = 'public/uploads/foto_ktp/';
                 $request->file('foto_ktp_dlx')->storeAs($storagePath, $foto_ktp_dlx);
                 $publicPath = public_path('storage/uploads/foto_ktp/');
