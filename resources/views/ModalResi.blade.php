@@ -1,7 +1,10 @@
-<div class="modal-body">
-    <div id="area-print">
-        TEST PRINT
-    </div>
+<div id="area-print">
+
+    <h4>HOTEL NIRWANA</h4>
+    <hr>
+
+    TEST PRINT
+
 </div>
 
 

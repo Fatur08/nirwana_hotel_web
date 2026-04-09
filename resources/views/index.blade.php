@@ -1749,17 +1749,42 @@
 
         function printResi() {
 
-            let printContents = document.getElementById('area-print').innerHTML;
-            let originalContents = document.body.innerHTML;
+            var isi = document.getElementById("area-print").innerHTML;
 
-            document.body.innerHTML = printContents;
+            var frame = document.createElement('iframe');
+            frame.style.position = "absolute";
+            frame.style.top = "-1000000px";
 
-            window.print();
+            document.body.appendChild(frame);
 
-            document.body.innerHTML = originalContents;
+            var frameDoc = frame.contentWindow.document;
 
-            location.reload();
+            frameDoc.open();
+            frameDoc.write(`
+        <html>
+        <head>
+            <title>Print Resi</title>
+            <style>
+                body{
+                    font-family: Arial;
+                    font-size:14px;
+                    padding:20px;
+                }
+            </style>
+        </head>
+        <body>
+            ${isi}
+        </body>
+        </html>
+    `);
+            frameDoc.close();
 
+            frame.contentWindow.focus();
+            frame.contentWindow.print();
+
+            setTimeout(function() {
+                document.body.removeChild(frame);
+            }, 1000);
         }
 
 
