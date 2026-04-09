@@ -13,6 +13,9 @@ Route::get('/', [HotelController::class,'index']);
 Route::post('/ModalInfo', [HotelController::class,'ModalInfo']);
 
 
+Route::post('/ModalResi', [HotelController::class,'ModalResi']);
+
+
 Route::post('/TambahModalDLX', [HotelController::class,'TambahModalDLX']);
 
 
