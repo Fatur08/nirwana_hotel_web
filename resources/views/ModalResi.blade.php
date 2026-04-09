@@ -1,5 +1,5 @@
 <div id="area-print">
-
+    <b>{{ $id }}</b>
     <h4>HOTEL NIRWANA</h4>
     <hr>
 
