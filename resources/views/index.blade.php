@@ -226,18 +226,18 @@
     @media print {
 
         body * {
-            display: none;
+            visibility: hidden;
         }
 
         #area-print,
         #area-print * {
-            display: block;
+            visibility: visible;
         }
 
         #area-print {
             position: absolute;
-            top: 0;
             left: 0;
+            top: 0;
             width: 100%;
         }
 

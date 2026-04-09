@@ -1,5 +1,7 @@
-<div id="area-print">
-    TEST PRINT
+<div class="modal-body">
+    <div id="area-print">
+        TEST PRINT
+    </div>
 </div>
 
 
