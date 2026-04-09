@@ -273,6 +273,21 @@ class HotelController extends Controller
 
 
 
+    public function ModalResi(Request $request)
+    {
+        $id = $request->id_laporan_keuangan;
+        return view('ModalResi',[
+            'id' => $id
+        ]);
+    }
+
+
+
+
+
+
+
+
 
 
     

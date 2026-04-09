@@ -342,8 +342,8 @@
                             <td class="text-center">
                                 <div class="d-flex justify-content-center gap-2">
                                     <a href="#"
-                                       class="TambahModalDLX btn btn-success"
-                                       tipe_kamar="1">
+                                       class="ModalResi btn btn-success"
+                                       id_laporan_keuangan="{{ $row->id_laporan_keuangan }}">
                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-printer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
                                     </a>
                                     <a href="#"
@@ -599,6 +599,25 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" id="loadModalInfo">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- Modal Resi -->
+  <div class="modal fade" id="modal-resi" tabindex="-1" aria-labelledby="ModalResiLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="ModalResiLabel" style="font-size:16pt;">Resi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="loadModalResi">
         </div>
       </div>
     </div>
@@ -1645,6 +1664,39 @@ $(document).on('click', '.ModalInfo', function(e){
         success:function(respond){
             $("#loadModalInfo").html(respond);
             $("#modal-info").modal("show");
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BAGIAN DARI MODAL RESI
+$(document).on('click', '.ModalResi', function(e){
+    e.preventDefault();
+
+    let id = $(this).attr('id_laporan_keuangan');
+
+    $.ajax({
+        type:'POST',
+        url:'/ModalResi',
+        data:{
+            _token : "{{ csrf_token() }}",
+            id_laporan_keuangan : id
+        },
+        success:function(respond){
+            $("#loadModalResi").html(respond);
+            $("#modal-resi").modal("show");
         }
     });
 });
