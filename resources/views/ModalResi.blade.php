@@ -6,6 +6,6 @@
 
 </table>
 
-<button type="button" class="btn btn-secondary w-100 mt-3" data-bs-dismiss="modal">
+<button type="button" class="btn btn-success w-100 mt-3" data-bs-dismiss="modal">
     Tutup
 </button>
