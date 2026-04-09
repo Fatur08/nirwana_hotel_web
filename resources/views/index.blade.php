@@ -203,6 +203,30 @@
 .btn-validasi:hover {
     background-color: #0ea5e9;
 }
+
+
+
+
+/* ================= PRINT RESI ================= */
+
+@media print {
+
+body * {
+    visibility: hidden;
+}
+
+#area-print, #area-print * {
+    visibility: visible;
+}
+
+#area-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+}
 </style>
 <div class="body" style="margin-top: 10px;">
   <div class="login-container">
@@ -1700,6 +1724,17 @@ $(document).on('click', '.ModalResi', function(e){
         }
     });
 });
+
+
+
+
+
+
+
+
+function printResi() {
+    window.print();
+}
 
 
 
