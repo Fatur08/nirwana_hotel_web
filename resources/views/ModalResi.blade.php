@@ -16,15 +16,20 @@
             </tr>
             <tr>
                 <td>
-                    Jl. Kolonel Makmun Rasyid
+                    Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
                 </td>
-                <td colspan="2">
-                    Dipesan
+                <td colspan="3">
+                    Dipesan Pada 09 April 2026
                 </td>
             </tr>
             <tr>
                 <td>
-                    0851
+                    Kabupaten Lampung Selatan, Lampung 35551
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    0851 5609 1313
                 </td>
             </tr>
         </tbody>
