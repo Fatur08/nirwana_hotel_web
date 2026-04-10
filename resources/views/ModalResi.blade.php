@@ -5,22 +5,20 @@
                 <td>
                     Bukti Pembayaran
                 </td>
+            </tr>
+            <tr>
                 <td>
                     Nirwana Hotel Kalianda
                 </td>
+            </tr>
+            <tr>
                 <td>
                     Jl. Kolonel Makmun Rasyid
                 </td>
-                <td>
-                    0851
-                </td>
             </tr>
             <tr>
-                <td rowspan="2">
-                    Logo
-                </td>
-                <td rowspan="2">
-                    Dipesan
+                <td>
+                    0851
                 </td>
             </tr>
         </tbody>
