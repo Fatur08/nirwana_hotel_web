@@ -1,37 +1,48 @@
 <div id="area-print">
-    <table class="border">
+    <table style="width:100%; border-collapse:collapse;">
         <tbody>
+
             <tr>
-                <td>
+                <td style="width:70%; font-size:28px; font-weight:bold;">
                     Bukti Pembayaran
                 </td>
-                <td colspan="2">
-                    Logo
+
+                <td style="width:30%; text-align:right;">
+                    <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:60px;">
                 </td>
             </tr>
+
             <tr>
-                <td>
-                    Nirwana Hotel Kalianda
+                <td style="font-size:22px; font-weight:bold;">
+                    Nirwana Hotel Kalianda ★
+                </td>
+
+                <td style="text-align:right; font-weight:bold;">
+                    Dipesan Pada 09 April 2026
                 </td>
             </tr>
+
             <tr>
                 <td>
                     Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
                 </td>
-                <td colspan="3">
-                    Dipesan Pada 09 April 2026
-                </td>
+                <td></td>
             </tr>
+
             <tr>
                 <td>
                     Kabupaten Lampung Selatan, Lampung 35551
                 </td>
+                <td></td>
             </tr>
+
             <tr>
                 <td>
                     0851 5609 1313
                 </td>
+                <td></td>
             </tr>
+
         </tbody>
     </table>
 
