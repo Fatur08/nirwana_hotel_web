@@ -5,6 +5,9 @@
                 <td>
                     Bukti Pembayaran
                 </td>
+                <td colspan="2">
+                    Logo
+                </td>
             </tr>
             <tr>
                 <td>
@@ -14,6 +17,9 @@
             <tr>
                 <td>
                     Jl. Kolonel Makmun Rasyid
+                </td>
+                <td colspan="2">
+                    Dipesan
                 </td>
             </tr>
             <tr>
