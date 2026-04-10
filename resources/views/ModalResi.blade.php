@@ -1,5 +1,5 @@
 <div id="area-print">
-    <table>
+    <table class="border">
         <tbody>
             <tr>
                 <td>
