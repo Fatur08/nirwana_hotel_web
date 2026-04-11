@@ -1,5 +1,5 @@
 <div id="area-print">
-    <table style="width:100%; border-collapse:collapse;">
+    <table class="table table-bordered" style="width:100%; border-collapse:collapse;">
         <tbody>
 
             <tr>
