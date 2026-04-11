@@ -193,6 +193,15 @@
 
 
 
+    /* KHUSUS MODAL RESI */
+    #modal-resi .modal-dialog {
+        max-width: 10.5cm;
+        width: 100%;
+        margin: 1.75rem auto;
+    }
+
+
+
     /* ================= PRINT RESI ================= */
 
     @media print {
