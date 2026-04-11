@@ -7,7 +7,7 @@
                     Bukti Pembayaran
                 </td>
 
-                <td colspan="2" style="text-align:right;">
+                <td rowspan="2" style="text-align:right;">
                     <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:60px;">
                 </td>
             </tr>
@@ -23,7 +23,7 @@
                 <td style="font-size:16px; text-align:left;">
                     Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
                 </td>
-                <td colspan="2" style="font-size:16px; text-align:right; font-weight:bold;">
+                <td rowspan="2" style="font-size:16px; text-align:right; font-weight:bold;">
                     Dipesan Pada 09 April 2026
                 </td>
             </tr>
