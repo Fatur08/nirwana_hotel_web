@@ -8,7 +8,7 @@
                 </td>
 
                 <td rowspan="2" style="text-align:right;">
-                    <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:60px;">
+                    <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:100px;">
                 </td>
             </tr>
 
@@ -46,12 +46,8 @@
 
 
 
-    <br><br><br><br>
+    <br><br>
     <b>{{ $id }}</b>
-    <h4>HOTEL NIRWANA</h4>
-    <hr>
-
-    TEST PRINT
 
 </div>
 
