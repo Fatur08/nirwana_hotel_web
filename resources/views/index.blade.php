@@ -193,6 +193,20 @@
 
 
 
+
+    .table-garis {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .table-garis th,
+    .table-garis td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+
+
     /* ================= PRINT RESI ================= */
 
     @media print {
