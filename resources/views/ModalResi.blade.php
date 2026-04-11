@@ -3,17 +3,17 @@
         <tbody>
 
             <tr>
-                <td style="width:70%; font-size:28px; font-weight:bold;">
+                <td style="font-size:14px; font-weight:bold;">
                     Bukti Pembayaran
                 </td>
 
-                <td style="width:30%; text-align:right;">
+                <td style="text-align:right;">
                     <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:60px;">
                 </td>
             </tr>
 
             <tr>
-                <td style="font-size:22px; font-weight:bold;">
+                <td style="font-size:12px; font-weight:bold;">
                     Nirwana Hotel Kalianda ★
                 </td>
 
