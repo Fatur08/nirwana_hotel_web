@@ -220,6 +220,10 @@
     /* Biar modal tidak kepotong */
     .modal-content {
         height: auto;
+    }
+
+
+    .modal-body {
         background: #f0f0f0;
     }
 
