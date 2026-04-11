@@ -204,6 +204,23 @@
         background: white;
         box-sizing: border-box;
         overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+
+
+    .modal-resi {
+        max-width: 10.5cm;
+        width: 100%;
+        margin: auto;
+    }
+
+
+
+    /* Biar modal tidak kepotong */
+    .modal-content {
+        height: auto;
+        background: #f0f0f0;
     }
 
 
@@ -660,7 +677,7 @@
 
         <!-- Modal Resi -->
         <div class="modal fade" id="modal-resi" tabindex="-1" aria-labelledby="ModalResiLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-resi">
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
                         <h5 class="modal-title" id="ModalResiLabel" style="font-size:16pt;">Resi</h5>
