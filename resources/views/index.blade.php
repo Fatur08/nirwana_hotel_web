@@ -191,39 +191,36 @@
         max-width: 1600px;
     }
 
-    /* === Buttons === */
-    .btn-status {
-        font-size: 13px;
-        padding: 4px 14px;
-        border-radius: 20px;
-        font-weight: 600;
-        border: none;
-        color: #fff;
+
+
+    /* ================= RESI A6 ================= */
+
+    #area-print {
+        width: 10.5cm;
+        min-height: 14.8cm;
+        /* pakai min-height biar tidak kepotong */
+        margin: auto;
+        padding: 10px;
+        background: white;
+        box-sizing: border-box;
+        overflow: hidden;
     }
-
-    .btn-menunggu {
-        background-color: #facc15;
-        color: #111827;
-    }
-
-    .btn-validasi {
-        background-color: #38bdf8;
-    }
-
-    .btn-menunggu:hover {
-        background-color: #eab308;
-    }
-
-    .btn-validasi:hover {
-        background-color: #0ea5e9;
-    }
-
-
 
 
     /* ================= PRINT RESI ================= */
 
     @media print {
+
+        @page {
+            size: 10.5cm 14.8cm;
+            margin: 0;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
         body * {
             visibility: hidden;
@@ -236,9 +233,12 @@
 
         #area-print {
             position: absolute;
-            left: 0;
+            left: 50%;
             top: 0;
-            width: 100%;
+            transform: translateX(-50%);
+            /* biar center */
+            width: 10.5cm;
+            min-height: 14.8cm;
         }
 
     }

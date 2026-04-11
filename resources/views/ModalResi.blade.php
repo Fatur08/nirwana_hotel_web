@@ -49,7 +49,7 @@
 
 
 
-
+    <br><br><br><br>
     <b>{{ $id }}</b>
     <h4>HOTEL NIRWANA</h4>
     <hr>
