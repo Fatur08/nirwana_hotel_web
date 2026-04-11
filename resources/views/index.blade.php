@@ -195,9 +195,25 @@
 
     /* KHUSUS MODAL RESI */
     #modal-resi .modal-dialog {
-        max-width: 10.5cm;
-        width: 100%;
+        width: 10.5cm !important;
+        max-width: 10.5cm !important;
         margin: 1.75rem auto;
+    }
+
+
+
+
+    #modal-resi .modal-content {
+        height: 14.8cm;
+    }
+
+
+
+
+    #modal-resi .modal-body {
+        height: calc(14.8cm - 60px);
+        /* dikurangi header */
+        overflow-y: auto;
     }
 
 
