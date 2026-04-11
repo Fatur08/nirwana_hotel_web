@@ -194,9 +194,6 @@
 
 
     /* ================= RESI A6 ================= */
-    .modal-open {
-        padding: 0 !important;
-    }
 
     #area-print {
         width: 10.5cm;
@@ -209,12 +206,6 @@
         overflow: hidden;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         border-radius: 5px;
-    }
-
-
-
-    #modal-resi {
-        padding: 0 !important;
     }
 
 
