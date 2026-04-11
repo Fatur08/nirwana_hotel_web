@@ -41,6 +41,14 @@
             </tr>
 
             <tr>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td></td>
+            </tr>
+
+            <tr>
                 <td>Detail Pemesanan</td>
             </tr>
 
