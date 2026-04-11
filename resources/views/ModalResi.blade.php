@@ -40,6 +40,10 @@
                 </td>
             </tr>
 
+            <tr>
+                <td>Detail Pemesanan</td>
+            </tr>
+
         </tbody>
     </table>
 
