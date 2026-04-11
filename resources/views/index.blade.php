@@ -193,38 +193,6 @@
 
 
 
-    /* ================= RESI A6 ================= */
-    #area-print {
-        width: 10.5cm;
-        min-height: 14.8cm;
-        margin: 0 auto;
-        padding: 10px;
-        background: white;
-        box-sizing: border-box;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-    }
-
-    /* MODAL SIZE */
-    .modal-resi {
-        max-width: 10.5cm;
-    }
-
-    /* KHUSUS MODAL RESI */
-    #modal-resi .modal-body {
-        background: #f0f0f0;
-        display: flex;
-        justify-content: center;
-        padding: 15px;
-    }
-
-    /* BIAR RAPI */
-    #modal-resi .modal-content {
-        border-radius: 10px;
-    }
-
-
-
     /* ================= PRINT RESI ================= */
 
     @media print {
