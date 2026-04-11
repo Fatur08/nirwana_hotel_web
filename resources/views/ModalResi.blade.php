@@ -17,6 +17,12 @@
                     Nirwana Hotel Kalianda ★
                 </td>
 
+            </tr>
+
+            <tr>
+                <td style="font-size:16px; text-align:left;">
+                    Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
+                </td>
                 <td colspan="2" style="font-size:16px; text-align:right; font-weight:bold;">
                     Dipesan Pada 09 April 2026
                 </td>
@@ -24,23 +30,14 @@
 
             <tr>
                 <td style="font-size:16px; text-align:left;">
-                    Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
-                </td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <td style="font-size:16px; text-align:left;">
                     Kabupaten Lampung Selatan, Lampung 35551
                 </td>
-                <td></td>
             </tr>
 
             <tr>
                 <td style="font-size:16px; text-align:left;">
                     0851 5609 1313
                 </td>
-                <td></td>
             </tr>
 
         </tbody>
