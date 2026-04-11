@@ -3,7 +3,7 @@
         <tbody>
 
             <tr>
-                <td style="font-size:22px; font-weight:bold;">
+                <td style="font-size:22px; font-weight:bold; text-align:left;">
                     Bukti Pembayaran
                 </td>
 
@@ -13,7 +13,7 @@
             </tr>
 
             <tr>
-                <td style="font-size:20px; font-weight:bold;">
+                <td style="font-size:20px; font-weight:bold; text-align:left;">
                     Nirwana Hotel Kalianda ★
                 </td>
 
