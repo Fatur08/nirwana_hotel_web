@@ -3,7 +3,7 @@
         <tbody>
 
             <tr>
-                <td style="font-size:14px; font-weight:bold;">
+                <td style="font-size:18px; font-weight:bold;">
                     Bukti Pembayaran
                 </td>
 
@@ -13,31 +13,31 @@
             </tr>
 
             <tr>
-                <td style="font-size:12px; font-weight:bold;">
+                <td style="font-size:16px; font-weight:bold;">
                     Nirwana Hotel Kalianda ★
                 </td>
 
-                <td style="text-align:right; font-weight:bold;">
+                <td style="font-size:16px; text-align:right; font-weight:bold;">
                     Dipesan Pada 09 April 2026
                 </td>
             </tr>
 
             <tr>
-                <td>
+                <td style="font-size:16px;">
                     Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
                 </td>
                 <td></td>
             </tr>
 
             <tr>
-                <td>
+                <td style="font-size:16px;">
                     Kabupaten Lampung Selatan, Lampung 35551
                 </td>
                 <td></td>
             </tr>
 
             <tr>
-                <td>
+                <td style="font-size:16px;">
                     0851 5609 1313
                 </td>
                 <td></td>
