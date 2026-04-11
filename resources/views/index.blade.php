@@ -193,44 +193,13 @@
 
 
 
-    /* KHUSUS MODAL RESI */
-    #modal-resi .modal-dialog {
-        width: 10.5cm !important;
-        max-width: 10.5cm !important;
-        margin: 1.75rem auto;
-    }
-
-
-
-
-    #modal-resi .modal-content {
-        height: 14.8cm;
-    }
-
-
-
-
-    #modal-resi .modal-body {
-        height: calc(14.8cm - 60px);
-        /* dikurangi header */
-        overflow-y: auto;
-    }
-
-
-
     /* ================= PRINT RESI ================= */
 
     @media print {
 
         @page {
-            size: 10.5cm 14.8cm;
+            size: A6;
             margin: 0;
-        }
-
-        html,
-        body {
-            margin: 0;
-            padding: 0;
         }
 
         body * {
@@ -244,12 +213,12 @@
 
         #area-print {
             position: absolute;
-            left: 50%;
             top: 0;
-            transform: translateX(-50%);
-            /* biar center */
+            left: 0;
             width: 10.5cm;
-            min-height: 14.8cm;
+            height: 14.8cm;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
     }
@@ -671,7 +640,7 @@
 
         <!-- Modal Resi -->
         <div class="modal fade" id="modal-resi" tabindex="-1" aria-labelledby="ModalResiLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-resi">
+            <div class="modal-dialog modal-dialog-centered" style="max-width:800px;">
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
                         <h5 class="modal-title" id="ModalResiLabel" style="font-size:16pt;">Resi</h5>
