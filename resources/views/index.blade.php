@@ -194,58 +194,33 @@
 
 
     /* ================= RESI A6 ================= */
-
     #area-print {
         width: 10.5cm;
         min-height: 14.8cm;
         margin: 0 auto;
-        /* ini penting */
         padding: 10px;
         background: white;
         box-sizing: border-box;
-        overflow: hidden;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         border-radius: 5px;
     }
 
-
-
+    /* MODAL SIZE */
     .modal-resi {
         max-width: 10.5cm;
-        width: 100%;
     }
 
-
-
+    /* KHUSUS MODAL RESI */
     #modal-resi .modal-body {
         background: #f0f0f0;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
-        /* atau center kalau mau tengah */
+        padding: 15px;
     }
 
-
-
-
+    /* BIAR RAPI */
     #modal-resi .modal-content {
         border-radius: 10px;
-        overflow: hidden;
-    }
-
-
-
-    /* Biar modal tidak kepotong */
-    .modal-content {
-        height: auto;
-    }
-
-
-
-
-
-    #modal-resi .modal-dialog {
-        margin: 1.75rem auto;
     }
 
 
