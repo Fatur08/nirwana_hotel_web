@@ -8,7 +8,7 @@
                 </td>
 
                 <td rowspan="2" style="text-align:right;">
-                    <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:10o0px;">
+                    <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:150px;">
                 </td>
             </tr>
 
