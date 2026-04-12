@@ -55,7 +55,7 @@
 
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-start">
                 <table class="table-garis">
                     <tbody>
                         <tr>
