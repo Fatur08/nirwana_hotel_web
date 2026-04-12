@@ -41,11 +41,11 @@
             </tr>
 
             <tr>
-                <td style="font-size:26px; font-weight:bold; text-align:left;">.</td>
+                <td style="font-size:5px; font-weight:bold; text-align:left;">.</td>
             </tr>
 
             <tr>
-                <td style="font-size:26px; font-weight:bold; text-align:left;">.</td>
+                <td style="font-size:5px; font-weight:bold; text-align:left;">.</td>
             </tr>
 
             <tr>
