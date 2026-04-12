@@ -100,7 +100,11 @@
                         </tr>
                         <tr>
                             <td>1. Deluxe 1 - Single Bed</td>
+                        </tr>
+                        <tr>
                             <td>2. Deluxe 2 - Single Bed</td>
+                        </tr>
+                        <tr>
                             <td>3. Deluxe 4 - Double Bed</td>
                         </tr>
                         <tr>
