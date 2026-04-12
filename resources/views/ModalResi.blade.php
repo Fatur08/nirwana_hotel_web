@@ -13,7 +13,7 @@
             </div>
 
             <div class="col-4 text-end">
-                <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:100px;">
+                <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:150px;">
             </div>
         </div>
 
