@@ -84,9 +84,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
                             <th>
-                                Jumlah Kamar
+                                <br>Jumlah Kamar
                             </th>
                         </tr>
                         <tr>
@@ -95,9 +94,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
                             <th>
-                                Nomor Kamar
+                                <br>Nomor Kamar
                             </th>
                         </tr>
                         <tr>
