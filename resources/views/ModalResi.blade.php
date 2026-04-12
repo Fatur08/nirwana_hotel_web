@@ -2,8 +2,8 @@
     <div class="container-fluid">
 
         <!-- Judul + Logo -->
-        <div class="row">
-            <div class="col-8">
+        <div class="row g-0">
+            <div class="col-8 ps-0">
                 <div style="font-size:26px; font-weight:bold;">
                     Bukti Pembayaran
                 </div>
