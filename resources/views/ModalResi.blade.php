@@ -68,6 +68,47 @@
                                 Tanggal Check In dan Check Out
                             </th>
                         </tr>
+                        <tr>
+                            <td>
+                                Kamis, 09 April 2026
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Jum'at, 10 April 2026
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ( 1 Malam )
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Jumlah Kamar
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                3 Kamar
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Nomor Kamar
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>1. Deluxe 1 - Single Bed</td>
+                            <td>2. Deluxe 2 - Single Bed</td>
+                            <td>3. Deluxe 4 - Double Bed</td>
+                        </tr>
+                        <tr>
+                            <th>Permintaan ( Request )</th>
+                        </tr>
+                        <tr>
+                            <th>Breakfast</th>
+                        </tr>
                     </tbody>
                 </table>
             </div>
