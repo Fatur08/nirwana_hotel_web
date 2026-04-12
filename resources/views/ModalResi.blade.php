@@ -19,7 +19,7 @@
 
         <!-- Alamat + Tanggal -->
         <div class="row mt-2">
-            <div class="col-7" style="font-size:16px;">
+            <div class="col-7 text-start" style="font-size:16px;">
                 Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
             </div>
 
@@ -30,14 +30,14 @@
 
         <!-- Alamat lanjut -->
         <div class="row">
-            <div class="col-12" style="font-size:16px;">
+            <div class="col-12 text-start" style="font-size:16px;">
                 Kabupaten Lampung Selatan, Lampung 35551
             </div>
         </div>
 
         <!-- Telepon -->
         <div class="row">
-            <div class="col-12" style="font-size:16px;">
+            <div class="col-12 text-start" style="font-size:16px;">
                 0851 5609 1313
             </div>
         </div>
