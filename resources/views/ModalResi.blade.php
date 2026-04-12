@@ -4,7 +4,7 @@
         <!-- Judul + Logo -->
         <div class="row">
             <div class="col-8 text-start">
-                <div style="font-size:26px; font-weight:bold;" class="mt-4 mb-5">
+                <div style="font-size:28px; font-weight:bold;" class="mt-4 mb-5">
                     Bukti Pembayaran
                 </div>
                 <div style="font-size:20px; font-weight:bold;">
@@ -50,6 +50,26 @@
         <div class="row">
             <div class="col-12 text-start" style="font-size:26px; font-weight:bold;">
                 Detail Pemesanan
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <table class="tabel-garis">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Kamar Deluxe
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tanggal Check In dan Check Out
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
