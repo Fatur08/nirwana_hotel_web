@@ -108,7 +108,7 @@
                             <td>3. Deluxe 4 - Double Bed</td>
                         </tr>
                         <tr>
-                            <th>Permintaan ( Request )</th>
+                            <th><br>Permintaan ( Request )</th>
                         </tr>
                         <tr>
                             <th>Breakfast</th>
