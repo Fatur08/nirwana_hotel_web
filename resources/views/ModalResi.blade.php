@@ -4,7 +4,7 @@
         <!-- Judul + Logo -->
         <div class="row">
             <div class="col-8 text-start">
-                <div style="font-size:26px; font-weight:bold;" class="mb-4">
+                <div style="font-size:26px; font-weight:bold;" class="mt-2 mb-4">
                     Bukti Pembayaran
                 </div>
                 <div style="font-size:20px; font-weight:bold;">
