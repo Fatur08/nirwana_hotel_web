@@ -48,7 +48,7 @@
 
         <!-- Judul Detail -->
         <div class="row">
-            <div class="col-12 text-start" style="font-size:26px; font-weight:bold;">
+            <div class="col-12 text-start mb-4" style="font-size:26px; font-weight:bold;">
                 Detail Pemesanan
             </div>
         </div>
