@@ -19,11 +19,11 @@
 
         <!-- Alamat + Tanggal -->
         <div class="row mt-2">
-            <div class="col-7 text-start" style="font-size:16px;">
+            <div class="col-8 text-start" style="font-size:16px;">
                 Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
             </div>
 
-            <div class="col-5 text-end" style="font-size:16px; font-weight:bold;">
+            <div class="col-4 text-end" style="font-size:16px; font-weight:bold;">
                 Dipesan Pada 09 April 2026
             </div>
         </div>
