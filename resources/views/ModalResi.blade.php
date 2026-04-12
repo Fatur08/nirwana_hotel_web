@@ -59,14 +59,14 @@
                 <table class="table-garis">
                     <tbody>
                         <tr>
-                            <td>
+                            <th>
                                 Kamar Deluxe
-                            </td>
+                            </th>
                         </tr>
                         <tr>
-                            <td>
+                            <th>
                                 Tanggal Check In dan Check Out
-                            </td>
+                            </th>
                         </tr>
                     </tbody>
                 </table>
