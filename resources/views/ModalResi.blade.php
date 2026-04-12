@@ -3,7 +3,7 @@
         <tbody>
 
             <tr>
-                <td style="font-size:22px; font-weight:bold; text-align:left;">
+                <td style="font-size:26px; font-weight:bold; text-align:left;">
                     Bukti Pembayaran
                 </td>
 
@@ -41,15 +41,15 @@
             </tr>
 
             <tr>
-                <td></td>
+                <td>.</td>
             </tr>
 
             <tr>
-                <td></td>
+                <td>.</td>
             </tr>
 
             <tr>
-                <td>Detail Pemesanan</td>
+                <td style="font-size:26px; font-weight:bold; text-align:left;">Detail Pemesanan</td>
             </tr>
 
         </tbody>
