@@ -123,7 +123,7 @@
 
         <!-- Detail Pembayaran -->
         <div class="row">
-            <div class="col-12 text-start mt-4 mb-4" style="font-size:26px; font-weight:bold;">
+            <div class="col-12 text-start mt-5 mb-4" style="font-size:26px; font-weight:bold;">
                 Detail Pembayaran
             </div>
         </div>
