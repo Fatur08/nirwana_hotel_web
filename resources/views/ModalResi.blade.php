@@ -144,7 +144,7 @@
                             <th>BRI Transfer</th>
                         </tr>
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 Total Harga<br>
                                 <b>1 Malam X 3 Kamar</b>
                             </td>
