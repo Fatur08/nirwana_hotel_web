@@ -56,47 +56,40 @@
 
         <div class="row">
             <div class="col-12 text-start">
-                <table class="table-garis">
+                <table class="table-custom">
                     <tbody>
+
+                        <!-- KHUSUS INI ADA BORDER SENDIRI -->
                         <tr>
-                            <th>
+                            <td class="header-kamar">
                                 Kamar Deluxe
-                            </th>
+                            </td>
                         </tr>
+
                         <tr>
                             <th>
                                 Tanggal Check In dan Check Out
                             </th>
                         </tr>
                         <tr>
-                            <td>
-                                Kamis, 09 April 2026
-                            </td>
+                            <td>Kamis, 09 April 2026</td>
                         </tr>
                         <tr>
-                            <td>
-                                Jum'at, 10 April 2026
-                            </td>
+                            <td>Jum'at, 10 April 2026</td>
                         </tr>
                         <tr>
-                            <td>
-                                ( 1 Malam )
-                            </td>
+                            <td>( 1 Malam )</td>
+                        </tr>
+
+                        <tr>
+                            <th><br>Jumlah Kamar</th>
                         </tr>
                         <tr>
-                            <th>
-                                <br>Jumlah Kamar
-                            </th>
+                            <td>3 Kamar</td>
                         </tr>
+
                         <tr>
-                            <td>
-                                3 Kamar
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <br>Nomor Kamar
-                            </th>
+                            <th><br>Nomor Kamar</th>
                         </tr>
                         <tr>
                             <td>1. Deluxe 1 - Single Bed</td>
@@ -107,12 +100,14 @@
                         <tr>
                             <td>3. Deluxe 4 - Double Bed</td>
                         </tr>
+
                         <tr>
                             <th><br>Permintaan ( Request )</th>
                         </tr>
                         <tr>
                             <th>Breakfast</th>
                         </tr>
+
                     </tbody>
                 </table>
             </div>

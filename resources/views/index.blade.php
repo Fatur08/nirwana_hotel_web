@@ -207,6 +207,30 @@
 
 
 
+
+    .table-custom {
+        width: 100%;
+        border: 1px solid black;
+        /* border luar saja */
+        border-collapse: collapse;
+    }
+
+    .table-custom td,
+    .table-custom th {
+        border: none;
+        /* hilangkan semua garis dalam */
+        padding: 6px;
+    }
+
+    /* KHUSUS HEADER KAMAR DELUXE */
+    .table-custom .header-kamar {
+        border: 1px solid black;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+
+
     /* ================= PRINT RESI ================= */
 
     @media print {
