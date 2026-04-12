@@ -46,7 +46,7 @@
         <div class="row mt-3"></div>
         <div class="row mt-3"></div>
 
-        <!-- Judul Detail -->
+        <!-- Detail Pemesanan -->
         <div class="row">
             <div class="col-12 text-start mb-4" style="font-size:26px; font-weight:bold;">
                 Detail Pemesanan
@@ -112,6 +112,43 @@
                         </tr>
                         <tr>
                             <th>Breakfast</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+        <!-- Detail Pembayaran -->
+        <div class="row">
+            <div class="col-12 text-start mt-4 mb-4" style="font-size:26px; font-weight:bold;">
+                Detail Pembayaran
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 text-start">
+                <table class="table-garis">
+                    <tbody>
+                        <tr>
+                            <td>Nama Tamu</td>
+                            <td>Waktu Pembayaran</td>
+                            <td>Metode Pembayaran</td>
+                        </tr>
+                        <tr>
+                            <th>Mutia</th>
+                            <th>Kamis, 09 April 2026, 13:59</th>
+                            <th>BRI Transfer</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                Total Harga<br>
+                                <b>1 Malam X 3 Kamar</b>
+                            </td>
+                            <th>Rp.900.000</th>
                         </tr>
                     </tbody>
                 </table>
