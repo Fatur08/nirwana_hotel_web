@@ -2,8 +2,8 @@
     <div class="container-fluid">
 
         <!-- Judul + Logo -->
-        <div class="row align-items-center">
-            <div class="col-8">
+        <div class="row align-items-center g-0">
+            <div class="col-8 ps-0">
                 <div style="font-size:26px; font-weight:bold;">
                     Bukti Pembayaran
                 </div>
@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="col-4 text-end">
+            <div class="col-4 text-end pe-0">
                 <img src="{{ asset('assets/img/nirwana_hotel.png') }}" style="height:100px;">
             </div>
         </div>
