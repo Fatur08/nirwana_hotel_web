@@ -150,15 +150,7 @@
                 </table>
             </div>
         </div>
-
     </div>
-
-
-
-
-    <br><br>
-    <b>{{ $id }}</b>
-
 </div>
 
 
