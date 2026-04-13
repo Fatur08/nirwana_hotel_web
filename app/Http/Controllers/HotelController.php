@@ -367,6 +367,17 @@ class HotelController extends Controller
             }
 
 
+
+            // ==============================
+            // METODE PEMBAYARAN
+            // ==============================
+            if ($request->metode_pembayaran_dlx == 'online') {
+                $metode_pembayaran = $request->sumber_pembayaran_dlx; // ambil input user
+            } else {
+                $metode_pembayaran = 'Cash';
+            }
+
+
             // ==============================
             // 6. INSERT LAPORAN KEUANGAN
             // ==============================
@@ -390,7 +401,7 @@ class HotelController extends Controller
 
                 // ✅ TAMBAHAN BARU
                 'tanggal_dipesan' => $request->tanggal_pesan_dlx ?? now(),
-                'metode_pembayaran' => $request->metode_pembayaran_dlx
+                'metode_pembayaran' => $metode_pembayaran
             ]);
 
             // ==============================
