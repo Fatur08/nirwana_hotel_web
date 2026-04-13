@@ -176,7 +176,7 @@
                             <td>Metode Pembayaran</td>
                         </tr>
                         <tr>
-                            <th>Mutia</th>
+                            <th>{{ $data->nama_tamu }}</th>
                             <th>Kamis, 09 April 2026, 13:59</th>
                             <th>BRI Transfer</th>
                         </tr>
