@@ -1067,6 +1067,24 @@
 
 
 
+
+        $(document).on('change', '#metode_pembayaran_dlx', function() {
+
+            let metode = $(this).val();
+
+            if (metode === 'online') {
+                $('#sumber_pembayaran_container_dlx').show();
+                $('#sumber_pembayaran_input_dlx').show();
+            } else {
+                $('#sumber_pembayaran_container_dlx').hide();
+                $('#sumber_pembayaran_input_dlx').hide();
+                $('#sumber_pembayaran_dlx').val('');
+            }
+
+        });
+
+
+
         $(document).on('submit', '#frmTambahModalDLX', function(e) {
 
             e.preventDefault();
