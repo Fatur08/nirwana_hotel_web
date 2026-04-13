@@ -72,14 +72,28 @@
                                 Tanggal Check In dan Check Out
                             </th>
                         </tr>
+                        @php
+                        $checkIn = \Carbon\Carbon::parse($data->check_in);
+                        $checkOut = \Carbon\Carbon::parse($data->check_out);
+                        $lama = $checkOut->diffInDays($checkIn);
+                        @endphp
+
                         <tr>
-                            <td>Kamis, 09 April 2026</td>
+                            <td>
+                                {{ $checkIn->translatedFormat('l, d F Y') }}
+                            </td>
                         </tr>
+
                         <tr>
-                            <td>Jum'at, 10 April 2026</td>
+                            <td>
+                                {{ $checkOut->translatedFormat('l, d F Y') }}
+                            </td>
                         </tr>
+
                         <tr>
-                            <td>( 1 Malam )</td>
+                            <td>
+                                ( {{ $lama }} Malam )
+                            </td>
                         </tr>
 
                         <tr>
