@@ -541,6 +541,18 @@ class HotelController extends Controller
             }
 
 
+
+            // ==============================
+            // METODE PEMBAYARAN
+            // ==============================
+            if ($request->metode_pembayaran_spr == 'online') {
+                $metode_pembayaran = $request->sumber_pembayaran_spr; // ambil input user
+            } else {
+                $metode_pembayaran = 'Cash';
+            }
+
+
+
             // ==============================
             // 6. INSERT LAPORAN KEUANGAN
             // ==============================
@@ -559,7 +571,13 @@ class HotelController extends Controller
                 'biaya_tambahan' => $biaya_request,
                 'pajak' => $pajak,
                 'total_diterima' => $total_diterima,
-                'foto_ktp' => $foto_ktp_spr
+                'foto_ktp' => $foto_ktp_spr,
+
+
+
+                // ✅ TAMBAHAN BARU
+                'tanggal_dipesan' => $request->tanggal_pesan_spr ?? now(),
+                'metode_pembayaran' => $metode_pembayaran
             ]);
 
             // ==============================

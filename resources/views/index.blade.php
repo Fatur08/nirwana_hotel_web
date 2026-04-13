@@ -1389,6 +1389,24 @@
 
 
 
+        $(document).on('change', '#metode_pembayaran_spr', function() {
+
+            let metode = $(this).val();
+
+            if (metode === 'online') {
+                $('#sumber_pembayaran_container_spr').show();
+                $('#sumber_pembayaran_input_spr').show();
+            } else {
+                $('#sumber_pembayaran_container_spr').hide();
+                $('#sumber_pembayaran_input_spr').hide();
+                $('#sumber_pembayaran_spr').val('');
+            }
+
+        });
+
+
+
+
         $(document).on('submit', '#frmTambahModalSPR', function(e) {
 
             e.preventDefault();
