@@ -100,7 +100,7 @@
                             <th><br>Jumlah Kamar</th>
                         </tr>
                         <tr>
-                            <td>3 Kamar</td>
+                            <td>{{ $data->jumlah_kamar_dipesan }}</td>
                         </tr>
 
                         <tr>
