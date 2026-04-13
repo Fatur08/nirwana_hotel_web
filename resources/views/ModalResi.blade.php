@@ -147,7 +147,7 @@
                             <th><br>Permintaan ( Request )</th>
                         </tr>
                         <tr>
-                            <th>Breakfast</th>
+                            <th>{{ $requestTambahan }}</th>
                         </tr>
 
                     </tbody>

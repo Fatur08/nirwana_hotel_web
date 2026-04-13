@@ -281,6 +281,19 @@ class HotelController extends Controller
             ->first();
 
 
+        // klasifikasi request tambahan
+        switch ($data->biaya_tambahan ?? 0) {
+            case 150000:
+                $requestTambahan = "Extra Bed";
+                break;
+            case 50000:
+                $requestTambahan = "Breakfast";
+                break;
+            default:
+                $requestTambahan = "-";
+        }
+
+
         // Ambil daftar kamar yang dipesan
         $kamar = DB::table('histori_kamar as hk')
             ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
@@ -294,7 +307,8 @@ class HotelController extends Controller
 
         return view('ModalResi', [
             'data' => $data,
-            'kamar' => $kamar
+            'kamar' => $kamar,
+            'requestTambahan' => $requestTambahan
         ]);
     }
 
