@@ -185,7 +185,7 @@
                                 Total Harga<br>
                                 <b>{{ $lama }} Malam X {{ $data->jumlah_kamar_dipesan }} Kamar</b>
                             </td>
-                            <th>Rp.900.000</th>
+                            <th>Rp.{{ number_format($data->biaya, 0, ',', '.') }}</th>
                         </tr>
                     </tbody>
                 </table>
