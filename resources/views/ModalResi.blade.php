@@ -24,7 +24,8 @@
             </div>
 
             <div class="col-4 text-end" style="font-size:16px; font-weight:bold;">
-                Dipesan Pada 09 April 2026
+                Dipesan Pada
+                {{ \Carbon\Carbon::parse($data->tanggal_dipesan)->translatedFormat('d F Y') }}
             </div>
         </div>
 

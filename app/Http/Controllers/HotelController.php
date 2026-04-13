@@ -275,8 +275,13 @@ class HotelController extends Controller
     public function ModalResi(Request $request)
     {
         $id = $request->id_laporan_keuangan;
+
+        $data = DB::table('laporan_keuangan')
+            ->where('id_laporan_keuangan', $id)
+            ->first();
+
         return view('ModalResi', [
-            'id' => $id
+            'data' => $data
         ]);
     }
 
