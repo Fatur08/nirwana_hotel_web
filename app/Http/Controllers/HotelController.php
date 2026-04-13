@@ -280,8 +280,21 @@ class HotelController extends Controller
             ->where('id_laporan_keuangan', $id)
             ->first();
 
+
+        // Ambil daftar kamar yang dipesan
+        $kamar = DB::table('histori_kamar as hk')
+            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
+            ->select(
+                'nk.nomor_kamar',
+                'nk.jenis_bed',
+                'nk.id_kamar'
+            )
+            ->where('hk.id_laporan_keuangan', $id)
+            ->get();
+
         return view('ModalResi', [
-            'data' => $data
+            'data' => $data,
+            'kamar' => $kamar
         ]);
     }
 

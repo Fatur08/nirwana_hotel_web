@@ -100,20 +100,47 @@
                             <th><br>Jumlah Kamar</th>
                         </tr>
                         <tr>
-                            <td>{{ $data->jumlah_kamar_dipesan }}</td>
+                            <td>{{ $data->jumlah_kamar_dipesan }} Kamar</td>
                         </tr>
 
                         <tr>
                             <th><br>Nomor Kamar</th>
                         </tr>
                         <tr>
-                            <td>1. Deluxe 1 - Single Bed</td>
-                        </tr>
-                        <tr>
-                            <td>2. Deluxe 2 - Single Bed</td>
-                        </tr>
-                        <tr>
-                            <td>3. Deluxe 4 - Double Bed</td>
+                            <td class="text-start">
+                                @foreach($kamar as $k)
+
+                                @php
+                                switch($k->id_kamar){
+                                case 1:
+                                $tipe = "Deluxe ";
+                                break;
+                                case 2:
+                                $tipe = "Superior ";
+                                break;
+                                case 3:
+                                $tipe = "Standar ";
+                                break;
+                                default:
+                                $tipe = "-";
+                                }
+
+                                switch($k->jenis_bed){
+                                case 1:
+                                $bed = "Single Bed";
+                                break;
+                                case 2:
+                                $bed = "Double Bed";
+                                break;
+                                default:
+                                $bed = "-";
+                                }
+                                @endphp
+
+                                {{ $loop->iteration }}. {{ $tipe }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
+
+                                @endforeach
+                            </td>
                         </tr>
 
                         <tr>
