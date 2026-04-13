@@ -177,13 +177,13 @@
                         </tr>
                         <tr>
                             <th>{{ $data->nama_tamu }}</th>
-                            <th>Kamis, 09 April 2026, 13:59</th>
-                            <th>BRI Transfer</th>
+                            <th>{{ \Carbon\Carbon::parse($data->tanggal_dipesan)->translatedFormat('l, d F Y H:i') }}</th>
+                            <th>{{ $data->metode_pembayaran }}</th>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 Total Harga<br>
-                                <b>1 Malam X 3 Kamar</b>
+                                <b>( {{ $lama }} Malam ) X {{ $data->jumlah_kamar_dipesan }} Kamar</b>
                             </td>
                             <th>Rp.900.000</th>
                         </tr>

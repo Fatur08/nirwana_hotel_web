@@ -1,7 +1,7 @@
 <form action="{{ url('TambahModalSPR/store_TambahModalSPR') }}" method="POST" id="frmTambahModalSPR" enctype="multipart/form-data">
     @csrf
     <input type="text" readonly value="{{ $tipe_kamar }}" id="tipe_kamar" class="form-control" name="tipe_kamar" placeholder="tipe_kamar" hidden>
-    <input type="text" readonly value="{{ now()->format('Y-m-d') }}" id="tanggal_pesan_spr" class="form-control" name="tanggal_pesan_spr" placeholder="tipe_kamar" hidden>
+    <input type="text" readonly value="{{ now()->format('Y-m-d H:i:s') }}" id="tanggal_pesan_spr" class="form-control" name="tanggal_pesan_spr" placeholder="tipe_kamar" hidden>
 
     <div class="row">
         <div class="col-12">
