@@ -1697,6 +1697,24 @@
 
 
 
+        $(document).on('change', '#metode_pembayaran_std', function() {
+
+            let metode = $(this).val();
+
+            if (metode === 'online') {
+                $('#sumber_pembayaran_container_std').show();
+                $('#sumber_pembayaran_input_std').show();
+            } else {
+                $('#sumber_pembayaran_container_std').hide();
+                $('#sumber_pembayaran_input_std').hide();
+                $('#sumber_pembayaran_std').val('');
+            }
+
+        });
+
+
+
+
         $(document).on('submit', '#frmTambahModalSTD', function(e) {
 
             e.preventDefault();

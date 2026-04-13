@@ -731,6 +731,17 @@ class HotelController extends Controller
 
 
             // ==============================
+            // METODE PEMBAYARAN
+            // ==============================
+            if ($request->metode_pembayaran_std == 'online') {
+                $metode_pembayaran = $request->sumber_pembayaran_std; // ambil input user
+            } else {
+                $metode_pembayaran = 'Cash';
+            }
+
+
+
+            // ==============================
             // 6. INSERT LAPORAN KEUANGAN
             // ==============================
             $id_laporan = DB::table('laporan_keuangan')->insertGetId([
@@ -748,7 +759,13 @@ class HotelController extends Controller
                 'biaya_tambahan' => $biaya_request,
                 'pajak' => $pajak,
                 'total_diterima' => $total_diterima,
-                'foto_ktp' => $foto_ktp_std
+                'foto_ktp' => $foto_ktp_std,
+
+
+
+                // ✅ TAMBAHAN BARU
+                'tanggal_dipesan' => $request->tanggal_pesan_std ?? now(),
+                'metode_pembayaran' => $metode_pembayaran
             ]);
 
             // ==============================
