@@ -183,7 +183,7 @@
                         <tr>
                             <td colspan="2">
                                 Total Harga<br>
-                                <b>( {{ $lama }} Malam ) X {{ $data->jumlah_kamar_dipesan }} Kamar</b>
+                                <b>{{ $lama }} Malam X {{ $data->jumlah_kamar_dipesan }} Kamar</b>
                             </td>
                             <th>Rp.900.000</th>
                         </tr>
