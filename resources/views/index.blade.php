@@ -234,7 +234,7 @@
     /* KHUSUS SAAT PDF */
     .mode-pdf {
         width: 105mm !important;
-        padding: 10px;
+        padding: 15px;
         box-sizing: border-box;
         font-size: 12px;
         transform: scale(0.85);
