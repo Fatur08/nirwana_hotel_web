@@ -799,9 +799,14 @@
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
         flatpickr(".flatpickr", {
             dateFormat: "Y-m-d", // format asli (hidden)
-            altInput: true,
+            altInput: false,
             altFormat: "d F Y", // tampil: 09 April 2026
             locale: "id",
+            appendTo: document.body,
+            position: "auto center",
+            disableMobile: false,
+            clickOpens: true,
+            allowInput: false,
 
             onChange: function(selectedDates, dateStr, instance) {
 
@@ -918,11 +923,24 @@
 
 
 
-        document.getElementById("check_in_tampil").addEventListener("focus", function(e) {
-            e.target.blur(); // cegah keyboard
+
+
+        flatpickr("#check_in_tampil", {
+            dateFormat: "d-m-Y",
+            altInput: false,
+            appendTo: document.body,
+            position: "auto center",
+            disableMobile: false,
+            clickOpens: true,
+            allowInput: false
         });
 
-        document.getElementById("check_out_tampil").addEventListener("focus", function(e) {
+
+
+
+
+
+        document.getElementById("check_in_tampil").addEventListener("focus", function(e) {
             e.target.blur(); // cegah keyboard
         });
 
