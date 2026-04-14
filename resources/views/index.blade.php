@@ -1898,7 +1898,7 @@
             let element = document.querySelector("#area-print");
 
             html2canvas(element, {
-                scale: 1,
+                scale: 2,
                 useCORS: true
             }).then(canvas => {
 
@@ -1909,9 +1909,9 @@
                     jsPDF
                 } = window.jspdf;
 
-                let pdf = new jsPDF('p', 'mm', [105, 148]);
+                let pdf = new jsPDF('p', 'mm', [100, 143]);
 
-                pdf.addImage(imgData, 'JPEG', 0, 0, 105, 148);
+                pdf.addImage(imgData, 'JPEG', 0, 0, 100, 143);
 
                 pdf.save("resi.pdf");
             });
