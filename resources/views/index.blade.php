@@ -799,7 +799,7 @@
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
         flatpickr(".flatpickr", {
             dateFormat: "Y-m-d", // format asli (hidden)
-            altInput: false,
+            altInput: true,
             altFormat: "d F Y", // tampil: 09 April 2026
             locale: "id",
             appendTo: document.body,
