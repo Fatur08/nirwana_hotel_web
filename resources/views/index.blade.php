@@ -409,7 +409,7 @@
                             <input type="text"
                                 id="check_in_tampil"
                                 class="form-control flatpickr w-100"
-                                placeholder="Tanggal Check-Out"
+                                placeholder="Tanggal Check-In"
                                 autocomplete="off"
                                 readonly
                                 style="font-size:16pt;">
@@ -804,7 +804,7 @@
             locale: "id",
             appendTo: document.body,
             position: "auto center",
-            disableMobile: false,
+            disableMobile: true,
             clickOpens: true,
             allowInput: false,
 
