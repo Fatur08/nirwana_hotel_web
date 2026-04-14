@@ -19,41 +19,54 @@
 
 
 
-    /* Perbesar container kalender */
+    /* Container kalender */
     .flatpickr-calendar {
-        transform: scale(1.2);
-        transform-origin: top left;
-        width: 100% !important;
-    }
-
-    /* Perbesar hari */
-    .flatpickr-day {
-        font-size: 14px;
-        height: 45px;
-        line-height: 45px;
-    }
-
-    /* Perbesar header bulan & tahun */
-    .flatpickr-current-month {
+        width: auto !important;
+        max-width: 100% !important;
         font-size: 16px;
+    }
+
+    /* Hari (tanggal) */
+    .flatpickr-day {
+        font-size: 15px;
+        height: 48px;
+        line-height: 48px;
+    }
+
+    /* Header bulan & tahun */
+    .flatpickr-current-month {
+        font-size: 18px;
     }
 
     /* Tombol prev/next */
     .flatpickr-prev-month,
     .flatpickr-next-month {
-        transform: scale(1.2);
+        font-size: 18px;
     }
 
-    /* Responsive khusus HP */
+    /* Supaya tidak kepotong */
+    .flatpickr-days {
+        width: 100% !important;
+    }
+
+    .dayContainer {
+        min-width: 100% !important;
+    }
+
+    /* Responsive HP / Tablet */
     @media (max-width: 768px) {
         .flatpickr-calendar {
-            transform: scale(1.3);
+            font-size: 18px;
         }
 
         .flatpickr-day {
-            height: 50px;
-            line-height: 50px;
-            font-size: 16px;
+            height: 55px;
+            line-height: 55px;
+            font-size: 17px;
+        }
+
+        .flatpickr-current-month {
+            font-size: 20px;
         }
     }
 
@@ -782,50 +795,48 @@
     @endsection
     @push('myscript')
     <script>
-        // BAGIAN DARI FORM PENCARIAN TANGGAL
-        $(document).on('focus', '.flatpickr', function() {
+        // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
+        flatpickr(".flatpickr", {
+            dateFormat: "Y-m-d", // format asli (hidden)
+            altInput: true,
+            altFormat: "d F Y", // tampil: 09 April 2026
+            locale: "id",
 
-            $(this).datepicker({
-                format: "dd MM yyyy",
-                autoclose: true,
-                todayHighlight: true,
-                language: "id"
-            }).on('changeDate', function(e) {
+            onChange: function(selectedDates, dateStr, instance) {
 
-                let tanggalDB = e.format('yyyy-mm-dd');
+                if (!selectedDates.length) return;
+
+                let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
+                let id = instance.element.id;
 
                 // FORM PENCARIAN
-                if ($(this).attr('id') === 'check_in_tampil') {
+                if (id === 'check_in_tampil') {
                     $('#cari_check_in').val(tanggalDB);
-                } else if ($(this).attr('id') === 'check_out_tampil') {
+                } else if (id === 'check_out_tampil') {
                     $('#cari_check_out').val(tanggalDB);
                 }
 
                 // FORM MODAL DLX
-                else if ($(this).attr('id') === 'check_in_tampil_dlx') {
+                else if (id === 'check_in_tampil_dlx') {
                     $('#check_in_dlx').val(tanggalDB).trigger('change');
-                } else if ($(this).attr('id') === 'check_out_tampil_dlx') {
+                } else if (id === 'check_out_tampil_dlx') {
                     $('#check_out_dlx').val(tanggalDB);
                 }
 
-
                 // FORM MODAL SPR
-                else if ($(this).attr('id') === 'check_in_tampil_spr') {
+                else if (id === 'check_in_tampil_spr') {
                     $('#check_in_spr').val(tanggalDB).trigger('change');
-                } else if ($(this).attr('id') === 'check_out_tampil_spr') {
+                } else if (id === 'check_out_tampil_spr') {
                     $('#check_out_spr').val(tanggalDB);
                 }
 
-
                 // FORM MODAL STD
-                else if ($(this).attr('id') === 'check_in_tampil_std') {
+                else if (id === 'check_in_tampil_std') {
                     $('#check_in_std').val(tanggalDB).trigger('change');
-                } else if ($(this).attr('id') === 'check_out_tampil_std') {
+                } else if (id === 'check_out_tampil_std') {
                     $('#check_out_std').val(tanggalDB);
                 }
-
-            });
-
+            }
         });
 
 
