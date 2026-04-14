@@ -925,32 +925,6 @@
 
 
 
-        flatpickr("#check_in_tampil", {
-            dateFormat: "d-m-Y",
-            altInput: false,
-            appendTo: document.body,
-            position: "auto center",
-            disableMobile: false,
-            clickOpens: true,
-            allowInput: false
-        });
-
-
-
-
-
-
-        document.getElementById("check_in_tampil").addEventListener("focus", function(e) {
-            e.target.blur(); // cegah keyboard
-        });
-
-
-
-
-
-
-
-
 
 
 
