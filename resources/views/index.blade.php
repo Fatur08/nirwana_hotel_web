@@ -231,80 +231,48 @@
 
 
 
+    #area-print {
+        max-width: 105mm;
+        margin: auto;
+    }
+
+
+
+
+    #area-print {
+        font-size: 12px;
+    }
+
+
+
     /* ================= PRINT RESI ================= */
 
     @media print {
 
-        @page {
-            size: A6 portrait;
-            margin: 0;
-        }
-
-        html,
         body {
-            width: 10.5cm;
-            height: 14.8cm;
-            margin: 0;
+            background: white !important;
             padding: 0;
-        }
-
-        body * {
-            visibility: hidden;
-        }
-
-        #area-print,
-        #area-print * {
-            visibility: visible;
+            margin: 0;
+            font-size: 12px;
+            /* kecilkan biar muat A6 */
         }
 
         #area-print {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10.5cm;
-            min-height: 14.8cm;
-            padding: 10px;
-            box-sizing: border-box;
+            width: 100%;
+            max-width: 105mm;
+            margin: auto;
         }
 
-        /* 🔥 FIX BOOTSTRAP GRID BIAR GA NGACO */
-        .row {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            margin: 0 !important;
+        table {
+            page-break-inside: avoid;
         }
 
-        .col-8 {
-            width: 66.666% !important;
-            flex: 0 0 66.666% !important;
+        tr,
+        td,
+        th {
+            page-break-inside: avoid;
         }
 
-        .col-4 {
-            width: 33.333% !important;
-            flex: 0 0 33.333% !important;
-        }
-
-        .col-12 {
-            width: 100% !important;
-            flex: 0 0 100% !important;
-        }
-
-        /* Hilangkan container bootstrap yang bikin melebar */
-        .container-fluid {
-            width: 100% !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        /* Font biar konsisten */
-        body {
-            font-size: 12px !important;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
     }
 </style>
 <div class="body" style="margin-top: 10px;">
@@ -1918,20 +1886,24 @@
             let element = document.getElementById('area-print');
 
             let opt = {
-                margin: 0,
+                margin: 5,
                 filename: 'resi.pdf',
                 image: {
                     type: 'jpeg',
                     quality: 1
                 },
                 html2canvas: {
-                    scale: 4
+                    scale: 2, // penting (jangan terlalu besar)
+                    useCORS: true
                 },
                 jsPDF: {
-                    unit: 'cm',
-                    format: [10.5, 14.8],
+                    unit: 'mm',
+                    format: [105, 148], // A6
                     orientation: 'portrait'
-                }
+                },
+                pagebreak: {
+                    mode: ['avoid-all']
+                } // ⬅️ ini penting
             };
 
             html2pdf().set(opt).from(element).save();
