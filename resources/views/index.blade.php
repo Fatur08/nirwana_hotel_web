@@ -256,6 +256,25 @@
 
 
 
+    #area-print {
+        width: 105mm;
+        height: 148mm;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        overflow: hidden;
+    }
+
+    #area-inner {
+        transform: scale(0.88);
+        /* 🔥 ini bisa kamu adjust */
+        transform-origin: top center;
+        width: 100%;
+    }
+
+
+
 
     /* ================= PRINT RESI ================= */
 
@@ -1909,9 +1928,9 @@
                     jsPDF
                 } = window.jspdf;
 
-                let pdf = new jsPDF('p', 'mm', [100, 143]);
+                let pdf = new jsPDF('p', 'mm', [105, 148]);
 
-                pdf.addImage(imgData, 'JPEG', 0, 0, 100, 143);
+                pdf.addImage(imgData, 'JPEG', 0, 0, 105, 148);
 
                 pdf.save("resi.pdf");
             });
