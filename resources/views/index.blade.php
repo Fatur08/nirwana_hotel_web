@@ -234,10 +234,10 @@
     /* KHUSUS SAAT PDF */
     .mode-pdf {
         width: 105mm !important;
-        padding: 50px;
+        padding: 10px;
         box-sizing: border-box;
         font-size: 12px;
-        transform: scale(0.75);
+        transform: scale(0.85);
         transform-origin: top left;
     }
 
@@ -1898,7 +1898,7 @@
             let element = document.querySelector("#area-print");
 
             html2canvas(element, {
-                scale: 2,
+                scale: 1,
                 useCORS: true
             }).then(canvas => {
 
