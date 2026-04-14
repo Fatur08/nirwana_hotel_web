@@ -234,11 +234,11 @@
     /* KHUSUS SAAT PDF */
     .mode-pdf {
         width: 105mm !important;
-        height: 148mm !important;
-        overflow: hidden;
         padding: 10px;
         box-sizing: border-box;
         font-size: 12px;
+        transform: scale(0.85);
+        transform-origin: top left;
     }
 
     /* kecilkan elemen hanya saat PDF */
@@ -1897,7 +1897,6 @@
 
             let element = document.getElementById('area-print');
 
-            // 👉 tambahkan class khusus
             element.classList.add('mode-pdf');
 
             let opt = {
@@ -1908,17 +1907,26 @@
                     quality: 1
                 },
                 html2canvas: {
-                    scale: 1.5
+                    scale: 2, // ⬅️ BESARKAN agar kualitas bagus
+                    useCORS: true
                 },
                 jsPDF: {
                     unit: 'mm',
-                    format: [105, 148],
+                    format: [105, 148], // A6
                     orientation: 'portrait'
                 }
             };
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                // 👉 hapus lagi biar modal normal
+            html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+
+                // 🔥 PAKSA FIT KE 1 HALAMAN
+                let totalPages = pdf.internal.getNumberOfPages();
+
+                for (let i = totalPages; i > 1; i--) {
+                    pdf.deletePage(i); // hapus halaman lebih
+                }
+
+            }).save().then(() => {
                 element.classList.remove('mode-pdf');
             });
         }
