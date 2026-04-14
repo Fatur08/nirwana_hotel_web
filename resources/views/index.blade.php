@@ -231,19 +231,6 @@
 
 
 
-    #area-print {
-        max-width: 105mm;
-        margin: auto;
-    }
-
-
-
-
-    #area-print {
-        font-size: 12px;
-    }
-
-
 
     /* ================= PRINT RESI ================= */
 
