@@ -1897,17 +1897,12 @@
 
             let element = document.getElementById('area-print');
 
-            html2canvas(element, {
-                scale: 2,
-                useCORS: true
-            }).then(canvas => {
-
-                let imgData = canvas.toDataURL('image/jpeg', 1.0);
+            html2canvas(document.querySelector("#area-print")).then(canvas => {
+                let imgData = canvas.toDataURL('image/jpeg');
 
                 let pdf = new jsPDF('p', 'mm', [105, 148]);
 
                 pdf.addImage(imgData, 'JPEG', 0, 0, 105, 148);
-
                 pdf.save("resi.pdf");
             });
         }
