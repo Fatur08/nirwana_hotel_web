@@ -1913,6 +1913,38 @@
 
 
 
+        function cetakPDF() {
+
+            let element = document.getElementById('area-print');
+
+            let opt = {
+                margin: 0,
+                filename: 'resi.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 1
+                },
+                html2canvas: {
+                    scale: 4
+                },
+                jsPDF: {
+                    unit: 'cm',
+                    format: [10.5, 14.8],
+                    orientation: 'portrait'
+                }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+
+
+
+
+
+
+
+
 
 
 
