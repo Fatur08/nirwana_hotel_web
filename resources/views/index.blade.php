@@ -231,6 +231,31 @@
 
 
 
+    /* KHUSUS SAAT PDF */
+    .mode-pdf {
+        width: 105mm !important;
+        height: 148mm !important;
+        overflow: hidden;
+        padding: 10px;
+        box-sizing: border-box;
+        font-size: 12px;
+    }
+
+    /* kecilkan elemen hanya saat PDF */
+    .mode-pdf h1 {
+        font-size: 18px !important;
+    }
+
+    .mode-pdf h2 {
+        font-size: 16px !important;
+    }
+
+    .mode-pdf img {
+        max-height: 80px !important;
+    }
+
+
+
 
     /* ================= PRINT RESI ================= */
 
@@ -1872,6 +1897,9 @@
 
             let element = document.getElementById('area-print');
 
+            // 👉 tambahkan class khusus
+            element.classList.add('mode-pdf');
+
             let opt = {
                 margin: 0,
                 filename: 'resi.pdf',
@@ -1880,17 +1908,19 @@
                     quality: 1
                 },
                 html2canvas: {
-                    scale: 1.5, // jangan terlalu besar
-                    scrollY: 0
+                    scale: 1.5
                 },
                 jsPDF: {
                     unit: 'mm',
-                    format: [105, 148], // A6
+                    format: [105, 148],
                     orientation: 'portrait'
                 }
             };
 
-            html2pdf().set(opt).from(element).save();
+            html2pdf().set(opt).from(element).save().then(() => {
+                // 👉 hapus lagi biar modal normal
+                element.classList.remove('mode-pdf');
+            });
         }
 
 
