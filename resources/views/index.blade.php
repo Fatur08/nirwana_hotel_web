@@ -234,10 +234,10 @@
     /* KHUSUS SAAT PDF */
     .mode-pdf {
         width: 105mm !important;
-        padding: 15px;
+        padding: 50px;
         box-sizing: border-box;
         font-size: 12px;
-        transform: scale(0.85);
+        transform: scale(0.75);
         transform-origin: top left;
     }
 
