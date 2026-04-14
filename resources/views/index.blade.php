@@ -12,6 +12,61 @@
         font-size: 20px;
     }
 
+
+
+
+
+
+
+
+    /* Perbesar container kalender */
+    .flatpickr-calendar {
+        transform: scale(1.2);
+        transform-origin: top left;
+        width: 100% !important;
+    }
+
+    /* Perbesar hari */
+    .flatpickr-day {
+        font-size: 14px;
+        height: 45px;
+        line-height: 45px;
+    }
+
+    /* Perbesar header bulan & tahun */
+    .flatpickr-current-month {
+        font-size: 16px;
+    }
+
+    /* Tombol prev/next */
+    .flatpickr-prev-month,
+    .flatpickr-next-month {
+        transform: scale(1.2);
+    }
+
+    /* Responsive khusus HP */
+    @media (max-width: 768px) {
+        .flatpickr-calendar {
+            transform: scale(1.3);
+        }
+
+        .flatpickr-day {
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
     .login-container {
         text-align: center;
         background: #e8dbb9;
@@ -340,10 +395,11 @@
                             <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                             <input type="text"
                                 id="check_in_tampil"
-                                class="form-control flatpickr"
+                                class="form-control flatpickr w-100"
                                 placeholder="Tanggal Check-In"
                                 autocomplete="off"
-                                style="font-size:16pt;">
+                                readonly
+                                style="font-size:16pt; height:55px;">
                             <!-- INPUT ASLI UNTUK DATABASE -->
                             <input type="hidden" id="cari_check_in" name="cari_check_in">
                         </div>
@@ -843,6 +899,32 @@
             if (document.getElementById("check_out_std"))
                 document.getElementById("check_out_std").value = formatDB;
 
+        });
+
+
+
+
+
+
+
+
+        flatpickr("#check_in_tampil", {
+            dateFormat: "d-m-Y",
+            altInput: false,
+            appendTo: document.body,
+            position: "auto center",
+            disableMobile: false,
+            clickOpens: true,
+            allowInput: false
+        });
+
+
+
+
+
+
+        document.getElementById("check_in_tampil").addEventListener("focus", function(e) {
+            e.target.blur(); // cegah keyboard
         });
 
 
