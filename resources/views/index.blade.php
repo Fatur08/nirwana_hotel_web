@@ -236,8 +236,16 @@
     @media print {
 
         @page {
-            size: A6;
+            size: A6 portrait;
             margin: 0;
+        }
+
+        html,
+        body {
+            width: 10.5cm;
+            height: 14.8cm;
+            margin: 0;
+            padding: 0;
         }
 
         body * {
@@ -254,11 +262,49 @@
             top: 0;
             left: 0;
             width: 10.5cm;
-            height: 14.8cm;
+            min-height: 14.8cm;
             padding: 10px;
             box-sizing: border-box;
         }
 
+        /* 🔥 FIX BOOTSTRAP GRID BIAR GA NGACO */
+        .row {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            margin: 0 !important;
+        }
+
+        .col-8 {
+            width: 66.666% !important;
+            flex: 0 0 66.666% !important;
+        }
+
+        .col-4 {
+            width: 33.333% !important;
+            flex: 0 0 33.333% !important;
+        }
+
+        .col-12 {
+            width: 100% !important;
+            flex: 0 0 100% !important;
+        }
+
+        /* Hilangkan container bootstrap yang bikin melebar */
+        .container-fluid {
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* Font biar konsisten */
+        body {
+            font-size: 12px !important;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     }
 </style>
 <div class="body" style="margin-top: 10px;">
