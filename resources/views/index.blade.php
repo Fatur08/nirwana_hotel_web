@@ -922,6 +922,10 @@
             e.target.blur(); // cegah keyboard
         });
 
+        document.getElementById("check_out_tampil").addEventListener("focus", function(e) {
+            e.target.blur(); // cegah keyboard
+        });
+
 
 
 
