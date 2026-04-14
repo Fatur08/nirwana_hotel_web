@@ -408,11 +408,11 @@
                             <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                             <input type="text"
                                 id="check_in_tampil"
-                                class="form-control flatpickr w-100"
-                                placeholder="Tanggal Check-In"
+                                class="form-control flatpickr"
+                                placeholder="Tanggal Check-Out"
                                 autocomplete="off"
                                 readonly
-                                style="font-size:16pt; height:55px;">
+                                style="font-size:16pt;">
                             <!-- INPUT ASLI UNTUK DATABASE -->
                             <input type="hidden" id="cari_check_in" name="cari_check_in">
                         </div>
@@ -438,6 +438,7 @@
                                 class="form-control flatpickr"
                                 placeholder="Tanggal Check-Out"
                                 autocomplete="off"
+                                readonly
                                 style="font-size:16pt;">
                             <!-- INPUT ASLI UNTUK DATABASE -->
                             <input type="hidden" id="cari_check_out" name="cari_check_out">
