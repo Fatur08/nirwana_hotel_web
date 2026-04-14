@@ -196,7 +196,7 @@
 
 
 
-<button onclick="cetakPDF()" class="btn btn-success w-100">Cetak</button>
+<button onclick="cetakPDF()" class="btn btn-success w-100 mt-3">Cetak</button>
 
 <button type="button" class="btn btn-success w-100 mt-3" data-bs-dismiss="modal">
     Tutup

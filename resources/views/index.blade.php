@@ -1873,24 +1873,21 @@
             let element = document.getElementById('area-print');
 
             let opt = {
-                margin: 5,
+                margin: 0,
                 filename: 'resi.pdf',
                 image: {
                     type: 'jpeg',
                     quality: 1
                 },
                 html2canvas: {
-                    scale: 2, // penting (jangan terlalu besar)
-                    useCORS: true
+                    scale: 1.5, // jangan terlalu besar
+                    scrollY: 0
                 },
                 jsPDF: {
                     unit: 'mm',
                     format: [105, 148], // A6
                     orientation: 'portrait'
-                },
-                pagebreak: {
-                    mode: ['avoid-all']
-                } // ⬅️ ini penting
+                }
             };
 
             html2pdf().set(opt).from(element).save();
