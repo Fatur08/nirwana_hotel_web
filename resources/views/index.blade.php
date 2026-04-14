@@ -254,18 +254,6 @@
         max-height: 80px !important;
     }
 
-
-
-    #area-print {
-        width: 105mm;
-        height: 148mm;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: white;
-        overflow: hidden;
-    }
-
     #area-inner {
         transform: scale(0.88);
         /* 🔥 ini bisa kamu adjust */
