@@ -1897,37 +1897,18 @@
 
             let element = document.getElementById('area-print');
 
-            element.classList.add('mode-pdf');
+            html2canvas(element, {
+                scale: 2,
+                useCORS: true
+            }).then(canvas => {
 
-            let opt = {
-                margin: 0,
-                filename: 'resi.pdf',
-                image: {
-                    type: 'jpeg',
-                    quality: 1
-                },
-                html2canvas: {
-                    scale: 2, // ⬅️ BESARKAN agar kualitas bagus
-                    useCORS: true
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: [105, 148], // A6
-                    orientation: 'portrait'
-                }
-            };
+                let imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-            html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+                let pdf = new jsPDF('p', 'mm', [105, 148]);
 
-                // 🔥 PAKSA FIT KE 1 HALAMAN
-                let totalPages = pdf.internal.getNumberOfPages();
+                pdf.addImage(imgData, 'JPEG', 0, 0, 105, 148);
 
-                for (let i = totalPages; i > 1; i--) {
-                    pdf.deletePage(i); // hapus halaman lebih
-                }
-
-            }).save().then(() => {
-                element.classList.remove('mode-pdf');
+                pdf.save("resi.pdf");
             });
         }
 
