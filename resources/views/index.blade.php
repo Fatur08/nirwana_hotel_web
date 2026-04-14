@@ -408,7 +408,7 @@
                             <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                             <input type="text"
                                 id="check_in_tampil"
-                                class="form-control flatpickr"
+                                class="form-control flatpickr w-100"
                                 placeholder="Tanggal Check-Out"
                                 autocomplete="off"
                                 readonly
@@ -435,7 +435,7 @@
                             <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                             <input type="text"
                                 id="check_out_tampil"
-                                class="form-control flatpickr"
+                                class="form-control flatpickr w-100"
                                 placeholder="Tanggal Check-Out"
                                 autocomplete="off"
                                 readonly
