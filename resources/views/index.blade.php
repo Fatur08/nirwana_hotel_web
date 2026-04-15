@@ -87,6 +87,7 @@
         font-size: 16px;
         display: flex;
         align-items: center;
+        line-height: 55px;
     }
 
     /* Khusus flatpickr (karena pakai altInput) */
