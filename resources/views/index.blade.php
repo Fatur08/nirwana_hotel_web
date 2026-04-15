@@ -127,6 +127,49 @@
 
 
 
+
+    /* BAGIAN STYLE INPUT KTP */
+    /* Input file biar sejajar */
+    input[type="file"].form-control {
+        height: 55px !important;
+        font-size: 16px !important;
+        line-height: 55px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Tombol "Choose file" */
+    input[type="file"]::file-selector-button {
+        height: 55px;
+        margin-right: 10px;
+        border: none;
+        padding: 0 15px;
+        cursor: pointer;
+
+
+        background: #0d6efd;
+        color: white;
+        border-radius: 6px;
+    }
+
+
+    input[type="file"] {
+        display: flex;
+        align-items: center;
+    }
+
+
+
+
+
+
+
+
+
+
+
     .login-container {
         text-align: center;
         background: #e8dbb9;
