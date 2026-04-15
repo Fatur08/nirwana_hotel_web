@@ -145,13 +145,9 @@
         height: 55px;
         margin-right: 10px;
         border: none;
+        background: #e9ecef;
         padding: 0 15px;
         cursor: pointer;
-
-
-        background: #0d6efd;
-        color: white;
-        border-radius: 6px;
     }
 
 
