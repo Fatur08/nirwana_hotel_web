@@ -797,52 +797,47 @@
     @push('myscript')
     <script>
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
-        flatpickr(".flatpickr", {
-            dateFormat: "Y-m-d", // format asli (hidden)
-            altInput: true,
-            altFormat: "d F Y", // tampil: 09 April 2026
-            locale: "id",
-            appendTo: document.body,
-            position: "auto center",
-            disableMobile: true,
-            clickOpens: true,
-            allowInput: false,
+        $(document).on('shown.bs.modal', '.modal', function() {
 
-            onChange: function(selectedDates, dateStr, instance) {
+            $(this).find('.flatpickr').each(function() {
 
-                if (!selectedDates.length) return;
+                // Cegah double init
+                if (this._flatpickr) return;
 
-                let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
-                let id = instance.element.id;
+                flatpickr(this, {
+                    dateFormat: "Y-m-d",
+                    altInput: true,
+                    altFormat: "d F Y",
+                    locale: "id",
+                    disableMobile: true,
+                    clickOpens: true,
+                    allowInput: false,
 
-                // FORM PENCARIAN
-                if (id === 'check_in_tampil') {
-                    $('#cari_check_in').val(tanggalDB);
-                } else if (id === 'check_out_tampil') {
-                    $('#cari_check_out').val(tanggalDB);
-                }
+                    onChange: function(selectedDates, dateStr, instance) {
 
-                // FORM MODAL DLX
-                else if (id === 'check_in_tampil_dlx') {
-                    $('#check_in_dlx').val(tanggalDB).trigger('change');
-                } else if (id === 'check_out_tampil_dlx') {
-                    $('#check_out_dlx').val(tanggalDB);
-                }
+                        if (!selectedDates.length) return;
 
-                // FORM MODAL SPR
-                else if (id === 'check_in_tampil_spr') {
-                    $('#check_in_spr').val(tanggalDB).trigger('change');
-                } else if (id === 'check_out_tampil_spr') {
-                    $('#check_out_spr').val(tanggalDB);
-                }
+                        let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
+                        let id = instance.element.id;
 
-                // FORM MODAL STD
-                else if (id === 'check_in_tampil_std') {
-                    $('#check_in_std').val(tanggalDB).trigger('change');
-                } else if (id === 'check_out_tampil_std') {
-                    $('#check_out_std').val(tanggalDB);
-                }
-            }
+                        if (id === 'check_in_tampil_dlx') {
+                            $('#check_in_dlx').val(tanggalDB).trigger('change');
+                        } else if (id === 'check_out_tampil_dlx') {
+                            $('#check_out_dlx').val(tanggalDB);
+                        } else if (id === 'check_in_tampil_spr') {
+                            $('#check_in_spr').val(tanggalDB).trigger('change');
+                        } else if (id === 'check_out_tampil_spr') {
+                            $('#check_out_spr').val(tanggalDB);
+                        } else if (id === 'check_in_tampil_std') {
+                            $('#check_in_std').val(tanggalDB).trigger('change');
+                        } else if (id === 'check_out_tampil_std') {
+                            $('#check_out_std').val(tanggalDB);
+                        }
+                    }
+                });
+
+            });
+
         });
 
 
