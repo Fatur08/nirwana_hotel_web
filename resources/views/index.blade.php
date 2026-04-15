@@ -80,6 +80,36 @@
 
 
 
+    /* Samakan semua input & select */
+    .form-control,
+    .form-select {
+        height: 55px !important;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Khusus flatpickr (karena pakai altInput) */
+    .flatpickr-input {
+        height: 55px !important;
+    }
+
+    /* Biar text di tengah (vertical align) */
+    .input-icon .form-control {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
     .login-container {
         text-align: center;
         background: #e8dbb9;
