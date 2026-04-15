@@ -42,7 +42,7 @@
                         <path d="M8 15h2v2h-2z" />
                     </svg>
                 </span>
-                <input type="text" id="check_in_tampil_dlx" class="form-control flatpickr" style="font-size:16pt;" placeholder="Masukkan Tanggal Check-In" autocomplete="off">
+                <input type="text" id="check_in_tampil_dlx" class="form-control flatpickr w-100" style="font-size:16pt;" placeholder="Masukkan Tanggal Check-In" autocomplete="off">
                 <input type="hidden" id="check_in_dlx" name="check_in_dlx">
             </div>
         </div>
