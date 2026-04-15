@@ -80,25 +80,41 @@
 
 
 
-    /* Samakan semua input & select */
+    /* Semua input & select */
     .form-control,
     .form-select {
         height: 55px !important;
-        font-size: 16px;
+        font-size: 16px !important;
+        line-height: normal !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         display: flex;
         align-items: center;
-        line-height: 55px;
     }
 
-    /* Khusus flatpickr (karena pakai altInput) */
+    /* Khusus text di select biar benar-benar tengah */
+    .form-select {
+        display: block !important;
+        line-height: 55px !important;
+    }
+
+    /* Flatpickr (input hasil clone) */
     .flatpickr-input {
         height: 55px !important;
+        font-size: 16px !important;
+        line-height: 55px !important;
     }
 
-    /* Biar text di tengah (vertical align) */
+    /* Biar icon tidak ganggu alignment */
     .input-icon .form-control {
-        padding-top: 0;
-        padding-bottom: 0;
+        padding-left: 40px;
+    }
+
+    /* Optional biar lebih halus */
+    .form-control,
+    .form-select,
+    .flatpickr-input {
+        border-radius: 8px;
     }
 
 
