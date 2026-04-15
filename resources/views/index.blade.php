@@ -797,6 +797,29 @@
     @push('myscript')
     <script>
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
+        flatpickr(".flatpickr", {
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d F Y",
+            locale: "id",
+            disableMobile: true,
+            allowInput: false,
+
+            onChange: function(selectedDates, dateStr, instance) {
+                if (!selectedDates.length) return;
+
+                let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
+                let id = instance.element.id;
+
+                if (id === 'check_in_tampil') {
+                    $('#cari_check_in').val(tanggalDB);
+                } else if (id === 'check_out_tampil') {
+                    $('#cari_check_out').val(tanggalDB);
+                }
+            }
+        });
+
+
         $(document).on('shown.bs.modal', '.modal', function() {
 
             $(this).find('.flatpickr').each(function() {
