@@ -460,7 +460,7 @@
                             <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                             <input type="text"
                                 id="check_in_tampil"
-                                class="form-control datepicker w-100"
+                                class="form-control flatpickr w-100"
                                 placeholder="Tanggal Check-In"
                                 autocomplete="off"
                                 readonly
@@ -487,7 +487,7 @@
                             <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
                             <input type="text"
                                 id="check_out_tampil"
-                                class="form-control datepicker w-100"
+                                class="form-control flatpickr w-100"
                                 placeholder="Tanggal Check-Out"
                                 autocomplete="off"
                                 readonly
@@ -850,31 +850,100 @@
     <script>
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
         function initFlatpickr(el) {
+            flatpickr(el, {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "d F Y",
+                locale: "id",
+                disableMobile: true,
+                allowInput: false,
 
-            // ❗ cegah double init
-            if (el.litepicker) return;
+                onOpen: function(selectedDates, dateStr, instance) {
+                    setTimeout(() => {
+                        const input = instance.altInput || instance.input;
+                        const rect = input.getBoundingClientRect();
+                        const calendar = instance.calendarContainer;
 
-            const picker = new Litepicker({
-                element: el,
-                format: 'DD MMMM YYYY',
-                lang: 'id-ID',
-                singleMode: true,
+                        // set width sama dengan input
+                        calendar.style.width = rect.width + "px";
 
-                setup: (picker) => {
-                    picker.on('selected', (date) => {
+                        // set posisi X (horizontal)
+                        calendar.style.left = rect.left + window.scrollX + "px";
 
-                        let tanggalDB = date.format('YYYY-MM-DD');
-                        let id = el.id;
+                        // set posisi Y (vertical)
+                        calendar.style.top = rect.bottom + window.scrollY + "px";
+                    }, 10);
+                },
 
-                        // FORM PENCARIAN
-                        if (id === 'check_in_tampil') {
-                            $('#cari_check_in').val(tanggalDB);
-                        } else if (id === 'check_out_tampil') {
-                            $('#cari_check_out').val(tanggalDB);
+                onChange: function(selectedDates, dateStr, instance) {
+                    if (!selectedDates.length) return;
+
+                    let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
+                    let id = instance.element.id;
+
+                    if (id === 'check_in_tampil') {
+                        $('#cari_check_in').val(tanggalDB);
+                    } else if (id === 'check_out_tampil') {
+                        $('#cari_check_out').val(tanggalDB);
+                    }
+                }
+            });
+        }
+
+
+
+        document.querySelectorAll(".flatpickr").forEach(el => {
+            if (!el._flatpickr) {
+                initFlatpickr(el);
+            }
+        });
+
+
+
+
+        $(document).on('shown.bs.modal', '.modal', function() {
+
+            $(this).find('.flatpickr').each(function() {
+
+                // ❗ cegah double init
+                if (this._flatpickr) return;
+
+                flatpickr(this, {
+                    dateFormat: "Y-m-d",
+                    altInput: true,
+                    altFormat: "d F Y",
+                    locale: "id",
+                    disableMobile: true,
+                    clickOpens: true,
+                    allowInput: false,
+
+                    // 🔥 FIX POSISI & LEBAR
+                    onOpen: function(selectedDates, dateStr, instance) {
+                        const input = instance.altInput || instance.input;
+                        const calendar = instance.calendarContainer;
+
+                        // ambil parent input (col-6)
+                        const parent = input.closest('.col-6') || input.parentElement;
+
+                        if (parent) {
+                            const rect = parent.getBoundingClientRect();
+
+                            calendar.style.position = "absolute";
+                            calendar.style.width = rect.width + "px";
+                            calendar.style.left = input.offsetLeft + "px";
+                            calendar.style.top = (input.offsetTop + input.offsetHeight) + "px";
                         }
+                    },
+
+                    onChange: function(selectedDates, dateStr, instance) {
+
+                        if (!selectedDates.length) return;
+
+                        let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
+                        let id = instance.element.id;
 
                         // DLX
-                        else if (id === 'check_in_tampil_dlx') {
+                        if (id === 'check_in_tampil_dlx') {
                             $('#check_in_dlx').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_dlx') {
                             $('#check_out_dlx').val(tanggalDB);
@@ -893,30 +962,9 @@
                         } else if (id === 'check_out_tampil_std') {
                             $('#check_out_std').val(tanggalDB);
                         }
+                    }
+                });
 
-                    });
-                }
-            });
-
-            // tandai sudah di-init
-            el.litepicker = picker;
-        }
-
-
-
-
-        document.querySelectorAll(".datepicker").forEach(el => {
-            initFlatpickr(el);
-        });
-
-
-
-
-
-        $(document).on('shown.bs.modal', '.modal', function() {
-
-            $(this).find('.datepicker').each(function() {
-                initFlatpickr(this);
             });
 
         });
