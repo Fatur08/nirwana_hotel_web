@@ -20,37 +20,64 @@
 
 
     /* Container kalender FULL mengikuti input */
-    /* Parent supaya posisi akurat */
-    .input-icon {
-        position: relative;
-    }
-
-    /* Calendar mengikuti lebar input */
     .flatpickr-calendar {
-        width: auto !important;
+        width: 100% !important;
         max-width: 100% !important;
+        font-size: 16px;
+        box-sizing: border-box;
     }
 
-    /* Supaya tidak kepotong tapi tidak maksa melebar */
+    /* Grid hari jadi 7 kolom full */
     .flatpickr-days {
-        width: auto !important;
+        width: 100% !important;
     }
 
     .dayContainer {
-        min-width: auto !important;
+        width: 100% !important;
+        min-width: 100% !important;
+
+        display: grid !important;
+        grid-template-columns: repeat(7, 1fr);
     }
 
-    /* Hari */
+    /* Hari (tanggal) */
     .flatpickr-day {
+        width: 100% !important;
         height: 50px;
         line-height: 50px;
+        font-size: 15px;
     }
 
-    /* Responsive */
+    /* Header bulan & tahun */
+    .flatpickr-current-month {
+        font-size: 18px;
+    }
+
+    /* Tombol prev/next */
+    .flatpickr-prev-month,
+    .flatpickr-next-month {
+        font-size: 18px;
+    }
+
+    /* Header container */
+    .flatpickr-months {
+        width: 100% !important;
+    }
+
+    /* Responsive HP / Tablet */
     @media (max-width: 768px) {
+        .flatpickr-calendar {
+            font-size: 18px;
+        }
+
         .flatpickr-day {
             height: 55px;
             line-height: 55px;
+            font-size: 17px;
+        }
+
+        .flatpickr-current-month {
+            font-size: 20px;
         }
     }
 
@@ -867,56 +894,29 @@
     @push('myscript')
     <script>
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
-        function initFlatpickr(el) {
-            flatpickr(el, {
-                dateFormat: "Y-m-d",
-                altInput: true,
-                altFormat: "d F Y",
-                locale: "id",
-                disableMobile: true,
-                allowInput: false,
+        flatpickr(".flatpickr", {
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d F Y",
+            locale: "id",
 
-                onOpen: function(selectedDates, dateStr, instance) {
-                    setTimeout(() => {
-                        const input = instance.altInput || instance.input;
-                        const rect = input.getBoundingClientRect();
-                        const calendar = instance.calendarContainer;
+            position: "below",
+            disableMobile: true,
+            allowInput: false,
 
-                        // set width sama dengan input
-                        calendar.style.width = rect.width + "px";
+            onChange: function(selectedDates, dateStr, instance) {
+                if (!selectedDates.length) return;
 
-                        // set posisi X (horizontal)
-                        calendar.style.left = rect.left + window.scrollX + "px";
+                let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
+                let id = instance.element.id;
 
-                        // set posisi Y (vertical)
-                        calendar.style.top = rect.bottom + window.scrollY + "px";
-                    }, 10);
-                },
-
-                onChange: function(selectedDates, dateStr, instance) {
-                    if (!selectedDates.length) return;
-
-                    let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
-                    let id = instance.element.id;
-
-                    if (id === 'check_in_tampil') {
-                        $('#cari_check_in').val(tanggalDB);
-                    } else if (id === 'check_out_tampil') {
-                        $('#cari_check_out').val(tanggalDB);
-                    }
+                if (id === 'check_in_tampil') {
+                    $('#cari_check_in').val(tanggalDB);
+                } else if (id === 'check_out_tampil') {
+                    $('#cari_check_out').val(tanggalDB);
                 }
-            });
-        }
-
-
-
-        document.querySelectorAll(".flatpickr").forEach(el => {
-            if (!el._flatpickr) {
-                initFlatpickr(el);
             }
         });
-
-
 
 
         $(document).on('shown.bs.modal', '.modal', function() {
