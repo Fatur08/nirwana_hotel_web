@@ -849,52 +849,43 @@
     @push('myscript')
     <script>
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
-        function initFlatpickr(el) {
-            flatpickr(el, {
-                dateFormat: "Y-m-d",
-                altInput: true,
-                altFormat: "d F Y",
-                locale: "id",
-                disableMobile: true,
-                allowInput: false,
+        flatpickr(".flatpickr", {
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "d F Y",
+            locale: "id",
 
-                onOpen: function(selectedDates, dateStr, instance) {
-                    setTimeout(() => {
-                        const input = instance.altInput || instance.input;
-                        const rect = input.getBoundingClientRect();
-                        const calendar = instance.calendarContainer;
+            appendTo: document.body,
+            position: "auto center",
 
-                        // set width sama dengan input
-                        calendar.style.width = rect.width + "px";
+            disableMobile: true, // 🔥 WAJIB
+            clickOpens: true,
+            allowInput: false,
 
-                        // set posisi X (horizontal)
-                        calendar.style.left = rect.left + window.scrollX + "px";
+            onChange: function(selectedDates, dateStr, instance) {
 
-                        // set posisi Y (vertical)
-                        calendar.style.top = rect.bottom + window.scrollY + "px";
-                    }, 10);
-                },
+                if (!selectedDates.length) return;
 
-                onChange: function(selectedDates, dateStr, instance) {
-                    if (!selectedDates.length) return;
+                let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
+                let id = instance.element.id;
 
-                    let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
-                    let id = instance.element.id;
-
-                    if (id === 'check_in_tampil') {
-                        $('#cari_check_in').val(tanggalDB);
-                    } else if (id === 'check_out_tampil') {
-                        $('#cari_check_out').val(tanggalDB);
-                    }
+                if (id === 'check_in_tampil') {
+                    $('#cari_check_in').val(tanggalDB);
+                } else if (id === 'check_out_tampil') {
+                    $('#cari_check_out').val(tanggalDB);
+                } else if (id === 'check_in_tampil_dlx') {
+                    $('#check_in_dlx').val(tanggalDB).trigger('change');
+                } else if (id === 'check_out_tampil_dlx') {
+                    $('#check_out_dlx').val(tanggalDB);
+                } else if (id === 'check_in_tampil_spr') {
+                    $('#check_in_spr').val(tanggalDB).trigger('change');
+                } else if (id === 'check_out_tampil_spr') {
+                    $('#check_out_spr').val(tanggalDB);
+                } else if (id === 'check_in_tampil_std') {
+                    $('#check_in_std').val(tanggalDB).trigger('change');
+                } else if (id === 'check_out_tampil_std') {
+                    $('#check_out_std').val(tanggalDB);
                 }
-            });
-        }
-
-
-
-        document.querySelectorAll(".flatpickr").forEach(el => {
-            if (!el._flatpickr) {
-                initFlatpickr(el);
             }
         });
 
@@ -905,7 +896,7 @@
 
             $(this).find('.flatpickr').each(function() {
 
-                // ❗ cegah double init
+                // Cegah double init
                 if (this._flatpickr) return;
 
                 flatpickr(this, {
@@ -917,24 +908,6 @@
                     clickOpens: true,
                     allowInput: false,
 
-                    // 🔥 FIX POSISI & LEBAR
-                    onOpen: function(selectedDates, dateStr, instance) {
-                        const input = instance.altInput || instance.input;
-                        const calendar = instance.calendarContainer;
-
-                        // ambil parent input (col-6)
-                        const parent = input.closest('.col-6') || input.parentElement;
-
-                        if (parent) {
-                            const rect = parent.getBoundingClientRect();
-
-                            calendar.style.position = "absolute";
-                            calendar.style.width = rect.width + "px";
-                            calendar.style.left = input.offsetLeft + "px";
-                            calendar.style.top = (input.offsetTop + input.offsetHeight) + "px";
-                        }
-                    },
-
                     onChange: function(selectedDates, dateStr, instance) {
 
                         if (!selectedDates.length) return;
@@ -942,22 +915,15 @@
                         let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
                         let id = instance.element.id;
 
-                        // DLX
                         if (id === 'check_in_tampil_dlx') {
                             $('#check_in_dlx').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_dlx') {
                             $('#check_out_dlx').val(tanggalDB);
-                        }
-
-                        // SPR
-                        else if (id === 'check_in_tampil_spr') {
+                        } else if (id === 'check_in_tampil_spr') {
                             $('#check_in_spr').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_spr') {
                             $('#check_out_spr').val(tanggalDB);
-                        }
-
-                        // STD
-                        else if (id === 'check_in_tampil_std') {
+                        } else if (id === 'check_in_tampil_std') {
                             $('#check_in_std').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_std') {
                             $('#check_out_std').val(tanggalDB);
