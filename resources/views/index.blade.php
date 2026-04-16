@@ -19,54 +19,41 @@
 
 
 
-    /* Container kalender */
+    /* Perbesar container kalender */
     .flatpickr-calendar {
-        width: auto !important;
-        max-width: 100% !important;
-        font-size: 16px;
+        transform: scale(1.2);
+        transform-origin: top left;
+        width: 100% !important;
     }
 
-    /* Hari (tanggal) */
+    /* Perbesar hari */
     .flatpickr-day {
-        font-size: 15px;
-        height: 48px;
-        line-height: 48px;
+        font-size: 14px;
+        height: 45px;
+        line-height: 45px;
     }
 
-    /* Header bulan & tahun */
+    /* Perbesar header bulan & tahun */
     .flatpickr-current-month {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     /* Tombol prev/next */
     .flatpickr-prev-month,
     .flatpickr-next-month {
-        font-size: 18px;
+        transform: scale(1.2);
     }
 
-    /* Supaya tidak kepotong */
-    .flatpickr-days {
-        width: 100% !important;
-    }
-
-    .dayContainer {
-        min-width: 100% !important;
-    }
-
-    /* Responsive HP / Tablet */
+    /* Responsive khusus HP */
     @media (max-width: 768px) {
         .flatpickr-calendar {
-            font-size: 18px;
+            transform: scale(1.3);
         }
 
         .flatpickr-day {
-            height: 55px;
-            line-height: 55px;
-            font-size: 17px;
-        }
-
-        .flatpickr-current-month {
-            font-size: 20px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
         }
     }
 
