@@ -19,18 +19,33 @@
 
 
 
-    /* Container kalender */
+    /* Container kalender FULL mengikuti input */
     .flatpickr-calendar {
-        width: auto !important;
+        width: 100% !important;
         max-width: 100% !important;
         font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Grid hari jadi 7 kolom full */
+    .flatpickr-days {
+        width: 100% !important;
+    }
+
+    .dayContainer {
+        width: 100% !important;
+        min-width: 100% !important;
+
+        display: grid !important;
+        grid-template-columns: repeat(7, 1fr);
     }
 
     /* Hari (tanggal) */
     .flatpickr-day {
+        width: 100% !important;
+        height: 50px;
+        line-height: 50px;
         font-size: 15px;
-        height: 48px;
-        line-height: 48px;
     }
 
     /* Header bulan & tahun */
@@ -44,13 +59,9 @@
         font-size: 18px;
     }
 
-    /* Supaya tidak kepotong */
-    .flatpickr-days {
+    /* Header container */
+    .flatpickr-months {
         width: 100% !important;
-    }
-
-    .dayContainer {
-        min-width: 100% !important;
     }
 
     /* Responsive HP / Tablet */
@@ -888,6 +899,8 @@
             altInput: true,
             altFormat: "d F Y",
             locale: "id",
+
+            position: "below",
             disableMobile: true,
             allowInput: false,
 
