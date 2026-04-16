@@ -856,7 +856,7 @@
             locale: "id",
 
             appendTo: document.body,
-            position: "auto center",
+            position: "auto",
 
             disableMobile: true, // 🔥 WAJIB
             clickOpens: true,
