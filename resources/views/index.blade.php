@@ -896,7 +896,6 @@
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
         flatpickr(".flatpickr", {
             dateFormat: "Y-m-d",
-            hai
             altInput: true,
             altFormat: "d F Y",
             locale: "id",
