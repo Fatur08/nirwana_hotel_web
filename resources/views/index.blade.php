@@ -19,44 +19,21 @@
 
 
 
-    /* Parent supaya posisi akurat */
+    /* Parent wajib */
     .input-icon {
         position: relative;
     }
 
-    /* Calendar mengikuti lebar input */
+    /* Calendar */
     .flatpickr-calendar {
         width: auto !important;
-        min-width: unset !important;
-        max-width: 100% !important;
-
-        left: 0 !important;
-        right: auto !important;
-
-        box-sizing: border-box;
-    }
-
-    /* Supaya tidak kepotong tapi tidak maksa melebar */
-    .flatpickr-days {
-        width: auto !important;
-    }
-
-    .dayContainer {
-        min-width: auto !important;
+        max-width: none !important;
     }
 
     /* Hari */
     .flatpickr-day {
         height: 50px;
         line-height: 50px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .flatpickr-day {
-            height: 55px;
-            line-height: 55px;
-        }
     }
 
 
