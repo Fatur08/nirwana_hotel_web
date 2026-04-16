@@ -20,26 +20,36 @@
 
 
     /* Container kalender FULL mengikuti input */
+    /* Parent supaya posisi akurat */
+    .input-icon {
+        position: relative;
+    }
+
+    /* Calendar mengikuti lebar input */
     .flatpickr-calendar {
         width: auto !important;
-        min-width: 100% !important;
+        min-width: unset !important;
         max-width: 100% !important;
+
+        left: 0 !important;
+        right: auto !important;
+
         box-sizing: border-box;
+    }
+
+    /* Supaya tidak kepotong tapi tidak maksa melebar */
+    .flatpickr-days {
+        width: auto !important;
+    }
+
+    .dayContainer {
+        min-width: auto !important;
     }
 
     /* Hari */
     .flatpickr-day {
         height: 50px;
         line-height: 50px;
-    }
-
-    /* Supaya tidak kepotong */
-    .flatpickr-days {
-        width: 100% !important;
-    }
-
-    .dayContainer {
-        min-width: 100% !important;
     }
 
     /* Responsive */
