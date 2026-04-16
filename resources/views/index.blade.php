@@ -923,7 +923,7 @@
 
             $(this).find('.flatpickr').each(function() {
 
-                // ❗ cegah double init
+                // Cegah double init
                 if (this._flatpickr) return;
 
                 flatpickr(this, {
@@ -935,24 +935,6 @@
                     clickOpens: true,
                     allowInput: false,
 
-                    // 🔥 FIX POSISI & LEBAR
-                    onOpen: function(selectedDates, dateStr, instance) {
-                        setTimeout(() => {
-                            const input = instance.altInput || instance.input;
-                            const rect = input.getBoundingClientRect();
-                            const calendar = instance.calendarContainer;
-
-                            // samakan lebar dengan input
-                            calendar.style.width = rect.width + "px";
-
-                            // posisi X (biar tidak ke kiri terus)
-                            calendar.style.left = rect.left + window.scrollX + "px";
-
-                            // posisi Y (tepat di bawah input)
-                            calendar.style.top = rect.bottom + window.scrollY + "px";
-                        }, 10);
-                    },
-
                     onChange: function(selectedDates, dateStr, instance) {
 
                         if (!selectedDates.length) return;
@@ -960,22 +942,15 @@
                         let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
                         let id = instance.element.id;
 
-                        // DLX
                         if (id === 'check_in_tampil_dlx') {
                             $('#check_in_dlx').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_dlx') {
                             $('#check_out_dlx').val(tanggalDB);
-                        }
-
-                        // SPR
-                        else if (id === 'check_in_tampil_spr') {
+                        } else if (id === 'check_in_tampil_spr') {
                             $('#check_in_spr').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_spr') {
                             $('#check_out_spr').val(tanggalDB);
-                        }
-
-                        // STD
-                        else if (id === 'check_in_tampil_std') {
+                        } else if (id === 'check_in_tampil_std') {
                             $('#check_in_std').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_std') {
                             $('#check_out_std').val(tanggalDB);
