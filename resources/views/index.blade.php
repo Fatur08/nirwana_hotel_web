@@ -19,41 +19,65 @@
 
 
 
-    /* Perbesar container kalender */
+    /* Container kalender FULL mengikuti input */
     .flatpickr-calendar {
-        transform: scale(1.2);
-        transform-origin: top left;
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Grid hari jadi 7 kolom full */
+    .flatpickr-days {
         width: 100% !important;
     }
 
-    /* Perbesar hari */
-    .flatpickr-day {
-        font-size: 14px;
-        height: 45px;
-        line-height: 45px;
+    .dayContainer {
+        width: 100% !important;
+        min-width: 100% !important;
+
+        display: grid !important;
+        grid-template-columns: repeat(7, 1fr);
     }
 
-    /* Perbesar header bulan & tahun */
+    /* Hari (tanggal) */
+    .flatpickr-day {
+        width: 100% !important;
+        height: 50px;
+        line-height: 50px;
+        font-size: 15px;
+    }
+
+    /* Header bulan & tahun */
     .flatpickr-current-month {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     /* Tombol prev/next */
     .flatpickr-prev-month,
     .flatpickr-next-month {
-        transform: scale(1.2);
+        font-size: 18px;
     }
 
-    /* Responsive khusus HP */
+    /* Header container */
+    .flatpickr-months {
+        width: 100% !important;
+    }
+
+    /* Responsive HP / Tablet */
     @media (max-width: 768px) {
         .flatpickr-calendar {
-            transform: scale(1.3);
+            font-size: 18px;
         }
 
         .flatpickr-day {
-            height: 50px;
-            line-height: 50px;
-            font-size: 16px;
+            height: 55px;
+            line-height: 55px;
+            font-size: 17px;
+        }
+
+        .flatpickr-current-month {
+            font-size: 20px;
         }
     }
 
