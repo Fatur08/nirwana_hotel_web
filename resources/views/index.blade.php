@@ -28,13 +28,7 @@
     /* Calendar mengikuti lebar input */
     .flatpickr-calendar {
         width: auto !important;
-        min-width: unset !important;
         max-width: 100% !important;
-
-        left: 0 !important;
-        right: auto !important;
-
-        box-sizing: border-box;
     }
 
     /* Supaya tidak kepotong tapi tidak maksa melebar */
@@ -873,36 +867,63 @@
     @push('myscript')
     <script>
         // BAGIAN DARI FORM PENCARIAN TANGGAL (PAKAI FLATPICKR)
-        flatpickr(".flatpickr", {
-            dateFormat: "Y-m-d",
-            altInput: true,
-            altFormat: "d F Y",
-            locale: "id",
+        function initFlatpickr(el) {
+            flatpickr(el, {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "d F Y",
+                locale: "id",
+                disableMobile: true,
+                allowInput: false,
 
-            position: "below",
-            disableMobile: true,
-            allowInput: false,
+                onOpen: function(selectedDates, dateStr, instance) {
+                    setTimeout(() => {
+                        const input = instance.altInput || instance.input;
+                        const rect = input.getBoundingClientRect();
+                        const calendar = instance.calendarContainer;
 
-            onChange: function(selectedDates, dateStr, instance) {
-                if (!selectedDates.length) return;
+                        // set width sama dengan input
+                        calendar.style.width = rect.width + "px";
 
-                let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
-                let id = instance.element.id;
+                        // set posisi X (horizontal)
+                        calendar.style.left = rect.left + window.scrollX + "px";
 
-                if (id === 'check_in_tampil') {
-                    $('#cari_check_in').val(tanggalDB);
-                } else if (id === 'check_out_tampil') {
-                    $('#cari_check_out').val(tanggalDB);
+                        // set posisi Y (vertical)
+                        calendar.style.top = rect.bottom + window.scrollY + "px";
+                    }, 10);
+                },
+
+                onChange: function(selectedDates, dateStr, instance) {
+                    if (!selectedDates.length) return;
+
+                    let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
+                    let id = instance.element.id;
+
+                    if (id === 'check_in_tampil') {
+                        $('#cari_check_in').val(tanggalDB);
+                    } else if (id === 'check_out_tampil') {
+                        $('#cari_check_out').val(tanggalDB);
+                    }
                 }
+            });
+        }
+
+
+
+        document.querySelectorAll(".flatpickr").forEach(el => {
+            if (!el._flatpickr) {
+                initFlatpickr(el);
             }
         });
+
+
 
 
         $(document).on('shown.bs.modal', '.modal', function() {
 
             $(this).find('.flatpickr').each(function() {
 
-                // Cegah double init
+                // ❗ cegah double init
                 if (this._flatpickr) return;
 
                 flatpickr(this, {
@@ -914,6 +935,24 @@
                     clickOpens: true,
                     allowInput: false,
 
+                    // 🔥 FIX POSISI & LEBAR
+                    onOpen: function(selectedDates, dateStr, instance) {
+                        setTimeout(() => {
+                            const input = instance.altInput || instance.input;
+                            const rect = input.getBoundingClientRect();
+                            const calendar = instance.calendarContainer;
+
+                            // samakan lebar dengan input
+                            calendar.style.width = rect.width + "px";
+
+                            // posisi X (biar tidak ke kiri terus)
+                            calendar.style.left = rect.left + window.scrollX + "px";
+
+                            // posisi Y (tepat di bawah input)
+                            calendar.style.top = rect.bottom + window.scrollY + "px";
+                        }, 10);
+                    },
+
                     onChange: function(selectedDates, dateStr, instance) {
 
                         if (!selectedDates.length) return;
@@ -921,15 +960,22 @@
                         let tanggalDB = instance.formatDate(selectedDates[0], "Y-m-d");
                         let id = instance.element.id;
 
+                        // DLX
                         if (id === 'check_in_tampil_dlx') {
                             $('#check_in_dlx').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_dlx') {
                             $('#check_out_dlx').val(tanggalDB);
-                        } else if (id === 'check_in_tampil_spr') {
+                        }
+
+                        // SPR
+                        else if (id === 'check_in_tampil_spr') {
                             $('#check_in_spr').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_spr') {
                             $('#check_out_spr').val(tanggalDB);
-                        } else if (id === 'check_in_tampil_std') {
+                        }
+
+                        // STD
+                        else if (id === 'check_in_tampil_std') {
                             $('#check_in_std').val(tanggalDB).trigger('change');
                         } else if (id === 'check_out_tampil_std') {
                             $('#check_out_std').val(tanggalDB);
