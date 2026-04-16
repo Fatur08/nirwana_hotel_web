@@ -19,39 +19,21 @@
 
 
 
-    /* Container kalender FULL mengikuti input */
-    /* Parent supaya posisi akurat */
+    /* Parent wajib */
     .input-icon {
         position: relative;
     }
 
-    /* Calendar mengikuti lebar input */
+    /* Calendar */
     .flatpickr-calendar {
         width: auto !important;
-        max-width: 100% !important;
-    }
-
-    /* Supaya tidak kepotong tapi tidak maksa melebar */
-    .flatpickr-days {
-        width: auto !important;
-    }
-
-    .dayContainer {
-        min-width: auto !important;
+        max-width: none !important;
     }
 
     /* Hari */
     .flatpickr-day {
         height: 50px;
         line-height: 50px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .flatpickr-day {
-            height: 55px;
-            line-height: 55px;
-        }
     }
 
 
@@ -937,20 +919,20 @@
 
                     // 🔥 FIX POSISI & LEBAR
                     onOpen: function(selectedDates, dateStr, instance) {
-                        setTimeout(() => {
-                            const input = instance.altInput || instance.input;
-                            const rect = input.getBoundingClientRect();
-                            const calendar = instance.calendarContainer;
+                        const input = instance.altInput || instance.input;
+                        const calendar = instance.calendarContainer;
 
-                            // samakan lebar dengan input
+                        // ambil parent input (col-6)
+                        const parent = input.closest('.col-6') || input.parentElement;
+
+                        if (parent) {
+                            const rect = parent.getBoundingClientRect();
+
+                            calendar.style.position = "absolute";
                             calendar.style.width = rect.width + "px";
-
-                            // posisi X (biar tidak ke kiri terus)
-                            calendar.style.left = rect.left + window.scrollX + "px";
-
-                            // posisi Y (tepat di bawah input)
-                            calendar.style.top = rect.bottom + window.scrollY + "px";
-                        }, 10);
+                            calendar.style.left = input.offsetLeft + "px";
+                            calendar.style.top = (input.offsetTop + input.offsetHeight) + "px";
+                        }
                     },
 
                     onChange: function(selectedDates, dateStr, instance) {
