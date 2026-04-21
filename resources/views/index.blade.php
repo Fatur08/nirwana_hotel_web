@@ -1322,6 +1322,8 @@
         // Alert Untuk Input Data DLX
         $(document).on('submit', '#frmTambahModalDLX', function(e) {
 
+            e.preventDefault(); // 🔥 WAJIB di sini
+
             var nama_tamu = $("#nama_tamu_dlx").val();
             var check_in = $("#check_in_tampil_dlx").val();
             var check_out = $("#check_out_tampil_dlx").val();
@@ -1331,7 +1333,6 @@
             var sumber = $("#sumber_pembayaran_dlx").val();
 
             function showError(pesan, el) {
-                e.preventDefault(); // 🔥 penting
                 Swal.fire({
                     title: 'Warning!',
                     text: pesan,
@@ -1376,6 +1377,8 @@
                 return;
             }
 
+            // ✅ KALAU LOLOS SEMUA → BARU SUBMIT MANUAL
+            this.submit();
         });
 
 
