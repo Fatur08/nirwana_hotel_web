@@ -1319,6 +1319,74 @@
 
 
 
+        // Alert Untuk Input Data DLX
+        $(document).ready(function() {
+
+            $("#frmTambahModalDLX").submit(function(e) {
+
+                var nama_tamu = $("#nama_tamu_dlx").val();
+                var check_in = $("#check_in_tampil_dlx").val();
+                var check_out = $("#check_out_tampil_dlx").val();
+                var jumlah_kamar = $("#jumlah_kamar_dipesan_dlx").val();
+                var foto_ktp = $("#foto_ktp_dlx").val();
+                var metode = $("#metode_pembayaran_dlx").val();
+                var sumber = $("#sumber_pembayaran_dlx").val();
+
+                function showError(pesan, el) {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: pesan,
+                        icon: 'warning'
+                    }).then(() => {
+                        if (el) $(el).focus();
+                    });
+                }
+
+                if (nama_tamu === "") {
+                    showError('Nama Tamu Harus Diisi', "#nama_tamu_dlx");
+                    return false;
+                }
+
+                if (check_in === "") {
+                    showError('Tanggal Check In Harus Diisi', "#check_in_tampil_dlx");
+                    return false;
+                }
+
+                if (check_out === "") {
+                    showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_dlx");
+                    return false;
+                }
+
+                if (jumlah_kamar === "" || jumlah_kamar === null) {
+                    showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_dlx");
+                    return false;
+                }
+
+                if (foto_ktp === "") {
+                    showError('Foto KTP Harus Diisi', "#foto_ktp_dlx");
+                    return false;
+                }
+
+                if (metode === "") {
+                    showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_dlx");
+                    return false;
+                }
+
+                if (metode === "online" && sumber === "") {
+                    showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_dlx");
+                    return false;
+                }
+
+                return true;
+            });
+
+        });
+
+
+
+
+
+
 
 
 
