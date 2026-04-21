@@ -1293,6 +1293,7 @@
             var foto_ktp = $("#foto_ktp_dlx").val();
             var metode = $("#metode_pembayaran_dlx").val();
             var sumber = $("#sumber_pembayaran_dlx").val();
+            var request = $("#request_dlx").val();
 
             function showError(pesan, el) {
                 Swal.fire({
@@ -1304,7 +1305,8 @@
                 });
             }
 
-            // VALIDASI
+            // ================= VALIDASI UTAMA =================
+
             if (nama_tamu === "") {
                 showError('Nama Tamu Harus Diisi', "#nama_tamu_dlx");
                 return;
@@ -1325,11 +1327,35 @@
                 return;
             }
 
+            // ================= VALIDASI JENIS BED =================
+            let bedKosong = false;
+
+            $('.select-bed-dlx').each(function() {
+                if ($(this).val() === "") {
+                    bedKosong = true;
+                    $(this).focus();
+                    return false; // stop loop
+                }
+            });
+
+            if (bedKosong) {
+                showError('Semua Jenis Bed Harus Dipilih');
+                return;
+            }
+
+            // ================= VALIDASI FOTO =================
             if (foto_ktp === "") {
                 showError('Foto KTP Harus Diisi', "#foto_ktp_dlx");
                 return;
             }
 
+            // ================= VALIDASI REQUEST =================
+            if (request === "") {
+                showError('Request Harus Dipilih', "#request_dlx");
+                return;
+            }
+
+            // ================= VALIDASI PEMBAYARAN =================
             if (metode === "") {
                 showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_dlx");
                 return;
@@ -1340,7 +1366,7 @@
                 return;
             }
 
-            // ✅ KALAU LOLOS → AJAX JALAN DI SINI
+            // ================= AJAX =================
             let formData = new FormData(this);
 
             $.ajax({
