@@ -1281,48 +1281,10 @@
 
 
 
+        // Alert Untuk Input DLX
         $(document).on('submit', '#frmTambahModalDLX', function(e) {
 
             e.preventDefault();
-
-            let formData = new FormData(this);
-
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                processData: false,
-                contentType: false,
-
-                success: function(res) {
-
-                    alert('Data berhasil disimpan');
-
-                    $('#modal-DLX').modal('hide');
-
-                    location.reload();
-
-                },
-
-                error: function(xhr) {
-
-                    console.log(xhr.responseText);
-                    alert('Terjadi kesalahan');
-
-                }
-            });
-
-        });
-
-
-
-
-
-
-        // Alert Untuk Input Data DLX
-        $(document).on('submit', '#frmTambahModalDLX', function(e) {
-
-            e.preventDefault(); // 🔥 WAJIB di sini
 
             var nama_tamu = $("#nama_tamu_dlx").val();
             var check_in = $("#check_in_tampil_dlx").val();
@@ -1342,6 +1304,7 @@
                 });
             }
 
+            // VALIDASI
             if (nama_tamu === "") {
                 showError('Nama Tamu Harus Diisi', "#nama_tamu_dlx");
                 return;
@@ -1377,8 +1340,41 @@
                 return;
             }
 
-            // ✅ KALAU LOLOS SEMUA → BARU SUBMIT MANUAL
-            this.submit();
+            // ✅ KALAU LOLOS → AJAX JALAN DI SINI
+            let formData = new FormData(this);
+
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+                processData: false,
+                contentType: false,
+
+                success: function(res) {
+
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil disimpan',
+                        icon: 'success'
+                    }).then(() => {
+                        $('#modal-DLX').modal('hide');
+                        location.reload();
+                    });
+
+                },
+
+                error: function(xhr) {
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan',
+                        icon: 'error'
+                    });
+
+                    console.log(xhr.responseText);
+                }
+            });
+
         });
 
 
