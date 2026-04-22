@@ -1746,7 +1746,7 @@
             // ================= VALIDASI JENIS BED =================
             let bedKosong = false;
 
-            $('.select-bed-dlx').each(function() {
+            $('.select-bed-spr').each(function() {
                 if ($(this).val() === "") {
                     bedKosong = true;
                     $(this).focus();
@@ -2160,7 +2160,7 @@
             // ================= VALIDASI JENIS BED =================
             let bedKosong = false;
 
-            $('.select-bed-dlx').each(function() {
+            $('.select-bed-std').each(function() {
                 if ($(this).val() === "") {
                     bedKosong = true;
                     $(this).focus();
