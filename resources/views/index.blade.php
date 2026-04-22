@@ -1692,10 +1692,97 @@
 
 
 
+
+
+
+
+
+        // Alert Untuk Input SPR
         $(document).on('submit', '#frmTambahModalSPR', function(e) {
 
             e.preventDefault();
 
+            var nama_tamu = $("#nama_tamu_spr").val();
+            var check_in = $("#check_in_tampil_spr").val();
+            var check_out = $("#check_out_tampil_spr").val();
+            var jumlah_kamar = $("#jumlah_kamar_dipesan_spr").val();
+            var foto_ktp = $("#foto_ktp_spr").val();
+            var metode = $("#metode_pembayaran_spr").val();
+            var sumber = $("#sumber_pembayaran_spr").val();
+            var request = $("#request_spr").val();
+
+            function showError(pesan, el) {
+                Swal.fire({
+                    title: 'Warning!',
+                    text: pesan,
+                    icon: 'warning'
+                }).then(() => {
+                    if (el) $(el).focus();
+                });
+            }
+
+            // ================= VALIDASI UTAMA =================
+
+            if (nama_tamu === "") {
+                showError('Nama Tamu Harus Diisi', "#nama_tamu_spr");
+                return;
+            }
+
+            if (check_in === "") {
+                showError('Tanggal Check In Harus Diisi', "#check_in_tampil_spr");
+                return;
+            }
+
+            if (check_out === "") {
+                showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_spr");
+                return;
+            }
+
+            if (jumlah_kamar === "" || jumlah_kamar === null) {
+                showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_spr");
+                return;
+            }
+
+            // ================= VALIDASI JENIS BED =================
+            let bedKosong = false;
+
+            $('.select-bed-dlx').each(function() {
+                if ($(this).val() === "") {
+                    bedKosong = true;
+                    $(this).focus();
+                    return false; // stop loop
+                }
+            });
+
+            if (bedKosong) {
+                showError('Semua Jenis Bed Harus Dipilih');
+                return;
+            }
+
+            // ================= VALIDASI FOTO =================
+            if (foto_ktp === "") {
+                showError('Foto KTP Harus Diisi', "#foto_ktp_spr");
+                return;
+            }
+
+            // ================= VALIDASI REQUEST =================
+            if (request === "") {
+                showError('Request Harus Dipilih', "#request_spr");
+                return;
+            }
+
+            // ================= VALIDASI PEMBAYARAN =================
+            if (metode === "") {
+                showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_spr");
+                return;
+            }
+
+            if (metode === "online" && sumber === "") {
+                showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_spr");
+                return;
+            }
+
+            // ================= AJAX =================
             let formData = new FormData(this);
 
             $.ajax({
@@ -1707,23 +1794,47 @@
 
                 success: function(res) {
 
-                    alert('Data berhasil disimpan');
-
-                    $('#modal-SPR').modal('hide');
-
-                    location.reload();
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil disimpan',
+                        icon: 'success'
+                    }).then(() => {
+                        $('#modal-SPR').modal('hide');
+                        location.reload();
+                    });
 
                 },
 
                 error: function(xhr) {
 
-                    console.log(xhr.responseText);
-                    alert('Terjadi kesalahan');
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan',
+                        icon: 'error'
+                    });
 
+                    console.log(xhr.responseText);
                 }
             });
 
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2000,10 +2111,92 @@
 
 
 
+        // Alert Untuk Input STD
         $(document).on('submit', '#frmTambahModalSTD', function(e) {
 
             e.preventDefault();
 
+            var nama_tamu = $("#nama_tamu_std").val();
+            var check_in = $("#check_in_tampil_std").val();
+            var check_out = $("#check_out_tampil_std").val();
+            var jumlah_kamar = $("#jumlah_kamar_dipesan_std").val();
+            var foto_ktp = $("#foto_ktp_std").val();
+            var metode = $("#metode_pembayaran_std").val();
+            var sumber = $("#sumber_pembayaran_std").val();
+            var request = $("#request_std").val();
+
+            function showError(pesan, el) {
+                Swal.fire({
+                    title: 'Warning!',
+                    text: pesan,
+                    icon: 'warning'
+                }).then(() => {
+                    if (el) $(el).focus();
+                });
+            }
+
+            // ================= VALIDASI UTAMA =================
+
+            if (nama_tamu === "") {
+                showError('Nama Tamu Harus Diisi', "#nama_tamu_std");
+                return;
+            }
+
+            if (check_in === "") {
+                showError('Tanggal Check In Harus Diisi', "#check_in_tampil_std");
+                return;
+            }
+
+            if (check_out === "") {
+                showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_std");
+                return;
+            }
+
+            if (jumlah_kamar === "" || jumlah_kamar === null) {
+                showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_std");
+                return;
+            }
+
+            // ================= VALIDASI JENIS BED =================
+            let bedKosong = false;
+
+            $('.select-bed-dlx').each(function() {
+                if ($(this).val() === "") {
+                    bedKosong = true;
+                    $(this).focus();
+                    return false; // stop loop
+                }
+            });
+
+            if (bedKosong) {
+                showError('Semua Jenis Bed Harus Dipilih');
+                return;
+            }
+
+            // ================= VALIDASI FOTO =================
+            if (foto_ktp === "") {
+                showError('Foto KTP Harus Diisi', "#foto_ktp_std");
+                return;
+            }
+
+            // ================= VALIDASI REQUEST =================
+            if (request === "") {
+                showError('Request Harus Dipilih', "#request_std");
+                return;
+            }
+
+            // ================= VALIDASI PEMBAYARAN =================
+            if (metode === "") {
+                showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_std");
+                return;
+            }
+
+            if (metode === "online" && sumber === "") {
+                showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_std");
+                return;
+            }
+
+            // ================= AJAX =================
             let formData = new FormData(this);
 
             $.ajax({
@@ -2015,19 +2208,26 @@
 
                 success: function(res) {
 
-                    alert('Data berhasil disimpan');
-
-                    $('#modal-SPR').modal('hide');
-
-                    location.reload();
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil disimpan',
+                        icon: 'success'
+                    }).then(() => {
+                        $('#modal-STD').modal('hide');
+                        location.reload();
+                    });
 
                 },
 
                 error: function(xhr) {
 
-                    console.log(xhr.responseText);
-                    alert('Terjadi kesalahan');
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan',
+                        icon: 'error'
+                    });
 
+                    console.log(xhr.responseText);
                 }
             });
 
