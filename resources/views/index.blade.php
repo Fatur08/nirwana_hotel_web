@@ -151,7 +151,7 @@
             font-weight: bold;
             max-width: 100%;
             width: 100%;
-            font-size: 25px;
+            font-size: 20px;
 
             display: flex;
             justify-content: center;
@@ -159,6 +159,11 @@
             text-align: center;
 
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-title h1 {
+            margin: 0;
+            font-size: 40px;
         }
 
         .role-grid {
@@ -439,7 +444,7 @@
     <div class="body" style="margin-top: 10px;">
         <div class="login-container">
             <div class="login-title">
-                <p>Aplikasi Manajemen<br>Hotel Nirwana</p>
+                <h1>Aplikasi Manajemen<br>Hotel Nirwana</h1>
             </div>
             <img src="{{ asset('assets/img/Nirwana_Logo.png') }}" alt="Logo Hotel Nirwana"
                 style="width:290px; height:220px; margin-bottom: 15px;">
