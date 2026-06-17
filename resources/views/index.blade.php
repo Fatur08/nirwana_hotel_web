@@ -233,6 +233,19 @@
             font-size: 20px;
         }
 
+        .kotak-hmsty {
+            background: linear-gradient(to right, #0d6efd, #0dcaf0, #20c997);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
         .kotak-dlx {
             background: linear-gradient(to right, #ea3438, #f39c12, #28a745);
             color: white;
@@ -489,7 +502,7 @@
 
                     <!-- HOME STAY -->
                     <div class="col-6 mb-3">
-                        <div class="kotak-std h-100 p-4 text-center">
+                        <div class="kotak-hmsty h-100 p-4 text-center">
 
                             <h3 class="mb-3">Home Stay</h3>
 
@@ -1175,10 +1188,10 @@
 
                         // default isi dropdown
                         $('#jumlah_kamar_dipesan_dlx').html(`
-                                                                        <option style="font-size:16pt;" value="">
-                                                                            Silakan pilih tanggal check-in
-                                                                        </option>
-                                                                    `);
+                                                                            <option style="font-size:16pt;" value="">
+                                                                                Silakan pilih tanggal check-in
+                                                                            </option>
+                                                                        `);
                     }
                 });
             });
@@ -1192,10 +1205,10 @@
 
                 if (!tanggal) {
                     $('#jumlah_kamar_dipesan_dlx').html(`
-                                                                    <option style="font-size:16pt;" value="">
-                                                                        Silakan pilih tanggal check-in
-                                                                    </option>
-                                                                `);
+                                                                        <option style="font-size:16pt;" value="">
+                                                                            Silakan pilih tanggal check-in
+                                                                        </option>
+                                                                    `);
                     return;
                 }
 
@@ -1214,10 +1227,10 @@
 
                         if (!res || res.length === 0) {
                             $('#jumlah_kamar_dipesan_dlx').html(`
-                                                                            <option style="font-size:16pt;" value="">
-                                                                                Kamar Penuh
-                                                                            </option>
-                                                                        `);
+                                                                                <option style="font-size:16pt;" value="">
+                                                                                    Kamar Penuh
+                                                                                </option>
+                                                                            `);
                             return;
                         }
 
@@ -1273,13 +1286,13 @@
                 for (let i = 1; i <= jumlah; i++) {
 
                     let selectHTML = `
-                                                                <div class="mb-2">
-                                                                    <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                                                                    <select name="jenis_bed[]" class="form-control select-bed-dlx" style="font-size:16pt;">
-                                                                        <option value="">-- Pilih Jenis Bed --</option>
-                                                                    </select>
-                                                                </div>
-                                                                `;
+                                                                    <div class="mb-2">
+                                                                        <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                                                                        <select name="jenis_bed[]" class="form-control select-bed-dlx" style="font-size:16pt;">
+                                                                            <option value="">-- Pilih Jenis Bed --</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    `;
 
                     list.append(selectHTML);
                 }
@@ -1586,10 +1599,10 @@
 
                         // default isi dropdown
                         $('#jumlah_kamar_dipesan_spr').html(`
-                                                                        <option style="font-size:16pt;" value="">
-                                                                            Silakan pilih tanggal check-in
-                                                                        </option>
-                                                                    `);
+                                                                            <option style="font-size:16pt;" value="">
+                                                                                Silakan pilih tanggal check-in
+                                                                            </option>
+                                                                        `);
                     }
                 });
             });
@@ -1603,10 +1616,10 @@
 
                 if (!tanggal) {
                     $('#jumlah_kamar_dipesan_spr').html(`
-                                                                    <option style="font-size:16pt;" value="">
-                                                                        Silakan pilih tanggal check-in
-                                                                    </option>
-                                                                `);
+                                                                        <option style="font-size:16pt;" value="">
+                                                                            Silakan pilih tanggal check-in
+                                                                        </option>
+                                                                    `);
                     return;
                 }
 
@@ -1625,10 +1638,10 @@
 
                         if (!res || res.length === 0) {
                             $('#jumlah_kamar_dipesan_spr').html(`
-                                                                            <option style="font-size:16pt;" value="">
-                                                                                Kamar Penuh
-                                                                            </option>
-                                                                        `);
+                                                                                <option style="font-size:16pt;" value="">
+                                                                                    Kamar Penuh
+                                                                                </option>
+                                                                            `);
                             return;
                         }
 
@@ -1684,13 +1697,13 @@
                 for (let i = 1; i <= jumlah; i++) {
 
                     let selectHTML = `
-                                                                <div class="mb-2">
-                                                                    <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                                                                    <select name="jenis_bed[]" class="form-control select-bed-spr" style="font-size:16pt;">
-                                                                        <option value="">-- Pilih Jenis Bed --</option>
-                                                                    </select>
-                                                                </div>
-                                                                `;
+                                                                    <div class="mb-2">
+                                                                        <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                                                                        <select name="jenis_bed[]" class="form-control select-bed-spr" style="font-size:16pt;">
+                                                                            <option value="">-- Pilih Jenis Bed --</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    `;
 
                     list.append(selectHTML);
                 }
@@ -2005,10 +2018,10 @@
 
                         // default isi dropdown
                         $('#jumlah_kamar_dipesan_std').html(`
-                                                                        <option style="font-size:16pt;" value="">
-                                                                            Silakan pilih tanggal check-in
-                                                                        </option>
-                                                                    `);
+                                                                            <option style="font-size:16pt;" value="">
+                                                                                Silakan pilih tanggal check-in
+                                                                            </option>
+                                                                        `);
                     }
                 });
             });
@@ -2022,10 +2035,10 @@
 
                 if (!tanggal) {
                     $('#jumlah_kamar_dipesan_std').html(`
-                                                                    <option style="font-size:16pt;" value="">
-                                                                        Silakan pilih tanggal check-in
-                                                                    </option>
-                                                                `);
+                                                                        <option style="font-size:16pt;" value="">
+                                                                            Silakan pilih tanggal check-in
+                                                                        </option>
+                                                                    `);
                     return;
                 }
 
@@ -2044,10 +2057,10 @@
 
                         if (!res || res.length === 0) {
                             $('#jumlah_kamar_dipesan_std').html(`
-                                                                            <option style="font-size:16pt;" value="">
-                                                                                Kamar Penuh
-                                                                            </option>
-                                                                        `);
+                                                                                <option style="font-size:16pt;" value="">
+                                                                                    Kamar Penuh
+                                                                                </option>
+                                                                            `);
                             return;
                         }
 
@@ -2103,13 +2116,13 @@
                 for (let i = 1; i <= jumlah; i++) {
 
                     let selectHTML = `
-                                                                <div class="mb-2">
-                                                                    <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                                                                    <select name="jenis_bed[]" class="form-control select-bed-std" style="font-size:16pt;">
-                                                                        <option value="">-- Pilih Jenis Bed --</option>
-                                                                    </select>
-                                                                </div>
-                                                                `;
+                                                                    <div class="mb-2">
+                                                                        <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                                                                        <select name="jenis_bed[]" class="form-control select-bed-std" style="font-size:16pt;">
+                                                                            <option value="">-- Pilih Jenis Bed --</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    `;
 
                     list.append(selectHTML);
                 }
@@ -2449,22 +2462,22 @@
 
                 frameDoc.open();
                 frameDoc.write(`
-                                                                <html>
-                                                                <head>
-                                                                    <title>Print Resi</title>
-                                                                    <style>
-                                                                        body{
-                                                                            font-family: Arial;
-                                                                            font-size:14px;
-                                                                            padding:20px;
-                                                                        }
-                                                                    </style>
-                                                                </head>
-                                                                <body>
-                                                                    ${isi}
-                                                                </body>
-                                                                </html>
-                                                            `);
+                                                                    <html>
+                                                                    <head>
+                                                                        <title>Print Resi</title>
+                                                                        <style>
+                                                                            body{
+                                                                                font-family: Arial;
+                                                                                font-size:14px;
+                                                                                padding:20px;
+                                                                            }
+                                                                        </style>
+                                                                    </head>
+                                                                    <body>
+                                                                        ${isi}
+                                                                    </body>
+                                                                    </html>
+                                                                `);
                 frameDoc.close();
 
                 frame.contentWindow.focus();
