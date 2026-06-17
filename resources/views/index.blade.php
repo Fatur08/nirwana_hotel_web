@@ -417,7 +417,7 @@
     <div class="body" style="margin-top: 10px;">
         <div class="login-container">
             <div class="login-title">
-                <h1>Aplikasi Manajemen Kamu siapa?<br>Hotel Nirwana</h1>
+                <h1>Aplikasi Manajemen<br>Hotel Nirwana</h1>
             </div>
             <img src="{{ asset('assets/img/Nirwana_Logo.png') }}" alt="Logo Hotel Nirwana"
                 style="width:290px; height:220px; margin-bottom: 15px;">
@@ -1039,10 +1039,10 @@
 
                         // default isi dropdown
                         $('#jumlah_kamar_dipesan_dlx').html(`
-                    <option style="font-size:16pt;" value="">
-                        Silakan pilih tanggal check-in
-                    </option>
-                `);
+                        <option style="font-size:16pt;" value="">
+                            Silakan pilih tanggal check-in
+                        </option>
+                    `);
                     }
                 });
             });
@@ -1056,10 +1056,10 @@
 
                 if (!tanggal) {
                     $('#jumlah_kamar_dipesan_dlx').html(`
-                <option style="font-size:16pt;" value="">
-                    Silakan pilih tanggal check-in
-                </option>
-            `);
+                    <option style="font-size:16pt;" value="">
+                        Silakan pilih tanggal check-in
+                    </option>
+                `);
                     return;
                 }
 
@@ -1078,10 +1078,10 @@
 
                         if (!res || res.length === 0) {
                             $('#jumlah_kamar_dipesan_dlx').html(`
-                        <option style="font-size:16pt;" value="">
-                            Kamar Penuh
-                        </option>
-                    `);
+                            <option style="font-size:16pt;" value="">
+                                Kamar Penuh
+                            </option>
+                        `);
                             return;
                         }
 
@@ -1137,13 +1137,13 @@
                 for (let i = 1; i <= jumlah; i++) {
 
                     let selectHTML = `
-            <div class="mb-2">
-                <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                <select name="jenis_bed[]" class="form-control select-bed-dlx" style="font-size:16pt;">
-                    <option value="">-- Pilih Jenis Bed --</option>
-                </select>
-            </div>
-            `;
+                <div class="mb-2">
+                    <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                    <select name="jenis_bed[]" class="form-control select-bed-dlx" style="font-size:16pt;">
+                        <option value="">-- Pilih Jenis Bed --</option>
+                    </select>
+                </div>
+                `;
 
                     list.append(selectHTML);
                 }
@@ -1450,10 +1450,10 @@
 
                         // default isi dropdown
                         $('#jumlah_kamar_dipesan_spr').html(`
-                    <option style="font-size:16pt;" value="">
-                        Silakan pilih tanggal check-in
-                    </option>
-                `);
+                        <option style="font-size:16pt;" value="">
+                            Silakan pilih tanggal check-in
+                        </option>
+                    `);
                     }
                 });
             });
@@ -1467,10 +1467,10 @@
 
                 if (!tanggal) {
                     $('#jumlah_kamar_dipesan_spr').html(`
-                <option style="font-size:16pt;" value="">
-                    Silakan pilih tanggal check-in
-                </option>
-            `);
+                    <option style="font-size:16pt;" value="">
+                        Silakan pilih tanggal check-in
+                    </option>
+                `);
                     return;
                 }
 
@@ -1489,10 +1489,10 @@
 
                         if (!res || res.length === 0) {
                             $('#jumlah_kamar_dipesan_spr').html(`
-                        <option style="font-size:16pt;" value="">
-                            Kamar Penuh
-                        </option>
-                    `);
+                            <option style="font-size:16pt;" value="">
+                                Kamar Penuh
+                            </option>
+                        `);
                             return;
                         }
 
@@ -1548,13 +1548,13 @@
                 for (let i = 1; i <= jumlah; i++) {
 
                     let selectHTML = `
-            <div class="mb-2">
-                <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                <select name="jenis_bed[]" class="form-control select-bed-spr" style="font-size:16pt;">
-                    <option value="">-- Pilih Jenis Bed --</option>
-                </select>
-            </div>
-            `;
+                <div class="mb-2">
+                    <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                    <select name="jenis_bed[]" class="form-control select-bed-spr" style="font-size:16pt;">
+                        <option value="">-- Pilih Jenis Bed --</option>
+                    </select>
+                </div>
+                `;
 
                     list.append(selectHTML);
                 }
@@ -1869,10 +1869,10 @@
 
                         // default isi dropdown
                         $('#jumlah_kamar_dipesan_std').html(`
-                    <option style="font-size:16pt;" value="">
-                        Silakan pilih tanggal check-in
-                    </option>
-                `);
+                        <option style="font-size:16pt;" value="">
+                            Silakan pilih tanggal check-in
+                        </option>
+                    `);
                     }
                 });
             });
@@ -1886,10 +1886,10 @@
 
                 if (!tanggal) {
                     $('#jumlah_kamar_dipesan_std').html(`
-                <option style="font-size:16pt;" value="">
-                    Silakan pilih tanggal check-in
-                </option>
-            `);
+                    <option style="font-size:16pt;" value="">
+                        Silakan pilih tanggal check-in
+                    </option>
+                `);
                     return;
                 }
 
@@ -1908,10 +1908,10 @@
 
                         if (!res || res.length === 0) {
                             $('#jumlah_kamar_dipesan_std').html(`
-                        <option style="font-size:16pt;" value="">
-                            Kamar Penuh
-                        </option>
-                    `);
+                            <option style="font-size:16pt;" value="">
+                                Kamar Penuh
+                            </option>
+                        `);
                             return;
                         }
 
@@ -1967,13 +1967,13 @@
                 for (let i = 1; i <= jumlah; i++) {
 
                     let selectHTML = `
-            <div class="mb-2">
-                <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                <select name="jenis_bed[]" class="form-control select-bed-std" style="font-size:16pt;">
-                    <option value="">-- Pilih Jenis Bed --</option>
-                </select>
-            </div>
-            `;
+                <div class="mb-2">
+                    <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                    <select name="jenis_bed[]" class="form-control select-bed-std" style="font-size:16pt;">
+                        <option value="">-- Pilih Jenis Bed --</option>
+                    </select>
+                </div>
+                `;
 
                     list.append(selectHTML);
                 }
@@ -2313,22 +2313,22 @@
 
                 frameDoc.open();
                 frameDoc.write(`
-            <html>
-            <head>
-                <title>Print Resi</title>
-                <style>
-                    body{
-                        font-family: Arial;
-                        font-size:14px;
-                        padding:20px;
-                    }
-                </style>
-            </head>
-            <body>
-                ${isi}
-            </body>
-            </html>
-        `);
+                <html>
+                <head>
+                    <title>Print Resi</title>
+                    <style>
+                        body{
+                            font-family: Arial;
+                            font-size:14px;
+                            padding:20px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${isi}
+                </body>
+                </html>
+            `);
                 frameDoc.close();
 
                 frame.contentWindow.focus();
