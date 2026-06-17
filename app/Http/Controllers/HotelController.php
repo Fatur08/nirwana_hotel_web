@@ -320,6 +320,19 @@ class HotelController extends Controller
 
 
 
+    public function PesanKamar(Request $request)
+    {
+        return view('PesanKamar');
+    }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -351,7 +364,7 @@ class HotelController extends Controller
             // ==============================
             // 2. LAMA INAP
             // ==============================
-            $checkIn  = \Carbon\Carbon::parse($request->check_in_dlx);
+            $checkIn = \Carbon\Carbon::parse($request->check_in_dlx);
             $checkOut = \Carbon\Carbon::parse($request->check_out_dlx);
             $lama_inap = $checkOut->diffInDays($checkIn);
 
@@ -525,7 +538,7 @@ class HotelController extends Controller
             // ==============================
             // 2. LAMA INAP
             // ==============================
-            $checkIn  = \Carbon\Carbon::parse($request->check_in_spr);
+            $checkIn = \Carbon\Carbon::parse($request->check_in_spr);
             $checkOut = \Carbon\Carbon::parse($request->check_out_spr);
             $lama_inap = $checkOut->diffInDays($checkIn);
 
@@ -714,7 +727,7 @@ class HotelController extends Controller
             // ==============================
             // 2. LAMA INAP
             // ==============================
-            $checkIn  = \Carbon\Carbon::parse($request->check_in_std);
+            $checkIn = \Carbon\Carbon::parse($request->check_in_std);
             $checkOut = \Carbon\Carbon::parse($request->check_out_std);
             $lama_inap = $checkOut->diffInDays($checkIn);
 
