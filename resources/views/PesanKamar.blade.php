@@ -109,7 +109,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="input-icon mb-3">
+            <div class="input-icon mb-6">
                 <span class="input-icon-addon">
                     <!-- Icon kamera -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -132,7 +132,7 @@
             <h5 class="text-start" style="font-size:16pt;">Request</h5>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-6">
         <div class="col-12">
             <select id="request" name="request" class="request form-control" style="font-size:16pt;">
                 <option value="">-- Pilih Request --</option>
@@ -148,7 +148,7 @@
     </div>
     <div class="row" id="biaya_input_container" style="display: none;">
         <div class="col-12">
-            <div class="input-icon mb-3">
+            <div class="input-icon mb-6">
                 <span class="input-icon-addon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -171,7 +171,7 @@
             <h5 class="text-start" style="font-size:16pt;">Metode Pembayaran</h5>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-6">
         <div class="col-12">
             <select id="metode_pembayaran" name="metode_pembayaran" class="form-control" style="font-size:16pt;">
                 <option value="">-- Pilih Metode Pembayaran --</option>
@@ -187,9 +187,9 @@
             <h5 class="text-start" style="font-size:16pt;">Masukkan Sumber Pembayaran Online</h5>
         </div>
     </div>
-    <div class="row mb-3" id="sumber_pembayaran_input" style="display:none;">
+    <div class="row" id="sumber_pembayaran_input" style="display:none;">
         <div class="col-12">
-            <div class="input-icon mb-3">
+            <div class="input-icon mb-6">
                 <span class="input-icon-addon">
                     <!-- icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
