@@ -233,15 +233,68 @@
         $(document).ready(function () {
 
             // ==========================
-            // ISI JUMLAH KAMAR
+            // FUNCTION LOAD KAMAR TERSEDIA
             // ==========================
-            let opsiJumlah = '<option value="">-- Pilih Jumlah Kamar --</option>';
+            function loadKamarTersedia() {
 
-            for (let i = 1; i <= 10; i++) {
-                opsiJumlah += `<option value="${i}">${i} Kamar</option>`;
+                let checkIn = $('#check_in').val();
+                let checkOut = $('#check_out').val();
+
+                if (!checkIn || !checkOut) {
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/getKamarTersedia',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        check_in: checkIn,
+                        check_out: checkOut
+                    },
+                    success: function (response) {
+
+                        // TOTAL KAMAR TERSEDIA
+                        let totalKamar = response.length;
+
+                        let opsiJumlah =
+                            '<option value="">-- Pilih Jumlah Kamar --</option>';
+
+                        for (let i = 1; i <= totalKamar; i++) {
+                            opsiJumlah += `
+                            <option value="${i}">
+                                ${i} Kamar
+                            </option>
+                        `;
+                        }
+
+                        $('#jumlah_kamar_dipesan').html(opsiJumlah);
+                    }
+                });
+
             }
 
-            $('#jumlah_kamar_dipesan').html(opsiJumlah);
+
+            // ==========================
+            // LOAD AWAL
+            // ==========================
+            loadKamarTersedia();
+
+
+            // ==========================
+            // SAAT TANGGAL BERUBAH
+            // ==========================
+            $('#check_in, #check_out').change(function () {
+
+                $('#jumlah_kamar_dipesan').val('');
+
+                $('#kamar_tersedia_title').hide();
+                $('#kamar_tersedia_list').hide();
+                $('#list_nomor_kamar').html('');
+
+                loadKamarTersedia();
+
+            });
 
 
             // ==========================
@@ -255,15 +308,6 @@
                 let checkOut = $('#check_out').val();
 
                 if (!checkIn || !checkOut) {
-
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Peringatan',
-                        text: 'Silakan pilih tanggal Check-In dan Check-Out terlebih dahulu'
-                    });
-
-                    $(this).val('');
-
                     return;
                 }
 
@@ -286,48 +330,45 @@
                         for (let i = 1; i <= jumlah; i++) {
 
                             html += `
-                            <div class="mb-4">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold"
+                                   style="font-size:16pt;">
+                                Pilih Kamar ${i}
+                            </label>
 
-                                <label class="form-label fw-bold"
-                                       style="font-size:16pt;">
-                                    Pilih Kamar ${i}
-                                </label>
+                            <select
+                                name="id_nomor_kamar[]"
+                                class="form-control nomor-kamar"
+                                style="font-size:16pt;"
+                                required>
 
-                                <select
-                                    name="id_nomor_kamar[]"
-                                    class="form-control nomor-kamar"
-                                    style="font-size:16pt;"
-                                    required>
-
-                                    <option value="">
-                                        -- Pilih Kamar --
-                                    </option>
+                                <option value="">
+                                    -- Pilih Kamar --
+                                </option>
                         `;
 
                             response.forEach(function (kamar) {
 
-                                let bed = '';
+                                let bed = '-';
 
                                 if (kamar.jenis_bed == 1) {
                                     bed = 'Single Bed';
                                 } else if (kamar.jenis_bed == 2) {
                                     bed = 'Double Bed';
-                                } else {
-                                    bed = '-';
                                 }
 
                                 html += `
-                                <option value="${kamar.id_nomor_kamar}">
-                                    ${kamar.tipe_kamar}
-                                    ${kamar.nomor_kamar}
-                                    (${bed})
-                                </option>
+                            <option value="${kamar.id_nomor_kamar}">
+                                ${kamar.tipe_kamar}
+                                ${kamar.nomor_kamar}
+                                (${bed})
+                            </option>
                             `;
                             });
 
                             html += `
-                                </select>
-                            </div>
+                            </select>
+                        </div>
                         `;
                         }
 

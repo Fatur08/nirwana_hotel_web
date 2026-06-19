@@ -213,7 +213,10 @@ class HotelController extends Controller
 
             ->get();
 
-        return response()->json($kamarTersedia);
+        return response()->json([
+            'jumlah_tersedia' => $kamarTersedia->count(),
+            'data' => $kamarTersedia
+        ]);
     }
 
 
