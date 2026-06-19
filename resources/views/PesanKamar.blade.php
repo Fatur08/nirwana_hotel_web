@@ -81,26 +81,26 @@
         </div>
 
         <!--<div class="row">
-            <div class="col-12">
-                <h5 class="text-start" style="font-size:16pt;">Jumlah Kamar Dipesan</h5>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-12">
-                <select id="jumlah_kamar_dipesan" name="jumlah_kamar_dipesan" class="form-control" style="font-size:16pt;">
-                </select>
-            </div>
-        </div>
-        <div class="row" id="kamar_tersedia_title" style="display:none;">
-            <div class="col-12">
-                <h5 class="text-start" style="font-size:16pt;">Kamar Yang Tersedia</h5>
-            </div>
-        </div>
-        <div class="row mb-3" id="kamar_tersedia_list" style="display:none;">
-            <div class="col-12">
-                <div id="list_nomor_kamar"></div>
-            </div>
-        </div>-->
+                    <div class="col-12">
+                        <h5 class="text-start" style="font-size:16pt;">Jumlah Kamar Dipesan</h5>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <select id="jumlah_kamar_dipesan" name="jumlah_kamar_dipesan" class="form-control" style="font-size:16pt;">
+                        </select>
+                    </div>
+                </div>
+                <div class="row" id="kamar_tersedia_title" style="display:none;">
+                    <div class="col-12">
+                        <h5 class="text-start" style="font-size:16pt;">Kamar Yang Tersedia</h5>
+                    </div>
+                </div>
+                <div class="row mb-3" id="kamar_tersedia_list" style="display:none;">
+                    <div class="col-12">
+                        <div id="list_nomor_kamar"></div>
+                    </div>
+                </div>-->
 
 
 
@@ -228,5 +228,77 @@
     </form>
 @endsection
 @push('myscript')
-    <script></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const checkOutPicker = flatpickr("#check_out_tampil", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "d F Y",
+                locale: flatpickr.l10ns.id,
+                disableMobile: true,
+                allowInput: false
+            });
+
+            const checkInPicker = flatpickr("#check_in_tampil", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "d F Y",
+                locale: flatpickr.l10ns.id,
+                disableMobile: true,
+                allowInput: false,
+
+                onChange: function (selectedDates) {
+
+                    if (!selectedDates.length) return;
+
+                    let checkInDate = selectedDates[0];
+
+                    // Simpan ke hidden input
+                    $('#check_in').val(
+                        this.formatDate(checkInDate, "Y-m-d")
+                    );
+
+                    // Check-out minimal H+1
+                    let minCheckout = new Date(checkInDate);
+                    minCheckout.setDate(minCheckout.getDate() + 1);
+
+                    checkOutPicker.set('minDate', minCheckout);
+
+                    // Kosongkan check-out lama
+                    checkOutPicker.clear();
+                    $('#check_out').val('');
+                }
+            });
+
+            checkOutPicker.config.onChange.push(function (selectedDates) {
+
+                if (!selectedDates.length) return;
+
+                $('#check_out').val(
+                    checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
+                );
+
+            });
+
+            // ==========================
+            // DEFAULT HARI INI
+            // ==========================
+
+            let today = new Date();
+
+            let yyyy = today.getFullYear();
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let dd = String(today.getDate()).padStart(2, '0');
+
+            let formatDB = `${yyyy}-${mm}-${dd}`;
+
+            checkInPicker.setDate(today);
+            checkOutPicker.setDate(today);
+
+            $('#check_in').val(formatDB);
+            $('#check_out').val(formatDB);
+
+        });
+    </script>
 @endpush
