@@ -44,8 +44,8 @@
                         <path d="M8 15h2v2h-2z" />
                     </svg>
                 </span>
-                <input type="text" id="check_in_tampil" class="form-control flatpickr w-100" style="font-size:16pt;"
-                    placeholder="Masukkan Tanggal Check-In" autocomplete="off">
+                <input type="text" id="check_in_pesan_kamar" class="form-control flatpickr w-100"
+                    style="font-size:16pt;" placeholder="Masukkan Tanggal Check-In" autocomplete="off">
                 <input type="hidden" id="check_in" name="check_in">
             </div>
         </div>
@@ -71,7 +71,7 @@
                         <path d="M8 15h2v2h-2z" />
                     </svg>
                 </span>
-                <input type="text" id="check_out_tampil" class="form-control flatpickr" style="font-size:16pt;"
+                <input type="text" id="check_out_pesan_kamar" class="form-control flatpickr" style="font-size:16pt;"
                     placeholder="Masukkan Tanggal Check-Out" autocomplete="off">
                 <input type="hidden" id="check_out" name="check_out">
             </div>
