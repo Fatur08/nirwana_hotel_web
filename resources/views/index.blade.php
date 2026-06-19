@@ -1038,76 +1038,77 @@
         </div>
 @endsection
     @push('myscript')
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
 
-                const checkOutPicker = flatpickr("#check_out_tampil", {
-                    dateFormat: "Y-m-d",
-                    altInput: true,
-                    altFormat: "d F Y",
-                    locale: flatpickr.l10ns.id,
-                    disableMobile: true,
-                    allowInput: false
-                });
+                    const checkOutPicker = flatpickr("#check_out_tampil", {
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "d F Y",
+                        locale: flatpickr.l10ns.id,
+                        disableMobile: true,
+                        allowInput: false
+                    });
 
-                const checkInPicker = flatpickr("#check_in_tampil", {
-                    dateFormat: "Y-m-d",
-                    altInput: true,
-                    altFormat: "d F Y",
-                    locale: flatpickr.l10ns.id,
-                    disableMobile: true,
-                    allowInput: false,
+                    const checkInPicker = flatpickr("#check_in_tampil", {
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "d F Y",
+                        locale: flatpickr.l10ns.id,
+                        disableMobile: true,
+                        allowInput: false,
 
-                    onChange: function (selectedDates) {
+                        onChange: function (selectedDates) {
+
+                            if (!selectedDates.length) return;
+
+                            let checkInDate = selectedDates[0];
+
+                            // Simpan ke hidden input pencarian
+                            $('#cari_check_in').val(
+                                this.formatDate(checkInDate, "Y-m-d")
+                            );
+
+                            // Check-Out minimal H+1
+                            let minCheckout = new Date(checkInDate);
+                            minCheckout.setDate(minCheckout.getDate() + 1);
+
+                            checkOutPicker.set('minDate', minCheckout);
+
+                            // Reset pilihan check-out lama
+                            checkOutPicker.clear();
+                            $('#cari_check_out').val('');
+                        }
+                    });
+
+                    checkOutPicker.config.onChange.push(function (selectedDates) {
 
                         if (!selectedDates.length) return;
 
-                        let checkInDate = selectedDates[0];
-
-                        // Simpan ke hidden input pencarian
-                        $('#cari_check_in').val(
-                            this.formatDate(checkInDate, "Y-m-d")
+                        $('#cari_check_out').val(
+                            checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
                         );
 
-                        // Check-Out minimal H+1
-                        let minCheckout = new Date(checkInDate);
-                        minCheckout.setDate(minCheckout.getDate() + 1);
+                    });
 
-                        checkOutPicker.set('minDate', minCheckout);
+                    // =========================
+                    // DEFAULT TANGGAL HARI INI
+                    // =========================
 
-                        // Reset pilihan check-out lama
-                        checkOutPicker.clear();
-                        $('#cari_check_out').val('');
-                    }
-                });
+                    let today = new Date();
 
-                checkOutPicker.config.onChange.push(function (selectedDates) {
+                    let yyyy = today.getFullYear();
+                    let mm = String(today.getMonth() + 1).padStart(2, '0');
+                    let dd = String(today.getDate()).padStart(2, '0');
 
-                    if (!selectedDates.length) return;
+                    let formatDB = `${yyyy}-${mm}-${dd}`;
 
-                    $('#cari_check_out').val(
-                        checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
-                    );
+                    // Hidden input untuk pencarian
+                    $('#cari_check_in').val(formatDB);
+                    $('#cari_check_out').val(formatDB);
 
                 });
 
-                // =========================
-                // DEFAULT TANGGAL HARI INI
-                // =========================
-
-                let today = new Date();
-
-                let yyyy = today.getFullYear();
-                let mm = String(today.getMonth() + 1).padStart(2, '0');
-                let dd = String(today.getDate()).padStart(2, '0');
-
-                let formatDB = `${yyyy}-${mm}-${dd}`;
-
-                // Hidden input untuk pencarian
-                $('#cari_check_in').val(formatDB);
-                $('#cari_check_out').val(formatDB);
-
-            });
 
 
 
@@ -1121,538 +1122,538 @@
 
 
 
-
-            // BAGIAN DARI FORM TAMBAH MODAL DELUXE
-            $(document).on('click', '.PesanKamar', function (e) {
-                e.preventDefault();
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/PesanKamar',
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function (respond) {
-
-                        $("#loadPesanKamar").html(respond);
-
-                        $("#modal-pesan-kamar").modal("show");
-
-                        setTimeout(function () {
-                            initPesanKamar();
-                        }, 200);
-
-                    }
-                });
-            });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            function initPesanKamar() {
-
-                const checkOutPicker = flatpickr("#check_out_pesan_kamar", {
-                    dateFormat: "Y-m-d",
-                    altInput: true,
-                    altFormat: "d F Y",
-                    locale: flatpickr.l10ns.id,
-                    disableMobile: true,
-                    allowInput: false
-                });
-
-                const checkInPicker = flatpickr("#check_in_pesan_kamar", {
-                    dateFormat: "Y-m-d",
-                    altInput: true,
-                    altFormat: "d F Y",
-                    locale: flatpickr.l10ns.id,
-                    disableMobile: true,
-                    allowInput: false,
-
-                    onChange: function (selectedDates) {
-
-                        if (!selectedDates.length) return;
-
-                        let checkInDate = selectedDates[0];
-
-                        $('#check_in').val(
-                            this.formatDate(checkInDate, "Y-m-d")
-                        );
-
-                        let minCheckout = new Date(checkInDate);
-                        minCheckout.setDate(minCheckout.getDate() + 1);
-
-                        checkOutPicker.set('minDate', minCheckout);
-
-                        checkOutPicker.clear();
-                        $('#check_out').val('');
-                    }
-                });
-
-                checkOutPicker.config.onChange.push(function (selectedDates) {
-
-                    if (!selectedDates.length) return;
-
-                    $('#check_out').val(
-                        checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
-                    );
+                // BAGIAN DARI FORM TAMBAH MODAL DELUXE
+                $(document).on('click', '.PesanKamar', function (e) {
+                    e.preventDefault();
 
                     $.ajax({
                         type: 'POST',
-                        url: '/getKamarTersedia',
+                        url: '/PesanKamar',
                         data: {
-                            _token: $('meta[name="csrf-token"]').attr('content'),
-                            check_in: $('#check_in').val(),
-                            check_out: $('#check_out').val()
+                            _token: "{{ csrf_token() }}"
                         },
+                        success: function (respond) {
 
-                        success: function (response) {
+                            $("#loadPesanKamar").html(respond);
 
-                            let totalKamar = response.length;
+                            $("#modal-pesan-kamar").modal("show");
 
-                            let opsiJumlah =
-                                '<option value="">-- Pilih Jumlah Kamar --</option>';
+                            setTimeout(function () {
+                                initPesanKamar();
+                            }, 200);
 
-                            for (let i = 1; i <= totalKamar; i++) {
+                        }
+                    });
+                });
 
-                                opsiJumlah += `
-                    <option value="${i}">
-                        ${i} Kamar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                function initPesanKamar() {
+
+                    const checkOutPicker = flatpickr("#check_out_pesan_kamar", {
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "d F Y",
+                        locale: flatpickr.l10ns.id,
+                        disableMobile: true,
+                        allowInput: false
+                    });
+
+                    const checkInPicker = flatpickr("#check_in_pesan_kamar", {
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "d F Y",
+                        locale: flatpickr.l10ns.id,
+                        disableMobile: true,
+                        allowInput: false,
+
+                        onChange: function (selectedDates) {
+
+                            if (!selectedDates.length) return;
+
+                            let checkInDate = selectedDates[0];
+
+                            $('#check_in').val(
+                                this.formatDate(checkInDate, "Y-m-d")
+                            );
+
+                            let minCheckout = new Date(checkInDate);
+                            minCheckout.setDate(minCheckout.getDate() + 1);
+
+                            checkOutPicker.set('minDate', minCheckout);
+
+                            checkOutPicker.clear();
+                            $('#check_out').val('');
+
+                        $('#jumlah_kamar_dipesan').html(`
+            <option value="">
+                -- Pilih Tanggal Check Out Dulu --
+            </option>
+        `);
+
+        $('#kamar_tersedia_title').hide();
+        $('#kamar_tersedia_list').hide();
+        $('#list_nomor_kamar').html('');
+                                }
+                            });
+
+                            checkOutPicker.config.onChange.push(function (selectedDates) {
+
+                                if (!selectedDates.length) return;
+
+                                $('#check_out').val(
+                                    checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
+                                );
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/getKamarTersedia',
+                                    data: {
+                                        _token: $('meta[name="csrf-token"]').attr('content'),
+                                        check_in: $('#check_in').val(),
+                                        check_out: $('#check_out').val()
+                                    },
+
+                                    success: function (response) {
+
+                                        let totalKamar = response.length;
+
+                                        let opsiJumlah =
+                                            '<option value="">-- Pilih Jumlah Kamar --</option>';
+
+                                        for (let i = 1; i <= totalKamar; i++) {
+
+                                            opsiJumlah += `
+                                    <option value="${i}">
+                                        ${i} Kamar
+                                    </option>
+                                `;
+                                        }
+
+                                        $('#jumlah_kamar_dipesan').html(opsiJumlah);
+                                    }
+                                });
+
+                            });
+                            // Default kosong saat modal dibuka
+                            checkInPicker.clear();
+                            checkOutPicker.clear();
+
+                            $('#check_in').val('');
+                            $('#check_out').val('');
+
+                            $('#jumlah_kamar_dipesan').html(`
+                    <option value="">
+                        -- Pilih Tanggal Check In Dulu --
                     </option>
-                `;
+                `);
+
+                            $('#kamar_tersedia_title').hide();
+                            $('#kamar_tersedia_list').hide();
+                            $('#list_nomor_kamar').html('');
+                        }
+
+
+
+
+                        // BAGIAN DARI FORM TAMBAH MODAL DELUXE
+                        $(document).on('click', '.TambahModalDLX', function (e) {
+                            e.preventDefault();
+
+                            let tipe = $(this).attr('tipe_kamar');
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/TambahModalDLX',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    tipe_kamar: tipe
+                                },
+                                success: function (respond) {
+                                    $("#loadTambahModalDLX").html(respond);
+                                    $("#modal-DLX").modal("show");
+
+                                    // default isi dropdown
+                                    $('#jumlah_kamar_dipesan_dlx').html(`
+                                                                                                                                                                                                                    <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                        Silakan pilih tanggal check-in
+                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                `);
+                                }
+                            });
+                        });
+
+
+
+                        $(document).on('change', '#check_in_dlx', function () {
+
+                            let tanggal = $(this).val();
+                            let tipe = 1; // DLX
+
+                            if (!tanggal) {
+                                $('#jumlah_kamar_dipesan_dlx').html(`
+                                                                                                                                                                                                                <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                    Silakan pilih tanggal check-in
+                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                            `);
+                                return;
                             }
 
-                            $('#jumlah_kamar_dipesan').html(opsiJumlah);
+                            $.ajax({
+                                url: '/getKamarTersedia',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    tanggal: tanggal,
+                                    tipe_kamar: tipe
+                                },
+                                success: function (res) {
+
+                                    console.log("RESPON FINAL:", res);
+
+                                    if (!res || res.length === 0) {
+                                        $('#jumlah_kamar_dipesan_dlx').html(`
+                                                                                                                                                                                                                        <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                            Kamar Penuh
+                                                                                                                                                                                                                        </option>
+                                                                                                                                                                                                                    `);
+                                        return;
+                                    }
+
+                                    let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
+
+                                    for (let i = 1; i <= res.length; i++) {
+                                        opt += `<option style="font-size:16pt;" value="${i}">${i} Kamar</option>`;
+                                    }
+
+                                    $('#jumlah_kamar_dipesan_dlx').html(opt);
+
+                                    // simpan data kamar
+                                    window.kamar = res;
+                                }
+                            });
+
+                        });
+
+
+                        // ✅ RESET SAAT MODAL DIBUKA
+                        $(document).on('shown.bs.modal', '#modal-DLX', function () {
+
+                            $('#list_nomor_kamar_dlx').html('');
+
+                            $('#kamar_tersedia_title_dlx').hide();
+                            $('#kamar_tersedia_list_dlx').hide();
+
+                            window.kamar = [];
+                        });
+
+
+                        // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
+                        $(document).on('change', '#jumlah_kamar_dipesan_dlx', function () {
+
+                            let jumlah = parseInt($(this).val());
+                            let list = $('#list_nomor_kamar_dlx');
+
+                            if (jumlah && jumlah > 0) {
+                                $('#kamar_tersedia_title_dlx').show();
+                                $('#kamar_tersedia_list_dlx').show();
+                            } else {
+                                $('#kamar_tersedia_title_dlx').hide();
+                                $('#kamar_tersedia_list_dlx').hide();
+                            }
+
+                            let tipe = 1;
+                            let tanggal = $('#check_in_dlx').val();
+
+                            list.html('');
+
+                            if (!jumlah || jumlah < 1) return;
+
+                            for (let i = 1; i <= jumlah; i++) {
+
+                                let selectHTML = `
+                                                                                                                                                                                                            <div class="mb-2">
+                                                                                                                                                                                                                <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                                                                                                                                                                                                                <select name="jenis_bed[]" class="form-control select-bed-dlx" style="font-size:16pt;">
+                                                                                                                                                                                                                    <option value="">-- Pilih Jenis Bed --</option>
+                                                                                                                                                                                                                </select>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            `;
+
+                                list.append(selectHTML);
+                            }
+
+                            $.ajax({
+                                type: 'POST',
+                                url: "/getKamarTersedia",
+                                dataType: 'json',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    tanggal: tanggal,
+                                    tipe_kamar: tipe
+                                },
+                                success: function (res) {
+
+                                    console.log("DATA KAMAR:", res);
+
+                                    let single = res.filter(k => k.jenis_bed == 1).length;
+                                    let dbl = res.filter(k => k.jenis_bed == 2).length;
+
+                                    console.log("STOK SINGLE:", single);
+                                    console.log("STOK DOUBLE:", dbl);
+
+                                    window.stokBedDLX = {
+                                        single: single,
+                                        double: dbl
+                                    };
+
+                                    setTimeout(function () {
+                                        updateBedSelectDLX();
+                                    }, 100);
+                                }
+                            });
+
+                        });
+
+
+
+                        function updateBedSelectDLX() {
+
+                            let usedSingle = 0;
+                            let usedDouble = 0;
+
+                            $('.select-bed-dlx').each(function () {
+
+                                let val = $(this).val();
+
+                                if (val == 1) usedSingle++;
+                                if (val == 2) usedDouble++;
+
+                            });
+
+                            $('.select-bed-dlx').each(function () {
+
+                                let current = $(this).val();
+                                let select = $(this);
+
+                                select.empty();
+
+                                select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
+
+                                // Single Bed
+                                if (window.stokBedDLX.single - usedSingle > 0 || current == 1) {
+                                    select.append(`<option value="1">Single Bed</option>`);
+                                }
+
+                                // Double Bed
+                                if (window.stokBedDLX.double - usedDouble > 0 || current == 2) {
+                                    select.append(`<option value="2">Double Bed</option>`);
+                                }
+
+                                if (current) {
+                                    select.val(current);
+                                }
+
+                            });
+
                         }
-                    });
 
-                });
-
-                // Default hari ini
-                let today = new Date();
-
-                let yyyy = today.getFullYear();
-                let mm = String(today.getMonth() + 1).padStart(2, '0');
-                let dd = String(today.getDate()).padStart(2, '0');
-
-                let formatDB = `${yyyy}-${mm}-${dd}`;
-
-                checkInPicker.setDate(today);
-
-                let besok = new Date(today);
-                besok.setDate(besok.getDate() + 1);
-
-                checkOutPicker.setDate(besok);
-
-                $('#check_in').val(formatDB);
-
-                $('#check_out').val(
-                    checkOutPicker.formatDate(besok, "Y-m-d")
-                );
-            }
-
-
-
-
-            // BAGIAN DARI FORM TAMBAH MODAL DELUXE
-            $(document).on('click', '.TambahModalDLX', function (e) {
-                e.preventDefault();
-
-                let tipe = $(this).attr('tipe_kamar');
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/TambahModalDLX',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        tipe_kamar: tipe
-                    },
-                    success: function (respond) {
-                        $("#loadTambahModalDLX").html(respond);
-                        $("#modal-DLX").modal("show");
-
-                        // default isi dropdown
-                        $('#jumlah_kamar_dipesan_dlx').html(`
-                                                                                                                                                                                                    <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                        Silakan pilih tanggal check-in
-                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                `);
-                    }
-                });
-            });
-
-
-
-            $(document).on('change', '#check_in_dlx', function () {
-
-                let tanggal = $(this).val();
-                let tipe = 1; // DLX
-
-                if (!tanggal) {
-                    $('#jumlah_kamar_dipesan_dlx').html(`
-                                                                                                                                                                                                <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                    Silakan pilih tanggal check-in
-                                                                                                                                                                                                </option>
-                                                                                                                                                                                            `);
-                    return;
-                }
-
-                $.ajax({
-                    url: '/getKamarTersedia',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        tanggal: tanggal,
-                        tipe_kamar: tipe
-                    },
-                    success: function (res) {
-
-                        console.log("RESPON FINAL:", res);
-
-                        if (!res || res.length === 0) {
-                            $('#jumlah_kamar_dipesan_dlx').html(`
-                                                                                                                                                                                                        <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                            Kamar Penuh
-                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                    `);
-                            return;
-                        }
-
-                        let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
-
-                        for (let i = 1; i <= res.length; i++) {
-                            opt += `<option style="font-size:16pt;" value="${i}">${i} Kamar</option>`;
-                        }
-
-                        $('#jumlah_kamar_dipesan_dlx').html(opt);
-
-                        // simpan data kamar
-                        window.kamar = res;
-                    }
-                });
-
-            });
-
-
-            // ✅ RESET SAAT MODAL DIBUKA
-            $(document).on('shown.bs.modal', '#modal-DLX', function () {
-
-                $('#list_nomor_kamar_dlx').html('');
-
-                $('#kamar_tersedia_title_dlx').hide();
-                $('#kamar_tersedia_list_dlx').hide();
-
-                window.kamar = [];
-            });
-
-
-            // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-            $(document).on('change', '#jumlah_kamar_dipesan_dlx', function () {
-
-                let jumlah = parseInt($(this).val());
-                let list = $('#list_nomor_kamar_dlx');
-
-                if (jumlah && jumlah > 0) {
-                    $('#kamar_tersedia_title_dlx').show();
-                    $('#kamar_tersedia_list_dlx').show();
-                } else {
-                    $('#kamar_tersedia_title_dlx').hide();
-                    $('#kamar_tersedia_list_dlx').hide();
-                }
-
-                let tipe = 1;
-                let tanggal = $('#check_in_dlx').val();
-
-                list.html('');
-
-                if (!jumlah || jumlah < 1) return;
-
-                for (let i = 1; i <= jumlah; i++) {
-
-                    let selectHTML = `
-                                                                                                                                                                                            <div class="mb-2">
-                                                                                                                                                                                                <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                                                                                                                                                                                                <select name="jenis_bed[]" class="form-control select-bed-dlx" style="font-size:16pt;">
-                                                                                                                                                                                                    <option value="">-- Pilih Jenis Bed --</option>
-                                                                                                                                                                                                </select>
-                                                                                                                                                                                            </div>
-                                                                                                                                                                                            `;
-
-                    list.append(selectHTML);
-                }
-
-                $.ajax({
-                    type: 'POST',
-                    url: "/getKamarTersedia",
-                    dataType: 'json',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        tanggal: tanggal,
-                        tipe_kamar: tipe
-                    },
-                    success: function (res) {
-
-                        console.log("DATA KAMAR:", res);
-
-                        let single = res.filter(k => k.jenis_bed == 1).length;
-                        let dbl = res.filter(k => k.jenis_bed == 2).length;
-
-                        console.log("STOK SINGLE:", single);
-                        console.log("STOK DOUBLE:", dbl);
-
-                        window.stokBedDLX = {
-                            single: single,
-                            double: dbl
-                        };
-
-                        setTimeout(function () {
+                        $(document).on('change', '.select-bed-dlx', function () {
                             updateBedSelectDLX();
-                        }, 100);
-                    }
-                });
-
-            });
-
-
-
-            function updateBedSelectDLX() {
-
-                let usedSingle = 0;
-                let usedDouble = 0;
-
-                $('.select-bed-dlx').each(function () {
-
-                    let val = $(this).val();
-
-                    if (val == 1) usedSingle++;
-                    if (val == 2) usedDouble++;
-
-                });
-
-                $('.select-bed-dlx').each(function () {
-
-                    let current = $(this).val();
-                    let select = $(this);
-
-                    select.empty();
-
-                    select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
-
-                    // Single Bed
-                    if (window.stokBedDLX.single - usedSingle > 0 || current == 1) {
-                        select.append(`<option value="1">Single Bed</option>`);
-                    }
-
-                    // Double Bed
-                    if (window.stokBedDLX.double - usedDouble > 0 || current == 2) {
-                        select.append(`<option value="2">Double Bed</option>`);
-                    }
-
-                    if (current) {
-                        select.val(current);
-                    }
-
-                });
-
-            }
-
-            $(document).on('change', '.select-bed-dlx', function () {
-                updateBedSelectDLX();
-            });
-
-
-
-            // ✅ REQUEST EXTRA BED / BREAKFAST
-            $(document).on('change', '#request_dlx', function () {
-
-                let value = $(this).val();
-                let biaya = 0;
-
-                if (value === 'extra_bed') {
-                    biaya = 150000;
-                } else if (value === 'breakfast') {
-                    biaya = 50000;
-                }
-
-                if (value !== '') {
-                    $('#biaya_container_dlx').show();
-                    $('#biaya_input_container_dlx').show();
-
-                    $('#biaya_request_dlx').val('Rp ' + biaya.toLocaleString('id-ID'));
-                    $('#biaya_request_value_dlx').val(biaya);
-                } else {
-                    $('#biaya_container_dlx').hide();
-                    $('#biaya_input_container_dlx').hide();
-                    $('#biaya_request_dlx').val('');
-                    $('#biaya_request_value_dlx').val('');
-                }
-
-            });
-
-
-
-
-            $(document).on('change', '#metode_pembayaran_dlx', function () {
-
-                let metode = $(this).val();
-
-                if (metode === 'online') {
-                    $('#sumber_pembayaran_container_dlx').show();
-                    $('#sumber_pembayaran_input_dlx').show();
-                } else {
-                    $('#sumber_pembayaran_container_dlx').hide();
-                    $('#sumber_pembayaran_input_dlx').hide();
-                    $('#sumber_pembayaran_dlx').val('');
-                }
-
-            });
-
-
-
-            // Alert Untuk Input DLX
-            $(document).on('submit', '#frmTambahModalDLX', function (e) {
-
-                e.preventDefault();
-
-                var nama_tamu = $("#nama_tamu_dlx").val();
-                var check_in = $("#check_in_tampil_dlx").val();
-                var check_out = $("#check_out_tampil_dlx").val();
-                var jumlah_kamar = $("#jumlah_kamar_dipesan_dlx").val();
-                var foto_ktp = $("#foto_ktp_dlx").val();
-                var metode = $("#metode_pembayaran_dlx").val();
-                var sumber = $("#sumber_pembayaran_dlx").val();
-                var request = $("#request_dlx").val();
-
-                function showError(pesan, el) {
-                    Swal.fire({
-                        title: 'Warning!',
-                        text: pesan,
-                        icon: 'warning'
-                    }).then(() => {
-                        if (el) $(el).focus();
-                    });
-                }
-
-                // ================= VALIDASI UTAMA =================
-
-                if (nama_tamu === "") {
-                    showError('Nama Tamu Harus Diisi', "#nama_tamu_dlx");
-                    return;
-                }
-
-                if (check_in === "") {
-                    showError('Tanggal Check In Harus Diisi', "#check_in_tampil_dlx");
-                    return;
-                }
-
-                if (check_out === "") {
-                    showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_dlx");
-                    return;
-                }
-
-                if (jumlah_kamar === "" || jumlah_kamar === null) {
-                    showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_dlx");
-                    return;
-                }
-
-                // ================= VALIDASI JENIS BED =================
-                let bedKosong = false;
-
-                $('.select-bed-dlx').each(function () {
-                    if ($(this).val() === "") {
-                        bedKosong = true;
-                        $(this).focus();
-                        return false; // stop loop
-                    }
-                });
-
-                if (bedKosong) {
-                    showError('Semua Jenis Bed Harus Dipilih');
-                    return;
-                }
-
-                // ================= VALIDASI FOTO =================
-                if (foto_ktp === "") {
-                    showError('Foto KTP Harus Diisi', "#foto_ktp_dlx");
-                    return;
-                }
-
-                // ================= VALIDASI REQUEST =================
-                if (request === "") {
-                    showError('Request Harus Dipilih', "#request_dlx");
-                    return;
-                }
-
-                // ================= VALIDASI PEMBAYARAN =================
-                if (metode === "") {
-                    showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_dlx");
-                    return;
-                }
-
-                if (metode === "online" && sumber === "") {
-                    showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_dlx");
-                    return;
-                }
-
-                // ================= AJAX =================
-                let formData = new FormData(this);
-
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-
-                    success: function (res) {
-
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil disimpan',
-                            icon: 'success'
-                        }).then(() => {
-                            $('#modal-DLX').modal('hide');
-                            location.reload();
                         });
 
-                    },
 
-                    error: function (xhr) {
 
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Terjadi kesalahan',
-                            icon: 'error'
+                        // ✅ REQUEST EXTRA BED / BREAKFAST
+                        $(document).on('change', '#request_dlx', function () {
+
+                            let value = $(this).val();
+                            let biaya = 0;
+
+                            if (value === 'extra_bed') {
+                                biaya = 150000;
+                            } else if (value === 'breakfast') {
+                                biaya = 50000;
+                            }
+
+                            if (value !== '') {
+                                $('#biaya_container_dlx').show();
+                                $('#biaya_input_container_dlx').show();
+
+                                $('#biaya_request_dlx').val('Rp ' + biaya.toLocaleString('id-ID'));
+                                $('#biaya_request_value_dlx').val(biaya);
+                            } else {
+                                $('#biaya_container_dlx').hide();
+                                $('#biaya_input_container_dlx').hide();
+                                $('#biaya_request_dlx').val('');
+                                $('#biaya_request_value_dlx').val('');
+                            }
+
                         });
 
-                        console.log(xhr.responseText);
-                    }
-                });
-
-            });
 
 
 
+                        $(document).on('change', '#metode_pembayaran_dlx', function () {
+
+                            let metode = $(this).val();
+
+                            if (metode === 'online') {
+                                $('#sumber_pembayaran_container_dlx').show();
+                                $('#sumber_pembayaran_input_dlx').show();
+                            } else {
+                                $('#sumber_pembayaran_container_dlx').hide();
+                                $('#sumber_pembayaran_input_dlx').hide();
+                                $('#sumber_pembayaran_dlx').val('');
+                            }
+
+                        });
+
+
+
+                        // Alert Untuk Input DLX
+                        $(document).on('submit', '#frmTambahModalDLX', function (e) {
+
+                            e.preventDefault();
+
+                            var nama_tamu = $("#nama_tamu_dlx").val();
+                            var check_in = $("#check_in_tampil_dlx").val();
+                            var check_out = $("#check_out_tampil_dlx").val();
+                            var jumlah_kamar = $("#jumlah_kamar_dipesan_dlx").val();
+                            var foto_ktp = $("#foto_ktp_dlx").val();
+                            var metode = $("#metode_pembayaran_dlx").val();
+                            var sumber = $("#sumber_pembayaran_dlx").val();
+                            var request = $("#request_dlx").val();
+
+                            function showError(pesan, el) {
+                                Swal.fire({
+                                    title: 'Warning!',
+                                    text: pesan,
+                                    icon: 'warning'
+                                }).then(() => {
+                                    if (el) $(el).focus();
+                                });
+                            }
+
+                            // ================= VALIDASI UTAMA =================
+
+                            if (nama_tamu === "") {
+                                showError('Nama Tamu Harus Diisi', "#nama_tamu_dlx");
+                                return;
+                            }
+
+                            if (check_in === "") {
+                                showError('Tanggal Check In Harus Diisi', "#check_in_tampil_dlx");
+                                return;
+                            }
+
+                            if (check_out === "") {
+                                showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_dlx");
+                                return;
+                            }
+
+                            if (jumlah_kamar === "" || jumlah_kamar === null) {
+                                showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_dlx");
+                                return;
+                            }
+
+                            // ================= VALIDASI JENIS BED =================
+                            let bedKosong = false;
+
+                            $('.select-bed-dlx').each(function () {
+                                if ($(this).val() === "") {
+                                    bedKosong = true;
+                                    $(this).focus();
+                                    return false; // stop loop
+                                }
+                            });
+
+                            if (bedKosong) {
+                                showError('Semua Jenis Bed Harus Dipilih');
+                                return;
+                            }
+
+                            // ================= VALIDASI FOTO =================
+                            if (foto_ktp === "") {
+                                showError('Foto KTP Harus Diisi', "#foto_ktp_dlx");
+                                return;
+                            }
+
+                            // ================= VALIDASI REQUEST =================
+                            if (request === "") {
+                                showError('Request Harus Dipilih', "#request_dlx");
+                                return;
+                            }
+
+                            // ================= VALIDASI PEMBAYARAN =================
+                            if (metode === "") {
+                                showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_dlx");
+                                return;
+                            }
+
+                            if (metode === "online" && sumber === "") {
+                                showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_dlx");
+                                return;
+                            }
+
+                            // ================= AJAX =================
+                            let formData = new FormData(this);
+
+                            $.ajax({
+                                type: 'POST',
+                                url: $(this).attr('action'),
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+
+                                success: function (res) {
+
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: 'Data berhasil disimpan',
+                                        icon: 'success'
+                                    }).then(() => {
+                                        $('#modal-DLX').modal('hide');
+                                        location.reload();
+                                    });
+
+                                },
+
+                                error: function (xhr) {
+
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'Terjadi kesalahan',
+                                        icon: 'error'
+                                    });
+
+                                    console.log(xhr.responseText);
+                                }
+                            });
+
+                        });
 
 
 
@@ -1684,401 +1685,261 @@
 
 
 
-            // BAGIAN DARI FORM TAMBAH MODAL SUPERIOR
-            $(document).on('click', '.TambahModalSPR', function (e) {
-                e.preventDefault();
-
-                let tipe = $(this).attr('tipe_kamar');
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/TambahModalSPR',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        tipe_kamar: tipe
-                    },
-                    success: function (respond) {
-                        $("#loadTambahModalSPR").html(respond);
-                        $("#modal-SPR").modal("show");
-
-                        // default isi dropdown
-                        $('#jumlah_kamar_dipesan_spr').html(`
-                                                                                                                                                                                                    <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                        Silakan pilih tanggal check-in
-                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                `);
-                    }
-                });
-            });
 
 
 
-            $(document).on('change', '#check_in_spr', function () {
+                        // BAGIAN DARI FORM TAMBAH MODAL SUPERIOR
+                        $(document).on('click', '.TambahModalSPR', function (e) {
+                            e.preventDefault();
 
-                let tanggal = $(this).val();
-                let tipe = 2; // SPR
+                            let tipe = $(this).attr('tipe_kamar');
 
-                if (!tanggal) {
-                    $('#jumlah_kamar_dipesan_spr').html(`
-                                                                                                                                                                                                <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                    Silakan pilih tanggal check-in
-                                                                                                                                                                                                </option>
-                                                                                                                                                                                            `);
-                    return;
-                }
+                            $.ajax({
+                                type: 'POST',
+                                url: '/TambahModalSPR',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    tipe_kamar: tipe
+                                },
+                                success: function (respond) {
+                                    $("#loadTambahModalSPR").html(respond);
+                                    $("#modal-SPR").modal("show");
 
-                $.ajax({
-                    url: '/getKamarTersedia',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        tanggal: tanggal,
-                        tipe_kamar: tipe
-                    },
-                    success: function (res) {
+                                    // default isi dropdown
+                                    $('#jumlah_kamar_dipesan_spr').html(`
+                                                                                                                                                                                                                    <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                        Silakan pilih tanggal check-in
+                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                `);
+                                }
+                            });
+                        });
 
-                        console.log("RESPON FINAL:", res);
 
-                        if (!res || res.length === 0) {
-                            $('#jumlah_kamar_dipesan_spr').html(`
-                                                                                                                                                                                                        <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                            Kamar Penuh
-                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                    `);
-                            return;
+
+                        $(document).on('change', '#check_in_spr', function () {
+
+                            let tanggal = $(this).val();
+                            let tipe = 2; // SPR
+
+                            if (!tanggal) {
+                                $('#jumlah_kamar_dipesan_spr').html(`
+                                                                                                                                                                                                                <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                    Silakan pilih tanggal check-in
+                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                            `);
+                                return;
+                            }
+
+                            $.ajax({
+                                url: '/getKamarTersedia',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    tanggal: tanggal,
+                                    tipe_kamar: tipe
+                                },
+                                success: function (res) {
+
+                                    console.log("RESPON FINAL:", res);
+
+                                    if (!res || res.length === 0) {
+                                        $('#jumlah_kamar_dipesan_spr').html(`
+                                                                                                                                                                                                                        <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                            Kamar Penuh
+                                                                                                                                                                                                                        </option>
+                                                                                                                                                                                                                    `);
+                                        return;
+                                    }
+
+                                    let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
+
+                                    for (let i = 1; i <= res.length; i++) {
+                                        opt += `<option style="font-size:16pt;" value="${i}">${i} Kamar</option>`;
+                                    }
+
+                                    $('#jumlah_kamar_dipesan_spr').html(opt);
+
+                                    // simpan data kamar
+                                    window.kamar = res;
+                                }
+                            });
+
+                        });
+
+
+                        // ✅ RESET SAAT MODAL DIBUKA
+                        $(document).on('shown.bs.modal', '#modal-SPR', function () {
+
+                            $('#list_nomor_kamar_spr').html('');
+
+                            $('#kamar_tersedia_title_spr').hide();
+                            $('#kamar_tersedia_list_spr').hide();
+
+                            window.kamar = [];
+                        });
+
+
+                        // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
+                        $(document).on('change', '#jumlah_kamar_dipesan_spr', function () {
+
+                            let jumlah = parseInt($(this).val());
+                            let list = $('#list_nomor_kamar_spr');
+
+                            if (jumlah && jumlah > 0) {
+                                $('#kamar_tersedia_title_spr').show();
+                                $('#kamar_tersedia_list_spr').show();
+                            } else {
+                                $('#kamar_tersedia_title_spr').hide();
+                                $('#kamar_tersedia_list_spr').hide();
+                            }
+
+                            let tipe = 2;
+                            let tanggal = $('#check_in_spr').val();
+
+                            list.html('');
+
+                            if (!jumlah || jumlah < 1) return;
+
+                            for (let i = 1; i <= jumlah; i++) {
+
+                                let selectHTML = `
+                                                                                                                                                                                                            <div class="mb-2">
+                                                                                                                                                                                                                <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                                                                                                                                                                                                                <select name="jenis_bed[]" class="form-control select-bed-spr" style="font-size:16pt;">
+                                                                                                                                                                                                                    <option value="">-- Pilih Jenis Bed --</option>
+                                                                                                                                                                                                                </select>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            `;
+
+                                list.append(selectHTML);
+                            }
+
+                            $.ajax({
+                                type: 'POST',
+                                url: "/getKamarTersedia",
+                                dataType: 'json',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    tanggal: tanggal,
+                                    tipe_kamar: tipe
+                                },
+                                success: function (res) {
+
+                                    console.log("DATA KAMAR:", res);
+
+                                    let single = res.filter(k => k.jenis_bed == 1).length;
+                                    let dbl = res.filter(k => k.jenis_bed == 2).length;
+
+                                    console.log("STOK SINGLE:", single);
+                                    console.log("STOK DOUBLE:", dbl);
+
+                                    window.stokBedSPR = {
+                                        single: single,
+                                        double: dbl
+                                    };
+
+                                    setTimeout(function () {
+                                        updateBedSelectSPR();
+                                    }, 100);
+                                }
+                            });
+
+                        });
+
+
+
+                        function updateBedSelectSPR() {
+
+                            let usedSingle = 0;
+                            let usedDouble = 0;
+
+                            $('.select-bed-spr').each(function () {
+
+                                let val = $(this).val();
+
+                                if (val == 1) usedSingle++;
+                                if (val == 2) usedDouble++;
+
+                            });
+
+                            $('.select-bed-spr').each(function () {
+
+                                let current = $(this).val();
+                                let select = $(this);
+
+                                select.empty();
+
+                                select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
+
+                                // Single Bed
+                                if (window.stokBedSPR.single - usedSingle > 0 || current == 1) {
+                                    select.append(`<option value="1">Single Bed</option>`);
+                                }
+
+                                // Double Bed
+                                if (window.stokBedSPR.double - usedDouble > 0 || current == 2) {
+                                    select.append(`<option value="2">Double Bed</option>`);
+                                }
+
+                                if (current) {
+                                    select.val(current);
+                                }
+
+                            });
+
                         }
 
-                        let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
-
-                        for (let i = 1; i <= res.length; i++) {
-                            opt += `<option style="font-size:16pt;" value="${i}">${i} Kamar</option>`;
-                        }
-
-                        $('#jumlah_kamar_dipesan_spr').html(opt);
-
-                        // simpan data kamar
-                        window.kamar = res;
-                    }
-                });
-
-            });
-
-
-            // ✅ RESET SAAT MODAL DIBUKA
-            $(document).on('shown.bs.modal', '#modal-SPR', function () {
-
-                $('#list_nomor_kamar_spr').html('');
-
-                $('#kamar_tersedia_title_spr').hide();
-                $('#kamar_tersedia_list_spr').hide();
-
-                window.kamar = [];
-            });
-
-
-            // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-            $(document).on('change', '#jumlah_kamar_dipesan_spr', function () {
-
-                let jumlah = parseInt($(this).val());
-                let list = $('#list_nomor_kamar_spr');
-
-                if (jumlah && jumlah > 0) {
-                    $('#kamar_tersedia_title_spr').show();
-                    $('#kamar_tersedia_list_spr').show();
-                } else {
-                    $('#kamar_tersedia_title_spr').hide();
-                    $('#kamar_tersedia_list_spr').hide();
-                }
-
-                let tipe = 2;
-                let tanggal = $('#check_in_spr').val();
-
-                list.html('');
-
-                if (!jumlah || jumlah < 1) return;
-
-                for (let i = 1; i <= jumlah; i++) {
-
-                    let selectHTML = `
-                                                                                                                                                                                            <div class="mb-2">
-                                                                                                                                                                                                <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                                                                                                                                                                                                <select name="jenis_bed[]" class="form-control select-bed-spr" style="font-size:16pt;">
-                                                                                                                                                                                                    <option value="">-- Pilih Jenis Bed --</option>
-                                                                                                                                                                                                </select>
-                                                                                                                                                                                            </div>
-                                                                                                                                                                                            `;
-
-                    list.append(selectHTML);
-                }
-
-                $.ajax({
-                    type: 'POST',
-                    url: "/getKamarTersedia",
-                    dataType: 'json',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        tanggal: tanggal,
-                        tipe_kamar: tipe
-                    },
-                    success: function (res) {
-
-                        console.log("DATA KAMAR:", res);
-
-                        let single = res.filter(k => k.jenis_bed == 1).length;
-                        let dbl = res.filter(k => k.jenis_bed == 2).length;
-
-                        console.log("STOK SINGLE:", single);
-                        console.log("STOK DOUBLE:", dbl);
-
-                        window.stokBedSPR = {
-                            single: single,
-                            double: dbl
-                        };
-
-                        setTimeout(function () {
+                        $(document).on('change', '.select-bed-spr', function () {
                             updateBedSelectSPR();
-                        }, 100);
-                    }
-                });
-
-            });
-
-
-
-            function updateBedSelectSPR() {
-
-                let usedSingle = 0;
-                let usedDouble = 0;
-
-                $('.select-bed-spr').each(function () {
-
-                    let val = $(this).val();
-
-                    if (val == 1) usedSingle++;
-                    if (val == 2) usedDouble++;
-
-                });
-
-                $('.select-bed-spr').each(function () {
-
-                    let current = $(this).val();
-                    let select = $(this);
-
-                    select.empty();
-
-                    select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
-
-                    // Single Bed
-                    if (window.stokBedSPR.single - usedSingle > 0 || current == 1) {
-                        select.append(`<option value="1">Single Bed</option>`);
-                    }
-
-                    // Double Bed
-                    if (window.stokBedSPR.double - usedDouble > 0 || current == 2) {
-                        select.append(`<option value="2">Double Bed</option>`);
-                    }
-
-                    if (current) {
-                        select.val(current);
-                    }
-
-                });
-
-            }
-
-            $(document).on('change', '.select-bed-spr', function () {
-                updateBedSelectSPR();
-            });
-
-
-
-            // ✅ REQUEST EXTRA BED / BREAKFAST
-            $(document).on('change', '#request_spr', function () {
-
-                let value = $(this).val();
-                let biaya = 0;
-
-                if (value === 'extra_bed') {
-                    biaya = 150000;
-                } else if (value === 'breakfast') {
-                    biaya = 50000;
-                }
-
-                if (value !== '') {
-                    $('#biaya_container_spr').show();
-                    $('#biaya_input_container_spr').show();
-
-                    $('#biaya_request_spr').val('Rp ' + biaya.toLocaleString('id-ID'));
-                    $('#biaya_request_value_spr').val(biaya);
-                } else {
-                    $('#biaya_container_spr').hide();
-                    $('#biaya_input_container_spr').hide();
-                    $('#biaya_request_spr').val('');
-                    $('#biaya_request_value_spr').val('');
-                }
-
-            });
-
-
-
-            $(document).on('change', '#metode_pembayaran_spr', function () {
-
-                let metode = $(this).val();
-
-                if (metode === 'online') {
-                    $('#sumber_pembayaran_container_spr').show();
-                    $('#sumber_pembayaran_input_spr').show();
-                } else {
-                    $('#sumber_pembayaran_container_spr').hide();
-                    $('#sumber_pembayaran_input_spr').hide();
-                    $('#sumber_pembayaran_spr').val('');
-                }
-
-            });
-
-
-
-
-
-
-
-
-
-            // Alert Untuk Input SPR
-            $(document).on('submit', '#frmTambahModalSPR', function (e) {
-
-                e.preventDefault();
-
-                var nama_tamu = $("#nama_tamu_spr").val();
-                var check_in = $("#check_in_tampil_spr").val();
-                var check_out = $("#check_out_tampil_spr").val();
-                var jumlah_kamar = $("#jumlah_kamar_dipesan_spr").val();
-                var foto_ktp = $("#foto_ktp_spr").val();
-                var metode = $("#metode_pembayaran_spr").val();
-                var sumber = $("#sumber_pembayaran_spr").val();
-                var request = $("#request_spr").val();
-
-                function showError(pesan, el) {
-                    Swal.fire({
-                        title: 'Warning!',
-                        text: pesan,
-                        icon: 'warning'
-                    }).then(() => {
-                        if (el) $(el).focus();
-                    });
-                }
-
-                // ================= VALIDASI UTAMA =================
-
-                if (nama_tamu === "") {
-                    showError('Nama Tamu Harus Diisi', "#nama_tamu_spr");
-                    return;
-                }
-
-                if (check_in === "") {
-                    showError('Tanggal Check In Harus Diisi', "#check_in_tampil_spr");
-                    return;
-                }
-
-                if (check_out === "") {
-                    showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_spr");
-                    return;
-                }
-
-                if (jumlah_kamar === "" || jumlah_kamar === null) {
-                    showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_spr");
-                    return;
-                }
-
-                // ================= VALIDASI JENIS BED =================
-                let bedKosong = false;
-
-                $('.select-bed-spr').each(function () {
-                    if ($(this).val() === "") {
-                        bedKosong = true;
-                        $(this).focus();
-                        return false; // stop loop
-                    }
-                });
-
-                if (bedKosong) {
-                    showError('Semua Jenis Bed Harus Dipilih');
-                    return;
-                }
-
-                // ================= VALIDASI FOTO =================
-                if (foto_ktp === "") {
-                    showError('Foto KTP Harus Diisi', "#foto_ktp_spr");
-                    return;
-                }
-
-                // ================= VALIDASI REQUEST =================
-                if (request === "") {
-                    showError('Request Harus Dipilih', "#request_spr");
-                    return;
-                }
-
-                // ================= VALIDASI PEMBAYARAN =================
-                if (metode === "") {
-                    showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_spr");
-                    return;
-                }
-
-                if (metode === "online" && sumber === "") {
-                    showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_spr");
-                    return;
-                }
-
-                // ================= AJAX =================
-                let formData = new FormData(this);
-
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-
-                    success: function (res) {
-
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil disimpan',
-                            icon: 'success'
-                        }).then(() => {
-                            $('#modal-SPR').modal('hide');
-                            location.reload();
                         });
 
-                    },
 
-                    error: function (xhr) {
 
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Terjadi kesalahan',
-                            icon: 'error'
+                        // ✅ REQUEST EXTRA BED / BREAKFAST
+                        $(document).on('change', '#request_spr', function () {
+
+                            let value = $(this).val();
+                            let biaya = 0;
+
+                            if (value === 'extra_bed') {
+                                biaya = 150000;
+                            } else if (value === 'breakfast') {
+                                biaya = 50000;
+                            }
+
+                            if (value !== '') {
+                                $('#biaya_container_spr').show();
+                                $('#biaya_input_container_spr').show();
+
+                                $('#biaya_request_spr').val('Rp ' + biaya.toLocaleString('id-ID'));
+                                $('#biaya_request_value_spr').val(biaya);
+                            } else {
+                                $('#biaya_container_spr').hide();
+                                $('#biaya_input_container_spr').hide();
+                                $('#biaya_request_spr').val('');
+                                $('#biaya_request_value_spr').val('');
+                            }
+
                         });
 
-                        console.log(xhr.responseText);
-                    }
-                });
-
-            });
 
 
+                        $(document).on('change', '#metode_pembayaran_spr', function () {
 
+                            let metode = $(this).val();
 
+                            if (metode === 'online') {
+                                $('#sumber_pembayaran_container_spr').show();
+                                $('#sumber_pembayaran_input_spr').show();
+                            } else {
+                                $('#sumber_pembayaran_container_spr').hide();
+                                $('#sumber_pembayaran_input_spr').hide();
+                                $('#sumber_pembayaran_spr').val('');
+                            }
 
-
-
-
-
-
-
-
-
+                        });
 
 
 
@@ -2088,6 +1949,127 @@
 
 
 
+                        // Alert Untuk Input SPR
+                        $(document).on('submit', '#frmTambahModalSPR', function (e) {
+
+                            e.preventDefault();
+
+                            var nama_tamu = $("#nama_tamu_spr").val();
+                            var check_in = $("#check_in_tampil_spr").val();
+                            var check_out = $("#check_out_tampil_spr").val();
+                            var jumlah_kamar = $("#jumlah_kamar_dipesan_spr").val();
+                            var foto_ktp = $("#foto_ktp_spr").val();
+                            var metode = $("#metode_pembayaran_spr").val();
+                            var sumber = $("#sumber_pembayaran_spr").val();
+                            var request = $("#request_spr").val();
+
+                            function showError(pesan, el) {
+                                Swal.fire({
+                                    title: 'Warning!',
+                                    text: pesan,
+                                    icon: 'warning'
+                                }).then(() => {
+                                    if (el) $(el).focus();
+                                });
+                            }
+
+                            // ================= VALIDASI UTAMA =================
+
+                            if (nama_tamu === "") {
+                                showError('Nama Tamu Harus Diisi', "#nama_tamu_spr");
+                                return;
+                            }
+
+                            if (check_in === "") {
+                                showError('Tanggal Check In Harus Diisi', "#check_in_tampil_spr");
+                                return;
+                            }
+
+                            if (check_out === "") {
+                                showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_spr");
+                                return;
+                            }
+
+                            if (jumlah_kamar === "" || jumlah_kamar === null) {
+                                showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_spr");
+                                return;
+                            }
+
+                            // ================= VALIDASI JENIS BED =================
+                            let bedKosong = false;
+
+                            $('.select-bed-spr').each(function () {
+                                if ($(this).val() === "") {
+                                    bedKosong = true;
+                                    $(this).focus();
+                                    return false; // stop loop
+                                }
+                            });
+
+                            if (bedKosong) {
+                                showError('Semua Jenis Bed Harus Dipilih');
+                                return;
+                            }
+
+                            // ================= VALIDASI FOTO =================
+                            if (foto_ktp === "") {
+                                showError('Foto KTP Harus Diisi', "#foto_ktp_spr");
+                                return;
+                            }
+
+                            // ================= VALIDASI REQUEST =================
+                            if (request === "") {
+                                showError('Request Harus Dipilih', "#request_spr");
+                                return;
+                            }
+
+                            // ================= VALIDASI PEMBAYARAN =================
+                            if (metode === "") {
+                                showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_spr");
+                                return;
+                            }
+
+                            if (metode === "online" && sumber === "") {
+                                showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_spr");
+                                return;
+                            }
+
+                            // ================= AJAX =================
+                            let formData = new FormData(this);
+
+                            $.ajax({
+                                type: 'POST',
+                                url: $(this).attr('action'),
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+
+                                success: function (res) {
+
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: 'Data berhasil disimpan',
+                                        icon: 'success'
+                                    }).then(() => {
+                                        $('#modal-SPR').modal('hide');
+                                        location.reload();
+                                    });
+
+                                },
+
+                                error: function (xhr) {
+
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'Terjadi kesalahan',
+                                        icon: 'error'
+                                    });
+
+                                    console.log(xhr.responseText);
+                                }
+                            });
+
+                        });
 
 
 
@@ -2103,421 +2085,405 @@
 
 
 
-            // BAGIAN DARI FORM TAMBAH MODAL STANDAR
-            $(document).on('click', '.TambahModalSTD', function (e) {
-                e.preventDefault();
-
-                let tipe = $(this).attr('tipe_kamar');
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/TambahModalSTD',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        tipe_kamar: tipe
-                    },
-                    success: function (respond) {
-                        $("#loadTambahModalSTD").html(respond);
-                        $("#modal-STD").modal("show");
-
-                        // default isi dropdown
-                        $('#jumlah_kamar_dipesan_std').html(`
-                                                                                                                                                                                                    <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                        Silakan pilih tanggal check-in
-                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                `);
-                    }
-                });
-            });
 
 
 
-            $(document).on('change', '#check_in_std', function () {
 
-                let tanggal = $(this).val();
-                let tipe = 3; // STD
 
-                if (!tanggal) {
-                    $('#jumlah_kamar_dipesan_std').html(`
-                                                                                                                                                                                                <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                    Silakan pilih tanggal check-in
-                                                                                                                                                                                                </option>
-                                                                                                                                                                                            `);
-                    return;
-                }
 
-                $.ajax({
-                    url: '/getKamarTersedia',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        tanggal: tanggal,
-                        tipe_kamar: tipe
-                    },
-                    success: function (res) {
 
-                        console.log("RESPON FINAL:", res);
 
-                        if (!res || res.length === 0) {
-                            $('#jumlah_kamar_dipesan_std').html(`
-                                                                                                                                                                                                        <option style="font-size:16pt;" value="">
-                                                                                                                                                                                                            Kamar Penuh
-                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                    `);
-                            return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        // BAGIAN DARI FORM TAMBAH MODAL STANDAR
+                        $(document).on('click', '.TambahModalSTD', function (e) {
+                            e.preventDefault();
+
+                            let tipe = $(this).attr('tipe_kamar');
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/TambahModalSTD',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    tipe_kamar: tipe
+                                },
+                                success: function (respond) {
+                                    $("#loadTambahModalSTD").html(respond);
+                                    $("#modal-STD").modal("show");
+
+                                    // default isi dropdown
+                                    $('#jumlah_kamar_dipesan_std').html(`
+                                                                                                                                                                                                                    <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                        Silakan pilih tanggal check-in
+                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                `);
+                                }
+                            });
+                        });
+
+
+
+                        $(document).on('change', '#check_in_std', function () {
+
+                            let tanggal = $(this).val();
+                            let tipe = 3; // STD
+
+                            if (!tanggal) {
+                                $('#jumlah_kamar_dipesan_std').html(`
+                                                                                                                                                                                                                <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                    Silakan pilih tanggal check-in
+                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                            `);
+                                return;
+                            }
+
+                            $.ajax({
+                                url: '/getKamarTersedia',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    tanggal: tanggal,
+                                    tipe_kamar: tipe
+                                },
+                                success: function (res) {
+
+                                    console.log("RESPON FINAL:", res);
+
+                                    if (!res || res.length === 0) {
+                                        $('#jumlah_kamar_dipesan_std').html(`
+                                                                                                                                                                                                                        <option style="font-size:16pt;" value="">
+                                                                                                                                                                                                                            Kamar Penuh
+                                                                                                                                                                                                                        </option>
+                                                                                                                                                                                                                    `);
+                                        return;
+                                    }
+
+                                    let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
+
+                                    for (let i = 1; i <= res.length; i++) {
+                                        opt += `<option style="font-size:16pt;" value="${i}">${i} Kamar</option>`;
+                                    }
+
+                                    $('#jumlah_kamar_dipesan_std').html(opt);
+
+                                    // simpan data kamar
+                                    window.kamar = res;
+                                }
+                            });
+
+                        });
+
+
+                        // ✅ RESET SAAT MODAL DIBUKA
+                        $(document).on('shown.bs.modal', '#modal-STD', function () {
+
+                            $('#list_nomor_kamar_std').html('');
+
+                            $('#kamar_tersedia_title_std').hide();
+                            $('#kamar_tersedia_list_std').hide();
+
+                            window.kamar = [];
+                        });
+
+
+                        // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
+                        $(document).on('change', '#jumlah_kamar_dipesan_std', function () {
+
+                            let jumlah = parseInt($(this).val());
+                            let list = $('#list_nomor_kamar_std');
+
+                            if (jumlah && jumlah > 0) {
+                                $('#kamar_tersedia_title_std').show();
+                                $('#kamar_tersedia_list_std').show();
+                            } else {
+                                $('#kamar_tersedia_title_std').hide();
+                                $('#kamar_tersedia_list_std').hide();
+                            }
+
+                            let tipe = 3;
+                            let tanggal = $('#check_in_std').val();
+
+                            list.html('');
+
+                            if (!jumlah || jumlah < 1) return;
+
+                            for (let i = 1; i <= jumlah; i++) {
+
+                                let selectHTML = `
+                                                                                                                                                                                                            <div class="mb-2">
+                                                                                                                                                                                                                <label style="font-size:16pt;">Jenis Bed ${i}</label>
+                                                                                                                                                                                                                <select name="jenis_bed[]" class="form-control select-bed-std" style="font-size:16pt;">
+                                                                                                                                                                                                                    <option value="">-- Pilih Jenis Bed --</option>
+                                                                                                                                                                                                                </select>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            `;
+
+                                list.append(selectHTML);
+                            }
+
+                            $.ajax({
+                                type: 'POST',
+                                url: "/getKamarTersedia",
+                                dataType: 'json',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                    tanggal: tanggal,
+                                    tipe_kamar: tipe
+                                },
+                                success: function (res) {
+
+                                    console.log("DATA KAMAR:", res);
+
+                                    let single = res.filter(k => k.jenis_bed == 1).length;
+                                    let dbl = res.filter(k => k.jenis_bed == 2).length;
+
+                                    console.log("STOK SINGLE:", single);
+                                    console.log("STOK DOUBLE:", dbl);
+
+                                    window.stokBedSTD = {
+                                        single: single,
+                                        double: dbl
+                                    };
+
+                                    setTimeout(function () {
+                                        updateBedSelectSTD();
+                                    }, 100);
+                                }
+                            });
+
+                        });
+
+
+
+                        function updateBedSelectSTD() {
+
+                            let usedSingle = 0;
+                            let usedDouble = 0;
+
+                            $('.select-bed-std').each(function () {
+
+                                let val = $(this).val();
+
+                                if (val == 1) usedSingle++;
+                                if (val == 2) usedDouble++;
+
+                            });
+
+                            $('.select-bed-std').each(function () {
+
+                                let current = $(this).val();
+                                let select = $(this);
+
+                                select.empty();
+
+                                select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
+
+                                // Single Bed
+                                if (window.stokBedSTD.single - usedSingle > 0 || current == 1) {
+                                    select.append(`<option value="1">Single Bed</option>`);
+                                }
+
+                                // Double Bed
+                                if (window.stokBedSTD.double - usedDouble > 0 || current == 2) {
+                                    select.append(`<option value="2">Double Bed</option>`);
+                                }
+
+                                if (current) {
+                                    select.val(current);
+                                }
+
+                            });
+
                         }
 
-                        let opt = `<option style="font-size:16pt;" value="">-- Pilih --</option>`;
-
-                        for (let i = 1; i <= res.length; i++) {
-                            opt += `<option style="font-size:16pt;" value="${i}">${i} Kamar</option>`;
-                        }
-
-                        $('#jumlah_kamar_dipesan_std').html(opt);
-
-                        // simpan data kamar
-                        window.kamar = res;
-                    }
-                });
-
-            });
-
-
-            // ✅ RESET SAAT MODAL DIBUKA
-            $(document).on('shown.bs.modal', '#modal-STD', function () {
-
-                $('#list_nomor_kamar_std').html('');
-
-                $('#kamar_tersedia_title_std').hide();
-                $('#kamar_tersedia_list_std').hide();
-
-                window.kamar = [];
-            });
-
-
-            // ✅ SAAT JUMLAH KAMAR DIPILIH → GENERATE SELECT NOMOR KAMAR
-            $(document).on('change', '#jumlah_kamar_dipesan_std', function () {
-
-                let jumlah = parseInt($(this).val());
-                let list = $('#list_nomor_kamar_std');
-
-                if (jumlah && jumlah > 0) {
-                    $('#kamar_tersedia_title_std').show();
-                    $('#kamar_tersedia_list_std').show();
-                } else {
-                    $('#kamar_tersedia_title_std').hide();
-                    $('#kamar_tersedia_list_std').hide();
-                }
-
-                let tipe = 3;
-                let tanggal = $('#check_in_std').val();
-
-                list.html('');
-
-                if (!jumlah || jumlah < 1) return;
-
-                for (let i = 1; i <= jumlah; i++) {
-
-                    let selectHTML = `
-                                                                                                                                                                                            <div class="mb-2">
-                                                                                                                                                                                                <label style="font-size:16pt;">Jenis Bed ${i}</label>
-                                                                                                                                                                                                <select name="jenis_bed[]" class="form-control select-bed-std" style="font-size:16pt;">
-                                                                                                                                                                                                    <option value="">-- Pilih Jenis Bed --</option>
-                                                                                                                                                                                                </select>
-                                                                                                                                                                                            </div>
-                                                                                                                                                                                            `;
-
-                    list.append(selectHTML);
-                }
-
-                $.ajax({
-                    type: 'POST',
-                    url: "/getKamarTersedia",
-                    dataType: 'json',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        tanggal: tanggal,
-                        tipe_kamar: tipe
-                    },
-                    success: function (res) {
-
-                        console.log("DATA KAMAR:", res);
-
-                        let single = res.filter(k => k.jenis_bed == 1).length;
-                        let dbl = res.filter(k => k.jenis_bed == 2).length;
-
-                        console.log("STOK SINGLE:", single);
-                        console.log("STOK DOUBLE:", dbl);
-
-                        window.stokBedSTD = {
-                            single: single,
-                            double: dbl
-                        };
-
-                        setTimeout(function () {
+                        $(document).on('change', '.select-bed-std', function () {
                             updateBedSelectSTD();
-                        }, 100);
-                    }
-                });
-
-            });
-
-
-
-            function updateBedSelectSTD() {
-
-                let usedSingle = 0;
-                let usedDouble = 0;
-
-                $('.select-bed-std').each(function () {
-
-                    let val = $(this).val();
-
-                    if (val == 1) usedSingle++;
-                    if (val == 2) usedDouble++;
-
-                });
-
-                $('.select-bed-std').each(function () {
-
-                    let current = $(this).val();
-                    let select = $(this);
-
-                    select.empty();
-
-                    select.append(`<option value="">-- Pilih Jenis Bed --</option>`);
-
-                    // Single Bed
-                    if (window.stokBedSTD.single - usedSingle > 0 || current == 1) {
-                        select.append(`<option value="1">Single Bed</option>`);
-                    }
-
-                    // Double Bed
-                    if (window.stokBedSTD.double - usedDouble > 0 || current == 2) {
-                        select.append(`<option value="2">Double Bed</option>`);
-                    }
-
-                    if (current) {
-                        select.val(current);
-                    }
-
-                });
-
-            }
-
-            $(document).on('change', '.select-bed-std', function () {
-                updateBedSelectSTD();
-            });
-
-
-
-            // ✅ REQUEST EXTRA BED / BREAKFAST
-            $(document).on('change', '#request_std', function () {
-
-                let value = $(this).val();
-                let biaya = 0;
-
-                if (value === 'extra_bed') {
-                    biaya = 150000;
-                } else if (value === 'breakfast') {
-                    biaya = 50000;
-                }
-
-                if (value !== '') {
-                    $('#biaya_container_std').show();
-                    $('#biaya_input_container_std').show();
-
-                    $('#biaya_request_std').val('Rp ' + biaya.toLocaleString('id-ID'));
-                    $('#biaya_request_value_std').val(biaya);
-                } else {
-                    $('#biaya_container_std').hide();
-                    $('#biaya_input_container_std').hide();
-                    $('#biaya_request_std').val('');
-                    $('#biaya_request_value_std').val('');
-                }
-
-            });
-
-
-
-            $(document).on('change', '#metode_pembayaran_std', function () {
-
-                let metode = $(this).val();
-
-                if (metode === 'online') {
-                    $('#sumber_pembayaran_container_std').show();
-                    $('#sumber_pembayaran_input_std').show();
-                } else {
-                    $('#sumber_pembayaran_container_std').hide();
-                    $('#sumber_pembayaran_input_std').hide();
-                    $('#sumber_pembayaran_std').val('');
-                }
-
-            });
-
-
-
-
-            // Alert Untuk Input STD
-            $(document).on('submit', '#frmTambahModalSTD', function (e) {
-
-                e.preventDefault();
-
-                var nama_tamu = $("#nama_tamu_std").val();
-                var check_in = $("#check_in_tampil_std").val();
-                var check_out = $("#check_out_tampil_std").val();
-                var jumlah_kamar = $("#jumlah_kamar_dipesan_std").val();
-                var foto_ktp = $("#foto_ktp_std").val();
-                var metode = $("#metode_pembayaran_std").val();
-                var sumber = $("#sumber_pembayaran_std").val();
-                var request = $("#request_std").val();
-
-                function showError(pesan, el) {
-                    Swal.fire({
-                        title: 'Warning!',
-                        text: pesan,
-                        icon: 'warning'
-                    }).then(() => {
-                        if (el) $(el).focus();
-                    });
-                }
-
-                // ================= VALIDASI UTAMA =================
-
-                if (nama_tamu === "") {
-                    showError('Nama Tamu Harus Diisi', "#nama_tamu_std");
-                    return;
-                }
-
-                if (check_in === "") {
-                    showError('Tanggal Check In Harus Diisi', "#check_in_tampil_std");
-                    return;
-                }
-
-                if (check_out === "") {
-                    showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_std");
-                    return;
-                }
-
-                if (jumlah_kamar === "" || jumlah_kamar === null) {
-                    showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_std");
-                    return;
-                }
-
-                // ================= VALIDASI JENIS BED =================
-                let bedKosong = false;
-
-                $('.select-bed-std').each(function () {
-                    if ($(this).val() === "") {
-                        bedKosong = true;
-                        $(this).focus();
-                        return false; // stop loop
-                    }
-                });
-
-                if (bedKosong) {
-                    showError('Semua Jenis Bed Harus Dipilih');
-                    return;
-                }
-
-                // ================= VALIDASI FOTO =================
-                if (foto_ktp === "") {
-                    showError('Foto KTP Harus Diisi', "#foto_ktp_std");
-                    return;
-                }
-
-                // ================= VALIDASI REQUEST =================
-                if (request === "") {
-                    showError('Request Harus Dipilih', "#request_std");
-                    return;
-                }
-
-                // ================= VALIDASI PEMBAYARAN =================
-                if (metode === "") {
-                    showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_std");
-                    return;
-                }
-
-                if (metode === "online" && sumber === "") {
-                    showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_std");
-                    return;
-                }
-
-                // ================= AJAX =================
-                let formData = new FormData(this);
-
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-
-                    success: function (res) {
-
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil disimpan',
-                            icon: 'success'
-                        }).then(() => {
-                            $('#modal-STD').modal('hide');
-                            location.reload();
                         });
 
-                    },
 
-                    error: function (xhr) {
 
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Terjadi kesalahan',
-                            icon: 'error'
+                        // ✅ REQUEST EXTRA BED / BREAKFAST
+                        $(document).on('change', '#request_std', function () {
+
+                            let value = $(this).val();
+                            let biaya = 0;
+
+                            if (value === 'extra_bed') {
+                                biaya = 150000;
+                            } else if (value === 'breakfast') {
+                                biaya = 50000;
+                            }
+
+                            if (value !== '') {
+                                $('#biaya_container_std').show();
+                                $('#biaya_input_container_std').show();
+
+                                $('#biaya_request_std').val('Rp ' + biaya.toLocaleString('id-ID'));
+                                $('#biaya_request_value_std').val(biaya);
+                            } else {
+                                $('#biaya_container_std').hide();
+                                $('#biaya_input_container_std').hide();
+                                $('#biaya_request_std').val('');
+                                $('#biaya_request_value_std').val('');
+                            }
+
                         });
 
-                        console.log(xhr.responseText);
-                    }
-                });
 
-            });
 
+                        $(document).on('change', '#metode_pembayaran_std', function () {
+
+                            let metode = $(this).val();
+
+                            if (metode === 'online') {
+                                $('#sumber_pembayaran_container_std').show();
+                                $('#sumber_pembayaran_input_std').show();
+                            } else {
+                                $('#sumber_pembayaran_container_std').hide();
+                                $('#sumber_pembayaran_input_std').hide();
+                                $('#sumber_pembayaran_std').val('');
+                            }
+
+                        });
+
+
+
+
+                        // Alert Untuk Input STD
+                        $(document).on('submit', '#frmTambahModalSTD', function (e) {
+
+                            e.preventDefault();
+
+                            var nama_tamu = $("#nama_tamu_std").val();
+                            var check_in = $("#check_in_tampil_std").val();
+                            var check_out = $("#check_out_tampil_std").val();
+                            var jumlah_kamar = $("#jumlah_kamar_dipesan_std").val();
+                            var foto_ktp = $("#foto_ktp_std").val();
+                            var metode = $("#metode_pembayaran_std").val();
+                            var sumber = $("#sumber_pembayaran_std").val();
+                            var request = $("#request_std").val();
+
+                            function showError(pesan, el) {
+                                Swal.fire({
+                                    title: 'Warning!',
+                                    text: pesan,
+                                    icon: 'warning'
+                                }).then(() => {
+                                    if (el) $(el).focus();
+                                });
+                            }
+
+                            // ================= VALIDASI UTAMA =================
 
+                            if (nama_tamu === "") {
+                                showError('Nama Tamu Harus Diisi', "#nama_tamu_std");
+                                return;
+                            }
 
+                            if (check_in === "") {
+                                showError('Tanggal Check In Harus Diisi', "#check_in_tampil_std");
+                                return;
+                            }
 
+                            if (check_out === "") {
+                                showError('Tanggal Check Out Harus Diisi', "#check_out_tampil_std");
+                                return;
+                            }
 
+                            if (jumlah_kamar === "" || jumlah_kamar === null) {
+                                showError('Jumlah Kamar Harus Diisi', "#jumlah_kamar_dipesan_std");
+                                return;
+                            }
 
+                            // ================= VALIDASI JENIS BED =================
+                            let bedKosong = false;
 
+                            $('.select-bed-std').each(function () {
+                                if ($(this).val() === "") {
+                                    bedKosong = true;
+                                    $(this).focus();
+                                    return false; // stop loop
+                                }
+                            });
 
+                            if (bedKosong) {
+                                showError('Semua Jenis Bed Harus Dipilih');
+                                return;
+                            }
 
+                            // ================= VALIDASI FOTO =================
+                            if (foto_ktp === "") {
+                                showError('Foto KTP Harus Diisi', "#foto_ktp_std");
+                                return;
+                            }
 
+                            // ================= VALIDASI REQUEST =================
+                            if (request === "") {
+                                showError('Request Harus Dipilih', "#request_std");
+                                return;
+                            }
 
+                            // ================= VALIDASI PEMBAYARAN =================
+                            if (metode === "") {
+                                showError('Metode Pembayaran Harus Diisi', "#metode_pembayaran_std");
+                                return;
+                            }
 
-            // BAGIAN DARI MODAL INFO
-            $(document).on('click', '.ModalInfo', function (e) {
-                e.preventDefault();
+                            if (metode === "online" && sumber === "") {
+                                showError('Sumber Pembayaran Harus Diisi', "#sumber_pembayaran_std");
+                                return;
+                            }
 
-                let id = $(this).attr('id_laporan_keuangan');
+                            // ================= AJAX =================
+                            let formData = new FormData(this);
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/ModalInfo',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id_laporan_keuangan: id
-                    },
-                    success: function (respond) {
-                        $("#loadModalInfo").html(respond);
-                        $("#modal-info").modal("show");
-                    }
-                });
-            });
+                            $.ajax({
+                                type: 'POST',
+                                url: $(this).attr('action'),
+                                data: formData,
+                                processData: false,
+                                contentType: false,
 
+                                success: function (res) {
 
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: 'Data berhasil disimpan',
+                                        icon: 'success'
+                                    }).then(() => {
+                                        $('#modal-STD').modal('hide');
+                                        location.reload();
+                                    });
 
+                                },
 
+                                error: function (xhr) {
 
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'Terjadi kesalahan',
+                                        icon: 'error'
+                                    });
 
+                                    console.log(xhr.responseText);
+                                }
+                            });
 
+                        });
 
 
 
@@ -2525,109 +2491,110 @@
 
 
 
-            // BAGIAN DARI MODAL RESI
-            $(document).on('click', '.ModalResi', function (e) {
-                e.preventDefault();
 
-                let id = $(this).attr('id_laporan_keuangan');
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/ModalResi',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id_laporan_keuangan: id
-                    },
-                    success: function (respond) {
-                        $("#loadModalResi").html(respond);
-                        $("#modal-resi").modal("show");
-                    }
-                });
-            });
 
 
 
+                        // BAGIAN DARI MODAL INFO
+                        $(document).on('click', '.ModalInfo', function (e) {
+                            e.preventDefault();
 
+                            let id = $(this).attr('id_laporan_keuangan');
 
+                            $.ajax({
+                                type: 'POST',
+                                url: '/ModalInfo',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    id_laporan_keuangan: id
+                                },
+                                success: function (respond) {
+                                    $("#loadModalInfo").html(respond);
+                                    $("#modal-info").modal("show");
+                                }
+                            });
+                        });
 
 
 
-            function printResi() {
 
-                var isi = document.getElementById("area-print").innerHTML;
 
-                var frame = document.createElement('iframe');
-                frame.style.position = "absolute";
-                frame.style.top = "-1000000px";
 
-                document.body.appendChild(frame);
 
-                var frameDoc = frame.contentWindow.document;
 
-                frameDoc.open();
-                frameDoc.write(`
-                                                                                                                                                                                            <html>
-                                                                                                                                                                                            <head>
-                                                                                                                                                                                                <title>Print Resi</title>
-                                                                                                                                                                                                <style>
-                                                                                                                                                                                                    body{
-                                                                                                                                                                                                        font-family: Arial;
-                                                                                                                                                                                                        font-size:14px;
-                                                                                                                                                                                                        padding:20px;
-                                                                                                                                                                                                    }
-                                                                                                                                                                                                </style>
-                                                                                                                                                                                            </head>
-                                                                                                                                                                                            <body>
-                                                                                                                                                                                                ${isi}
-                                                                                                                                                                                            </body>
-                                                                                                                                                                                            </html>
-                                                                                                                                                                                        `);
-                frameDoc.close();
 
-                frame.contentWindow.focus();
-                frame.contentWindow.print();
 
-                setTimeout(function () {
-                    document.body.removeChild(frame);
-                }, 1000);
-            }
 
 
 
 
+                        // BAGIAN DARI MODAL RESI
+                        $(document).on('click', '.ModalResi', function (e) {
+                            e.preventDefault();
 
+                            let id = $(this).attr('id_laporan_keuangan');
 
+                            $.ajax({
+                                type: 'POST',
+                                url: '/ModalResi',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    id_laporan_keuangan: id
+                                },
+                                success: function (respond) {
+                                    $("#loadModalResi").html(respond);
+                                    $("#modal-resi").modal("show");
+                                }
+                            });
+                        });
 
 
 
-            function cetakPDF() {
 
-                let element = document.querySelector("#area-print");
 
-                html2canvas(element, {
-                    scale: 2,
-                    useCORS: true
-                }).then(canvas => {
 
-                    let imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-                    // 🔥 ini yang benar
-                    const {
-                        jsPDF
-                    } = window.jspdf;
 
-                    let pdf = new jsPDF('p', 'mm', [105, 148]);
+                        function printResi() {
 
-                    pdf.addImage(imgData, 'JPEG', 0, 0, 105, 148);
+                            var isi = document.getElementById("area-print").innerHTML;
 
-                    pdf.save("resi.pdf");
-                });
-            }
+                            var frame = document.createElement('iframe');
+                            frame.style.position = "absolute";
+                            frame.style.top = "-1000000px";
 
+                            document.body.appendChild(frame);
 
+                            var frameDoc = frame.contentWindow.document;
 
+                            frameDoc.open();
+                            frameDoc.write(`
+                                                                                                                                                                                                            <html>
+                                                                                                                                                                                                            <head>
+                                                                                                                                                                                                                <title>Print Resi</title>
+                                                                                                                                                                                                                <style>
+                                                                                                                                                                                                                    body{
+                                                                                                                                                                                                                        font-family: Arial;
+                                                                                                                                                                                                                        font-size:14px;
+                                                                                                                                                                                                                        padding:20px;
+                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                </style>
+                                                                                                                                                                                                            </head>
+                                                                                                                                                                                                            <body>
+                                                                                                                                                                                                                ${isi}
+                                                                                                                                                                                                            </body>
+                                                                                                                                                                                                            </html>
+                                                                                                                                                                                                        `);
+                            frameDoc.close();
 
+                            frame.contentWindow.focus();
+                            frame.contentWindow.print();
 
+                            setTimeout(function () {
+                                document.body.removeChild(frame);
+                            }, 1000);
+                        }
 
 
 
@@ -2637,11 +2604,48 @@
 
 
 
+                        function cetakPDF() {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        </script>
+                            let element = document.querySelector("#area-print");
+
+                            html2canvas(element, {
+                                scale: 2,
+                                useCORS: true
+                            }).then(canvas => {
+
+                                let imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+                                // 🔥 ini yang benar
+                                const {
+                                    jsPDF
+                                } = window.jspdf;
+
+                                let pdf = new jsPDF('p', 'mm', [105, 148]);
+
+                                pdf.addImage(imgData, 'JPEG', 0, 0, 105, 148);
+
+                                pdf.save("resi.pdf");
+                            });
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                    </script>
     @endpush
