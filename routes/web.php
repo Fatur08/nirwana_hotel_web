@@ -28,6 +28,9 @@ Route::post('/getKamarTersedia', [HotelController::class, 'getKamarTersedia']);
 Route::post('/getRequestHotel', [HotelController::class, 'getRequestHotel']);
 
 
+Route::post('/getBiayaRequest', [HotelController::class, 'getBiayaRequest']);
+
+
 Route::post('/TambahModalDLX/store_TambahModalDLX', [HotelController::class, 'store_TambahModalDLX']);
 
 

@@ -271,6 +271,34 @@ class HotelController extends Controller
 
 
 
+    public function getBiayaRequest()
+    {
+        $extraBed = DB::table('kamar')
+            ->where('kode_kamar', 'BED')
+            ->first();
+
+        $breakfast = DB::table('kamar')
+            ->where('kode_kamar', 'FAST')
+            ->first();
+
+        return response()->json([
+            'extra_bed' => $extraBed->tarif_per_hari ?? 0,
+            'breakfast' => $breakfast->tarif_per_hari ?? 0
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function ModalInfo(Request $request)

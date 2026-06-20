@@ -131,38 +131,44 @@
 
         <div class="row">
             <div class="col-12">
-                <h5 class="text-start" style="font-size:16pt;">Request</h5>
+                <h5 style="font-size:16pt;">Jumlah Extra Bed</h5>
             </div>
         </div>
+
         <div class="row mb-6">
             <div class="col-12">
-                <select id="request" name="request" class="request form-control" style="font-size:16pt;">
-                    <option value="">-- Pilih Request --</option>
-                    <option value="extra_bed">Ekstra Bed</option>
-                    <option value="breakfast">Breakfast</option>
-                </select>
+                <input type="number" id="jumlah_extra_bed" name="jumlah_extra_bed" class="form-control" min="0" value="0"
+                    style="font-size:16pt;">
             </div>
         </div>
-        <div class="row" id="biaya_container" style="display: none;">
+
+
+        <div class="row">
             <div class="col-12">
-                <h5 class="text-start" style="font-size:16pt;">Biaya Tambahan</h5>
+                <h5 style="font-size:16pt;">Jumlah Breakfast</h5>
             </div>
         </div>
-        <div class="row" id="biaya_input_container" style="display: none;">
+
+        <div class="row mb-6">
             <div class="col-12">
-                <div class="input-icon mb-6">
-                    <span class="input-icon-addon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="icon icon-tabler icons-tabler-outline icon-tabler-currency-dollar">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
-                            <path d="M12 3v3m0 12v3" />
-                        </svg>
-                    </span>
-                    <input type="text" id="biaya_request" class="form-control" style="font-size:16pt;" readonly>
-                    <input type="hidden" id="biaya_request_value" name="biaya_request">
-                </div>
+                <input type="number" id="jumlah_breakfast" name="jumlah_breakfast" class="form-control" min="0" value="0"
+                    style="font-size:16pt;">
+            </div>
+        </div>
+
+
+        <div class="row" id="biaya_container" style="display:none;">
+            <div class="col-12">
+                <h5 style="font-size:16pt;">Biaya Tambahan</h5>
+            </div>
+        </div>
+
+        <div class="row mb-6" id="biaya_input_container" style="display:none;">
+            <div class="col-12">
+                <textarea id="biaya_request" class="form-control" rows="4" readonly style="font-size:16pt;">
+                    </textarea>
+
+                <input type="hidden" id="biaya_request_value" name="biaya_request">
             </div>
         </div>
 
@@ -234,10 +240,10 @@
 
             // Default saat modal dibuka
             $('#jumlah_kamar_dipesan').html(`
-                    <option value="">
-                        -- Pilih Tanggal Check In Dulu --
-                    </option>
-                `);
+                                            <option value="">
+                                                -- Pilih Tanggal Check In Dulu --
+                                            </option>
+                                        `);
 
             $('#kamar_tersedia_title').hide();
             $('#kamar_tersedia_list').hide();
@@ -257,10 +263,10 @@
                 if (!checkIn || !checkOut) {
 
                     $('#jumlah_kamar_dipesan').html(`
-                <option value="">
-                    -- Pilih Tanggal Check In Dulu --
-                </option>
-            `);
+                                        <option value="">
+                                            -- Pilih Tanggal Check In Dulu --
+                                        </option>
+                                    `);
 
                     return;
                 }
@@ -284,10 +290,10 @@
                         for (let i = 1; i <= totalKamar; i++) {
 
                             opsiJumlah += `
-                                                    <option value="${i}">
-                                                        ${i} Kamar
-                                                    </option>
-                                                `;
+                                                                            <option value="${i}">
+                                                                                ${i} Kamar
+                                                                            </option>
+                                                                        `;
                         }
 
                         $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -354,23 +360,23 @@
                         for (let i = 1; i <= jumlah; i++) {
 
                             html += `
-                                                                <div class="mb-4">
+                                                                                        <div class="mb-4">
 
-                                                                    <label class="form-label fw-bold"
-                                                                           style="font-size:16pt;">
-                                                                        Pilih Kamar ${i}
-                                                                    </label>
+                                                                                            <label class="form-label fw-bold"
+                                                                                                   style="font-size:16pt;">
+                                                                                                Pilih Kamar ${i}
+                                                                                            </label>
 
-                                                                    <select
-                                                                        name="id_nomor_kamar[]"
-                                                                        class="form-control nomor-kamar"
-                                                                        style="font-size:16pt;"
-                                                                        required>
+                                                                                            <select
+                                                                                                name="id_nomor_kamar[]"
+                                                                                                class="form-control nomor-kamar"
+                                                                                                style="font-size:16pt;"
+                                                                                                required>
 
-                                                                        <option value="">
-                                                                            -- Pilih Kamar --
-                                                                        </option>
-                                                            `;
+                                                                                                <option value="">
+                                                                                                    -- Pilih Kamar --
+                                                                                                </option>
+                                                                                    `;
 
                             response.forEach(function (kamar) {
 
@@ -385,18 +391,18 @@
                                 }
 
                                 html += `
-                                                                    <option value="${kamar.id_nomor_kamar}">
-                                                                        ${kamar.tipe_kamar}
-                                                                        ${kamar.nomor_kamar}
-                                                                        (${bed})
-                                                                    </option>
-                                                                `;
+                                                                                            <option value="${kamar.id_nomor_kamar}">
+                                                                                                ${kamar.tipe_kamar}
+                                                                                                ${kamar.nomor_kamar}
+                                                                                                (${bed})
+                                                                                            </option>
+                                                                                        `;
                             });
 
                             html += `
-                                                                    </select>
-                                                                </div>
-                                                            `;
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    `;
                         }
 
                         $('#list_nomor_kamar').html(html);
@@ -499,6 +505,142 @@
                 });
 
             });
+
+
+
+
+            // ==========================
+            // HITUNG BIAYA REQUEST
+            // ==========================
+            function hitungBiayaRequest() {
+
+                let jumlahExtraBed =
+                    parseInt($('#jumlah_extra_bed').val()) || 0;
+
+                let jumlahBreakfast =
+                    parseInt($('#jumlah_breakfast').val()) || 0;
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: '/getBiayaRequest',
+
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+
+                    success: function (response) {
+
+                        let hargaExtraBed =
+                            parseInt(response.extra_bed);
+
+                        let hargaBreakfast =
+                            parseInt(response.breakfast);
+
+                        let total = 0;
+                        let keterangan = [];
+
+                        // EXTRA BED
+                        if (jumlahExtraBed > 0) {
+
+                            let subtotal =
+                                jumlahExtraBed * hargaExtraBed;
+
+                            total += subtotal;
+
+                            if (jumlahExtraBed == 1) {
+
+                                keterangan.push(
+                                    'Rp ' +
+                                    subtotal.toLocaleString('id-ID')
+                                );
+
+                            } else {
+
+                                keterangan.push(
+                                    jumlahExtraBed +
+                                    ' Extra Bed x Rp ' +
+                                    hargaExtraBed.toLocaleString('id-ID') +
+                                    ' = Rp ' +
+                                    subtotal.toLocaleString('id-ID')
+                                );
+
+                            }
+                        }
+
+                        // BREAKFAST
+                        if (jumlahBreakfast > 0) {
+
+                            let subtotal =
+                                jumlahBreakfast * hargaBreakfast;
+
+                            total += subtotal;
+
+                            if (jumlahBreakfast == 1) {
+
+                                keterangan.push(
+                                    'Rp ' +
+                                    subtotal.toLocaleString('id-ID')
+                                );
+
+                            } else {
+
+                                keterangan.push(
+                                    jumlahBreakfast +
+                                    ' Breakfast x Rp ' +
+                                    hargaBreakfast.toLocaleString('id-ID') +
+                                    ' = Rp ' +
+                                    subtotal.toLocaleString('id-ID')
+                                );
+
+                            }
+                        }
+
+                        if (total > 0) {
+
+                            $('#biaya_container').show();
+                            $('#biaya_input_container').show();
+
+                            if (keterangan.length > 1) {
+
+                                keterangan.push(
+                                    '\nTotal = Rp ' +
+                                    total.toLocaleString('id-ID')
+                                );
+
+                            }
+
+                            $('#biaya_request').val(
+                                keterangan.join('\n')
+                            );
+
+                            $('#biaya_request_value').val(total);
+
+                        } else {
+
+                            $('#biaya_container').hide();
+                            $('#biaya_input_container').hide();
+
+                            $('#biaya_request').val('');
+                            $('#biaya_request_value').val('');
+                        }
+
+                    }
+
+                });
+
+            }
+
+            // Saat jumlah berubah
+            $(document).on(
+                'input',
+                '#jumlah_extra_bed, #jumlah_breakfast',
+                function () {
+
+                    hitungBiayaRequest();
+
+                }
+            );
 
         });
     </script>
