@@ -234,10 +234,10 @@
 
             // Default saat modal dibuka
             $('#jumlah_kamar_dipesan').html(`
-                <option value="">
-                    -- Pilih Tanggal Check In Dulu --
-                </option>
-            `);
+                    <option value="">
+                        -- Pilih Tanggal Check In Dulu --
+                    </option>
+                `);
 
             $('#kamar_tersedia_title').hide();
             $('#kamar_tersedia_list').hide();
@@ -257,10 +257,10 @@
                 if (!checkIn || !checkOut) {
 
                     $('#jumlah_kamar_dipesan').html(`
-            <option value="">
-                -- Pilih Tanggal Check In Dulu --
-            </option>
-        `);
+                <option value="">
+                    -- Pilih Tanggal Check In Dulu --
+                </option>
+            `);
 
                     return;
                 }
@@ -284,10 +284,10 @@
                         for (let i = 1; i <= totalKamar; i++) {
 
                             opsiJumlah += `
-                                                <option value="${i}">
-                                                    ${i} Kamar
-                                                </option>
-                                            `;
+                                                    <option value="${i}">
+                                                        ${i} Kamar
+                                                    </option>
+                                                `;
                         }
 
                         $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -354,23 +354,23 @@
                         for (let i = 1; i <= jumlah; i++) {
 
                             html += `
-                                                            <div class="mb-4">
+                                                                <div class="mb-4">
 
-                                                                <label class="form-label fw-bold"
-                                                                       style="font-size:16pt;">
-                                                                    Pilih Kamar ${i}
-                                                                </label>
+                                                                    <label class="form-label fw-bold"
+                                                                           style="font-size:16pt;">
+                                                                        Pilih Kamar ${i}
+                                                                    </label>
 
-                                                                <select
-                                                                    name="id_nomor_kamar[]"
-                                                                    class="form-control nomor-kamar"
-                                                                    style="font-size:16pt;"
-                                                                    required>
+                                                                    <select
+                                                                        name="id_nomor_kamar[]"
+                                                                        class="form-control nomor-kamar"
+                                                                        style="font-size:16pt;"
+                                                                        required>
 
-                                                                    <option value="">
-                                                                        -- Pilih Kamar --
-                                                                    </option>
-                                                        `;
+                                                                        <option value="">
+                                                                            -- Pilih Kamar --
+                                                                        </option>
+                                                            `;
 
                             response.forEach(function (kamar) {
 
@@ -385,18 +385,18 @@
                                 }
 
                                 html += `
-                                                                <option value="${kamar.id_nomor_kamar}">
-                                                                    ${kamar.tipe_kamar}
-                                                                    ${kamar.nomor_kamar}
-                                                                    (${bed})
-                                                                </option>
-                                                            `;
+                                                                    <option value="${kamar.id_nomor_kamar}">
+                                                                        ${kamar.tipe_kamar}
+                                                                        ${kamar.nomor_kamar}
+                                                                        (${bed})
+                                                                    </option>
+                                                                `;
                             });
 
                             html += `
-                                                                </select>
-                                                            </div>
-                                                        `;
+                                                                    </select>
+                                                                </div>
+                                                            `;
                         }
 
                         $('#list_nomor_kamar').html(html);
@@ -439,6 +439,63 @@
 
                     });
 
+                });
+
+            });
+
+
+
+
+
+            // ==========================
+            // REQUEST HOTEL
+            // ==========================
+            $(document).on('change', '#request', function () {
+
+                let requestType = $(this).val();
+
+                if (requestType == '') {
+
+                    $('#biaya_container').hide();
+                    $('#biaya_input_container').hide();
+
+                    $('#biaya_request').val('');
+                    $('#biaya_request_value').val('');
+
+                    return;
+                }
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: '/getRequestHotel',
+
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        request_type: requestType
+                    },
+
+                    success: function (response) {
+
+                        if (!response) {
+
+                            $('#biaya_container').hide();
+                            $('#biaya_input_container').hide();
+
+                            return;
+                        }
+
+                        let biaya = parseInt(response.tarif_per_hari);
+
+                        $('#biaya_container').show();
+                        $('#biaya_input_container').show();
+
+                        $('#biaya_request').val(
+                            'Rp ' + biaya.toLocaleString('id-ID')
+                        );
+
+                        $('#biaya_request_value').val(biaya);
+                    }
                 });
 
             });

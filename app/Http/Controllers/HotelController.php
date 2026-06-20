@@ -225,6 +225,49 @@ class HotelController extends Controller
 
 
 
+    public function getRequestHotel(Request $request)
+    {
+        $requestType = $request->request_type;
+
+        if ($requestType == 'extra_bed') {
+
+            $data = DB::table('kamar')
+                ->where('kode_kamar', 'BED')
+                ->select(
+                    'id_kamar',
+                    'kode_kamar',
+                    'tarif_per_hari'
+                )
+                ->first();
+
+        } elseif ($requestType == 'breakfast') {
+
+            $data = DB::table('kamar')
+                ->where('kode_kamar', 'FAST')
+                ->select(
+                    'id_kamar',
+                    'kode_kamar',
+                    'tarif_per_hari'
+                )
+                ->first();
+
+        } else {
+
+            $data = null;
+        }
+
+        return response()->json($data);
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
