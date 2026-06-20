@@ -31,13 +31,15 @@ Route::post('/getRequestHotel', [HotelController::class, 'getRequestHotel']);
 Route::post('/getBiayaRequest', [HotelController::class, 'getBiayaRequest']);
 
 
-Route::post('/TambahModalDLX/store_TambahModalDLX', [HotelController::class, 'store_TambahModalDLX']);
+Route::post('/hapus-histori-kamar', [HotelController::class, 'hapusHistoriKamar']);
+
+
+Route::post('/PesanKamar/store_PesanKamar', [HotelController::class, 'store_PesanKamar']);
 
 
 Route::post('/ModalDLX', [HotelController::class, 'ModalDLX']);
 
 
-Route::post('/hapus-histori-kamar', [HotelController::class, 'hapusHistoriKamar']);
 
 
 
