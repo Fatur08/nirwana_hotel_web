@@ -129,7 +129,7 @@
 
     {{-- KOTAK CARI --}}
     <div class="kotak-cari">
-        <form action="/" method="GET" id="frmCariTanggal" enctype="multipart/form-data">
+        <form action="/InformasiPemesanan" method="GET" id="FormInformasiPemesanan" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-6">
