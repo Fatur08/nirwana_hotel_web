@@ -426,6 +426,15 @@ class HotelController extends Controller
 
 
 
+    public function DataMaster(Request $request)
+    {
+        return view('DataMaster');
+    }
+
+
+
+
+
 
 
 

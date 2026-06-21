@@ -43,6 +43,9 @@ Route::get('/KetersediaanKamar', [HotelController::class, 'KetersediaanKamar']);
 Route::get('/InformasiPemesanan', [HotelController::class, 'InformasiPemesanan']);
 
 
+Route::get('/DataMaster', [HotelController::class, 'DataMaster']);
+
+
 Route::post('/ModalDLX', [HotelController::class, 'ModalDLX']);
 
 
