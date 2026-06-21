@@ -407,6 +407,17 @@ class HotelController extends Controller
 
 
 
+    public function KetersediaanKamar(Request $request)
+    {
+        return view('KetersediaanKamar');
+    }
+
+
+
+
+
+
+
 
 
 
