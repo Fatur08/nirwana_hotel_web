@@ -40,6 +40,9 @@ Route::post('/PesanKamar/store_PesanKamar', [HotelController::class, 'store_Pesa
 Route::get('/KetersediaanKamar', [HotelController::class, 'KetersediaanKamar']);
 
 
+Route::get('/InformasiPemesanan', [HotelController::class, 'InformasiPemesanan']);
+
+
 Route::post('/ModalDLX', [HotelController::class, 'ModalDLX']);
 
 

@@ -417,6 +417,16 @@ class HotelController extends Controller
 
 
 
+    public function InformasiPemesanan(Request $request)
+    {
+        return view('InformasiPemesanan');
+    }
+
+
+
+
+
+
 
 
 
