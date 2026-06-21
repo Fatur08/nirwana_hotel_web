@@ -248,7 +248,7 @@
 
 
         .kotak-ketersediaan-kamar {
-            background: linear-gradient(to right, #b8860b, #f1c40f, #ffd700);
+            background: linear-gradient(to right, #4facfe, #00c6ff, #43e97b);
             color: white;
             padding: 12px;
             border-radius: 10px;
