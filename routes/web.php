@@ -37,7 +37,7 @@ Route::post('/hapus-histori-kamar', [HotelController::class, 'hapusHistoriKamar'
 Route::post('/PesanKamar/store_PesanKamar', [HotelController::class, 'store_PesanKamar']);
 
 
-Route::post('/KetersediaanKamar', [HotelController::class, 'KetersediaanKamar']);
+Route::get('/KetersediaanKamar', [HotelController::class, 'KetersediaanKamar']);
 
 
 Route::post('/ModalDLX', [HotelController::class, 'ModalDLX']);
