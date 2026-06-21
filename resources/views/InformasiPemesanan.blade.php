@@ -290,4 +290,230 @@
     </div>
 @endsection
 @push('myscript')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const checkOutPicker = flatpickr("#check_out_tampil", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "d F Y",
+                locale: flatpickr.l10ns.id,
+                disableMobile: true,
+                allowInput: false
+            });
+
+            const checkInPicker = flatpickr("#check_in_tampil", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "d F Y",
+                locale: flatpickr.l10ns.id,
+                disableMobile: true,
+                allowInput: false,
+
+                onChange: function (selectedDates) {
+
+                    if (!selectedDates.length) return;
+
+                    let checkInDate = selectedDates[0];
+
+                    // Simpan ke hidden input pencarian
+                    $('#cari_check_in').val(
+                        this.formatDate(checkInDate, "Y-m-d")
+                    );
+
+                    // Check-Out minimal H+1
+                    let minCheckout = new Date(checkInDate);
+                    minCheckout.setDate(minCheckout.getDate() + 1);
+
+                    checkOutPicker.set('minDate', minCheckout);
+
+                    // Reset pilihan check-out lama
+                    checkOutPicker.clear();
+                    $('#cari_check_out').val('');
+                }
+            });
+
+            checkOutPicker.config.onChange.push(function (selectedDates) {
+
+                if (!selectedDates.length) return;
+
+                $('#cari_check_out').val(
+                    checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
+                );
+
+            });
+
+            // =========================
+            // DEFAULT TANGGAL HARI INI
+            // =========================
+
+            let today = new Date();
+
+            let yyyy = today.getFullYear();
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let dd = String(today.getDate()).padStart(2, '0');
+
+            let formatDB = `${yyyy}-${mm}-${dd}`;
+
+            // Hidden input untuk pencarian
+            $('#cari_check_in').val(formatDB);
+            $('#cari_check_out').val(formatDB);
+
+        });
+
+
+
+
+        // BAGIAN DARI MODAL INFO
+        $(document).on('click', '.ModalInfo', function (e) {
+            e.preventDefault();
+
+            let id = $(this).attr('id_laporan_keuangan');
+
+            $.ajax({
+                type: 'POST',
+                url: '/ModalInfo',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id_laporan_keuangan: id
+                },
+                success: function (respond) {
+                    $("#loadModalInfo").html(respond);
+                    $("#modal-info").modal("show");
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // BAGIAN DARI MODAL RESI
+        $(document).on('click', '.ModalResi', function (e) {
+            e.preventDefault();
+
+            let id = $(this).attr('id_laporan_keuangan');
+
+            $.ajax({
+                type: 'POST',
+                url: '/ModalResi',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id_laporan_keuangan: id
+                },
+                success: function (respond) {
+                    $("#loadModalResi").html(respond);
+                    $("#modal-resi").modal("show");
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+        function printResi() {
+
+            var isi = document.getElementById("area-print").innerHTML;
+
+            var frame = document.createElement('iframe');
+            frame.style.position = "absolute";
+            frame.style.top = "-1000000px";
+
+            document.body.appendChild(frame);
+
+            var frameDoc = frame.contentWindow.document;
+
+            frameDoc.open();
+            frameDoc.write(`
+                <html>
+                <head>
+                    <title>Print Resi</title>
+                    <style>
+                        body{
+                            font-family: Arial;
+                            font-size:14px;
+                            padding:20px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${isi}
+                </body>
+                </html>
+            `);
+            frameDoc.close();
+
+            frame.contentWindow.focus();
+            frame.contentWindow.print();
+
+            setTimeout(function () {
+                document.body.removeChild(frame);
+            }, 1000);
+        }
+
+
+
+
+
+
+
+
+
+        function cetakPDF() {
+
+            let element = document.querySelector("#area-print");
+
+            html2canvas(element, {
+                scale: 2,
+                useCORS: true
+            }).then(canvas => {
+
+                let imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+                // 🔥 ini yang benar
+                const {
+                    jsPDF
+                } = window.jspdf;
+
+                let pdf = new jsPDF('p', 'mm', [105, 148]);
+
+                pdf.addImage(imgData, 'JPEG', 0, 0, 105, 148);
+
+                pdf.save("resi.pdf");
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 @endpush
