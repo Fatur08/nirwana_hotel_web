@@ -146,9 +146,9 @@
                                 <path d="M8 15h2v2h-2z" />
                             </svg>
                         </span>
-                        <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
+                        <!-- ✅ INPUT TAMPILAN (FONT 20pt) -->
                         <input type="text" id="check_in_tampil" class="form-control flatpickr w-100"
-                            placeholder="Tanggal Check-In" autocomplete="off" readonly style="font-size:16pt;">
+                            placeholder="Tanggal Check-In" autocomplete="off" readonly style="font-size:20pt;">
                         <!-- INPUT ASLI UNTUK DATABASE -->
                         <input type="hidden" id="cari_check_in" name="cari_check_in">
                     </div>
@@ -167,9 +167,9 @@
                                 <path d="M8 15h2v2h-2z" />
                             </svg>
                         </span>
-                        <!-- ✅ INPUT TAMPILAN (FONT 16pt) -->
+                        <!-- ✅ INPUT TAMPILAN (FONT 20pt) -->
                         <input type="text" id="check_out_tampil" class="form-control flatpickr w-100"
-                            placeholder="Tanggal Check-Out" autocomplete="off" readonly style="font-size:16pt;">
+                            placeholder="Tanggal Check-Out" autocomplete="off" readonly style="font-size:20pt;">
                         <!-- INPUT ASLI UNTUK DATABASE -->
                         <input type="hidden" id="cari_check_out" name="cari_check_out">
                     </div>
@@ -177,14 +177,14 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <select id="status" name="status" class="form-control" style="font-size:16pt;">
+                    <select id="status" name="status" class="form-control" style="font-size:20pt;">
                         <option value="">-- Pilih Status --</option>
                         <option value="booking">Booking</option>
                         <option value="check_in">Check-In</option>
                     </select>
                 </div>
                 <div class="col-6">
-                    <button class="btn btn-success w-100" type="submit" style="font-size:16pt; padding:10px;">
+                    <button class="btn btn-success w-100" type="submit" style="font-size:20pt; padding:10px;">
                         Cari
                     </button>
                 </div>
@@ -474,22 +474,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                    <html>
-                    <head>
-                        <title>Print Resi</title>
-                        <style>
-                            body{
-                                font-family: Arial;
-                                font-size:14px;
-                                padding:20px;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        ${isi}
-                    </body>
-                    </html>
-                `);
+                        <html>
+                        <head>
+                            <title>Print Resi</title>
+                            <style>
+                                body{
+                                    font-family: Arial;
+                                    font-size:14px;
+                                    padding:20px;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            ${isi}
+                        </body>
+                        </html>
+                    `);
             frameDoc.close();
 
             frame.contentWindow.focus();
