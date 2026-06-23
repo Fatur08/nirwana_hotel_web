@@ -38,8 +38,8 @@
 
             {{-- IDENTITAS --}}
             <tr style="border:1px solid black;">
-                <td style="width:180px;">Nama Tn/Ny</td>
-                <td style="width:25px;text-align:center;">:</td>
+                <td style="width:180px; border:1px solid black;">Nama Tn/Ny</td>
+                <td style="width:25px;text-align:center;border:1px solid black;">:</td>
                 <td colspan="3">{{ $data->nama_tamu }}</td>
             </tr>
 
