@@ -99,23 +99,23 @@
 
         /* Header nomor kamar */
         .header-dlx {
-            background-color: #f8d7da !important;
-            /* Merah pastel */
+            background: #f8d7da !important;
+            color: #000 !important;
         }
 
         .header-spr {
-            background-color: #d6eaf8 !important;
-            /* Biru pastel */
+            background: #d6eaf8 !important;
+            color: #000 !important;
         }
 
         .header-std {
-            background-color: #fcf3cf !important;
-            /* Kuning pastel */
+            background: #fcf3cf !important;
+            color: #000 !important;
         }
 
         .header-hmsty {
-            background-color: #d5f5e3 !important;
-            /* Hijau pastel */
+            background: #d5f5e3 !important;
+            color: #000 !important;
         }
     </style>
 
@@ -149,21 +149,9 @@
 
                     <tr>
                         @foreach ($nomorKamar as $kamar)
-
-                            @php
-                                $warna = match ($kamar->id_kamar) {
-                                    1 => 'header-dlx',    // Deluxe
-                                    2 => 'header-spr',    // Superior
-                                    3 => 'header-std',    // Standar
-                                    4 => 'header-hmsty',  // Home Stay
-                                    default => ''
-                                };
-                            @endphp
-
-                            <th class="{{ $warna }}" style="min-width:60px;">
+                            <th style="min-width:60px;">
                                 {{ $kamar->id_nomor_kamar }}
                             </th>
-
                         @endforeach
                     </tr>
 
@@ -178,7 +166,19 @@
                             </th>
 
                             @foreach ($nomorKamar as $kamar)
-                                <td></td>
+
+                                @php
+                                    $warna = match ($kamar->id_kamar) {
+                                        1 => 'header-dlx',
+                                        2 => 'header-spr',
+                                        3 => 'header-std',
+                                        4 => 'header-hmsty',
+                                        default => ''
+                                    };
+                                @endphp
+
+                                <td class="{{ $warna }}"></td>
+
                             @endforeach
 
                         </tr>
