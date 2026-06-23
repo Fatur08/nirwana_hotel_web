@@ -23,98 +23,6 @@
             width: 100%;
             font-size: 20px;
         }
-
-
-
-        /* === Table Style === */
-        .custom-table {
-            border-collapse: separate;
-            border-spacing: 0;
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            background-color: #ffffff;
-        }
-
-        .custom-table thead th {
-            background: linear-gradient(135deg, #007bff, #00bcd4);
-            color: white;
-            text-align: center;
-            font-weight: 600;
-            font-size: 15px;
-            letter-spacing: 0.5px;
-            padding: 12px;
-            border: none;
-        }
-
-        .custom-table thead tr:first-child th {
-            background: linear-gradient(135deg, #0069d9, #17a2b8);
-            font-size: 17px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .custom-table tbody td,
-        .custom-table tbody th {
-            padding: 12px;
-            text-align: center;
-            vertical-align: middle;
-            border: 1px solid #dee2e6;
-            font-size: 16px;
-            color: #333;
-        }
-
-        .custom-table tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .custom-table tbody tr:hover {
-            background-color: #e9f5ff;
-            transition: 0.3s;
-        }
-
-        .table-container {
-            max-width: 1600px;
-        }
-
-
-
-
-        .table-garis {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        .table-garis th,
-        .table-garis td {
-            border: 1px solid black;
-            padding: 8px;
-        }
-
-
-
-
-        .table-custom {
-            width: 100%;
-            border: 1px solid black;
-            /* border luar saja */
-            border-collapse: collapse;
-        }
-
-        .table-custom td,
-        .table-custom th {
-            border: none;
-            /* hilangkan semua garis dalam */
-            padding: 6px;
-        }
-
-        /* KHUSUS HEADER KAMAR DELUXE */
-        .table-custom .header-kamar {
-            border: 1px solid black;
-            font-size: 24px;
-            font-weight: bold;
-        }
     </style>
 
 
@@ -138,37 +46,37 @@
             <div class="mb-3">
                 <label class="form-label">Deluxe</label>
                 <input type="text" class="form-control rupiah" name="DLX"
-                    value="Rp.{{ number_format($kamar['DLX'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="{{ !empty($kamar['DLX']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Superior</label>
                 <input type="text" class="form-control rupiah" name="SPR"
-                    value="Rp.{{ number_format($kamar['SPR'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="{{ !empty($kamar['SPR']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Standart</label>
                 <input type="text" class="form-control rupiah" name="STD"
-                    value="Rp.{{ number_format($kamar['STD'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="{{ !empty($kamar['STD']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Home Stay</label>
                 <input type="text" class="form-control rupiah" name="HMSTY"
-                    value="Rp.{{ number_format($kamar['HMSTY'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="{{ !empty($kamar['HMSTY']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Ekstra Bed</label>
                 <input type="text" class="form-control rupiah" name="BED"
-                    value="Rp.{{ number_format($kamar['BED'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="{{ !empty($kamar['BED']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Breakfast</label>
                 <input type="text" class="form-control rupiah" name="FAST"
-                    value="Rp.{{ number_format($kamar['FAST'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="{{ !empty($kamar['FAST']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
             </div>
 
             <button type="submit" class="btn btn-success w-100" style="font-size:16pt;">
@@ -237,34 +145,43 @@
 
         function formatRupiah(angka) {
 
-            angka = angka.replace(/[^,\d]/g, '');
+            angka = angka.replace(/[^0-9]/g, '');
 
-            let split = angka.split(',');
-            let sisa = split[0].length % 3;
-            let rupiah = split[0].substr(0, sisa);
-            let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            if (ribuan) {
-
-                let separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-
+            if (angka.length === 0) {
+                return '';
             }
 
-            return 'Rp.' + rupiah;
+            return 'Rp.' + parseInt(angka).toLocaleString('id-ID');
         }
 
-        $('.rupiah').on('keyup', function () {
+        $('.rupiah').on('input', function () {
 
-            let angka = $(this).val().replace(/[^0-9]/g, '');
-
-            if (angka == '') {
-                $(this).val('Rp.0');
-            } else {
-                $(this).val(formatRupiah(angka));
-            }
+            $(this).val(
+                formatRupiah($(this).val())
+            );
 
         });
 
+        $('.rupiah').on('focus', function () {
+
+            let angka = $(this).val().replace(/[^0-9]/g, '');
+
+            $(this).val(angka);
+
+        });
+
+        $('.rupiah').on('blur', function () {
+
+            let angka = $(this).val();
+
+            if (angka !== '') {
+
+                $(this).val(
+                    'Rp.' + parseInt(angka).toLocaleString('id-ID')
+                );
+
+            }
+
+        });
     </script>
 @endpush
