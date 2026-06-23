@@ -1,14 +1,3 @@
-<style>
-    .tabel-resi {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .tabel-resi td,
-    .tabel-resi th {
-        border: 1px solid red;
-    }
-</style>
 <div id="area-print">
 
     <div id="area-inner" style="padding:30px;">
@@ -45,7 +34,7 @@
             $checkOut = Carbon::parse($data->check_out);
         @endphp
 
-        <table style="width:100%; font-size:14pt;" class="tabel-resi">
+        <table style="width:100%; font-size:14pt;">
 
             {{-- IDENTITAS --}}
             <tr>
