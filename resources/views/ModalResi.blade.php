@@ -97,7 +97,7 @@
                     <td style="text-align:center;">=</td>
 
                     <td style="text-align:right;">
-                        Rp.{{ number_format($item['subtotal'], 0, ',', '.') }}
+                        = Rp.{{ number_format($item['subtotal'], 0, ',', '.') }}
                     </td>
 
                 </tr>
@@ -124,7 +124,7 @@
                     <td style="text-align:center;">=</td>
 
                     <td style="text-align:right;">
-                        Rp.{{ number_format($req->total_harga, 0, ',', '.') }}
+                        = Rp.{{ number_format($req->total_harga, 0, ',', '.') }}
                     </td>
 
                 </tr>
@@ -147,7 +147,7 @@
                 </td>
 
                 <td style="text-align:right;">
-                    Rp.{{ number_format($subTotal, 0, ',', '.') }}
+                    = Rp.{{ number_format($subTotal, 0, ',', '.') }}
                 </td>
             </tr>
 
@@ -160,7 +160,7 @@
                 </td>
 
                 <td style="text-align:right;">
-                    Rp.{{ number_format($pajak, 0, ',', '.') }}
+                    = Rp.{{ number_format($pajak, 0, ',', '.') }}
                 </td>
             </tr>
 
@@ -173,7 +173,7 @@
                 </td>
 
                 <td style="text-align:right;">
-                    Rp.{{ number_format($grandTotal, 0, ',', '.') }}
+                    = Rp.{{ number_format($grandTotal, 0, ',', '.') }}
                 </td>
             </tr>
 
