@@ -45,8 +45,15 @@
 
             <div class="mb-3">
                 <label class="form-label">Deluxe</label>
-                <input type="number" class="form-control rupiah" name="DLX"
-                    value="{{ !empty($kamar['DLX']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
+
+                <div class="input-group">
+                    <span class="input-group-text">Rp</span>
+                    <input type="number" class="form-control" name="DLX" id="DLX" value="{{ $kamar['DLX'] ?? '' }}">
+                </div>
+
+                <small class="text-white">
+                    <span id="DLX_view"></span>
+                </small>
             </div>
 
             <div class="mb-3">
@@ -144,22 +151,24 @@
         });
 
         function formatRupiah(angka) {
-
-            angka = angka.replace(/\D/g, '');
-
-            if (angka === '') {
-                return '';
-            }
-
-            return 'Rp.' + new Intl.NumberFormat('id-ID').format(angka);
+            return new Intl.NumberFormat('id-ID').format(angka);
         }
 
-        $('.rupiah').on('keyup', function () {
+        function bindRupiah(id) {
+            let el = document.getElementById(id);
 
-            $(this).val(
-                formatRupiah($(this).val())
-            );
+            el.addEventListener('input', function () {
+                let val = this.value;
+                document.getElementById(id + '_view').innerText =
+                    val ? 'Rp.' + formatRupiah(val) : '';
+            });
+        }
 
-        });
+        bindRupiah('DLX');
+        bindRupiah('SPR');
+        bindRupiah('STD');
+        bindRupiah('HMSTY');
+        bindRupiah('BED');
+        bindRupiah('FAST');
     </script>
 @endpush
