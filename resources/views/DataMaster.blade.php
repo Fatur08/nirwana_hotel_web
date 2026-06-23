@@ -161,14 +161,5 @@
             );
 
         });
-
-        $('.rupiah').each(function () {
-
-            if ($(this).val() == '') {
-                $(this).val('Rp.0');
-            }
-
-        });
-
     </script>
 @endpush
