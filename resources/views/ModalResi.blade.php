@@ -67,7 +67,7 @@
 
             {{-- SPASI --}}
             <tr>
-                <td colspan="5" style="height:25px;"></td>
+                <td colspan="7" style="height:25px;"></td>
             </tr>
 
             {{-- DETAIL KAMAR --}}
