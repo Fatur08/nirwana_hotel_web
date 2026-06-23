@@ -145,13 +145,13 @@
 
         function formatRupiah(angka) {
 
-            angka = angka.replace(/[^0-9]/g, '');
+            angka = angka.replace(/\D/g, '');
 
-            if (angka.length === 0) {
+            if (angka === '') {
                 return '';
             }
 
-            return 'Rp.' + parseInt(angka).toLocaleString('id-ID');
+            return 'Rp.' + new Intl.NumberFormat('id-ID').format(angka);
         }
 
         $('.rupiah').on('input', function () {
@@ -159,28 +159,6 @@
             $(this).val(
                 formatRupiah($(this).val())
             );
-
-        });
-
-        $('.rupiah').on('focus', function () {
-
-            let angka = $(this).val().replace(/[^0-9]/g, '');
-
-            $(this).val(angka);
-
-        });
-
-        $('.rupiah').on('blur', function () {
-
-            let angka = $(this).val();
-
-            if (angka !== '') {
-
-                $(this).val(
-                    'Rp.' + parseInt(angka).toLocaleString('id-ID')
-                );
-
-            }
 
         });
     </script>
