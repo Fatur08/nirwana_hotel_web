@@ -183,6 +183,159 @@ class HotelController extends Controller
 
 
 
+
+
+
+
+
+
+
+
+    // Modal Pesan Kamar
+    public function PesanKamar(Request $request)
+    {
+        return view('PesanKamar');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getKamarTersedia(Request $request)
+    {
+        $checkIn = $request->check_in;
+        $checkOut = $request->check_out;
+
+        if (!$checkIn || !$checkOut) {
+            return response()->json([]);
+        }
+
+        $kamarTersedia = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+
+            ->whereNotIn('nk.id_nomor_kamar', function ($q) use ($checkIn, $checkOut) {
+
+                $q->select('id_nomor_kamar')
+                    ->from('histori_kamar')
+
+                    // cek kamar yang bentrok tanggal
+                    ->where(function ($query) use ($checkIn, $checkOut) {
+
+                        $query->whereDate('check_in', '<', $checkOut)
+                            ->whereDate('check_out', '>', $checkIn);
+
+                    });
+
+            })
+
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'nk.jenis_bed',
+                'k.id_kamar',
+                'k.tipe_kamar'
+            )
+
+            ->orderBy('k.id_kamar')
+            ->orderBy('nk.nomor_kamar')
+
+            ->get();
+
+        return response()->json($kamarTersedia);
+    }
+
+
+
+
+
+
+
+
+
+
+    public function getRequestHotel(Request $request)
+    {
+        $requestType = $request->request_type;
+
+        if ($requestType == 'extra_bed') {
+
+            $data = DB::table('kamar')
+                ->where('kode_kamar', 'BED')
+                ->select(
+                    'id_kamar',
+                    'kode_kamar',
+                    'tarif_per_hari'
+                )
+                ->first();
+
+        } elseif ($requestType == 'breakfast') {
+
+            $data = DB::table('kamar')
+                ->where('kode_kamar', 'FAST')
+                ->select(
+                    'id_kamar',
+                    'kode_kamar',
+                    'tarif_per_hari'
+                )
+                ->first();
+
+        } else {
+
+            $data = null;
+        }
+
+        return response()->json($data);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getBiayaRequest()
+    {
+        $extraBed = DB::table('kamar')
+            ->where('kode_kamar', 'BED')
+            ->first();
+
+        $breakfast = DB::table('kamar')
+            ->where('kode_kamar', 'FAST')
+            ->first();
+
+        return response()->json([
+            'extra_bed' => $extraBed->tarif_per_hari ?? 0,
+            'breakfast' => $breakfast->tarif_per_hari ?? 0
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function store_PesanKamar(Request $request)
     {
         DB::beginTransaction();
@@ -474,140 +627,7 @@ class HotelController extends Controller
 
 
 
-    public function getKamarTersedia(Request $request)
-    {
-        $checkIn = $request->check_in;
-        $checkOut = $request->check_out;
 
-        if (!$checkIn || !$checkOut) {
-            return response()->json([]);
-        }
-
-        $kamarTersedia = DB::table('nomor_kamar as nk')
-            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
-
-            ->whereNotIn('nk.id_nomor_kamar', function ($q) use ($checkIn, $checkOut) {
-
-                $q->select('id_nomor_kamar')
-                    ->from('histori_kamar')
-
-                    // cek kamar yang bentrok tanggal
-                    ->where(function ($query) use ($checkIn, $checkOut) {
-
-                        $query->whereDate('check_in', '<', $checkOut)
-                            ->whereDate('check_out', '>', $checkIn);
-
-                    });
-
-            })
-
-            ->select(
-                'nk.id_nomor_kamar',
-                'nk.nomor_kamar',
-                'nk.jenis_bed',
-                'k.id_kamar',
-                'k.tipe_kamar'
-            )
-
-            ->orderBy('k.id_kamar')
-            ->orderBy('nk.nomor_kamar')
-
-            ->get();
-
-        return response()->json($kamarTersedia);
-    }
-
-
-
-
-
-
-
-
-
-
-    public function getRequestHotel(Request $request)
-    {
-        $requestType = $request->request_type;
-
-        if ($requestType == 'extra_bed') {
-
-            $data = DB::table('kamar')
-                ->where('kode_kamar', 'BED')
-                ->select(
-                    'id_kamar',
-                    'kode_kamar',
-                    'tarif_per_hari'
-                )
-                ->first();
-
-        } elseif ($requestType == 'breakfast') {
-
-            $data = DB::table('kamar')
-                ->where('kode_kamar', 'FAST')
-                ->select(
-                    'id_kamar',
-                    'kode_kamar',
-                    'tarif_per_hari'
-                )
-                ->first();
-
-        } else {
-
-            $data = null;
-        }
-
-        return response()->json($data);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function getBiayaRequest()
-    {
-        $extraBed = DB::table('kamar')
-            ->where('kode_kamar', 'BED')
-            ->first();
-
-        $breakfast = DB::table('kamar')
-            ->where('kode_kamar', 'FAST')
-            ->first();
-
-        return response()->json([
-            'extra_bed' => $extraBed->tarif_per_hari ?? 0,
-            'breakfast' => $breakfast->tarif_per_hari ?? 0
-        ]);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Modal Pesan Kamar
-    public function PesanKamar(Request $request)
-    {
-        return view('PesanKamar');
-    }
 
 
 
@@ -775,8 +795,7 @@ class HotelController extends Controller
             ->first();
 
         // Lama menginap
-        $lama = \Carbon\Carbon::parse($data->check_out)
-            ->diffInDays(\Carbon\Carbon::parse($data->check_in));
+        $lama = $data->lama_inap;
 
         // Ambil seluruh kamar yang dipesan
         $kamar = DB::table('histori_kamar as hk')
@@ -805,11 +824,24 @@ class HotelController extends Controller
                     'jumlah' => 0,
                     'tarif' => $item->tarif_per_hari,
                     'subtotal' => 0,
+                    'nomor_kamar' => [],
                 ];
 
             }
 
             $detailKamar[$item->kode_kamar]['jumlah']++;
+            $detailKamar[$item->kode_kamar]['nomor_kamar'][] = $item->nomor_kamar;
+
+            $jenisBed = match ($item->jenis_bed) {
+                1 => 'Single Bed',
+                2 => 'Double Bed',
+                default => '-'
+            };
+
+            $detailKamar[$item->kode_kamar]['nomor_kamar'][] = [
+                'nomor' => $item->nomor_kamar,
+                'bed' => $jenisBed
+            ];
 
         }
 
@@ -823,22 +855,24 @@ class HotelController extends Controller
         }
 
 
-        $subTotal = $data->before_10_persen;
+        $subTotal = $data->biaya;
 
         $pajak = $data->pajak;
 
-        $grandTotal = $data->after_10_persen;
+        $grandTotal = $data->total_diterima;
 
 
-        // Ambil tarif Extra Bed
-        $extraBed = DB::table('kamar')
-            ->where('kode_kamar', 'BED')
-            ->first();
-
-        // Ambil tarif Breakfast
-        $breakfast = DB::table('kamar')
-            ->where('kode_kamar', 'FAST')
-            ->first();
+        $requestTambahan = DB::table('request as r')
+            ->join('kamar as k', 'r.kode_request', '=', 'k.kode_kamar')
+            ->select(
+                'r.kode_request',
+                'r.jumlah_request',
+                'r.total_harga',
+                'k.tipe_kamar',
+                'k.tarif_per_hari'
+            )
+            ->where('r.id_laporan_keuangan', $id)
+            ->get();
 
         return view('ModalResi', [
 
@@ -848,13 +882,9 @@ class HotelController extends Controller
 
             'lama' => $lama,
 
-            'kamar' => $kamar,
-
             'detailKamar' => $detailKamar,
 
-            'extraBed' => $extraBed,
-
-            'breakfast' => $breakfast,
+            'requestTambahan' => $requestTambahan,
 
             'subTotal' => $subTotal,
 
