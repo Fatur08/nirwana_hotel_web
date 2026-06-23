@@ -156,8 +156,15 @@
 
         $('.rupiah').on('input', function () {
 
-            $(this).val(
-                formatRupiah($(this).val())
+            let angka = $(this).val().replace(/\D/g, '');
+
+            let posisi = this.selectionStart;
+
+            $(this).val(formatRupiah(angka));
+
+            this.setSelectionRange(
+                $(this).val().length,
+                $(this).val().length
             );
 
         });
