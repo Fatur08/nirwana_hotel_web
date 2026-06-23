@@ -74,9 +74,9 @@
                                 </th>
                             </tr>
                             @php
-                            $checkIn = \Carbon\Carbon::parse($data->check_in);
-                            $checkOut = \Carbon\Carbon::parse($data->check_out);
-                            $lama = $checkOut->diffInDays($checkIn);
+                                $checkIn = \Carbon\Carbon::parse($data->check_in);
+                                $checkOut = \Carbon\Carbon::parse($data->check_out);
+                                $lama = $checkOut->diffInDays($checkIn);
                             @endphp
 
                             <tr>
@@ -111,34 +111,34 @@
                                 <td class="text-start">
                                     @foreach($kamar as $k)
 
-                                    @php
-                                    switch($k->id_kamar){
-                                    case 1:
-                                    $tipe = "Deluxe ";
-                                    break;
-                                    case 2:
-                                    $tipe = "Superior ";
-                                    break;
-                                    case 3:
-                                    $tipe = "Standar ";
-                                    break;
-                                    default:
-                                    $tipe = "-";
-                                    }
+                                        @php
+                                            switch ($k->id_kamar) {
+                                                case 1:
+                                                    $tipe = "Deluxe ";
+                                                    break;
+                                                case 2:
+                                                    $tipe = "Superior ";
+                                                    break;
+                                                case 3:
+                                                    $tipe = "Standar ";
+                                                    break;
+                                                default:
+                                                    $tipe = "-";
+                                            }
 
-                                    switch($k->jenis_bed){
-                                    case 1:
-                                    $bed = "Single Bed";
-                                    break;
-                                    case 2:
-                                    $bed = "Double Bed";
-                                    break;
-                                    default:
-                                    $bed = "-";
-                                    }
-                                    @endphp
+                                            switch ($k->jenis_bed) {
+                                                case 1:
+                                                    $bed = "Single Bed";
+                                                    break;
+                                                case 2:
+                                                    $bed = "Double Bed";
+                                                    break;
+                                                default:
+                                                    $bed = "-";
+                                            }
+                                        @endphp
 
-                                    {{ $loop->iteration }}. {{ $tipe }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
+                                        {{ $loop->iteration }}. {{ $tipe }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
 
                                     @endforeach
                                 </td>
@@ -178,7 +178,8 @@
                             </tr>
                             <tr>
                                 <th>{{ $data->nama_tamu }}</th>
-                                <th>{{ \Carbon\Carbon::parse($data->tanggal_dipesan)->translatedFormat('l, d F Y H:i') }}</th>
+                                <th>{{ \Carbon\Carbon::parse($data->tanggal_dipesan)->translatedFormat('l, d F Y H:i') }}
+                                </th>
                                 <th>{{ $data->metode_pembayaran }}</th>
                             </tr>
                             <tr>
