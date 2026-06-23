@@ -52,31 +52,31 @@
             <div class="mb-3">
                 <label class="form-label">Superior</label>
                 <input type="text" class="form-control rupiah" name="SPR"
-                    value="{{ !empty($kamar['SPR']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
+                    value="{{ !empty($kamar['SPR']) ? 'Rp.' . number_format($kamar['SPR'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Standart</label>
                 <input type="text" class="form-control rupiah" name="STD"
-                    value="{{ !empty($kamar['STD']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
+                    value="{{ !empty($kamar['STD']) ? 'Rp.' . number_format($kamar['STD'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Home Stay</label>
                 <input type="text" class="form-control rupiah" name="HMSTY"
-                    value="{{ !empty($kamar['HMSTY']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
+                    value="{{ !empty($kamar['HMSTY']) ? 'Rp.' . number_format($kamar['HMSTY'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Ekstra Bed</label>
                 <input type="text" class="form-control rupiah" name="BED"
-                    value="{{ !empty($kamar['BED']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
+                    value="{{ !empty($kamar['BED']) ? 'Rp.' . number_format($kamar['BED'], 0, ',', '.') : '' }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Breakfast</label>
                 <input type="text" class="form-control rupiah" name="FAST"
-                    value="{{ !empty($kamar['FAST']) ? 'Rp.' . number_format($kamar['DLX'], 0, ',', '.') : '' }}">
+                    value="{{ !empty($kamar['FAST']) ? 'Rp.' . number_format($kamar['FAST'], 0, ',', '.') : '' }}">
             </div>
 
             <button type="submit" class="btn btn-success w-100" style="font-size:16pt;">
