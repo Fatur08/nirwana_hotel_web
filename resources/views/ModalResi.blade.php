@@ -1,3 +1,14 @@
+<style>
+    .tabel-resi {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .tabel-resi td,
+    .tabel-resi th {
+        border: 1px solid red;
+    }
+</style>
 <div id="area-print">
 
     <div id="area-inner" style="padding:30px;">
@@ -34,22 +45,22 @@
             $checkOut = Carbon::parse($data->check_out);
         @endphp
 
-        <table style="width:100%; font-size:14pt; border:1px solid black;">
+        <table style="width:100%; font-size:14pt;" class="tabel-resi">
 
             {{-- IDENTITAS --}}
-            <tr style="border:1px solid black;">
-                <td style="width:180px; border:1px solid black;">Nama Tn/Ny</td>
-                <td style="width:25px;text-align:center;border:1px solid black;">:</td>
+            <tr>
+                <td style="width:180px;">Nama Tn/Ny</td>
+                <td style="width:25px;text-align:center;">:</td>
                 <td colspan="3">{{ $data->nama_tamu }}</td>
             </tr>
 
-            <tr style="border:1px solid black;">
+            <tr>
                 <td>Alamat</td>
                 <td style="text-align:center;">:</td>
                 <td colspan="3">{{ $histori->alamat ?? '-' }}</td>
             </tr>
 
-            <tr style="border:1px solid black;">
+            <tr>
                 <td>Check - In</td>
                 <td style="text-align:center;">:</td>
                 <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
@@ -58,20 +69,20 @@
                 <td>: {{ $checkOut->translatedFormat('d F Y') }}</td>
             </tr>
 
-            <tr style="border:1px solid black;">
+            <tr>
                 <td>Hari</td>
                 <td style="text-align:center;">:</td>
                 <td colspan="3">{{ $lama }} Hari</td>
             </tr>
 
             {{-- SPASI --}}
-            <tr style="border:1px solid black;">
+            <tr>
                 <td colspan="5" style="height:25px;"></td>
             </tr>
 
             {{-- DETAIL KAMAR --}}
             @foreach($detailKamar as $item)
-                <tr style="border:1px solid black;">
+                <tr>
 
                     <td>{{ $item['nama'] }}</td>
 
@@ -93,13 +104,13 @@
             @endforeach
 
             {{-- SPASI --}}
-            <tr style="border:1px solid black;">
+            <tr>
                 <td colspan="5" style="height:15px;"></td>
             </tr>
 
             {{-- REQUEST --}}
             @foreach($requestTambahan as $req)
-                <tr style="border:1px solid black;">
+                <tr>
 
                     <td>{{ $req->tipe_kamar }}</td>
 
@@ -120,7 +131,7 @@
             @endforeach
 
             {{-- GARIS --}}
-            <tr style="border:1px solid black;">
+            <tr>
                 <td colspan="3"></td>
                 <td colspan="2">
                     <hr style="margin:5px 0;border:1px solid #999;">
@@ -128,7 +139,7 @@
             </tr>
 
             {{-- SUBTOTAL --}}
-            <tr style="border:1px solid black;">
+            <tr>
                 <td colspan="3"></td>
 
                 <td style="text-align:right;">
@@ -141,7 +152,7 @@
             </tr>
 
             {{-- PAJAK --}}
-            <tr style="border:1px solid black;">
+            <tr>
                 <td colspan="3"></td>
 
                 <td style="text-align:right;">
@@ -154,7 +165,7 @@
             </tr>
 
             {{-- TOTAL --}}
-            <tr style="font-weight:bold; border:1px solid black;">
+            <tr style="font-weight:bold;">
                 <td colspan="3"></td>
 
                 <td style="text-align:right;">
