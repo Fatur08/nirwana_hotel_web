@@ -156,11 +156,11 @@
 
             <br><br>
 
-            <img src="{{ asset('assets/img/cap_ttd.png') }}" style="width:250px;">
+            <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px;">
 
             <br><br>
 
-            ( ........................................ )
+            ( Ani Muslimah )
 
         </div>
 
