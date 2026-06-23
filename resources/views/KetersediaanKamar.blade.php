@@ -99,22 +99,22 @@
 
         /* Header nomor kamar */
         .header-dlx {
-            background: #ffd7db !important;
+            background: #ffe6e9 !important;
             color: #000 !important;
         }
 
         .header-spr {
-            background: #e2f3ff !important;
+            background: #eaf6ff !important;
             color: #000 !important;
         }
 
         .header-std {
-            background: #fff9e3 !important;
+            background: #fffbed !important;
             color: #000 !important;
         }
 
         .header-hmsty {
-            background: #e7fff1 !important;
+            background: #effff6 !important;
             color: #000 !important;
         }
     </style>
