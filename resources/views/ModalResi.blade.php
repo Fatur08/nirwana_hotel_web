@@ -61,91 +61,119 @@
 
         <br><br>
 
-        {{-- DETAIL KAMAR --}}
-        @foreach($detailKamar as $item)
+        <table style="width:100%; font-size:14pt; border-collapse:collapse;">
 
-            <div style="font-size:14pt;">
+            {{-- KAMAR --}}
+            @foreach($detailKamar as $item)
+                <tr>
+                    <td style="width:180px;">
+                        {{ $item['nama'] }}
+                    </td>
 
-                {{ $item['nama'] }}
+                    <td style="width:20px;">
+                        :
+                    </td>
 
-                :
+                    <td>
+                        {{ $item['jumlah'] }}
+                        x Rp.{{ number_format($item['tarif'], 0, ',', '.') }}
+                        x {{ $lama }} Hari
+                    </td>
 
-                {{ $item['jumlah'] }}
+                    <td style="width:20px;">
+                        =
+                    </td>
 
-                x
+                    <td style="width:180px; text-align:right;">
+                        Rp.{{ number_format($item['subtotal'], 0, ',', '.') }}
+                    </td>
+                </tr>
+            @endforeach
 
-                Rp.{{ number_format($item['tarif'], 0, ',', '.') }}
+            {{-- SPASI --}}
+            <tr>
+                <td colspan="5" style="height:15px;"></td>
+            </tr>
 
-                x
+            {{-- REQUEST --}}
+            @foreach($requestTambahan as $req)
+                <tr>
 
-                {{ $lama }} Hari
+                    <td style="width:180px;">
+                        {{ $req->tipe_kamar }}
+                    </td>
 
-                =
+                    <td>
+                        :
+                    </td>
 
-                Rp.{{ number_format($item['subtotal'], 0, ',', '.') }}
+                    <td>
+                        {{ $req->jumlah_request }}
+                        x Rp.{{ number_format($req->tarif_per_hari, 0, ',', '.') }}
+                    </td>
 
-            </div>
+                    <td>
+                        =
+                    </td>
 
-        @endforeach
+                    <td style="text-align:right;">
+                        Rp.{{ number_format($req->total_harga, 0, ',', '.') }}
+                    </td>
 
+                </tr>
+            @endforeach
 
-        {{-- REQUEST TAMBAHAN --}}
-        @foreach($requestTambahan as $req)
-
-            <div style="font-size:14pt;">
-
-                {{ $req->tipe_kamar }}
-
-                :
-
-                {{ $req->jumlah_request }}
-
-                x
-
-                Rp.{{ number_format($req->tarif_per_hari, 0, ',', '.') }}
-
-                =
-
-                Rp.{{ number_format($req->total_harga, 0, ',', '.') }}
-
-            </div>
-
-        @endforeach
+        </table>
 
         <br><br>
 
 
         {{-- TOTAL --}}
-        <div style="width:45%;margin-left:auto;font-size:14pt;">
+        <table style="
+        width:380px;
+        margin-left:auto;
+        margin-top:20px;
+        font-size:14pt;
+        border-collapse:collapse;
+    ">
 
-            <hr style="border:1px solid black;margin-bottom:5px;">
+            <tr>
+                <td colspan="2">
+                    <hr style="border:1px solid black; margin:0;">
+                </td>
+            </tr>
 
-            <table style="width:100%;">
+            <tr>
+                <td style="text-align:right; width:150px;">
+                    =
+                </td>
 
-                <tr>
-                    <td>Total</td>
-                    <td align="right">
-                        Rp.{{ number_format($subTotal, 0, ',', '.') }}
-                    </td>
-                </tr>
+                <td style="text-align:right;">
+                    Rp.{{ number_format($subTotal, 0, ',', '.') }}
+                </td>
+            </tr>
 
-                <tr>
-                    <td>Pajak</td>
-                    <td align="right">
-                        Rp.{{ number_format($pajak, 0, ',', '.') }}
-                    </td>
-                </tr>
+            <tr>
+                <td style="text-align:right;">
+                    Pajak =
+                </td>
 
-                <tr style="font-weight:bold;">
-                    <td>Total</td>
-                    <td align="right">
-                        Rp.{{ number_format($grandTotal, 0, ',', '.') }}
-                    </td>
-                </tr>
+                <td style="text-align:right;">
+                    Rp.{{ number_format($pajak, 0, ',', '.') }}
+                </td>
+            </tr>
 
-            </table>
+            <tr style="font-weight:bold;">
+                <td style="text-align:right;">
+                    Total =
+                </td>
 
-        </div>
+                <td style="text-align:right;">
+                    Rp.{{ number_format($grandTotal, 0, ',', '.') }}
+                </td>
+            </tr>
+
+        </table>
 
 
         {{-- TANDA TANGAN --}}
