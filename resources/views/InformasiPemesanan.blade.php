@@ -306,7 +306,7 @@
 
     <!-- Modal Resi -->
     <div class="modal fade" id="modal-resi" tabindex="-1" aria-labelledby="ModalResiLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width:800px;">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
                     <h5 class="modal-title" id="ModalResiLabel" style="font-size:16pt;">Resi</h5>
@@ -467,22 +467,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                        <html>
-                                        <head>
-                                            <title>Print Resi</title>
-                                            <style>
-                                                body{
-                                                    font-family: Arial;
-                                                    font-size:14px;
-                                                    padding:20px;
-                                                }
-                                            </style>
-                                        </head>
-                                        <body>
-                                            ${isi}
-                                        </body>
-                                        </html>
-                                    `);
+                                            <html>
+                                            <head>
+                                                <title>Print Resi</title>
+                                                <style>
+                                                    body{
+                                                        font-family: Arial;
+                                                        font-size:14px;
+                                                        padding:20px;
+                                                    }
+                                                </style>
+                                            </head>
+                                            <body>
+                                                ${isi}
+                                            </body>
+                                            </html>
+                                        `);
             frameDoc.close();
 
             frame.contentWindow.focus();
