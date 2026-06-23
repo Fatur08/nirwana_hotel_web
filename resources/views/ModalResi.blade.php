@@ -131,7 +131,9 @@
             <tr>
                 <td colspan="3"></td>
 
-                <td style="text-align:right;">
+                <td></td>
+
+                <td style="text-align:center;">
                     =
                 </td>
 
@@ -145,7 +147,11 @@
                 <td colspan="3"></td>
 
                 <td style="text-align:right;">
-                    Pajak =
+                    Pajak
+                </td>
+
+                <td style="text-align:center;">
+                    =
                 </td>
 
                 <td style="text-align:right;">
@@ -158,14 +164,17 @@
                 <td colspan="3"></td>
 
                 <td style="text-align:right;">
-                    Total =
+                    Total
+                </td>
+
+                <td style="text-align:center;">
+                    =
                 </td>
 
                 <td style="text-align:right;">
                     Rp.{{ number_format($grandTotal, 0, ',', '.') }}
                 </td>
             </tr>
-
         </table>
 
 
