@@ -133,76 +133,48 @@
     <form action="{{ url('/UpdateDataMaster') }}" method="POST" id="frmDataMaster">
         @csrf
 
-        <div class="card shadow-sm border-0 mb-4">
-            <div class="card-body">
+        <div class="kotak-cari mt-3">
 
-                {{-- DELUXE --}}
-                <div class="mb-3">
-                    <label class="form-label fw-bold" style="font-size:16pt;">
-                        Deluxe
-                    </label>
-
-                    <input type="number" class="form-control" name="DLX" style="font-size:16pt;"
-                        value="{{ $kamar['DLX'] ?? 0 }}">
-                </div>
-
-                {{-- SUPERIOR --}}
-                <div class="mb-3">
-                    <label class="form-label fw-bold" style="font-size:16pt;">
-                        Superior
-                    </label>
-
-                    <input type="number" class="form-control" name="SPR" style="font-size:16pt;"
-                        value="{{ $kamar['SPR'] ?? 0 }}">
-                </div>
-
-                {{-- STANDART --}}
-                <div class="mb-3">
-                    <label class="form-label fw-bold" style="font-size:16pt;">
-                        Standart
-                    </label>
-
-                    <input type="number" class="form-control" name="STD" style="font-size:16pt;"
-                        value="{{ $kamar['STD'] ?? 0 }}">
-                </div>
-
-                {{-- HOME STAY --}}
-                <div class="mb-3">
-                    <label class="form-label fw-bold" style="font-size:16pt;">
-                        Home Stay
-                    </label>
-
-                    <input type="number" class="form-control" name="HMSTY" style="font-size:16pt;"
-                        value="{{ $kamar['HMSTY'] ?? 0 }}">
-                </div>
-
-                {{-- EXTRA BED --}}
-                <div class="mb-3">
-                    <label class="form-label fw-bold" style="font-size:16pt;">
-                        Ekstra Bed
-                    </label>
-
-                    <input type="number" class="form-control" name="BED" style="font-size:16pt;"
-                        value="{{ $kamar['BED'] ?? 0 }}">
-                </div>
-
-                {{-- BREAKFAST --}}
-                <div class="mb-4">
-                    <label class="form-label fw-bold" style="font-size:16pt;">
-                        Breakfast
-                    </label>
-
-                    <input type="number" class="form-control" name="FAST" style="font-size:16pt;"
-                        value="{{ $kamar['FAST'] ?? 0 }}">
-                </div>
-
-                <button type="submit" class="btn btn-success w-100" style="font-size:20pt;">
-
-                    Simpan
-
-                </button>
-
+            <div class="mb-3">
+                <label class="form-label">Deluxe</label>
+                <input type="text" class="form-control rupiah" name="DLX"
+                    value="Rp.{{ number_format($dataMaster['DLX'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
+
+            <div class="mb-3">
+                <label class="form-label">Superior</label>
+                <input type="text" class="form-control rupiah" name="SPR"
+                    value="Rp.{{ number_format($dataMaster['SPR'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Standart</label>
+                <input type="text" class="form-control rupiah" name="STD"
+                    value="Rp.{{ number_format($dataMaster['STD'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Home Stay</label>
+                <input type="text" class="form-control rupiah" name="HMSTY"
+                    value="Rp.{{ number_format($dataMaster['HMSTY'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ekstra Bed</label>
+                <input type="text" class="form-control rupiah" name="BED"
+                    value="Rp.{{ number_format($dataMaster['BED'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Breakfast</label>
+                <input type="text" class="form-control rupiah" name="FAST"
+                    value="Rp.{{ number_format($dataMaster['FAST'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+            </div>
+
+            <button type="submit" class="btn btn-success w-100" style="font-size:16pt;">
+                Simpan
+            </button>
+
         </div>
     </form>
 
@@ -262,5 +234,37 @@
             });
 
         });
+
+        function formatRupiah(angka) {
+
+            angka = angka.replace(/[^,\d]/g, '');
+
+            let split = angka.split(',');
+            let sisa = split[0].length % 3;
+            let rupiah = split[0].substr(0, sisa);
+            let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+
+                let separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+
+            }
+
+            return 'Rp.' + rupiah;
+        }
+
+        $('.rupiah').on('keyup', function () {
+
+            let angka = $(this).val().replace(/[^0-9]/g, '');
+
+            if (angka == '') {
+                $(this).val('Rp.0');
+            } else {
+                $(this).val(formatRupiah(angka));
+            }
+
+        });
+
     </script>
 @endpush

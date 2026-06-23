@@ -711,7 +711,8 @@ class HotelController extends Controller
     public function DataMaster(Request $request)
     {
         $kamar = DB::table('kamar')
-            ->pluck('tarif_per_hari', 'kode_kamar');
+            ->pluck('tarif_per_hari', 'kode_kamar')
+            ->toArray();
 
         return view('DataMaster', compact('kamar'));
     }
@@ -726,41 +727,23 @@ class HotelController extends Controller
 
         try {
 
-            DB::table('kamar')
-                ->where('kode_kamar', 'DLX')
-                ->update([
-                    'tarif_per_hari' => $request->DLX
-                ]);
+            $data = [
+                'DLX',
+                'SPR',
+                'STD',
+                'HMSTY',
+                'BED',
+                'FAST'
+            ];
 
-            DB::table('kamar')
-                ->where('kode_kamar', 'SPR')
-                ->update([
-                    'tarif_per_hari' => $request->SPR
-                ]);
+            foreach ($data as $kode) {
 
-            DB::table('kamar')
-                ->where('kode_kamar', 'STD')
-                ->update([
-                    'tarif_per_hari' => $request->STD
-                ]);
-
-            DB::table('kamar')
-                ->where('kode_kamar', 'HMSTY')
-                ->update([
-                    'tarif_per_hari' => $request->HMSTY
-                ]);
-
-            DB::table('kamar')
-                ->where('kode_kamar', 'BED')
-                ->update([
-                    'tarif_per_hari' => $request->BED
-                ]);
-
-            DB::table('kamar')
-                ->where('kode_kamar', 'FAST')
-                ->update([
-                    'tarif_per_hari' => $request->FAST
-                ]);
+                DB::table('kamar')
+                    ->where('kode_kamar', $kode)
+                    ->update([
+                        'tarif_per_hari' => preg_replace('/[^0-9]/', '', $request->$kode)
+                    ]);
+            }
 
             DB::commit();
 
