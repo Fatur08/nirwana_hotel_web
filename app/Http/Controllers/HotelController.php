@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kamar;
+use App\Models\NomorKamar;
 
 class HotelController extends Controller
 {
@@ -645,7 +646,26 @@ class HotelController extends Controller
 
     public function KetersediaanKamar(Request $request)
     {
-        return view('KetersediaanKamar');
+        // Bulan dan tahun
+        if ($request->filled('bulan')) {
+            [$tahun, $bulan] = explode('-', $request->bulan);
+        } else {
+            $bulan = date('m');
+            $tahun = date('Y');
+        }
+
+        // Jumlah hari pada bulan tersebut
+        $jumlahHari = Carbon::create($tahun, $bulan, 1)->daysInMonth;
+
+        // Ambil seluruh nomor kamar
+        $nomorKamar = NomorKamar::orderBy('id_nomor_kamar')->get();
+
+        return view('KetersediaanKamar', compact(
+            'nomorKamar',
+            'jumlahHari',
+            'bulan',
+            'tahun'
+        ));
     }
 
 

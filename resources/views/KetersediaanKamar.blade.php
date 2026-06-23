@@ -12,20 +12,6 @@
             padding: 20px;
         }
 
-        .kotak-cari {
-            background-color: #4fce05ff;
-            color: white;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            max-width: 100%;
-            width: 100%;
-            font-size: 20px;
-        }
-
-
-
         /* === Table Style === */
         .custom-table {
             border-collapse: separate;
@@ -42,7 +28,7 @@
             color: white;
             text-align: center;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 20px;
             letter-spacing: 0.5px;
             padding: 12px;
             border: none;
@@ -50,7 +36,7 @@
 
         .custom-table thead tr:first-child th {
             background: linear-gradient(135deg, #0069d9, #17a2b8);
-            font-size: 17px;
+            font-size: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -61,7 +47,7 @@
             text-align: center;
             vertical-align: middle;
             border: 1px solid #dee2e6;
-            font-size: 16px;
+            font-size: 20px;
             color: #333;
         }
 
@@ -108,13 +94,6 @@
             /* hilangkan semua garis dalam */
             padding: 6px;
         }
-
-        /* KHUSUS HEADER KAMAR DELUXE */
-        .table-custom .header-kamar {
-            border: 1px solid black;
-            font-size: 24px;
-            font-weight: bold;
-        }
     </style>
 
 
@@ -125,6 +104,46 @@
         <h1 class="mb-1 fw-bold" style="font-size:25pt;">
             Ketersediaan Kamar
         </h1>
+    </div>
+
+
+
+    {{-- TABEL --}}
+    <div class="table-wrapper mt-3">
+        <div class="table-responsive">
+            <table class="table custom-table">
+                <thead class="table-primary">
+                    <tr>
+                        <th style="min-width:80px;">
+                            Tanggal
+                        </th>
+
+                        @foreach ($nomorKamar as $kamar)
+                            <th style="min-width:60px;">
+                                {{ $kamar->id_nomor_kamar }}
+                            </th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @for ($tgl = 1; $tgl <= $jumlahHari; $tgl++)
+                        <tr>
+
+                            <th class="table-light">
+                                {{ $tgl }}
+                            </th>
+
+                            @foreach ($nomorKamar as $kamar)
+                                <td></td>
+                            @endforeach
+
+                        </tr>
+                    @endfor
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
