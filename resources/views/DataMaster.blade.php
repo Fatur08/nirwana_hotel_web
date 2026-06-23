@@ -153,5 +153,13 @@
 
             return 'Rp.' + new Intl.NumberFormat('id-ID').format(angka);
         }
+
+        $('.rupiah').on('keyup', function () {
+
+            $(this).val(
+                formatRupiah($(this).val())
+            );
+
+        });
     </script>
 @endpush
