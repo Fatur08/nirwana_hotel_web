@@ -467,22 +467,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                <html>
-                                                <head>
-                                                    <title>Print Resi</title>
-                                                    <style>
-                                                        body{
-                                                            font-family: Arial;
-                                                            font-size:14px;
-                                                            padding:20px;
-                                                        }
-                                                    </style>
-                                                </head>
-                                                <body>
-                                                    ${isi}
-                                                </body>
-                                                </html>
-                                            `);
+                                                        <html>
+                                                        <head>
+                                                            <title>Print Resi</title>
+                                                            <style>
+                                                                body{
+                                                                    font-family: Arial;
+                                                                    font-size:14px;
+                                                                    padding:20px;
+                                                                }
+                                                            </style>
+                                                        </head>
+                                                        <body>
+                                                            ${isi}
+                                                        </body>
+                                                        </html>
+                                                    `);
             frameDoc.close();
 
             frame.contentWindow.focus();
@@ -491,6 +491,36 @@
             setTimeout(function () {
                 document.body.removeChild(frame);
             }, 1000);
+        }
+
+
+
+
+
+
+
+
+
+        function cetakJPG() {
+
+            let element = document.querySelector("#area-print");
+
+            html2canvas(element, {
+                scale: 4,
+                useCORS: true,
+                backgroundColor: "#ffffff"
+            }).then(canvas => {
+
+                let link = document.createElement('a');
+
+                link.download = 'Resi-' + Date.now() + '.jpg';
+
+                link.href = canvas.toDataURL('image/jpeg', 1.0);
+
+                link.click();
+
+            });
+
         }
 
 
