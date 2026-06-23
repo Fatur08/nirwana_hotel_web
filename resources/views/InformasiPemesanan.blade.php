@@ -42,7 +42,7 @@
             color: white;
             text-align: center;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 20px;
             letter-spacing: 0.5px;
             padding: 12px;
             border: none;
@@ -50,7 +50,7 @@
 
         .custom-table thead tr:first-child th {
             background: linear-gradient(135deg, #0069d9, #17a2b8);
-            font-size: 17px;
+            font-size: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -61,7 +61,7 @@
             text-align: center;
             vertical-align: middle;
             border: 1px solid #dee2e6;
-            font-size: 16px;
+            font-size: 20px;
             color: #333;
         }
 
@@ -107,13 +107,6 @@
             border: none;
             /* hilangkan semua garis dalam */
             padding: 6px;
-        }
-
-        /* KHUSUS HEADER KAMAR DELUXE */
-        .table-custom .header-kamar {
-            border: 1px solid black;
-            font-size: 24px;
-            font-weight: bold;
         }
     </style>
 
@@ -474,22 +467,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                        <html>
-                        <head>
-                            <title>Print Resi</title>
-                            <style>
-                                body{
-                                    font-family: Arial;
-                                    font-size:14px;
-                                    padding:20px;
-                                }
-                            </style>
-                        </head>
-                        <body>
-                            ${isi}
-                        </body>
-                        </html>
-                    `);
+                            <html>
+                            <head>
+                                <title>Print Resi</title>
+                                <style>
+                                    body{
+                                        font-family: Arial;
+                                        font-size:14px;
+                                        padding:20px;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                ${isi}
+                            </body>
+                            </html>
+                        `);
             frameDoc.close();
 
             frame.contentWindow.focus();
