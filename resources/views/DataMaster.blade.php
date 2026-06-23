@@ -153,35 +153,5 @@
 
             return 'Rp.' + parseInt(angka).toLocaleString('id-ID');
         }
-
-        $('.rupiah').on('input', function () {
-
-            $(this).val(
-                formatRupiah($(this).val())
-            );
-
-        });
-
-        $('.rupiah').on('focus', function () {
-
-            let angka = $(this).val().replace(/[^0-9]/g, '');
-
-            $(this).val(angka);
-
-        });
-
-        $('.rupiah').on('blur', function () {
-
-            let angka = $(this).val();
-
-            if (angka !== '') {
-
-                $(this).val(
-                    'Rp.' + parseInt(angka).toLocaleString('id-ID')
-                );
-
-            }
-
-        });
     </script>
 @endpush
