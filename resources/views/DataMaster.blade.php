@@ -136,37 +136,37 @@
         <div class="kotak-cari mt-3">
 
             <div class="mb-3">
-                <label class="form-label">Deluxe</label>
+                <label class="form-label" style="font-size:20pt;">Deluxe</label>
                 <input type="text" class="form-control rupiah" name="DLX"
                     value="Rp.{{ number_format($kamar['DLX'] ?? 0, 0, ',', '.') }}" style="font-size:20pt;">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Superior</label>
+                <label class="form-label" style="font-size:20pt;">Superior</label>
                 <input type="text" class="form-control rupiah" name="SPR"
                     value="Rp.{{ number_format($kamar['SPR'] ?? 0, 0, ',', '.') }}" style="font-size:20pt;">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Standart</label>
+                <label class="form-label" style="font-size:20pt;">Standart</label>
                 <input type="text" class="form-control rupiah" name="STD"
                     value="Rp.{{ number_format($kamar['STD'] ?? 0, 0, ',', '.') }}" style="font-size:20pt;">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Home Stay</label>
+                <label class="form-label" style="font-size:20pt;">Home Stay</label>
                 <input type="text" class="form-control rupiah" name="HMSTY"
                     value="Rp.{{ number_format($kamar['HMSTY'] ?? 0, 0, ',', '.') }}" style="font-size:20pt;">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Ekstra Bed</label>
+                <label class="form-label" style="font-size:20pt;">Ekstra Bed</label>
                 <input type="text" class="form-control rupiah" name="BED"
                     value="Rp.{{ number_format($kamar['BED'] ?? 0, 0, ',', '.') }}" style="font-size:20pt;">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Breakfast</label>
+                <label class="form-label" style="font-size:20pt;">Breakfast</label>
                 <input type="text" class="form-control rupiah" name="FAST"
                     value="Rp.{{ number_format($kamar['FAST'] ?? 0, 0, ',', '.') }}" style="font-size:20pt;">
             </div>
