@@ -151,11 +151,11 @@
                         @foreach ($nomorKamar as $kamar)
 
                             @php
-                                $warna = match ($kamar->kode_kamar) {
-                                    'DLX' => 'header-dlx',
-                                    'SPR' => 'header-spr',
-                                    'STD' => 'header-std',
-                                    'HMSTY' => 'header-hmsty',
+                                $warna = match ($kamar->id_kamar) {
+                                    1 => 'header-dlx',    // Deluxe
+                                    2 => 'header-spr',    // Superior
+                                    3 => 'header-std',    // Standar
+                                    4 => 'header-hmsty',  // Home Stay
                                     default => ''
                                 };
                             @endphp
