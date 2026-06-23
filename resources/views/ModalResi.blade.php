@@ -19,7 +19,7 @@
             0851 5609 1313
         </div>
 
-        <hr style="border:1px solid black;">
+        <hr style="border:3px solid black;">
 
 
         {{-- JUDUL --}}
@@ -123,7 +123,7 @@
             <tr>
                 <td colspan="3"></td>
                 <td colspan="2">
-                    <hr style="margin:5px 0;border:1px solid #999;">
+                    <hr style="margin:5px 0;border:3px solid #000000;">
                 </td>
             </tr>
 
