@@ -45,45 +45,38 @@
 
             <div class="mb-3">
                 <label class="form-label">Deluxe</label>
-
-                <div class="input-group">
-                    <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control" name="DLX" id="DLX" value="{{ $kamar['DLX'] ?? '' }}">
-                </div>
-
-                <small class="text-white">
-                    <span id="DLX_view"></span>
-                </small>
+                <input type="text" class="form-control rupiah" name="DLX"
+                    value="Rp.{{ number_format($kamar['DLX'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Superior</label>
-                <input type="number" class="form-control rupiah" name="SPR"
-                    value="{{ !empty($kamar['SPR']) ? 'Rp.' . number_format($kamar['SPR'], 0, ',', '.') : '' }}">
+                <input type="text" class="form-control rupiah" name="SPR"
+                    value="Rp.{{ number_format($kamar['SPR'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Standart</label>
-                <input type="number" class="form-control rupiah" name="STD"
-                    value="{{ !empty($kamar['STD']) ? 'Rp.' . number_format($kamar['STD'], 0, ',', '.') : '' }}">
+                <input type="text" class="form-control rupiah" name="STD"
+                    value="Rp.{{ number_format($kamar['STD'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Home Stay</label>
-                <input type="number" class="form-control rupiah" name="HMSTY"
-                    value="{{ !empty($kamar['HMSTY']) ? 'Rp.' . number_format($kamar['HMSTY'], 0, ',', '.') : '' }}">
+                <input type="text" class="form-control rupiah" name="HMSTY"
+                    value="Rp.{{ number_format($kamar['HMSTY'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Ekstra Bed</label>
-                <input type="number" class="form-control rupiah" name="BED"
-                    value="{{ !empty($kamar['BED']) ? 'Rp.' . number_format($kamar['BED'], 0, ',', '.') : '' }}">
+                <input type="text" class="form-control rupiah" name="BED"
+                    value="Rp.{{ number_format($kamar['BED'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Breakfast</label>
-                <input type="number" class="form-control rupiah" name="FAST"
-                    value="{{ !empty($kamar['FAST']) ? 'Rp.' . number_format($kamar['FAST'], 0, ',', '.') : '' }}">
+                <input type="text" class="form-control rupiah" name="FAST"
+                    value="Rp.{{ number_format($kamar['FAST'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <button type="submit" class="btn btn-success w-100" style="font-size:16pt;">
@@ -151,24 +144,31 @@
         });
 
         function formatRupiah(angka) {
-            return new Intl.NumberFormat('id-ID').format(angka);
+
+            angka = angka.replace(/\D/g, '');
+
+            if (angka === '') {
+                return '';
+            }
+
+            return 'Rp.' + new Intl.NumberFormat('id-ID').format(angka);
         }
 
-        function bindRupiah(id) {
-            let el = document.getElementById(id);
+        $('.rupiah').on('input', function () {
 
-            el.addEventListener('input', function () {
-                let val = this.value;
-                document.getElementById(id + '_view').innerText =
-                    val ? 'Rp.' + formatRupiah(val) : '';
-            });
-        }
+            $(this).val(
+                formatRupiah($(this).val())
+            );
 
-        bindRupiah('DLX');
-        bindRupiah('SPR');
-        bindRupiah('STD');
-        bindRupiah('HMSTY');
-        bindRupiah('BED');
-        bindRupiah('FAST');
+        });
+
+        $('.rupiah').each(function () {
+
+            if ($(this).val() == '') {
+                $(this).val('Rp.0');
+            }
+
+        });
+
     </script>
 @endpush
