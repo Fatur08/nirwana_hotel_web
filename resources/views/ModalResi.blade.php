@@ -47,7 +47,7 @@
             <tr>
                 <td>Alamat</td>
                 <td style="text-align:center;">:</td>
-                <td colspan="3">{{ $histori->alamat ?? '-' }}</td>
+                <td colspan="3">{{ $histori->alamat_tamu ?? '-' }}</td>
             </tr>
 
             <tr>
