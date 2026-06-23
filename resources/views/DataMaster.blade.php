@@ -259,11 +259,8 @@
             let angka = $(this).val().replace(/[^0-9]/g, '');
 
             if (angka == '') {
-                $(this).val('Rp.0');
-            } else {
                 $(this).val(formatRupiah(angka));
             }
-
         });
 
     </script>
