@@ -562,7 +562,7 @@
 
                             <p class="mb-0">
                                 <span style="font-size:24px;font-weight:700;color:#00ff79;">
-                                    Rp.300.000
+                                    Rp.{{ number_format($tarifKamar['DLX']->tarif_per_hari ?? 0, 0, ',', '.') }}
                                 </span>
                                 / malam
                             </p>
@@ -588,7 +588,7 @@
 
                             <p class="mb-0">
                                 <span style="font-size:24px;font-weight:700;color:#8F00FF;">
-                                    Rp.800.000
+                                    Rp.{{ number_format($tarifKamar['HMSTY']->tarif_per_hari ?? 0, 0, ',', '.') }}
                                 </span>
                                 / malam
                             </p>
@@ -618,7 +618,7 @@
 
                             <p class="mb-0">
                                 <span style="font-size:24px;font-weight:700;color:#f8f9fa;">
-                                    Rp.280.000
+                                    Rp.{{ number_format($tarifKamar['SPR']->tarif_per_hari ?? 0, 0, ',', '.') }}
                                 </span>
                                 / malam
                             </p>
@@ -644,7 +644,7 @@
 
                             <p class="mb-0">
                                 <span style="font-size:24px;font-weight:700;color:#8F00FF;">
-                                    Rp.240.000
+                                    Rp.{{ number_format($tarifKamar['STD']->tarif_per_hari ?? 0, 0, ',', '.') }}
                                 </span>
                                 / malam
                             </p>
@@ -951,10 +951,10 @@
                         $('#check_out').val('');
 
                         $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                    <option value="">
-                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
-                                                                                                                                                    </option>
-                                                                                                                                                `);
+                                                                                                                                                                    <option value="">
+                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
+                                                                                                                                                                    </option>
+                                                                                                                                                                `);
 
                         $('#kamar_tersedia_title').hide();
                         $('#kamar_tersedia_list').hide();
@@ -989,10 +989,10 @@
                             for (let i = 1; i <= totalKamar; i++) {
 
                                 opsiJumlah += `
-                                                                                                                                                                            <option value="${i}">
-                                                                                                                                                                                ${i} Kamar
-                                                                                                                                                                            </option>
-                                                                                                                                                                        `;
+                                                                                                                                                                                            <option value="${i}">
+                                                                                                                                                                                                ${i} Kamar
+                                                                                                                                                                                            </option>
+                                                                                                                                                                                        `;
                             }
 
                             $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -1008,10 +1008,10 @@
                 $('#check_out').val('');
 
                 $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                            <option value="">
-                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                            </option>
-                                                                                                                                                        `);
+                                                                                                                                                                            <option value="">
+                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                            </option>
+                                                                                                                                                                        `);
 
                 $('#kamar_tersedia_title').hide();
                 $('#kamar_tersedia_list').hide();

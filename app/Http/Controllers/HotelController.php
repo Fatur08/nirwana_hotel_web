@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Kamar;
 
 class HotelController extends Controller
 {
@@ -14,6 +15,15 @@ class HotelController extends Controller
         $cari_check_in = $request->cari_check_in;
         $cari_check_out = $request->cari_check_out;
         $status = $request->status;
+
+
+
+
+        $tarifKamar = Kamar::select('kode_kamar', 'tarif_per_hari')
+            ->get()
+            ->keyBy('kode_kamar');
+
+
         // default jika kosong
         if (!$cari_check_in) {
             $cari_check_in = date('Y-m-d');
@@ -164,7 +174,7 @@ class HotelController extends Controller
 
 
 
-        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSTD', 'kamarSingleSTD', 'kamarDoubleSTD', 'histori'));
+        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSTD', 'kamarSingleSTD', 'kamarDoubleSTD', 'histori', 'tarifKamar'));
     }
 
 
