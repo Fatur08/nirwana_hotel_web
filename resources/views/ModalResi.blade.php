@@ -34,45 +34,48 @@
             $checkOut = Carbon::parse($data->check_out);
         @endphp
 
-        <table style="width:100%;font-size:14pt;">
+        <table style="width:100%; border-collapse:collapse; font-size:14pt;">
+
+            {{-- IDENTITAS --}}
             <tr>
-                <td width="20%">Nama Tn/Ny</td>
-                <td width="35%">: {{ $data->nama_tamu }}</td>
+                <td style="width:180px;">Nama Tn/Ny</td>
+                <td style="width:25px;text-align:center;">:</td>
+                <td colspan="3">{{ $data->nama_tamu }}</td>
             </tr>
 
             <tr>
                 <td>Alamat</td>
-                <td>: {{ $histori->alamat ?? '-' }}</td>
+                <td style="text-align:center;">:</td>
+                <td colspan="3">{{ $histori->alamat ?? '-' }}</td>
             </tr>
 
             <tr>
                 <td>Check - In</td>
-                <td>: {{ $checkIn->translatedFormat('d F Y') }}</td>
+                <td style="text-align:center;">:</td>
+                <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
 
-                <td width="20%">Check - Out</td>
-                <td>: {{ $checkOut->translatedFormat('d F Y') }}</td>
+                <td style="width:180px;">Check - Out</td>
+                <td>{{ $checkOut->translatedFormat('d F Y') }}</td>
             </tr>
 
             <tr>
                 <td>Hari</td>
-                <td>: {{ $lama }} Hari</td>
+                <td style="text-align:center;">:</td>
+                <td colspan="3">{{ $lama }} Hari</td>
             </tr>
-        </table>
 
-        <br><br>
+            {{-- SPASI --}}
+            <tr>
+                <td colspan="5" style="height:25px;"></td>
+            </tr>
 
-        <table style="width:100%; font-size:14pt; border-collapse:collapse;">
-
-            {{-- KAMAR --}}
+            {{-- DETAIL KAMAR --}}
             @foreach($detailKamar as $item)
                 <tr>
-                    <td style="width:180px;">
-                        {{ $item['nama'] }}
-                    </td>
 
-                    <td style="width:20px;">
-                        :
-                    </td>
+                    <td>{{ $item['nama'] }}</td>
+
+                    <td style="text-align:center;">:</td>
 
                     <td>
                         {{ $item['jumlah'] }}
@@ -80,13 +83,12 @@
                         x {{ $lama }} Hari
                     </td>
 
-                    <td style="width:20px;">
-                        =
-                    </td>
+                    <td style="text-align:center;">=</td>
 
-                    <td style="width:180px; text-align:right;">
+                    <td style="text-align:right;">
                         Rp.{{ number_format($item['subtotal'], 0, ',', '.') }}
                     </td>
+
                 </tr>
             @endforeach
 
@@ -99,22 +101,16 @@
             @foreach($requestTambahan as $req)
                 <tr>
 
-                    <td style="width:180px;">
-                        {{ $req->tipe_kamar }}
-                    </td>
+                    <td>{{ $req->tipe_kamar }}</td>
 
-                    <td>
-                        :
-                    </td>
+                    <td style="text-align:center;">:</td>
 
                     <td>
                         {{ $req->jumlah_request }}
                         x Rp.{{ number_format($req->tarif_per_hari, 0, ',', '.') }}
                     </td>
 
-                    <td>
-                        =
-                    </td>
+                    <td style="text-align:center;">=</td>
 
                     <td style="text-align:right;">
                         Rp.{{ number_format($req->total_harga, 0, ',', '.') }}
@@ -123,28 +119,19 @@
                 </tr>
             @endforeach
 
-        </table>
-
-        <br><br>
-
-
-        {{-- TOTAL --}}
-        <table style="
-        width:380px;
-        margin-left:auto;
-        margin-top:20px;
-        font-size:14pt;
-        border-collapse:collapse;
-    ">
-
+            {{-- GARIS --}}
             <tr>
+                <td colspan="3"></td>
                 <td colspan="2">
-                    <hr style="border:1px solid black; margin:0;">
+                    <hr style="margin:5px 0;border:1px solid #999;">
                 </td>
             </tr>
 
+            {{-- SUBTOTAL --}}
             <tr>
-                <td style="text-align:right; width:150px;">
+                <td colspan="3"></td>
+
+                <td style="text-align:right;">
                     =
                 </td>
 
@@ -153,7 +140,10 @@
                 </td>
             </tr>
 
+            {{-- PAJAK --}}
             <tr>
+                <td colspan="3"></td>
+
                 <td style="text-align:right;">
                     Pajak =
                 </td>
@@ -163,7 +153,10 @@
                 </td>
             </tr>
 
+            {{-- TOTAL --}}
             <tr style="font-weight:bold;">
+                <td colspan="3"></td>
+
                 <td style="text-align:right;">
                     Total =
                 </td>
