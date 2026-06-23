@@ -65,7 +65,7 @@
                 <td style="text-align:center;">:</td>
                 <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
 
-                <td style="width:180px;">Check - Out</td>
+                <td style="width:180px; text-align:center;">Check - Out</td>
                 <td>: {{ $checkOut->translatedFormat('d F Y') }}</td>
             </tr>
 
@@ -155,7 +155,7 @@
             <tr>
                 <td colspan="3"></td>
 
-                <td style="text-align:right;">
+                <td style="text-align:center;">
                     Pajak
                 </td>
 
@@ -168,7 +168,7 @@
             <tr style="font-weight:bold;">
                 <td colspan="3"></td>
 
-                <td style="text-align:right;">
+                <td style="text-align:center;">
                     Total
                 </td>
 
