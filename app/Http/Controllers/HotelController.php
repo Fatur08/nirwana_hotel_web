@@ -595,6 +595,9 @@ class HotelController extends Controller
                     'nama_tamu' =>
                         $request->nama_tamu,
 
+                    'alamat_tamu' =>
+                        $request->alamat_tamu,
+
                     'check_in' =>
                         $request->check_in,
 
