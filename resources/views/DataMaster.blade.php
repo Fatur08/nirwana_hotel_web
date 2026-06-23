@@ -153,13 +153,5 @@
 
             return 'Rp.' + parseInt(angka).toLocaleString('id-ID');
         }
-
-        $('.rupiah').on('input', function () {
-
-            $(this).val(
-                formatRupiah($(this).val())
-            );
-
-        });
     </script>
 @endpush
