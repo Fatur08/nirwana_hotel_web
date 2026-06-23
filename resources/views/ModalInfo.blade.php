@@ -26,40 +26,44 @@
     </tr>
 
     <tr>
-        <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan : {{ $data->jumlah_kamar_dipesan }} Kamar</b></td>
+        <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan :
+                {{ $data->jumlah_kamar_dipesan }} Kamar</b></td>
     </tr>
     <tr>
         <td class="text-start">
             @foreach($kamar as $k)
 
-            @php
-            switch($k->id_kamar){
-            case 1:
-            $tipe = "Deluxe ";
-            break;
-            case 2:
-            $tipe = "Superior ";
-            break;
-            case 3:
-            $tipe = "Standar ";
-            break;
-            default:
-            $tipe = "-";
-            }
+                @php
+                    switch ($k->id_kamar) {
+                        case 1:
+                            $tipe = "Deluxe ";
+                            break;
+                        case 2:
+                            $tipe = "Superior ";
+                            break;
+                        case 3:
+                            $tipe = "Standart ";
+                            break;
+                        case 4:
+                            $tipe = "Home Stay ";
+                            break;
+                        default:
+                            $tipe = "-";
+                    }
 
-            switch($k->jenis_bed){
-            case 1:
-            $bed = "Single Bed";
-            break;
-            case 2:
-            $bed = "Double Bed";
-            break;
-            default:
-            $bed = "-";
-            }
-            @endphp
+                    switch ($k->jenis_bed) {
+                        case 1:
+                            $bed = "Single Bed";
+                            break;
+                        case 2:
+                            $bed = "Double Bed";
+                            break;
+                        default:
+                            $bed = "-";
+                    }
+                @endphp
 
-            {{ $loop->iteration }}. {{ $tipe }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
+                {{ $loop->iteration }}. {{ $tipe }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
 
             @endforeach
         </td>
@@ -70,7 +74,7 @@
     </tr>
     <tr>
         <td>
-            <img src="{{ asset('storage/uploads/foto_ktp/'.$data->foto_ktp) }}" width="200">
+            <img src="{{ asset('storage/uploads/foto_ktp/' . $data->foto_ktp) }}" width="200">
         </td>
     </tr>
 
