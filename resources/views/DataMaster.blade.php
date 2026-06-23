@@ -129,6 +129,85 @@
 
 
 
+
+    <form action="{{ url('/UpdateDataMaster') }}" method="POST" id="frmDataMaster">
+        @csrf
+
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+
+                {{-- DELUXE --}}
+                <div class="mb-3">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
+                        Deluxe
+                    </label>
+
+                    <input type="number" class="form-control" name="DLX" style="font-size:16pt;"
+                        value="{{ $kamar['DLX'] ?? 0 }}">
+                </div>
+
+                {{-- SUPERIOR --}}
+                <div class="mb-3">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
+                        Superior
+                    </label>
+
+                    <input type="number" class="form-control" name="SPR" style="font-size:16pt;"
+                        value="{{ $kamar['SPR'] ?? 0 }}">
+                </div>
+
+                {{-- STANDART --}}
+                <div class="mb-3">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
+                        Standart
+                    </label>
+
+                    <input type="number" class="form-control" name="STD" style="font-size:16pt;"
+                        value="{{ $kamar['STD'] ?? 0 }}">
+                </div>
+
+                {{-- HOME STAY --}}
+                <div class="mb-3">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
+                        Home Stay
+                    </label>
+
+                    <input type="number" class="form-control" name="HMSTY" style="font-size:16pt;"
+                        value="{{ $kamar['HMSTY'] ?? 0 }}">
+                </div>
+
+                {{-- EXTRA BED --}}
+                <div class="mb-3">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
+                        Ekstra Bed
+                    </label>
+
+                    <input type="number" class="form-control" name="BED" style="font-size:16pt;"
+                        value="{{ $kamar['BED'] ?? 0 }}">
+                </div>
+
+                {{-- BREAKFAST --}}
+                <div class="mb-4">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
+                        Breakfast
+                    </label>
+
+                    <input type="number" class="form-control" name="FAST" style="font-size:16pt;"
+                        value="{{ $kamar['FAST'] ?? 0 }}">
+                </div>
+
+                <button type="submit" class="btn btn-success w-100" style="font-size:20pt;">
+
+                    Simpan
+
+                </button>
+
+            </div>
+        </div>
+    </form>
+
+
+
     {{-- BUTTON KEMBALI --}}
     <div class="row mt-4">
         <div class="col-12">
@@ -143,4 +222,45 @@
     </div>
 @endsection
 @push('myscript')
+    <script>
+        $(document).on('submit', '#frmDataMaster', function (e) {
+
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+                processData: false,
+                contentType: false,
+
+                success: function (res) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Data Master berhasil diperbarui'
+                    });
+
+                },
+
+                error: function (xhr) {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Terjadi kesalahan'
+                    });
+
+                    console.log(xhr.responseText);
+
+                }
+
+            });
+
+        });
+    </script>
 @endpush
