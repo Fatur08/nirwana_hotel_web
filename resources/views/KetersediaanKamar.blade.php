@@ -113,17 +113,25 @@
         <div class="table-responsive">
             <table class="table custom-table">
                 <thead class="table-primary">
+
                     <tr>
-                        <th style="min-width:80px;">
+                        <th rowspan="2" class="align-middle" style="min-width:80px;">
                             Tanggal
                         </th>
 
+                        <th colspan="{{ $nomorKamar->count() }}" class="text-center">
+                            Nomor Kamar
+                        </th>
+                    </tr>
+
+                    <tr>
                         @foreach ($nomorKamar as $kamar)
                             <th style="min-width:60px;">
                                 {{ $kamar->id_nomor_kamar }}
                             </th>
                         @endforeach
                     </tr>
+
                 </thead>
                 <tbody>
 
