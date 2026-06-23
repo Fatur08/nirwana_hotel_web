@@ -37,19 +37,19 @@
         <table style="width:100%; font-size:14pt; border:1px solid black;">
 
             {{-- IDENTITAS --}}
-            <tr>
+            <tr style="border:1px solid black;">
                 <td style="width:180px;">Nama Tn/Ny</td>
                 <td style="width:25px;text-align:center;">:</td>
                 <td colspan="3">{{ $data->nama_tamu }}</td>
             </tr>
 
-            <tr>
+            <tr style="border:1px solid black;">
                 <td>Alamat</td>
                 <td style="text-align:center;">:</td>
                 <td colspan="3">{{ $histori->alamat ?? '-' }}</td>
             </tr>
 
-            <tr>
+            <tr style="border:1px solid black;">
                 <td>Check - In</td>
                 <td style="text-align:center;">:</td>
                 <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
@@ -58,20 +58,20 @@
                 <td>: {{ $checkOut->translatedFormat('d F Y') }}</td>
             </tr>
 
-            <tr>
+            <tr style="border:1px solid black;">
                 <td>Hari</td>
                 <td style="text-align:center;">:</td>
                 <td colspan="3">{{ $lama }} Hari</td>
             </tr>
 
             {{-- SPASI --}}
-            <tr>
+            <tr style="border:1px solid black;">
                 <td colspan="5" style="height:25px;"></td>
             </tr>
 
             {{-- DETAIL KAMAR --}}
             @foreach($detailKamar as $item)
-                <tr>
+                <tr style="border:1px solid black;">
 
                     <td>{{ $item['nama'] }}</td>
 
@@ -93,13 +93,13 @@
             @endforeach
 
             {{-- SPASI --}}
-            <tr>
+            <tr style="border:1px solid black;">
                 <td colspan="5" style="height:15px;"></td>
             </tr>
 
             {{-- REQUEST --}}
             @foreach($requestTambahan as $req)
-                <tr>
+                <tr style="border:1px solid black;">
 
                     <td>{{ $req->tipe_kamar }}</td>
 
@@ -120,7 +120,7 @@
             @endforeach
 
             {{-- GARIS --}}
-            <tr>
+            <tr style="border:1px solid black;">
                 <td colspan="3"></td>
                 <td colspan="2">
                     <hr style="margin:5px 0;border:1px solid #999;">
@@ -128,7 +128,7 @@
             </tr>
 
             {{-- SUBTOTAL --}}
-            <tr>
+            <tr style="border:1px solid black;">
                 <td colspan="3"></td>
 
                 <td style="text-align:right;">
@@ -141,7 +141,7 @@
             </tr>
 
             {{-- PAJAK --}}
-            <tr>
+            <tr style="border:1px solid black;">
                 <td colspan="3"></td>
 
                 <td style="text-align:right;">
@@ -154,7 +154,7 @@
             </tr>
 
             {{-- TOTAL --}}
-            <tr style="font-weight:bold;">
+            <tr style="font-weight:bold; border:1px solid black;">
                 <td colspan="3"></td>
 
                 <td style="text-align:right;">
