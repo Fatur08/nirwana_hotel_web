@@ -138,37 +138,37 @@
             <div class="mb-3">
                 <label class="form-label">Deluxe</label>
                 <input type="text" class="form-control rupiah" name="DLX"
-                    value="Rp.{{ number_format($dataMaster['DLX'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="Rp.{{ number_format($Kamar['DLX'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Superior</label>
                 <input type="text" class="form-control rupiah" name="SPR"
-                    value="Rp.{{ number_format($dataMaster['SPR'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="Rp.{{ number_format($Kamar['SPR'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Standart</label>
                 <input type="text" class="form-control rupiah" name="STD"
-                    value="Rp.{{ number_format($dataMaster['STD'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="Rp.{{ number_format($Kamar['STD'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Home Stay</label>
                 <input type="text" class="form-control rupiah" name="HMSTY"
-                    value="Rp.{{ number_format($dataMaster['HMSTY'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="Rp.{{ number_format($Kamar['HMSTY'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Ekstra Bed</label>
                 <input type="text" class="form-control rupiah" name="BED"
-                    value="Rp.{{ number_format($dataMaster['BED'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="Rp.{{ number_format($Kamar['BED'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Breakfast</label>
                 <input type="text" class="form-control rupiah" name="FAST"
-                    value="Rp.{{ number_format($dataMaster['FAST'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
+                    value="Rp.{{ number_format($Kamar['FAST'] ?? 0, 0, ',', '.') }}" style="font-size:16pt;">
             </div>
 
             <button type="submit" class="btn btn-success w-100" style="font-size:16pt;">
