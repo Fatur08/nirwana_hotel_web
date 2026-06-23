@@ -26,6 +26,7 @@
         <div style="font-size:24pt;margin-top:20px;">
             Bukti Pembayaran ( Invoice )
         </div>
+        <br>
 
         @php
             use Carbon\Carbon;
