@@ -94,6 +94,29 @@
             /* hilangkan semua garis dalam */
             padding: 6px;
         }
+
+
+
+        /* Header nomor kamar */
+        .header-dlx {
+            background-color: #f8d7da !important;
+            /* Merah pastel */
+        }
+
+        .header-spr {
+            background-color: #d6eaf8 !important;
+            /* Biru pastel */
+        }
+
+        .header-std {
+            background-color: #fcf3cf !important;
+            /* Kuning pastel */
+        }
+
+        .header-hmsty {
+            background-color: #d5f5e3 !important;
+            /* Hijau pastel */
+        }
     </style>
 
 
@@ -126,9 +149,21 @@
 
                     <tr>
                         @foreach ($nomorKamar as $kamar)
-                            <th style="min-width:60px;">
+
+                            @php
+                                $warna = match ($kamar->kode_kamar) {
+                                    'DLX' => 'header-dlx',
+                                    'SPR' => 'header-spr',
+                                    'STD' => 'header-std',
+                                    'HMSTY' => 'header-hmsty',
+                                    default => ''
+                                };
+                            @endphp
+
+                            <th class="{{ $warna }}" style="min-width:60px;">
                                 {{ $kamar->id_nomor_kamar }}
                             </th>
+
                         @endforeach
                     </tr>
 
