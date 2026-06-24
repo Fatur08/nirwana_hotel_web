@@ -137,6 +137,7 @@
                 <label class="form-label fw-bold">
                     Bulan
                 </label>
+
                 @php
                     $bulanList = [
                         1 => 'Januari',
@@ -161,24 +162,18 @@
                     @endforeach
                 </select>
             </div>
-        </div>
 
-        <div class="row mt-3">
             <div class="col-md-6 mb-2">
                 <label class="form-label fw-bold">
                     Tahun
                 </label>
 
                 <select name="tahun" class="form-control">
-
                     @for($thn = 2026; $thn <= date('Y') + 20; $thn++)
-
                         <option value="{{ $thn }}" {{ $tahun == $thn ? 'selected' : '' }}>
                             {{ $thn }}
                         </option>
-
                     @endfor
-
                 </select>
             </div>
         </div>
@@ -199,31 +194,7 @@
 
 
 
-    <div class="mt-4 mb-3">
 
-        <table class="table-custom">
-
-            <tr>
-                <td width="120">
-                    <b>Bulan</b>
-                </td>
-                <td>
-                    : {{ $namaBulan }}
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <b>Tahun</b>
-                </td>
-                <td>
-                    : {{ $tahun }}
-                </td>
-            </tr>
-
-        </table>
-
-    </div>
 
 
 
