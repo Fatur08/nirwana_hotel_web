@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kamar;
 use App\Models\NomorKamar;
+use Illuminate\Support\Facades\Storage;
 
 class HotelController extends Controller
 {
@@ -996,6 +997,50 @@ class HotelController extends Controller
             ], 500);
 
         }
+    }
+
+
+
+
+
+
+    public function BatalkanPembayaran(Request $request, $id)
+    {
+        $data = DB::table('laporan_keuangan')
+            ->where('id_laporan_keuangan', $id)
+            ->first();
+
+        if (!empty($data->bukti_pembayaran)) {
+
+            // Hapus dari storage/app/public
+            Storage::delete(
+                'public/uploads/bukti_pembayaran/' .
+                $data->bukti_pembayaran
+            );
+
+            // Hapus dari public/storage
+            $filePublic = public_path(
+                'storage/uploads/bukti_pembayaran/' .
+                $data->bukti_pembayaran
+            );
+
+            if (file_exists($filePublic)) {
+                unlink($filePublic);
+            }
+        }
+
+        DB::table('laporan_keuangan')
+            ->where('id_laporan_keuangan', $id)
+            ->update([
+                'status_pembayaran' => 0,
+                'metode_pembayaran' => null,
+                'bukti_pembayaran' => null
+            ]);
+
+        return redirect()->back()->with(
+            'success',
+            'Pembayaran berhasil dibatalkan'
+        );
     }
 
 
