@@ -132,16 +132,12 @@
 
 
     <form method="GET" action="{{ url('/KetersediaanKamar') }}">
-
         <div class="row mt-3">
-
             <div class="col-md-6 mb-2">
                 <label class="form-label fw-bold">
                     Bulan
                 </label>
-
                 <select name="bulan" class="form-control">
-
                     @php
                         $bulanList = [
                             1 => 'Januari',
@@ -158,20 +154,17 @@
                             12 => 'Desember'
                         ];
                     @endphp
-
                     <select name="bulan" class="form-control">
-
                         @foreach($bulanList as $key => $nama)
-
-                            <option value="{{ $key }}" @selected($bulan == $key)>
+                            <option value="{{ $key }}" {{ $bulan == $key ? 'selected' : '' }}>
                                 {{ $nama }}
                             </option>
-
                         @endforeach
-
                     </select>
             </div>
+        </div>
 
+        <div class="row mt-3">
             <div class="col-md-6 mb-2">
                 <label class="form-label fw-bold">
                     Tahun
@@ -189,7 +182,6 @@
 
                 </select>
             </div>
-
         </div>
 
         <div class="row mt-2">
