@@ -680,12 +680,30 @@ class HotelController extends Controller
         $nomorKamar = NomorKamar::orderBy('id_nomor_kamar')
             ->get();
 
+
+        $bookingKamar = DB::table('histori_kamar as hk')
+            ->join(
+                'laporan_keuangan as lk',
+                'hk.id_laporan_keuangan',
+                '=',
+                'lk.id_laporan_keuangan'
+            )
+            ->select(
+                'hk.id_nomor_kamar',
+                'hk.id_laporan_keuangan',
+                'hk.check_in',
+                'hk.check_out',
+                'lk.status_pembayaran'
+            )
+            ->get();
+
         return view('KetersediaanKamar', compact(
             'nomorKamar',
             'jumlahHari',
             'bulan',
             'tahun',
-            'namaBulan'
+            'namaBulan',
+            'bookingKamar'
         ));
     }
 

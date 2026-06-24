@@ -224,6 +224,9 @@
 
 
     {{-- TABEL --}}
+    @php
+        $tanggalDipilih = \Carbon\Carbon::create($tahun, $bulan, 1);
+    @endphp
     <div class="table-wrapper mt-3">
         <div class="table-responsive">
             <table class="table custom-table">
@@ -269,7 +272,63 @@
                                     };
                                 @endphp
 
-                                <td class="{{ $warna }}"></td>
+                                <td class="{{ $warna }}">
+
+                                    @php
+
+                                        $tanggalCell = \Carbon\Carbon::create(
+                                            $tahun,
+                                            $bulan,
+                                            $tgl
+                                        )->format('Y-m-d');
+
+                                        $booking = $bookingKamar->first(function ($item) use ($kamar, $tanggalCell) {
+
+                                            return $item->id_nomor_kamar == $kamar->id_nomor_kamar
+                                                && $tanggalCell >= $item->check_in
+                                                && $tanggalCell < $item->check_out;
+                                        });
+
+                                    @endphp
+
+                                    @if($booking)
+
+                                                    @php
+
+                                                        $hariIni = date('Y-m-d');
+
+                                                        if (
+                                                            $booking->check_in > $hariIni
+                                                            && $booking->status_pembayaran == 0
+                                                        ) {
+
+                                                            $btn = 'btn-warning';
+
+                                                        } elseif (
+                                                            $booking->check_in > $hariIni
+                                                        ) {
+
+                                                            $btn = 'btn-secondary';
+
+                                                        } else {
+
+                                                            $btn = 'btn-success';
+
+                                                        }
+
+                                                    @endphp
+
+                                                    <button class="btn {{ $btn }}" style="
+                                            width:30px;
+                                            height:30px;
+                                            padding:0;
+                                            border-radius:4px;
+                                        " data-id="{{ $booking->id_laporan_keuangan }}">
+                                                    </button>
+
+                                    @endif
+
+                                </td>
 
                             @endforeach
 
