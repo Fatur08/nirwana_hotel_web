@@ -93,7 +93,7 @@
 
                     {{ $loop->iteration }}.
                     {{ $req->tipe_kamar }}
-                    ({{ $req->jumlah_request }}x)
+                    ({{ $req->jumlah_request }})
 
                     <br>
 
