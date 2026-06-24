@@ -649,25 +649,43 @@ class HotelController extends Controller
 
     public function KetersediaanKamar(Request $request)
     {
-        // Bulan dan tahun
-        if ($request->filled('bulan')) {
-            [$tahun, $bulan] = explode('-', $request->bulan);
-        } else {
-            $bulan = date('m');
-            $tahun = date('Y');
-        }
+        // Ambil bulan dan tahun dari form
+        $bulan = $request->bulan ?? date('n');
+        $tahun = $request->tahun ?? date('Y');
 
-        // Jumlah hari pada bulan tersebut
-        $jumlahHari = Carbon::create($tahun, $bulan, 1)->daysInMonth;
+        // Jumlah hari dalam bulan yang dipilih
+        $jumlahHari = Carbon::create(
+            $tahun,
+            $bulan,
+            1
+        )->daysInMonth;
+
+        // Nama bulan
+        $namaBulan = [
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember'
+        ][$bulan];
 
         // Ambil seluruh nomor kamar
-        $nomorKamar = NomorKamar::orderBy('id_nomor_kamar')->get();
+        $nomorKamar = NomorKamar::orderBy('id_nomor_kamar')
+            ->get();
 
         return view('KetersediaanKamar', compact(
             'nomorKamar',
             'jumlahHari',
             'bulan',
-            'tahun'
+            'tahun',
+            'namaBulan'
         ));
     }
 

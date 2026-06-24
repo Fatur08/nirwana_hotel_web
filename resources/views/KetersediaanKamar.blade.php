@@ -131,6 +131,110 @@
 
 
 
+    <form method="GET" action="{{ url('/KetersediaanKamar') }}">
+
+    <div class="row mt-3">
+
+        <div class="col-md-6 mb-2">
+            <label class="form-label fw-bold">
+                Bulan
+            </label>
+
+            <select name="bulan" class="form-control">
+
+    @foreach([
+        1=>'Januari',
+        2=>'Februari',
+        3=>'Maret',
+        4=>'April',
+        5=>'Mei',
+        6=>'Juni',
+        7=>'Juli',
+        8=>'Agustus',
+        9=>'September',
+        10=>'Oktober',
+        11=>'November',
+        12=>'Desember'
+    ] as $key => $nama)
+
+        <option value="{{ $key }}"
+            {{ $bulan == $key ? 'selected' : '' }}>
+            {{ $nama }}
+        </option>
+
+    @endforeach
+
+</select>
+        </div>
+
+        <div class="col-md-6 mb-2">
+            <label class="form-label fw-bold">
+                Tahun
+            </label>
+
+            <select name="tahun" class="form-control">
+
+    @for($thn = 2026; $thn <= date('Y') + 20; $thn++)
+
+        <option value="{{ $thn }}"
+            {{ $tahun == $thn ? 'selected' : '' }}>
+            {{ $thn }}
+        </option>
+
+    @endfor
+
+</select>
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+
+            <button type="submit"
+                class="btn btn-primary w-100"
+                style="font-size:18px;">
+
+                Tampilkan
+
+            </button>
+
+        </div>
+    </div>
+
+</form>
+
+
+
+    <div class="mt-4 mb-3">
+
+    <table class="table-custom">
+
+        <tr>
+            <td width="120">
+                <b>Bulan</b>
+            </td>
+            <td>
+                : {{ $namaBulan }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Tahun</b>
+            </td>
+            <td>
+                : {{ $tahun }}
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+
+
+
     {{-- TABEL --}}
     <div class="table-wrapper mt-3">
         <div class="table-responsive">
