@@ -271,17 +271,64 @@
                                         default => ''
                                     };
                                 @endphp
-
                                 <td class="{{ $warna }}">
-                                    <a href="#" class="ModalInfo btn {{ $btn }}"
-                                        id_laporan_keuangan="{{ $booking->id_laporan_keuangan }}" style="
-                                                            width:30px;
-                                                            height:30px;
-                                                            padding:0;
-                                                            border-radius:4px;
-                                                            display:inline-block;
-                                                        ">
-                                    </a>
+
+                                    @php
+
+                                        $tanggalCell = \Carbon\Carbon::create(
+                                            $tahun,
+                                            $bulan,
+                                            $tgl
+                                        )->format('Y-m-d');
+
+                                        $booking = $bookingKamar->first(function ($item) use ($kamar, $tanggalCell) {
+
+                                            return $item->id_nomor_kamar == $kamar->id_nomor_kamar
+                                                && $tanggalCell >= $item->check_in
+                                                && $tanggalCell < $item->check_out;
+                                        });
+
+                                    @endphp
+
+                                    @if($booking)
+
+                                        @php
+
+                                            $hariIni = date('Y-m-d');
+
+                                            if (
+                                                $booking->check_in > $hariIni
+                                                && $booking->status_pembayaran == 0
+                                            ) {
+
+                                                $btn = 'btn-warning';
+
+                                            } elseif (
+                                                $booking->check_in > $hariIni
+                                            ) {
+
+                                                $btn = 'btn-secondary';
+
+                                            } else {
+
+                                                $btn = 'btn-success';
+
+                                            }
+
+                                        @endphp
+
+                                        <a href="#" class="ModalInfo btn {{ $btn }}"
+                                            id_laporan_keuangan="{{ $booking->id_laporan_keuangan }}" style="
+                                                                                                        width:30px;
+                                                                                                        height:30px;
+                                                                                                        padding:0;
+                                                                                                        border-radius:4px;
+                                                                                                        display:inline-block;
+                                                                                                    ">
+                                        </a>
+
+                                    @endif
+
                                 </td>
 
                             @endforeach
