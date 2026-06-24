@@ -975,9 +975,6 @@ class HotelController extends Controller
                     'status_pembayaran' => 1,
 
                     'metode_pembayaran' =>
-                        $request->metode_pembayaran,
-
-                    'sumber_pembayaran' =>
                         $request->metode_pembayaran == 'online'
                         ? $request->sumber_pembayaran
                         : null,
