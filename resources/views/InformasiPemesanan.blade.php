@@ -197,6 +197,7 @@
                         <th>Check-In</th>
                         <th>Check-Out</th>
                         <th>Resi</th>
+                        <th>Pembayaran</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -246,6 +247,24 @@
                                             <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
                                             <path d="M12 9h.01" />
                                             <path d="M11 12h1v4h1" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="ModalPembayaran btn btn-secondary"
+                                        id_laporan_keuangan="{{ $row->id_laporan_keuangan }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-cash">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3" />
+                                            <path
+                                                d="M7 10a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" />
+                                            <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
                                         </svg>
                                     </a>
                                 </div>
@@ -313,6 +332,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="loadModalResi">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Modal Validasi Pembayaran -->
+    <div class="modal fade" id="modal-pembayaran" tabindex="-1" aria-labelledby="ModalPembayaranLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="ModalPembayaranLabel" style="font-size:16pt;">Status Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="loadModalPembayaran">
                 </div>
             </div>
         </div>
@@ -453,6 +491,42 @@
 
 
 
+
+
+
+
+        // BAGIAN DARI MODAL PEMBAYARAN
+        $(document).on('click', '.ModalPembayaran', function (e) {
+            e.preventDefault();
+
+            let id = $(this).attr('id_laporan_keuangan');
+
+            $.ajax({
+                type: 'POST',
+                url: '/ModalPembayaran',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id_laporan_keuangan: id
+                },
+                success: function (respond) {
+                    $("#loadModalPembayaran").html(respond);
+                    $("#modal-pembayaran").modal("show");
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
         function printResi() {
 
             var isi = document.getElementById("area-print").innerHTML;
@@ -467,22 +541,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                        <html>
-                                                        <head>
-                                                            <title>Print Resi</title>
-                                                            <style>
-                                                                body{
-                                                                    font-family: Arial;
-                                                                    font-size:14px;
-                                                                    padding:20px;
-                                                                }
-                                                            </style>
-                                                        </head>
-                                                        <body>
-                                                            ${isi}
-                                                        </body>
-                                                        </html>
-                                                    `);
+                                                                    <html>
+                                                                    <head>
+                                                                        <title>Print Resi</title>
+                                                                        <style>
+                                                                            body{
+                                                                                font-family: Arial;
+                                                                                font-size:14px;
+                                                                                padding:20px;
+                                                                            }
+                                                                        </style>
+                                                                    </head>
+                                                                    <body>
+                                                                        ${isi}
+                                                                    </body>
+                                                                    </html>
+                                                                `);
             frameDoc.close();
 
             frame.contentWindow.focus();

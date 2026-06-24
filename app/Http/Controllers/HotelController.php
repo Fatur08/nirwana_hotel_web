@@ -912,6 +912,19 @@ class HotelController extends Controller
 
 
 
+    // Modal Status Pembayaran
+    public function ModalPembayaran(Request $request)
+    {
+        return view('ModalPembayaran');
+    }
+
+
+
+
+
+
+
+
 
 
 
