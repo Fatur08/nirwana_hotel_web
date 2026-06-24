@@ -475,6 +475,11 @@ class HotelController extends Controller
             // =====================================
             // INSERT LAPORAN KEUANGAN
             // =====================================
+
+            $status_pembayaran =
+                $request->status_pembayaran == 'sudah'
+                ? 1
+                : 0;
             $id_laporan =
                 DB::table('laporan_keuangan')
                     ->insertGetId([
@@ -531,7 +536,10 @@ class HotelController extends Controller
                             $metode_pembayaran,
 
                         'bukti_pembayaran' =>
-                            $bukti_pembayaran
+                            $bukti_pembayaran,
+
+                        'status_pembayaran' =>
+                            $status_pembayaran
                     ]);
 
 
