@@ -3,6 +3,7 @@
     <form action="{{ url('ModalPembayaran/store_ModalPembayaran') }}" method="POST" id="frmModalPembayaran"
         enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="id_laporan_keuangan" value="{{ $id_laporan_keuangan }}">
         <!-- METODE PEMBAYARAN -->
         <div class="row" id="metode_pembayaran_container">
             <div class="col-12">

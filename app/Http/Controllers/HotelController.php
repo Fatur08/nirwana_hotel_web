@@ -925,10 +925,80 @@ class HotelController extends Controller
 
 
 
-    // Modal Status Pembayaran
+    // Modal Pembayaran
     public function ModalPembayaran(Request $request)
     {
-        return view('ModalPembayaran');
+        $id_laporan_keuangan = $request->id_laporan_keuangan;
+        return view('ModalPembayaran', compact('id_laporan_keuangan'));
+    }
+
+
+
+
+
+
+    public function store_ModalPembayaran(Request $request)
+    {
+        try {
+
+            /* ===============================
+               UPLOAD BUKTI PEMBAYARAN
+            ================================*/
+            $bukti_pembayaran = null;
+
+
+            if ($request->hasFile('bukti_pembayaran')) {
+                $timestamp = now()->format('Y-m-d_H-i-s');
+                $nama = str_replace(' ', '_', $request->nama_tamu);
+                $bukti_pembayaran = "Bukti Pembayaran_" . $nama . "_" . $timestamp . "." . $request->file('bukti_pembayaran')->extension();
+                $storagePath = 'public/uploads/bukti_pembayaran/';
+                $request->file('bukti_pembayaran')->storeAs($storagePath, $bukti_pembayaran);
+                $publicPath = public_path('storage/uploads/bukti_pembayaran/');
+                if (!is_dir($publicPath)) {
+                    mkdir($publicPath, 0777, true);
+                }
+                $sourceFile = storage_path('app/' . $storagePath . $bukti_pembayaran);
+                $destinationFile = public_path('storage/uploads/bukti_pembayaran/' . $bukti_pembayaran);
+                copy($sourceFile, $destinationFile);
+            }
+
+            // ==========================
+            // UPDATE PEMBAYARAN
+            // ==========================
+            DB::table('laporan_keuangan')
+                ->where(
+                    'id_laporan_keuangan',
+                    $request->id_laporan_keuangan
+                )
+                ->update([
+
+                    'status_pembayaran' => 1,
+
+                    'metode_pembayaran' =>
+                        $request->metode_pembayaran,
+
+                    'sumber_pembayaran' =>
+                        $request->metode_pembayaran == 'online'
+                        ? $request->sumber_pembayaran
+                        : null,
+
+                    'bukti_pembayaran' =>
+                        $bukti_pembayaran
+                ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Pembayaran berhasil disimpan'
+            ]);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+
+        }
     }
 
 

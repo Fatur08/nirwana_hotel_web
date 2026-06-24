@@ -49,6 +49,9 @@ Route::post('/ModalResi', [HotelController::class, 'ModalResi']);
 Route::post('/ModalPembayaran', [HotelController::class, 'ModalPembayaran']);
 
 
+Route::post('/ModalPembayaran/store_ModalPembayaran', [HotelController::class, 'store_ModalPembayaran']);
+
+
 Route::post('/ModalPembayaran/{id}/BatalkanPembayaran', [HotelController::class, 'BatalkanPembayaran']);
 
 
