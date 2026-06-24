@@ -547,22 +547,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                                                                            <html>
-                                                                                                            <head>
-                                                                                                                <title>Print Resi</title>
-                                                                                                                <style>
-                                                                                                                    body{
-                                                                                                                        font-family: Arial;
-                                                                                                                        font-size:14px;
-                                                                                                                        padding:20px;
-                                                                                                                    }
-                                                                                                                </style>
-                                                                                                            </head>
-                                                                                                            <body>
-                                                                                                                ${isi}
-                                                                                                            </body>
-                                                                                                            </html>
-                                                                                                        `);
+                                                                                                                    <html>
+                                                                                                                    <head>
+                                                                                                                        <title>Print Resi</title>
+                                                                                                                        <style>
+                                                                                                                            body{
+                                                                                                                                font-family: Arial;
+                                                                                                                                font-size:14px;
+                                                                                                                                padding:20px;
+                                                                                                                            }
+                                                                                                                        </style>
+                                                                                                                    </head>
+                                                                                                                    <body>
+                                                                                                                        ${isi}
+                                                                                                                    </body>
+                                                                                                                    </html>
+                                                                                                                `);
             frameDoc.close();
 
             frame.contentWindow.focus();
@@ -634,6 +634,36 @@
                 pdf.save("resi.pdf");
             });
         }
+
+
+
+
+
+
+
+
+        $(".BatalkanPembayaran").click(function (e) {
+            var form = $(this).closest('form');
+            e.preventDefault();
+            Swal.fire({
+                title: "Apakah Anda Yakin ingin batalkan",
+                text: "Jika Ya Maka Status Pembayaran akan berubah",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Batalkan Saja"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Data Pembayaran Berhasil Di Batalkan",
+                        icon: "success"
+                    });
+                }
+            });
+        });
 
 
 
