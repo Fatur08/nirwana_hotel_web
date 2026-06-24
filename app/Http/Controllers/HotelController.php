@@ -693,11 +693,21 @@ class HotelController extends Controller
         $histori = DB::table('histori_kamar as hk')
             ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->join(
+                'laporan_keuangan as lk',
+                'hk.id_laporan_keuangan',
+                '=',
+                'lk.id_laporan_keuangan'
+            )
             ->select(
                 'hk.nama_tamu',
                 'hk.id_laporan_keuangan',
                 'hk.check_in',
                 'hk.check_out',
+
+                // TAMBAHKAN INI
+                'lk.status_pembayaran',
+
                 DB::raw('GROUP_CONCAT(nk.nomor_kamar ORDER BY nk.nomor_kamar SEPARATOR ", ") as nomor_kamar'),
                 DB::raw('GROUP_CONCAT(k.kode_kamar SEPARATOR ", ") as tipe_kamar'),
                 DB::raw('COUNT(nk.id_nomor_kamar) as jumlah_kamar')
@@ -708,7 +718,10 @@ class HotelController extends Controller
                 'hk.nama_tamu',
                 'hk.id_laporan_keuangan',
                 'hk.check_in',
-                'hk.check_out'
+                'hk.check_out',
+
+                // WAJIB DITAMBAHKAN
+                'lk.status_pembayaran'
             )
             ->orderBy('hk.check_in', 'desc')
             ->get();
