@@ -195,7 +195,31 @@
 
 
 
+    <div class="mt-4 mb-3">
 
+        <table class="table-custom">
+
+            <tr>
+                <td width="120">
+                    <b>Bulan</b>
+                </td>
+                <td>
+                    : {{ $namaBulan }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b>Tahun</b>
+                </td>
+                <td>
+                    : {{ $tahun }}
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
 
 
 
