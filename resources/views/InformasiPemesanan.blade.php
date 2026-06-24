@@ -265,11 +265,10 @@
                                             Validasi
                                         </a>
                                     @else
-                                        <form
-                                            action="/owner/data_staff/ahli_gizi/{{ $d->id_ahli_gizi }}/batalkan_validasi_ahli_gizi"
+                                        <form action="/ModalPembayaran/{{ $row->id_laporan_keuangan }}/BatalkanPembayaran"
                                             style="margin-left: 5px;" method="POST">
                                             @csrf
-                                            <a class="btn btn-sm bg-danger batalkan_validasi_ahli_gizi">
+                                            <a class="btn btn-sm bg-danger BatalkanPembayaran">
                                                 Batalkan
                                             </a>
                                         </form>
@@ -548,22 +547,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                                                                    <html>
-                                                                                                    <head>
-                                                                                                        <title>Print Resi</title>
-                                                                                                        <style>
-                                                                                                            body{
-                                                                                                                font-family: Arial;
-                                                                                                                font-size:14px;
-                                                                                                                padding:20px;
-                                                                                                            }
-                                                                                                        </style>
-                                                                                                    </head>
-                                                                                                    <body>
-                                                                                                        ${isi}
-                                                                                                    </body>
-                                                                                                    </html>
-                                                                                                `);
+                                                                                                        <html>
+                                                                                                        <head>
+                                                                                                            <title>Print Resi</title>
+                                                                                                            <style>
+                                                                                                                body{
+                                                                                                                    font-family: Arial;
+                                                                                                                    font-size:14px;
+                                                                                                                    padding:20px;
+                                                                                                                }
+                                                                                                            </style>
+                                                                                                        </head>
+                                                                                                        <body>
+                                                                                                            ${isi}
+                                                                                                        </body>
+                                                                                                        </html>
+                                                                                                    `);
             frameDoc.close();
 
             frame.contentWindow.focus();
