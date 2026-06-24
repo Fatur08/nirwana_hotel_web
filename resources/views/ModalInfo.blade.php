@@ -79,10 +79,33 @@
     </tr>
 
     <tr>
-        <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Request</b></td>
+        <td class="text-start" style="background:#f5f5f5;font-weight:bold;">
+            <b>Request</b>
+        </td>
     </tr>
+
     <tr>
-        <td class="text-start">{{ $requestTambahan }}</td>
+        <td class="text-start">
+
+            @if($requestTambahan->count() > 0)
+
+                @foreach($requestTambahan as $req)
+
+                    {{ $loop->iteration }}.
+                    {{ $req->tipe_kamar }}
+                    ({{ $req->jumlah_request }}x)
+
+                    <br>
+
+                @endforeach
+
+            @else
+
+                -
+
+            @endif
+
+        </td>
     </tr>
 
 </table>

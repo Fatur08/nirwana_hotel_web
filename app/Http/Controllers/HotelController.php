@@ -755,16 +755,15 @@ class HotelController extends Controller
 
 
         // klasifikasi request tambahan
-        switch ($data->biaya_tambahan ?? 0) {
-            case 150000:
-                $requestTambahan = "Extra Bed";
-                break;
-            case 50000:
-                $requestTambahan = "Breakfast";
-                break;
-            default:
-                $requestTambahan = "-";
-        }
+        $requestTambahan = DB::table('request as r')
+            ->join('kamar as k', 'r.kode_request', '=', 'k.kode_kamar')
+            ->select(
+                'k.tipe_kamar',
+                'r.jumlah_request',
+                'r.total_harga'
+            )
+            ->where('r.id_laporan_keuangan', $id)
+            ->get();
 
         // Ambil daftar kamar yang dipesan
         $kamar = DB::table('histori_kamar as hk')
