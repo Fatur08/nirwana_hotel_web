@@ -293,38 +293,141 @@
 
                                     @if($booking)
 
-                                                    @php
+                                        @php
 
-                                                        $hariIni = date('Y-m-d');
+                                            $hariIni = date('Y-m-d');
 
-                                                        if (
-                                                            $booking->check_in > $hariIni
-                                                            && $booking->status_pembayaran == 0
-                                                        ) {
+                                            if (
+                                                $booking->check_in > $hariIni
+                                                && $booking->status_pembayaran == 0
+                                            ) {
 
-                                                            $btn = 'btn-warning';
+                                                $btn = 'btn-warning';
 
-                                                        } elseif (
-                                                            $booking->check_in > $hariIni
-                                                        ) {
+                                            } elseif (
+                                                $booking->check_in > $hariIni
+                                            ) {
 
-                                                            $btn = 'btn-secondary';
+                                                $btn = 'btn-secondary';
 
-                                                        } else {
+                                            } else {
 
-                                                            $btn = 'btn-success';
+                                                $btn = 'btn-success';
 
-                                                        }
+                                            }
 
-                                                    @endphp
+                                        @endphp
 
-                                                    <button class="btn {{ $btn }}" style="
-                                            width:30px;
-                                            height:30px;
-                                            padding:0;
-                                            border-radius:4px;
-                                        " data-id="{{ $booking->id_laporan_keuangan }}">
-                                                    </button>
+                                        
+        <div class="table-responsive">
+            <table class="table custom-table">
+                <thead class="table-primary">
+
+                    <tr>
+                        <th rowspan="2" class="align-middle" style="min-width:80px;">
+                            Tanggal
+                        </th>
+
+                        <th colspan="{{ $nomorKamar->count() }}" class="text-center">
+                            Nomor Kamar
+                        </th>
+                    </tr>
+
+                    <tr>
+                        @foreach ($nomorKamar as $kamar)
+                            <th style="min-width:60px;">
+                                {{ $kamar->id_nomor_kamar }}
+                            </th>
+                        @endforeach
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    @for ($tgl = 1; $tgl <= $jumlahHari; $tgl++)
+                        <tr>
+
+                            <th class="table-light">
+                                {{ $tgl }}
+                            </th>
+
+                            @foreach ($nomorKamar as $kamar)
+
+                                @php
+                                    $warna = match ($kamar->id_kamar) {
+                                        1 => 'header-dlx',
+                                        2 => 'header-spr',
+                                        3 => 'header-std',
+                                        4 => 'header-hmsty',
+                                        default => ''
+                                    };
+                                @endphp
+
+                                <td class="{{ $warna }}">
+
+                                    @php
+
+                                        $tanggalCell = \Carbon\Carbon::create(
+                                            $tahun,
+                                            $bulan,
+                                            $tgl
+                                        )->format('Y-m-d');
+
+                                        $booking = $bookingKamar->first(function ($item) use ($kamar, $tanggalCell) {
+
+                                            return $item->id_nomor_kamar == $kamar->id_nomor_kamar
+                                                && $tanggalCell >= $item->check_in
+                                                && $tanggalCell < $item->check_out;
+                                        });
+
+                                    @endphp
+
+                                    @if($booking)
+                                        @php
+                                            $hariIni = date('Y-m-d');
+                                            if (
+                                                $booking->check_in > $hariIni
+                                                && $booking->status_pembayaran == 0
+                                            ) {
+
+                                                $btn = 'btn-warning';
+
+                                            } elseif (
+                                                $booking->check_in > $hariIni
+                                            ) {
+
+                                                $btn = 'btn-secondary';
+
+                                            } else {
+
+                                                $btn = 'btn-success';
+
+                                            }
+
+                                        @endphp
+
+<a href="#"
+    class="ModalInfo btn {{ $btn }}"
+    id_laporan_keuangan="{{ $booking->id_laporan_keuangan }}"
+    style="
+        width:30px;
+        height:30px;
+        padding:0;
+        border-radius:4px;
+        display:inline-block;
+    ">
+</a>
+
+                                    @endif
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endfor
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 
                                     @endif
 
@@ -354,6 +457,45 @@
             </a>
         </div>
     </div>
+
+
+
+
+
+    <!-- Modal Informasi Pemesanan -->
+    <div class="modal fade" id="modal-info" tabindex="-1" aria-labelledby="ModalInfoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
+            <div class="modal-content">
+                <div class="modal-header bg-secondary text-white">
+                    <h5 class="modal-title" id="ModalInfoLabel" style="font-size:16pt;">Informasi Pemesanan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="loadModalInfo">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('myscript')
+<script>
+        // BAGIAN DARI MODAL INFO
+        $(document).on('click', '.ModalInfo', function (e) {
+            e.preventDefault();
+
+            let id = $(this).attr('id_laporan_keuangan');
+
+            $.ajax({
+                type: 'POST',
+                url: '/ModalInfo',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id_laporan_keuangan: id
+                },
+                success: function (respond) {
+                    $("#loadModalInfo").html(respond);
+                    $("#modal-info").modal("show");
+                }
+            });
+        });
+    </script>
 @endpush
