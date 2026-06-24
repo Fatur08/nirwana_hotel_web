@@ -240,6 +240,10 @@
                         <th colspan="{{ $nomorKamar->count() }}" class="text-center">
                             Nomor Kamar
                         </th>
+
+                        <th rowspan="2" class="align-middle">
+                            Total
+                        </th>
                     </tr>
 
                     <tr>
@@ -254,6 +258,9 @@
                 <tbody>
 
                     @for ($tgl = 1; $tgl <= $jumlahHari; $tgl++)
+                        @php
+                            $totalTerisi = 0;
+                        @endphp
                         <tr>
 
                             <th class="table-light">
@@ -309,22 +316,26 @@
 
                                                 $btn = 'btn-secondary';
 
+                                                $totalTerisi++;
+
                                             } else {
 
                                                 $btn = 'btn-success';
 
+                                                $totalTerisi++;
                                             }
 
                                         @endphp
 
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
-                                            id_laporan_keuangan="{{ $booking->id_laporan_keuangan }}" style="
-                                                                                                        width:30px;
-                                                                                                        height:30px;
-                                                                                                        padding:0;
-                                                                                                        border-radius:4px;
-                                                                                                        display:inline-block;
-                                                                                                    ">
+                                            id_laporan_keuangan="{{ $booking->id_laporan_keuangan }}"
+                                            style="
+                                                                                                                                                                        width:30px;
+                                                                                                                                                                        height:30px;
+                                                                                                                                                                        padding:0;
+                                                                                                                                                                        border-radius:4px;
+                                                                                                                                                                        display:inline-block;
+                                                                                                                                                                    ">
                                         </a>
 
                                     @endif
@@ -332,7 +343,9 @@
                                 </td>
 
                             @endforeach
-
+                            <td class="fw-bold bg-light">
+                                {{ $totalTerisi }}
+                            </td>
                         </tr>
                     @endfor
 
