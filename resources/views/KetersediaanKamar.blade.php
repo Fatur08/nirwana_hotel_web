@@ -133,104 +133,106 @@
 
     <form method="GET" action="{{ url('/KetersediaanKamar') }}">
 
-    <div class="row mt-3">
+        <div class="row mt-3">
 
-        <div class="col-md-6 mb-2">
-            <label class="form-label fw-bold">
-                Bulan
-            </label>
+            <div class="col-md-6 mb-2">
+                <label class="form-label fw-bold">
+                    Bulan
+                </label>
 
-            <select name="bulan" class="form-control">
+                <select name="bulan" class="form-control">
 
-    @foreach([
-        1=>'Januari',
-        2=>'Februari',
-        3=>'Maret',
-        4=>'April',
-        5=>'Mei',
-        6=>'Juni',
-        7=>'Juli',
-        8=>'Agustus',
-        9=>'September',
-        10=>'Oktober',
-        11=>'November',
-        12=>'Desember'
-    ] as $key => $nama)
+                    @php
+                        $bulanList = [
+                            1 => 'Januari',
+                            2 => 'Februari',
+                            3 => 'Maret',
+                            4 => 'April',
+                            5 => 'Mei',
+                            6 => 'Juni',
+                            7 => 'Juli',
+                            8 => 'Agustus',
+                            9 => 'September',
+                            10 => 'Oktober',
+                            11 => 'November',
+                            12 => 'Desember'
+                        ];
+                    @endphp
 
-        <option value="{{ $key }}"
-            {{ $bulan == $key ? 'selected' : '' }}>
-            {{ $nama }}
-        </option>
+                    <select name="bulan" class="form-control">
 
-    @endforeach
+                        @foreach($bulanList as $key => $nama)
 
-</select>
-        </div>
+                            <option value="{{ $key }}" @selected($bulan == $key)>
+                                {{ $nama }}
+                            </option>
 
-        <div class="col-md-6 mb-2">
-            <label class="form-label fw-bold">
-                Tahun
-            </label>
+                        @endforeach
 
-            <select name="tahun" class="form-control">
+                    </select>
+            </div>
 
-    @for($thn = 2026; $thn <= date('Y') + 20; $thn++)
+            <div class="col-md-6 mb-2">
+                <label class="form-label fw-bold">
+                    Tahun
+                </label>
 
-        <option value="{{ $thn }}"
-            {{ $tahun == $thn ? 'selected' : '' }}>
-            {{ $thn }}
-        </option>
+                <select name="tahun" class="form-control">
 
-    @endfor
+                    @for($thn = 2026; $thn <= date('Y') + 20; $thn++)
 
-</select>
-        </div>
+                        <option value="{{ $thn }}" {{ $tahun == $thn ? 'selected' : '' }}>
+                            {{ $thn }}
+                        </option>
 
-    </div>
+                    @endfor
 
-    <div class="row mt-2">
-        <div class="col-12">
-
-            <button type="submit"
-                class="btn btn-primary w-100"
-                style="font-size:18px;">
-
-                Tampilkan
-
-            </button>
+                </select>
+            </div>
 
         </div>
-    </div>
 
-</form>
+        <div class="row mt-2">
+            <div class="col-12">
+
+                <button type="submit" class="btn btn-primary w-100" style="font-size:18px;">
+
+                    Tampilkan
+
+                </button>
+
+            </div>
+        </div>
+
+    </form>
 
 
 
     <div class="mt-4 mb-3">
 
-    <table class="table-custom">
+        <table class="table-custom">
 
-        <tr>
-            <td width="120">
-                <b>Bulan</b>
-            </td>
-            <td>
-                : {{ $namaBulan }}
-            </td>
-        </tr>
+            <tr>
+                <td width="120">
+                    <b>Bulan</b>
+                </td>
+                <td>
+                    : {{ $namaBulan }}
+                </td>
+            </tr>
 
-        <tr>
-            <td>
-                <b>Tahun</b>
-            </td>
-            <td>
-                : {{ $tahun }}
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <b>Tahun</b>
+                </td>
+                <td>
+                    : {{ $tahun }}
+                </td>
+            </tr>
 
-    </table>
+        </table>
 
-</div>
+    </div>
 
 
 
