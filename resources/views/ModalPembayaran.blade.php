@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <button class="btn btn-secondary w-100" type="submit" style="font-size:16pt;">
+                    <button class="btn btn-info w-100" type="submit" style="font-size:16pt;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-send">
