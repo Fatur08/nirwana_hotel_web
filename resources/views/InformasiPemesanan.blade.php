@@ -236,9 +236,9 @@
 
                             <td class="text-center">
                                 @if($row->status_pembayaran == 0)
-                                    <button class="btn btn-warning btn-sm">Belum Bayar</button>
+                                    <button class="btn btn-warning">Belum Bayar</button>
                                 @else
-                                    <button class="btn btn-success btn-sm">Sudah Bayar</button>
+                                    <button class="btn btn-success">Sudah Bayar</button>
                                 @endif
                                 <div class="d-flex justify-content-center gap-2">
                                     @if($row->status_pembayaran == 0)
@@ -250,7 +250,7 @@
                                         <form action="/ModalPembayaran/{{ $row->id_laporan_keuangan }}/BatalkanPembayaran"
                                             style="margin-left: 5px;" method="POST">
                                             @csrf
-                                            <a class="btn btn-sm bg-danger BatalkanPembayaran">
+                                            <a class="btn bg-danger BatalkanPembayaran">
                                                 Batalkan
                                             </a>
                                         </form>
@@ -529,22 +529,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                                                                                                        <html>
-                                                                                                                                        <head>
-                                                                                                                                            <title>Print Resi</title>
-                                                                                                                                            <style>
-                                                                                                                                                body{
-                                                                                                                                                    font-family: Arial;
-                                                                                                                                                    font-size:14px;
-                                                                                                                                                    padding:20px;
-                                                                                                                                                }
-                                                                                                                                            </style>
-                                                                                                                                        </head>
-                                                                                                                                        <body>
-                                                                                                                                            ${isi}
-                                                                                                                                        </body>
-                                                                                                                                        </html>
-                                                                                                                                    `);
+                                                                                                                                            <html>
+                                                                                                                                            <head>
+                                                                                                                                                <title>Print Resi</title>
+                                                                                                                                                <style>
+                                                                                                                                                    body{
+                                                                                                                                                        font-family: Arial;
+                                                                                                                                                        font-size:14px;
+                                                                                                                                                        padding:20px;
+                                                                                                                                                    }
+                                                                                                                                                </style>
+                                                                                                                                            </head>
+                                                                                                                                            <body>
+                                                                                                                                                ${isi}
+                                                                                                                                            </body>
+                                                                                                                                            </html>
+                                                                                                                                        `);
             frameDoc.close();
 
             frame.contentWindow.focus();
