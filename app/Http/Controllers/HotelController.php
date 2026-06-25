@@ -971,7 +971,7 @@ class HotelController extends Controller
         // PAJAK
         // =====================================
 
-        $pajak = round($subTotal * 0.19);
+        $pajak = $data->pajak;
 
 
         // =====================================
