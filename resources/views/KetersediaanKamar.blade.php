@@ -181,7 +181,7 @@
         <div class="row mt-2">
             <div class="col-12">
 
-                <button type="submit" class="btn btn-primary w-100" style="font-size:18px;">
+                <button type="submit" class="btn btn-primary w-100" style="font-size:20pt;">
 
                     Tampilkan
 
@@ -330,12 +330,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_laporan_keuangan="{{ $booking->id_laporan_keuangan }}"
                                             style="
-                                                                                                                                                                                                                        width:30px;
-                                                                                                                                                                                                                        height:30px;
-                                                                                                                                                                                                                        padding:0;
-                                                                                                                                                                                                                        border-radius:4px;
-                                                                                                                                                                                                                        display:inline-block;
-                                                                                                                                                                                                                    ">
+                                                                                                                                                                                                                                        width:30px;
+                                                                                                                                                                                                                                        height:30px;
+                                                                                                                                                                                                                                        padding:0;
+                                                                                                                                                                                                                                        border-radius:4px;
+                                                                                                                                                                                                                                        display:inline-block;
+                                                                                                                                                                                                                                    ">
                                         </a>
 
                                     @endif
