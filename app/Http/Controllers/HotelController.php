@@ -971,7 +971,7 @@ class HotelController extends Controller
         // PAJAK
         // =====================================
 
-        $pajak = $data->pajak;
+        $pajak = 0;
 
 
         // =====================================
