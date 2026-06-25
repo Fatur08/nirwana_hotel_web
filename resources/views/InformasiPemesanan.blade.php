@@ -222,7 +222,7 @@
                             </td>
 
                             <td class="text-center">
-                                <div class="btn-group">
+                                <div class="d-flex justify-content-center gap-2">
                                     <a href="#" class="ModalResi btn btn-success w-100"
                                         id_laporan_keuangan="{{ $row->id_laporan_keuangan }}">
                                         Resi
@@ -240,7 +240,7 @@
                                 @else
                                     <button class="btn btn-success w-100">Sudah Bayar</button>
                                 @endif
-                                <div class="btn-group">
+                                <div class="d-flex justify-content-center gap-2">
                                     @if($row->status_pembayaran == 0)
                                         <a href="#" class="ModalPembayaran btn btn-info w-100"
                                             id_laporan_keuangan="{{ $row->id_laporan_keuangan }}">
