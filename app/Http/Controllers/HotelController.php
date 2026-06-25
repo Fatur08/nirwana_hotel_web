@@ -940,21 +940,45 @@ class HotelController extends Controller
 
 
 
+        // =====================================
+        // TOTAL KAMAR
+        // =====================================
+
+        $totalKamar = 0;
+
+        foreach ($detailKamar as $item) {
+
+            $totalKamar += $item['subtotal'];
+
+        }
+
+
+        // =====================================
+        // TOTAL REQUEST
+        // =====================================
+
         $totalRequest = $requestTambahan->sum('total_harga');
 
-        $subTotal = $data->biaya + $totalRequest;
 
-        $pajak = $data->pajak;
+        // =====================================
+        // SUB TOTAL
+        // =====================================
+
+        $subTotal = $totalKamar + $totalRequest;
+
+
+        // =====================================
+        // PAJAK
+        // =====================================
+
+        $pajak = round($subTotal * 0.19);
+
+
+        // =====================================
+        // GRAND TOTAL
+        // =====================================
 
         $grandTotal = $subTotal + $pajak;
-
-        dd([
-            'biaya' => $data->biaya,
-            'pajak' => $data->pajak,
-            'total_diterima' => $data->total_diterima,
-            'totalRequest' => $requestTambahan->sum('total_harga'),
-            'detailKamar' => $detailKamar
-        ]);
 
         return view('ModalResi', [
 
