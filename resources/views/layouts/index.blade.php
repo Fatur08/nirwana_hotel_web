@@ -14,7 +14,7 @@
 <head>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=1000">
+  <meta name="viewport" content="width=1080">
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Home Page - Hotel Nirwana</title>
   <script defer data-api="/stats/api/event" data-domain="preview.tabler.io" src="/stats/js/script.js"></script>
