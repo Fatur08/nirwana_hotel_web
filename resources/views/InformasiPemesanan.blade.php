@@ -315,7 +315,7 @@
         <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
             <div class="modal-content">
                 <div class="modal-header bg-secondary text-white">
-                    <h5 class="modal-title" id="ModalInfoLabel" style="font-size:16pt;">Informasi Pemesanan</h5>
+                    <h5 class="modal-title" id="ModalInfoLabel" style="font-size:20pt;">Informasi Pemesanan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="loadModalInfo">
@@ -547,22 +547,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                                                                                                <html>
-                                                                                                                                <head>
-                                                                                                                                    <title>Print Resi</title>
-                                                                                                                                    <style>
-                                                                                                                                        body{
-                                                                                                                                            font-family: Arial;
-                                                                                                                                            font-size:14px;
-                                                                                                                                            padding:20px;
-                                                                                                                                        }
-                                                                                                                                    </style>
-                                                                                                                                </head>
-                                                                                                                                <body>
-                                                                                                                                    ${isi}
-                                                                                                                                </body>
-                                                                                                                                </html>
-                                                                                                                            `);
+                                                                                                                                    <html>
+                                                                                                                                    <head>
+                                                                                                                                        <title>Print Resi</title>
+                                                                                                                                        <style>
+                                                                                                                                            body{
+                                                                                                                                                font-family: Arial;
+                                                                                                                                                font-size:14px;
+                                                                                                                                                padding:20px;
+                                                                                                                                            }
+                                                                                                                                        </style>
+                                                                                                                                    </head>
+                                                                                                                                    <body>
+                                                                                                                                        ${isi}
+                                                                                                                                    </body>
+                                                                                                                                    </html>
+                                                                                                                                `);
             frameDoc.close();
 
             frame.contentWindow.focus();

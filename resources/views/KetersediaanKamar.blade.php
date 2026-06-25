@@ -330,12 +330,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_laporan_keuangan="{{ $booking->id_laporan_keuangan }}"
                                             style="
-                                                                                                                                                                                                                                        width:30px;
-                                                                                                                                                                                                                                        height:30px;
-                                                                                                                                                                                                                                        padding:0;
-                                                                                                                                                                                                                                        border-radius:4px;
-                                                                                                                                                                                                                                        display:inline-block;
-                                                                                                                                                                                                                                    ">
+                                                                                                                                                                                                                                                        width:30px;
+                                                                                                                                                                                                                                                        height:30px;
+                                                                                                                                                                                                                                                        padding:0;
+                                                                                                                                                                                                                                                        border-radius:4px;
+                                                                                                                                                                                                                                                        display:inline-block;
+                                                                                                                                                                                                                                                    ">
                                         </a>
 
                                     @endif
@@ -377,7 +377,7 @@
         <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
             <div class="modal-content">
                 <div class="modal-header bg-secondary text-white">
-                    <h5 class="modal-title" id="ModalInfoLabel" style="font-size:16pt;">Informasi Pemesanan</h5>
+                    <h5 class="modal-title" id="ModalInfoLabel" style="font-size:20pt;">Informasi Pemesanan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="loadModalInfo">
