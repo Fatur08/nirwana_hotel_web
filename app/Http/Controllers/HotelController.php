@@ -915,11 +915,14 @@ class HotelController extends Controller
         }
 
 
-        $subTotal = $data->biaya;
+        // Total kamar
+        $totalKamar = 0;
 
-        $pajak = $data->pajak;
+        foreach ($detailKamar as $item) {
 
-        $grandTotal = $data->total_diterima;
+            $totalKamar += $item['subtotal'];
+
+        }
 
 
         $requestTambahan = DB::table('request as r')
@@ -933,6 +936,17 @@ class HotelController extends Controller
             )
             ->where('r.id_laporan_keuangan', $id)
             ->get();
+
+
+
+
+        $totalRequest = $requestTambahan->sum('total_harga');
+
+        $subTotal = $data->biaya + $totalRequest;
+
+        $pajak = $data->pajak;
+
+        $grandTotal = $subTotal + $pajak;
 
         return view('ModalResi', [
 

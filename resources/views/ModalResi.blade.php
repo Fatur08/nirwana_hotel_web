@@ -128,7 +128,7 @@
                 </td>
             </tr>
 
-            {{-- SUBTOTAL --}}
+            {{-- SUBTOTAL --}};
             <tr>
                 <td colspan="3"></td>
 
