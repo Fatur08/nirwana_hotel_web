@@ -150,7 +150,7 @@
                 </td>
 
                 <td style="text-align:left;">
-                    <!--= Rp.{{ number_format($pajak, 0, ',', '.') }}-->
+                    = <!--Rp.{{ number_format($pajak, 0, ',', '.') }}-->
                 </td>
             </tr>
 
