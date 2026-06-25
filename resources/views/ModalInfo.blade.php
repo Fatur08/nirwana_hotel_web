@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table table-bordered" style="font-size:20pt;">
 
     <tr>
         <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Nama Tamu</b></td>
