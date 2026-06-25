@@ -948,6 +948,14 @@ class HotelController extends Controller
 
         $grandTotal = $subTotal + $pajak;
 
+        dd([
+            'biaya' => $data->biaya,
+            'pajak' => $data->pajak,
+            'total_diterima' => $data->total_diterima,
+            'totalRequest' => $requestTambahan->sum('total_harga'),
+            'detailKamar' => $detailKamar
+        ]);
+
         return view('ModalResi', [
 
             'data' => $data,
