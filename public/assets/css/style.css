@@ -7998,17 +7998,3 @@ body.dark-mode-active .cart-item .cart-item-footer {
   height: 45px;
   line-height: 45px;
 }
-
-
-
-@media (max-width: 1200px) {
-
-  html {
-    zoom: 0.28;
-  }
-
-  body {
-    min-width: 1200px;
-  }
-
-}
