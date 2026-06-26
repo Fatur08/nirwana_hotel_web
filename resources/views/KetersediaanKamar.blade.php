@@ -135,7 +135,7 @@
         <div class="row mt-3">
             <div class="col-md-6 mb-2">
                 <label class="form-label fw-bold" style="font-size:20pt;">
-                    Bulan
+                    Pilih Bulan
                 </label>
 
                 @php
@@ -165,7 +165,7 @@
 
             <div class="col-md-6 mb-2">
                 <label class="form-label fw-bold" style="font-size:20pt;">
-                    Tahun
+                    Pilih Tahun
                 </label>
 
                 <select name="tahun" class="form-control" style="font-size:20pt;">
@@ -330,12 +330,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_laporan_keuangan="{{ $booking->id_laporan_keuangan }}"
                                             style="
-                                                                                                                                                                                                                                                        width:30px;
-                                                                                                                                                                                                                                                        height:30px;
-                                                                                                                                                                                                                                                        padding:0;
-                                                                                                                                                                                                                                                        border-radius:4px;
-                                                                                                                                                                                                                                                        display:inline-block;
-                                                                                                                                                                                                                                                    ">
+                                                                                                                                                                                                                                                                        width:30px;
+                                                                                                                                                                                                                                                                        height:30px;
+                                                                                                                                                                                                                                                                        padding:0;
+                                                                                                                                                                                                                                                                        border-radius:4px;
+                                                                                                                                                                                                                                                                        display:inline-block;
+                                                                                                                                                                                                                                                                    ">
                                         </a>
 
                                     @endif
