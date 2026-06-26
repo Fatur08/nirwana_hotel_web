@@ -393,11 +393,11 @@
 
 
     <!-- Modal Edit Pesan Kamar -->
-    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="ModalEditLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="ModalModalEdit" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
             <div class="modal-content">
                 <div class="modal-header bg-warning text-white">
-                    <h5 class="modal-title" id="ModalEditLabel" style="font-size:20pt;">Edit Pesan Kamar</h5>
+                    <h5 class="modal-title" id="ModalModalEdit" style="font-size:20pt;">Edit Pesan Kamar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="loadModalEdit">
@@ -642,10 +642,10 @@
                     $('#check_out').val('');
 
                     $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                            <option value="">
-                                                                                                                                                                                                                -- Pilih Tanggal Check Out Dulu --
-                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
+                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                `);
 
                     $('#kamar_tersedia_title').hide();
                     $('#kamar_tersedia_list').hide();
@@ -680,10 +680,10 @@
                         for (let i = 1; i <= totalKamar; i++) {
 
                             opsiJumlah += `
-                                                                                                                                                                                                                                    <option value="${i}">
-                                                                                                                                                                                                                                        ${i} Kamar
-                                                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                                                `;
+                                                                                                                                                                                                                                            <option value="${i}">
+                                                                                                                                                                                                                                                ${i} Kamar
+                                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                                        `;
                         }
 
                         $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -699,10 +699,10 @@
             $('#check_out').val('');
 
             $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                    <option value="">
-                                                                                                                                                                                                                        -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                                `);
+                                                                                                                                                                                                                            <option value="">
+                                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                        `);
 
             $('#kamar_tersedia_title').hide();
             $('#kamar_tersedia_list').hide();
@@ -735,22 +735,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                                                                                                                                                                                <html>
-                                                                                                                                                                                                                <head>
-                                                                                                                                                                                                                    <title>Print Resi</title>
-                                                                                                                                                                                                                    <style>
-                                                                                                                                                                                                                        body{
-                                                                                                                                                                                                                            font-family: Arial;
-                                                                                                                                                                                                                            font-size:14px;
-                                                                                                                                                                                                                            padding:20px;
-                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                    </style>
-                                                                                                                                                                                                                </head>
-                                                                                                                                                                                                                <body>
-                                                                                                                                                                                                                    ${isi}
-                                                                                                                                                                                                                </body>
-                                                                                                                                                                                                                </html>
-                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                        <html>
+                                                                                                                                                                                                                        <head>
+                                                                                                                                                                                                                            <title>Print Resi</title>
+                                                                                                                                                                                                                            <style>
+                                                                                                                                                                                                                                body{
+                                                                                                                                                                                                                                    font-family: Arial;
+                                                                                                                                                                                                                                    font-size:14px;
+                                                                                                                                                                                                                                    padding:20px;
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                            </style>
+                                                                                                                                                                                                                        </head>
+                                                                                                                                                                                                                        <body>
+                                                                                                                                                                                                                            ${isi}
+                                                                                                                                                                                                                        </body>
+                                                                                                                                                                                                                        </html>
+                                                                                                                                                                                                                    `);
             frameDoc.close();
 
             frame.contentWindow.focus();
