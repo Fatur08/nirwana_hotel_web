@@ -476,7 +476,7 @@
                             html += `
                                                                                                                                                                                                                     <div class="mb-4">
 
-                                                                                                                                                                                                                        <label class="form-label fw-bold text-center"
+                                                                                                                                                                                                                        <label class="form-label fw-bold"
                                                                                                                                                                                                                                style="font-size:16pt;">
                                                                                                                                                                                                                             Pilih Kamar ${i}
                                                                                                                                                                                                                         </label>
