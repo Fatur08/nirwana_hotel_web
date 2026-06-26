@@ -600,6 +600,119 @@
 
 
 
+        function initPesanKamar() {
+
+            const checkOutPicker = flatpickr("#check_out_pesan_kamar", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "d F Y",
+                locale: flatpickr.l10ns.id,
+                disableMobile: true,
+                allowInput: false
+            });
+
+            const checkInPicker = flatpickr("#check_in_pesan_kamar", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "d F Y",
+                locale: flatpickr.l10ns.id,
+                disableMobile: true,
+                allowInput: false,
+
+                onChange: function (selectedDates) {
+
+                    if (!selectedDates.length) return;
+
+                    let checkInDate = selectedDates[0];
+
+                    $('#check_in').val(
+                        this.formatDate(checkInDate, "Y-m-d")
+                    );
+
+                    let minCheckout = new Date(checkInDate);
+                    minCheckout.setDate(minCheckout.getDate() + 1);
+
+                    checkOutPicker.set('minDate', minCheckout);
+
+                    checkOutPicker.clear();
+                    $('#check_out').val('');
+
+                    $('#jumlah_kamar_dipesan').html(`
+                                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
+                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                `);
+
+                    $('#kamar_tersedia_title').hide();
+                    $('#kamar_tersedia_list').hide();
+                    $('#list_nomor_kamar').html('');
+                }
+            });
+
+            checkOutPicker.config.onChange.push(function (selectedDates) {
+
+                if (!selectedDates.length) return;
+
+                $('#check_out').val(
+                    checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
+                );
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/getKamarTersedia',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        check_in: $('#check_in').val(),
+                        check_out: $('#check_out').val()
+                    },
+
+                    success: function (response) {
+
+                        let totalKamar = response.length;
+
+                        let opsiJumlah =
+                            '<option value="">-- Pilih Jumlah Kamar --</option>';
+
+                        for (let i = 1; i <= totalKamar; i++) {
+
+                            opsiJumlah += `
+                                                                                                                                                                                                                            <option value="${i}">
+                                                                                                                                                                                                                                ${i} Kamar
+                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                        `;
+                        }
+
+                        $('#jumlah_kamar_dipesan').html(opsiJumlah);
+                    }
+                });
+
+            });
+            // Default kosong saat modal dibuka
+            checkInPicker.clear();
+            checkOutPicker.clear();
+
+            $('#check_in').val('');
+            $('#check_out').val('');
+
+            $('#jumlah_kamar_dipesan').html(`
+                                                                                                                                                                                                            <option value="">
+                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                        `);
+
+            $('#kamar_tersedia_title').hide();
+            $('#kamar_tersedia_list').hide();
+            $('#list_nomor_kamar').html('');
+        }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -618,22 +731,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                                                                                                                                                                    <html>
-                                                                                                                                                                                                    <head>
-                                                                                                                                                                                                        <title>Print Resi</title>
-                                                                                                                                                                                                        <style>
-                                                                                                                                                                                                            body{
-                                                                                                                                                                                                                font-family: Arial;
-                                                                                                                                                                                                                font-size:14px;
-                                                                                                                                                                                                                padding:20px;
-                                                                                                                                                                                                            }
-                                                                                                                                                                                                        </style>
-                                                                                                                                                                                                    </head>
-                                                                                                                                                                                                    <body>
-                                                                                                                                                                                                        ${isi}
-                                                                                                                                                                                                    </body>
-                                                                                                                                                                                                    </html>
-                                                                                                                                                                                                `);
+                                                                                                                                                                                                        <html>
+                                                                                                                                                                                                        <head>
+                                                                                                                                                                                                            <title>Print Resi</title>
+                                                                                                                                                                                                            <style>
+                                                                                                                                                                                                                body{
+                                                                                                                                                                                                                    font-family: Arial;
+                                                                                                                                                                                                                    font-size:14px;
+                                                                                                                                                                                                                    padding:20px;
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                            </style>
+                                                                                                                                                                                                        </head>
+                                                                                                                                                                                                        <body>
+                                                                                                                                                                                                            ${isi}
+                                                                                                                                                                                                        </body>
+                                                                                                                                                                                                        </html>
+                                                                                                                                                                                                    `);
             frameDoc.close();
 
             frame.contentWindow.focus();
