@@ -282,7 +282,7 @@
 
                                 <div class="d-grid gap-2">
 
-                                    <a href="#" class="ModalPembayaran btn btn-warning"
+                                    <a href="#" class="ModalEdit btn btn-warning"
                                         id_laporan_keuangan="{{ $row->id_laporan_keuangan }}">
                                         Edit
                                     </a>
@@ -379,10 +379,28 @@
         <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
             <div class="modal-content">
                 <div class="modal-header bg-info text-white">
-                    <h5 class="modal-title" id="ModalPembayaranLabel" style="font-size:16pt;">Status Pembayaran</h5>
+                    <h5 class="modal-title" id="ModalPembayaranLabel" style="font-size:20pt;">Status Pembayaran</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="loadModalPembayaran">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Modal Edit Pesan Kamar -->
+    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="ModalEditLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="ModalEditLabel" style="font-size:20pt;">Status Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="loadModalEdit">
                 </div>
             </div>
         </div>
@@ -554,6 +572,33 @@
 
 
 
+        // BAGIAN DARI MODAL EDIT
+        $(document).on('click', '.ModalEdit', function (e) {
+            e.preventDefault();
+
+            let id = $(this).attr('id_laporan_keuangan');
+
+            $.ajax({
+                type: 'POST',
+                url: '/ModalEdit',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id_laporan_keuangan: id
+                },
+                success: function (respond) {
+                    $("#loadModalEdit").html(respond);
+                    $("#modal-edit").modal("show");
+                }
+            });
+        });
+
+
+
+
+
+
+
+
 
 
 
@@ -573,22 +618,22 @@
 
             frameDoc.open();
             frameDoc.write(`
-                                                                                                                                                                                    <html>
-                                                                                                                                                                                    <head>
-                                                                                                                                                                                        <title>Print Resi</title>
-                                                                                                                                                                                        <style>
-                                                                                                                                                                                            body{
-                                                                                                                                                                                                font-family: Arial;
-                                                                                                                                                                                                font-size:14px;
-                                                                                                                                                                                                padding:20px;
-                                                                                                                                                                                            }
-                                                                                                                                                                                        </style>
-                                                                                                                                                                                    </head>
-                                                                                                                                                                                    <body>
-                                                                                                                                                                                        ${isi}
-                                                                                                                                                                                    </body>
-                                                                                                                                                                                    </html>
-                                                                                                                                                                                `);
+                                                                                                                                                                                            <html>
+                                                                                                                                                                                            <head>
+                                                                                                                                                                                                <title>Print Resi</title>
+                                                                                                                                                                                                <style>
+                                                                                                                                                                                                    body{
+                                                                                                                                                                                                        font-family: Arial;
+                                                                                                                                                                                                        font-size:14px;
+                                                                                                                                                                                                        padding:20px;
+                                                                                                                                                                                                    }
+                                                                                                                                                                                                </style>
+                                                                                                                                                                                            </head>
+                                                                                                                                                                                            <body>
+                                                                                                                                                                                                ${isi}
+                                                                                                                                                                                            </body>
+                                                                                                                                                                                            </html>
+                                                                                                                                                                                        `);
             frameDoc.close();
 
             frame.contentWindow.focus();

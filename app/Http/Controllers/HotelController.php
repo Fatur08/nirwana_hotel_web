@@ -1134,6 +1134,21 @@ class HotelController extends Controller
 
 
 
+    // Modal Edit Pesan Kamar
+    public function ModalEdit(Request $request)
+    {
+        return view('ModalEdit');
+    }
+
+
+
+
+
+
+
+
+
+
 
     public function DataMaster(Request $request)
     {
