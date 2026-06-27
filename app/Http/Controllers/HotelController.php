@@ -1081,8 +1081,8 @@ class HotelController extends Controller
     // Modal Pembayaran
     public function ModalPembayaran(Request $request)
     {
-        $id_laporan_keuangan = $request->id_laporan_keuangan;
-        return view('ModalPembayaran', compact('id_laporan_keuangan'));
+        $id_rincian_pesanan = $request->id_rincian_pesanan;
+        return view('ModalPembayaran', compact('id_rincian_pesanan'));
     }
 
 
@@ -1120,8 +1120,8 @@ class HotelController extends Controller
             // ==========================
             DB::table('laporan_keuangan')
                 ->where(
-                    'id_laporan_keuangan',
-                    $request->id_laporan_keuangan
+                    'id_rincian_pesanan',
+                    $request->id_rincian_pesanan
                 )
                 ->update([
 
