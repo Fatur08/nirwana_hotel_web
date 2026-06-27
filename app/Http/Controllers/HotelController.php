@@ -656,20 +656,31 @@ class HotelController extends Controller
         $nomorKamar = NomorKamar::orderBy('id_nomor_kamar')
             ->get();
 
-
         $bookingKamar = DB::table('histori_kamar as hk')
             ->join(
-                'laporan_keuangan as lk',
-                'hk.id_laporan_keuangan',
+                'rincian_pesanan as rp',
+                'hk.id_rincian_pesanan',
                 '=',
-                'lk.id_laporan_keuangan'
+                'rp.id_rincian_pesanan'
+            )
+            ->leftJoin(
+                'laporan_keuangan as lk',
+                'rp.id_rincian_pesanan',
+                '=',
+                'lk.id_rincian_pesanan'
             )
             ->select(
                 'hk.id_nomor_kamar',
-                'hk.id_laporan_keuangan',
+                'hk.id_rincian_pesanan',
                 'hk.check_in',
                 'hk.check_out',
-                'lk.status_pembayaran'
+                DB::raw('MIN(lk.status_pembayaran) as status_pembayaran')
+            )
+            ->groupBy(
+                'hk.id_nomor_kamar',
+                'hk.id_rincian_pesanan',
+                'hk.check_in',
+                'hk.check_out'
             )
             ->get();
 
@@ -936,43 +947,27 @@ class HotelController extends Controller
         $detailKamar = [];
 
         foreach ($kamar as $item) {
-
             if (!isset($detailKamar[$item->kode_kamar])) {
-
                 $detailKamar[$item->kode_kamar] = [
-
                     'nama' => $item->tipe_kamar,
-
                     'jumlah' => 0,
-
                     'tarif' => $item->tarif_per_hari,
-
                     'subtotal' => 0,
-
                     'nomor_kamar' => []
-
                 ];
-
             }
 
             $detailKamar[$item->kode_kamar]['jumlah']++;
 
             $jenisBed = match ($item->jenis_bed) {
-
                 1 => 'Single Bed',
-
                 2 => 'Double Bed',
-
                 default => '-'
-
             };
 
             $detailKamar[$item->kode_kamar]['nomor_kamar'][] = [
-
                 'nomor' => $item->nomor_kamar,
-
                 'bed' => $jenisBed
-
             ];
 
         }
@@ -1065,23 +1060,14 @@ class HotelController extends Controller
         $grandTotal = $subTotal + $pajak;
 
         return view('ModalResi', [
-
             'data' => $data,
-
             'histori' => $histori,
-
             'lama' => $lama,
-
             'detailKamar' => $detailKamar,
-
             'requestTambahan' => $requestTambahan,
-
             'subTotal' => $subTotal,
-
             'pajak' => $pajak,
-
             'grandTotal' => $grandTotal
-
         ]);
     }
 
