@@ -460,10 +460,10 @@ class HotelController extends Controller
             }
 
             /*
-|--------------------------------------------------------------------------
-| STATUS & METODE PEMBAYARAN
-|--------------------------------------------------------------------------
-*/
+            |--------------------------------------------------------------------------
+            | STATUS & METODE PEMBAYARAN
+            |--------------------------------------------------------------------------
+            */
 
             $status_pembayaran =
                 $request->status_pembayaran == 'sudah'
@@ -703,38 +703,51 @@ class HotelController extends Controller
             $cari_check_out = date('Y-m-d');
         }
 
-        $histori = DB::table('histori_kamar as hk')
-            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
-            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+        $histori = DB::table('rincian_pesanan as rp')
             ->join(
-                'laporan_keuangan as lk',
-                'hk.id_laporan_keuangan',
+                'histori_kamar as hk',
+                'rp.id_rincian_pesanan',
                 '=',
-                'lk.id_laporan_keuangan'
+                'hk.id_rincian_pesanan'
             )
+
+            ->leftJoin(
+                'laporan_keuangan as lk',
+                'rp.id_rincian_pesanan',
+                '=',
+                'lk.id_rincian_pesanan'
+            )
+
             ->select(
-                'hk.nama_tamu',
-                'hk.id_laporan_keuangan',
+                'rp.id_rincian_pesanan',
+                'rp.nama_tamu',
+                'rp.total_kamar_dipesan',
+                'rp.total_request',
                 'hk.check_in',
                 'hk.check_out',
+                DB::raw('MIN(lk.status_pembayaran) as status_pembayaran')
 
-                // TAMBAHKAN INI
-                'lk.status_pembayaran',
-
-                DB::raw('GROUP_CONCAT(nk.nomor_kamar ORDER BY nk.nomor_kamar SEPARATOR ", ") as nomor_kamar'),
-                DB::raw('GROUP_CONCAT(k.kode_kamar SEPARATOR ", ") as tipe_kamar'),
-                DB::raw('COUNT(nk.id_nomor_kamar) as jumlah_kamar')
             )
-            ->whereDate('hk.check_in', '<=', $cari_check_out)
-            ->whereDate('hk.check_out', '>=', $cari_check_in)
-            ->groupBy(
-                'hk.nama_tamu',
-                'hk.id_laporan_keuangan',
-                'hk.check_in',
-                'hk.check_out',
 
-                // WAJIB DITAMBAHKAN
-                'lk.status_pembayaran'
+            ->whereDate(
+                'hk.check_in',
+                '<=',
+                $cari_check_out
+            )
+
+            ->whereDate(
+                'hk.check_out',
+                '>=',
+                $cari_check_in
+            )
+
+            ->groupBy(
+                'rp.id_rincian_pesanan',
+                'rp.nama_tamu',
+                'rp.total_kamar_dipesan',
+                'rp.total_request',
+                'hk.check_in',
+                'hk.check_out'
             )
             ->orderBy('hk.check_in', 'desc')
             ->get();
