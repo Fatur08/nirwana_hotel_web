@@ -1116,6 +1116,24 @@ class HotelController extends Controller
             }
 
             // ==========================
+            // TENTUKAN METODE PEMBAYARAN
+            // ==========================
+
+            if ($request->metode_pembayaran == 'online') {
+
+                $metodePembayaran = $request->sumber_pembayaran;
+
+            } elseif ($request->metode_pembayaran == 'cash') {
+
+                $metodePembayaran = 'Cash';
+
+            } else {
+
+                $metodePembayaran = null;
+
+            }
+
+            // ==========================
             // UPDATE PEMBAYARAN
             // ==========================
             DB::table('laporan_keuangan')
@@ -1124,16 +1142,9 @@ class HotelController extends Controller
                     $request->id_rincian_pesanan
                 )
                 ->update([
-
                     'status_pembayaran' => 1,
-
-                    'metode_pembayaran' =>
-                        $request->metode_pembayaran == 'online'
-                        ? $request->sumber_pembayaran
-                        : null,
-
-                    'bukti_pembayaran' =>
-                        $bukti_pembayaran
+                    'metode_pembayaran' => $metodePembayaran,
+                    'bukti_pembayaran' => $bukti_pembayaran
                 ]);
 
             return response()->json([
