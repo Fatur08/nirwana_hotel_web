@@ -460,26 +460,33 @@ class HotelController extends Controller
             }
 
             /*
-            |--------------------------------------------------------------------------
-            | METODE PEMBAYARAN
-            |--------------------------------------------------------------------------
-            */
-
-            if ($request->metode_pembayaran == 'online') {
-
-                $metode_pembayaran =
-                    $request->sumber_pembayaran;
-
-            } else {
-
-                $metode_pembayaran = 'Cash';
-
-            }
+|--------------------------------------------------------------------------
+| STATUS & METODE PEMBAYARAN
+|--------------------------------------------------------------------------
+*/
 
             $status_pembayaran =
                 $request->status_pembayaran == 'sudah'
                 ? 1
                 : 0;
+
+            $metode_pembayaran = null;
+
+            // Hanya isi metode pembayaran jika memang sudah bayar
+            if ($status_pembayaran == 1) {
+
+                if ($request->metode_pembayaran == 'online') {
+
+                    $metode_pembayaran =
+                        $request->sumber_pembayaran;
+
+                } else {
+
+                    $metode_pembayaran = 'Cash';
+
+                }
+
+            }
 
             /*
             |--------------------------------------------------------------------------
