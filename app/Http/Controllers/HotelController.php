@@ -1159,7 +1159,7 @@ class HotelController extends Controller
     public function BatalkanPembayaran(Request $request, $id)
     {
         $data = DB::table('laporan_keuangan')
-            ->where('id_laporan_keuangan', $id)
+            ->where('id_rincian_pesanan', $id)
             ->first();
 
         if (!empty($data->bukti_pembayaran)) {
@@ -1182,7 +1182,7 @@ class HotelController extends Controller
         }
 
         DB::table('laporan_keuangan')
-            ->where('id_laporan_keuangan', $id)
+            ->where('id_rincian_pesanan', $id)
             ->update([
                 'status_pembayaran' => 0,
                 'metode_pembayaran' => null,
