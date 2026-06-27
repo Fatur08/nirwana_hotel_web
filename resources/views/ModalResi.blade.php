@@ -31,8 +31,8 @@
         @php
             use Carbon\Carbon;
 
-            $checkIn = Carbon::parse($data->check_in);
-            $checkOut = Carbon::parse($data->check_out);
+            $checkIn = Carbon::parse($histori->check_in);
+            $checkOut = Carbon::parse($histori->check_out);
         @endphp
 
         <table style="width:100%; font-size:14pt;">

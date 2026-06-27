@@ -831,34 +831,51 @@ class HotelController extends Controller
 
     public function ModalResi(Request $request)
     {
-        $id = $request->id_laporan_keuangan;
+        $id = $request->id_rincian_pesanan;
 
         // Data transaksi
-        $data = DB::table('laporan_keuangan')
-            ->where('id_laporan_keuangan', $id)
+        $data = DB::table('rincian_pesanan')
+            ->where('id_rincian_pesanan', $id)
             ->first();
 
         // Ambil data tamu (alamat di histori)
         $histori = DB::table('histori_kamar')
-            ->where('id_laporan_keuangan', $id)
+            ->where('id_rincian_pesanan', $id)
             ->first();
 
         // Lama menginap
-        $lama = $data->lama_inap;
+        $lama = Carbon::parse($histori->check_out)->diffInDays(Carbon::parse($histori->check_in));
 
         // Ambil seluruh kamar yang dipesan
         $kamar = DB::table('histori_kamar as hk')
-            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
-            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+
+            ->join(
+                'nomor_kamar as nk',
+                'hk.id_nomor_kamar',
+                '=',
+                'nk.id_nomor_kamar'
+            )
+
+            ->join(
+                'kamar as k',
+                'nk.id_kamar',
+                '=',
+                'k.id_kamar'
+            )
+
+            ->where(
+                'hk.id_rincian_pesanan',
+                $id
+            )
+
             ->select(
                 'nk.nomor_kamar',
                 'nk.jenis_bed',
-                'k.id_kamar',
                 'k.kode_kamar',
                 'k.tipe_kamar',
                 'k.tarif_per_hari'
             )
-            ->where('hk.id_laporan_keuangan', $id)
+
             ->get();
 
 
@@ -869,27 +886,39 @@ class HotelController extends Controller
             if (!isset($detailKamar[$item->kode_kamar])) {
 
                 $detailKamar[$item->kode_kamar] = [
+
                     'nama' => $item->tipe_kamar,
+
                     'jumlah' => 0,
+
                     'tarif' => $item->tarif_per_hari,
+
                     'subtotal' => 0,
-                    'nomor_kamar' => [],
+
+                    'nomor_kamar' => []
+
                 ];
 
             }
 
             $detailKamar[$item->kode_kamar]['jumlah']++;
-            $detailKamar[$item->kode_kamar]['nomor_kamar'][] = $item->nomor_kamar;
 
             $jenisBed = match ($item->jenis_bed) {
+
                 1 => 'Single Bed',
+
                 2 => 'Double Bed',
+
                 default => '-'
+
             };
 
             $detailKamar[$item->kode_kamar]['nomor_kamar'][] = [
+
                 'nomor' => $item->nomor_kamar,
+
                 'bed' => $jenisBed
+
             ];
 
         }
@@ -915,7 +944,19 @@ class HotelController extends Controller
 
 
         $requestTambahan = DB::table('request as r')
-            ->join('kamar as k', 'r.kode_request', '=', 'k.kode_kamar')
+
+            ->join(
+                'kamar as k',
+                'r.kode_request',
+                '=',
+                'k.kode_kamar'
+            )
+
+            ->where(
+                'r.id_rincian_pesanan',
+                $id
+            )
+
             ->select(
                 'r.kode_request',
                 'r.jumlah_request',
@@ -923,7 +964,7 @@ class HotelController extends Controller
                 'k.tipe_kamar',
                 'k.tarif_per_hari'
             )
-            ->where('r.id_laporan_keuangan', $id)
+
             ->get();
 
 
