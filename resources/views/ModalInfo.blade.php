@@ -12,7 +12,7 @@
     </tr>
     <tr>
         <td class="text-start">
-            {{ \Carbon\Carbon::parse($data->check_in)->locale('id')->translatedFormat('l, d F Y') }}
+            {{ \Carbon\Carbon::parse($histori->check_in)->locale('id')->translatedFormat('l, d F Y') }}
         </td>
     </tr>
 
@@ -21,49 +21,38 @@
     </tr>
     <tr>
         <td class="text-start">
-            {{ \Carbon\Carbon::parse($data->check_out)->locale('id')->translatedFormat('l, d F Y') }}
+            {{ \Carbon\Carbon::parse($histori->check_out)->locale('id')->translatedFormat('l, d F Y') }}
         </td>
     </tr>
 
     <tr>
         <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Jumlah Kamar Dipesan :
-                {{ $data->jumlah_kamar_dipesan }} Kamar</b></td>
+                {{ $data->total_kamar_dipesan }} Kamar</b></td>
     </tr>
     <tr>
         <td class="text-start">
             @foreach($kamar as $k)
 
                 @php
-                    switch ($k->id_kamar) {
-                        case 1:
-                            $tipe = "Deluxe ";
-                            break;
-                        case 2:
-                            $tipe = "Superior ";
-                            break;
-                        case 3:
-                            $tipe = "Standart ";
-                            break;
-                        case 4:
-                            $tipe = "Home Stay ";
-                            break;
-                        default:
-                            $tipe = "-";
-                    }
 
                     switch ($k->jenis_bed) {
+
                         case 1:
-                            $bed = "Single Bed";
+                            $bed = 'Single Bed';
                             break;
+
                         case 2:
-                            $bed = "Double Bed";
+                            $bed = 'Double Bed';
                             break;
+
                         default:
-                            $bed = "-";
+                            $bed = '-';
+
                     }
+
                 @endphp
 
-                {{ $loop->iteration }}. {{ $tipe }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
+                {{ $loop->iteration }}. {{ $k->tipe_kamar }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
 
             @endforeach
         </td>
@@ -74,7 +63,15 @@
     </tr>
     <tr>
         <td>
-            <img src="{{ asset('storage/uploads/foto_ktp/' . $data->foto_ktp) }}" width="200">
+            @if($foto && $foto->foto_ktp)
+
+                <img src="{{ asset('storage/uploads/foto_ktp/' . $foto->foto_ktp) }}" width="200">
+
+            @else
+
+                Tidak ada foto KTP
+
+            @endif
         </td>
     </tr>
 

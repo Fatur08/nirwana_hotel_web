@@ -785,15 +785,34 @@ class HotelController extends Controller
 
     public function ModalInfo(Request $request)
     {
-        $id = $request->id_laporan_keuangan;
+        $id = $request->id_rincian_pesanan;
 
-        // Ambil data laporan keuangan
-        $data = DB::table('laporan_keuangan')
-            ->where('id_laporan_keuangan', $id)
+        /*
+        |--------------------------------------------------------------------------
+        | DATA HEADER
+        |--------------------------------------------------------------------------
+        */
+
+        $data = DB::table('rincian_pesanan')
+            ->where('id_rincian_pesanan', $id)
             ->first();
 
+        /*
+        |--------------------------------------------------------------------------
+        | HISTORI (ambil satu data untuk informasi umum)
+        |--------------------------------------------------------------------------
+        */
 
-        // klasifikasi request tambahan
+        $histori = DB::table('histori_kamar')
+            ->where('id_rincian_pesanan', $id)
+            ->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | REQUEST TAMBAHAN
+        |--------------------------------------------------------------------------
+        */
+
         $requestTambahan = DB::table('request as r')
             ->join('kamar as k', 'r.kode_request', '=', 'k.kode_kamar')
             ->select(
@@ -801,22 +820,57 @@ class HotelController extends Controller
                 'r.jumlah_request',
                 'r.total_harga'
             )
-            ->where('r.id_laporan_keuangan', $id)
+            ->where('r.id_rincian_pesanan', $id)
             ->get();
 
-        // Ambil daftar kamar yang dipesan
+        /*
+        |--------------------------------------------------------------------------
+        | DAFTAR KAMAR
+        |--------------------------------------------------------------------------
+        */
+
         $kamar = DB::table('histori_kamar as hk')
-            ->join('nomor_kamar as nk', 'hk.id_nomor_kamar', '=', 'nk.id_nomor_kamar')
+            ->join(
+                'nomor_kamar as nk',
+                'hk.id_nomor_kamar',
+                '=',
+                'nk.id_nomor_kamar'
+            )
+            ->join(
+                'kamar as k',
+                'nk.id_kamar',
+                '=',
+                'k.id_kamar'
+            )
             ->select(
                 'nk.nomor_kamar',
                 'nk.jenis_bed',
-                'nk.id_kamar'
+                'k.id_kamar',
+                'k.tipe_kamar'
             )
-            ->where('hk.id_laporan_keuangan', $id)
+            ->where(
+                'hk.id_rincian_pesanan',
+                $id
+            )
+            ->orderBy('k.id_kamar')
+            ->orderBy('nk.nomor_kamar')
             ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | FOTO KTP
+        |--------------------------------------------------------------------------
+        */
+
+        $foto = DB::table('laporan_keuangan')
+            ->where('id_rincian_pesanan', $id)
+            ->whereNotNull('foto_ktp')
+            ->first();
 
         return view('ModalInfo', [
             'data' => $data,
+            'histori' => $histori,
+            'foto' => $foto,
             'kamar' => $kamar,
             'requestTambahan' => $requestTambahan
         ]);
