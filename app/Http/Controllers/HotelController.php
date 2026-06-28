@@ -1353,9 +1353,12 @@ class HotelController extends Controller
             | LAMA INAP
             |--------------------------------------------------------------------------
             */
-            $checkIn = \Carbon\Carbon::parse($request->check_in);
-            $checkOut = \Carbon\Carbon::parse($request->check_out);
+            $checkIn = \Carbon\Carbon::parse($request->edit_check_in);
+            $checkOut = \Carbon\Carbon::parse($request->edit_check_out);
             $lama_inap = $checkOut->diffInDays($checkIn);
+            if ($lama_inap <= 0) {
+                throw new Exception('Tanggal check out harus setelah check in.');
+            }
 
 
             /*
