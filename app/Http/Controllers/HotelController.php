@@ -1382,8 +1382,8 @@ class HotelController extends Controller
                 ->where('kode_kamar', 'FAST')
                 ->first();
 
-            $jumlahExtraBed = (int) $request->jumlah_extra_bed;
-            $jumlahBreakfast = (int) $request->jumlah_breakfast;
+            $jumlahExtraBed = (int) $request->edit_jumlah_extra_bed;
+            $jumlahBreakfast = (int) $request->edit_jumlah_breakfast;
             $totalExtraBed =
                 $jumlahExtraBed *
                 ($extraBed->tarif_per_hari ?? 0);
@@ -1489,7 +1489,7 @@ class HotelController extends Controller
                         ->insertGetId([
                             'id_rincian_pesanan' => $request->id_rincian_pesanan,
                             'kode_kamar' => $kamar->kode_kamar,
-                            'nama_tamu' => $request->nama_tamu,
+                            'nama_tamu' => $nama_tamu,
                             'tipe_kamar' => $kamar->tipe_kamar,
                             'jumlah_kamar_dipesan' => $jumlahPerTipe,
                             'tarif_per_hari' => $kamar->tarif_per_hari,
