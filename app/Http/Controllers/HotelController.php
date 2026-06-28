@@ -1429,9 +1429,9 @@ class HotelController extends Controller
             if ($request->hasFile('edit_foto_ktp')) {
                 $timestamp = now()->format('Y-m-d_H-i-s');
                 $nama = str_replace(' ', '_', $nama_tamu);
-                $foto_ktp = "Foto_KTP_" . $nama . "_" . $timestamp . "." . $request->file('foto_ktp')->extension();
+                $foto_ktp = "Foto_KTP_" . $nama . "_" . $timestamp . "." . $request->file('edit_foto_ktp')->extension();
                 $storagePath = 'public/uploads/foto_ktp/';
-                $request->file('foto_ktp')->storeAs($storagePath, $foto_ktp);
+                $request->file('edit_foto_ktp')->storeAs($storagePath, $foto_ktp);
                 $publicPath = public_path('storage/uploads/foto_ktp/');
                 if (!is_dir($publicPath)) {
                     mkdir($publicPath, 0777, true);
