@@ -58,6 +58,9 @@ Route::post('/ModalPembayaran/{id}/BatalkanPembayaran', [HotelController::class,
 Route::post('/ModalEdit', [HotelController::class, 'ModalEdit']);
 
 
+Route::post('ModalEdit/store_ModalEdit', [HotelController::class, 'store_ModalEdit']);
+
+
 
 
 

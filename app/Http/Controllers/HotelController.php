@@ -1218,7 +1218,22 @@ class HotelController extends Controller
     // Modal Edit Pesan Kamar
     public function ModalEdit(Request $request)
     {
-        return view('ModalEdit');
+        $id_rincian_pesanan = $request->id_rincian_pesanan;
+        return view('ModalEdit', compact('id_rincian_pesanan'));
+    }
+
+
+
+
+
+
+
+
+
+
+    public function store_ModalEdit(Request $request)
+    {
+
     }
 
 
