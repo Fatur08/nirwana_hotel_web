@@ -1218,8 +1218,16 @@ class HotelController extends Controller
     // Modal Edit Pesan Kamar
     public function ModalEdit(Request $request)
     {
-        $id_rincian_pesanan = $request->id_rincian_pesanan;
-        return view('ModalEdit', compact('id_rincian_pesanan'));
+        $id = $request->id_rincian_pesanan;
+
+        $tamu = DB::table('histori_kamar')
+            ->where('id_rincian_pesanan', $id)
+            ->first();
+
+        return view('ModalEdit', [
+            'id_rincian_pesanan' => $id,
+            'tamu' => $tamu
+        ]);
     }
 
 
