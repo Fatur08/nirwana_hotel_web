@@ -61,6 +61,9 @@ Route::post('/ModalEdit', [HotelController::class, 'ModalEdit']);
 Route::post('ModalEdit/store_ModalEdit', [HotelController::class, 'store_ModalEdit']);
 
 
+Route::post('/HapusPesanan/{id}', [HotelController::class, 'HapusPesanan']);
+
+
 
 
 

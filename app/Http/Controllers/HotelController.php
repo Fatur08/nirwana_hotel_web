@@ -1587,6 +1587,86 @@ class HotelController extends Controller
 
 
 
+    public function HapusPesanan(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            /*
+            |--------------------------------------------------------------------------
+            | HAPUS REQUEST TAMBAHAN
+            |--------------------------------------------------------------------------
+            */
+            DB::table('request')
+                ->where(
+                    'id_rincian_pesanan',
+                    $id
+                )
+                ->delete();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | HAPUS HISTORI KAMAR
+            |--------------------------------------------------------------------------
+            */
+            DB::table('histori_kamar')
+                ->where(
+                    'id_rincian_pesanan',
+                    $id
+                )
+                ->delete();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | HAPUS LAPORAN KEUANGAN
+            |--------------------------------------------------------------------------
+            */
+            DB::table('laporan_keuangan')
+                ->where(
+                    'id_rincian_pesanan',
+                    $id
+                )
+                ->delete();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | HAPUS RINCIAN PESANAN
+            |--------------------------------------------------------------------------
+            */
+            DB::table('rincian_pesanan')
+                ->where(
+                    'id_rincian_pesanan',
+                    $id
+                )
+                ->delete();
+
+
+            DB::commit();
+
+            return redirect()
+                ->back()
+                ->with('success', 'Pesanan berhasil dibatalkan.');
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return redirect()
+                ->back()
+                ->with('error', $e->getMessage());
+        }
+    }
+
+
+
+
+
+
+
 
 
 
