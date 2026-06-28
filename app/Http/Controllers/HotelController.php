@@ -1446,35 +1446,100 @@ class HotelController extends Controller
 
 
 
+            /*
+            |--------------------------------------------------------------------------
+            | UPDATE RINCIAN PESANAN
+            |--------------------------------------------------------------------------
+            */
+            DB::table('rincian_pesanan')
+                ->where(
+                    'id_rincian_pesanan',
+                    $request->id_rincian_pesanan
+                )
+                ->update([
+                    'total_kamar_dipesan' => $jumlah_kamar,
+                    'total_request' => $biaya_tambahan
+
+                ]);
+
+
+
+
+
+
+            // =====================================
+            // INSERT LAPORAN KEUANGAN
+            // SATU DATA PER TIPE KAMAR
+            // =====================================
+            $idLaporanPerKamar = [];
+            foreach ($groupKamar as $idKamar => $items) {
+                $kamar = $items->first();
+                $jumlahPerTipe = $items->count();
+                $biaya =
+                    $jumlahPerTipe *
+                    $kamar->after_10_persen *
+                    $lama_inap;
+
+                $pajak = $biaya * 0.19;
+                $total_diterima =
+                    ($biaya - $pajak);
+
+                $idLaporan =
+                    DB::table('laporan_keuangan')
+                        ->insertGetId([
+                            'id_rincian_pesanan' => $request->id_rincian_pesanan,
+                            'kode_kamar' => $kamar->kode_kamar,
+                            'nama_tamu' => $request->nama_tamu,
+                            'tipe_kamar' => $kamar->tipe_kamar,
+                            'jumlah_kamar_dipesan' => $jumlahPerTipe,
+                            'tarif_per_hari' => $kamar->tarif_per_hari,
+                            'before_10_persen' => $kamar->before_10_persen,
+                            'after_10_persen' => $kamar->after_10_persen,
+                            'tanggal_dipesan' => now(),
+                            'check_in' => $request->edit_check_in,
+                            'check_out' => $request->edit_check_out,
+                            'lama_inap' => $lama_inap,
+                            'biaya' => $biaya,
+
+                            // request sekarang disimpan
+                            // di tabel request
+                            'biaya_tambahan' => 0,
+                            'pajak' => $pajak,
+                            'total_diterima' => $total_diterima,
+                            'foto_ktp' => $foto_ktp,
+                            'metode_pembayaran' => $metodePembayaranLama,
+                            'bukti_pembayaran' => $buktiPembayaranLama,
+                            'status_pembayaran' => $statusPembayaranLama
+                        ]);
+
+                // Simpan relasi nomor kamar -> id laporan
+                foreach ($items as $item) {
+                    $idLaporanPerKamar[$item->id_nomor_kamar] = $idLaporan;
+                }
+            }
+
 
 
             /*
             |--------------------------------------------------------------------------
-            | INSERT LAPORAN KEUANGAN
+            | INSERT HISTORI KAMAR
             |--------------------------------------------------------------------------
             */
-            DB::table('laporan_keuangan')->insert([
-                'id_rincian_pesanan' => $request->id_rincian_pesanan,
-                'nama_tamu' => $nama_tamu,
-                'kode_kamar' => null,
-                'tipe_kamar' => null,
-                'jumlah_kamar_dipesan' => $jumlah_kamar,
-                'tarif_per_hari' => null,
-                'before_10_persen' => null,
-                'after_10_persen' => null,
-                'tanggal_dipesan' => now(),
-                'check_in' => $request->check_in,
-                'check_out' => $request->check_out,
-                'lama_inap' => $lama_inap,
-                'biaya' => $biaya,
-                'biaya_tambahan' => $biaya_tambahan,
-                'pajak' => $pajak,
-                'total_diterima' => $total_diterima,
-                'foto_ktp' => $foto_ktp,
-                'metode_pembayaran' => $metodePembayaranLama,
-                'bukti_pembayaran' => $buktiPembayaranLama,
-                'status_pembayaran' => $statusPembayaranLama
-            ]);
+            foreach ($request->id_nomor_kamar as $idNomorKamar) {
+                DB::table('histori_kamar')->insert([
+                    'id_rincian_pesanan' => $request->id_rincian_pesanan,
+                    'id_laporan_keuangan' => $idLaporanPerKamar[$idNomorKamar],
+                    'id_nomor_kamar' => $idNomorKamar,
+                    'nama_tamu' => $nama_tamu,
+                    'alamat_tamu' => $alamat_tamu,
+                    'check_in' => $request->edit_check_in,
+                    'check_out' => $request->edit_check_out
+                ]);
+            }
+
+
+
+
 
 
             /*
@@ -1500,42 +1565,6 @@ class HotelController extends Controller
                     'total_harga' => $totalBreakfast
                 ]);
             }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | INSERT HISTORI KAMAR
-            |--------------------------------------------------------------------------
-            */
-            foreach ($request->id_nomor_kamar as $idNomorKamar) {
-                DB::table('histori_kamar')->insert([
-                    'id_rincian_pesanan' => $request->id_rincian_pesanan,
-                    'id_nomor_kamar' => $idNomorKamar,
-                    'nama_tamu' => $nama_tamu,
-                    'alamat_tamu' => $alamat_tamu,
-                    'check_in' => $request->check_in,
-                    'check_out' => $request->check_out
-                ]);
-            }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | UPDATE RINCIAN PESANAN
-            |--------------------------------------------------------------------------
-            */
-            DB::table('rincian_pesanan')
-                ->where(
-                    'id_rincian_pesanan',
-                    $request->id_rincian_pesanan
-                )
-                ->update([
-                    'total_kamar_dipesan' => $jumlah_kamar,
-                    'total_request' =>
-                        $jumlahExtraBed +
-                        $jumlahBreakfast
-
-                ]);
 
 
             DB::commit();
