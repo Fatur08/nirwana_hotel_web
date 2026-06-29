@@ -192,7 +192,7 @@
                     <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded mb-3"
                         style="max-height:180px;">
 
-                    <p class="mb-2">
+                    <p class="mb-4">
                         Total Kamar :<br>
                         {{ $kamarSingleDLX }} Kamar Single Bed
                         <br>
@@ -200,7 +200,7 @@
                         <br>
                     </p>
 
-                    <p class="mb-4">
+                    <p class="mb-2">
                         Total Harga per Kamar :<br>
                         Rp.60.000
                     </p>
