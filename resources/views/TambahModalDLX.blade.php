@@ -74,59 +74,110 @@
 @push('myscript')
     <script>
         // ==========================
-        // AJAX SIMPAN
+        // SUBMIT FORM PESAN KAMAR
         // ==========================
+        $(document).on('submit', '#frmTambahModalDLX', function (e) {
 
-        let formData = new FormData(this);
+            e.preventDefault();
 
-        $.ajax({
+            let jumlah_kamar = $('#jumlah_kamar').val();
+            let jenis_bed = $('#jenis_bed').val();
 
-            type: 'POST',
-            url: $(this).attr('action'),
-            data: formData,
-
-            processData: false,
-            contentType: false,
-
-            beforeSend: function () {
+            function showError(pesan, el = null) {
 
                 Swal.fire({
-                    title: 'Menyimpan Data...',
-                    text: 'Mohon tunggu sebentar',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-            },
-
-            success: function (res) {
-
-                Swal.fire({
-                    title: 'Berhasil!',
-                    text: 'Pemesanan kamar berhasil disimpan',
-                    icon: 'success'
+                    title: 'Warning!',
+                    text: pesan,
+                    icon: 'warning'
                 }).then(() => {
 
-                    window.location.reload();
+                    if (el) {
+                        $(el).focus();
+                    }
 
                 });
-
-            },
-
-            error: function (xhr) {
-
-                Swal.fire({
-                    title: 'Error!',
-                    text: xhr.responseJSON?.message ??
-                        'Terjadi kesalahan saat menyimpan data',
-                    icon: 'error'
-                });
-
-                console.log(xhr.responseText);
 
             }
 
-        });</script>
+            // ==========================
+            // VALIDASI
+            // ==========================
+
+            if (jumlah_kamar == '') {
+                showError(
+                    'Jumlah Kamar Harus Dipilih',
+                    '#jumlah_kamar'
+                );
+                return;
+            }
+
+
+
+            if (jenis_bed == '') {
+                showError(
+                    'Jenis Harus Dipilih',
+                    '#jenis_bed'
+                );
+                return;
+            }
+
+            // ==========================
+            // AJAX SIMPAN
+            // ==========================
+
+            let formData = new FormData(this);
+
+            $.ajax({
+
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+
+                processData: false,
+                contentType: false,
+
+                beforeSend: function () {
+
+                    Swal.fire({
+                        title: 'Menyimpan Data...',
+                        text: 'Mohon tunggu sebentar',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                },
+
+                success: function (res) {
+
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Pemesanan kamar berhasil disimpan',
+                        icon: 'success'
+                    }).then(() => {
+
+                        window.location.reload();
+
+                    });
+
+                },
+
+                error: function (xhr) {
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: xhr.responseJSON?.message ??
+                            'Terjadi kesalahan saat menyimpan data',
+                        icon: 'error'
+                    });
+
+                    console.log(xhr.responseText);
+
+                }
+
+            });
+
+        });
+    </script>
 @endpush
