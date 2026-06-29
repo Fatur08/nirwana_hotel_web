@@ -82,6 +82,12 @@ Route::post('/EditHargaDeluxe', [HotelController::class, 'EditHargaDeluxe']);
 Route::post('/EditHargaDeluxe/store_EditHargaDeluxe', [HotelController::class, 'store_EditHargaDeluxe']);
 
 
+Route::post('/HapusKamarDeluxe', [HotelController::class, 'HapusKamarDeluxe']);
+
+
+Route::post('/HapusKamarDeluxe/store_HapusKamarDeluxe', [HotelController::class, 'store_HapusKamarDeluxe']);
+
+
 Route::post('/TambahHomeStay', [HotelController::class, 'TambahHomeStay']);
 
 

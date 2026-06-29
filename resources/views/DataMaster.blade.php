@@ -215,7 +215,7 @@
                     <a href="#" class="EditHargaDeluxe btn btn-warning w-100 mb-2" style="font-size:20pt;" kode_kamar="DLX">
                         Edit Harga
                     </a>
-                    <a href="#" class="btn btn-danger w-100" style="font-size:20pt;">
+                    <a href="#" class="HapusKamarDeluxe btn btn-danger w-100" style="font-size:20pt;" kode_kamar="DLX">
                         Hapus Kamar
                     </a>
                 </div>
@@ -396,6 +396,24 @@
             </div>
         </div>
     </div>
+
+
+
+
+    <!-- Modal Hapus Kamar Deluxe -->
+    <div class="modal fade" id="modal-hapus-kamar-deluxe" tabindex="-1" aria-labelledby="ModalHapusKamarDeluxe"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="ModalHapusKamarDeluxe" style="font-size:20pt;">Hapus Kamar Deluxe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="loadHapusKamarDeluxe">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('myscript')
     <script>
@@ -423,7 +441,7 @@
 
 
 
-        // MODAL TAMBAH KAMAR DELUXE
+        // MODAL EDIT HARGA DELUXE
         $(document).on('click', '.EditHargaDeluxe', function (e) {
             e.preventDefault();
             let id = $(this).attr('kode_kamar');
@@ -438,6 +456,29 @@
                 success: function (respond) {
                     $("#loadEditHargaDeluxe").html(respond);
                     $("#modal-edit-harga-deluxe").modal("show");
+                }
+            });
+        });
+
+
+
+
+
+        // MODAL HAPUS KAMAR DELUXE
+        $(document).on('click', '.HapusKamarDeluxe', function (e) {
+            e.preventDefault();
+            let id = $(this).attr('kode_kamar');
+
+            $.ajax({
+                type: 'POST',
+                url: '/HapusKamarDeluxe',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    kode_kamar: id
+                },
+                success: function (respond) {
+                    $("#loadHapusKamarDeluxe").html(respond);
+                    $("#modal-hapus-kamar-deluxe").modal("show");
                 }
             });
         });

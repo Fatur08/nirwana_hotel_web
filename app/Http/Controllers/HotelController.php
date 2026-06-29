@@ -2065,6 +2065,27 @@ class HotelController extends Controller
 
 
 
+    // Modal Hapus Kamar Deluxe
+    public function HapusKamarDeluxe(Request $request)
+    {
+        $kode_kamar = $request->kode_kamar;
+
+        $jumlahKamar = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->where('k.kode_kamar', $kode_kamar)
+            ->count();
+
+        return view('HapusKamarDeluxe', compact(
+            'kode_kamar',
+            'jumlahKamar'
+        ));
+    }
+
+
+
+
+
+
 
 
 
