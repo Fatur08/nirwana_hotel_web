@@ -1760,6 +1760,11 @@ class HotelController extends Controller
             ->toArray();
 
 
+        $tarifKamar = Kamar::select('kode_kamar', 'tarif_per_hari')
+            ->get()
+            ->keyBy('kode_kamar');
+
+
 
         $tanggalHariIni = Carbon::today();
 
@@ -1887,7 +1892,7 @@ class HotelController extends Controller
             ->where('jenis_bed', 2)
             ->count();
 
-        return view('DataMaster', compact('kamar', 'kamarSingleDLX', 'kamarDoubleDLX', 'SingleHMSTY', 'DoubleHMSTY', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSingleSTD', 'kamarDoubleSTD', ));
+        return view('DataMaster', compact('kamar', 'kamarSingleDLX', 'kamarDoubleDLX', 'SingleHMSTY', 'DoubleHMSTY', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSingleSTD', 'kamarDoubleSTD', 'tarifKamar'));
     }
 
 

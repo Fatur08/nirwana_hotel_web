@@ -202,7 +202,10 @@
 
                     <p class="mb-4">
                         Total Harga per Kamar :<br>
-                        Rp.60.000
+                        <span style="font-size:24px;font-weight:700;color:#00ff79;">
+                            Rp.{{ number_format($tarifKamar['DLX']->tarif_per_hari ?? 0, 0, ',', '.') }}
+                        </span>
+                        / malam
                     </p>
 
                     <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
@@ -226,11 +229,19 @@
                     <img src="{{ asset('assets/img/homestay.jpg') }}" class="img-fluid rounded mb-3"
                         style="max-height:180px;">
 
-                    <p class="mb-2">
+                    <p class="mb-4">
                         Total Kamar :<br>
                         {{ $SingleHMSTY }} Kamar Single Bed
                         <br>
                         {{ $DoubleHMSTY }} Kamar Double Bed
+                    </p>
+
+                    <p class="mb-4">
+                        Total Harga per Kamar :<br>
+                        <span style="font-size:24px;font-weight:700;color:#8F00FF;">
+                            Rp.{{ number_format($tarifKamar['HMSTY']->tarif_per_hari ?? 0, 0, ',', '.') }}
+                        </span>
+                        / malam
                     </p>
                 </div>
             </div>
@@ -248,11 +259,20 @@
                     <img src="{{ asset('assets/img/kamar_superior.jpg') }}" class="img-fluid rounded mb-3"
                         style="max-height:180px;">
 
-                    <p class="mb-2">
+                    <p class="mb-4">
                         Total Kamar :<br>
                         {{ $kamarSingleSPR }} Kamar Single Bed
                         <br>
                         {{ $kamarDoubleSPR }} Kamar Double Bed
+                    </p>
+
+
+                    <p class="mb-4">
+                        Total Harga per Kamar :<br>
+                        <span style="font-size:24px;font-weight:700;color:#f8f9fa;">
+                            Rp.{{ number_format($tarifKamar['SPR']->tarif_per_hari ?? 0, 0, ',', '.') }}
+                        </span>
+                        / malam
                     </p>
                 </div>
             </div>
@@ -266,11 +286,19 @@
                     <img src="{{ asset('assets/img/kamar_standar.jpg') }}" class="img-fluid rounded mb-3"
                         style="max-height:180px;">
 
-                    <p class="mb-2">
+                    <p class="mb-4">
                         Total Kamar :<br>
                         {{ $kamarSingleSTD }} Kamar Single Bed
                         <br>
                         {{ $kamarDoubleSTD }} Kamar Double Bed
+                    </p>
+
+                    <p class="mb-4">
+                        Total Harga per Kamar :<br>
+                        <span style="font-size:24px;font-weight:700;color:#8F00FF;">
+                            Rp.{{ number_format($tarifKamar['STD']->tarif_per_hari ?? 0, 0, ',', '.') }}
+                        </span>
+                        / malam
                     </p>
                 </div>
             </div>
