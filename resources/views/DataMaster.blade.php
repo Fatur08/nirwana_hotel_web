@@ -166,7 +166,7 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Tersedia Hari ini<br>
+                        Total Kamar :<br>
                         0 Kamar Single Bed
                         <br>
                         0 Kamar Double Bed
@@ -184,7 +184,7 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Tersedia Hari ini<br>
+                        Total Kamar :<br>
                         0 Kamar Single Bed
                         <br>
                         0 Kamar Double Bed
@@ -206,7 +206,7 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Tersedia Hari ini<br>
+                        Total Kamar :<br>
                         0 Kamar Single Bed
                         <br>
                         0 Kamar Double Bed
@@ -224,7 +224,7 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Tersedia Hari ini<br>
+                        Total Kamar :<br>
                         0 Kamar Single Bed
                         <br>
                         0 Kamar Double Bed
