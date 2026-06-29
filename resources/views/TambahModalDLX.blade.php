@@ -103,9 +103,9 @@
             // VALIDASI
             // ==========================
 
-            if (jumlah_kamar == '') {
+            if (parseInt(jumlah_kamar) < 1) {
                 showError(
-                    'Jumlah Kamar Harus Dipilih',
+                    'Jumlah Kamar Minimal 1',
                     '#jumlah_kamar'
                 );
                 return;
