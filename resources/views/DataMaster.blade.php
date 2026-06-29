@@ -209,7 +209,7 @@
                     </p>
 
                     <a href="#" class="TambahKamarDeluxe btn btn-success w-100 mb-2" style="font-size:20pt;"
-                        kode_kamar="{{ $kamarDLX->kode_kamar }}">
+                        kode_kamar="DLX">
                         Tambah Kamar
                     </a>
                     <a href="#" class="btn btn-warning w-100 mb-2" style="font-size:20pt;">
@@ -364,7 +364,7 @@
 
 
 
-    <!-- Modal Pesan Kamar -->
+    <!-- Modal Tambah Kamar Deluxe -->
     <div class="modal fade" id="modal-tambah-kamar-deluxe" tabindex="-1" aria-labelledby="ModalTambahKamarDeluxe"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
@@ -381,7 +381,7 @@
 @endsection
 @push('myscript')
     <script>
-        // MODAL PESAN KAMAR
+        // MODAL TAMBAH KAMAR DELUXE
         $(document).on('click', '.TambahKamarDeluxe', function (e) {
             e.preventDefault();
             let id = $(this).attr('kode_kamar');
