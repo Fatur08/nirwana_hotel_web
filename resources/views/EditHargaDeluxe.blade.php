@@ -6,7 +6,7 @@
         <input type="text" readonly value="{{ $kode_kamar }}" id="kode_kamar" class="form-control" name="kode_kamar"
             placeholder="kode_kamar" hidden>
 
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-12">
                 <h5 class="text-start" style="font-size:25pt;">Masukkan Harga Kamar Baru :</h5>
             </div>
@@ -14,7 +14,7 @@
 
         <div class="row mb-6">
             <div class="col-12">
-                <input type="text" class="form-control rupiah" name="DLX"
+                <input type="text" class="form-control rupiah" id="harga_dlx" name="harga_dlx"
                     value="Rp.{{ number_format($kamar['DLX'] ?? 0, 0, ',', '.') }}" style="font-size:20pt;">
             </div>
         </div>
@@ -48,8 +48,7 @@
 
             e.preventDefault();
 
-            let jumlah_kamar = $('#jumlah_kamar').val();
-            let jenis_bed = $('#jenis_bed').val();
+            let harga_dlx = $('#harga_dlx').val();
 
             function showError(pesan, el = null) {
 
@@ -71,20 +70,10 @@
             // VALIDASI
             // ==========================
 
-            if (parseInt(jumlah_kamar) < 1) {
+            if (harga_dlx == '') {
                 showError(
-                    'Jumlah Kamar Minimal 1',
-                    '#jumlah_kamar'
-                );
-                return;
-            }
-
-
-
-            if (jenis_bed == '') {
-                showError(
-                    'Jenis Harus Dipilih',
-                    '#jenis_bed'
+                    'Masukkan Harga Kamar!',
+                    '#harga_dlx'
                 );
                 return;
             }
@@ -121,7 +110,7 @@
 
                     Swal.fire({
                         title: 'Berhasil!',
-                        text: 'Tambah Kamar Deluxe berhasil disimpan',
+                        text: 'Harga kamar berhasil disimpan',
                         icon: 'success'
                     }).then(() => {
 
