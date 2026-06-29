@@ -89,6 +89,33 @@
             font-size: 25px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
+
+
+        .kotak-ekstrabed {
+            background: linear-gradient(to right, #6d4c41, #8d6e63, #d7ccc8);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .kotak-breakfast {
+            background: linear-gradient(to right, #fbc02d, #ff9800, #ff7043);
+            color: black;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
     </style>
 
 
@@ -238,6 +265,54 @@
                         {{ $kamarSingleSTD }} Kamar Single Bed
                         <br>
                         {{ $kamarDoubleSTD }} Kamar Double Bed
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <!-- EKSTRA BED -->
+            <div class="col-6 mb-3">
+                <div class="kotak-ekstrabed h-100 p-4 text-center">
+
+                    <p class="mb-3">Kamar Deluxe</p>
+
+                    <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded mb-3"
+                        style="max-height:180px;">
+
+                    <p class="mb-2">
+                        Total Kamar :<br>
+                        {{ $kamarSingleDLX }} Kamar Single Bed
+                        <br>
+                        {{ $kamarDoubleDLX }} Kamar Double Bed
+                    </p>
+
+                    <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
+                        Tambah Kamar
+                    </a>
+                    <a href="{{ url('/') }}" class="btn btn-warning w-100 mb-2" style="font-size:20pt;">
+                        Edit Kamar
+                    </a>
+                    <a href="{{ url('/') }}" class="btn btn-danger w-100" style="font-size:20pt;">
+                        Hapus Kamar
+                    </a>
+                </div>
+            </div>
+
+            <!-- BREAKFAST -->
+            <div class="col-6 mb-3">
+                <div class="kotak-breakfast h-100 p-4 text-center">
+
+                    <p class="mb-3">Home Stay</p>
+
+                    <img src="{{ asset('assets/img/homestay.jpg') }}" class="img-fluid rounded mb-3"
+                        style="max-height:180px;">
+
+                    <p class="mb-2">
+                        Total Kamar :<br>
+                        {{ $SingleHMSTY }} Kamar Single Bed
+                        <br>
+                        {{ $DoubleHMSTY }} Kamar Double Bed
                     </p>
                 </div>
             </div>
