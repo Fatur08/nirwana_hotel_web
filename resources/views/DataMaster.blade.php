@@ -197,6 +197,9 @@
                         {{ $kamarSingleDLX }} Kamar Single Bed
                         <br>
                         {{ $kamarDoubleDLX }} Kamar Double Bed
+                        <br>
+                        Total Harga per Kamar :<br>
+                        Rp.60.000
                     </p>
 
                     <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
