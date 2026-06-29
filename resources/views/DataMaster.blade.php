@@ -175,6 +175,12 @@
                     <a href="{{ url('/') }}" class="btn btn-success w-100" style="font-size:25pt;">
                         Tambah Kamar
                     </a>
+                    <a href="{{ url('/') }}" class="btn btn-warning w-100" style="font-size:25pt;">
+                        Edit Kamar
+                    </a>
+                    <a href="{{ url('/') }}" class="btn btn-danger w-100" style="font-size:25pt;">
+                        Hapus Kamar
+                    </a>
                 </div>
             </div>
 
