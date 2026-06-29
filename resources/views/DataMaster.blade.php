@@ -212,7 +212,7 @@
                         Tambah Kamar
                     </a>
                     <a href="{{ url('/') }}" class="btn btn-warning w-100 mb-2" style="font-size:20pt;">
-                        Edit Kamar
+                        Edit Harga
                     </a>
                     <a href="{{ url('/') }}" class="btn btn-danger w-100" style="font-size:20pt;">
                         Hapus Kamar
