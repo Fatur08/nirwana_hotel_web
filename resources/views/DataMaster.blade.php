@@ -171,6 +171,10 @@
                         <br>
                         0 Kamar Double Bed
                     </p>
+
+                    <a href="{{ url('/') }}" class="btn btn-success w-100" style="font-size:25pt;">
+                        Tambah Kamar
+                    </a>
                 </div>
             </div>
 
