@@ -79,6 +79,9 @@ Route::post('/TambahModalDLX/store_TambahModalDLX', [HotelController::class, 'st
 Route::post('/EditHargaDeluxe', [HotelController::class, 'EditHargaDeluxe']);
 
 
+Route::post('/EditHargaDeluxe/store_EditHargaDeluxe', [HotelController::class, 'store_EditHargaDeluxe']);
+
+
 Route::post('/TambahHomeStay', [HotelController::class, 'TambahHomeStay']);
 
 

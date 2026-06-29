@@ -2018,6 +2018,53 @@ class HotelController extends Controller
 
 
 
+    public function store_EditHargaDeluxe(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            // Bersihkan format rupiah
+            $tarif_per_hari = preg_replace('/[^0-9]/', '', $request->harga_dlx);
+
+            if (empty($tarif_per_hari) || $tarif_per_hari <= 0) {
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Harga kamar tidak valid.'
+                ], 422);
+
+            }
+
+            DB::table('kamar')
+                ->where('kode_kamar', $request->kode_kamar)
+                ->update([
+                    'tarif_per_hari' => $tarif_per_hari
+                ]);
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success'
+            ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+
+        }
+    }
+
+
+
+
+
+
 
 
 
