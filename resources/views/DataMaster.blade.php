@@ -200,7 +200,7 @@
                         <br>
                     </p>
 
-                    <p class="mb-2">
+                    <p class="mb-4">
                         Total Harga per Kamar :<br>
                         Rp.60.000
                     </p>
