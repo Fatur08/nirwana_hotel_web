@@ -584,9 +584,9 @@
 
                             <p class="mb-2">
                                 Tersedia Hari ini<br>
-                                {{ $kamarSingleSTD }} Kamar Single Bed
+                                {{ $SingleHMSTY }} Kamar Single Bed
                                 <br>
-                                {{ $kamarDoubleSTD }} Kamar Double Bed
+                                {{ $DoubleHMSTY }} Kamar Double Bed
                             </p>
 
                             <p class="mb-0">
@@ -871,10 +871,10 @@
                         $('#check_out').val('');
 
                         $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                <option value="">
-                                                                                                                                                                                                    -- Pilih Tanggal Check Out Dulu --
-                                                                                                                                                                                                </option>
-                                                                                                                                                                                            `);
+                                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
+                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                `);
 
                         $('#kamar_tersedia_title').hide();
                         $('#kamar_tersedia_list').hide();
@@ -909,10 +909,10 @@
                             for (let i = 1; i <= totalKamar; i++) {
 
                                 opsiJumlah += `
-                                                                                                                                                                                                                        <option value="${i}">
-                                                                                                                                                                                                                            ${i} Kamar
-                                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                                    `;
+                                                                                                                                                                                                                            <option value="${i}">
+                                                                                                                                                                                                                                ${i} Kamar
+                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                        `;
                             }
 
                             $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -928,10 +928,10 @@
                 $('#check_out').val('');
 
                 $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                        <option value="">
-                                                                                                                                                                                                            -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                    `);
+                                                                                                                                                                                                            <option value="">
+                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                        `);
 
                 $('#kamar_tersedia_title').hide();
                 $('#kamar_tersedia_list').hide();

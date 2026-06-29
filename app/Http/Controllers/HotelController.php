@@ -112,6 +112,36 @@ class HotelController extends Controller
 
 
 
+        $HomeStay = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
+                $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                    ->whereDate('hk.check_in', '<=', $tanggalHariIni)
+                    ->whereDate('hk.check_out', '>', $tanggalHariIni);
+            })
+            ->where('k.kode_kamar', 'HMSTY')
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'nk.jenis_bed',
+                'k.kode_kamar',
+                'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+            )
+            ->get();
+        $HomeStayTersedia = $HomeStay->whereNull('histori_aktif')->count();
+        $SingleHMSTY = $HomeStay
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 1)
+            ->count();
+
+        $DoubleHMSTY = $HomeStay
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 2)
+            ->count();
+
+
+
+
 
 
 
@@ -177,7 +207,7 @@ class HotelController extends Controller
 
 
 
-        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSTD', 'kamarSingleSTD', 'kamarDoubleSTD', 'histori', 'tarifKamar'));
+        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSTD', 'kamarSingleSTD', 'kamarDoubleSTD', 'SingleHMSTY', 'DoubleHMSTY', 'histori', 'tarifKamar'));
     }
 
 
@@ -1729,7 +1759,135 @@ class HotelController extends Controller
             ->pluck('tarif_per_hari', 'kode_kamar')
             ->toArray();
 
-        return view('DataMaster', compact('kamar'));
+
+
+        $tanggalHariIni = Carbon::today();
+
+        $kamarDLX = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
+                $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                    ->whereDate('hk.check_in', '<=', $tanggalHariIni)
+                    ->whereDate('hk.check_out', '>', $tanggalHariIni);
+            })
+            ->where('k.kode_kamar', 'DLX')
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'nk.jenis_bed',
+                'k.kode_kamar',
+                'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+            )
+            ->get();
+        $kamarTersediaDLX = $kamarDLX->whereNull('histori_aktif')->count();
+        $kamarSingleDLX = $kamarDLX
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 1)
+            ->count();
+
+        $kamarDoubleDLX = $kamarDLX
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 2)
+            ->count();
+
+
+
+
+
+        $HomeStay = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
+                $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                    ->whereDate('hk.check_in', '<=', $tanggalHariIni)
+                    ->whereDate('hk.check_out', '>', $tanggalHariIni);
+            })
+            ->where('k.kode_kamar', 'HMSTY')
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'nk.jenis_bed',
+                'k.kode_kamar',
+                'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+            )
+            ->get();
+        $HomeStayTersedia = $HomeStay->whereNull('histori_aktif')->count();
+        $SingleHMSTY = $HomeStay
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 1)
+            ->count();
+
+        $DoubleHMSTY = $HomeStay
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 2)
+            ->count();
+
+
+
+
+
+
+
+
+        $kamarSPR = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
+                $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                    ->whereDate('hk.check_in', '<=', $tanggalHariIni)
+                    ->whereDate('hk.check_out', '>', $tanggalHariIni);
+            })
+            ->where('k.kode_kamar', 'SPR')
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'nk.jenis_bed',
+                'k.kode_kamar',
+                'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+            )
+            ->get();
+        $kamarTersediaSPR = $kamarSPR->whereNull('histori_aktif')->count();
+        $kamarSingleSPR = $kamarSPR
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 1)
+            ->count();
+
+        $kamarDoubleSPR = $kamarSPR
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 2)
+            ->count();
+
+
+
+
+
+
+        $kamarSTD = DB::table('nomor_kamar as nk')
+            ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+            ->leftJoin('histori_kamar as hk', function ($join) use ($tanggalHariIni) {
+                $join->on('nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                    ->whereDate('hk.check_in', '<=', $tanggalHariIni)
+                    ->whereDate('hk.check_out', '>', $tanggalHariIni);
+            })
+            ->where('k.kode_kamar', 'STD')
+            ->select(
+                'nk.id_nomor_kamar',
+                'nk.nomor_kamar',
+                'nk.jenis_bed',
+                'k.kode_kamar',
+                'hk.id_histori_kamar as histori_aktif' // ✅ PENANDA TERISI ATAU TIDAK
+            )
+            ->get();
+        $kamarTersediaSTD = $kamarSTD->whereNull('histori_aktif')->count();
+        $kamarSingleSTD = $kamarSTD
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 1)
+            ->count();
+
+        $kamarDoubleSTD = $kamarSTD
+            ->whereNull('histori_aktif')
+            ->where('jenis_bed', 2)
+            ->count();
+
+        return view('DataMaster', compact('kamar', 'kamarSingleDLX', 'kamarDoubleDLX', 'SingleHMSTY', 'DoubleHMSTY', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSingleSTD', 'kamarDoubleSTD', ));
     }
 
 

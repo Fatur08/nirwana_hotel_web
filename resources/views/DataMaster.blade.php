@@ -166,10 +166,10 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Total Kamar :<br>
-                        0 Kamar Single Bed
+                        Tersedia Hari ini<br>
+                        {{ $kamarSingleDLX }} Kamar Single Bed
                         <br>
-                        0 Kamar Double Bed
+                        {{ $kamarDoubleDLX }} Kamar Double Bed
                     </p>
 
                     <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
@@ -194,10 +194,10 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Total Kamar :<br>
-                        0 Kamar Single Bed
+                        Tersedia Hari ini<br>
+                        {{ $SingleHMSTY }} Kamar Single Bed
                         <br>
-                        0 Kamar Double Bed
+                        {{ $DoubleHMSTY }} Kamar Double Bed
                     </p>
                 </div>
             </div>
@@ -216,10 +216,10 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Total Kamar :<br>
-                        0 Kamar Single Bed
+                        Tersedia Hari ini<br>
+                        {{ $kamarSingleSPR }} Kamar Single Bed
                         <br>
-                        0 Kamar Double Bed
+                        {{ $kamarDoubleSPR }} Kamar Double Bed
                     </p>
                 </div>
             </div>
@@ -234,10 +234,10 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Total Kamar :<br>
-                        0 Kamar Single Bed
+                        Tersedia Hari ini<br>
+                        {{ $kamarSingleSTD }} Kamar Single Bed
                         <br>
-                        0 Kamar Double Bed
+                        {{ $kamarDoubleSTD }} Kamar Double Bed
                     </p>
                 </div>
             </div>
