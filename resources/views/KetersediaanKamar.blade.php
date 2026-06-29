@@ -258,9 +258,12 @@
                 <tbody>
 
                     @for ($tgl = 1; $tgl <= $jumlahHari; $tgl++)
+
                         @php
                             $totalTerisi = 0;
+                            $tanggalCell = \Carbon\Carbon::create($tahun, $bulan, $tgl)->format('Y-m-d');
                         @endphp
+
                         <tr>
 
                             <th class="table-light">
@@ -270,82 +273,67 @@
                             @foreach ($nomorKamar as $kamar)
 
                                 @php
-                                    $warna = match ($kamar->id_kamar) {
-                                        1 => 'header-dlx',
-                                        2 => 'header-spr',
-                                        3 => 'header-std',
-                                        4 => 'header-hmsty',
-                                        default => ''
-                                    };
+
+                                    switch ($kamar->id_kamar) {
+                                        case 1:
+                                            $warna = 'header-dlx';
+                                            break;
+                                        case 2:
+                                            $warna = 'header-spr';
+                                            break;
+                                        case 3:
+                                            $warna = 'header-std';
+                                            break;
+                                        case 4:
+                                            $warna = 'header-hmsty';
+                                            break;
+                                        default:
+                                            $warna = '';
+                                    }
+
+                                    $booking = $bookingKamar->first(function ($item) use ($kamar, $tanggalCell) {
+                                        return $item->id_nomor_kamar == $kamar->id_nomor_kamar
+                                            && $tanggalCell >= $item->check_in
+                                            && $tanggalCell < $item->check_out;
+                                    });
+
                                 @endphp
+
                                 <td class="{{ $warna }}">
-
-                                    @php
-                                        $tanggalCell = \Carbon\Carbon::create(
-                                            $tahun,
-                                            $bulan,
-                                            $tgl
-                                        )->format('Y-m-d');
-
-                                        $booking = $bookingKamar->first(function ($item) use ($kamar, $tanggalCell) {
-
-                                            return $item->id_nomor_kamar == $kamar->id_nomor_kamar
-                                                && $tanggalCell >= $item->check_in
-                                                && $tanggalCell < $item->check_out;
-                                        });
-
-                                    @endphp
-
-@if($kamar->id_nomor_kamar == 24)
-
-<pre>
-{{ print_r($booking, true) }}
-</pre>
-
-@endif
 
                                     @if($booking)
 
                                         @php
 
+                                            $hariIni = \Carbon\Carbon::today();
+                                            $checkIn = \Carbon\Carbon::parse($booking->check_in);
 
-                                            $hariIni = date('Y-m-d');
-
-
-
-                                            if (
-                                                $booking->check_in > $hariIni
-                                                && $booking->status_pembayaran == 0
-                                            ) {
+                                            if ($booking->status_pembayaran == 0) {
 
                                                 $btn = 'btn-warning';
 
-                                            } elseif (
-                                                $booking->check_in > $hariIni
-                                            ) {
-
-                                                $btn = 'btn-secondary';
-
-                                                $totalTerisi++;
-
                                             } else {
 
-                                                $btn = 'btn-success';
+                                                if ($checkIn->gt($hariIni)) {
+                                                    $btn = 'btn-secondary';
+                                                } else {
+                                                    $btn = 'btn-success';
+                                                }
 
-                                                $totalTerisi++;
                                             }
+
+                                            $totalTerisi++;
 
                                         @endphp
 
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
-                                            id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
-                                            style="
-                                                                                                                                                                                                                                                                                                                                                                                        width:30px;
-                                                                                                                                                                                                                                                                                                                                                                                        height:30px;
-                                                                                                                                                                                                                                                                                                                                                                                        padding:0;
-                                                                                                                                                                                                                                                                                                                                                                                        border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                                                        display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                                    ">
+                                            id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}" style="
+                                                width:30px;
+                                                height:30px;
+                                                padding:0;
+                                                border-radius:4px;
+                                                display:inline-block;
+                                            ">
                                         </a>
 
                                     @endif
@@ -353,10 +341,13 @@
                                 </td>
 
                             @endforeach
+
                             <td class="fw-bold bg-light">
                                 {{ $totalTerisi }}
                             </td>
+
                         </tr>
+
                     @endfor
 
                 </tbody>
