@@ -208,13 +208,14 @@
                         / malam
                     </p>
 
-                    <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
+                    <a href="#" class="TambahKamarDeluxe btn btn-success w-100 mb-2" style="font-size:20pt;"
+                        kode_kamar="{{ $kamarDLX->kode_kamar }}">
                         Tambah Kamar
                     </a>
-                    <a href="{{ url('/') }}" class="btn btn-warning w-100 mb-2" style="font-size:20pt;">
+                    <a href="#" class="btn btn-warning w-100 mb-2" style="font-size:20pt;">
                         Edit Harga
                     </a>
-                    <a href="{{ url('/') }}" class="btn btn-danger w-100" style="font-size:20pt;">
+                    <a href="#" class="btn btn-danger w-100" style="font-size:20pt;">
                         Hapus Kamar
                     </a>
                 </div>
@@ -359,9 +360,48 @@
             </a>
         </div>
     </div>
+
+
+
+
+    <!-- Modal Pesan Kamar -->
+    <div class="modal fade" id="modal-tambah-kamar-deluxe" tabindex="-1" aria-labelledby="ModalTambahKamarDeluxe"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="ModalTambahKamarDeluxe" style="font-size:20pt;">Tambah Kamar Deluxe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="loadTambahKamarDeluxe">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('myscript')
     <script>
+        // MODAL PESAN KAMAR
+        $(document).on('click', '.TambahKamarDeluxe', function (e) {
+            e.preventDefault();
+            let id = $(this).attr('kode_kamar');
+
+            $.ajax({
+                type: 'POST',
+                url: '/TambahKamarDeluxe',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    kode_kamar: id
+                },
+                success: function (respond) {
+                    $("#loadTambahKamarDeluxe").html(respond);
+                    $("#modal-tambah-kamar-deluxe").modal("show");
+                }
+            });
+        });
+
+
+
         $(document).on('submit', '#frmDataMaster', function (e) {
 
             e.preventDefault();
