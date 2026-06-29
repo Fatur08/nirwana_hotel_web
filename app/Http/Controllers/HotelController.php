@@ -1948,11 +1948,32 @@ class HotelController extends Controller
 
             $id_kamar = $mappingKamar[$request->kode_kamar];
 
-            // Insert sesuai jumlah kamar
+            /*
+            |--------------------------------------------------------------------------
+            | AMBIL NOMOR KAMAR TERAKHIR BERDASARKAN TIPE KAMAR
+            |--------------------------------------------------------------------------
+            */
+
+            $nomorTerakhir = DB::table('nomor_kamar')
+                ->where('id_kamar', $id_kamar)
+                ->max('nomor_kamar');
+
+            // Jika belum ada kamar sama sekali
+            $nomorTerakhir = $nomorTerakhir ? (int) $nomorTerakhir : 0;
+
+            /*
+            |--------------------------------------------------------------------------
+            | INSERT KAMAR BARU
+            |--------------------------------------------------------------------------
+            */
+
             for ($i = 1; $i <= $request->jumlah_kamar; $i++) {
+
+                $nomorTerakhir++;
 
                 DB::table('nomor_kamar')->insert([
                     'id_kamar' => $id_kamar,
+                    'nomor_kamar' => $nomorTerakhir,
                     'jenis_bed' => $request->jenis_bed
                 ]);
 
@@ -1965,11 +1986,14 @@ class HotelController extends Controller
             ]);
 
         } catch (\Exception $e) {
+
             DB::rollBack();
+
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
+
         }
     }
 

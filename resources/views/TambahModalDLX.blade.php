@@ -153,7 +153,7 @@
 
                     Swal.fire({
                         title: 'Berhasil!',
-                        text: 'Pemesanan kamar berhasil disimpan',
+                        text: 'Tambah Kamar Deluxe berhasil disimpan',
                         icon: 'success'
                     }).then(() => {
 
