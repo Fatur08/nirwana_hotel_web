@@ -166,7 +166,7 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Tersedia Hari ini<br>
+                        Total Kamar :<br>
                         {{ $kamarSingleDLX }} Kamar Single Bed
                         <br>
                         {{ $kamarDoubleDLX }} Kamar Double Bed
@@ -194,7 +194,7 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Tersedia Hari ini<br>
+                        Total Kamar :<br>
                         {{ $SingleHMSTY }} Kamar Single Bed
                         <br>
                         {{ $DoubleHMSTY }} Kamar Double Bed
@@ -216,7 +216,7 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Tersedia Hari ini<br>
+                        Total Kamar :<br>
                         {{ $kamarSingleSPR }} Kamar Single Bed
                         <br>
                         {{ $kamarDoubleSPR }} Kamar Double Bed
@@ -234,7 +234,7 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Tersedia Hari ini<br>
+                        Total Kamar :<br>
                         {{ $kamarSingleSTD }} Kamar Single Bed
                         <br>
                         {{ $kamarDoubleSTD }} Kamar Double Bed
