@@ -212,7 +212,7 @@
                         kode_kamar="DLX">
                         Tambah Kamar
                     </a>
-                    <a href="#" class="btn btn-warning w-100 mb-2" style="font-size:20pt;">
+                    <a href="#" class="EditHargaDeluxe btn btn-warning w-100 mb-2" style="font-size:20pt;" kode_kamar="DLX">
                         Edit Harga
                     </a>
                     <a href="#" class="btn btn-danger w-100" style="font-size:20pt;">
@@ -378,6 +378,24 @@
             </div>
         </div>
     </div>
+
+
+
+
+    <!-- Modal Edit Harga Deluxe -->
+    <div class="modal fade" id="modal-edit-harga-deluxe" tabindex="-1" aria-labelledby="ModalEditHargaDeluxe"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title" id="ModalEditHargaDeluxe" style="font-size:20pt;">Edit Harga Deluxe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="loadEditHargaDeluxe">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('myscript')
     <script>
@@ -399,6 +417,35 @@
                 }
             });
         });
+
+
+
+
+
+
+        // MODAL TAMBAH KAMAR DELUXE
+        $(document).on('click', '.EditHargaDeluxe', function (e) {
+            e.preventDefault();
+            let id = $(this).attr('kode_kamar');
+
+            $.ajax({
+                type: 'POST',
+                url: '/EditHargaDeluxe',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    kode_kamar: id
+                },
+                success: function (respond) {
+                    $("#loadEditHargaDeluxe").html(respond);
+                    $("#modal-edit-harga-deluxe").modal("show");
+                }
+            });
+        });
+
+
+
+
+
 
 
 

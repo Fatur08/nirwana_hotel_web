@@ -2003,6 +2003,22 @@ class HotelController extends Controller
 
 
 
+    // Modal Edit Harga Deluxe
+    public function EditHargaDeluxe(Request $request)
+    {
+        $kode_kamar = $request->kode_kamar;
+        $kamar = DB::table('kamar')
+            ->pluck('tarif_per_hari', 'kode_kamar')
+            ->toArray();
+        return view('EditHargaDeluxe', compact('kode_kamar', 'kamar'));
+    }
+
+
+
+
+
+
+
 
 
 
