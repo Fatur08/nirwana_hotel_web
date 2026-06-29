@@ -25,95 +25,55 @@
         }
 
 
-
-        /* === Table Style === */
-        .custom-table {
-            border-collapse: separate;
-            border-spacing: 0;
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            background-color: #ffffff;
-        }
-
-        .custom-table thead th {
-            background: linear-gradient(135deg, #007bff, #00bcd4);
+        .kotak-pesan {
+            background-color: rgb(209, 209, 209);
             color: white;
-            text-align: center;
-            font-weight: 600;
-            font-size: 15px;
-            letter-spacing: 0.5px;
             padding: 12px;
-            border: none;
-        }
-
-        .custom-table thead tr:first-child th {
-            background: linear-gradient(135deg, #0069d9, #17a2b8);
-            font-size: 17px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .custom-table tbody td,
-        .custom-table tbody th {
-            padding: 12px;
-            text-align: center;
-            vertical-align: middle;
-            border: 1px solid #dee2e6;
-            font-size: 16px;
-            color: #333;
-        }
-
-        .custom-table tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .custom-table tbody tr:hover {
-            background-color: #e9f5ff;
-            transition: 0.3s;
-        }
-
-        .table-container {
-            max-width: 1600px;
-        }
-
-
-
-
-        .table-garis {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        .table-garis th,
-        .table-garis td {
-            border: 1px solid black;
-            padding: 8px;
-        }
-
-
-
-
-        .table-custom {
-            width: 100%;
-            border: 1px solid black;
-            /* border luar saja */
-            border-collapse: collapse;
-        }
-
-        .table-custom td,
-        .table-custom th {
-            border: none;
-            /* hilangkan semua garis dalam */
-            padding: 6px;
-        }
-
-        /* KHUSUS HEADER KAMAR DELUXE */
-        .table-custom .header-kamar {
-            border: 1px solid black;
-            font-size: 24px;
+            border-radius: 10px;
             font-weight: bold;
+            margin-bottom: 10px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        .kotak-dlx {
+            background: linear-gradient(to right, #ea3438, #f39c12, #28a745);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .kotak-spr {
+            background: linear-gradient(to right, #99caeb, #5daee6, #f39c12);
+            color: black;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .kotak-std {
+            background: linear-gradient(to right, #f6df07, #f4c20d, #ff7f50, #c0392b, #8e44ad);
+            color: black;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
 
@@ -177,6 +137,88 @@
 
         </div>
     </form>
+
+
+
+    <div class="kotak-pesan">
+        <div class="row mt-3">
+            <!-- KAMAR DELUXE -->
+            <div class="col-6 mb-3">
+                <div class="kotak-dlx h-100 p-4 text-center">
+
+                    <p class="mb-3">Kamar Deluxe</p>
+
+                    <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded mb-3"
+                        style="max-height:180px;">
+
+                    <p class="mb-2">
+                        Tersedia Hari ini<br>
+                        0 Kamar Single Bed
+                        <br>
+                        0 Kamar Double Bed
+                    </p>
+                </div>
+            </div>
+
+            <!-- HOME STAY -->
+            <div class="col-6 mb-3">
+                <div class="kotak-hmsty h-100 p-4 text-center">
+
+                    <p class="mb-3">Home Stay</p>
+
+                    <img src="{{ asset('assets/img/homestay.jpg') }}" class="img-fluid rounded mb-3"
+                        style="max-height:180px;">
+
+                    <p class="mb-2">
+                        Tersedia Hari ini<br>
+                        0 Kamar Single Bed
+                        <br>
+                        0 Kamar Double Bed
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+
+            <!-- KAMAR SUPERIOR -->
+            <div class="col-6 mb-3">
+                <div class="kotak-spr h-100 p-4 text-center">
+
+                    <p class="mb-3">Kamar Superior</p>
+
+                    <img src="{{ asset('assets/img/kamar_superior.jpg') }}" class="img-fluid rounded mb-3"
+                        style="max-height:180px;">
+
+                    <p class="mb-2">
+                        Tersedia Hari ini<br>
+                        0 Kamar Single Bed
+                        <br>
+                        0 Kamar Double Bed
+                    </p>
+                </div>
+            </div>
+
+            <!-- KAMAR STANDAR -->
+            <div class="col-6 mb-3">
+                <div class="kotak-std h-100 p-4 text-center">
+
+                    <p class="mb-3">Kamar Standar</p>
+
+                    <img src="{{ asset('assets/img/kamar_standar.jpg') }}" class="img-fluid rounded mb-3"
+                        style="max-height:180px;">
+
+                    <p class="mb-2">
+                        Tersedia Hari ini<br>
+                        0 Kamar Single Bed
+                        <br>
+                        0 Kamar Double Bed
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
