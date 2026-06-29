@@ -1899,6 +1899,24 @@ class HotelController extends Controller
 
 
 
+
+
+    // Modal Tambah Kamar Deluxe
+    public function TambahKamarDeluxe(Request $request)
+    {
+        $kode_kamar = $request->kode_kamar;
+        return view('TambahModalDLX', compact('kode_kamar'));
+    }
+
+
+
+
+
+
+
+
+
+
     public function UpdateDataMaster(Request $request)
     {
         DB::beginTransaction();

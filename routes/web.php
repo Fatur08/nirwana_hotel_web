@@ -70,4 +70,16 @@ Route::post('/HapusPesanan/{id}', [HotelController::class, 'HapusPesanan']);
 Route::get('/DataMaster', [HotelController::class, 'DataMaster']);
 
 
+Route::post('/TambahKamarDeluxe', [HotelController::class, 'TambahKamarDeluxe']);
+
+
+Route::post('/TambahHomeStay', [HotelController::class, 'TambahHomeStay']);
+
+
+Route::post('/TambahKamarSuperior', [HotelController::class, 'TambahKamarSuperior']);
+
+
+Route::post('/TambahKamarStandart', [HotelController::class, 'TambahKamarStandart']);
+
+
 Route::post('/UpdateDataMaster', [HotelController::class, 'UpdateDataMaster']);
