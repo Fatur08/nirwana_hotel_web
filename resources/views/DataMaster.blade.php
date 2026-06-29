@@ -281,20 +281,12 @@
                         style="max-height:180px;">
 
                     <p class="mb-2">
-                        Total Kamar :<br>
-                        {{ $kamarSingleDLX }} Kamar Single Bed
-                        <br>
-                        {{ $kamarDoubleDLX }} Kamar Double Bed
+                        Total Harga per Item :<br>
+                        Rp.60.000
                     </p>
 
                     <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
-                        Tambah Kamar
-                    </a>
-                    <a href="{{ url('/') }}" class="btn btn-warning w-100 mb-2" style="font-size:20pt;">
-                        Edit Kamar
-                    </a>
-                    <a href="{{ url('/') }}" class="btn btn-danger w-100" style="font-size:20pt;">
-                        Hapus Kamar
+                        Simpan Harga
                     </a>
                 </div>
             </div>
