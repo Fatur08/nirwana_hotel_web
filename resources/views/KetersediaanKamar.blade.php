@@ -319,21 +319,18 @@
                                                 } else {
                                                     $btn = 'btn-success';
                                                 }
-
+                                                $totalTerisi++;
                                             }
-
-                                            $totalTerisi++;
-
                                         @endphp
 
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}" style="
-                                                width:30px;
-                                                height:30px;
-                                                padding:0;
-                                                border-radius:4px;
-                                                display:inline-block;
-                                            ">
+                                                                width:30px;
+                                                                height:30px;
+                                                                padding:0;
+                                                                border-radius:4px;
+                                                                display:inline-block;
+                                                            ">
                                         </a>
 
                                     @endif
