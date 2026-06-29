@@ -2,7 +2,7 @@
     enctype="multipart/form-data">
     @csrf
     <input type="text" readonly value="{{ $kode_kamar }}" id="kode_kamar" class="form-control" name="kode_kamar"
-        placeholder="kode_kamar" hidden>
+        placeholder="kode_kamar">
 
     <div class="row">
         <div class="col-12">
@@ -20,7 +20,7 @@
 
 
 
-    <!-- STATUS PEMBAYARAN -->
+    <!-- JENIS BED -->
     <div class="row">
         <div class="col-12">
             <h5 class="text-start" style="font-size:25pt;">
