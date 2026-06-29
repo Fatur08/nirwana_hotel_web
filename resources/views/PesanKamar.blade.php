@@ -203,12 +203,12 @@
             <div class="col-12">
                 <textarea id="biaya_request" class="form-control" readonly
                     style="
-                                                                                                                                        font-size:16pt;
-                                                                                                                                        min-height:120px;
-                                                                                                                                        resize:none;
-                                                                                                                                        overflow:hidden;
-                                                                                                                                    ">
-                                                                                                                                </textarea>
+                                                                                                                                            font-size:16pt;
+                                                                                                                                            min-height:120px;
+                                                                                                                                            resize:none;
+                                                                                                                                            overflow:hidden;
+                                                                                                                                        ">
+                                                                                                                                    </textarea>
 
                 <input type="hidden" id="biaya_request_value" name="biaya_request">
             </div>
@@ -354,10 +354,10 @@
 
 
             $('#jumlah_kamar_dipesan').html(`
-                                                                                                <option value="">
-                                                                                                    -- Pilih Tanggal Check In Dulu --
-                                                                                                </option>
-                                                                                            `);
+                                                                                                    <option value="">
+                                                                                                        -- Pilih Tanggal Check In Dulu --
+                                                                                                    </option>
+                                                                                                `);
 
             $('#kamar_tersedia_title').hide();
             $('#kamar_tersedia_list').hide();
@@ -378,10 +378,10 @@
                 if (!checkIn || !checkOut) {
 
                     $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                <option value="">
-                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                </option>
-                                                                                                                                                                            `);
+                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                        -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                    </option>
+                                                                                                                                                                                `);
 
                     return;
                 }
@@ -405,10 +405,10 @@
                         for (let i = 1; i <= totalKamar; i++) {
 
                             opsiJumlah += `
-                                                                                                                                                                                                                    <option value="${i}">
-                                                                                                                                                                                                                        ${i} Kamar
-                                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                                `;
+                                                                                                                                                                                                                        <option value="${i}">
+                                                                                                                                                                                                                            ${i} Kamar
+                                                                                                                                                                                                                        </option>
+                                                                                                                                                                                                                    `;
                         }
 
                         $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -434,7 +434,7 @@
 
 
             // ==========================
-            // SAAT JUMLAH KAMAR DIPILIHhhh
+            // SAAT JUMLAH KAMAR DIPILIH
             // ==========================
             $('#jumlah_kamar_dipesan').change(function () {
 
@@ -475,42 +475,38 @@
                         for (let i = 1; i <= jumlah; i++) {
 
                             html += `
-                                                                                                                                                                                                                                <div class="mb-4">
+                                                                                                                                                                                                                                    <div class="mb-4">
 
-                                                                                                                                                                                                                                    <label class="form-label fw-bold"
-                                                                                                                                                                                                                                           style="font-size:16pt;">
-                                                                                                                                                                                                                                        Pilih Kamar ${i}
-                                                                                                                                                                                                                                    </label>
+                                                                                                                                                                                                                                        <label class="form-label fw-bold"
+                                                                                                                                                                                                                                               style="font-size:16pt;">
+                                                                                                                                                                                                                                            Pilih Kamar ${i}
+                                                                                                                                                                                                                                        </label>
 
-                                                                                                                                                                                                                                    <select
-                                                                                                                                                                                                                                        name="id_nomor_kamar[]"
-                                                                                                                                                                                                                                        class="form-control nomor-kamar"
-                                                                                                                                                                                                                                        style="font-size:16pt;"
-                                                                                                                                                                                                                                        required>
+                                                                                                                                                                                                                                        <select
+                                                                                                                                                                                                                                            name="id_nomor_kamar[]"
+                                                                                                                                                                                                                                            class="form-control nomor-kamar"
+                                                                                                                                                                                                                                            style="font-size:16pt;"
+                                                                                                                                                                                                                                            required>
 
-                                                                                                                                                                                                                                        <option value="">
-                                                                                                                                                                                                                                            -- Pilih Kamar --
-                                                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                            <option value="">
+                                                                                                                                                                                                                                                -- Pilih Kamar --
+                                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                                `;
 
                             let homeStaySudahAda = false;
+                            let homeStayIds = [];
 
                             response.forEach(function (kamar) {
 
-                                // HOME STAY
-                                if (kamar.tipe_kamar == 'Home Stay') {
+                                if (kamar.id_kamar == 4) {
+
+                                    homeStayIds.push(kamar.id_nomor_kamar);
 
                                     if (homeStaySudahAda) {
                                         return;
                                     }
 
                                     homeStaySudahAda = true;
-
-                                    html += `
-                        <option value="24,25">
-                            Home Stay
-                        </option>
-                    `;
 
                                     return;
                                 }
@@ -524,18 +520,23 @@
                                 }
 
                                 html += `
-                    <option value="${kamar.id_nomor_kamar}">
-                        ${kamar.tipe_kamar}
-                        ${kamar.nomor_kamar}
-                        (${bed})
-                    </option>
-                `;
+            <option value="${kamar.id_nomor_kamar}">
+                ${kamar.tipe_kamar}
+                ${kamar.nomor_kamar}
+                (${bed})
+            </option>
+        `;
                             });
 
-                            html += `
-                    </select>
-                </div>
-            `;
+                            if (homeStayIds.length > 0) {
+
+                                html += `
+            <option value="${homeStayIds.join(',')}">
+                Home Stay
+            </option>
+        `;
+
+                            }
                         }
 
                         $('#list_nomor_kamar').html(html);

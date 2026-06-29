@@ -2,7 +2,7 @@
     enctype="multipart/form-data">
     @csrf
     <input type="text" readonly value="{{ $kode_kamar }}" id="kode_kamar" class="form-control" name="kode_kamar"
-        placeholder="kode_kamar">
+        placeholder="kode_kamar" hidden>
 
     <div class="row">
         <div class="col-12">

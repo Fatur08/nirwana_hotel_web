@@ -73,13 +73,25 @@ Route::get('/DataMaster', [HotelController::class, 'DataMaster']);
 Route::post('/TambahKamarDeluxe', [HotelController::class, 'TambahKamarDeluxe']);
 
 
+Route::post('/TambahModalDLX/store_TambahModalDLX', [HotelController::class, 'store_TambahModalDLX']);
+
+
 Route::post('/TambahHomeStay', [HotelController::class, 'TambahHomeStay']);
+
+
+Route::post('/TambahHomeStay/store_TambahHomeStay', [HotelController::class, 'store_TambahHomeStay']);
 
 
 Route::post('/TambahKamarSuperior', [HotelController::class, 'TambahKamarSuperior']);
 
 
+Route::post('/TambahModalSPR/store_TambahModalSPR', [HotelController::class, 'store_TambahModalSPR']);
+
+
 Route::post('/TambahKamarStandart', [HotelController::class, 'TambahKamarStandart']);
+
+
+Route::post('/TambahModalSTD/store_TambahModalSTD', [HotelController::class, 'store_TambahModalSTD']);
 
 
 Route::post('/UpdateDataMaster', [HotelController::class, 'UpdateDataMaster']);
