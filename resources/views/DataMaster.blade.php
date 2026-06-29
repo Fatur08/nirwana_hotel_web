@@ -275,7 +275,7 @@
             <div class="col-6 mb-3">
                 <div class="kotak-ekstrabed h-100 p-4 text-center">
 
-                    <p class="mb-3">Kamar Deluxe</p>
+                    <p class="mb-3">Ekstra Bed</p>
 
                     <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded mb-3"
                         style="max-height:180px;">
@@ -295,7 +295,7 @@
             <div class="col-6 mb-3">
                 <div class="kotak-breakfast h-100 p-4 text-center">
 
-                    <p class="mb-3">Home Stay</p>
+                    <p class="mb-3">Breakfast</p>
 
                     <img src="{{ asset('assets/img/homestay.jpg') }}" class="img-fluid rounded mb-3"
                         style="max-height:180px;">
