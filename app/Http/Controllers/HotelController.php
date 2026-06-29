@@ -343,6 +343,31 @@ class HotelController extends Controller
         DB::beginTransaction();
 
         try {
+            // =====================================
+            // UBAH VALUE HOME STAY MENJADI 2 KAMAR
+            // =====================================
+            $idNomorKamar = [];
+
+            foreach ($request->id_nomor_kamar as $item) {
+
+                if (str_contains($item, ',')) {
+
+                    foreach (explode(',', $item) as $id) {
+                        $idNomorKamar[] = trim($id);
+                    }
+
+                } else {
+
+                    $idNomorKamar[] = $item;
+
+                }
+            }
+
+            $request->merge([
+                'id_nomor_kamar' => $idNomorKamar
+            ]);
+
+
 
             /*
             |--------------------------------------------------------------------------
