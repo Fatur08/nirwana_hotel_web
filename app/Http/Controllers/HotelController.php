@@ -1311,11 +1311,15 @@ class HotelController extends Controller
 
             foreach ($request->id_nomor_kamar as $item) {
 
-                if (str_contains($item, ',')) {
+                if ($item == 'HMSTY') {
 
-                    foreach (explode(',', $item) as $id) {
-                        $idNomorKamar[] = trim($id);
-                    }
+                    $homeStay = DB::table('nomor_kamar as nk')
+                        ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
+                        ->where('k.kode_kamar', 'HMSTY')
+                        ->pluck('nk.id_nomor_kamar')
+                        ->toArray();
+
+                    $idNomorKamar = array_merge($idNomorKamar, $homeStay);
 
                 } else {
 
