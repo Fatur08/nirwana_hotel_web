@@ -37,11 +37,11 @@
                     -- Pilih Jenis Bed --
                 </option>
 
-                <option value="single">
+                <option value="1">
                     Single Bed
                 </option>
 
-                <option value="double">
+                <option value="2">
                     Double Bed
                 </option>
 

@@ -1924,7 +1924,57 @@ class HotelController extends Controller
 
     public function store_TambahModalDLX(Request $request)
     {
-        $kode_kamar = $request->kode_kamar;
+        DB::beginTransaction();
+
+        try {
+
+            // Mapping kode kamar ke id_kamar
+            $mappingKamar = [
+                'DLX' => 1,
+                'SPR' => 2,
+                'STD' => 3,
+                'HMSTY' => 4,
+            ];
+
+            // Cek apakah kode kamar valid
+            if (!isset($mappingKamar[$request->kode_kamar])) {
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Kode kamar tidak valid.'
+                ], 422);
+
+            }
+
+            $id_kamar = $mappingKamar[$request->kode_kamar];
+
+            // Insert sesuai jumlah kamar
+            for ($i = 1; $i <= $request->jumlah_kamar; $i++) {
+
+                DB::table('nomor_kamar')->insert([
+                    'id_kamar' => $id_kamar,
+                    'jenis_bed' => $request->jenis_bed
+                ]);
+
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Kamar berhasil ditambahkan.'
+            ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+
+        }
     }
 
 
