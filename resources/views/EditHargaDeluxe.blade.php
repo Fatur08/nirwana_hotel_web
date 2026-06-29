@@ -48,7 +48,7 @@
 
             e.preventDefault();
 
-            let harga_dlx = $('#harga_dlx').val();
+            let harga_dlx = $('#harga_dlx').val().replace(/[^0-9]/g, '');
 
             function showError(pesan, el = null) {
 
@@ -70,7 +70,7 @@
             // VALIDASI
             // ==========================
 
-            if (harga_dlx == '') {
+            if (parseInt(harga_dlx) <= 0 || isNaN(parseInt(harga_dlx))) {
                 showError(
                     'Masukkan Harga Kamar!',
                     '#harga_dlx'
