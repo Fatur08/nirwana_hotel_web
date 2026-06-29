@@ -6,7 +6,46 @@
 
     <div class="row">
         <div class="col-12">
-            <h5 class="text-start" style="font-size:25pt;">{{ $kode_kamar }}</h5>
+            <h5 class="text-start" style="font-size:25pt;">Masukkan Jumlah Kamar</h5>
+        </div>
+    </div>
+
+    <div class="row mb-6">
+        <div class="col-12">
+            <input type="number" id="jumlah_kamar" name="jumlah_kamar" class="form-control" min="0" value="0"
+                style="font-size:25pt;">
+        </div>
+    </div>
+
+
+
+
+    <!-- STATUS PEMBAYARAN -->
+    <div class="row">
+        <div class="col-12">
+            <h5 class="text-start" style="font-size:25pt;">
+                Jenis Bed
+            </h5>
+        </div>
+    </div>
+
+    <div class="row mb-6">
+        <div class="col-12">
+            <select id="jenis_bed" name="jenis_bed" class="form-control" style="font-size:25pt;">
+
+                <option value="">
+                    -- Pilih Jenis Bed --
+                </option>
+
+                <option value="single">
+                    Single Bed
+                </option>
+
+                <option value="double">
+                    Double Bed
+                </option>
+
+            </select>
         </div>
     </div>
 
