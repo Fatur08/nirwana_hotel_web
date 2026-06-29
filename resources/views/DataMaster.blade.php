@@ -172,16 +172,12 @@
                         0 Kamar Double Bed
                     </p>
 
-                    <a href="{{ url('/') }}" class="btn btn-success w-100" style="font-size:20pt;">
+                    <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
                         Tambah Kamar
                     </a>
-                    <br>
-                    <br>
-                    <a href="{{ url('/') }}" class="btn btn-warning w-100" style="font-size:20pt;">
+                    <a href="{{ url('/') }}" class="btn btn-warning w-100 mb-2" style="font-size:20pt;">
                         Edit Kamar
                     </a>
-                    <br>
-                    <br>
                     <a href="{{ url('/') }}" class="btn btn-danger w-100" style="font-size:20pt;">
                         Hapus Kamar
                     </a>
