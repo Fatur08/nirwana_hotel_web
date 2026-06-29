@@ -2085,6 +2085,96 @@ class HotelController extends Controller
 
 
 
+    public function store_HapusKamarDeluxe(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            // Mapping kode kamar
+            $mappingKamar = [
+                'DLX' => 1,
+                'SPR' => 2,
+                'STD' => 3,
+                'HMSTY' => 4,
+            ];
+
+            if (!isset($mappingKamar[$request->kode_kamar])) {
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Kode kamar tidak valid.'
+                ], 422);
+
+            }
+
+            $idKamar = $mappingKamar[$request->kode_kamar];
+
+            $hariIni = date('Y-m-d');
+
+            // Ambil kamar kosong dengan nomor terbesar
+            $kamarKosong = DB::table('nomor_kamar as nk')
+
+                ->where('nk.id_kamar', $idKamar)
+
+                ->whereNotIn('nk.id_nomor_kamar', function ($q) use ($hariIni) {
+
+                    $q->select('id_nomor_kamar')
+                        ->from('histori_kamar')
+
+                        ->whereDate('check_in', '<=', $hariIni)
+                        ->whereDate('check_out', '>', $hariIni);
+
+                })
+
+                ->orderByDesc('nk.nomor_kamar')
+
+                ->limit($request->jumlah_kamar)
+
+                ->get();
+
+            // Jika kamar kosong kurang dari yang diminta
+            if ($kamarKosong->count() < $request->jumlah_kamar) {
+
+                DB::rollBack();
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Tidak dapat menghapus kamar karena sebagian kamar masih digunakan.'
+                ], 422);
+
+            }
+
+            // Hapus kamar
+            DB::table('nomor_kamar')
+                ->whereIn(
+                    'id_nomor_kamar',
+                    $kamarKosong->pluck('id_nomor_kamar')
+                )
+                ->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success'
+            ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+
+        }
+    }
+
+
+
+
+
 
 
 
