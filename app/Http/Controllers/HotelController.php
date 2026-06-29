@@ -1961,19 +1961,15 @@ class HotelController extends Controller
             DB::commit();
 
             return response()->json([
-                'status' => 'success',
-                'message' => 'Kamar berhasil ditambahkan.'
+                'status' => 'success'
             ]);
 
         } catch (\Exception $e) {
-
             DB::rollBack();
-
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
-            ], 500);
-
+            ]);
         }
     }
 
