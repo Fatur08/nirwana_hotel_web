@@ -50,6 +50,20 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
+
+        .kotak-hmsty {
+            background: linear-gradient(to right, #0d6efd, #0dcaf0, #20c997);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            max-width: 100%;
+            width: 100%;
+            font-size: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
         .kotak-spr {
             background: linear-gradient(to right, #99caeb, #5daee6, #f39c12);
             color: black;
