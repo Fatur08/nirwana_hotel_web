@@ -325,12 +325,12 @@
 
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}" style="
-                                                                width:30px;
-                                                                height:30px;
-                                                                padding:0;
-                                                                border-radius:4px;
-                                                                display:inline-block;
-                                                            ">
+                                                                                width:30px;
+                                                                                height:30px;
+                                                                                padding:0;
+                                                                                border-radius:4px;
+                                                                                display:inline-block;
+                                                                            ">
                                         </a>
 
                                     @endif
@@ -349,6 +349,53 @@
 
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    {{-- KETERANGAN --}}
+    <div class="card mt-3 shadow-sm">
+        <div class="card-header fw-bold" style="font-size:18px;">
+            Keterangan
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4 mb-2">
+                    <span class="btn btn-success" style="width:30px;height:30px;padding:0;border-radius:4px;">
+                    </span>
+
+                    <span class="ms-2 fw-semibold">
+                        Check In & Sudah Bayar
+                    </span>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <span class="btn btn-secondary" style="width:30px;height:30px;padding:0;border-radius:4px;">
+                    </span>
+
+                    <span class="ms-2 fw-semibold">
+                        Booking & Sudah Bayar
+                    </span>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <span class="btn btn-warning" style="width:30px;height:30px;padding:0;border-radius:4px;">
+                    </span>
+
+                    <span class="ms-2 fw-semibold">
+                        Belum Bayar
+                    </span>
+                </div>
+
+            </div>
+
+            <small class="text-muted">
+                <b>Catatan:</b> Status <b>Belum Bayar</b> berlaku baik sebelum maupun sesudah tanggal Check In selama
+                pembayaran belum dilakukan.
+            </small>
+
         </div>
     </div>
 
