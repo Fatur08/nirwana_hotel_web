@@ -1172,7 +1172,6 @@ class HotelController extends Controller
 
             if ($request->hasFile('bukti_pembayaran')) {
                 $timestamp = now()->format('Y-m-d_H-i-s');
-                $nama = str_replace(' ', '_', $request->nama_tamu);
                 $bukti_pembayaran = "Bukti Pembayaran_" . $nama . "_" . $timestamp . "." . $request->file('bukti_pembayaran')->extension();
                 $storagePath = 'public/uploads/bukti_pembayaran/';
                 $request->file('bukti_pembayaran')->storeAs($storagePath, $bukti_pembayaran);
