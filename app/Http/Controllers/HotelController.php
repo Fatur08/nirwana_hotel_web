@@ -1153,6 +1153,16 @@ class HotelController extends Controller
     public function store_ModalPembayaran(Request $request)
     {
         try {
+            $dataPesanan = DB::table('rincian_pesanan')
+                ->select('nama_tamu')
+                ->where('id_rincian_pesanan', $request->id_rincian_pesanan)
+                ->first();
+
+            $nama = 'Tanpa_Nama';
+
+            if ($dataPesanan) {
+                $nama = str_replace(' ', '_', $dataPesanan->nama_tamu);
+            }
 
             /* ===============================
                UPLOAD BUKTI PEMBAYARAN
