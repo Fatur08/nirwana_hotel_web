@@ -1707,6 +1707,49 @@ class HotelController extends Controller
 
         try {
 
+
+            $data = DB::table('laporan_keuangan')
+                ->where('id_rincian_pesanan', $id)
+                ->first();
+
+            if (!empty($data->bukti_pembayaran)) {
+
+                // Hapus dari storage/app/public
+                Storage::delete(
+                    'public/uploads/bukti_pembayaran/' .
+                    $data->bukti_pembayaran
+                );
+
+                // Hapus dari public/storage
+                $filePublic = public_path(
+                    'storage/uploads/bukti_pembayaran/' .
+                    $data->bukti_pembayaran
+                );
+
+                if (file_exists($filePublic)) {
+                    unlink($filePublic);
+                }
+            }
+
+            if (!empty($data->foto_ktp)) {
+
+                // Hapus dari storage/app/public
+                Storage::delete(
+                    'public/uploads/foto_ktp/' .
+                    $data->foto_ktp
+                );
+
+                // Hapus dari public/storage
+                $filePublic = public_path(
+                    'storage/uploads/foto_ktp/' .
+                    $data->foto_ktp
+                );
+
+                if (file_exists($filePublic)) {
+                    unlink($filePublic);
+                }
+            }
+
             /*
             |--------------------------------------------------------------------------
             | HAPUS REQUEST TAMBAHAN
