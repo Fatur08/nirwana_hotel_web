@@ -226,7 +226,7 @@
 
                         Swal.fire({
                             title: 'Berhasil!',
-                            text: 'Pemesanan kamar berhasil disimpan',
+                            text: 'Status pembayaran berhasil disimpan',
                             icon: 'success'
                         }).then(() => {
 
