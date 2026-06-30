@@ -852,6 +852,18 @@ class HotelController extends Controller
 
 
 
+    // Modal Buat Resi Manual
+    public function BuatResiManual(Request $request)
+    {
+        return view('BuatResiManual');
+    }
+
+
+
+
+
+
+
 
 
     public function ModalInfo(Request $request)

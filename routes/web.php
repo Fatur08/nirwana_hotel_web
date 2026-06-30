@@ -40,6 +40,9 @@ Route::get('/KetersediaanKamar', [HotelController::class, 'KetersediaanKamar']);
 Route::get('/InformasiPemesanan', [HotelController::class, 'InformasiPemesanan']);
 
 
+Route::post('/BuatResiManual', [HotelController::class, 'BuatResiManual']);
+
+
 Route::post('/ModalInfo', [HotelController::class, 'ModalInfo']);
 
 
