@@ -1,35 +1,69 @@
 @extends('layouts.ModalPembayaran')
 
 @section('content')
+    @php
+        use Illuminate\Support\Facades\Storage;
+    @endphp
 
     <div class="container-fluid">
 
         @if($bukti && $bukti->bukti_pembayaran)
 
             @php
-                $ext = strtolower(pathinfo($bukti->bukti_pembayaran, PATHINFO_EXTENSION));
+                $file = $bukti->bukti_pembayaran;
+
+                // Prioritas ambil dari public/storage
+                if (file_exists(public_path('storage/uploads/bukti_pembayaran/' . $file))) {
+
+                    $url = asset('storage/uploads/bukti_pembayaran/' . $file);
+
+                }
+
+                // Kalau tidak ada, cek di storage/app/public
+                elseif (Storage::exists('public/uploads/bukti_pembayaran/' . $file)) {
+
+                    $url = asset('storage/uploads/bukti_pembayaran/' . $file);
+
+                } else {
+
+                    $url = null;
+
+                }
+
+                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+
             @endphp
 
-            @if(in_array($ext, ['jpg', 'jpeg', 'png', 'webp']))
+            @if($url)
 
-                <img src="{{ asset('uploads/bukti_pembayaran/' . $bukti->bukti_pembayaran) }}" class="img-fluid rounded border w-100">
+                @if(in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
 
-            @elseif($ext == 'pdf')
+                    <img src="{{ $url }}" class="img-fluid rounded border w-100">
 
-                <iframe src="{{ asset('uploads/bukti_pembayaran/' . $bukti->bukti_pembayaran) }}" width="100%" height="700px">
-                </iframe>
+                @elseif($ext == 'pdf')
+
+                    <iframe src="{{ $url }}" width="100%" height="700px">
+                    </iframe>
+
+                @else
+
+                    <div class="alert alert-warning">
+                        Format file tidak didukung.
+                    </div>
+
+                @endif
 
             @else
 
-                <div class="alert alert-warning">
-                    Format file tidak didukung.
+                <div class="alert alert-danger">
+                    File bukti pembayaran tidak ditemukan.
                 </div>
 
             @endif
 
         @else
 
-            <div class="alert alert-danger text-center">
+            <div class="alert alert-danger">
                 Bukti pembayaran belum tersedia.
             </div>
 
