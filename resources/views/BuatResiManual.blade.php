@@ -123,18 +123,19 @@
         </div>
         <div class="row mb-6">
             <div class="col-12">
-                <select id="jumlah_kamar_dipesan" name="jumlah_kamar_dipesan" class="form-control" style="font-size:16pt;">
+                <select id="jumlah_kamar_dipesan_buat_resi" name="jumlah_kamar_dipesan_buat_resi" class="form-control"
+                    style="font-size:16pt;">
                 </select>
             </div>
         </div>
-        <div class="row" id="kamar_tersedia_title" style="display:none;">
+        <div class="row" id="kamar_tersedia_title_buat_resi" style="display:none;">
             <div class="col-12">
                 <h5 class="text-start" style="font-size:16pt;">Kamar Yang Tersedia</h5>
             </div>
         </div>
-        <div class="row mb-6" id="kamar_tersedia_list" style="display:none;">
+        <div class="row mb-6" id="kamar_tersedia_list_buat_resi" style="display:none;">
             <div class="col-12">
-                <div id="list_nomor_kamar"></div>
+                <div id="list_nomor_kamar_buat_resi"></div>
             </div>
         </div>
 
@@ -159,7 +160,8 @@
                             <path d="M12 13m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
                         </svg>
                     </span>
-                    <input type="file" id="foto_ktp" name="foto_ktp" class="form-control" style="font-size:16pt;">
+                    <input type="file" id="foto_ktp_buat_resi" name="foto_ktp_buat_resi" class="form-control"
+                        style="font-size:16pt;">
                 </div>
             </div>
         </div>
@@ -173,8 +175,8 @@
 
         <div class="row mb-6">
             <div class="col-12">
-                <input type="number" id="jumlah_extra_bed" name="jumlah_extra_bed" class="form-control" min="0" value="0"
-                    style="font-size:16pt;">
+                <input type="number" id="jumlah_extra_bed_buat_resi" name="jumlah_extra_bed_buat_resi" class="form-control"
+                    min="0" value="0" style="font-size:16pt;">
             </div>
         </div>
 
@@ -187,30 +189,30 @@
 
         <div class="row mb-6">
             <div class="col-12">
-                <input type="number" id="jumlah_breakfast" name="jumlah_breakfast" class="form-control" min="0" value="0"
-                    style="font-size:16pt;">
+                <input type="number" id="jumlah_breakfast_buat_resi" name="jumlah_breakfast_buat_resi" class="form-control"
+                    min="0" value="0" style="font-size:16pt;">
             </div>
         </div>
 
 
-        <div class="row" id="biaya_container" style="display:none;">
+        <div class="row" id="biaya_container_buat_resi" style="display:none;">
             <div class="col-12">
                 <h5 class="text-start" style="font-size:16pt;">Biaya Tambahan</h5>
             </div>
         </div>
 
-        <div class="row mb-6" id="biaya_input_container" style="display:none;">
+        <div class="row mb-6" id="biaya_input_container_buat_resi" style="display:none;">
             <div class="col-12">
-                <textarea id="biaya_request" class="form-control" readonly
+                <textarea id="biaya_request_buat_resi" class="form-control" readonly
                     style="
-                                                                                                                                                                                    font-size:16pt;
-                                                                                                                                                                                    min-height:120px;
-                                                                                                                                                                                    resize:none;
-                                                                                                                                                                                    overflow:hidden;
-                                                                                                                                                                                ">
-                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                        font-size:16pt;
+                                                                                                                                                                                                                                        min-height:120px;
+                                                                                                                                                                                                                                        resize:none;
+                                                                                                                                                                                                                                        overflow:hidden;
+                                                                                                                                                                                                                                    ">
+                                                                                                                                                                                                                                </textarea>
 
-                <input type="hidden" id="biaya_request_value" name="biaya_request">
+                <input type="hidden" id="biaya_request_value_buat_resi" name="biaya_request_buat_resi">
             </div>
         </div>
 
@@ -226,7 +228,8 @@
 
         <div class="row mb-6">
             <div class="col-12">
-                <select id="status_pembayaran" name="status_pembayaran" class="form-control" style="font-size:16pt;">
+                <select id="status_pembayaran_buat_resi" name="status_pembayaran_buat_resi" class="form-control"
+                    style="font-size:16pt;">
 
                     <option value="">
                         -- Pilih Status Pembayaran --
@@ -247,14 +250,15 @@
 
 
         <!-- METODE PEMBAYARAN -->
-        <div class="row" id="metode_pembayaran_container" style="display:none;">
+        <div class="row" id="metode_pembayaran_container_buat_resi" style="display:none;">
             <div class="col-12">
                 <h5 class="text-start" style="font-size:16pt;">Metode Pembayaran</h5>
             </div>
         </div>
-        <div class="row mb-6" id="metode_pembayaran_input" style="display:none;">
+        <div class="row mb-6" id="metode_pembayaran_input_buat_resi" style="display:none;">
             <div class="col-12">
-                <select id="metode_pembayaran" name="metode_pembayaran" class="form-control" style="font-size:16pt;">
+                <select id="metode_pembayaran_buat_resi" name="metode_pembayaran_buat_resi" class="form-control"
+                    style="font-size:16pt;">
                     <option value="">-- Pilih Metode Pembayaran --</option>
                     <option value="cash">Cash</option>
                     <option value="online">Online</option>
@@ -263,12 +267,12 @@
         </div>
 
         <!-- INPUT TAMBAHAN JIKA ONLINE -->
-        <div class="row" id="sumber_pembayaran_container" style="display:none;">
+        <div class="row" id="sumber_pembayaran_container_buat_resi" style="display:none;">
             <div class="col-12">
                 <h5 class="text-start" style="font-size:16pt;">Masukkan Sumber Pembayaran Online</h5>
             </div>
         </div>
-        <div class="row" id="sumber_pembayaran_input" style="display:none;">
+        <div class="row" id="sumber_pembayaran_input_buat_resi" style="display:none;">
             <div class="col-12">
                 <div class="input-icon mb-6">
                     <span class="input-icon-addon">
@@ -281,15 +285,15 @@
                             <line x1="3" y1="10" x2="21" y2="10" />
                         </svg>
                     </span>
-                    <input type="text" id="sumber_pembayaran" name="sumber_pembayaran" class="form-control"
-                        style="font-size:16pt;" placeholder="Contoh: BCA, Dana, OVO, dll">
+                    <input type="text" id="sumber_pembayaran_buat_resi" name="sumber_pembayaran_buat_resi"
+                        class="form-control" style="font-size:16pt;" placeholder="Contoh: BCA, Dana, OVO, dll">
                 </div>
             </div>
         </div>
 
 
         <!-- UPLOAD BUKTI PEMBAYARAN -->
-        <div class="row" id="bukti_pembayaran_container" style="display:none;">
+        <div class="row" id="bukti_pembayaran_container_buat_resi" style="display:none;">
             <div class="col-12">
                 <h5 class="text-start" style="font-size:16pt;">
                     Upload Bukti Pembayaran
@@ -297,7 +301,7 @@
             </div>
         </div>
 
-        <div class="row" id="bukti_pembayaran_input" style="display:none;">
+        <div class="row" id="bukti_pembayaran_input_buat_resi" style="display:none;">
             <div class="col-12">
                 <div class="input-icon mb-6">
 
@@ -315,8 +319,8 @@
                         </svg>
                     </span>
 
-                    <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" class="form-control" accept="image/*"
-                        style="font-size:16pt;">
+                    <input type="file" id="bukti_pembayaran_buat_resi" name="bukti_pembayaran_buat_resi"
+                        class="form-control" accept="image/*" style="font-size:16pt;">
                 </div>
             </div>
         </div>
@@ -346,21 +350,21 @@
         $(document).ready(function () {
 
             // Default saat modal dibuka
-            $('#sumber_pembayaran_container').hide();
-            $('#sumber_pembayaran_input').hide();
+            $('#sumber_pembayaran_container_buat_resi').hide();
+            $('#sumber_pembayaran_input_buat_resi').hide();
 
-            $('#bukti_pembayaran_container').hide();
-            $('#bukti_pembayaran_input').hide();
+            $('#bukti_pembayaran_container_buat_resi').hide();
+            $('#bukti_pembayaran_input_buat_resi').hide();
 
 
-            $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                            <option value="">
-                                                                                                                                                -- Pilih Tanggal Check In Dulu --
-                                                                                                                                            </option>
-                                                                                                                                        `);
+            $('#jumlah_kamar_dipesan_buat_resi').html(`
+                                                                                                                                                                                                <option value="">
+                                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                </option>
+                                                                                                                                                                                            `);
 
-            $('#kamar_tersedia_title').hide();
-            $('#kamar_tersedia_list').hide();
+            $('#kamar_tersedia_title_buat_resi').hide();
+            $('#kamar_tersedia_list_buat_resi').hide();
 
 
 
@@ -377,11 +381,11 @@
 
                 if (!checkIn || !checkOut) {
 
-                    $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                            <option value="">
-                                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                        `);
+                    $('#jumlah_kamar_dipesan_buat_resi').html(`
+                                                                                                                                                                                                                                                                                <option value="">
+                                                                                                                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                            `);
 
                     return;
                 }
@@ -405,13 +409,13 @@
                         for (let i = 1; i <= totalKamar; i++) {
 
                             opsiJumlah += `
-                                                                                                                                                                                                                                                                <option value="${i}">
-                                                                                                                                                                                                                                                                    ${i} Kamar
-                                                                                                                                                                                                                                                                </option>
-                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                                                                    <option value="${i}">
+                                                                                                                                                                                                                                                                                                                        ${i} Kamar
+                                                                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                                                                `;
                         }
 
-                        $('#jumlah_kamar_dipesan').html(opsiJumlah);
+                        $('#jumlah_kamar_dipesan_buat_resi').html(opsiJumlah);
 
                     }
                 });
@@ -422,11 +426,11 @@
             // Jika tanggal berubah, refresh jumlah kamar
             $('#check_in, #check_out').change(function () {
 
-                $('#jumlah_kamar_dipesan').val('');
+                $('#jumlah_kamar_dipesan_buat_resi').val('');
 
-                $('#kamar_tersedia_title').hide();
-                $('#kamar_tersedia_list').hide();
-                $('#list_nomor_kamar').html('');
+                $('#kamar_tersedia_title_buat_resi').hide();
+                $('#kamar_tersedia_list_buat_resi').hide();
+                $('#list_nomor_kamar_buat_resi').html('');
 
                 refreshJumlahKamar();
 
@@ -436,7 +440,7 @@
             // ==========================
             // SAAT JUMLAH KAMAR DIPILIH
             // ==========================
-            $('#jumlah_kamar_dipesan').change(function () {
+            $('#jumlah_kamar_dipesan_buat_resi').change(function () {
 
                 let jumlah = $(this).val();
 
@@ -467,8 +471,8 @@
 
                     success: function (response) {
 
-                        $('#kamar_tersedia_title').show();
-                        $('#kamar_tersedia_list').show();
+                        $('#kamar_tersedia_title_buat_resi').show();
+                        $('#kamar_tersedia_list_buat_resi').show();
 
                         let html = '';
 
@@ -480,23 +484,23 @@
                         for (let i = 1; i <= jumlah; i++) {
 
                             html += `
-                                                        <div class="mb-4">
+                                                                                                            <div class="mb-4">
 
-                                                            <label class="form-label fw-bold"
-                                                                   style="font-size:16pt;">
-                                                                Pilih Kamar ${i}
-                                                            </label>
+                                                                                                                <label class="form-label fw-bold"
+                                                                                                                       style="font-size:16pt;">
+                                                                                                                    Pilih Kamar ${i}
+                                                                                                                </label>
 
-                                                            <select
-                                                                name="id_nomor_kamar[]"
-                                                                class="form-control nomor-kamar"
-                                                                style="font-size:16pt;"
-                                                                required>
+                                                                                                                <select
+                                                                                                                    name="id_nomor_kamar[]"
+                                                                                                                    class="form-control nomor-kamar"
+                                                                                                                    style="font-size:16pt;"
+                                                                                                                    required>
 
-                                                                <option value="">
-                                                                    -- Pilih Kamar --
-                                                                </option>
-                                                    `;
+                                                                                                                    <option value="">
+                                                                                                                        -- Pilih Kamar --
+                                                                                                                    </option>
+                                                                                                        `;
 
                             response.forEach(function (kamar) {
 
@@ -514,30 +518,30 @@
                                 }
 
                                 html += `
-                                                            <option value="${kamar.id_nomor_kamar}">
-                                                                ${kamar.tipe_kamar}
-                                                                ${kamar.nomor_kamar}
-                                                                (${bed})
-                                                            </option>
-                                                        `;
+                                                                                                                <option value="${kamar.id_nomor_kamar}">
+                                                                                                                    ${kamar.tipe_kamar}
+                                                                                                                    ${kamar.nomor_kamar}
+                                                                                                                    (${bed})
+                                                                                                                </option>
+                                                                                                            `;
                             });
 
                             if (adaHomeStay) {
 
                                 html += `
-                                                            <option value="HMSTY">
-                                                                Home Stay
-                                                            </option>
-                                                        `;
+                                                                                                                <option value="HMSTY">
+                                                                                                                    Home Stay
+                                                                                                                </option>
+                                                                                                            `;
                             }
 
                             html += `
-                                                            </select>
-                                                        </div>
-                                                    `;
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        `;
                         }
 
-                        $('#list_nomor_kamar').html(html);
+                        $('#list_nomor_kamar_buat_resi').html(html);
                     }
                 });
 
@@ -590,10 +594,10 @@
             function hitungBiayaRequest() {
 
                 let jumlahExtraBed =
-                    parseInt($('#jumlah_extra_bed').val()) || 0;
+                    parseInt($('#jumlah_extra_bed_buat_resi').val()) || 0;
 
                 let jumlahBreakfast =
-                    parseInt($('#jumlah_breakfast').val()) || 0;
+                    parseInt($('#jumlah_breakfast_buat_resi').val()) || 0;
 
                 $.ajax({
 
@@ -673,8 +677,8 @@
 
                         if (total > 0) {
 
-                            $('#biaya_container').show();
-                            $('#biaya_input_container').show();
+                            $('#biaya_container_buat_resi').show();
+                            $('#biaya_input_container_buat_resi').show();
 
                             if (keterangan.length > 1) {
 
@@ -701,15 +705,15 @@
 
                             }, 10);
 
-                            $('#biaya_request_value').val(total);
+                            $('#biaya_request_value_buat_resi').val(total);
 
                         } else {
 
-                            $('#biaya_container').hide();
-                            $('#biaya_input_container').hide();
+                            $('#biaya_container_buat_resi').hide();
+                            $('#biaya_input_container_buat_resi').hide();
 
                             $('#biaya_request').val('');
-                            $('#biaya_request_value').val('');
+                            $('#biaya_request_value_buat_resi').val('');
                         }
 
                     }
@@ -721,7 +725,7 @@
             // Saat jumlah berubah
             $(document).on(
                 'input',
-                '#jumlah_extra_bed, #jumlah_breakfast',
+                '#jumlah_extra_bed_buat_resi, #jumlah_breakfast_buat_resi',
                 function () {
 
                     hitungBiayaRequest();
@@ -734,25 +738,25 @@
             // ==========================
             // STATUS PEMBAYARAN
             // ==========================
-            $(document).on('change', '#status_pembayaran', function () {
+            $(document).on('change', '#status_pembayaran_buat_resi', function () {
 
                 let status = $(this).val();
 
                 if (status === 'sudah') {
 
-                    $('#metode_pembayaran_container').show();
-                    $('#metode_pembayaran_input').show();
+                    $('#metode_pembayaran_container_buat_resi').show();
+                    $('#metode_pembayaran_input_buat_resi').show();
 
                 } else {
 
-                    $('#metode_pembayaran_container').hide();
-                    $('#metode_pembayaran_input').hide();
+                    $('#metode_pembayaran_container_buat_resi').hide();
+                    $('#metode_pembayaran_input_buat_resi').hide();
 
-                    $('#sumber_pembayaran_container').hide();
-                    $('#sumber_pembayaran_input').hide();
+                    $('#sumber_pembayaran_container_buat_resi').hide();
+                    $('#sumber_pembayaran_input_buat_resi').hide();
 
-                    $('#bukti_pembayaran_container').hide();
-                    $('#bukti_pembayaran_input').hide();
+                    $('#bukti_pembayaran_container_buat_resi').hide();
+                    $('#bukti_pembayaran_input_buat_resi').hide();
 
                     $('#metode_pembayaran').val('');
                     $('#sumber_pembayaran').val('');
@@ -774,19 +778,19 @@
 
                 if (metode === 'online') {
 
-                    $('#sumber_pembayaran_container').show();
-                    $('#sumber_pembayaran_input').show();
+                    $('#sumber_pembayaran_container_buat_resi').show();
+                    $('#sumber_pembayaran_input_buat_resi').show();
 
-                    $('#bukti_pembayaran_container').show();
-                    $('#bukti_pembayaran_input').show();
+                    $('#bukti_pembayaran_container_buat_resi').show();
+                    $('#bukti_pembayaran_input_buat_resi').show();
 
                 } else {
 
-                    $('#sumber_pembayaran_container').hide();
-                    $('#sumber_pembayaran_input').hide();
+                    $('#sumber_pembayaran_container_buat_resi').hide();
+                    $('#sumber_pembayaran_input_buat_resi').hide();
 
-                    $('#bukti_pembayaran_container').hide();
-                    $('#bukti_pembayaran_input').hide();
+                    $('#bukti_pembayaran_container_buat_resi').hide();
+                    $('#bukti_pembayaran_input_buat_resi').hide();
 
                     $('#sumber_pembayaran').val('');
                     $('#bukti_pembayaran').val('');
@@ -808,9 +812,9 @@
                 let buat_resi_alamat_tamu = $('#buat_resi_alamat_tamu').val();
                 let check_in = $('#check_in').val();
                 let check_out = $('#check_out').val();
-                let jumlah_kamar = $('#jumlah_kamar_dipesan').val();
+                let jumlah_kamar = $('#jumlah_kamar_dipesan_buat_resi').val();
 
-                let status = $('#status_pembayaran').val();
+                let status = $('#status_pembayaran_buat_resi').val();
                 let metode = $('#metode_pembayaran').val();
                 let sumber = $('#sumber_pembayaran').val();
 
@@ -859,7 +863,7 @@
                 if (jumlah_kamar == '') {
                     showError(
                         'Jumlah Kamar Harus Dipilih',
-                        '#jumlah_kamar_dipesan'
+                        '#jumlah_kamar_dipesan_buat_resi'
                     );
                     return;
                 }
