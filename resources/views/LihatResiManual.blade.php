@@ -62,7 +62,7 @@
 
         <br>
 
-        <table style="width:100%;font-size:14pt;">
+        <table style="width:100%;font-size:16pt;">
 
             <tr>
                 <td style="width:180px;">Nama Tn/Ny</td>
@@ -353,10 +353,10 @@
 
 <hr style="margin:50px 0;">
 
-<button onclick="cetakJPG()" class="btn btn-info w-100 mt-3">
+<button onclick="cetakJPG()" class="btn btn-info w-100 mt-3" style="font-size:20pt;">
     Cetak
 </button>
 
-<button type="button" class="btn btn-info w-100 mt-3" data-bs-dismiss="modal">
+<button type="button" class="btn btn-info w-100 mt-3" data-bs-dismiss="modal" style="font-size:20pt;">
     Tutup
 </button>
