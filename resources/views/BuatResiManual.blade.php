@@ -68,6 +68,8 @@
                 font-size: 26px;
                 padding: 18px 20px;
                 height: 6500px;
+                letter-spacing: 1px;
+                font-weight: 600;
             }
 
         }
