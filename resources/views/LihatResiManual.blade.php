@@ -320,7 +320,7 @@
 
                 <td colspan="3"></td>
 
-                <td>Total</td>
+                <td style="text-align:center;">Total</td>
 
                 <td>
 
