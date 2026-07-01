@@ -76,7 +76,7 @@
     </style>
     <div class="card-body">
 
-        <form action="{{ url('BuatResiManual/store') }}" method="POST">
+        <form action="{{ url('BuatResiManual/store') }}" id="FormResiManual" method="POST">
 
             @csrf
 
@@ -91,7 +91,7 @@
                         Nama Tamu
                     </label>
 
-                    <input type="text" name="nama_tamu" class="form-control" required>
+                    <input type="text" name="nama_tamu_resi_manual" class="form-control" required>
                 </div>
 
                 <div class="col-md-6">
@@ -99,7 +99,7 @@
                         Alamat
                     </label>
 
-                    <input type="text" name="alamat" class="form-control" required>
+                    <input type="text" name="alamat_tamu_resi_manual" class="form-control" required>
                 </div>
 
             </div>
@@ -118,7 +118,7 @@
                 <div class="tanggal-wrapper">
 
                     <!-- Input date asli -->
-                    <input type="date" id="check_in" name="check_in" class="tanggal-asli" required>
+                    <input type="date" id="check_in_resi_manual" name="check_in_resi_manual" class="tanggal-asli" required>
 
                     <!-- Tampilan -->
                     <div class="tanggal-view">
@@ -157,7 +157,8 @@
 
                 <div class="tanggal-wrapper">
 
-                    <input type="date" id="check_out" name="check_out" class="tanggal-asli" required>
+                    <input type="date" id="check_out_resi_manual" name="check_out_resi_manual" class="tanggal-asli"
+                        required>
 
                     <div class="tanggal-view">
 
@@ -196,25 +197,25 @@
                 <div class="col-md-3 mb-3">
                     <label style="font-size:16pt;">Deluxe</label>
 
-                    <input type="number" name="deluxe" class="form-control" min="0" value="0">
+                    <input type="number" name="jumlah_kamar_deluxe" class="form-control" min="0" value="0">
                 </div>
 
                 <div class="col-md-3 mb-3">
                     <label style="font-size:16pt;">Superior</label>
 
-                    <input type="number" name="superior" class="form-control" min="0" value="0">
+                    <input type="number" name="jumlah_kamar_superior" class="form-control" min="0" value="0">
                 </div>
 
                 <div class="col-md-3 mb-3">
                     <label style="font-size:16pt;">Standart</label>
 
-                    <input type="number" name="standart" class="form-control" min="0" value="0">
+                    <input type="number" name="jumlah_kamar_standart" class="form-control" min="0" value="0">
                 </div>
 
                 <div class="col-md-3 mb-3">
                     <label style="font-size:16pt;">Home Stay</label>
 
-                    <input type="number" name="homestay" class="form-control" min="0" value="0">
+                    <input type="number" name="jumlah_homestay" class="form-control" min="0" value="0">
                 </div>
 
             </div>
@@ -231,13 +232,13 @@
                 <div class="col-md-6 mb-3">
                     <label style="font-size:16pt;">Ekstra Bed</label>
 
-                    <input type="number" name="ekstra_bed" class="form-control" min="0" value="0">
+                    <input type="number" name="jumlah_ekstrabed" class="form-control" min="0" value="0">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label style="font-size:16pt;">Breakfast</label>
 
-                    <input type="number" name="breakfast" class="form-control" min="0" value="0">
+                    <input type="number" name="jumlah_breakfast" class="form-control" min="0" value="0">
                 </div>
 
             </div>
@@ -245,7 +246,7 @@
 
             <div class="text-end mt-4">
 
-                <button class="btn btn-success btn-lg" style="font-size:16pt;">
+                <button class="btn btn-info btn-lg" style="font-size:16pt;">
 
                     Simpan
 
@@ -290,7 +291,7 @@
 
 
 
-        $('#check_in').change(function () {
+        $('#check_in_resi_manual').change(function () {
 
             $('#check_in_text').text(
                 formatIndonesia($(this).val())
@@ -299,11 +300,126 @@
         });
 
 
-        $('#check_out').change(function () {
+        $('#check_out_resi_manual').change(function () {
 
             $('#check_out_text').text(
                 formatIndonesia($(this).val())
             );
+
+        });
+
+
+
+
+
+        // ==========================
+        // SUBMIT FORM PESAN KAMAR
+        // ==========================
+        $(document).on('submit', '#FormResiManual', function (e) {
+
+            e.preventDefault();
+
+            let nama_tamu_resi_manual = $('#nama_tamu_resi_manual').val();
+            let alamat_tamu_resi_manual = $('#alamat_tamu_resi_manual').val();
+            let check_in_resi_manual = $('#check_in_resi_manual').val();
+            let check_out_resi_manual = $('#check_out_resi_manual').val();
+
+            function showError(pesan, el = null) {
+
+                Swal.fire({
+                    title: 'Warning!',
+                    text: pesan,
+                    icon: 'warning'
+                }).then(() => {
+
+                    if (el) {
+                        $(el).focus();
+                    }
+
+                });
+
+            }
+
+            // ==========================
+            // VALIDASI
+            // ==========================
+
+            if (nama_tamu_resi_manual == '') {
+                showError('Nama Tamu Harus Diisi', '#nama_tamu_resi_manual');
+                return;
+            }
+
+            if (alamat_tamu_resi_manual == '') {
+                showError('Nama Tamu Harus Diisi', '#alamat_tamu_resi_manual');
+                return;
+            }
+
+            if (check_in_resi_manual == '') {
+                showError('Tanggal Check In Harus Diisi');
+                return;
+            }
+
+            if (check_out_resi_manual == '') {
+                showError('Tanggal Check Out Harus Diisi');
+                return;
+            }
+
+            // ==========================
+            // AJAX SIMPAN
+            // ==========================
+
+            let formData = new FormData(this);
+
+            $.ajax({
+
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+
+                processData: false,
+                contentType: false,
+
+                beforeSend: function () {
+
+                    Swal.fire({
+                        title: 'Menyimpan Data...',
+                        text: 'Mohon tunggu sebentar',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                },
+
+                success: function (res) {
+
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data resi manual berhasil disimpan',
+                        icon: 'success'
+                    }).then(() => {
+
+                        window.location.reload();
+
+                    });
+
+                },
+
+                error: function (xhr) {
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: xhr.responseJSON?.message ??
+                            'Terjadi kesalahan saat menyimpan data',
+                        icon: 'error'
+                    });
+
+                    console.log(xhr.responseText);
+
+                }
+
+            });
 
         });
     </script>
