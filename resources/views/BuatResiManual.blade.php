@@ -78,7 +78,7 @@
                         Nama Tamu
                     </label>
 
-                    <input type="text" name="nama_tamu" class="form-control" required>
+                    <input type="text" name="nama_tamu" class="form-control" style="font-size:16pt;" required>
                 </div>
 
                 <div class="col-md-6">
@@ -86,7 +86,7 @@
                         Alamat
                     </label>
 
-                    <input type="text" name="alamat" class="form-control" required>
+                    <input type="text" name="alamat" class="form-control" style="font-size:16pt;" required>
                 </div>
 
             </div>
@@ -98,7 +98,7 @@
 
             <div class="mb-3">
 
-                <label class="form-label fw-bold">
+                <label class="form-label fw-bold" style="font-size:16pt;">
                     Check In
                 </label>
 
@@ -129,7 +129,7 @@
 
             <div class="mb-4">
 
-                <label class="form-label fw-bold">
+                <label class="form-label fw-bold" style="font-size:16pt;">
                     Check Out
                 </label>
 
@@ -156,32 +156,32 @@
 
             <hr>
 
-            <h4 class="mb-3">
+            <h4 class="mb-3" style="font-size:16pt;">
                 Jumlah Kamar
             </h4>
 
             <div class="row">
 
                 <div class="col-md-3 mb-3">
-                    <label>Deluxe</label>
+                    <label style="font-size:16pt;">Deluxe</label>
 
                     <input type="number" name="deluxe" class="form-control" min="0" value="0">
                 </div>
 
                 <div class="col-md-3 mb-3">
-                    <label>Superior</label>
+                    <label style="font-size:16pt;">Superior</label>
 
                     <input type="number" name="superior" class="form-control" min="0" value="0">
                 </div>
 
                 <div class="col-md-3 mb-3">
-                    <label>Standart</label>
+                    <label style="font-size:16pt;">Standart</label>
 
                     <input type="number" name="standart" class="form-control" min="0" value="0">
                 </div>
 
                 <div class="col-md-3 mb-3">
-                    <label>Home Stay</label>
+                    <label style="font-size:16pt;">Home Stay</label>
 
                     <input type="number" name="homestay" class="form-control" min="0" value="0">
                 </div>
@@ -191,20 +191,20 @@
 
             <hr>
 
-            <h4 class="mb-3">
+            <h4 class="mb-3" style="font-size:16pt;">
                 Request Tambahan
             </h4>
 
             <div class="row">
 
                 <div class="col-md-6 mb-3">
-                    <label>Ekstra Bed</label>
+                    <label style="font-size:16pt;">Ekstra Bed</label>
 
                     <input type="number" name="ekstra_bed" class="form-control" min="0" value="0">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label>Breakfast</label>
+                    <label style="font-size:16pt;">Breakfast</label>
 
                     <input type="number" name="breakfast" class="form-control" min="0" value="0">
                 </div>
@@ -214,7 +214,7 @@
 
             <div class="text-end mt-4">
 
-                <button class="btn btn-success btn-lg">
+                <button class="btn btn-success btn-lg" style="font-size:16pt;">
 
                     Simpan
 
