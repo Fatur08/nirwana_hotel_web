@@ -915,11 +915,9 @@ class HotelController extends Controller
 
     public function LihatResiManual(Request $request)
     {
-        $resiManual = DB::table('resi_manual')
-            ->orderByDesc('id_resi_manual')
-            ->get();
+        $data = DB::table('resi_manual')->first();
 
-        return view('LihatResiManual', compact('resiManual'));
+        return view('LihatResiManual', compact('data'));
     }
 
 
