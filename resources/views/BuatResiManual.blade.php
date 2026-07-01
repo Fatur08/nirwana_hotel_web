@@ -28,7 +28,7 @@
 
             border-radius: 8px;
 
-            min-height: 58px;
+            min-height: 65px;
 
             display: flex;
 
@@ -38,7 +38,7 @@
 
             padding: 0 18px;
 
-            font-size: 20px;
+            font-size: 22px;
 
             background: #fff;
 
@@ -58,6 +58,17 @@
             margin-left: 10px;
 
             color: #444;
+
+        }
+
+
+        @media (min-width: 768px) {
+
+            input[type="date"] {
+                font-size: 26px;
+                padding: 18px 20px;
+                height: 65px;
+            }
 
         }
     </style>
