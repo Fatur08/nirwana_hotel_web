@@ -1,127 +1,279 @@
-<div class="card-body">
+@extends('layouts.PesanKamar')
+@section('content')
+    <style>
+        .tanggal-wrapper {
+            position: relative;
+            width: 100%;
+        }
 
-    <form action="{{ url('BuatResiManual/store') }}" method="POST">
+        .tanggal-asli {
 
-        @csrf
+            position: absolute;
+            inset: 0;
 
-        {{-- ========================= --}}
-        {{-- DATA TAMU --}}
-        {{-- ========================= --}}
+            width: 100%;
+            height: 100%;
 
-        <div class="row mb-3">
+            opacity: 0;
 
-            <div class="col-md-6">
-                <label class="form-label fw-bold">
-                    Nama Tamu
-                </label>
+            cursor: pointer;
 
-                <input type="text" name="nama_tamu" class="form-control" required>
+            z-index: 10;
+
+        }
+
+        .tanggal-view {
+
+            border: 1px solid #ced4da;
+
+            border-radius: 8px;
+
+            min-height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 18px;
+
+            font-size: 20px;
+
+            background: #fff;
+
+        }
+
+        .icon {
+
+            margin-right: 10px;
+
+        }
+
+        #check_in_text,
+        #check_out_text {
+
+            flex: 1;
+
+            margin-left: 10px;
+
+            color: #444;
+
+        }
+    </style>
+    <div class="card-body">
+
+        <form action="{{ url('BuatResiManual/store') }}" method="POST">
+
+            @csrf
+
+            {{-- ========================= --}}
+            {{-- DATA TAMU --}}
+            {{-- ========================= --}}
+
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">
+                        Nama Tamu
+                    </label>
+
+                    <input type="text" name="nama_tamu" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">
+                        Alamat
+                    </label>
+
+                    <input type="text" name="alamat" class="form-control" required>
+                </div>
+
             </div>
 
-            <div class="col-md-6">
-                <label class="form-label fw-bold">
-                    Alamat
-                </label>
 
-                <input type="text" name="alamat" class="form-control" required>
-            </div>
+            {{-- ========================= --}}
+            {{-- CHECK IN / OUT --}}
+            {{-- ========================= --}}
 
-        </div>
+            <div class="mb-3">
 
-
-        {{-- ========================= --}}
-        {{-- CHECK IN / OUT --}}
-        {{-- ========================= --}}
-
-        <div class="row mb-4">
-
-            <div class="col-md-6">
                 <label class="form-label fw-bold">
                     Check In
                 </label>
 
-                <input type="date" name="check_in" class="form-control" required>
+                <div class="tanggal-wrapper">
+
+                    <!-- Input date asli -->
+                    <input type="date" id="check_in" name="check_in" class="tanggal-asli" required>
+
+                    <!-- Tampilan -->
+                    <div class="tanggal-view">
+
+                        <span class="icon">
+                            📅
+                        </span>
+
+                        <span id="check_in_text">
+                            Pilih Tanggal Check In
+                        </span>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="col-md-6">
+
+
+
+            <div class="mb-4">
+
                 <label class="form-label fw-bold">
                     Check Out
                 </label>
 
-                <input type="date" name="check_out" class="form-control" required>
+                <div class="tanggal-wrapper">
+
+                    <input type="date" id="check_out" name="check_out" class="tanggal-asli" required>
+
+                    <div class="tanggal-view">
+
+                        <span class="icon">
+                            📅
+                        </span>
+
+                        <span id="check_out_text">
+                            Pilih Tanggal Check Out
+                        </span>
+
+                    </div>
+
+                </div>
+
             </div>
 
-        </div>
 
+            <hr>
 
-        <hr>
+            <h4 class="mb-3">
+                Jumlah Kamar
+            </h4>
 
-        <h4 class="mb-3">
-            Jumlah Kamar
-        </h4>
+            <div class="row">
 
-        <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Deluxe</label>
 
-            <div class="col-md-3 mb-3">
-                <label>Deluxe</label>
+                    <input type="number" name="deluxe" class="form-control" min="0" value="0">
+                </div>
 
-                <input type="number" name="deluxe" class="form-control" min="0" value="0">
+                <div class="col-md-3 mb-3">
+                    <label>Superior</label>
+
+                    <input type="number" name="superior" class="form-control" min="0" value="0">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label>Standart</label>
+
+                    <input type="number" name="standart" class="form-control" min="0" value="0">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label>Home Stay</label>
+
+                    <input type="number" name="homestay" class="form-control" min="0" value="0">
+                </div>
+
             </div>
 
-            <div class="col-md-3 mb-3">
-                <label>Superior</label>
 
-                <input type="number" name="superior" class="form-control" min="0" value="0">
+            <hr>
+
+            <h4 class="mb-3">
+                Request Tambahan
+            </h4>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label>Ekstra Bed</label>
+
+                    <input type="number" name="ekstra_bed" class="form-control" min="0" value="0">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Breakfast</label>
+
+                    <input type="number" name="breakfast" class="form-control" min="0" value="0">
+                </div>
+
             </div>
 
-            <div class="col-md-3 mb-3">
-                <label>Standart</label>
 
-                <input type="number" name="standart" class="form-control" min="0" value="0">
+            <div class="text-end mt-4">
+
+                <button class="btn btn-success btn-lg">
+
+                    Simpan
+
+                </button>
+
             </div>
 
-            <div class="col-md-3 mb-3">
-                <label>Home Stay</label>
+        </form>
 
-                <input type="number" name="homestay" class="form-control" min="0" value="0">
-            </div>
+    </div>
+@endsection
+@push('myscript')
+    <script>
+        function formatIndonesia(tanggal) {
 
-        </div>
+            if (!tanggal) return '';
+
+            const bulan = [
+                'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+            ];
+
+            let t = new Date(tanggal);
+
+            return String(t.getDate()).padStart(2, '0')
+                + ' '
+                + bulan[t.getMonth()]
+                + ' '
+                + t.getFullYear();
+
+        }
 
 
-        <hr>
 
-        <h4 class="mb-3">
-            Request Tambahan
-        </h4>
+        $('#check_in').change(function () {
 
-        <div class="row">
+            $('#check_in_text').text(
+                formatIndonesia($(this).val())
+            );
 
-            <div class="col-md-6 mb-3">
-                <label>Ekstra Bed</label>
-
-                <input type="number" name="ekstra_bed" class="form-control" min="0" value="0">
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label>Breakfast</label>
-
-                <input type="number" name="breakfast" class="form-control" min="0" value="0">
-            </div>
-
-        </div>
+        });
 
 
-        <div class="text-end mt-4">
+        $('#check_out').change(function () {
 
-            <button class="btn btn-success btn-lg">
+            $('#check_out_text').text(
+                formatIndonesia($(this).val())
+            );
 
-                Simpan
-
-            </button>
-
-        </div>
-
-    </form>
-
-</div>
+        });
+    </script>
+@endpush
