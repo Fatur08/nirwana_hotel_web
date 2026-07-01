@@ -1,10 +1,17 @@
 @php
     use Carbon\Carbon;
 
-    $checkIn = Carbon::parse($data->check_in);
-    $checkOut = Carbon::parse($data->check_out);
+    $checkIn = $data && $data->check_in
+        ? Carbon::parse($data->check_in)
+        : null;
 
-    $lama = $checkIn->diffInDays($checkOut);
+    $checkOut = $data && $data->check_out
+        ? Carbon::parse($data->check_out)
+        : null;
+
+    $lama = ($checkIn && $checkOut)
+        ? $checkIn->diffInDays($checkOut)
+        : 0;
 
     // Tarif
     $hargaDLX = 300000;
@@ -69,13 +76,13 @@
                 <tr>
                     <td style="width:180px;">Nama Tn/Ny</td>
                     <td style="width:20px;">:</td>
-                    <td>{{ $data->nama_tamu_resi_manual }}</td>
+                    <td>{{ $data->nama_tamu_resi_manual ?? 0 }}</td>
                 </tr>
 
                 <tr>
                     <td>Alamat</td>
                     <td>:</td>
-                    <td>{{ $data->alamat_tamu_resi_manual }}</td>
+                    <td>{{ $data->alamat_tamu_resi_manual ?? 0 }}</td>
                 </tr>
 
                 <tr>
@@ -126,7 +133,7 @@
 
                         <td>
 
-                            {{ $data->jumlah_kamar_deluxe }}
+                            {{ $data->jumlah_kamar_deluxe ?? 0 }}
                             x Rp.{{ number_format($hargaDLX, 0, ',', '.') }}
                             x {{ $lama }} Hari
 
@@ -155,7 +162,7 @@
 
                         <td>
 
-                            {{ $data->jumlah_kamar_superior }}
+                            {{ $data->jumlah_kamar_superior ?? 0 }}
                             x Rp.{{ number_format($hargaSPR, 0, ',', '.') }}
                             x {{ $lama }} Hari
 
@@ -184,7 +191,7 @@
 
                         <td>
 
-                            {{ $data->jumlah_kamar_standart }}
+                            {{ $data->jumlah_kamar_standart ?? 0 }}
                             x Rp.{{ number_format($hargaSTD, 0, ',', '.') }}
                             x {{ $lama }} Hari
 
@@ -213,7 +220,7 @@
 
                         <td>
 
-                            {{ $data->jumlah_homestay }}
+                            {{ $data->jumlah_homestay ?? 0 }}
                             x Rp.{{ number_format($hargaHM, 0, ',', '.') }}
                             x {{ $lama }} Hari
 
@@ -242,7 +249,7 @@
 
                         <td>
 
-                            {{ $data->jumlah_ekstrabed }}
+                            {{ $data->jumlah_ekstrabed ?? 0 }}
                             x Rp.{{ number_format($hargaEB, 0, ',', '.') }}
 
                         </td>
@@ -270,7 +277,7 @@
 
                         <td>
 
-                            {{ $data->jumlah_breakfast }}
+                            {{ $data->jumlah_breakfast ?? 0 }}
                             x Rp.{{ number_format($hargaBF, 0, ',', '.') }}
 
                         </td>
