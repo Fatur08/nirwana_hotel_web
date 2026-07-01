@@ -33,330 +33,409 @@
         $subtotalEB +
         $subtotalBF;
 @endphp
-<div id="area-print">
+@extends('layouts.PesanKamar')
+@section('content')
+    <div id="area-print">
 
-    <div id="area-inner" style="padding:30px;">
+        <div id="area-inner" style="padding:30px;">
 
-        {{-- HEADER HOTEL --}}
-        <div style="font-size:20pt;font-weight:bold;">
-            NIRWANA HOTEL KALIANDA ★
-        </div>
+            {{-- HEADER HOTEL --}}
+            <div style="font-size:20pt;font-weight:bold;">
+                NIRWANA HOTEL KALIANDA ★
+            </div>
 
-        <div style="font-size:12pt;">
-            Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
-        </div>
+            <div style="font-size:12pt;">
+                Jl. Kolonel Makmun Rasyid No.18, Way Urang, Kec. Kalianda,
+            </div>
 
-        <div style="font-size:12pt;">
-            Kab. Lampung Selatan, Lampung, 35551
-        </div>
+            <div style="font-size:12pt;">
+                Kab. Lampung Selatan, Lampung, 35551
+            </div>
 
-        <div style="font-size:12pt;">
-            0851 5609 1313
-        </div>
+            <div style="font-size:12pt;">
+                0851 5609 1313
+            </div>
 
-        <hr style="border:3px solid black;">
+            <hr style="border:3px solid black;">
 
-        <div style="font-size:24pt;margin-top:20px;">
-            Bukti Pembayaran (Invoice Manual)
-        </div>
+            <div style="font-size:24pt;margin-top:20px;">
+                Bukti Pembayaran ( Invoice )
+            </div>
 
-        <br>
+            <br>
 
-        <table style="width:100%;font-size:16pt;">
+            <table style="width:100%;font-size:16pt;">
 
-            <tr>
-                <td style="width:180px;">Nama Tn/Ny</td>
-                <td style="width:20px;">:</td>
-                <td>{{ $data->nama_tamu_resi_manual }}</td>
-            </tr>
+                <tr>
+                    <td style="width:180px;">Nama Tn/Ny</td>
+                    <td style="width:20px;">:</td>
+                    <td>{{ $data->nama_tamu_resi_manual }}</td>
+                </tr>
 
-            <tr>
-                <td>Alamat</td>
-                <td>:</td>
-                <td>{{ $data->alamat_tamu_resi_manual }}</td>
-            </tr>
-
-            <tr>
-
-                <td>Check In</td>
-
-                <td>:</td>
-
-                <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
-
-                <td style="width:170px;">Check Out</td>
-
-                <td>
-                    :
-                    {{ $checkOut->translatedFormat('d F Y') }}
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td>Hari</td>
-
-                <td>:</td>
-
-                <td colspan="3">
-
-                    {{ $lama }} Hari
-
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td colspan="5" style="height:25px;"></td>
-
-            </tr>
-
-            {{-- Deluxe --}}
-            @if($data->jumlah_kamar_deluxe > 0)
+                <tr>
+                    <td>Alamat</td>
+                    <td>:</td>
+                    <td>{{ $data->alamat_tamu_resi_manual }}</td>
+                </tr>
 
                 <tr>
 
-                    <td>Deluxe</td>
+                    <td>Check In</td>
 
                     <td>:</td>
 
+                    <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
+
+                    <td style="width:170px;">Check Out</td>
+
                     <td>
-
-                        {{ $data->jumlah_kamar_deluxe }}
-                        x Rp.{{ number_format($hargaDLX, 0, ',', '.') }}
-                        x {{ $lama }} Hari
-
+                        :
+                        {{ $checkOut->translatedFormat('d F Y') }}
                     </td>
 
-                    <td></td>
+                </tr>
 
-                    <td>
+                <tr>
 
-                        = Rp.{{ number_format($subtotalDLX, 0, ',', '.') }}
+                    <td>Hari</td>
+
+                    <td>:</td>
+
+                    <td colspan="3">
+
+                        {{ $lama }} Hari
 
                     </td>
 
                 </tr>
 
-            @endif
+                <tr>
 
-            {{-- Superior --}}
-            @if($data->jumlah_kamar_superior > 0)
+                    <td colspan="5" style="height:25px;"></td>
+
+                </tr>
+
+                {{-- Deluxe --}}
+                @if($data->jumlah_kamar_deluxe > 0)
+
+                    <tr>
+
+                        <td>Deluxe</td>
+
+                        <td>:</td>
+
+                        <td>
+
+                            {{ $data->jumlah_kamar_deluxe }}
+                            x Rp.{{ number_format($hargaDLX, 0, ',', '.') }}
+                            x {{ $lama }} Hari
+
+                        </td>
+
+                        <td></td>
+
+                        <td>
+
+                            = Rp.{{ number_format($subtotalDLX, 0, ',', '.') }}
+
+                        </td>
+
+                    </tr>
+
+                @endif
+
+                {{-- Superior --}}
+                @if($data->jumlah_kamar_superior > 0)
+
+                    <tr>
+
+                        <td>Superior</td>
+
+                        <td>:</td>
+
+                        <td>
+
+                            {{ $data->jumlah_kamar_superior }}
+                            x Rp.{{ number_format($hargaSPR, 0, ',', '.') }}
+                            x {{ $lama }} Hari
+
+                        </td>
+
+                        <td></td>
+
+                        <td>
+
+                            = Rp.{{ number_format($subtotalSPR, 0, ',', '.') }}
+
+                        </td>
+
+                    </tr>
+
+                @endif
+
+                {{-- Standart --}}
+                @if($data->jumlah_kamar_standart > 0)
+
+                    <tr>
+
+                        <td>Standart</td>
+
+                        <td>:</td>
+
+                        <td>
+
+                            {{ $data->jumlah_kamar_standart }}
+                            x Rp.{{ number_format($hargaSTD, 0, ',', '.') }}
+                            x {{ $lama }} Hari
+
+                        </td>
+
+                        <td></td>
+
+                        <td>
+
+                            = Rp.{{ number_format($subtotalSTD, 0, ',', '.') }}
+
+                        </td>
+
+                    </tr>
+
+                @endif
+
+                {{-- Home Stay --}}
+                @if($data->jumlah_homestay > 0)
+
+                    <tr>
+
+                        <td>Home Stay</td>
+
+                        <td>:</td>
+
+                        <td>
+
+                            {{ $data->jumlah_homestay }}
+                            x Rp.{{ number_format($hargaHM, 0, ',', '.') }}
+                            x {{ $lama }} Hari
+
+                        </td>
+
+                        <td></td>
+
+                        <td>
+
+                            = Rp.{{ number_format($subtotalHM, 0, ',', '.') }}
+
+                        </td>
+
+                    </tr>
+
+                @endif
+
+                {{-- Ekstra Bed --}}
+                @if($data->jumlah_ekstrabed > 0)
+
+                    <tr>
+
+                        <td>Ekstra Bed</td>
+
+                        <td>:</td>
+
+                        <td>
+
+                            {{ $data->jumlah_ekstrabed }}
+                            x Rp.{{ number_format($hargaEB, 0, ',', '.') }}
+
+                        </td>
+
+                        <td></td>
+
+                        <td>
+
+                            = Rp.{{ number_format($subtotalEB, 0, ',', '.') }}
+
+                        </td>
+
+                    </tr>
+
+                @endif
+
+                {{-- Breakfast --}}
+                @if($data->jumlah_breakfast > 0)
+
+                    <tr>
+
+                        <td>Breakfast</td>
+
+                        <td>:</td>
+
+                        <td>
+
+                            {{ $data->jumlah_breakfast }}
+                            x Rp.{{ number_format($hargaBF, 0, ',', '.') }}
+
+                        </td>
+
+                        <td></td>
+
+                        <td>
+
+                            = Rp.{{ number_format($subtotalBF, 0, ',', '.') }}
+
+                        </td>
+
+                    </tr>
+
+                @endif
 
                 <tr>
 
-                    <td>Superior</td>
-
-                    <td>:</td>
+                    <td colspan="3"></td>
 
                     <td>
 
-                        {{ $data->jumlah_kamar_superior }}
-                        x Rp.{{ number_format($hargaSPR, 0, ',', '.') }}
-                        x {{ $lama }} Hari
+                        <hr style="border:3px solid black;">
 
                     </td>
 
-                    <td></td>
-
                     <td>
 
-                        = Rp.{{ number_format($subtotalSPR, 0, ',', '.') }}
+                        <hr style="border:3px solid black;">
 
                     </td>
 
                 </tr>
 
-            @endif
-
-            {{-- Standart --}}
-            @if($data->jumlah_kamar_standart > 0)
-
+                {{-- PAJAK --}}
                 <tr>
+                    <td colspan="3"></td>
 
-                    <td>Standart</td>
-
-                    <td>:</td>
-
-                    <td>
-
-                        {{ $data->jumlah_kamar_standart }}
-                        x Rp.{{ number_format($hargaSTD, 0, ',', '.') }}
-                        x {{ $lama }} Hari
-
+                    <td style="text-align:center;">
+                        Pajak
                     </td>
 
-                    <td></td>
+                    <td style="text-align:left;">
+                        =
+                    </td>
+                </tr>
+
+                <tr style="font-weight:bold;">
+
+                    <td colspan="3"></td>
+
+                    <td style="text-align:center;">Total</td>
 
                     <td>
 
-                        = Rp.{{ number_format($subtotalSTD, 0, ',', '.') }}
+                        = Rp.{{ number_format($grandTotal, 0, ',', '.') }}
 
                     </td>
 
                 </tr>
 
-            @endif
+            </table>
 
-            {{-- Home Stay --}}
-            @if($data->jumlah_homestay > 0)
+            <div style="width:40%;margin-left:auto;margin-top:30px;text-align:center;">
 
-                <tr>
+                Kalianda,
+                {{ Carbon::now()->translatedFormat('d F Y') }}
 
-                    <td>Home Stay</td>
+                <br><br>
 
-                    <td>:</td>
+                <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px;">
 
-                    <td>
+                <br><br>
 
-                        {{ $data->jumlah_homestay }}
-                        x Rp.{{ number_format($hargaHM, 0, ',', '.') }}
-                        x {{ $lama }} Hari
+                ( Ani Muslimah )
 
-                    </td>
-
-                    <td></td>
-
-                    <td>
-
-                        = Rp.{{ number_format($subtotalHM, 0, ',', '.') }}
-
-                    </td>
-
-                </tr>
-
-            @endif
-
-            {{-- Ekstra Bed --}}
-            @if($data->jumlah_ekstrabed > 0)
-
-                <tr>
-
-                    <td>Ekstra Bed</td>
-
-                    <td>:</td>
-
-                    <td>
-
-                        {{ $data->jumlah_ekstrabed }}
-                        x Rp.{{ number_format($hargaEB, 0, ',', '.') }}
-
-                    </td>
-
-                    <td></td>
-
-                    <td>
-
-                        = Rp.{{ number_format($subtotalEB, 0, ',', '.') }}
-
-                    </td>
-
-                </tr>
-
-            @endif
-
-            {{-- Breakfast --}}
-            @if($data->jumlah_breakfast > 0)
-
-                <tr>
-
-                    <td>Breakfast</td>
-
-                    <td>:</td>
-
-                    <td>
-
-                        {{ $data->jumlah_breakfast }}
-                        x Rp.{{ number_format($hargaBF, 0, ',', '.') }}
-
-                    </td>
-
-                    <td></td>
-
-                    <td>
-
-                        = Rp.{{ number_format($subtotalBF, 0, ',', '.') }}
-
-                    </td>
-
-                </tr>
-
-            @endif
-
-            <tr>
-
-                <td colspan="3"></td>
-
-                <td>
-
-                    <hr style="border:3px solid black;">
-
-                </td>
-
-                <td>
-
-                    <hr style="border:3px solid black;">
-
-                </td>
-
-            </tr>
-
-            {{-- PAJAK --}}
-            <tr>
-                <td colspan="3"></td>
-
-                <td style="text-align:center;">
-                    Pajak
-                </td>
-
-                <td style="text-align:left;">
-                    =
-                </td>
-            </tr>
-
-            <tr style="font-weight:bold;">
-
-                <td colspan="3"></td>
-
-                <td style="text-align:center;">Total</td>
-
-                <td>
-
-                    = Rp.{{ number_format($grandTotal, 0, ',', '.') }}
-
-                </td>
-
-            </tr>
-
-        </table>
-
-        <div style="width:40%;margin-left:auto;margin-top:30px;text-align:center;">
-
-            Kalianda,
-            {{ Carbon::now()->translatedFormat('d F Y') }}
-
-            <br><br>
-
-            <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px;">
-
-            <br><br>
-
-            ( Ani Muslimah )
+            </div>
 
         </div>
 
     </div>
 
-</div>
+    <hr style="margin:50px 0;">
 
-<hr style="margin:50px 0;">
+    <button onclick="cetakJPG()" class="btn btn-info w-100 mt-3" style="font-size:20pt;">
+        Cetak
+    </button>
 
-<button onclick="cetakJPG()" class="btn btn-info w-100 mt-3" style="font-size:20pt;">
-    Cetak
-</button>
+    <button type="button" id="btnKosongkanResi" class="btn btn-danger w-100 mt-3" style="font-size:20pt;">
+        Kosongkan
+    </button>
 
-<button type="button" class="btn btn-info w-100 mt-3" data-bs-dismiss="modal" style="font-size:20pt;">
-    Tutup
-</button>
+    <button type="button" class="btn btn-info w-100 mt-3" data-bs-dismiss="modal" style="font-size:20pt;">
+        Tutup
+    </button>
+@endsection
+@push('myscript')
+    <script>
+        $(document).on('click', '#btnKosongkanResi', function () {
+
+            Swal.fire({
+                title: 'Yakin?',
+                text: 'Seluruh data Resi Manual akan dihapus.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal',
+                confirmButtonColor: '#d33'
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+
+                    $.ajax({
+
+                        type: 'POST',
+                        url: '/KosongkanResiManual',
+
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
+
+                        beforeSend: function () {
+
+                            Swal.fire({
+                                title: 'Menghapus...',
+                                text: 'Mohon tunggu sebentar',
+                                allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            });
+
+                        },
+
+                        success: function (res) {
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: 'Resi Manual berhasil dikosongkan.'
+                            }).then(() => {
+
+                                $("#modal-lihat-resi-manual").modal("hide");
+
+                            });
+
+                        },
+
+                        error: function (xhr) {
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: xhr.responseJSON?.message ??
+                                    'Terjadi kesalahan.'
+                            });
+
+                        }
+
+                    });
+
+                }
+
+            });
+
+        });
+    </script>
+@endpush

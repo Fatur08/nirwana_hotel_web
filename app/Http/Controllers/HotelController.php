@@ -924,6 +924,37 @@ class HotelController extends Controller
 
 
 
+    public function KosongkanResiManual(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            DB::table('resi_manual')->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Resi Manual berhasil dikosongkan.'
+            ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+
+        }
+    }
+
+
+
+
+
 
 
 
