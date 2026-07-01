@@ -303,6 +303,19 @@
 
             </tr>
 
+            {{-- PAJAK --}}
+            <tr>
+                <td colspan="3"></td>
+
+                <td style="text-align:center;">
+                    Pajak
+                </td>
+
+                <td style="text-align:left;">
+                    =
+                </td>
+            </tr>
+
             <tr style="font-weight:bold;">
 
                 <td colspan="3"></td>
@@ -340,10 +353,10 @@
 
 <hr style="margin:50px 0;">
 
-<button onclick="cetakJPG()" class="btn btn-success w-100 mt-3">
+<button onclick="cetakJPG()" class="btn btn-info w-100 mt-3">
     Cetak
 </button>
 
-<button type="button" class="btn btn-success w-100 mt-3" data-bs-dismiss="modal">
+<button type="button" class="btn btn-info w-100 mt-3" data-bs-dismiss="modal">
     Tutup
 </button>
