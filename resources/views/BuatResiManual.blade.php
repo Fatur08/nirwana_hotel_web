@@ -62,12 +62,12 @@
         }
 
 
-        @media (min-width: 1000px) {
+        @media (min-width: 10000px) {
 
             input[type="date"] {
                 font-size: 26px;
                 padding: 18px 20px;
-                height: 650px;
+                height: 6500px;
             }
 
         }
