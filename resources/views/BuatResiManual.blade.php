@@ -191,27 +191,27 @@
                 Jumlah Kamar
             </h4>
 
-            <div class="row">
+            <div class="row mb-4">
 
-                <div class="col-md-3 mb-2">
+                <div class="col-md-3 mb-3">
                     <label style="font-size:16pt;">Deluxe</label>
 
                     <input type="number" name="deluxe" class="form-control" min="0" value="0">
                 </div>
 
-                <div class="col-md-3 mb-2">
+                <div class="col-md-3 mb-3">
                     <label style="font-size:16pt;">Superior</label>
 
                     <input type="number" name="superior" class="form-control" min="0" value="0">
                 </div>
 
-                <div class="col-md-3 mb-2">
+                <div class="col-md-3 mb-3">
                     <label style="font-size:16pt;">Standart</label>
 
                     <input type="number" name="standart" class="form-control" min="0" value="0">
                 </div>
 
-                <div class="col-md-3 mb-2">
+                <div class="col-md-3 mb-3">
                     <label style="font-size:16pt;">Home Stay</label>
 
                     <input type="number" name="homestay" class="form-control" min="0" value="0">
