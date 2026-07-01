@@ -222,17 +222,11 @@
 
 
             <div class="text-end mt-4">
-
-                <button class="btn btn-info btn-lg" style="font-size:16pt;">
-
+                <button class="btn btn-info btn-lg w-100" style="font-size:20pt;">
                     Simpan
-
                 </button>
-
             </div>
-
         </form>
-
     </div>
 @endsection
 @push('myscript')
