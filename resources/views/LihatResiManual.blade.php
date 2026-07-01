@@ -373,13 +373,18 @@
 
     <hr style="margin:50px 0;">
 
-    <button onclick="cetakJPG()" class="btn btn-info w-100 mt-3" style="font-size:20pt;">
-        Cetak
-    </button>
 
-    <button type="button" id="btnKosongkanResi" class="btn btn-danger w-100 mt-3" style="font-size:20pt;">
-        Kosongkan
-    </button>
+    @if($data)
+
+        <button onclick="cetakJPG()" class="btn btn-info w-100 mt-3" style="font-size:20pt;">
+            Cetak
+        </button>
+
+        <button type="button" id="btnKosongkanResi" class="btn btn-danger w-100 mt-3" style="font-size:20pt;">
+            Kosongkan
+        </button>
+
+    @endif
 
     <button type="button" class="btn btn-info w-100 mt-3" data-bs-dismiss="modal" style="font-size:20pt;">
         Tutup
