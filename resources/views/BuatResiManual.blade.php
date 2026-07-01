@@ -3,7 +3,7 @@
     <style>
         .tanggal-wrapper {
             position: relative;
-            width: 200%;
+            width: 1000%;
         }
 
         .tanggal-asli {
@@ -11,8 +11,8 @@
             position: absolute;
             inset: 0;
 
-            width: 200%;
-            height: 200%;
+            width: 100%;
+            height: 100%;
 
             opacity: 0;
 
@@ -28,7 +28,7 @@
 
             border-radius: 8px;
 
-            min-height: 580px;
+            min-height: 58px;
 
             display: flex;
 
