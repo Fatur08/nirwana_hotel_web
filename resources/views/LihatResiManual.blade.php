@@ -22,14 +22,14 @@
     $hargaBF = 30000;
 
     // Subtotal kamar
-    $subtotalDLX = $data->jumlah_kamar_deluxe * $hargaDLX * $lama;
-    $subtotalSPR = $data->jumlah_kamar_superior * $hargaSPR * $lama;
-    $subtotalSTD = $data->jumlah_kamar_standart * $hargaSTD * $lama;
-    $subtotalHM = $data->jumlah_homestay * $hargaHM * $lama;
+    $subtotalDLX = ($data->jumlah_kamar_deluxe ?? 0) * $hargaDLX * $lama;
+    $subtotalSPR = ($data->jumlah_kamar_superior ?? 0) * $hargaSPR * $lama;
+    $subtotalSTD = ($data->jumlah_kamar_standart ?? 0) * $hargaSTD * $lama;
+    $subtotalHM = ($data->jumlah_homestay ?? 0) * $hargaHM * $lama;
 
     // Request
-    $subtotalEB = $data->jumlah_ekstrabed * $hargaEB;
-    $subtotalBF = $data->jumlah_breakfast * $hargaBF;
+    $subtotalEB = ($data->jumlah_ekstrabed ?? 0) * $hargaEB;
+    $subtotalBF = ($data->jumlah_breakfast ?? 0) * $hargaBF;
 
     // Grand Total
     $grandTotal =
@@ -91,13 +91,13 @@
 
                     <td>:</td>
 
-                    <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
+                    <td>{{ $checkIn ? $checkIn->translatedFormat('d F Y') : '-' }}</td>
 
                     <td style="width:170px;">Check Out</td>
 
                     <td>
                         :
-                        {{ $checkOut->translatedFormat('d F Y') }}
+                        {{ $checkOut ? $checkOut->translatedFormat('d F Y') : '-' }}
                     </td>
 
                 </tr>
@@ -122,8 +122,19 @@
 
                 </tr>
 
+
+                @if(!$data)
+
+                    <tr>
+                        <td colspan="5" class="text-center" style="padding:30px;color:#999;">
+                            Belum ada data Resi Manual.
+                        </td>
+                    </tr>
+
+                @endif
+
                 {{-- Deluxe --}}
-                @if($data->jumlah_kamar_deluxe > 0)
+                @if(($data->jumlah_kamar_deluxe ?? 0) > 0)
 
                     <tr>
 
@@ -152,7 +163,7 @@
                 @endif
 
                 {{-- Superior --}}
-                @if($data->jumlah_kamar_superior > 0)
+                @if(($data->jumlah_kamar_superior ?? 0) > 0)
 
                     <tr>
 
@@ -181,7 +192,7 @@
                 @endif
 
                 {{-- Standart --}}
-                @if($data->jumlah_kamar_standart > 0)
+                @if(($data->jumlah_kamar_standart ?? 0) > 0)
 
                     <tr>
 
@@ -210,7 +221,7 @@
                 @endif
 
                 {{-- Home Stay --}}
-                @if($data->jumlah_homestay > 0)
+                @if(($data->jumlah_homestay ?? 0) > 0)
 
                     <tr>
 
@@ -239,7 +250,7 @@
                 @endif
 
                 {{-- Ekstra Bed --}}
-                @if($data->jumlah_ekstrabed > 0)
+                @if(($data->jumlah_ekstrabed ?? 0) > 0)
 
                     <tr>
 
@@ -267,7 +278,7 @@
                 @endif
 
                 {{-- Breakfast --}}
-                @if($data->jumlah_breakfast > 0)
+                @if(($data->jumlah_breakfast ?? 0) > 0)
 
                     <tr>
 
