@@ -913,6 +913,22 @@ class HotelController extends Controller
 
 
 
+    public function LihatResiManual(Request $request)
+    {
+        $resiManual = DB::table('resi_manual')
+            ->orderByDesc('id_resi_manual')
+            ->get();
+
+        return view('LihatResiManual', compact('resiManual'));
+    }
+
+
+
+
+
+
+
+
 
     public function ModalInfo(Request $request)
     {

@@ -46,6 +46,9 @@ Route::post('/BuatResiManual', [HotelController::class, 'BuatResiManual']);
 Route::post('/store_BuatResiManual', [HotelController::class, 'store_BuatResiManual']);
 
 
+Route::post('/LihatResiManual', [HotelController::class, 'LihatResiManual']);
+
+
 Route::post('/ModalInfo', [HotelController::class, 'ModalInfo']);
 
 
