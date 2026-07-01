@@ -156,7 +156,7 @@
 
             <hr>
 
-            <h4 class="mb-5" style="font-size:16pt;">
+            <h4 class="mb-4" style="font-size:16pt;">
                 Jumlah Kamar
             </h4>
 
