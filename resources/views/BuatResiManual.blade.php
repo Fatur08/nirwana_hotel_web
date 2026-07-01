@@ -91,7 +91,7 @@
                         Nama Tamu
                     </label>
 
-                    <input type="text" name="nama_tamu_resi_manual" class="form-control">
+                    <input type="text" id="nama_tamu_resi_manual" name="nama_tamu_resi_manual" class="form-control">
                 </div>
 
                 <div class="col-md-6">
@@ -99,7 +99,7 @@
                         Alamat
                     </label>
 
-                    <input type="text" name="alamat_tamu_resi_manual" class="form-control">
+                    <input type="text" id="alamat_tamu_resi_manual" name="alamat_tamu_resi_manual" class="form-control">
                 </div>
 
             </div>
