@@ -74,19 +74,19 @@
             <div class="row mb-3">
 
                 <div class="col-md-6">
-                    <label class="form-label fw-bold">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
                         Nama Tamu
                     </label>
 
-                    <input type="text" name="nama_tamu" class="form-control" style="font-size:16pt;" required>
+                    <input type="text" name="nama_tamu" class="form-control" required>
                 </div>
 
                 <div class="col-md-6">
-                    <label class="form-label fw-bold">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
                         Alamat
                     </label>
 
-                    <input type="text" name="alamat" class="form-control" style="font-size:16pt;" required>
+                    <input type="text" name="alamat" class="form-control" required>
                 </div>
 
             </div>
