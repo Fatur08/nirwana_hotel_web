@@ -91,7 +91,7 @@
                         Nama Tamu
                     </label>
 
-                    <input type="text" name="nama_tamu_resi_manual" class="form-control" required>
+                    <input type="text" name="nama_tamu_resi_manual" class="form-control">
                 </div>
 
                 <div class="col-md-6">
@@ -99,7 +99,7 @@
                         Alamat
                     </label>
 
-                    <input type="text" name="alamat_tamu_resi_manual" class="form-control" required>
+                    <input type="text" name="alamat_tamu_resi_manual" class="form-control">
                 </div>
 
             </div>
@@ -118,7 +118,7 @@
                 <div class="tanggal-wrapper">
 
                     <!-- Input date asli -->
-                    <input type="date" id="check_in_resi_manual" name="check_in_resi_manual" class="tanggal-asli" required>
+                    <input type="date" id="check_in_resi_manual" name="check_in_resi_manual" class="tanggal-asli">
 
                     <!-- Tampilan -->
                     <div class="tanggal-view">
@@ -157,8 +157,7 @@
 
                 <div class="tanggal-wrapper">
 
-                    <input type="date" id="check_out_resi_manual" name="check_out_resi_manual" class="tanggal-asli"
-                        required>
+                    <input type="date" id="check_out_resi_manual" name="check_out_resi_manual" class="tanggal-asli">
 
                     <div class="tanggal-view">
 
