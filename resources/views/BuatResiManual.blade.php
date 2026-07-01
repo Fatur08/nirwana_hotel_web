@@ -71,7 +71,7 @@
             {{-- DATA TAMU --}}
             {{-- ========================= --}}
 
-            <div class="row mb-3">
+            <div class="row mb-5">
 
                 <div class="col-md-6">
                     <label class="form-label fw-bold" style="font-size:16pt;">
@@ -156,7 +156,7 @@
 
             <hr>
 
-            <h4 class="mb-3" style="font-size:16pt;">
+            <h4 class="mb-5" style="font-size:16pt;">
                 Jumlah Kamar
             </h4>
 
@@ -191,7 +191,7 @@
 
             <hr>
 
-            <h4 class="mb-3" style="font-size:16pt;">
+            <h4 class="mt-3 mb-4" style="font-size:16pt;">
                 Request Tambahan
             </h4>
 
