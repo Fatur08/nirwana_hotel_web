@@ -863,6 +863,54 @@ class HotelController extends Controller
 
 
 
+    public function store_BuatResiManual(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            DB::table('resi_manual')->insert([
+
+                'nama_tamu_resi_manual' => $request->nama_tamu_resi_manual,
+                'alamat_tamu_resi_manual' => $request->alamat_tamu_resi_manual,
+
+                'check_in' => $request->check_in_resi_manual,
+                'check_out' => $request->check_out_resi_manual,
+
+                'jumlah_kamar_deluxe' => $request->jumlah_kamar_deluxe,
+                'jumlah_kamar_superior' => $request->jumlah_kamar_superior,
+                'jumlah_kamar_standart' => $request->jumlah_kamar_standart,
+                'jumlah_homestay' => $request->jumlah_homestay,
+
+                'jumlah_ekstrabed' => $request->jumlah_ekstrabed,
+                'jumlah_breakfast' => $request->jumlah_breakfast,
+
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data resi manual berhasil disimpan.'
+            ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+
+        }
+    }
+
+
+
+
+
+
 
 
 

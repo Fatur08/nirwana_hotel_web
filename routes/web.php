@@ -43,6 +43,9 @@ Route::get('/InformasiPemesanan', [HotelController::class, 'InformasiPemesanan']
 Route::post('/BuatResiManual', [HotelController::class, 'BuatResiManual']);
 
 
+Route::post('/store_BuatResiManual', [HotelController::class, 'store_BuatResiManual']);
+
+
 Route::post('/ModalInfo', [HotelController::class, 'ModalInfo']);
 
 

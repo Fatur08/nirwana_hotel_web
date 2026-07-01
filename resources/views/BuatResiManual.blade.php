@@ -7,58 +7,36 @@
         }
 
         .tanggal-asli {
-
             position: absolute;
             inset: 0;
-
             width: 100%;
             height: 100%;
-
             opacity: 0;
-
             cursor: pointer;
-
             z-index: 10;
-
         }
 
         .tanggal-view {
-
             border: 1px solid #ced4da;
-
             border-radius: 8px;
-
             min-height: 58px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             padding: 0 18px;
-
             font-size: 20px;
-
             background: #fff;
-
         }
 
         .icon {
-
             margin-right: 10px;
-
         }
 
         #check_in_text,
         #check_out_text {
-
             flex: 1;
-
             margin-left: 10px;
-
             color: #444;
-
         }
 
 
@@ -76,7 +54,7 @@
     </style>
     <div class="card-body">
 
-        <form action="{{ url('BuatResiManual/store') }}" id="FormResiManual" method="POST">
+        <form action="{{ url('store_BuatResiManual') }}" id="FormResiManual" method="POST">
 
             @csrf
 
@@ -349,7 +327,7 @@
             }
 
             if (alamat_tamu_resi_manual == '') {
-                showError('Nama Tamu Harus Diisi', '#alamat_tamu_resi_manual');
+                showError('Alamat Tamu Harus Diisi', '#alamat_tamu_resi_manual');
                 return;
             }
 
