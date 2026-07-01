@@ -28,7 +28,7 @@
 
             border-radius: 8px;
 
-            min-height: 58px;
+            min-height: 580px;
 
             display: flex;
 
