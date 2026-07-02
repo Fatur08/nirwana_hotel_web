@@ -1114,6 +1114,95 @@ class HotelController extends Controller
 
 
 
+
+
+    public function UploadFotoKTP(Request $request)
+    {
+        try {
+
+            $request->validate([
+                'foto_ktp' => 'required|image|mimes:jpg,jpeg,png|max:5120'
+            ]);
+
+            $foto = null;
+
+            if ($request->hasFile('foto_ktp')) {
+
+                $namaTamu = DB::table('rincian_pesanan')
+                    ->where('id_rincian_pesanan', $request->id_rincian_pesanan)
+                    ->value('nama_tamu');
+
+                $timestamp = now()->format('Y-m-d_H-i-s');
+
+                $nama = str_replace(' ', '_', $namaTamu);
+
+                $foto = "Foto_KTP_" .
+                    $nama .
+                    "_" .
+                    $timestamp .
+                    "." .
+                    $request->file('foto_ktp')->extension();
+
+                $storagePath = 'public/uploads/foto_ktp/';
+
+                $request->file('foto_ktp')->storeAs(
+                    $storagePath,
+                    $foto
+                );
+
+                $publicPath = public_path(
+                    'storage/uploads/foto_ktp/'
+                );
+
+                if (!is_dir($publicPath)) {
+
+                    mkdir($publicPath, 0777, true);
+
+                }
+
+                copy(
+                    storage_path(
+                        'app/' .
+                        $storagePath .
+                        $foto
+                    ),
+                    public_path(
+                        'storage/uploads/foto_ktp/' .
+                        $foto
+                    )
+                );
+            }
+
+            DB::table('laporan_keuangan')
+                ->where(
+                    'id_rincian_pesanan',
+                    $request->id_rincian_pesanan
+                )
+                ->update([
+                    'foto_ktp' => $foto
+                ]);
+
+            return response()->json([
+                'success' => true
+            ]);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+
+        }
+    }
+
+
+
+
+
+
+
+
     public function ModalResi(Request $request)
     {
         $id = $request->id_rincian_pesanan;

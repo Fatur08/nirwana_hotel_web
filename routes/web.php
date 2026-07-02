@@ -73,6 +73,9 @@ Route::post('/ModalPembayaran/{id}/BatalkanPembayaran', [HotelController::class,
 Route::post('/LihatBukti', [HotelController::class, 'LihatBukti']);
 
 
+Route::post('/UploadFotoKTP', [HotelController::class, 'UploadFotoKTP']);
+
+
 Route::post('/ModalEdit', [HotelController::class, 'ModalEdit']);
 
 
