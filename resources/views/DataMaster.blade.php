@@ -181,170 +181,171 @@
 
 
 
-    <div class="kotak-pesan">
-        <div class="row mt-3">
-            <!-- KAMAR DELUXE -->
-            <div class="col-6 mb-3">
-                <div class="kotak-dlx h-100 p-4 text-center">
+    <!--<div class="kotak-pesan">
+            <div class="row mt-3">
+                {{-- KAMAR DELUXE --}}
+                <div class="col-6 mb-3">
+                    <div class="kotak-dlx h-100 p-4 text-center">
 
-                    <p class="mb-3">Kamar Deluxe</p>
+                        <p class="mb-3">Kamar Deluxe</p>
 
-                    <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded mb-3"
-                        style="max-height:180px;">
+                        <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded mb-3"
+                            style="max-height:180px;">
 
-                    <p class="mb-4">
-                        Total Kamar :<br>
-                        {{ $kamarSingleDLX }} Kamar Single Bed
-                        <br>
-                        {{ $kamarDoubleDLX }} Kamar Double Bed
-                        <br>
-                    </p>
+                        <p class="mb-4">
+                            Total Kamar :<br>
+                            {{ $kamarSingleDLX }} Kamar Single Bed
+                            <br>
+                            {{ $kamarDoubleDLX }} Kamar Double Bed
+                            <br>
+                        </p>
 
-                    <p class="mb-4">
-                        Total Harga per Kamar :<br>
-                        <span style="font-size:24px;font-weight:700;color:#00ff79;">
-                            Rp.{{ number_format($tarifKamar['DLX']->tarif_per_hari ?? 0, 0, ',', '.') }}
-                        </span>
-                        / malam
-                    </p>
+                        <p class="mb-4">
+                            Total Harga per Kamar :<br>
+                            <span style="font-size:24px;font-weight:700;color:#00ff79;">
+                                Rp.{{ number_format($tarifKamar['DLX']->tarif_per_hari ?? 0, 0, ',', '.') }}
+                            </span>
+                            / malam
+                        </p>
 
-                    <a href="#" class="TambahKamarDeluxe btn btn-success w-100 mb-2" style="font-size:20pt;"
-                        kode_kamar="DLX">
-                        Tambah Kamar
-                    </a>
-                    <a href="#" class="EditHargaDeluxe btn btn-warning w-100 mb-2" style="font-size:20pt;" kode_kamar="DLX">
-                        Edit Harga
-                    </a>
-                    <a href="#" class="HapusKamarDeluxe btn btn-danger w-100" style="font-size:20pt;" kode_kamar="DLX">
-                        Hapus Kamar
-                    </a>
+                        <a href="#" class="TambahKamarDeluxe btn btn-success w-100 mb-2" style="font-size:20pt;"
+                            kode_kamar="DLX">
+                            Tambah Kamar
+                        </a>
+                        <a href="#" class="EditHargaDeluxe btn btn-warning w-100 mb-2" style="font-size:20pt;" kode_kamar="DLX">
+                            Edit Harga
+                        </a>
+                        <a href="#" class="HapusKamarDeluxe btn btn-danger w-100" style="font-size:20pt;" kode_kamar="DLX">
+                            Hapus Kamar
+                        </a>
+                    </div>
+                </div>
+
+                {{-- HOME STAY --}}
+                <div class="col-6 mb-3">
+                    <div class="kotak-hmsty h-100 p-4 text-center">
+
+                        <p class="mb-3">Home Stay</p>
+
+                        <img src="{{ asset('assets/img/homestay.jpg') }}" class="img-fluid rounded mb-3"
+                            style="max-height:180px;">
+
+                        <p class="mb-4">
+                            Total Kamar :<br>
+                            {{ $SingleHMSTY }} Kamar Single Bed
+                            <br>
+                            {{ $DoubleHMSTY }} Kamar Double Bed
+                        </p>
+
+                        <p class="mb-4">
+                            Total Harga per Kamar :<br>
+                            <span style="font-size:24px;font-weight:700;color:#8F00FF;">
+                                Rp.{{ number_format($tarifKamar['HMSTY']->tarif_per_hari ?? 0, 0, ',', '.') }}
+                            </span>
+                            / malam
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- HOME STAY -->
-            <div class="col-6 mb-3">
-                <div class="kotak-hmsty h-100 p-4 text-center">
 
-                    <p class="mb-3">Home Stay</p>
+            <div class="row mt-3">
 
-                    <img src="{{ asset('assets/img/homestay.jpg') }}" class="img-fluid rounded mb-3"
-                        style="max-height:180px;">
+                {{-- KAMAR SUPERIOR --}}
+                <div class="col-6 mb-3">
+                    <div class="kotak-spr h-100 p-4 text-center">
 
-                    <p class="mb-4">
-                        Total Kamar :<br>
-                        {{ $SingleHMSTY }} Kamar Single Bed
-                        <br>
-                        {{ $DoubleHMSTY }} Kamar Double Bed
-                    </p>
+                        <p class="mb-3">Kamar Superior</p>
 
-                    <p class="mb-4">
-                        Total Harga per Kamar :<br>
-                        <span style="font-size:24px;font-weight:700;color:#8F00FF;">
-                            Rp.{{ number_format($tarifKamar['HMSTY']->tarif_per_hari ?? 0, 0, ',', '.') }}
-                        </span>
-                        / malam
-                    </p>
+                        <img src="{{ asset('assets/img/kamar_superior.jpg') }}" class="img-fluid rounded mb-3"
+                            style="max-height:180px;">
+
+                        <p class="mb-4">
+                            Total Kamar :<br>
+                            {{ $kamarSingleSPR }} Kamar Single Bed
+                            <br>
+                            {{ $kamarDoubleSPR }} Kamar Double Bed
+                        </p>
+
+
+                        <p class="mb-4">
+                            Total Harga per Kamar :<br>
+                            <span style="font-size:24px;font-weight:700;color:#f8f9fa;">
+                                Rp.{{ number_format($tarifKamar['SPR']->tarif_per_hari ?? 0, 0, ',', '.') }}
+                            </span>
+                            / malam
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </div>
 
+                {{-- KAMAR STANDART --}}
+                <div class="col-6 mb-3">
+                    <div class="kotak-std h-100 p-4 text-center">
 
-        <div class="row mt-3">
+                        <p class="mb-3">Kamar Standar</p>
 
-            <!-- KAMAR SUPERIOR -->
-            <div class="col-6 mb-3">
-                <div class="kotak-spr h-100 p-4 text-center">
+                        <img src="{{ asset('assets/img/kamar_standar.jpg') }}" class="img-fluid rounded mb-3"
+                            style="max-height:180px;">
 
-                    <p class="mb-3">Kamar Superior</p>
+                        <p class="mb-4">
+                            Total Kamar :<br>
+                            {{ $kamarSingleSTD }} Kamar Single Bed
+                            <br>
+                            {{ $kamarDoubleSTD }} Kamar Double Bed
+                        </p>
 
-                    <img src="{{ asset('assets/img/kamar_superior.jpg') }}" class="img-fluid rounded mb-3"
-                        style="max-height:180px;">
-
-                    <p class="mb-4">
-                        Total Kamar :<br>
-                        {{ $kamarSingleSPR }} Kamar Single Bed
-                        <br>
-                        {{ $kamarDoubleSPR }} Kamar Double Bed
-                    </p>
-
-
-                    <p class="mb-4">
-                        Total Harga per Kamar :<br>
-                        <span style="font-size:24px;font-weight:700;color:#f8f9fa;">
-                            Rp.{{ number_format($tarifKamar['SPR']->tarif_per_hari ?? 0, 0, ',', '.') }}
-                        </span>
-                        / malam
-                    </p>
-                </div>
-            </div>
-
-            <!-- KAMAR STANDAR -->
-            <div class="col-6 mb-3">
-                <div class="kotak-std h-100 p-4 text-center">
-
-                    <p class="mb-3">Kamar Standar</p>
-
-                    <img src="{{ asset('assets/img/kamar_standar.jpg') }}" class="img-fluid rounded mb-3"
-                        style="max-height:180px;">
-
-                    <p class="mb-4">
-                        Total Kamar :<br>
-                        {{ $kamarSingleSTD }} Kamar Single Bed
-                        <br>
-                        {{ $kamarDoubleSTD }} Kamar Double Bed
-                    </p>
-
-                    <p class="mb-4">
-                        Total Harga per Kamar :<br>
-                        <span style="font-size:24px;font-weight:700;color:#8F00FF;">
-                            Rp.{{ number_format($tarifKamar['STD']->tarif_per_hari ?? 0, 0, ',', '.') }}
-                        </span>
-                        / malam
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-3">
-            <!-- EKSTRA BED -->
-            <div class="col-6 mb-3">
-                <div class="kotak-ekstrabed h-100 p-4 text-center">
-
-                    <p class="mb-3">Ekstra Bed</p>
-
-                    <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded mb-3"
-                        style="max-height:180px;">
-
-                    <p class="mb-2">
-                        Total Harga per Item :<br>
-                        Rp.60.000
-                    </p>
-
-                    <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
-                        Simpan Harga
-                    </a>
+                        <p class="mb-4">
+                            Total Harga per Kamar :<br>
+                            <span style="font-size:24px;font-weight:700;color:#8F00FF;">
+                                Rp.{{ number_format($tarifKamar['STD']->tarif_per_hari ?? 0, 0, ',', '.') }}
+                            </span>
+                            / malam
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- BREAKFAST -->
-            <div class="col-6 mb-3">
-                <div class="kotak-breakfast h-100 p-4 text-center">
+            <div class="row mt-3">
 
-                    <p class="mb-3">Breakfast</p>
+                {{-- EKSTRA BED --}}
+                <div class="col-6 mb-3">
+                    <div class="kotak-ekstrabed h-100 p-4 text-center">
 
-                    <img src="{{ asset('assets/img/homestay.jpg') }}" class="img-fluid rounded mb-3"
-                        style="max-height:180px;">
+                        <p class="mb-3">Ekstra Bed</p>
 
-                    <p class="mb-2">
-                        Total Kamar :<br>
-                        {{ $SingleHMSTY }} Kamar Single Bed
-                        <br>
-                        {{ $DoubleHMSTY }} Kamar Double Bed
-                    </p>
+                        <img src="{{ asset('assets/img/kamar_deluxe.jpg') }}" class="img-fluid rounded mb-3"
+                            style="max-height:180px;">
+
+                        <p class="mb-2">
+                            Total Harga per Item :<br>
+                            Rp.60.000
+                        </p>
+
+                        <a href="{{ url('/') }}" class="btn btn-success w-100 mb-2" style="font-size:20pt;">
+                            Simpan Harga
+                        </a>
+                    </div>
+                </div>
+
+                {{-- BREAKFAST --}}
+                <div class="col-6 mb-3">
+                    <div class="kotak-breakfast h-100 p-4 text-center">
+
+                        <p class="mb-3">Breakfast</p>
+
+                        <img src="{{ asset('assets/img/homestay.jpg') }}" class="img-fluid rounded mb-3"
+                            style="max-height:180px;">
+
+                        <p class="mb-2">
+                            Total Kamar :<br>
+                            {{ $SingleHMSTY }} Kamar Single Bed
+                            <br>
+                            {{ $DoubleHMSTY }} Kamar Double Bed
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>-->
 
 
 
