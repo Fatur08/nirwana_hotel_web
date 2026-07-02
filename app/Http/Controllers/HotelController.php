@@ -244,6 +244,7 @@ class HotelController extends Controller
     {
         $checkIn = $request->check_in;
         $checkOut = $request->check_out;
+        $idRincian = $request->id_rincian_pesanan;
 
         if (!$checkIn || !$checkOut) {
             return response()->json([]);
@@ -252,18 +253,20 @@ class HotelController extends Controller
         $kamarTersedia = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
 
-            ->whereNotIn('nk.id_nomor_kamar', function ($q) use ($checkIn, $checkOut) {
+            ->whereNotIn('nk.id_nomor_kamar', function ($q) use ($checkIn, $checkOut, $idRincian) {
 
                 $q->select('id_nomor_kamar')
                     ->from('histori_kamar')
 
-                    // cek kamar yang bentrok tanggal
                     ->where(function ($query) use ($checkIn, $checkOut) {
 
                         $query->whereDate('check_in', '<', $checkOut)
                             ->whereDate('check_out', '>', $checkIn);
 
-                    });
+                    })
+
+                    // <<< BAGIAN PALING PENTING
+                    ->where('id_rincian_pesanan', '!=', $idRincian);
 
             })
 
@@ -277,7 +280,6 @@ class HotelController extends Controller
 
             ->orderBy('k.id_kamar')
             ->orderBy('nk.nomor_kamar')
-
             ->get();
 
         return response()->json($kamarTersedia);
