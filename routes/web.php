@@ -16,6 +16,9 @@ Route::post('/PesanKamar', [HotelController::class, 'PesanKamar']);
 Route::post('/getKamarTersedia', [HotelController::class, 'getKamarTersedia']);
 
 
+Route::post('/getKamarTersediaEdit', [HotelController::class, 'getKamarTersediaEdit']);
+
+
 Route::post('/getRequestHotel', [HotelController::class, 'getRequestHotel']);
 
 
