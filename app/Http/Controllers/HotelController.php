@@ -241,37 +241,42 @@ class HotelController extends Controller
 
     public function getKamarTersedia(Request $request)
     {
-        $tanggal = $request->tanggal;
-        $tipe = $request->tipe_kamar;
+        $checkIn = $request->check_in;
+        $checkOut = $request->check_out;
 
-        // ✅ Proteksi agar tidak error
-        if (!$tanggal || !$tipe) {
+        if (!$checkIn || !$checkOut) {
             return response()->json([]);
         }
 
         $kamarTersedia = DB::table('nomor_kamar as nk')
             ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
 
-            ->where('k.id_kamar', $tipe)
+            ->whereNotIn('nk.id_nomor_kamar', function ($q) use ($checkIn, $checkOut) {
 
-            // ✅ HANYA AMBIL BED 1 ATAU 2
-            ->whereIn('nk.jenis_bed', [1, 2])
-
-            // cek kamar yang sedang terpakai
-            ->whereNotIn('nk.id_nomor_kamar', function ($q) use ($tanggal) {
                 $q->select('id_nomor_kamar')
                     ->from('histori_kamar')
-                    ->whereDate('check_in', '<=', $tanggal)
-                    ->whereDate('check_out', '>', $tanggal);
+
+                    // kamar yang bentrok tanggal
+                    ->where(function ($query) use ($checkIn, $checkOut) {
+
+                        $query->whereDate('check_in', '<', $checkOut)
+                            ->whereDate('check_out', '>', $checkIn);
+
+                    });
+
             })
 
             ->select(
                 'nk.id_nomor_kamar',
                 'nk.nomor_kamar',
                 'nk.jenis_bed',
-                'k.kode_kamar',
+                'k.id_kamar',
                 'k.tipe_kamar'
             )
+
+            ->orderBy('k.id_kamar')
+            ->orderBy('nk.nomor_kamar')
+
             ->get();
 
         return response()->json($kamarTersedia);
