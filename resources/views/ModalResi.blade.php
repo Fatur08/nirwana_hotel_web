@@ -97,13 +97,11 @@
 
                     <td style="text-align:center;">:</td>
 
-                    <td>
+                    <td colspan="2">
                         {{ $item['jumlah'] }}
                         x Rp.{{ number_format($item['tarif'], 0, ',', '.') }}
                         x {{ $lama }} Hari
                     </td>
-
-                    <td style="text-align:center;"></td>
 
                     <td style="text-align:left;">
                         = Rp.{{ number_format($item['subtotal'], 0, ',', '.') }}
