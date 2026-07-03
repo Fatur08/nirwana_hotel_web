@@ -35,7 +35,7 @@
             $checkOut = Carbon::parse($histori->check_out);
         @endphp
 
-        <table style="width:100%; font-size:14pt; border:1px solid #000;">
+        <table border="1" style="width:100%; font-size:14pt; border-collapse:collapse;">
 
             {{-- IDENTITAS --}}
             <tr>
