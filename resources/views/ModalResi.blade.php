@@ -72,7 +72,7 @@
             <tr>
                 <td>Check - In</td>
                 <td style="text-align:center;">:</td>
-                <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
+                <td style="width:150px;">{{ $checkIn->translatedFormat('d F Y') }}</td>
 
                 <td colspan="2" style="width:180px; text-align:left;">Check - Out :
                     {{ $checkOut->translatedFormat('d F Y') }}
