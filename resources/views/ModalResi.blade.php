@@ -104,7 +104,7 @@
                         x {{ $lama }} Hari
                     </td>
 
-                    <td style="text-align:left;">
+                    <td style="width:150px; text-align:left;">
                         = Rp.{{ number_format($item['subtotal'], 0, ',', '.') }}
                     </td>
 
@@ -124,14 +124,12 @@
 
                     <td style="text-align:center;">:</td>
 
-                    <td>
+                    <td colspan="2">
                         {{ $req->jumlah_request }}
                         x Rp.{{ number_format($req->tarif_per_hari, 0, ',', '.') }}
                     </td>
 
-                    <td style="text-align:center;"></td>
-
-                    <td style="text-align:left;">
+                    <td style="width:150px; text-align:left;">
                         = Rp.{{ number_format($req->total_harga, 0, ',', '.') }}
                     </td>
 
@@ -150,7 +148,7 @@
             <tr>
                 <td colspan="4"></td>
 
-                <td style="text-align:left;">
+                <td style="width:150px; text-align:left;">
                     = Rp.{{ number_format($subTotal, 0, ',', '.') }}
                 </td>
             </tr>
@@ -161,7 +159,7 @@
                     Pajak
                 </td>
 
-                <td style="text-align:left;">
+                <td style="width:150px; text-align:left;">
                     = <!--Rp.{{ number_format($pajak, 0, ',', '.') }}-->
                 </td>
             </tr>
@@ -172,7 +170,7 @@
                     Total
                 </td>
 
-                <td style="text-align:left;">
+                <td style="width:150px; text-align:left;">
                     = Rp.{{ number_format($grandTotal, 0, ',', '.') }}
                 </td>
             </tr>
