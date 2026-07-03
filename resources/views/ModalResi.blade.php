@@ -165,7 +165,7 @@
         <div style="width:40%; margin-left:auto; margin-top:30px; text-align:center;">
             Kalianda, {{ Carbon::now()->translatedFormat('d F Y') }}
             <br><br>
-            <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px; position:relative; left:-25px;">
+            <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px; position:relative; left:-50px;">
             <br><br>
             ( Ani Muslimah )
         </div>
