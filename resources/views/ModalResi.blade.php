@@ -72,9 +72,9 @@
             <tr>
                 <td>Check - In</td>
                 <td style="text-align:center;">:</td>
-                <td style="width:150px;">{{ $checkIn->translatedFormat('d F Y') }}</td>
+                <td style="width:170px;">{{ $checkIn->translatedFormat('d F Y') }}</td>
 
-                <td colspan="2" style="width:180px; text-align:left;">Check - Out :
+                <td colspan="2" style="width:160px; text-align:left;">Check - Out :
                     {{ $checkOut->translatedFormat('d F Y') }}
                 </td>
             </tr>
@@ -140,8 +140,8 @@
 
             {{-- GARIS --}}
             <tr>
-                <td colspan="3"></td>
-                <td colspan="2">
+                <td colspan="4"></td>
+                <td colspan="1">
                     <hr style="margin:5px 0;border:3px solid #000000;">
                 </td>
             </tr>
