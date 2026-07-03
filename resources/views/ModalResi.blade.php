@@ -73,7 +73,7 @@
                 <td>Check - In</td>
                 <td style="text-align:center;">:</td>
                 {{-- <td style="width:190px;">{{ $checkIn->translatedFormat('d F Y') }}</td> --}}
-                <td style="width:300px;">30 Desember 2026</td>
+                <td style="width:200px;">30 Desember 2026</td>
 
                 <td colspan="2" style="width:160px; text-align:left;">
                     Check - Out&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
