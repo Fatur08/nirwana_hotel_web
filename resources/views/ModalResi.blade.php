@@ -75,7 +75,8 @@
                 <td>{{ $checkIn->translatedFormat('d F Y') }}</td>
 
                 <td colspan="2" style="width:180px; text-align:left;">Check - Out :
-                    {{ $checkOut->translatedFormat('d F Y') }}</td>
+                    {{ $checkOut->translatedFormat('d F Y') }}
+                </td>
             </tr>
 
             <tr>
@@ -147,11 +148,7 @@
 
             {{-- SUBTOTAL --}}
             <tr>
-                <td colspan="3"></td>
-
-                <td style="text-align:right;">
-
-                </td>
+                <td colspan="4"></td>
 
                 <td style="text-align:left;">
                     = Rp.{{ number_format($subTotal, 0, ',', '.') }}
@@ -160,9 +157,7 @@
 
             {{-- PAJAK --}}
             <tr>
-                <td colspan="3"></td>
-
-                <td style="text-align:right;">
+                <td colspan="4" style="text-align:right;">
                     Pajak
                 </td>
 
@@ -173,9 +168,7 @@
 
             {{-- TOTAL --}}
             <tr style="font-weight:bold;">
-                <td colspan="3"></td>
-
-                <td style="text-align:right;">
+                <td colspan="4" style="text-align:right;">
                     Total
                 </td>
 
