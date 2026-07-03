@@ -121,8 +121,8 @@
 
             {{-- GARIS --}}
             <tr>
-                <td colspan="4"></td>
-                <td colspan="1">
+                <td colspan="3"></td>
+                <td colspan="2">
                     <hr style="margin:5px 0;border:3px solid #000000;">
                 </td>
             </tr>
