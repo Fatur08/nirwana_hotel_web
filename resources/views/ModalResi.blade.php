@@ -4,7 +4,7 @@
 
         {{-- HEADER HOTEL --}}
         <div style="font-size:20pt;font-weight:bold;">
-            NIRWANA HOTEL KALIANDA ★
+            NIRWANA HOTEL ★
         </div>
 
         <div style="font-size:12pt;">
@@ -35,7 +35,7 @@
             $checkOut = Carbon::parse($histori->check_out);
         @endphp
 
-        <table style="width:100%; font-size:14pt;">
+        <table style="width:100%; font-size:14pt; border-collapse:collapse;">
 
             {{-- IDENTITAS --}}
             <tr>
