@@ -162,23 +162,14 @@
 
 
         {{-- TANDA TANGAN --}}
-        <div style="width:40%;margin-left:auto;margin-top:30px;text-align:center;">
-
-            Kalianda,
-            {{ Carbon::now()->translatedFormat('d F Y') }}
-
+        <div style="width:40%; margin-left:auto; margin-top:30px; text-align:center;">
+            Kalianda, {{ Carbon::now()->translatedFormat('d F Y') }}
             <br><br>
-
-            <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px;">
-
+            <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px; position:relative; left:-25px;">
             <br><br>
-
             ( Ani Muslimah )
-
         </div>
-
     </div>
-
 </div>
 
 <button onclick="cetakJPG()" class="btn btn-success w-100 mt-3">Cetak</button>
