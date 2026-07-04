@@ -11,6 +11,20 @@
         </tr>
 
         <tr>
+            <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Alamat Tamu</b></td>
+        </tr>
+        <tr>
+            <td class="text-start">{{ $histori->alamat_tamu }}</td>
+        </tr>
+
+        <tr>
+            <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>No. WA Tamu</b></td>
+        </tr>
+        <tr>
+            <td class="text-start">{{ $data->no_wa_tamu }}</td>
+        </tr>
+
+        <tr>
             <td class="text-start" style="background:#f5f5f5;font-weight:bold;"><b>Check In</b></td>
         </tr>
         <tr>
