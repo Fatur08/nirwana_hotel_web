@@ -48,7 +48,7 @@
 
             {{-- HEADER HOTEL --}}
             <div style="font-size:20pt;font-weight:bold;">
-                NIRWANA HOTEL KALIANDA ★
+                NIRWANA HOTEL
             </div>
 
             <div style="font-size:12pt;">
@@ -60,7 +60,8 @@
             </div>
 
             <div style="font-size:12pt;">
-                0851 5609 1313
+                0812 7281 0410 <br>
+                (0727)321493
             </div>
 
             <hr style="border:3px solid black;">
@@ -86,20 +87,15 @@
                 </tr>
 
                 <tr>
-
                     <td>Check In</td>
-
                     <td>:</td>
+                    <td colspan="3">{{ $checkIn ? $checkIn->translatedFormat('d F Y') : '-' }}</td>
+                </tr>
 
-                    <td>{{ $checkIn ? $checkIn->translatedFormat('d F Y') : '-' }}</td>
-
-                    <td style="width:170px;">Check Out</td>
-
-                    <td>
-                        :
-                        {{ $checkOut ? $checkOut->translatedFormat('d F Y') : '-' }}
-                    </td>
-
+                <tr>
+                    <td>Check Out</td>
+                    <td>:</td>
+                    <td colspan="3">{{ $checkOut ? $checkOut->translatedFormat('d F Y') : '-' }}</td>
                 </tr>
 
                 <tr>
@@ -353,22 +349,14 @@
             </table>
 
             <div style="width:40%;margin-left:auto;margin-top:30px;text-align:center;">
-
                 Kalianda,
                 {{ Carbon::now()->translatedFormat('d F Y') }}
-
                 <br><br>
-
-                <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px;">
-
+                <img src="{{ asset('assets/img/ttd_dan_cap.png') }}" style="width:250px; position:relative; left:-55px;">
                 <br><br>
-
                 ( Ani Muslimah )
-
             </div>
-
         </div>
-
     </div>
 
     <hr style="margin:50px 0;">
