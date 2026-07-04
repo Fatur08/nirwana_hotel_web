@@ -4,7 +4,7 @@
 
         {{-- HEADER HOTEL --}}
         <div style="font-size:20pt;font-weight:bold;">
-            NIRWANA HOTEL ★
+            NIRWANA HOTEL
         </div>
 
         <div style="font-size:12pt;">
@@ -17,6 +17,7 @@
 
         <div style="font-size:12pt;">
             0812 7281 0410
+            (0727)321493
         </div>
 
         <hr style="border:3px solid black;">
@@ -51,13 +52,13 @@
             </tr>
 
             <tr>
-                <td>Check - In</td>
+                <td>Check In</td>
                 <td style="text-align:center;">:</td>
                 {{-- <td style="width:190px;">{{ $checkIn->translatedFormat('d F Y') }}</td> --}}
                 <td style="width:230px;">30 Desember 2026</td>
 
                 <td colspan="2" style="width:160px; text-align:left;">
-                    Check - Out&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+                    Check Out&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
                     {{ $checkOut->translatedFormat('d F Y') }}
                 </td>
             </tr>
