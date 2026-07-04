@@ -1554,13 +1554,18 @@ class HotelController extends Controller
     {
         $id = $request->id_rincian_pesanan;
 
-        $tamu = DB::table('histori_kamar')
+        $histori_kamar = DB::table('histori_kamar')
+            ->where('id_rincian_pesanan', $id)
+            ->first();
+
+        $rincian_pesanan = DB::table('rincian_pesanan')
             ->where('id_rincian_pesanan', $id)
             ->first();
 
         return view('ModalEdit', [
             'id_rincian_pesanan' => $id,
-            'tamu' => $tamu
+            'histori_kamar' => $histori_kamar,
+            'rincian_pesanan' => $rincian_pesanan
         ]);
     }
 
@@ -1638,6 +1643,18 @@ class HotelController extends Controller
             }
 
 
+            $rincianLama = DB::table('rincian_pesanan')
+                ->where(
+                    'id_rincian_pesanan',
+                    $request->id_rincian_pesanan
+                )
+                ->first();
+
+            if (!$rincianLama) {
+                throw new \Exception('Data rincian pesanan tidak ditemukan.');
+            }
+
+
             /*
             |--------------------------------------------------------------------------
             | SIMPAN DATA YANG TIDAK BOLEH HILANG
@@ -1645,6 +1662,7 @@ class HotelController extends Controller
             */
             $nama_tamu = $historiLama->nama_tamu;
             $alamat_tamu = $historiLama->alamat_tamu;
+            $no_wa_tamu = $rincianLama->no_wa_tamu;
             $statusPembayaranLama = $laporanLama->status_pembayaran ?? 0;
             $metodePembayaranLama = $laporanLama->metode_pembayaran ?? null;
             $buktiPembayaranLama = $laporanLama->bukti_pembayaran ?? null;
