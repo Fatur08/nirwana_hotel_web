@@ -611,6 +611,7 @@ class HotelController extends Controller
             $idRincian = DB::table('rincian_pesanan')
                 ->insertGetId([
                     'nama_tamu' => $request->nama_tamu,
+                    'no_wa_tamu' => $request->no_wa_tamu,
                     'total_kamar_dipesan' => $totalKamar,
                     'total_request' => $totalRequest
                 ]);
