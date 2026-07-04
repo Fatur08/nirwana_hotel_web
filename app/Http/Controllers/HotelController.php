@@ -817,34 +817,23 @@ class HotelController extends Controller
 
     public function InformasiPemesanan(Request $request)
     {
-        // ambil data dari form
         $cari_check_in = $request->cari_check_in;
         $cari_check_out = $request->cari_check_out;
         $status = $request->status;
-        // default jika kosong
-        if (!$cari_check_in) {
-            $cari_check_in = date('Y-m-d');
-        }
 
-        if (!$cari_check_out) {
-            $cari_check_out = date('Y-m-d');
-        }
-
-        $histori = DB::table('rincian_pesanan as rp')
+        $query = DB::table('rincian_pesanan as rp')
             ->join(
                 'histori_kamar as hk',
                 'rp.id_rincian_pesanan',
                 '=',
                 'hk.id_rincian_pesanan'
             )
-
             ->leftJoin(
                 'laporan_keuangan as lk',
                 'rp.id_rincian_pesanan',
                 '=',
                 'lk.id_rincian_pesanan'
             )
-
             ->select(
                 'rp.id_rincian_pesanan',
                 'rp.nama_tamu',
@@ -853,21 +842,7 @@ class HotelController extends Controller
                 'hk.check_in',
                 'hk.check_out',
                 DB::raw('MIN(lk.status_pembayaran) as status_pembayaran')
-
             )
-
-            ->whereDate(
-                'hk.check_in',
-                '<=',
-                $cari_check_out
-            )
-
-            ->whereDate(
-                'hk.check_out',
-                '>=',
-                $cari_check_in
-            )
-
             ->groupBy(
                 'rp.id_rincian_pesanan',
                 'rp.nama_tamu',
@@ -875,30 +850,84 @@ class HotelController extends Controller
                 'rp.total_request',
                 'hk.check_in',
                 'hk.check_out'
-            )
-            ->orderBy('hk.check_in', 'desc')
-            ->get();
+            );
 
+        /*
+        |--------------------------------------------------------------------------
+        | FILTER TANGGAL
+        |--------------------------------------------------------------------------
+        */
 
-        // tentukan status otomatis
+        // Check In + Check Out diisi
+        if (!empty($cari_check_in) && !empty($cari_check_out)) {
+
+            $query->whereDate('hk.check_in', $cari_check_in)
+                ->orderByRaw("
+                CASE
+                    WHEN DATE(hk.check_out) = ? THEN 0
+                    ELSE 1
+                END
+            ", [$cari_check_out])
+                ->orderBy('hk.check_out', 'asc');
+        }
+
+        // Hanya Check In
+        elseif (!empty($cari_check_in)) {
+
+            $query->whereDate('hk.check_in', $cari_check_in)
+                ->orderBy('hk.check_out', 'asc');
+        }
+
+        // Hanya Check Out
+        elseif (!empty($cari_check_out)) {
+
+            $query->whereDate('hk.check_out', $cari_check_out)
+                ->orderBy('hk.check_in', 'asc');
+        }
+
+        // Tidak ada filter
+        else {
+
+            $query->orderByDesc('hk.check_in')
+                ->orderByDesc('hk.check_out');
+        }
+
+        $histori = $query->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | STATUS BOOKING / CHECK IN
+        |--------------------------------------------------------------------------
+        */
+
         $today = Carbon::today();
 
         foreach ($histori as $row) {
 
             if ($today < Carbon::parse($row->check_in)) {
+
                 $row->status = 'booking';
+
             } else {
+
                 $row->status = 'check_in';
+
             }
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | FILTER STATUS
+        |--------------------------------------------------------------------------
+        */
 
-        // filter status jika dipilih
-        if ($status) {
+        if (!empty($status)) {
+
             $histori = $histori->filter(function ($item) use ($status) {
                 return $item->status == $status;
             });
         }
+
         return view('InformasiPemesanan', compact('histori'));
     }
 
