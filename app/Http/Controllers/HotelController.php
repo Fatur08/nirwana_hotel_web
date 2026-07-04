@@ -1660,9 +1660,10 @@ class HotelController extends Controller
             | SIMPAN DATA YANG TIDAK BOLEH HILANG
             |--------------------------------------------------------------------------
             */
-            $nama_tamu = $historiLama->nama_tamu;
-            $alamat_tamu = $historiLama->alamat_tamu;
-            $no_wa_tamu = $rincianLama->no_wa_tamu;
+            $nama_tamu = $request->edit_nama_tamu;
+            $alamat_tamu = $request->edit_alamat_tamu;
+            $no_wa_tamu = $request->edit_no_wa_tamu;
+
             $statusPembayaranLama = $laporanLama->status_pembayaran ?? 0;
             $metodePembayaranLama = $laporanLama->metode_pembayaran ?? null;
             $buktiPembayaranLama = $laporanLama->bukti_pembayaran ?? null;
@@ -1839,9 +1840,10 @@ class HotelController extends Controller
                     $request->id_rincian_pesanan
                 )
                 ->update([
+                    'nama_tamu' => $nama_tamu,
+                    'no_wa_tamu' => $no_wa_tamu,
                     'total_kamar_dipesan' => $jumlah_kamar,
                     'total_request' => $biaya_tambahan
-
                 ]);
 
 

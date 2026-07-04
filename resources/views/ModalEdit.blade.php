@@ -82,7 +82,7 @@
                                                                                          a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
                         </svg>
                     </span>
-                    <input type="text" value="{{ $rincian_pesanan->no_wa_tamu }}" id="edit_no_wa_tamu"
+                    <input type="text" value="{{ $rincian_pesanan->alamat_tamu }}" id="edit_no_wa_tamu"
                         name="edit_no_wa_tamu" class="form-control" placeholder="Masukkan Nomor WA Tamu" inputmode="numeric"
                         pattern="[0-9]+" minlength="10" maxlength="15"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '')">
