@@ -245,6 +245,11 @@
 
                 @endif
 
+                {{-- SPASI --}}
+                <tr>
+                    <td colspan="5" style="height:15px;"></td>
+                </tr>
+
                 {{-- Ekstra Bed --}}
                 @if(($data->jumlah_ekstrabed ?? 0) > 0)
 
