@@ -263,6 +263,13 @@ class HotelController extends Controller
     {
         $customer = DB::table('rincian_pesanan as rp')
 
+            ->join(
+                'histori_kamar as hk',
+                'rp.id_rincian_pesanan',
+                '=',
+                'hk.id_rincian_pesanan'
+            )
+
             ->leftJoin(
                 'laporan_keuangan as lk',
                 'rp.id_rincian_pesanan',
@@ -277,7 +284,7 @@ class HotelController extends Controller
 
             ->select(
                 'rp.nama_tamu',
-                'rp.alamat_tamu',
+                'hk.alamat_tamu',
                 'rp.no_wa_tamu',
                 'lk.foto_ktp'
             )
