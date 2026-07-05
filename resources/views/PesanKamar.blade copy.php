@@ -40,8 +40,6 @@
         }
     </style>
 
-
-
     <div class="row mb-3">
         <div class="col-12">
             <h5 style="font-size:16pt;">Apakah Customer Baru?</h5>
@@ -54,13 +52,10 @@
         </div>
     </div>
 
-
-
-    <form action="{{ url('PesanKamar/store_PesanKamar') }}" method="POST" id="frmPesanKamar" enctype="multipart/form-data">
-        @csrf
-        <!-- FORM CUSTOMER BARU -->
-        <div id="formCustomerBaru" style="display:none;">
-            <input type="hidden" name="jenis_customer" value="baru">
+    <div id="formCustomerBaru" style="display:none;">
+        <form action="{{ url('PesanKamar/store_PesanKamar') }}" method="POST" id="frmPesanKamar"
+            enctype="multipart/form-data">
+            @csrf
             <div class="row">
                 <div class="col-12">
                     <h5 class="text-start" style="font-size:16pt;">Nama Tamu</h5>
@@ -129,7 +124,7 @@
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path
                                     d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4
-                                                                                                                                                                                         a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                                                                                                                                                                             a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
                             </svg>
                         </span>
                         <input type="text" id="no_wa_tamu" name="no_wa_tamu" class="form-control"
@@ -140,118 +135,7 @@
             </div>
 
 
-            <div class="row">
-                <div class="col-12">
-                    <h5 class="text-start" style="font-size:16pt;">Upload Foto KTP</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="input-icon mb-6">
-                        <span class="input-icon-addon">
-                            <!-- Icon kamera -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-camera">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M5 7h2l1 -2h8l1 2h2a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2" />
-                                <path d="M12 13m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                            </svg>
-                        </span>
-                        <input type="file" id="foto_ktp" name="foto_ktp" class="form-control" style="font-size:16pt;">
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- FORM CUSTOMER LAMA -->
-        <div id="formCustomerLama" style="display:none;">
-
-            <input type="hidden" name="jenis_customer" value="lama">
-
-            <input type="hidden" id="id_customer_lama" name="id_customer_lama">
-
-            <div class="mb-3">
-
-                <label class="form-label fw-bold">
-                    Cari Customer
-                </label>
-
-                <input type="text" id="keyword_customer" class="form-control" placeholder="Ketik nama customer...">
-
-            </div>
-
-            <div id="hasilCustomer" class="list-group mb-3" style="display:none;
-                    max-height:250px;
-                    overflow-y:auto;">
-
-            </div>
-
-            <hr>
-
-            <div id="dataCustomerLama" style="display:none;">
-
-                <div class="mb-3">
-
-                    <label class="form-label fw-bold">
-                        Nama Customer
-                    </label>
-
-                    <input type="text" id="lama_nama_tamu" class="form-control" readonly>
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label fw-bold">
-                        Alamat
-                    </label>
-
-                    <textarea id="lama_alamat_tamu" class="form-control" rows="2" readonly></textarea>
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label fw-bold">
-                        No WA
-                    </label>
-
-                    <input type="text" id="lama_no_wa" class="form-control" readonly>
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label fw-bold">
-                        Foto KTP
-                    </label>
-
-                    <div id="lama_foto_ktp">
-
-                        <div class="text-muted">
-
-                            Tidak ada Foto KTP
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <button type="button" class="btn btn-warning" id="gantiCustomer">
-
-                    Ganti Customer
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- FORM BOOKING -->
-        <div id="formBooking" style="display:none;">
             <div class="row">
                 <div class="col-12">
                     <h5 class="text-start" style="font-size:16pt;">Check-In</h5>
@@ -333,6 +217,31 @@
 
             <div class="row">
                 <div class="col-12">
+                    <h5 class="text-start" style="font-size:16pt;">Upload Foto KTP</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="input-icon mb-6">
+                        <span class="input-icon-addon">
+                            <!-- Icon kamera -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-camera">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M5 7h2l1 -2h8l1 2h2a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2" />
+                                <path d="M12 13m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            </svg>
+                        </span>
+                        <input type="file" id="foto_ktp" name="foto_ktp" class="form-control" style="font-size:16pt;">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12">
                     <h5 class="text-start" style="font-size:16pt;">Jumlah Extra Bed</h5>
                 </div>
             </div>
@@ -369,12 +278,12 @@
                 <div class="col-12">
                     <textarea id="biaya_request" class="form-control" readonly
                         style="
-                                                                                                                                                                                                                                                                                                                                    font-size:16pt;
-                                                                                                                                                                                                                                                                                                                                    min-height:120px;
-                                                                                                                                                                                                                                                                                                                                    resize:none;
-                                                                                                                                                                                                                                                                                                                                    overflow:hidden;
-                                                                                                                                                                                                                                                                                                                                ">
-                                                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                            font-size:16pt;
+                                                                                                                                                                                                                                                                                            min-height:120px;
+                                                                                                                                                                                                                                                                                            resize:none;
+                                                                                                                                                                                                                                                                                            overflow:hidden;
+                                                                                                                                                                                                                                                                                        ">
+                                                                                                                                                                                                                                                                                    </textarea>
 
                     <input type="hidden" id="biaya_request_value" name="biaya_request">
                 </div>
@@ -504,9 +413,379 @@
                     </div>
                 </div>
             </div>
+        </form>
+    </div>
+
+
+    <div id="formCustomerLama" style="display:none;">
+
+        {{-- Cari Customer --}}
+        <div class="mb-3">
+
+            <label class="form-label fw-bold" style="font-size:16pt;">
+                Cari Customer
+            </label>
+
+            <input type="text" id="keyword_customer" class="form-control" placeholder="Ketik nama customer..."
+                autocomplete="off" style="font-size:16pt;">
+
         </div>
 
-    </form>
+        {{-- HASIL PENCARIAN --}}
+        <div id="hasilCustomer" class="list-group shadow-sm" style="display:none;
+                                                   max-height:250px;
+                                                   overflow-y:auto;">
+        </div>
+
+        <hr>
+
+        {{-- DATA CUSTOMER --}}
+        <div id="dataCustomerLama" style="display:none;">
+
+            <div class="alert alert-success d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>
+                        ✓ Customer Lama Dipilih
+                    </strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label fw-bold">
+                    Nama Customer
+                </label>
+
+                <input type="text" id="lama_nama_tamu" class="form-control" readonly>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label fw-bold">
+                    Alamat
+                </label>
+
+                <textarea id="lama_alamat_tamu" class="form-control" rows="2" readonly></textarea>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label fw-bold">
+                    No. WhatsApp
+                </label>
+
+                <input type="text" id="lama_no_wa" class="form-control" readonly>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label fw-bold">
+                    Foto KTP
+                </label>
+
+                <div id="lama_foto_ktp">
+
+                    <div class="text-muted">
+                        Tidak ada Foto KTP
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="text-end mb-3">
+
+                <button type="button" class="btn btn-warning w-100" id="gantiCustomer" style="display:none;">
+
+                    Ganti Customer
+
+                </button>
+
+            </div>
+
+            {{-- ID Customer --}}
+            <input type="hidden" id="id_customer_lama" name="id_customer_lama">
+
+            <hr>
+
+            <hr>
+
+            <div id="formBooking" style="display:none;">
+                <form action="{{ url('PesanKamar/store_PesanKamar') }}" method="POST" id="frmPesanKamar"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Check-In</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-6">
+                                <span class="input-icon-addon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-event">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                                        <path d="M16 3l0 4" />
+                                        <path d="M8 3l0 4" />
+                                        <path d="M4 11l16 0" />
+                                        <path d="M8 15h2v2h-2z" />
+                                    </svg>
+                                </span>
+                                <input type="text" id="check_in_pesan_kamar" class="form-control flatpickr w-100"
+                                    style="font-size:16pt;" placeholder="Masukkan Tanggal Check-In" autocomplete="off">
+                                <input type="hidden" id="check_in" name="check_in">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Check-Out</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-icon mb-6">
+                                <span class="input-icon-addon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-event">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                                        <path d="M16 3l0 4" />
+                                        <path d="M8 3l0 4" />
+                                        <path d="M4 11l16 0" />
+                                        <path d="M8 15h2v2h-2z" />
+                                    </svg>
+                                </span>
+                                <input type="text" id="check_out_pesan_kamar" class="form-control flatpickr"
+                                    style="font-size:16pt;" placeholder="Masukkan Tanggal Check-Out" autocomplete="off">
+                                <input type="hidden" id="check_out" name="check_out">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Jumlah Kamar Dipesan</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-12">
+                            <select id="jumlah_kamar_dipesan" name="jumlah_kamar_dipesan" class="form-control"
+                                style="font-size:16pt;">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="kamar_tersedia_title" style="display:none;">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Kamar Yang Tersedia</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-6" id="kamar_tersedia_list" style="display:none;">
+                        <div class="col-12">
+                            <div id="list_nomor_kamar"></div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Jumlah Extra Bed</h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-6">
+                        <div class="col-12">
+                            <input type="number" id="jumlah_extra_bed" name="jumlah_extra_bed" class="form-control" min="0"
+                                value="0" style="font-size:16pt;">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Jumlah Breakfast</h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-6">
+                        <div class="col-12">
+                            <input type="number" id="jumlah_breakfast" name="jumlah_breakfast" class="form-control" min="0"
+                                value="0" style="font-size:16pt;">
+                        </div>
+                    </div>
+
+
+                    <div class="row" id="biaya_container" style="display:none;">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Biaya Tambahan</h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-6" id="biaya_input_container" style="display:none;">
+                        <div class="col-12">
+                            <textarea id="biaya_request" class="form-control" readonly
+                                style="
+                                                                                                                                                                                                                                                                                            font-size:16pt;
+                                                                                                                                                                                                                                                                                            min-height:120px;
+                                                                                                                                                                                                                                                                                            resize:none;
+                                                                                                                                                                                                                                                                                            overflow:hidden;
+                                                                                                                                                                                                                                                                                        ">
+                                                                                                                                                                                                                                                                                    </textarea>
+
+                            <input type="hidden" id="biaya_request_value" name="biaya_request">
+                        </div>
+                    </div>
+
+
+                    <!-- STATUS PEMBAYARAN -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">
+                                Apakah Sudah Bayar?
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-6">
+                        <div class="col-12">
+                            <select id="status_pembayaran" name="status_pembayaran" class="form-control"
+                                style="font-size:16pt;">
+
+                                <option value="">
+                                    -- Pilih Status Pembayaran --
+                                </option>
+
+                                <option value="sudah">
+                                    Sudah
+                                </option>
+
+                                <option value="belum">
+                                    Belum
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <!-- METODE PEMBAYARAN -->
+                    <div class="row" id="metode_pembayaran_container" style="display:none;">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Metode Pembayaran</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-6" id="metode_pembayaran_input" style="display:none;">
+                        <div class="col-12">
+                            <select id="metode_pembayaran" name="metode_pembayaran" class="form-control"
+                                style="font-size:16pt;">
+                                <option value="">-- Pilih Metode Pembayaran --</option>
+                                <option value="cash">Cash</option>
+                                <option value="online">Online</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- INPUT TAMBAHAN JIKA ONLINE -->
+                    <div class="row" id="sumber_pembayaran_container" style="display:none;">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">Masukkan Sumber Pembayaran Online</h5>
+                        </div>
+                    </div>
+                    <div class="row" id="sumber_pembayaran_input" style="display:none;">
+                        <div class="col-12">
+                            <div class="input-icon mb-6">
+                                <span class="input-icon-addon">
+                                    <!-- icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-credit-card">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <rect x="3" y="5" width="18" height="14" rx="3" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                    </svg>
+                                </span>
+                                <input type="text" id="sumber_pembayaran" name="sumber_pembayaran" class="form-control"
+                                    style="font-size:16pt;" placeholder="Contoh: BCA, Dana, OVO, dll">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- UPLOAD BUKTI PEMBAYARAN -->
+                    <div class="row" id="bukti_pembayaran_container" style="display:none;">
+                        <div class="col-12">
+                            <h5 class="text-start" style="font-size:16pt;">
+                                Upload Bukti Pembayaran
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="row" id="bukti_pembayaran_input" style="display:none;">
+                        <div class="col-12">
+                            <div class="input-icon mb-6">
+
+                                <span class="input-icon-addon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="icon">
+
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M15 8h.01" />
+                                        <path
+                                            d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
+                                        <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5" />
+                                        <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />
+
+                                    </svg>
+                                </span>
+
+                                <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" class="form-control"
+                                    accept="image/*" style="font-size:16pt;">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button class="btn btn-secondary w-100" type="submit" style="font-size:16pt;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-send">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M10 14l11 -11" />
+                                        <path
+                                            d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                                    </svg>
+                                    Simpan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
 
 @endsection
 @push('myscript')
@@ -523,10 +802,10 @@
 
 
             $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                            <option value="">
-                                                                                                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                <option value="">
+                                                                                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                            `);
 
             $('#kamar_tersedia_title').hide();
             $('#kamar_tersedia_list').hide();
@@ -605,42 +884,42 @@
                         if (response.length == 0) {
 
                             html = `
-                                                                                                <div class="list-group-item text-danger">
-                                                                                                    Customer tidak ditemukan
-                                                                                                </div>
-                                                                                            `;
+                                                    <div class="list-group-item text-danger">
+                                                        Customer tidak ditemukan
+                                                    </div>
+                                                `;
 
                         } else {
 
                             response.forEach(function (item) {
 
                                 html += `
-                                                                                                    <a href="#"
+                                                        <a href="#"
 
-                                                                                                       class="list-group-item list-group-item-action pilihCustomer"
+                                                           class="list-group-item list-group-item-action pilihCustomer"
 
-                                                                                                       data-id="${item.id_rincian_pesanan}"
+                                                           data-id="${item.id_rincian_pesanan}"
 
-                                                                                                       data-nama="${item.nama_tamu}"
+                                                           data-nama="${item.nama_tamu}"
 
-                                                                                                       data-alamat="${item.alamat_tamu ?? ''}"
+                                                           data-alamat="${item.alamat_tamu ?? ''}"
 
-                                                                                                       data-wa="${item.no_wa_tamu ?? ''}"
+                                                           data-wa="${item.no_wa_tamu ?? ''}"
 
-                                                                                                       data-foto="${item.foto_ktp ?? ''}">
+                                                           data-foto="${item.foto_ktp ?? ''}">
 
-                                                                                                        <b>${item.nama_tamu}</b>
+                                                            <b>${item.nama_tamu}</b>
 
-                                                                                                        <br>
+                                                            <br>
 
-                                                                                                        <small>
+                                                            <small>
 
-                                                                                                            ${item.alamat_tamu ?? '-'}
+                                                                ${item.alamat_tamu ?? '-'}
 
-                                                                                                        </small>
+                                                            </small>
 
-                                                                                                    </a>
-                                                                                                `;
+                                                        </a>
+                                                    `;
 
                             });
 
@@ -681,19 +960,19 @@
                 if (foto != '') {
 
                     $('#lama_foto_ktp').html(`
-                                                                                    <img
-                                                                                        src="/storage/uploads/foto_ktp/${foto}"
-                                                                                        class="img-fluid rounded border"
-                                                                                        style="max-height:250px;">
-                                                                                `);
+                                        <img
+                                            src="/storage/uploads/foto_ktp/${foto}"
+                                            class="img-fluid rounded border"
+                                            style="max-height:250px;">
+                                    `);
 
                 } else {
 
                     $('#lama_foto_ktp').html(`
-                                                                                    <div class="text-muted">
-                                                                                        Tidak ada Foto KTP
-                                                                                    </div>
-                                                                                `);
+                                        <div class="text-muted">
+                                            Tidak ada Foto KTP
+                                        </div>
+                                    `);
 
                 }
 
@@ -729,10 +1008,10 @@
                 if (!checkIn || !checkOut) {
 
                     $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                                                                                                            <option value="">
-                                                                                                                                                                                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                <option value="">
+                                                                                                                                                                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                                                                            `);
 
                     return;
                 }
@@ -756,10 +1035,10 @@
                         for (let i = 1; i <= totalKamar; i++) {
 
                             opsiJumlah += `
-                                                                                                                                                                                                                                                                                                                                                                                                                <option value="${i}">
-                                                                                                                                                                                                                                                                                                                                                                                                                    ${i} Kamar
-                                                                                                                                                                                                                                                                                                                                                                                                                </option>
-                                                                                                                                                                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                                                                                                                    <option value="${i}">
+                                                                                                                                                                                                                                                                                                                                                                        ${i} Kamar
+                                                                                                                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                                                                                                                `;
                         }
 
                         $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -831,23 +1110,23 @@
                         for (let i = 1; i <= jumlah; i++) {
 
                             html += `
-                                                                                                                                                                                                        <div class="mb-4">
+                                                                                                                                                            <div class="mb-4">
 
-                                                                                                                                                                                                            <label class="form-label fw-bold"
-                                                                                                                                                                                                                   style="font-size:16pt;">
-                                                                                                                                                                                                                Pilih Kamar ${i}
-                                                                                                                                                                                                            </label>
+                                                                                                                                                                <label class="form-label fw-bold"
+                                                                                                                                                                       style="font-size:16pt;">
+                                                                                                                                                                    Pilih Kamar ${i}
+                                                                                                                                                                </label>
 
-                                                                                                                                                                                                            <select
-                                                                                                                                                                                                                name="id_nomor_kamar[]"
-                                                                                                                                                                                                                class="form-control nomor-kamar"
-                                                                                                                                                                                                                style="font-size:16pt;"
-                                                                                                                                                                                                                required>
+                                                                                                                                                                <select
+                                                                                                                                                                    name="id_nomor_kamar[]"
+                                                                                                                                                                    class="form-control nomor-kamar"
+                                                                                                                                                                    style="font-size:16pt;"
+                                                                                                                                                                    required>
 
-                                                                                                                                                                                                                <option value="">
-                                                                                                                                                                                                                    -- Pilih Kamar --
-                                                                                                                                                                                                                </option>
-                                                                                                                                                                                                    `;
+                                                                                                                                                                    <option value="">
+                                                                                                                                                                        -- Pilih Kamar --
+                                                                                                                                                                    </option>
+                                                                                                                                                        `;
 
                             response.forEach(function (kamar) {
 
@@ -865,27 +1144,27 @@
                                 }
 
                                 html += `
-                                                                                                                                                                                                            <option value="${kamar.id_nomor_kamar}">
-                                                                                                                                                                                                                ${kamar.tipe_kamar}
-                                                                                                                                                                                                                ${kamar.nomor_kamar}
-                                                                                                                                                                                                                (${bed})
-                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                        `;
+                                                                                                                                                                <option value="${kamar.id_nomor_kamar}">
+                                                                                                                                                                    ${kamar.tipe_kamar}
+                                                                                                                                                                    ${kamar.nomor_kamar}
+                                                                                                                                                                    (${bed})
+                                                                                                                                                                </option>
+                                                                                                                                                            `;
                             });
 
                             if (adaHomeStay) {
 
                                 html += `
-                                                                                                                                                                                                            <option value="HMSTY">
-                                                                                                                                                                                                                Home Stay
-                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                        `;
+                                                                                                                                                                <option value="HMSTY">
+                                                                                                                                                                    Home Stay
+                                                                                                                                                                </option>
+                                                                                                                                                            `;
                             }
 
                             html += `
-                                                                                                                                                                                                            </select>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                    `;
+                                                                                                                                                                </select>
+                                                                                                                                                            </div>
+                                                                                                                                                        `;
                         }
 
                         $('#list_nomor_kamar').html(html);
