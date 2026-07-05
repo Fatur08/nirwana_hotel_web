@@ -226,20 +226,25 @@ class HotelController extends Controller
     // Modal Pesan Kamar
     public function PesanKamar(Request $request)
     {
-        $customer = DB::table('rincian_pesanan')
+        $customer = DB::table('rincian_pesanan as rp')
+            ->join(
+                'histori_kamar as hk',
+                'rp.id_rincian_pesanan',
+                '=',
+                'hk.id_rincian_pesanan'
+            )
             ->select(
-                'id_rincian_pesanan',
-                'nama_tamu',
-                'alamat_tamu',
-                'no_wa_tamu'
+                DB::raw('MIN(rp.id_rincian_pesanan) as id_rincian_pesanan'),
+                'rp.nama_tamu',
+                'hk.alamat_tamu',
+                'rp.no_wa_tamu'
             )
             ->groupBy(
-                'nama_tamu',
-                'alamat_tamu',
-                'no_wa_tamu',
-                'id_rincian_pesanan'
+                'rp.nama_tamu',
+                'hk.alamat_tamu',
+                'rp.no_wa_tamu'
             )
-            ->orderBy('nama_tamu')
+            ->orderBy('rp.nama_tamu')
             ->get();
         return view('PesanKamar', compact('customer'));
     }
