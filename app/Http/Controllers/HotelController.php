@@ -259,8 +259,10 @@ class HotelController extends Controller
 
 
 
-    public function getCustomer(Request $request)
+    public function CariCustomer(Request $request)
     {
+        $keyword = $request->keyword;
+
         $customer = DB::table('rincian_pesanan as rp')
 
             ->join(
@@ -277,19 +279,29 @@ class HotelController extends Controller
                 'lk.id_rincian_pesanan'
             )
 
-            ->where(
-                'rp.id_rincian_pesanan',
-                $request->id_rincian_pesanan
-            )
-
             ->select(
+                'rp.id_rincian_pesanan',
                 'rp.nama_tamu',
                 'hk.alamat_tamu',
                 'rp.no_wa_tamu',
                 'lk.foto_ktp'
             )
 
-            ->first();
+            ->where('rp.nama_tamu', 'like', '%' . $keyword . '%')
+
+            ->groupBy(
+                'rp.id_rincian_pesanan',
+                'rp.nama_tamu',
+                'hk.alamat_tamu',
+                'rp.no_wa_tamu',
+                'lk.foto_ktp'
+            )
+
+            ->orderBy('rp.nama_tamu')
+
+            ->limit(10)
+
+            ->get();
 
         return response()->json($customer);
     }

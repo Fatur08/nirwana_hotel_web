@@ -13,7 +13,7 @@ Route::get('/', [HotelController::class, 'index']);
 Route::post('/PesanKamar', [HotelController::class, 'PesanKamar']);
 
 
-Route::post('/getCustomer', [HotelController::class, 'getCustomer']);
+Route::post('/CariCustomer', [HotelController::class, 'CariCustomer']);
 
 
 Route::post('/getKamarTersedia', [HotelController::class, 'getKamarTersedia']);
