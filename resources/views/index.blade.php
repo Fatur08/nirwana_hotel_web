@@ -871,10 +871,10 @@
                         $('#check_out').val('');
 
                         $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                <option value="">
-                                                                                                                                                                                                                                                    -- Pilih Tanggal Check Out Dulu --
-                                                                                                                                                                                                                                                </option>
-                                                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
+                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                `);
 
                         $('#kamar_tersedia_title').hide();
                         $('#kamar_tersedia_list').hide();
@@ -909,10 +909,10 @@
                             for (let i = 1; i <= totalKamar; i++) {
 
                                 opsiJumlah += `
-                                                                                                                                                                                                                                                                        <option value="${i}">
-                                                                                                                                                                                                                                                                            ${i} Kamar
-                                                                                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                                                                                    `;
+                                                                                                                                                                                                                                                                            <option value="${i}">
+                                                                                                                                                                                                                                                                                ${i} Kamar
+                                                                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                                                                        `;
                             }
 
                             $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -928,10 +928,10 @@
                 $('#check_out').val('');
 
                 $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                        <option value="">
-                                                                                                                                                                                                                                                            -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                                                                    `);
+                                                                                                                                                                                                                                                            <option value="">
+                                                                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                                                        `);
 
                 $('#kamar_tersedia_title').hide();
                 $('#kamar_tersedia_list').hide();
@@ -948,24 +948,24 @@
                     $("#id_customer_lama").val($(this).data('id'));
 
                     $("#lama_nama_tamu").val($(this).data('nama'));
-                    $("#lama_alamat_tamu").val($(this).data('alamat'));
+                    $("#lama_alamat_tamu").text($(this).data('alamat'));
                     $("#lama_no_wa").val($(this).data('wa'));
 
                     if ($(this).data('foto')) {
 
                         $("#lama_foto_ktp").html(`
-                                <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
-                                     class="img-fluid rounded"
-                                     style="max-height:250px;">
-                            `);
+                                    <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
+                                         class="img-fluid rounded"
+                                         style="max-height:250px;">
+                                `);
 
                     } else {
 
                         $("#lama_foto_ktp").html(`
-                                <div class="text-muted">
-                                    Tidak ada Foto KTP
-                                </div>
-                            `);
+                                    <div class="text-muted">
+                                        Tidak ada Foto KTP
+                                    </div>
+                                `);
 
                     }
 
@@ -1004,10 +1004,10 @@
                     $("#lama_no_wa").val("");
 
                     $("#lama_foto_ktp").html(`
-            <div class="text-muted">
-                Tidak ada Foto KTP
-            </div>
-        `);
+                <div class="text-muted">
+                    Tidak ada Foto KTP
+                </div>
+            `);
 
                     // Booking
                     $("#formBooking").hide();
@@ -1019,10 +1019,10 @@
                     $("#check_out").val("");
 
                     $("#jumlah_kamar_dipesan").html(`
-            <option value="">
-                -- Pilih Tanggal Check In Dulu --
-            </option>
-        `);
+                <option value="">
+                    -- Pilih Tanggal Check In Dulu --
+                </option>
+            `);
 
                     $("#jumlah_ekstrabed").val("0");
                     $("#jumlah_breakfast").val("0");
