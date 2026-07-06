@@ -786,7 +786,9 @@
 @endsection
     @push('myscript')
         <script>
+            // ======================================================
             // MODAL PESAN KAMAR
+            // ======================================================
             $(document).on('click', '.PesanKamar', function (e) {
                 e.preventDefault();
 
@@ -811,28 +813,9 @@
             });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            // ======================================================
+            // INIT PESAN KAMAR
+            // ======================================================
             function initPesanKamar() {
 
                 const checkOutPicker = flatpickr("#check_out_pesan_kamar", {
@@ -871,10 +854,10 @@
                         $('#check_out').val('');
 
                         $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                                                    <option value="">
-                                                                                                                                                                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
-                                                                                                                                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                                                                                                                                `);
+                        <option value="">
+                            -- Pilih Tanggal Check Out Dulu --
+                        </option>
+                    `);
 
                         $('#kamar_tersedia_title').hide();
                         $('#kamar_tersedia_list').hide();
@@ -909,36 +892,84 @@
                             for (let i = 1; i <= totalKamar; i++) {
 
                                 opsiJumlah += `
-                                                                                                                                                                                                                                                                                                                                            <option value="${i}">
-                                                                                                                                                                                                                                                                                                                                                ${i} Kamar
-                                                                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                                                                        `;
+                                <option value="${i}">
+                                    ${i} Kamar
+                                </option>
+                            `;
+
                             }
 
                             $('#jumlah_kamar_dipesan').html(opsiJumlah);
+
                         }
+
                     });
 
                 });
-                // Default kosong saat modal dibuka
-                checkInPicker.clear();
-                checkOutPicker.clear();
 
-                $('#check_in').val('');
-                $('#check_out').val('');
 
-                $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                                                            <option value="">
-                                                                                                                                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                                                        `);
+                // ======================================================
+                // RESET BOOKING
+                // ======================================================
+                function resetFormBooking() {
 
-                $('#kamar_tersedia_title').hide();
-                $('#kamar_tersedia_list').hide();
-                $('#list_nomor_kamar').html('');
+                    checkInPicker.clear();
+                    checkOutPicker.clear();
+
+                    $("#check_in_pesan_kamar").val("");
+                    $("#check_out_pesan_kamar").val("");
+
+                    $("#check_in").val("");
+                    $("#check_out").val("");
+
+                    $("#jumlah_kamar_dipesan").html(`
+                    <option value="">
+                        -- Pilih Tanggal Check In Dulu --
+                    </option>
+                `);
+
+                    $("#kamar_tersedia_title").hide();
+                    $("#kamar_tersedia_list").hide();
+                    $("#list_nomor_kamar").html("");
+
+                    $("#jumlah_extra_bed").val("");
+                    $("#jumlah_breakfast").val("");
+
+                    $("#biaya_container").hide();
+                    $("#biaya_input_container").hide();
+
+                    $("#biaya_request").val("");
+                    $("#biaya_request_value").val("");
+
+                    $("#status_pembayaran").val("");
+                    $("#metode_pembayaran").val("");
+                    $("#sumber_pembayaran").val("");
+                    $("#bukti_pembayaran").val("");
+
+                    $("#metode_pembayaran_container").hide();
+                    $("#metode_pembayaran_input").hide();
+
+                    $("#sumber_pembayaran_container").hide();
+                    $("#sumber_pembayaran_input").hide();
+
+                    $("#bukti_pembayaran_container").hide();
+                    $("#bukti_pembayaran_input").hide();
+
+                    $("#formBooking").hide();
+
+                }
+
+                // supaya bisa dipanggil dari luar
+                window.resetFormBooking = resetFormBooking;
+
+                resetFormBooking();
+
             }
 
 
+            // ======================================================
+            // PILIH CUSTOMER
+            // ======================================================
             $(document).off('click', '.pilihCustomer').on('click', '.pilihCustomer', function (e) {
 
                 e.preventDefault();
@@ -952,48 +983,44 @@
                 if ($(this).data('foto')) {
 
                     $("#lama_foto_ktp").html(`
-                                                                                                    <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
-                                                                                                         class="img-fluid rounded"
-                                                                                                         style="max-height:250px;">
-                                                                                                `);
+                    <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
+                        class="img-fluid rounded"
+                        style="max-height:250px;">
+                `);
 
                 } else {
 
                     $("#lama_foto_ktp").html(`
-                                                                                                    <div class="text-muted">
-                                                                                                        Tidak ada Foto KTP
-                                                                                                    </div>
-                                                                                                `);
+                    <div class="text-muted">
+                        Tidak ada Foto KTP
+                    </div>
+                `);
 
                 }
 
-                // isi textbox pencarian
                 $("#keyword_customer").val($(this).data('nama'));
 
-                // sembunyikan hasil pencarian
                 $("#hasilCustomer").hide();
 
-                // tampilkan data customer
                 $("#dataCustomerLama").show();
 
-                // tampilkan form booking
                 $("#formBooking").show();
 
                 $("#gantiCustomer").show();
 
-                // kunci pencarian
                 $("#keyword_customer").prop("readonly", true);
 
             });
 
 
-
-
-
+            // ======================================================
+            // GANTI CUSTOMER
+            // ======================================================
             $(document).off('click', '#gantiCustomer').on('click', '#gantiCustomer', function () {
-                // Customer
+
                 $("#keyword_customer").val("");
                 $("#keyword_customer").prop("readonly", false);
+
                 $("#id_customer_lama").val("");
 
                 $("#lama_nama_tamu").val("");
@@ -1001,74 +1028,37 @@
                 $("#lama_no_wa").val("");
 
                 $("#lama_foto_ktp").html(`
-                                                                                <div class="text-muted">
-                                                                                    Tidak ada Foto KTP
-                                                                                </div>
-                                                                            `);
-
-                // Booking
-                $("#formBooking").hide();
-
-                $("#check_in_pesan_kamar").val("");
-                $("#check_out_pesan_kamar").val("");
-
-                $("#check_in").val("");
-                $("#check_out").val("");
-
-                $("#status_pembayaran").val("");
-                $("#metode_pembayaran").val("");
-                $("#sumber_pembayaran").val("");
-                $("#bukti_pembayaran").val("");
-
-
-                $("#metode_pembayaran_container").hide();
-                $("#metode_pembayaran_input").hide();
-
-                $("#sumber_pembayaran_container").hide();
-                $("#sumber_pembayaran_input").hide();
-
-                $("#bukti_pembayaran_container").hide();
-                $("#bukti_pembayaran_input").hide();
-
-                $("#jumlah_kamar_dipesan").html(`
-                                                                                <option value="">
-                                                                                    -- Pilih Tanggal Check In Dulu --
-                                                                                </option>
-                                                                            `);
-
-                $("#jumlah_extra_bed").val("");
-                $("#jumlah_breakfast").val("");
+                <div class="text-muted">
+                    Tidak ada Foto KTP
+                </div>
+            `);
 
                 $("#hasilCustomer").hide();
                 $("#dataCustomerLama").hide();
                 $("#gantiCustomer").hide();
 
+                resetFormBooking();
 
-                $("#kamar_tersedia_title").hide();
-                $("#kamar_tersedia_list").hide();
-                $("#list_nomor_kamar").html("");
-
-                $("#biaya_container").hide();
-                $("#biaya_input_container").hide();
-
-                $("#biaya_request").val("");
-                $("#biaya_request_value").val("");
                 $("#keyword_customer").focus();
+
             });
 
 
-
-
-
-
+            // ======================================================
+            // MODAL DITUTUP
+            // ======================================================
             $('#modal-pesan-kamar').on('hidden.bs.modal', function () {
 
                 $(this).find('form').trigger('reset');
 
+                if (typeof resetFormBooking === "function") {
+                    resetFormBooking();
+                }
+
                 $("#hasilCustomer").hide();
                 $("#dataCustomerLama").hide();
-                $("#formBooking").hide();
 
             });
+
         </script>
     @endpush
