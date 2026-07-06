@@ -208,9 +208,13 @@
                         Alamat
                     </label>
 
-                    <div id="lama_alamat_tamu" class="form-control d-flex align-items-center"
-                        style="min-height:70px; font-size:16pt;">
-                    </div>
+                    <textarea id="lama_alamat_tamu" class="form-control" rows="2" readonly style="
+            font-size:16pt;
+            resize:none;
+            overflow:hidden;
+            line-height:1.6;
+            padding:14px 12px;
+        "></textarea>
 
                 </div>
 
@@ -684,7 +688,7 @@
                 // tampilkan data customer
                 $('#lama_nama_tamu').val($(this).data('nama'));
 
-                $("#lama_alamat_tamu").text($(this).data('alamat'));
+                $('#lama_alamat_tamu').val($(this).data('alamat'));
 
                 $('#lama_no_wa').val($(this).data('wa'));
 
