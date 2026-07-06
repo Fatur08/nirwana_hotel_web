@@ -129,7 +129,7 @@
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path
                                     d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4
-                                                                                                                                                                                                                                                                                                                                                 a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                                                                                                                                                                                                                                                                                                                                                     a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
                             </svg>
                         </span>
                         <input type="text" id="no_wa_tamu" name="no_wa_tamu" class="form-control"
@@ -181,8 +181,8 @@
 
             <div id="hasilCustomer" class="list-group mb-3"
                 style="display:none;
-                                                                                                                                                                            max-height:250px;
-                                                                                                                                                                            overflow-y:auto;">
+                                                                                                                                                                                max-height:250px;
+                                                                                                                                                                                overflow-y:auto;">
 
             </div>
 
@@ -208,10 +208,10 @@
 
                     <div id="lama_alamat_tamu" class="form-control d-flex align-items-center"
                         style="
-                                                                                                            min-height:70px;
-                                                                                                            font-size:16pt;
-                                                                                                            white-space:pre-wrap;
-                                                                                                            word-break:break-word;">
+                                                                                                                min-height:70px;
+                                                                                                                font-size:16pt;
+                                                                                                                white-space:pre-wrap;
+                                                                                                                word-break:break-word;">
                     </div>
 
                 </div>
@@ -373,12 +373,12 @@
                 <div class="col-12">
                     <textarea id="biaya_request" class="form-control" readonly
                         style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            font-size:16pt;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            min-height:120px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            resize:none;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            overflow:hidden;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                font-size:16pt;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                min-height:120px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                resize:none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                overflow:hidden;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
 
                     <input type="hidden" id="biaya_request_value" name="biaya_request">
                 </div>
@@ -538,10 +538,10 @@
 
 
             $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option value="">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        <option value="">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        </option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    `);
 
             $('#kamar_tersedia_title').hide();
             $('#kamar_tersedia_list').hide();
@@ -586,10 +586,10 @@
                 $('#lama_no_wa').val('');
 
                 $('#lama_foto_ktp').html(`
-                                <div class="text-muted">
-                                    Tidak ada Foto KTP
-                                </div>
-                            `);
+                                    <div class="text-muted">
+                                        Tidak ada Foto KTP
+                                    </div>
+                                `);
 
                 // reset input customer baru
                 $('#nama_tamu').val('');
@@ -618,6 +618,591 @@
 
                     $('#formCustomerLama').show();
 
+                }
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+            $(document).on('keyup', '#keyword_customer', function () {
+
+                let keyword = $(this).val();
+
+                if (keyword.length < 1) {
+
+                    $('#hasilCustomer').hide();
+                    $('#hasilCustomer').html('');
+
+                    return;
+
+                }
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '/CariCustomer',
+
+                    data: {
+
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+
+                        keyword: keyword
+
+                    },
+
+                    success: function (response) {
+
+                        let html = '';
+
+                        if (response.length == 0) {
+
+                            html = `
+                                                                                                                                                                                                                                    <div class="list-group-item text-danger">
+                                                                                                                                                                                                                                        Customer tidak ditemukan
+                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                `;
+
+                        } else {
+
+                            response.forEach(function (item) {
+
+                                html += `
+                                                                                                                                                                                                                                        <a href="#"
+
+                                                                                                                                                                                                                                           class="list-group-item list-group-item-action pilihCustomer"
+
+                                                                                                                                                                                                                                           data-id="${item.id_rincian_pesanan}"
+
+                                                                                                                                                                                                                                           data-nama="${item.nama_tamu}"
+
+                                                                                                                                                                                                                                           data-alamat="${item.alamat_tamu ?? ''}"
+
+                                                                                                                                                                                                                                           data-wa="${item.no_wa_tamu ?? ''}"
+
+                                                                                                                                                                                                                                           data-foto="${item.foto_ktp ?? ''}">
+
+                                                                                                                                                                                                                                            <b>${item.nama_tamu}</b>
+
+                                                                                                                                                                                                                                            <br>
+
+                                                                                                                                                                                                                                            <small>
+
+                                                                                                                                                                                                                                                ${item.alamat_tamu ?? '-'}
+
+                                                                                                                                                                                                                                            </small>
+
+                                                                                                                                                                                                                                        </a>
+                                                                                                                                                                                                                                    `;
+
+                            });
+
+                        }
+
+                        $('#hasilCustomer').html(html).show();
+
+                    }
+
+                });
+
+            });
+
+
+
+
+
+
+
+
+            $(document).on('click', '.pilihCustomer', function (e) {
+
+                e.preventDefault();
+
+                // simpan id customer
+                $('#id_customer_lama').val($(this).data('id'));
+
+                // tampilkan data customer
+                $('#lama_nama_tamu').val($(this).data('nama'));
+
+                $("#lama_alamat_tamu").text($(this).data('alamat'));
+
+                $('#lama_no_wa').val($(this).data('wa'));
+
+                // Foto KTP
+                let foto = $(this).data('foto');
+
+                if (foto != '') {
+
+                    $('#lama_foto_ktp').html(`
+                                                                                                                                                                                                                        <img
+                                                                                                                                                                                                                            src="/storage/uploads/foto_ktp/${foto}"
+                                                                                                                                                                                                                            class="img-fluid rounded border"
+                                                                                                                                                                                                                            style="max-height:250px;">
+                                                                                                                                                                                                                    `);
+
+                } else {
+
+                    $('#lama_foto_ktp').html(`
+                                                                                                                                                                                                                        <div class="text-muted">
+                                                                                                                                                                                                                            Tidak ada Foto KTP
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                    `);
+
+                }
+
+                // isi textbox dengan nama customer
+                $('#keyword_customer').val($(this).data('nama'));
+
+                // sembunyikan hasil pencarian
+                $('#hasilCustomer').hide();
+
+                // tampilkan data customer
+                $('#dataCustomerLama').slideDown(200);
+
+            });
+
+
+
+
+
+
+
+
+            // ==========================
+            // AMBIL JUMLAH KAMAR TERSEDIA
+            // ==========================
+            function refreshJumlahKamar() {
+
+                let checkIn = $('#check_in').val();
+                let checkOut = $('#check_out').val();
+
+                console.log($('#check_in').val());
+                console.log($('#check_out').val());
+
+                if (!checkIn || !checkOut) {
+
+                    $('#jumlah_kamar_dipesan').html(`
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <option value="">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `);
+
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/getKamarTersedia',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        check_in: checkIn,
+                        check_out: checkOut
+                    },
+
+                    success: function (response) {
+
+                        let totalKamar = response.length;
+
+                        let opsiJumlah =
+                            '<option value="">-- Pilih Jumlah Kamar --</option>';
+
+                        for (let i = 1; i <= totalKamar; i++) {
+
+                            opsiJumlah += `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option value="${i}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ${i} Kamar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `;
+                        }
+
+                        $('#jumlah_kamar_dipesan').html(opsiJumlah);
+
+                    }
+                });
+            }
+
+
+
+            // Jika tanggal berubah, refresh jumlah kamar
+            $('#check_in, #check_out').change(function () {
+
+                $('#jumlah_kamar_dipesan').val('');
+
+                $('#kamar_tersedia_title').hide();
+                $('#kamar_tersedia_list').hide();
+                $('#list_nomor_kamar').html('');
+
+                refreshJumlahKamar();
+
+            });
+
+
+            // ==========================
+            // SAAT JUMLAH KAMAR DIPILIH
+            // ==========================
+            $('#jumlah_kamar_dipesan').change(function () {
+
+                let jumlah = $(this).val();
+
+                let checkIn = $('#check_in').val();
+                let checkOut = $('#check_out').val();
+
+                if (!checkIn || !checkOut) {
+
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Peringatan',
+                        text: 'Silakan pilih tanggal Check-In dan Check-Out terlebih dahulu'
+                    });
+
+                    $(this).val('');
+
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/getKamarTersedia',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        check_in: checkIn,
+                        check_out: checkOut
+                    },
+
+                    success: function (response) {
+
+                        $('#kamar_tersedia_title').show();
+                        $('#kamar_tersedia_list').show();
+
+                        let html = '';
+
+                        // cek apakah Home Stay tersedia
+                        let adaHomeStay = response.some(function (kamar) {
+                            return kamar.id_kamar == 4;
+                        });
+
+                        for (let i = 1; i <= jumlah; i++) {
+
+                            html += `
+                                                                                                                                                                                                                                                                                                                                            <div class="mb-4">
+
+                                                                                                                                                                                                                                                                                                                                                <label class="form-label fw-bold"
+                                                                                                                                                                                                                                                                                                                                                       style="font-size:16pt;">
+                                                                                                                                                                                                                                                                                                                                                    Pilih Kamar ${i}
+                                                                                                                                                                                                                                                                                                                                                </label>
+
+                                                                                                                                                                                                                                                                                                                                                <select
+                                                                                                                                                                                                                                                                                                                                                    name="id_nomor_kamar[]"
+                                                                                                                                                                                                                                                                                                                                                    class="form-control nomor-kamar"
+                                                                                                                                                                                                                                                                                                                                                    style="font-size:16pt;"
+                                                                                                                                                                                                                                                                                                                                                    required>
+
+                                                                                                                                                                                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                                                                                                                                                                                        -- Pilih Kamar --
+                                                                                                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                                                                                        `;
+
+                            response.forEach(function (kamar) {
+
+                                // Home Stay ditampilkan satu pilihan saja
+                                if (kamar.id_kamar == 4) {
+                                    return;
+                                }
+
+                                let bed = '-';
+
+                                if (kamar.jenis_bed == 1) {
+                                    bed = 'Single Bed';
+                                } else if (kamar.jenis_bed == 2) {
+                                    bed = 'Double Bed';
+                                }
+
+                                html += `
+                                                                                                                                                                                                                                                                                                                                                <option value="${kamar.id_nomor_kamar}">
+                                                                                                                                                                                                                                                                                                                                                    ${kamar.tipe_kamar}
+                                                                                                                                                                                                                                                                                                                                                    ${kamar.nomor_kamar}
+                                                                                                                                                                                                                                                                                                                                                    (${bed})
+                                                                                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                                                                                            `;
+                            });
+
+                            if (adaHomeStay) {
+
+                                html += `
+                                                                                                                                                                                                                                                                                                                                                <option value="HMSTY">
+                                                                                                                                                                                                                                                                                                                                                    Home Stay
+                                                                                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                                                                                            `;
+                            }
+
+                            html += `
+                                                                                                                                                                                                                                                                                                                                                </select>
+                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                        `;
+                        }
+
+                        $('#list_nomor_kamar').html(html);
+                    }
+                });
+
+            });
+
+
+            // ==========================
+            // CEGAH KAMAR GANDA
+            // ==========================
+            $(document).on('change', '.nomor-kamar', function () {
+
+                let selectedRooms = [];
+
+                $('.nomor-kamar').each(function () {
+
+                    let val = $(this).val();
+
+                    if (val) {
+                        selectedRooms.push(val);
+                    }
+
+                });
+
+                $('.nomor-kamar option').prop('disabled', false);
+
+                selectedRooms.forEach(function (id) {
+
+                    $('.nomor-kamar').each(function () {
+
+                        if ($(this).val() != id) {
+
+                            $(this)
+                                .find(`option[value="${id}"]`)
+                                .prop('disabled', true);
+
+                        }
+
+                    });
+
+                });
+
+            });
+
+
+
+
+            // ==========================
+            // HITUNG BIAYA REQUEST
+            // ==========================
+            function hitungBiayaRequest() {
+
+                let jumlahExtraBed =
+                    parseInt($('#jumlah_extra_bed').val()) || 0;
+
+                let jumlahBreakfast =
+                    parseInt($('#jumlah_breakfast').val()) || 0;
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: '/getBiayaRequest',
+
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+
+                    success: function (response) {
+
+                        let hargaExtraBed =
+                            parseInt(response.extra_bed);
+
+                        let hargaBreakfast =
+                            parseInt(response.breakfast);
+
+                        let total = 0;
+                        let keterangan = [];
+
+                        // EXTRA BED
+                        if (jumlahExtraBed > 0) {
+
+                            let subtotal =
+                                jumlahExtraBed * hargaExtraBed;
+
+                            total += subtotal;
+
+                            if (jumlahExtraBed == 1) {
+
+                                keterangan.push(
+                                    'Rp ' +
+                                    subtotal.toLocaleString('id-ID')
+                                );
+
+                            } else {
+
+                                keterangan.push(
+                                    jumlahExtraBed +
+                                    ' Extra Bed x Rp ' +
+                                    hargaExtraBed.toLocaleString('id-ID') +
+                                    ' = Rp ' +
+                                    subtotal.toLocaleString('id-ID')
+                                );
+
+                            }
+                        }
+
+                        // BREAKFAST
+                        if (jumlahBreakfast > 0) {
+
+                            let subtotal =
+                                jumlahBreakfast * hargaBreakfast;
+
+                            total += subtotal;
+
+                            if (jumlahBreakfast == 1) {
+
+                                keterangan.push(
+                                    'Rp ' +
+                                    subtotal.toLocaleString('id-ID')
+                                );
+
+                            } else {
+
+                                keterangan.push(
+                                    jumlahBreakfast +
+                                    ' Breakfast x Rp ' +
+                                    hargaBreakfast.toLocaleString('id-ID') +
+                                    ' = Rp ' +
+                                    subtotal.toLocaleString('id-ID')
+                                );
+
+                            }
+                        }
+
+                        if (total > 0) {
+
+                            $('#biaya_container').show();
+                            $('#biaya_input_container').show();
+
+                            if (keterangan.length > 1) {
+
+                                keterangan.push(
+                                    '\nTotal = Rp ' +
+                                    total.toLocaleString('id-ID')
+                                );
+
+                            }
+
+                            $('#biaya_request').val(
+                                keterangan.join('\n')
+                            );
+
+                            // paksa resize textarea
+                            setTimeout(function () {
+
+                                $('#biaya_request').css('height', 'auto');
+
+                                $('#biaya_request').css(
+                                    'height',
+                                    $('#biaya_request')[0].scrollHeight + 'px'
+                                );
+
+                            }, 10);
+
+                            $('#biaya_request_value').val(total);
+
+                        } else {
+
+                            $('#biaya_container').hide();
+                            $('#biaya_input_container').hide();
+
+                            $('#biaya_request').val('');
+                            $('#biaya_request_value').val('');
+                        }
+
+                    }
+
+                });
+
+            }
+
+            // Saat jumlah berubah
+            $(document).on(
+                'input',
+                '#jumlah_extra_bed, #jumlah_breakfast',
+                function () {
+
+                    hitungBiayaRequest();
+
+                }
+            );
+
+
+
+            // ==========================
+            // STATUS PEMBAYARAN
+            // ==========================
+            $(document).on('change', '#status_pembayaran', function () {
+
+                let status = $(this).val();
+
+                if (status === 'sudah') {
+
+                    $('#metode_pembayaran_container').show();
+                    $('#metode_pembayaran_input').show();
+
+                } else {
+
+                    $('#metode_pembayaran_container').hide();
+                    $('#metode_pembayaran_input').hide();
+
+                    $('#sumber_pembayaran_container').hide();
+                    $('#sumber_pembayaran_input').hide();
+
+                    $('#bukti_pembayaran_container').hide();
+                    $('#bukti_pembayaran_input').hide();
+
+                    $('#metode_pembayaran').val('');
+                    $('#sumber_pembayaran').val('');
+                    $('#bukti_pembayaran').val('');
+                }
+
+            });
+
+
+
+
+
+            // ==========================
+            // METODE PEMBAYARAN
+            // ==========================
+            $(document).on('change', '#metode_pembayaran', function () {
+
+                let metode = $(this).val();
+
+                if (metode === 'online') {
+
+                    $('#sumber_pembayaran_container').show();
+                    $('#sumber_pembayaran_input').show();
+
+                    $('#bukti_pembayaran_container').show();
+                    $('#bukti_pembayaran_input').show();
+
+                } else {
+
+                    $('#sumber_pembayaran_container').hide();
+                    $('#sumber_pembayaran_input').hide();
+
+                    $('#bukti_pembayaran_container').hide();
+                    $('#bukti_pembayaran_input').hide();
+
+                    $('#sumber_pembayaran').val('');
+                    $('#bukti_pembayaran').val('');
                 }
 
             });
