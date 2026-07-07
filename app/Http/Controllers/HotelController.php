@@ -851,51 +851,49 @@ class HotelController extends Controller
 |--------------------------------------------------------------------------
 */
 
-            if ($request->jenis_customer == 'baru') {
-
+            if ($request->jenis_customer == "baru") {
                 /*
                 |--------------------------------------------------------------------------
                 | INSERT CUSTOMER BARU
                 |--------------------------------------------------------------------------
                 */
 
-                $idCustomer = DB::table('rincian_pesanan')->insertGetId([
-                    'nama_tamu' => $request->nama_tamu,
-                    'no_wa_tamu' => $request->no_wa_tamu,
-                    'total_kamar_dipesan' => $totalKamar,
-                    'total_request' => $totalRequest
-                ]);
+                $namaTamu = $request->nama_tamu;
+                $alamatTamu = $request->alamat_tamu;
+                $noWaTamu = $request->no_wa_tamu;
 
             } else {
-
                 /*
                 |--------------------------------------------------------------------------
                 | CUSTOMER LAMA
                 |--------------------------------------------------------------------------
                 */
 
-                $customer = DB::table('rincian_pesanan')
-                    ->where('id_rincian_pesanan', $request->id_customer_lama)
+                $customer = DB::table('rincian_pesanan as rp')
+                    ->select(
+                        'rp.nama_tamu',
+                        'rp.no_wa_tamu',
+                        DB::raw('(SELECT alamat_tamu
+                FROM histori_kamar
+                WHERE id_rincian_pesanan = rp.id_rincian_pesanan
+                LIMIT 1) as alamat_tamu'),
+                        DB::raw('(SELECT foto_ktp
+                FROM laporan_keuangan
+                WHERE id_rincian_pesanan = rp.id_rincian_pesanan
+                LIMIT 1) as foto_ktp')
+                    )
+                    ->where('rp.id_rincian_pesanan', $request->id_customer_lama)
                     ->first();
 
                 if (!$customer) {
-                    throw new \Exception('Customer tidak ditemukan.');
+                    throw new Exception("Customer tidak ditemukan.");
                 }
 
-                /*
-                |--------------------------------------------------------------------------
-                | UPDATE TOTAL CUSTOMER
-                |--------------------------------------------------------------------------
-                */
+                $namaTamu = $customer->nama_tamu;
+                $alamatTamu = $customer->alamat_tamu;
+                $noWaTamu = $customer->no_wa_tamu;
+                $foto_ktp = $customer->foto_ktp;
 
-                DB::table('rincian_pesanan')
-                    ->where('id_rincian_pesanan', $customer->id_rincian_pesanan)
-                    ->update([
-                        'total_kamar_dipesan' => DB::raw("total_kamar_dipesan + {$totalKamar}"),
-                        'total_request' => DB::raw("total_request + {$totalRequest}")
-                    ]);
-
-                $idCustomer = $customer->id_rincian_pesanan;
             }
 
             /*
@@ -904,7 +902,14 @@ class HotelController extends Controller
             |--------------------------------------------------------------------------
             */
 
-            $idRincian = $idCustomer;
+            $idRincian = DB::table('rincian_pesanan')->insertGetId([
+
+                'nama_tamu' => $namaTamu,
+                'no_wa_tamu' => $noWaTamu,
+                'total_kamar_dipesan' => $totalKamar,
+                'total_request' => $totalRequest
+
+            ]);
 
 
 
@@ -934,7 +939,7 @@ class HotelController extends Controller
                     'id_rincian_pesanan' => $idRincian,
 
                     'kode_kamar' => $kamar->kode_kamar,
-                    'nama_tamu' => $request->nama_tamu,
+                    'nama_tamu' => $namaTamu,
                     'tipe_kamar' => $kamar->tipe_kamar,
 
                     'jumlah_kamar_dipesan' => $jumlahPerTipe,
@@ -1034,8 +1039,8 @@ class HotelController extends Controller
                     'id_laporan_keuangan' => $idLaporanPerKamar[$idNomorKamar],
                     'id_nomor_kamar' => $idNomorKamar,
 
-                    'nama_tamu' => $request->nama_tamu,
-                    'alamat_tamu' => $request->alamat_tamu,
+                    'nama_tamu' => $namaTamu,
+                    'alamat_tamu' => $alamatTamu,
 
                     'check_in' => $request->check_in,
                     'check_out' => $request->check_out
