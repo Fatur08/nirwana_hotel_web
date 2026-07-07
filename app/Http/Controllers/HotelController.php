@@ -505,14 +505,17 @@ class HotelController extends Controller
         DB::beginTransaction();
 
         try {
-            // =====================================
-            // UBAH VALUE HOME STAY MENJADI 2 KAMAR
-            // =====================================
+            /*
+    |--------------------------------------------------------------------------
+    | UBAH HOME STAY MENJADI 2 NOMOR KAMAR
+    |--------------------------------------------------------------------------
+    */
+
             $idNomorKamar = [];
 
             foreach ($request->id_nomor_kamar as $item) {
 
-                if ($item == 'HMSTY') {
+                if ($item == "HMSTY") {
 
                     $homeStay = DB::table('nomor_kamar as nk')
                         ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
@@ -527,6 +530,7 @@ class HotelController extends Controller
                     $idNomorKamar[] = $item;
 
                 }
+
             }
 
             $request->merge([
@@ -537,37 +541,141 @@ class HotelController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | AMBIL SELURUH KAMAR YANG DIPILIH
+            | AMBIL DATA CUSTOMER
+            |--------------------------------------------------------------------------
+            */
+
+            $namaTamu = "";
+            $alamatTamu = "";
+            $noWaTamu = "";
+
+            $foto_ktp = null;
+
+            if ($request->jenis_customer == "baru") {
+
+                $namaTamu = $request->nama_tamu;
+                $alamatTamu = $request->alamat_tamu;
+                $noWaTamu = $request->no_wa_tamu;
+
+                /*
+                |--------------------------------------------------------------------------
+                | UPLOAD FOTO KTP CUSTOMER BARU
+                |--------------------------------------------------------------------------
+                */
+
+                if ($request->hasFile('foto_ktp')) {
+
+                    $timestamp = now()->format('Y-m-d_H-i-s');
+
+                    $namaFile = str_replace(' ', '_', $namaTamu);
+
+                    $foto_ktp =
+                        "Foto_KTP_" .
+                        $namaFile .
+                        "_" .
+                        $timestamp .
+                        "." .
+                        $request->file('foto_ktp')->extension();
+
+                    $storagePath = 'public/uploads/foto_ktp/';
+
+                    $request
+                        ->file('foto_ktp')
+                        ->storeAs($storagePath, $foto_ktp);
+
+                    $publicPath =
+                        public_path('storage/uploads/foto_ktp/');
+
+                    if (!is_dir($publicPath)) {
+
+                        mkdir($publicPath, 0777, true);
+
+                    }
+
+                    copy(
+                        storage_path('app/' . $storagePath . $foto_ktp),
+                        public_path('storage/uploads/foto_ktp/' . $foto_ktp)
+                    );
+
+                }
+
+            } else {
+
+                $customer = DB::table('rincian_pesanan')
+                    ->where('id_rincian_pesanan', $request->id_customer_lama)
+                    ->first();
+
+                if (!$customer) {
+
+                    throw new Exception("Customer lama tidak ditemukan.");
+
+                }
+
+                $namaTamu = $customer->nama_tamu;
+                $alamatTamu = $customer->alamat_tamu;
+                $noWaTamu = $customer->no_wa_tamu;
+                $foto_ktp = $customer->foto_ktp;
+
+            }
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | AMBIL KAMAR
             |--------------------------------------------------------------------------
             */
 
             $kamarDipilih = DB::table('nomor_kamar as nk')
-                ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
-                ->whereIn('nk.id_nomor_kamar', $request->id_nomor_kamar)
+
+                ->join(
+                    'kamar as k',
+                    'nk.id_kamar',
+                    '=',
+                    'k.id_kamar'
+                )
+
+                ->whereIn(
+                    'nk.id_nomor_kamar',
+                    $request->id_nomor_kamar
+                )
+
                 ->select(
+
                     'nk.id_nomor_kamar',
                     'nk.nomor_kamar',
                     'nk.jenis_bed',
+
                     'k.id_kamar',
                     'k.kode_kamar',
                     'k.tipe_kamar',
                     'k.tarif_per_hari',
                     'k.before_10_persen',
                     'k.after_10_persen'
+
                 )
+
                 ->get();
 
+
             if ($kamarDipilih->isEmpty()) {
-                throw new \Exception('Data kamar tidak ditemukan');
+
+                throw new Exception("Data kamar tidak ditemukan.");
+
             }
+
+
 
             /*
             |--------------------------------------------------------------------------
-            | GROUP BERDASARKAN TIPE KAMAR
+            | GROUP TIPE KAMAR
             |--------------------------------------------------------------------------
             */
 
-            $groupKamar = $kamarDipilih->groupBy('id_kamar');
+            $groupKamar =
+                $kamarDipilih->groupBy('id_kamar');
+
+
 
             /*
             |--------------------------------------------------------------------------
@@ -575,10 +683,16 @@ class HotelController extends Controller
             |--------------------------------------------------------------------------
             */
 
-            $checkIn = \Carbon\Carbon::parse($request->check_in);
-            $checkOut = \Carbon\Carbon::parse($request->check_out);
+            $checkIn =
+                \Carbon\Carbon::parse($request->check_in);
 
-            $lama_inap = $checkOut->diffInDays($checkIn);
+            $checkOut =
+                \Carbon\Carbon::parse($request->check_out);
+
+            $lama_inap =
+                $checkOut->diffInDays($checkIn);
+
+
 
             /*
             |--------------------------------------------------------------------------
@@ -586,208 +700,350 @@ class HotelController extends Controller
             |--------------------------------------------------------------------------
             */
 
-            $totalKamar = count($request->id_nomor_kamar);
+            $totalKamar =
+                count($request->id_nomor_kamar);
+
+
 
             /*
             |--------------------------------------------------------------------------
-            | BIAYA REQUEST
+            | HITUNG REQUEST
             |--------------------------------------------------------------------------
             */
 
-            $extraBed = DB::table('kamar')
-                ->where('kode_kamar', 'BED')
-                ->first();
+            $extraBed =
+                DB::table('kamar')
+                    ->where('kode_kamar', 'BED')
+                    ->first();
 
-            $breakfast = DB::table('kamar')
-                ->where('kode_kamar', 'FAST')
-                ->first();
+            $breakfast =
+                DB::table('kamar')
+                    ->where('kode_kamar', 'FAST')
+                    ->first();
 
-            $jumlahExtraBed = (int) $request->jumlah_extra_bed;
-            $jumlahBreakfast = (int) $request->jumlah_breakfast;
+            $jumlahExtraBed =
+                (int) $request->jumlah_extra_bed;
 
-            $totalExtraBed = $jumlahExtraBed * ($extraBed->tarif_per_hari ?? 0);
-            $totalBreakfast = $jumlahBreakfast * ($breakfast->tarif_per_hari ?? 0);
-            $totalRequest = $totalExtraBed + $totalBreakfast;
+            $jumlahBreakfast =
+                (int) $request->jumlah_breakfast;
 
-            /* ===============================
-               UPLOAD FOTO KTP
-            ================================*/
-            $foto_ktp = null;
+            $totalExtraBed =
+                $jumlahExtraBed *
+                ($extraBed->tarif_per_hari ?? 0);
 
+            $totalBreakfast =
+                $jumlahBreakfast *
+                ($breakfast->tarif_per_hari ?? 0);
 
-            if ($request->hasFile('foto_ktp')) {
-                $timestamp = now()->format('Y-m-d_H-i-s');
-                $nama = str_replace(' ', '_', $request->nama_tamu);
-                $foto_ktp = "Foto_KTP_" . $nama . "_" . $timestamp . "." . $request->file('foto_ktp')->extension();
-                $storagePath = 'public/uploads/foto_ktp/';
-                $request->file('foto_ktp')->storeAs($storagePath, $foto_ktp);
-                $publicPath = public_path('storage/uploads/foto_ktp/');
-                if (!is_dir($publicPath)) {
-                    mkdir($publicPath, 0777, true);
-                }
-                $sourceFile = storage_path('app/' . $storagePath . $foto_ktp);
-                $destinationFile = public_path('storage/uploads/foto_ktp/' . $foto_ktp);
-                copy($sourceFile, $destinationFile);
-            }
-
-            /* ===============================
-               UPLOAD BUKTI PEMBAYARAN
-            ================================*/
-            $bukti_pembayaran = null;
+            $totalRequest =
+                $totalExtraBed +
+                $totalBreakfast;
 
 
-            if ($request->hasFile('bukti_pembayaran')) {
-                $timestamp = now()->format('Y-m-d_H-i-s');
-                $nama = str_replace(' ', '_', $request->nama_tamu);
-                $bukti_pembayaran = "Bukti Pembayaran_" . $nama . "_" . $timestamp . "." . $request->file('bukti_pembayaran')->extension();
-                $storagePath = 'public/uploads/bukti_pembayaran/';
-                $request->file('bukti_pembayaran')->storeAs($storagePath, $bukti_pembayaran);
-                $publicPath = public_path('storage/uploads/bukti_pembayaran/');
-                if (!is_dir($publicPath)) {
-                    mkdir($publicPath, 0777, true);
-                }
-                $sourceFile = storage_path('app/' . $storagePath . $bukti_pembayaran);
-                $destinationFile = public_path('storage/uploads/bukti_pembayaran/' . $bukti_pembayaran);
-                copy($sourceFile, $destinationFile);
-            }
 
             /*
             |--------------------------------------------------------------------------
-            | STATUS & METODE PEMBAYARAN
+            | UPLOAD BUKTI PEMBAYARAN
+            |--------------------------------------------------------------------------
+            */
+
+            $bukti_pembayaran = null;
+
+            if ($request->hasFile('bukti_pembayaran')) {
+
+                $timestamp =
+                    now()->format('Y-m-d_H-i-s');
+
+                $namaFile =
+                    str_replace(' ', '_', $namaTamu);
+
+                $bukti_pembayaran =
+                    "Bukti_Pembayaran_" .
+                    $namaFile .
+                    "_" .
+                    $timestamp .
+                    "." .
+                    $request->file('bukti_pembayaran')->extension();
+
+                $storagePath =
+                    'public/uploads/bukti_pembayaran/';
+
+                $request
+                    ->file('bukti_pembayaran')
+                    ->storeAs(
+                        $storagePath,
+                        $bukti_pembayaran
+                    );
+
+                $publicPath =
+                    public_path(
+                        'storage/uploads/bukti_pembayaran/'
+                    );
+
+                if (!is_dir($publicPath)) {
+
+                    mkdir($publicPath, 0777, true);
+
+                }
+
+                copy(
+
+                    storage_path(
+                        'app/' .
+                        $storagePath .
+                        $bukti_pembayaran
+                    ),
+
+                    public_path(
+                        'storage/uploads/bukti_pembayaran/' .
+                        $bukti_pembayaran
+                    )
+
+                );
+
+            }
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | STATUS PEMBAYARAN
             |--------------------------------------------------------------------------
             */
 
             $status_pembayaran =
-                $request->status_pembayaran == 'sudah'
+                $request->status_pembayaran == "sudah"
                 ? 1
                 : 0;
 
             $metode_pembayaran = null;
 
-            // Hanya isi metode pembayaran jika memang sudah bayar
             if ($status_pembayaran == 1) {
 
-                if ($request->metode_pembayaran == 'online') {
+                if ($request->metode_pembayaran == "online") {
 
                     $metode_pembayaran =
                         $request->sumber_pembayaran;
 
                 } else {
 
-                    $metode_pembayaran = 'Cash';
+                    $metode_pembayaran = "Cash";
 
                 }
 
             }
 
             /*
-            |--------------------------------------------------------------------------
-            | INSERT RINCIAN PESANAN
-            |--------------------------------------------------------------------------
-            */
-            $idRincian = DB::table('rincian_pesanan')
-                ->insertGetId([
+|--------------------------------------------------------------------------
+| CUSTOMER BARU / CUSTOMER LAMA
+|--------------------------------------------------------------------------
+*/
+
+            if ($request->jenis_customer == 'baru') {
+
+                /*
+                |--------------------------------------------------------------------------
+                | INSERT CUSTOMER BARU
+                |--------------------------------------------------------------------------
+                */
+
+                $idCustomer = DB::table('rincian_pesanan')->insertGetId([
                     'nama_tamu' => $request->nama_tamu,
+                    'alamat_tamu' => $request->alamat_tamu,
                     'no_wa_tamu' => $request->no_wa_tamu,
+                    'foto_ktp' => $foto_ktp,
                     'total_kamar_dipesan' => $totalKamar,
                     'total_request' => $totalRequest
                 ]);
 
+            } else {
+
+                /*
+                |--------------------------------------------------------------------------
+                | CUSTOMER LAMA
+                |--------------------------------------------------------------------------
+                */
+
+                $customer = DB::table('rincian_pesanan')
+                    ->where('id_rincian_pesanan', $request->id_customer_lama)
+                    ->first();
+
+                if (!$customer) {
+                    throw new \Exception('Customer tidak ditemukan.');
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | UPDATE TOTAL CUSTOMER
+                |--------------------------------------------------------------------------
+                */
+
+                DB::table('rincian_pesanan')
+                    ->where('id_rincian_pesanan', $customer->id_rincian_pesanan)
+                    ->update([
+                        'total_kamar_dipesan' => DB::raw("total_kamar_dipesan + {$totalKamar}"),
+                        'total_request' => DB::raw("total_request + {$totalRequest}")
+                    ]);
+
+                $idCustomer = $customer->id_rincian_pesanan;
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | ID RINCIAN
+            |--------------------------------------------------------------------------
+            */
+
+            $idRincian = $idCustomer;
+
 
 
 
 
             // =====================================
-            // INSERT LAPORAN KEUANGAN
-            // SATU DATA PER TIPE KAMAR
-            // =====================================
+// INSERT LAPORAN KEUANGAN
+// SATU DATA PER TIPE KAMAR
+// =====================================
+
             $idLaporanPerKamar = [];
-            foreach ($groupKamar as $idKamar => $items) {
+
+            foreach ($groupKamar as $items) {
+
                 $kamar = $items->first();
+
                 $jumlahPerTipe = $items->count();
-                $biaya =
-                    $jumlahPerTipe *
-                    $kamar->after_10_persen *
-                    $lama_inap;
+
+                $biaya = $jumlahPerTipe * $kamar->after_10_persen * $lama_inap;
 
                 $pajak = $biaya * 0.19;
-                $total_diterima =
-                    ($biaya - $pajak);
 
-                $idLaporan =
-                    DB::table('laporan_keuangan')
-                        ->insertGetId([
-                            'id_rincian_pesanan' => $idRincian,
-                            'kode_kamar' => $kamar->kode_kamar,
-                            'nama_tamu' => $request->nama_tamu,
-                            'tipe_kamar' => $kamar->tipe_kamar,
-                            'jumlah_kamar_dipesan' => $jumlahPerTipe,
-                            'tarif_per_hari' => $kamar->tarif_per_hari,
-                            'before_10_persen' => $kamar->before_10_persen,
-                            'after_10_persen' => $kamar->after_10_persen,
-                            'tanggal_dipesan' => now(),
-                            'check_in' => $request->check_in,
-                            'check_out' => $request->check_out,
-                            'lama_inap' => $lama_inap,
-                            'biaya' => $biaya,
+                $totalDiterima = $biaya - $pajak;
 
-                            // request sekarang disimpan
-                            // di tabel request
-                            'biaya_tambahan' => 0,
-                            'pajak' => $pajak,
-                            'total_diterima' => $total_diterima,
-                            'foto_ktp' => $foto_ktp,
-                            'metode_pembayaran' => $metode_pembayaran,
-                            'bukti_pembayaran' => $bukti_pembayaran,
-                            'status_pembayaran' => $status_pembayaran
-                        ]);
+                $idLaporan = DB::table('laporan_keuangan')->insertGetId([
 
-                // Simpan relasi nomor kamar -> id laporan
+                    'id_rincian_pesanan' => $idRincian,
+
+                    'kode_kamar' => $kamar->kode_kamar,
+                    'nama_tamu' => $request->nama_tamu,
+                    'tipe_kamar' => $kamar->tipe_kamar,
+
+                    'jumlah_kamar_dipesan' => $jumlahPerTipe,
+
+                    'tarif_per_hari' => $kamar->tarif_per_hari,
+                    'before_10_persen' => $kamar->before_10_persen,
+                    'after_10_persen' => $kamar->after_10_persen,
+
+                    'tanggal_dipesan' => now(),
+
+                    'check_in' => $request->check_in,
+                    'check_out' => $request->check_out,
+                    'lama_inap' => $lama_inap,
+
+                    'biaya' => $biaya,
+                    'biaya_tambahan' => 0,
+                    'pajak' => $pajak,
+                    'total_diterima' => $totalDiterima,
+
+                    'foto_ktp' => $foto_ktp,
+
+                    'metode_pembayaran' => $metode_pembayaran,
+                    'bukti_pembayaran' => $bukti_pembayaran,
+                    'status_pembayaran' => $status_pembayaran
+
+                ]);
+
                 foreach ($items as $item) {
+
                     $idLaporanPerKamar[$item->id_nomor_kamar] = $idLaporan;
+
                 }
+
             }
 
 
+
+
+
+
+
             // =====================================
-            // INSERT REQUEST TAMBAHAN
-            // =====================================
+// INSERT REQUEST TAMBAHAN
+// =====================================
+
+            $requestTambahan = [];
+
             if ($jumlahExtraBed > 0) {
-                DB::table('request')->insert([
+
+                $requestTambahan[] = [
+
                     'id_rincian_pesanan' => $idRincian,
                     'kode_request' => 'BED',
                     'jumlah_request' => $jumlahExtraBed,
                     'total_harga' => $totalExtraBed
-                ]);
+
+                ];
+
             }
 
             if ($jumlahBreakfast > 0) {
-                DB::table('request')->insert([
+
+                $requestTambahan[] = [
+
                     'id_rincian_pesanan' => $idRincian,
                     'kode_request' => 'FAST',
                     'jumlah_request' => $jumlahBreakfast,
                     'total_harga' => $totalBreakfast
-                ]);
+
+                ];
+
+            }
+
+            if (!empty($requestTambahan)) {
+
+                DB::table('request')->insert($requestTambahan);
+
             }
 
 
+
+
+
+
+
             // =====================================
-            // INSERT HISTORI KAMAR
-            // =====================================
+// INSERT HISTORI KAMAR
+// =====================================
+
+            $dataHistori = [];
+
             foreach ($request->id_nomor_kamar as $idNomorKamar) {
-                DB::table('histori_kamar')->insert([
+
+                $dataHistori[] = [
+
                     'id_rincian_pesanan' => $idRincian,
                     'id_laporan_keuangan' => $idLaporanPerKamar[$idNomorKamar],
                     'id_nomor_kamar' => $idNomorKamar,
+
                     'nama_tamu' => $request->nama_tamu,
                     'alamat_tamu' => $request->alamat_tamu,
+
                     'check_in' => $request->check_in,
                     'check_out' => $request->check_out
-                ]);
+
+                ];
+
             }
+
+            DB::table('histori_kamar')->insert($dataHistori);
+
+
+
+
+
 
 
             DB::commit();
+
             return response()->json([
                 'status' => 'success'
             ]);
