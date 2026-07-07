@@ -1765,6 +1765,24 @@ class HotelController extends Controller
 
 
 
+
+
+
+    public function kirimResiWA($id)
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'Request berhasil masuk ke Laravel. ID = ' . $id
+        ]);
+    }
+
+
+
+
+
+
+
+
     // Modal Pembayaran
     public function ModalPembayaran(Request $request)
     {
