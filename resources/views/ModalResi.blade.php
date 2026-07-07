@@ -172,8 +172,13 @@
     </div>
 </div>
 
-<button onclick="cetakJPG()" class="btn btn-success w-100 mt-3">Cetak</button>
+<button onclick="cetakJPG()" class="btn btn-success w-100 mt-3" style="font-size:16pt;">Cetak</button>
 
-<button type="button" class="btn btn-success w-100 mt-3" data-bs-dismiss="modal">
+<button type="button" class="btn btn-primary w-100 mt-3" id="btnKirimWA" data-id="{{ $histori->id }}"
+    style="font-size:16pt;">
+    <i class="bi bi-whatsapp"></i> Kirim ke WhatsApp
+</button>
+
+<button type="button" class="btn btn-success w-100 mt-3" data-bs-dismiss="modal" style="font-size:16pt;">
     Tutup
 </button>
