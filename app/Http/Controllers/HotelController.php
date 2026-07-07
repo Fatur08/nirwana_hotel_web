@@ -601,8 +601,20 @@ class HotelController extends Controller
 
             } else {
 
-                $customer = DB::table('rincian_pesanan')
-                    ->where('id_rincian_pesanan', $request->id_customer_lama)
+                $customer = DB::table('rincian_pesanan as rp')
+                    ->select(
+                        'rp.nama_tamu',
+                        'rp.no_wa_tamu',
+                        DB::raw('(SELECT alamat_tamu
+                  FROM histori_kamar
+                  WHERE id_rincian_pesanan = rp.id_rincian_pesanan
+                  LIMIT 1) as alamat_tamu'),
+                        DB::raw('(SELECT foto_ktp
+                  FROM laporan_keuangan
+                  WHERE id_rincian_pesanan = rp.id_rincian_pesanan
+                  LIMIT 1) as foto_ktp')
+                    )
+                    ->where('rp.id_rincian_pesanan', $request->id_customer_lama)
                     ->first();
 
                 if (!$customer) {
