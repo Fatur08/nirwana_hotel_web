@@ -849,7 +849,6 @@ class HotelController extends Controller
 
                 $idCustomer = DB::table('rincian_pesanan')->insertGetId([
                     'nama_tamu' => $request->nama_tamu,
-                    'alamat_tamu' => $request->alamat_tamu,
                     'no_wa_tamu' => $request->no_wa_tamu,
                     'foto_ktp' => $foto_ktp,
                     'total_kamar_dipesan' => $totalKamar,
