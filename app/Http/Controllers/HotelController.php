@@ -1812,16 +1812,34 @@ class HotelController extends Controller
             'image' => 'required'
         ]);
 
-        $image = $request->image;
+        // Ambil data reservasi
+        $rincian = DB::table('rincian_pesanan')
+            ->where('id', $id)
+            ->first();
 
-        // Hilangkan header Base64
+        if (!$rincian) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data reservasi tidak ditemukan.'
+            ], 404);
+        }
+
+        // Ambil nama tamu
+        $namaTamu = trim($rincian->nama_tamu);
+
+        // Bersihkan nama file
+        $namaFile = preg_replace('/[^A-Za-z0-9\s]/', '', $namaTamu);
+        $namaFile = str_replace(' ', '_', $namaFile);
+
+        // Ambil gambar Base64
+        $image = $request->image;
         $image = str_replace('data:image/jpeg;base64,', '', $image);
         $image = str_replace(' ', '+', $image);
 
         // Nama file
         $timestamp = now()->format('Y-m-d_H-i-s');
 
-        $fileName = "Resi_Hotel_{$id}_{$timestamp}.jpg";
+        $fileName = "Resi_Hotel_{$namaFile}_{$timestamp}.jpg";
 
         // Folder Storage
         $storagePath = 'public/uploads/resi/';
@@ -1836,9 +1854,7 @@ class HotelController extends Controller
         $publicPath = public_path('storage/uploads/resi/');
 
         if (!is_dir($publicPath)) {
-
             mkdir($publicPath, 0777, true);
-
         }
 
         // Copy ke Public
