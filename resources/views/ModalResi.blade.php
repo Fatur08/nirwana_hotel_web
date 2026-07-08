@@ -201,14 +201,24 @@
                 .then(res => res.json())
                 .then(res => {
 
-                    alert(res.message);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Resi berhasil dikirim ke WhatsApp.',
+                        confirmButtonText: 'OK'
+                    });
 
                 })
                 .catch(err => {
 
-                    console.log(err);
+                    console.error(err);
 
-                    alert("Terjadi kesalahan.");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Resi gagal dikirim.',
+                        confirmButtonText: 'OK'
+                    });
 
                 });
 
