@@ -1165,6 +1165,7 @@ class HotelController extends Controller
 
     public function InformasiPemesanan(Request $request)
     {
+        $cari_nama_tamu = $request->cari_nama_tamu;
         $cari_check_in = $request->cari_check_in;
         $cari_check_out = $request->cari_check_out;
         $status = $request->status;
@@ -1202,12 +1203,24 @@ class HotelController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | FILTER NAMA TAMU
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->filled('cari_nama_tamu')) {
+
+            $query->where('rp.nama_tamu', 'like', '%' . $cari_nama_tamu . '%');
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
         | FILTER TANGGAL
         |--------------------------------------------------------------------------
         */
 
-        // Check In + Check Out diisi
-        if (!empty($cari_check_in) && !empty($cari_check_out)) {
+        // Check In + Check Out
+        if ($request->filled('cari_check_in') && $request->filled('cari_check_out')) {
 
             $query->whereDate('hk.check_in', $cari_check_in)
                 ->orderByRaw("
@@ -1217,27 +1230,31 @@ class HotelController extends Controller
                 END
             ", [$cari_check_out])
                 ->orderBy('hk.check_out', 'asc');
+
         }
 
         // Hanya Check In
-        elseif (!empty($cari_check_in)) {
+        elseif ($request->filled('cari_check_in')) {
 
             $query->whereDate('hk.check_in', $cari_check_in)
                 ->orderBy('hk.check_out', 'asc');
+
         }
 
         // Hanya Check Out
-        elseif (!empty($cari_check_out)) {
+        elseif ($request->filled('cari_check_out')) {
 
             $query->whereDate('hk.check_out', $cari_check_out)
                 ->orderBy('hk.check_in', 'asc');
+
         }
 
-        // Tidak ada filter
+        // Tanpa Filter Tanggal
         else {
 
             $query->orderByDesc('hk.check_in')
                 ->orderByDesc('hk.check_out');
+
         }
 
         $histori = $query->get();
@@ -1261,6 +1278,7 @@ class HotelController extends Controller
                 $row->status = 'check_in';
 
             }
+
         }
 
         /*
@@ -1269,11 +1287,12 @@ class HotelController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if (!empty($status)) {
+        if ($request->filled('status')) {
 
             $histori = $histori->filter(function ($item) use ($status) {
                 return $item->status == $status;
             });
+
         }
 
         return view('InformasiPemesanan', compact('histori'));
