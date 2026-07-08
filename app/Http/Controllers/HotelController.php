@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
@@ -9,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Kamar;
 use App\Models\NomorKamar;
 use Illuminate\Support\Facades\Storage;
+use App\Services\WhatsApp\WhatsAppService;
 
 class HotelController extends Controller
 {
@@ -1767,13 +1767,33 @@ class HotelController extends Controller
 
 
 
+    protected $whatsappService;
+    public function __construct(WhatsAppService $whatsappService)
+    {
+        $this->whatsappService = $whatsappService;
+    }
+
+
+
+
+
+
+
+
+
+
 
     public function kirimResiWA($id)
     {
-        return response()->json([
-            'success' => true,
-            'message' => 'Request berhasil masuk ke Laravel. ID = ' . $id
-        ]);
+
+        $target = '6288975660188';
+
+        $message = 'Halo, ini adalah percobaan pertama pengiriman WhatsApp dari Aplikasi Hotel Nirwana.';
+
+        $response = $this->whatsappService->sendText($target, $message);
+
+        return response()->json($response->json());
+
     }
 
 
