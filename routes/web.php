@@ -67,6 +67,9 @@ Route::post('/ModalResi', [HotelController::class, 'ModalResi']);
 Route::post('/kirim-resi-wa/{id}', [HotelController::class, 'kirimResiWA']);
 
 
+Route::post('/upload-resi-wa/{id}', [HotelController::class, 'uploadResiWA']);
+
+
 Route::post('/ModalPembayaran', [HotelController::class, 'ModalPembayaran']);
 
 

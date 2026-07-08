@@ -1803,6 +1803,25 @@ class HotelController extends Controller
 
 
 
+
+
+
+    public function uploadResiWA(Request $request, $id)
+    {
+        return response()->json([
+            'success' => true,
+            'id' => $id,
+            'panjang_base64' => strlen($request->image)
+        ]);
+    }
+
+
+
+
+
+
+
+
     // Modal Pembayaran
     public function ModalPembayaran(Request $request)
     {
