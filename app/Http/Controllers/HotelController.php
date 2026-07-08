@@ -1869,14 +1869,27 @@ class HotelController extends Controller
         $target = $rincian->no_wa_tamu;
 
         // URL gambar yang bisa diakses Fonnte
-        $urlGambar = asset('storage/uploads/resi/' . $fileName);
+        $urlGambar = url('storage/uploads/resi/' . $fileName);
 
         // Pesan WhatsApp
-        $pesan = "Halo {$rincian->nama_tamu},\n\n"
-            . "Terima kasih telah menginap di Nirwana Hotel.\n\n"
-            . "Berikut kami kirimkan resi pembayaran Anda.\n\n"
-            . "Salam,\n"
-            . "Nirwana Hotel ";
+        $pesan =
+            "🏨 *NIRWANA HOTEL KALIANDA*\n\n"
+
+            . "Halo *{$rincian->nama_tamu}*,\n\n"
+
+            . "Terima kasih telah memilih *Nirwana Hotel Kalianda* sebagai tempat menginap Anda.\n\n"
+
+            . "Berikut kami kirimkan *Resi Pembayaran* dalam bentuk gambar yang dapat dibuka melalui tautan berikut:\n\n"
+
+            . $urlGambar . "\n\n"
+
+            . "Silakan simpan resi tersebut sebagai bukti pembayaran.\n\n"
+
+            . "Apabila terdapat pertanyaan atau membutuhkan bantuan, silakan hubungi resepsionis kami.\n\n"
+
+            . "Terima kasih.\n\n"
+
+            . "*NIRWANA HOTEL KALIANDA*";
 
         // Kirim gambar
         $response = $this->whatsappService->sendImage(
@@ -1891,19 +1904,11 @@ class HotelController extends Controller
             str_contains(strtolower($result['detail']), 'success')
         ) {
 
-            // Hapus file di Storage
-            Storage::delete($storagePath . $fileName);
-
-            // Hapus file di Public
-            $publicFile = public_path('storage/uploads/resi/' . $fileName);
-
-            if (file_exists($publicFile)) {
-                unlink($publicFile);
-            }
-
             return response()->json([
                 'success' => true,
-                'message' => 'Resi berhasil dikirim.'
+                'message' => 'Resi berhasil dikirim ke WhatsApp.',
+                'url_resi' => $urlGambar,
+                'nama_file' => $fileName
             ]);
 
         }
