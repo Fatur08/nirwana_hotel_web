@@ -1808,10 +1808,25 @@ class HotelController extends Controller
 
     public function uploadResiWA(Request $request, $id)
     {
+        $request->validate([
+            'image' => 'required'
+        ]);
+
+        $image = $request->image;
+
+        $image = str_replace('data:image/jpeg;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+
+        $fileName = 'Resi-' . $id . '-' . time() . '.jpg';
+
+        Storage::disk('public')->put(
+            'resi/' . $fileName,
+            base64_decode($image)
+        );
+
         return response()->json([
             'success' => true,
-            'id' => $id,
-            'panjang_base64' => strlen($request->image)
+            'file' => $fileName
         ]);
     }
 

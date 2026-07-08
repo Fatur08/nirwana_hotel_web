@@ -176,7 +176,8 @@
 
     <button onclick="cetakJPG()" class="btn btn-success w-100 mt-3" style="font-size:16pt;">Cetak</button>
 
-    <button type="button" class="btn btn-success w-100 mt-3" onclick="kirimWA({{ $data->id_rincian_pesanan }})">
+    <button type="button" class="btn btn-success w-100 mt-3" onclick="kirimWA({{ $data->id_rincian_pesanan }})"
+        style="font-size:16pt;">
         <i class="bi bi-whatsapp"></i> Kirim ke WhatsApp
     </button>
 
