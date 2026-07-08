@@ -29,4 +29,10 @@ class WhatsAppService
     {
         return $this->provider->sendText($target, $message);
     }
+
+
+    public function sendImage($target, $message, $url)
+    {
+        return $this->provider->sendImage($target, $message, $url);
+    }
 }

@@ -1863,9 +1863,32 @@ class HotelController extends Controller
             public_path('storage/uploads/resi/' . $fileName)
         );
 
+
+
+        // Ambil nomor WhatsApp tamu
+        $target = $rincian->no_wa_tamu;
+
+        // URL gambar yang bisa diakses Fonnte
+        $urlGambar = asset('storage/uploads/resi/' . $fileName);
+
+        // Pesan WhatsApp
+        $pesan = "Halo {$rincian->nama_tamu},\n\n"
+            . "Terima kasih telah menginap di Nirwana Hotel.\n\n"
+            . "Berikut kami kirimkan resi pembayaran Anda.\n\n"
+            . "Salam,\n"
+            . "Nirwana Hotel ";
+
+        // Kirim gambar
+        $response = $this->whatsappService->sendImage(
+            $target,
+            $pesan,
+            $urlGambar
+        );
+
         return response()->json([
             'success' => true,
-            'file' => $fileName
+            'response_fonnte' => $response->json(),
+            'gambar' => $urlGambar
         ]);
     }
 
