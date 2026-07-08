@@ -1884,12 +1884,35 @@ class HotelController extends Controller
             $pesan,
             $urlGambar
         );
+        $result = $response->json();
+
+        if (
+            isset($result['detail']) &&
+            str_contains(strtolower($result['detail']), 'success')
+        ) {
+
+            // Hapus file di Storage
+            Storage::delete($storagePath . $fileName);
+
+            // Hapus file di Public
+            $publicFile = public_path('storage/uploads/resi/' . $fileName);
+
+            if (file_exists($publicFile)) {
+                unlink($publicFile);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Resi berhasil dikirim.'
+            ]);
+
+        }
 
         return response()->json([
-            'success' => true,
-            'response_fonnte' => $response->json(),
-            'gambar' => $urlGambar
-        ]);
+            'success' => false,
+            'message' => 'Resi gagal dikirim.',
+            'response' => $result
+        ], 500);
     }
 
 
