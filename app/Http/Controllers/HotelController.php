@@ -1814,14 +1814,37 @@ class HotelController extends Controller
 
         $image = $request->image;
 
+        // Hilangkan header Base64
         $image = str_replace('data:image/jpeg;base64,', '', $image);
         $image = str_replace(' ', '+', $image);
 
-        $fileName = 'Resi-' . $id . '-' . time() . '.jpg';
+        // Nama file
+        $timestamp = now()->format('Y-m-d_H-i-s');
 
-        Storage::disk('public')->put(
-            'resi/' . $fileName,
+        $fileName = "Resi_Hotel_{$id}_{$timestamp}.jpg";
+
+        // Folder Storage
+        $storagePath = 'public/uploads/resi/';
+
+        // Simpan ke Storage
+        Storage::put(
+            $storagePath . $fileName,
             base64_decode($image)
+        );
+
+        // Folder Public
+        $publicPath = public_path('storage/uploads/resi/');
+
+        if (!is_dir($publicPath)) {
+
+            mkdir($publicPath, 0777, true);
+
+        }
+
+        // Copy ke Public
+        copy(
+            storage_path('app/' . $storagePath . $fileName),
+            public_path('storage/uploads/resi/' . $fileName)
         );
 
         return response()->json([
