@@ -1814,7 +1814,7 @@ class HotelController extends Controller
 
         // Ambil data reservasi
         $rincian = DB::table('rincian_pesanan')
-            ->where('id', $id)
+            ->where('id_rincian_pesanan', $id)
             ->first();
 
         if (!$rincian) {
