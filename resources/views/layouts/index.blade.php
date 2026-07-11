@@ -208,7 +208,18 @@
       return localStorage.getItem('nama_pengguna');
     }
 
+    function buatFormData(form) {
 
+      let formData = new FormData(form);
+
+      formData.append(
+        'dibuat_oleh',
+        getNamaPengguna()
+      );
+
+      return formData;
+
+    }
   </script>
 </body>
 
