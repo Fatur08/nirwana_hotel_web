@@ -144,6 +144,70 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   @stack('myscript')
+
+  <!-- Modal Identitas Pengguna -->
+  <div class="modal fade" id="modalIdentitasPengguna" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">
+            Identitas Pengguna
+          </h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">
+            Nama Pengguna
+          </label>
+          <input type="text" class="form-control" id="nama_pengguna" placeholder="Contoh : Resepsionis 1">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary w-100" id="btnSimpanPengguna">
+            Simpan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      let namaPengguna = localStorage.getItem('nama_pengguna');
+      if (!namaPengguna) {
+        $('#modalIdentitasPengguna').modal('show');
+      }
+    });
+
+    $('#btnSimpanPengguna').click(function () {
+      let nama = $('#nama_pengguna').val().trim();
+      if (nama == '') {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Perhatian',
+          text: 'Nama Pengguna wajib diisi.'
+        });
+        return;
+      }
+
+      localStorage.setItem(
+        'nama_pengguna',
+        nama
+      );
+
+      $('#modalIdentitasPengguna').modal('hide');
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: 'Identitas berhasil disimpan.',
+        timer: 1200,
+        showConfirmButton: false
+      });
+    });
+
+    function getNamaPengguna() {
+      return localStorage.getItem('nama_pengguna');
+    }
+  </script>
 </body>
 
 </html>

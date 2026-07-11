@@ -1061,15 +1061,11 @@ class HotelController extends Controller
             DB::commit();
 
             NotifikasiService::buat(
-
-                'Testing',
-
-                'Notifikasi pertama berhasil dibuat',
-
-                'testing',
-
+                'Pemesanan Baru',
+                'Pemesanan baru atas nama "' . $namaTamu . '" berhasil dibuat.',
+                'pemesanan',
                 'Admin'
-
+                //$request->dibuat_oleh
             );
 
             return response()->json([
@@ -1529,10 +1525,6 @@ class HotelController extends Controller
     public function UploadFotoKTP(Request $request)
     {
         try {
-
-            $request->validate([
-                'foto_ktp' => 'required|image|mimes:jpg,jpeg,png|max:5120'
-            ]);
 
             $foto = null;
 
