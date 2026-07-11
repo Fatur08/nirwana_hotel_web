@@ -9,6 +9,7 @@ use App\Models\Kamar;
 use App\Models\NomorKamar;
 use Illuminate\Support\Facades\Storage;
 use App\Services\WhatsApp\WhatsAppService;
+use App\Services\NotifikasiService;
 
 class HotelController extends Controller
 {
@@ -506,10 +507,10 @@ class HotelController extends Controller
 
         try {
             /*
-    |--------------------------------------------------------------------------
-    | UBAH HOME STAY MENJADI 2 NOMOR KAMAR
-    |--------------------------------------------------------------------------
-    */
+            |--------------------------------------------------------------------------
+            | UBAH HOME STAY MENJADI 2 NOMOR KAMAR
+            |--------------------------------------------------------------------------
+            */
 
             $idNomorKamar = [];
 
@@ -846,10 +847,10 @@ class HotelController extends Controller
             }
 
             /*
-|--------------------------------------------------------------------------
-| CUSTOMER BARU / CUSTOMER LAMA
-|--------------------------------------------------------------------------
-*/
+            |--------------------------------------------------------------------------
+            | CUSTOMER BARU / CUSTOMER LAMA
+            |--------------------------------------------------------------------------
+            */
 
             if ($request->jenis_customer == "baru") {
                 /*
@@ -916,9 +917,9 @@ class HotelController extends Controller
 
 
             // =====================================
-// INSERT LAPORAN KEUANGAN
-// SATU DATA PER TIPE KAMAR
-// =====================================
+            // INSERT LAPORAN KEUANGAN
+            // SATU DATA PER TIPE KAMAR
+            // =====================================
 
             $idLaporanPerKamar = [];
 
@@ -982,8 +983,8 @@ class HotelController extends Controller
 
 
             // =====================================
-// INSERT REQUEST TAMBAHAN
-// =====================================
+            // INSERT REQUEST TAMBAHAN
+            // =====================================
 
             $requestTambahan = [];
 
@@ -1026,8 +1027,8 @@ class HotelController extends Controller
 
 
             // =====================================
-// INSERT HISTORI KAMAR
-// =====================================
+            // INSERT HISTORI KAMAR
+            // =====================================
 
             $dataHistori = [];
 
@@ -1058,6 +1059,18 @@ class HotelController extends Controller
 
 
             DB::commit();
+
+            NotifikasiService::buat(
+
+                'Testing',
+
+                'Notifikasi pertama berhasil dibuat',
+
+                'testing',
+
+                'Admin'
+
+            );
 
             return response()->json([
                 'status' => 'success'
