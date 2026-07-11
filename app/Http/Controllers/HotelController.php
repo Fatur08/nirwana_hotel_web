@@ -1064,8 +1064,7 @@ class HotelController extends Controller
                 'Pemesanan Baru',
                 'Pemesanan baru atas nama "' . $namaTamu . '" berhasil dibuat.',
                 'pemesanan',
-                'Admin'
-                //$request->dibuat_oleh
+                $request->dibuat_oleh
             );
 
             return response()->json([
