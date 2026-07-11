@@ -209,18 +209,6 @@
     }
 
 
-    function buatFormData(form) {
-
-      let formData = new FormData(form);
-
-      formData.append(
-        'dibuat_oleh',
-        getNamaPengguna()
-      );
-
-      return formData;
-
-    }
   </script>
 </body>
 
