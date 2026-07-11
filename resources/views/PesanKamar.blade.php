@@ -1368,7 +1368,12 @@
                 // AJAX SIMPAN
                 // ==========================
 
-                let formData = buatFormData(this);
+                let formData = new FormData(this);
+
+                formData.append(
+                    'dibuat_oleh',
+                    getNamaPengguna()
+                );
 
                 console.log(formData.get('dibuat_oleh'));
 
