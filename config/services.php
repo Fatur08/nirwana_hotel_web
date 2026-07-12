@@ -39,18 +39,26 @@ return [
         | Fonnte
         |--------------------------------------------------------------------------
         */
+        'fonnte' => [
 
-        'token' => env('FONNTE_TOKEN'),
+            'token' => env('FONNTE_TOKEN'),
+
+        ],
 
         /*
         |--------------------------------------------------------------------------
         | Meta Cloud API
         |--------------------------------------------------------------------------
         */
+        'meta' => [
 
-        'meta_token' => env('META_TOKEN'),
-        'phone_number_id' => env('META_PHONE_NUMBER_ID'),
-        'version' => env('META_API_VERSION', 'v23.0'),
+            'token' => env('META_TOKEN'),
+
+            'phone_number_id' => env('META_PHONE_NUMBER_ID'),
+
+            'version' => env('META_API_VERSION', 'v23.0'),
+
+        ],
 
     ],
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
+use App\Services\WhatsApp\MetaService;
 
 Route::get('/', function () {
     return view('index');
@@ -139,6 +140,13 @@ Route::post('/TambahModalSTD/store_TambahModalSTD', [HotelController::class, 'st
 Route::post('/UpdateDataMaster', [HotelController::class, 'UpdateDataMaster']);
 
 
-Route::get('/cek-wa', function () {
-    dd(config('services.whatsapp'));
+Route::get('/test-meta', function () {
+
+    $meta = new MetaService();
+
+    return $meta->sendText(
+        '6285766698404',
+        'Halo, ini percobaan dari Laravel menggunakan Meta Cloud API.'
+    );
+
 });
