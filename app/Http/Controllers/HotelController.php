@@ -2567,7 +2567,21 @@ class HotelController extends Controller
             }
 
 
+
+
+            NotifikasiService::buat(
+                '✏️ Data Pemesanan Diubah',
+                'Data pemesanan atas nama "' .
+                $nama_tamu .
+                '" berhasil diperbarui.',
+                'edit_pemesanan',
+                $request->dibuat_oleh
+            );
+
+
             DB::commit();
+
+
             return response()->json([
                 'success' => true,
                 'message' => 'Data berhasil diperbarui.'
@@ -2577,7 +2591,7 @@ class HotelController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], 500);
+            ], 3000);
         }
     }
 
