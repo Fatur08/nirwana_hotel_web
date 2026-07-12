@@ -3185,6 +3185,18 @@ class HotelController extends Controller
                     ]);
             }
 
+
+
+
+            NotifikasiService::buat(
+                '⚙️ Data Master Diperbarui',
+                'Tarif kamar dan fasilitas hotel berhasil diperbarui.',
+                'data_master',
+                $request->dibuat_oleh
+            );
+
+
+
             DB::commit();
 
             return response()->json([
