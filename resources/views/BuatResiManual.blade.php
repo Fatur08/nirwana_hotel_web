@@ -339,7 +339,7 @@
             // AJAX SIMPAN
             // ==========================
 
-            let formData = buatFormData(this);
+            let formData = new FormData(this);
 
             $.ajax({
 
