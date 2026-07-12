@@ -1349,12 +1349,7 @@ class HotelController extends Controller
 
             DB::commit();
 
-            NotifikasiService::buat(
-                'Resi Manual Dibuat',
-                'Resi manual atas nama "' . $request->nama_tamu_resi_manual . '" berhasil dibuat.',
-                'resi_manual',
-                $request->dibuat_oleh
-            );
+
 
             return response()->json([
                 'success' => true,
