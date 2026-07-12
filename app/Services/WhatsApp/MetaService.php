@@ -42,4 +42,30 @@ class MetaService
             ->json();
     }
 
+
+    public function sendImage($target, $caption, $imageUrl)
+    {
+        return Http::withToken($this->token)
+            ->post(
+                "https://graph.facebook.com/{$this->version}/{$this->phoneNumberId}/messages",
+                [
+                    'messaging_product' => 'whatsapp',
+
+                    'to' => $target,
+
+                    'type' => 'image',
+
+                    'image' => [
+
+                        'link' => $imageUrl,
+
+                        'caption' => $caption,
+
+                    ]
+
+                ]
+            )
+            ->json();
+    }
+
 }

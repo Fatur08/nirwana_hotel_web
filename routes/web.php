@@ -150,3 +150,23 @@ Route::get('/test-meta', function () {
     );
 
 });
+
+
+
+
+
+Route::get('/test-image', function () {
+
+    $wa = new \App\Services\WhatsApp\MetaService();
+
+    return $wa->sendImage(
+
+        '6288975660188',
+
+        'Ini gambar percobaan dari Laravel',
+
+        'https://images.unsplash.com/photo-1506744038136-46273834b3fb'
+
+    );
+
+});
