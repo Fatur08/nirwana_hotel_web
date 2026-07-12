@@ -147,7 +147,7 @@
 
   <!-- Modal Identitas Pengguna -->
   <div class="modal fade" id="modalIdentitasPengguna" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title">
@@ -155,10 +155,11 @@
           </h5>
         </div>
         <div class="modal-body">
-          <label class="form-label">
+          <label class="form-label" style="font-size:20pt;">
             Nama Pengguna
           </label>
-          <input type="text" class="form-control" id="nama_pengguna" placeholder="Contoh : Resepsionis 1">
+          <input type="text" class="form-control" id="nama_pengguna" style="font-size:20pt;"
+            placeholder="Contoh : Resepsionis 1">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary w-100" id="btnSimpanPengguna">
