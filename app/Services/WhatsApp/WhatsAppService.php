@@ -18,9 +18,17 @@ class WhatsAppService
 
                 break;
 
+            case 'meta':
+
+                $this->provider = new MetaService();
+
+                break;
+
             default:
 
-                throw new \Exception('Provider WhatsApp tidak ditemukan.');
+                throw new \Exception(
+                    'Provider WhatsApp tidak ditemukan.'
+                );
 
         }
     }
@@ -30,9 +38,12 @@ class WhatsAppService
         return $this->provider->sendText($target, $message);
     }
 
-
     public function sendImage($target, $message, $url)
     {
-        return $this->provider->sendImage($target, $message, $url);
+        return $this->provider->sendImage(
+            $target,
+            $message,
+            $url
+        );
     }
 }
