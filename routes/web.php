@@ -145,7 +145,7 @@ Route::get('/test-meta', function () {
     $meta = new MetaService();
 
     return $meta->sendText(
-        '6285766698404',
+        '6288975660188',
         'Halo, ini percobaan dari Laravel menggunakan Meta Cloud API.'
     );
 
