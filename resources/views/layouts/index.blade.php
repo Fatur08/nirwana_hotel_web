@@ -150,19 +150,19 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title">
+          <h5 class="modal-title" style="font-size:16pt;">
             Identitas Pengguna
           </h5>
         </div>
         <div class="modal-body">
-          <label class="form-label" style="font-size:20pt;">
+          <label class="form-label" style="font-size:16pt;">
             Nama Pengguna
           </label>
-          <input type="text" class="form-control" id="nama_pengguna" style="font-size:20pt;"
+          <input type="text" class="form-control" id="nama_pengguna" style="font-size:16pt;"
             placeholder="Contoh : Resepsionis 1">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary w-100" id="btnSimpanPengguna">
+          <button type="button" class="btn btn-primary w-100" id="btnSimpanPengguna" style="font-size:16pt;">
             Simpan
           </button>
         </div>
