@@ -405,7 +405,11 @@
                         url: '/KosongkanResiManual',
 
                         data: {
-                            _token: "{{ csrf_token() }}"
+
+                            _token: "{{ csrf_token() }}",
+
+                            nama_pengguna: localStorage.getItem('nama_pengguna')
+
                         },
 
                         beforeSend: function () {

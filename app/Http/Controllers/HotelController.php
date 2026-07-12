@@ -1054,18 +1054,16 @@ class HotelController extends Controller
 
 
 
-
-
-
-
-            DB::commit();
-
             NotifikasiService::buat(
                 'Pemesanan Baru',
                 'Pemesanan baru atas nama "' . $namaTamu . '" berhasil dibuat.',
                 'pemesanan',
                 $request->dibuat_oleh
             );
+
+
+
+            DB::commit();
 
             return response()->json([
                 'status' => 'success'
@@ -1347,7 +1345,6 @@ class HotelController extends Controller
 
             ]);
 
-            DB::commit();
 
             NotifikasiService::buat(
                 'Resi Manual Dibuat',
@@ -1355,6 +1352,8 @@ class HotelController extends Controller
                 'resi_manual',
                 $request->dibuat_oleh
             );
+
+            DB::commit();
 
             return response()->json([
                 'success' => true,
@@ -1399,6 +1398,13 @@ class HotelController extends Controller
 
             DB::table('resi_manual')->delete();
 
+            NotifikasiService::buat(
+                'Resi Manual Dikosongkan',
+                'Seluruh data Resi Manual telah dikosongkan.',
+                'resi_manual',
+                $request->dibuat_oleh
+            );
+
             DB::commit();
 
             return response()->json([
@@ -1413,7 +1419,7 @@ class HotelController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], 500);
+            ], 1000);
 
         }
     }
