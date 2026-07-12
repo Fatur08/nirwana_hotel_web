@@ -302,6 +302,28 @@
 
 
 
+        .kotak-data-pengguna {
+            background: linear-gradient(to right, #ffb347, #ff9800, #ff6f00);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+
+        .kotak-data-pengguna:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+        }
+
+        .kotak-data-pengguna h1 {
+            color: white;
+            font-weight: bold;
+        }
+
+
+
+
+
+
 
 
         .kotak-dlx {
@@ -759,6 +781,41 @@
 
 
 
+            <!-- MENU DATA PENGGUNA -->
+            <a href="#" class="kotak-data-pengguna mt-3 p-3 d-block text-decoration-none" data-bs-toggle="modal"
+                data-bs-target="#ModalDataPengguna">
+                <div class="row align-items-center">
+                    <!-- FOTO -->
+                    <div class="col-md-3 col-12 text-center mb-3 mb-md-0">
+                        <img src="{{ asset('assets/img/data_pengguna.png') }}" class="img-fluid" style="max-height:120px;">
+                    </div>
+
+                    <!-- JUDUL -->
+                    <div class="col-md-7 col-9">
+                        <p class="mb-0 text-white fw-bold" style="font-size:25pt; white-space:nowrap;">
+                            Data Pengguna
+                        </p>
+                    </div>
+
+                    <!-- ICON PANAH -->
+                    <div class="col-md-2 col-3 text-end">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                            stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14" />
+                            <path d="M13 5l7 7l-7 7" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -782,6 +839,38 @@
                         </div>
                         <div class="modal-body" id="loadPesanKamar">
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="modal fade" id="ModalDataPengguna" tabindex="-1" aria-labelledby="ModalDataPengguna" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width:900px;">
+                <div class="modal-content">
+                    <div class="modal-header bg-secondary text-white">
+                        <h5 class="modal-title" id="ModalPesanKamar" style="font-size:20pt;">Data Pengguna</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <label class="form-label fw-bold">
+                            Nama Pengguna
+                        </label>
+                        <input type="text" id="nama_pengguna_modal" class="form-control" readonly>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-warning text-white" id="btnGantiPengguna">
+                            Ganti Pengguna
+                        </button>
+
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                            Tutup
+                        </button>
                     </div>
                 </div>
             </div>
@@ -857,10 +946,10 @@
                         $('#check_out').val('');
 
                         $('#jumlah_kamar_dipesan').html(`
-                                                        <option value="">
-                                                            -- Pilih Tanggal Check Out Dulu --
-                                                        </option>
-                                                    `);
+                                                                                                            <option value="">
+                                                                                                                -- Pilih Tanggal Check Out Dulu --
+                                                                                                            </option>
+                                                                                                        `);
 
                         $('#kamar_tersedia_title').hide();
                         $('#kamar_tersedia_list').hide();
@@ -895,10 +984,10 @@
                             for (let i = 1; i <= totalKamar; i++) {
 
                                 opsiJumlah += `
-                                                                <option value="${i}">
-                                                                    ${i} Kamar
-                                                                </option>
-                                                            `;
+                                                                                                                    <option value="${i}">
+                                                                                                                        ${i} Kamar
+                                                                                                                    </option>
+                                                                                                                `;
 
                             }
 
@@ -926,10 +1015,10 @@
                     $("#check_out").val("");
 
                     $("#jumlah_kamar_dipesan").html(`
-                                                    <option value="">
-                                                        -- Pilih Tanggal Check In Dulu --
-                                                    </option>
-                                                `);
+                                                                                                        <option value="">
+                                                                                                            -- Pilih Tanggal Check In Dulu --
+                                                                                                        </option>
+                                                                                                    `);
 
                     $("#kamar_tersedia_title").hide();
                     $("#kamar_tersedia_list").hide();
@@ -986,18 +1075,18 @@
                 if ($(this).data('foto')) {
 
                     $("#lama_foto_ktp").html(`
-                                                    <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
-                                                        class="img-fluid rounded"
-                                                        style="max-height:250px;">
-                                                `);
+                                                                                                        <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
+                                                                                                            class="img-fluid rounded"
+                                                                                                            style="max-height:250px;">
+                                                                                                    `);
 
                 } else {
 
                     $("#lama_foto_ktp").html(`
-                                                    <div class="text-muted">
-                                                        Tidak ada Foto KTP
-                                                    </div>
-                                                `);
+                                                                                                        <div class="text-muted">
+                                                                                                            Tidak ada Foto KTP
+                                                                                                        </div>
+                                                                                                    `);
 
                 }
 
@@ -1031,10 +1120,10 @@
                 $("#lama_no_wa").val("");
 
                 $("#lama_foto_ktp").html(`
-                                                <div class="text-muted">
-                                                    Tidak ada Foto KTP
-                                                </div>
-                                            `);
+                                                                                                    <div class="text-muted">
+                                                                                                        Tidak ada Foto KTP
+                                                                                                    </div>
+                                                                                                `);
 
                 $("#hasilCustomer").hide();
                 $("#dataCustomerLama").hide();
@@ -1063,5 +1152,21 @@
 
             });
 
+
+
+
+
+            $('#ModalDataPengguna').on('show.bs.modal', function () {
+                $('#nama_pengguna_modal').val(
+                    getNamaPengguna()
+                );
+            });
+
+
+
+            $('#btnGantiPengguna').click(function () {
+                localStorage.removeItem('nama_pengguna');
+                location.reload();
+            });
         </script>
     @endpush
