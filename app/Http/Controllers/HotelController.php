@@ -2606,7 +2606,10 @@ class HotelController extends Controller
         DB::beginTransaction();
 
         try {
-
+            $pesanan = DB::table('rincian_pesanan')
+                ->select('nama_tamu')
+                ->where('id_rincian_pesanan', $id)
+                ->first();
 
             $data = DB::table('laporan_keuangan')
                 ->where('id_rincian_pesanan', $id)
@@ -2700,6 +2703,17 @@ class HotelController extends Controller
                     $id
                 )
                 ->delete();
+
+
+
+            NotifikasiService::buat(
+                '🗑️ Pesanan Dihapus',
+                'Data pemesanan atas nama "' .
+                $pesanan->nama_tamu .
+                '" telah dihapus dari sistem.',
+                'hapus_pesanan',
+                $request->dibuat_oleh
+            );
 
 
             DB::commit();
