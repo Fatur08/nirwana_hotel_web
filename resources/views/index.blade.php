@@ -864,11 +864,11 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button class="btn btn-warning text-white" id="btnGantiPengguna">
+                        <button class="btn btn-warning text-white w-100" id="btnGantiPengguna" style="font-size:20pt;">
                             Ganti Pengguna
                         </button>
 
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                        <button class="btn btn-secondary w-100" style="font-size:20pt;" data-bs-dismiss="modal">
                             Tutup
                         </button>
                     </div>
@@ -946,10 +946,10 @@
                         $('#check_out').val('');
 
                         $('#jumlah_kamar_dipesan').html(`
-                                                                                                                <option value="">
-                                                                                                                    -- Pilih Tanggal Check Out Dulu --
-                                                                                                                </option>
-                                                                                                            `);
+                                                                                                                    <option value="">
+                                                                                                                        -- Pilih Tanggal Check Out Dulu --
+                                                                                                                    </option>
+                                                                                                                `);
 
                         $('#kamar_tersedia_title').hide();
                         $('#kamar_tersedia_list').hide();
@@ -984,10 +984,10 @@
                             for (let i = 1; i <= totalKamar; i++) {
 
                                 opsiJumlah += `
-                                                                                                                        <option value="${i}">
-                                                                                                                            ${i} Kamar
-                                                                                                                        </option>
-                                                                                                                    `;
+                                                                                                                            <option value="${i}">
+                                                                                                                                ${i} Kamar
+                                                                                                                            </option>
+                                                                                                                        `;
 
                             }
 
@@ -1015,10 +1015,10 @@
                     $("#check_out").val("");
 
                     $("#jumlah_kamar_dipesan").html(`
-                                                                                                            <option value="">
-                                                                                                                -- Pilih Tanggal Check In Dulu --
-                                                                                                            </option>
-                                                                                                        `);
+                                                                                                                <option value="">
+                                                                                                                    -- Pilih Tanggal Check In Dulu --
+                                                                                                                </option>
+                                                                                                            `);
 
                     $("#kamar_tersedia_title").hide();
                     $("#kamar_tersedia_list").hide();
@@ -1075,18 +1075,18 @@
                 if ($(this).data('foto')) {
 
                     $("#lama_foto_ktp").html(`
-                                                                                                            <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
-                                                                                                                class="img-fluid rounded"
-                                                                                                                style="max-height:250px;">
-                                                                                                        `);
+                                                                                                                <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
+                                                                                                                    class="img-fluid rounded"
+                                                                                                                    style="max-height:250px;">
+                                                                                                            `);
 
                 } else {
 
                     $("#lama_foto_ktp").html(`
-                                                                                                            <div class="text-muted">
-                                                                                                                Tidak ada Foto KTP
-                                                                                                            </div>
-                                                                                                        `);
+                                                                                                                <div class="text-muted">
+                                                                                                                    Tidak ada Foto KTP
+                                                                                                                </div>
+                                                                                                            `);
 
                 }
 
@@ -1120,10 +1120,10 @@
                 $("#lama_no_wa").val("");
 
                 $("#lama_foto_ktp").html(`
-                                                                                                        <div class="text-muted">
-                                                                                                            Tidak ada Foto KTP
-                                                                                                        </div>
-                                                                                                    `);
+                                                                                                            <div class="text-muted">
+                                                                                                                Tidak ada Foto KTP
+                                                                                                            </div>
+                                                                                                        `);
 
                 $("#hasilCustomer").hide();
                 $("#dataCustomerLama").hide();
