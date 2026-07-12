@@ -137,3 +137,8 @@ Route::post('/TambahModalSTD/store_TambahModalSTD', [HotelController::class, 'st
 
 
 Route::post('/UpdateDataMaster', [HotelController::class, 'UpdateDataMaster']);
+
+
+Route::get('/cek-wa', function () {
+    dd(config('services.whatsapp'));
+});
