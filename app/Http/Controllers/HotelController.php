@@ -2085,6 +2085,14 @@ class HotelController extends Controller
 
     public function BatalkanPembayaran(Request $request, $id)
     {
+        $dataPesanan = DB::table('rincian_pesanan')
+            ->select('nama_tamu')
+            ->where('id_rincian_pesanan', $id)
+            ->first();
+
+        $namaTamu = $dataPesanan?->nama_tamu ?? 'Tanpa Nama';
+
+
         $data = DB::table('laporan_keuangan')
             ->where('id_rincian_pesanan', $id)
             ->first();
@@ -2116,9 +2124,20 @@ class HotelController extends Controller
                 'bukti_pembayaran' => null
             ]);
 
+
+
+        NotifikasiService::buat(
+            '❌ Pembayaran Dibatalkan',
+            'Pembayaran atas nama "' .
+            $namaTamu .
+            '" telah dibatalkan.',
+            'batal_pembayaran',
+            $request->dibuat_oleh
+        );
+
         return redirect()->back()->with(
             'success',
-            'Pembayaran berhasil dibatalkan'
+            'Data Pembayaran Berhasil Di Batalkan'
         );
     }
 
