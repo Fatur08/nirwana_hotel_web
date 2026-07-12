@@ -1402,7 +1402,7 @@ class HotelController extends Controller
                 'Resi Manual Dikosongkan',
                 'Seluruh data Resi Manual telah dikosongkan.',
                 'resi_manual',
-                $request->dibuat_oleh
+                $request->nama_pengguna
             );
 
             DB::commit();
