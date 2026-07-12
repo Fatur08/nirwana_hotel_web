@@ -2049,6 +2049,20 @@ class HotelController extends Controller
                     'bukti_pembayaran' => $bukti_pembayaran
                 ]);
 
+
+
+
+            NotifikasiService::buat(
+                '💰 Pembayaran Berhasil',
+                'Pembayaran atas nama "' .
+                $dataPesanan->nama_tamu .
+                '" berhasil dikonfirmasi melalui ' .
+                $metodePembayaran .
+                '.',
+                'pembayaran',
+                $request->dibuat_oleh
+            );
+
             return response()->json([
                 'success' => true,
                 'message' => 'Pembayaran berhasil disimpan'
@@ -2059,7 +2073,7 @@ class HotelController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], 500);
+            ], 3000);
 
         }
     }

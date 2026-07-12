@@ -198,7 +198,7 @@
                 // AJAX SIMPAN
                 // ==========================
 
-                let formData = new FormData(this);
+                let formData = buatFormData(this);
 
                 $.ajax({
 
