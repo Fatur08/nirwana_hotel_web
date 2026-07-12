@@ -166,6 +166,10 @@
                 $('#id_rincian_pesanan').val()
             );
             formData.append('foto_ktp', file);
+            formData.append(
+                'nama_pengguna',
+                localStorage.getItem('nama_pengguna')
+            );
 
             $.ajax({
 

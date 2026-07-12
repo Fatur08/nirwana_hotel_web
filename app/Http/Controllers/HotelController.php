@@ -1596,6 +1596,14 @@ class HotelController extends Controller
                     'foto_ktp' => $foto
                 ]);
 
+
+            NotifikasiService::buat(
+                'Foto KTP Diupload',
+                'Foto KTP tamu "' . $namaTamu . '" berhasil diupload.',
+                'upload_foto_ktp',
+                $request->nama_pengguna
+            );
+
             return response()->json([
                 'success' => true
             ]);
@@ -1605,7 +1613,7 @@ class HotelController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], 500);
+            ], 3000);
 
         }
     }
