@@ -5,6 +5,8 @@ namespace App\Services\Resi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Services\WhatsApp\WhatsAppService;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ResiService
 {
@@ -348,27 +350,32 @@ class ResiService
      */
     public function buildMessage($dataPesanan, $urlResi)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Format Tanggal Indonesia
+        |--------------------------------------------------------------------------
+        */
+
+        Carbon::setLocale('id');
+
+        $checkIn = Carbon::parse(
+            $dataPesanan->check_in
+        )->translatedFormat('l, d F Y');
+
+        $checkOut = Carbon::parse(
+            $dataPesanan->check_out
+        )->translatedFormat('l, d F Y');
         return
             "🏨 *NIRWANA HOTEL KALIANDA*\n\n"
-
             . "Halo *{$dataPesanan->nama_tamu}*,\n\n"
-
             . "Terima kasih telah memilih *Nirwana Hotel Kalianda* sebagai tempat menginap Anda.\n\n"
-
             . "Berikut kami kirimkan *Resi Pembayaran* dalam bentuk gambar yang dapat dibuka melalui tautan berikut:\n\n"
-
             . $urlResi . "\n\n"
-
             . "Silakan simpan resi tersebut sebagai bukti pembayaran.\n\n"
-
-            . "📅 *Check In* : {$dataPesanan->check_in}\n"
-
-            . "📅 *Check Out* : {$dataPesanan->check_out}\n\n"
-
+            . "Check In*  : {$checkIn}\n"
+            . "Check Out* : {$checkIn}\n\n"
             . "Apabila terdapat pertanyaan atau membutuhkan bantuan, silakan hubungi resepsionis kami.\n\n"
-
             . "Terima kasih atas kepercayaan Anda.\n\n"
-
             . "*NIRWANA HOTEL KALIANDA*";
     }
 
@@ -431,6 +438,47 @@ class ResiService
         );
 
         $result = $response->json();
+        /*
+|--------------------------------------------------------------------------
+| Laravel Log
+|--------------------------------------------------------------------------
+*/
+
+        Log::info(
+
+            "\n"
+
+            . "====================================================\n"
+
+            . "            WHATSAPP RESI HOTEL\n"
+
+            . "====================================================\n"
+
+            . "Tanggal      : " . now()->format('d-m-Y H:i:s') . "\n"
+
+            . "Nama Tamu    : {$dataPesanan->nama_tamu}\n"
+
+            . "Nomor WA     : {$dataPesanan->no_wa_tamu}\n"
+
+            . "Nama File    : {$hasilResi['nama_file']}\n"
+
+            . "URL Resi     : {$hasilResi['url']}\n"
+
+            . "Status       : "
+            . (
+                isset($result['detail']) &&
+                str_contains(
+                    strtolower($result['detail']),
+                    'success'
+                )
+                ? 'BERHASIL'
+                : 'GAGAL'
+            )
+            . "\n"
+
+            . "===================================================="
+
+        );
 
         /*
         |--------------------------------------------------------------------------
@@ -464,6 +512,28 @@ class ResiService
         | Gagal
         |--------------------------------------------------------------------------
         */
+        /*
+        |--------------------------------------------------------------------------
+        | Simpan Response Error Meta
+        |--------------------------------------------------------------------------
+        */
+
+        Log::error(
+
+            "\n"
+
+            . "=============== ERROR META API ===============\n"
+
+            . json_encode(
+                $result,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+            )
+
+            . "\n"
+
+            . "=============================================="
+
+        );
         return [
 
             'success' => false,
