@@ -438,11 +438,23 @@ class ResiService
         );
 
         $result = $response->json();
+        Log::info([
+            'successful' => $response->successful(),
+            'status' => $response->status(),
+            'result' => $result,
+        ]);
+
+        $berhasil = $response->successful()
+            && isset($result['messages'][0]['id']);
+
+
+
+
         /*
-|--------------------------------------------------------------------------
-| Laravel Log
-|--------------------------------------------------------------------------
-*/
+        |--------------------------------------------------------------------------
+        | Laravel Log
+        |--------------------------------------------------------------------------
+        */
 
         Log::info(
 
@@ -465,15 +477,7 @@ class ResiService
             . "URL Resi     : {$hasilResi['url']}\n"
 
             . "Status       : "
-            . (
-                isset($result['detail']) &&
-                str_contains(
-                    strtolower($result['detail']),
-                    'success'
-                )
-                ? 'BERHASIL'
-                : 'GAGAL'
-            )
+            . ($berhasil ? 'BERHASIL' : 'GAGAL')
             . "\n"
 
             . "===================================================="
@@ -485,13 +489,7 @@ class ResiService
         | Berhasil
         |--------------------------------------------------------------------------
         */
-        if (
-            isset($result['detail']) &&
-            str_contains(
-                strtolower($result['detail']),
-                'success'
-            )
-        ) {
+        if ($berhasil) {
 
             return [
 
