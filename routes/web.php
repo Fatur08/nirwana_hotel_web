@@ -163,9 +163,9 @@ Route::get('/test-image', function () {
 
         '6288975660188',
 
-        'Ini gambar percobaan dari Laravel',
+        'Percobaan kirim gambar dari server Hotel Nirwana',
 
-        'https://images.unsplash.com/photo-1506744038136-46273834b3fb'
+        asset('storage/uploads/foto_ktp/Foto_KTP_Google_2026-07-09_12-24-31.jpg')
 
     );
 
