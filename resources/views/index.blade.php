@@ -539,7 +539,7 @@
     <div class="body" style="margin-top: 10px;">
         <div class="login-container">
             <h1 style="color:red">
-                DEVELOPMENT SERVER TES TES
+                DEVELOPMENT SERVER
             </h1>
             <div class="login-title">
                 <h1>Aplikasi Manajemen<br>Hotel Nirwana</h1>

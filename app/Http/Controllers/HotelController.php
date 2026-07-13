@@ -1852,116 +1852,114 @@ class HotelController extends Controller
 
     public function uploadResiWA(Request $request, $id)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi Request
+        |--------------------------------------------------------------------------
+        */
         $request->validate([
             'image' => 'required'
         ]);
 
-        // Ambil data reservasi
-        $rincian = DB::table('rincian_pesanan')
-            ->where('id_rincian_pesanan', $id)
-            ->first();
+        try {
 
-        if (!$rincian) {
+            /*
+            |--------------------------------------------------------------------------
+            | Generate Data Resi
+            |--------------------------------------------------------------------------
+            */
+            $dataPesanan = $this->resiService->generate($id);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Simpan Gambar Resi
+            |--------------------------------------------------------------------------
+            */
+            $hasilResi = $this->resiService->saveImage(
+                $request->image,
+                $dataPesanan
+            );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Membuat Pesan WhatsApp
+            |--------------------------------------------------------------------------
+            */
+            $pesan = $this->resiService->buildMessage(
+                $dataPesanan,
+                $hasilResi['url']
+            );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Kirim Gambar ke WhatsApp
+            |--------------------------------------------------------------------------
+            */
+            $response = $this->whatsappService->sendImage(
+
+                $dataPesanan->no_wa_tamu,
+
+                $pesan,
+
+                $hasilResi['url']
+
+            );
+
+            $result = $response->json();
+
+            /*
+            |--------------------------------------------------------------------------
+            | Berhasil
+            |--------------------------------------------------------------------------
+            */
+            if (
+                isset($result['detail']) &&
+                str_contains(
+                    strtolower($result['detail']),
+                    'success'
+                )
+            ) {
+
+                return response()->json([
+
+                    'success' => true,
+
+                    'message' => 'Resi berhasil dikirim ke WhatsApp.',
+
+                    'url_resi' => $hasilResi['url'],
+
+                    'nama_file' => $hasilResi['nama_file'],
+
+                ]);
+
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Gagal Kirim
+            |--------------------------------------------------------------------------
+            */
             return response()->json([
+
                 'success' => false,
-                'message' => 'Data reservasi tidak ditemukan.'
-            ], 404);
-        }
 
-        // Ambil nama tamu
-        $namaTamu = trim($rincian->nama_tamu);
+                'message' => 'Resi gagal dikirim.',
 
-        // Bersihkan nama file
-        $namaFile = preg_replace('/[^A-Za-z0-9\s]/', '', $namaTamu);
-        $namaFile = str_replace(' ', '_', $namaFile);
+                'response' => $result
 
-        // Ambil gambar Base64
-        $image = $request->image;
-        $image = str_replace('data:image/jpeg;base64,', '', $image);
-        $image = str_replace(' ', '+', $image);
+            ], 500);
 
-        // Nama file
-        $timestamp = now()->format('Y-m-d_H-i-s');
-
-        $fileName = "Resi_Hotel_{$namaFile}_{$timestamp}.jpg";
-
-        // Folder Storage
-        $storagePath = 'public/uploads/resi/';
-
-        // Simpan ke Storage
-        Storage::put(
-            $storagePath . $fileName,
-            base64_decode($image)
-        );
-
-        // Folder Public
-        $publicPath = public_path('storage/uploads/resi/');
-
-        if (!is_dir($publicPath)) {
-            mkdir($publicPath, 0777, true);
-        }
-
-        // Copy ke Public
-        copy(
-            storage_path('app/' . $storagePath . $fileName),
-            public_path('storage/uploads/resi/' . $fileName)
-        );
-
-
-
-        // Ambil nomor WhatsApp tamu
-        $target = $rincian->no_wa_tamu;
-
-        // URL gambar yang bisa diakses Fonnte
-        $urlGambar = url('storage/uploads/resi/' . $fileName);
-
-        // Pesan WhatsApp
-        $pesan =
-            "🏨 *NIRWANA HOTEL KALIANDA*\n\n"
-
-            . "Halo *{$rincian->nama_tamu}*,\n\n"
-
-            . "Terima kasih telah memilih *Nirwana Hotel Kalianda* sebagai tempat menginap Anda.\n\n"
-
-            . "Berikut kami kirimkan *Resi Pembayaran* dalam bentuk gambar yang dapat dibuka melalui tautan berikut:\n\n"
-
-            . $urlGambar . "\n\n"
-
-            . "Silakan simpan resi tersebut sebagai bukti pembayaran.\n\n"
-
-            . "Apabila terdapat pertanyaan atau membutuhkan bantuan, silakan hubungi resepsionis kami.\n\n"
-
-            . "Terima kasih.\n\n"
-
-            . "*NIRWANA HOTEL KALIANDA*";
-
-        // Kirim gambar
-        $response = $this->whatsappService->sendImage(
-            $target,
-            $pesan,
-            $urlGambar
-        );
-        $result = $response->json();
-
-        if (
-            isset($result['detail']) &&
-            str_contains(strtolower($result['detail']), 'success')
-        ) {
+        } catch (\Exception $e) {
 
             return response()->json([
-                'success' => true,
-                'message' => 'Resi berhasil dikirim ke WhatsApp.',
-                'url_resi' => $urlGambar,
-                'nama_file' => $fileName
-            ]);
+
+                'success' => false,
+
+                'message' => $e->getMessage()
+
+            ], 500);
 
         }
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Resi gagal dikirim.',
-            'response' => $result
-        ], 500);
     }
 
 
