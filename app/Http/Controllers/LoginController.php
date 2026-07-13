@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
@@ -43,71 +46,176 @@ class LoginController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Ambil Username & Password dari .env
+        | Cari User Berdasarkan Username
         |--------------------------------------------------------------------------
         */
-        $username = env('HOTEL_USERNAME');
+        $user = DB::table('users')
 
-        $password = env('HOTEL_PASSWORD');
+            ->where(
+                'username',
+                $request->username
+            )
+
+            ->first();
 
         /*
         |--------------------------------------------------------------------------
-        | Cek Username & Password
+        | Username Tidak Ditemukan
         |--------------------------------------------------------------------------
         */
-        if (
-
-            $request->username == $username
-
-            &&
-
-            $request->password == $password
-
-        ) {
+        if (!$user) {
 
             /*
             |--------------------------------------------------------------------------
-            | Simpan Session Login
+            | Laravel Log
             |--------------------------------------------------------------------------
             */
 
-            Session::put(
-                'login',
-                true
+            Log::warning(
+
+                "\n"
+
+                . "====================================================\n"
+
+                . "                LOGIN HOTEL\n"
+
+                . "====================================================\n"
+
+                . "Tanggal      : " . now()->format('d-m-Y H:i:s') . "\n"
+
+                . "Username     : {$request->username}\n"
+
+                . "IP Address   : {$request->ip()}\n"
+
+                . "Status       : GAGAL (Username tidak ditemukan)\n"
+
+                . "===================================================="
+
             );
 
-            Session::put(
-                'username',
-                $username
-            );
+            return back()
 
-            /*
-            |--------------------------------------------------------------------------
-            | Redirect ke Dashboard
-            |--------------------------------------------------------------------------
-            */
+                ->with(
+                    'error',
+                    'Username atau Password salah.'
+                )
 
-            return redirect('/');
+                ->withInput();
 
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Login Gagal
+        | Cek Password (bcrypt)
         |--------------------------------------------------------------------------
         */
+        if (
+            !Hash::check(
 
-        return back()
+                $request->password,
 
-            ->with(
-
-                'error',
-
-                'Username atau Password salah.'
+                $user->password
 
             )
+        ) {
 
-            ->withInput();
+            /*
+            |--------------------------------------------------------------------------
+            | Laravel Log
+            |--------------------------------------------------------------------------
+            */
+
+            Log::warning(
+
+                "\n"
+
+                . "====================================================\n"
+
+                . "                LOGIN HOTEL\n"
+
+                . "====================================================\n"
+
+                . "Tanggal      : " . now()->format('d-m-Y H:i:s') . "\n"
+
+                . "Username     : {$request->username}\n"
+
+                . "IP Address   : {$request->ip()}\n"
+
+                . "Status       : GAGAL (Password salah)\n"
+
+                . "===================================================="
+
+            );
+
+            return back()
+
+                ->with(
+                    'error',
+                    'Username atau Password salah.'
+                )
+
+                ->withInput();
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Login Berhasil
+        |--------------------------------------------------------------------------
+        */
+        Session::put(
+            'login',
+            true
+        );
+
+        Session::put(
+            'id_users',
+            $user->id_users
+        );
+
+        Session::put(
+            'username',
+            $user->username
+        );
+
+
+
+        /*
+|--------------------------------------------------------------------------
+| Laravel Log
+|--------------------------------------------------------------------------
+*/
+
+        Log::info(
+
+            "\n"
+
+            . "====================================================\n"
+
+            . "                LOGIN HOTEL\n"
+
+            . "====================================================\n"
+
+            . "Tanggal      : " . now()->format('d-m-Y H:i:s') . "\n"
+
+            . "ID User      : {$user->id_users}\n"
+
+            . "Username     : {$user->username}\n"
+
+            . "IP Address   : {$request->ip()}\n"
+
+            . "Status       : BERHASIL\n"
+
+            . "===================================================="
+
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect ke Dashboard
+        |--------------------------------------------------------------------------
+        */
+        return redirect('/');
     }
 
 

@@ -6,11 +6,6 @@ use App\Services\WhatsApp\MetaService;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Hash;
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-
-
 /*
 |--------------------------------------------------------------------------
 | Login
@@ -32,7 +27,16 @@ Route::get(
     [LoginController::class, 'logout']
 );
 
-Route::get('/', [HotelController::class, 'index']);
+/*
+|--------------------------------------------------------------------------
+| Hotel
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/',
+    [HotelController::class, 'index']
+)->name('index');
 
 
 Route::post('/PesanKamar', [HotelController::class, 'PesanKamar']);
