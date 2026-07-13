@@ -348,7 +348,7 @@ class ResiService
     /**
      * Membuat isi pesan WhatsApp
      */
-    public function buildMessage($dataPesanan, $urlResi)
+    public function buildMessage($dataPesanan)
     {
         /*
         |--------------------------------------------------------------------------
@@ -365,15 +365,16 @@ class ResiService
         $checkOut = Carbon::parse(
             $dataPesanan->check_out
         )->translatedFormat('l, d F Y');
+
         return
             "🏨 *NIRWANA HOTEL KALIANDA*\n\n"
             . "Halo *{$dataPesanan->nama_tamu}*,\n\n"
             . "Terima kasih telah memilih *Nirwana Hotel Kalianda* sebagai tempat menginap Anda.\n\n"
-            . "Berikut kami kirimkan *Resi Pembayaran* dalam bentuk gambar yang dapat dibuka melalui tautan berikut:\n\n"
-            . $urlResi . "\n\n"
-            . "Silakan simpan resi tersebut sebagai bukti pembayaran.\n\n"
-            . "Check In*  : {$checkIn}\n"
-            . "Check Out* : {$checkIn}\n\n"
+            . "Berikut kami kirimkan *Resi Pembayaran* dalam bentuk gambar pada pesan ini.\n\n"
+            . "Silakan simpan gambar tersebut sebagai bukti pembayaran dan tunjukkan saat proses check-in apabila diperlukan.\n\n"
+            . "*Detail Reservasi*\n"
+            . "Check In  : {$checkIn}\n"
+            . "Check Out : {$checkOut}\n\n"
             . "Apabila terdapat pertanyaan atau membutuhkan bantuan, silakan hubungi resepsionis kami.\n\n"
             . "Terima kasih atas kepercayaan Anda.\n\n"
             . "*NIRWANA HOTEL KALIANDA*";
@@ -429,8 +430,7 @@ class ResiService
         |--------------------------------------------------------------------------
         */
         $pesan = $this->buildMessage(
-            $dataPesanan,
-            $hasilResi['url']
+            $dataPesanan
         );
 
 
