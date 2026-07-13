@@ -46,4 +46,22 @@ class WhatsAppService
             $url
         );
     }
+
+
+
+
+
+
+
+
+
+    /**
+     * Upload media ke provider
+     */
+    public function uploadMedia($filePath)
+    {
+        return $this->provider->uploadMedia(
+            $filePath
+        );
+    }
 }

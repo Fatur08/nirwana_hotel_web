@@ -402,6 +402,12 @@ class ResiService
             $idRincianPesanan
         );
 
+
+
+
+
+
+
         /*
         |--------------------------------------------------------------------------
         | Simpan Gambar Resi
@@ -412,6 +418,11 @@ class ResiService
             $dataPesanan
         );
 
+
+
+
+
+
         /*
         |--------------------------------------------------------------------------
         | Membuat Pesan WhatsApp
@@ -421,6 +432,70 @@ class ResiService
             $dataPesanan,
             $hasilResi['url']
         );
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Gambar ke Meta
+        |--------------------------------------------------------------------------
+        */
+        Log::info([
+            'storage_path' => $hasilResi['storage_path'],
+            'file_exists' => file_exists($hasilResi['storage_path']),
+        ]);
+        $uploadResponse = $this->whatsappService->uploadMedia(
+            $hasilResi['storage_path']
+        );
+
+
+
+
+
+        $uploadResult = $uploadResponse->json();
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Pastikan Upload Berhasil
+        |--------------------------------------------------------------------------
+        */
+        if (
+            !$uploadResponse->successful()
+            || !isset($uploadResult['id'])
+        ) {
+
+            throw new \Exception(
+                'Upload gambar ke Meta gagal.'
+            );
+
+        }
+
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Ambil Media ID
+        |--------------------------------------------------------------------------
+        */
+        $mediaId = $uploadResult['id'];
+
+
+
+
+
+
 
         /*
         |--------------------------------------------------------------------------
@@ -433,19 +508,18 @@ class ResiService
 
             $pesan,
 
-            $hasilResi['url']
+            $mediaId
 
         );
 
         $result = $response->json();
-        Log::info([
-            'successful' => $response->successful(),
-            'status' => $response->status(),
-            'result' => $result,
-        ]);
 
         $berhasil = $response->successful()
             && isset($result['messages'][0]['id']);
+
+
+
+
 
 
 

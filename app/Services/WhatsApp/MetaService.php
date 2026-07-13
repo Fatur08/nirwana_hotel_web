@@ -43,19 +43,62 @@ class MetaService
     }
 
 
-    public function sendImage($target, $caption, $imageUrl)
+
+
+
+
+
+
+    /**
+     * Kirim gambar menggunakan Media ID
+     */
+    public function sendImage($target, $caption, $mediaId)
     {
         return Http::withToken($this->token)
             ->post(
                 "https://graph.facebook.com/{$this->version}/{$this->phoneNumberId}/messages",
                 [
                     'messaging_product' => 'whatsapp',
+
                     'to' => $target,
+
                     'type' => 'image',
+
                     'image' => [
-                        'link' => $imageUrl,
+
+                        'id' => $mediaId,
+
                         'caption' => $caption,
+
                     ]
+
+                ]
+            );
+    }
+
+
+
+
+
+
+
+
+
+    /**
+     * Upload media ke Meta Cloud API
+     */
+    public function uploadMedia($filePath)
+    {
+        return Http::withToken($this->token)
+            ->attach(
+                'file',
+                fopen($filePath, 'r'),
+                basename($filePath)
+            )
+            ->post(
+                "https://graph.facebook.com/{$this->version}/{$this->phoneNumberId}/media",
+                [
+                    'messaging_product' => 'whatsapp'
                 ]
             );
     }
