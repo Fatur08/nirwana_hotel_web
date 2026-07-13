@@ -10,9 +10,27 @@ use App\Models\NomorKamar;
 use Illuminate\Support\Facades\Storage;
 use App\Services\WhatsApp\WhatsAppService;
 use App\Services\NotifikasiService;
+use App\Services\Resi\ResiService;
 
 class HotelController extends Controller
 {
+    protected $whatsappService;
+    protected $resiService;
+    public function __construct(
+        WhatsAppService $whatsappService,
+        ResiService $resiService
+    ) {
+        $this->whatsappService = $whatsappService;
+        $this->resiService = $resiService;
+    }
+
+
+
+
+
+
+
+
     public function index(Request $request)
     {
         // ambil data dari form
@@ -1811,21 +1829,6 @@ class HotelController extends Controller
 
 
 
-    protected $whatsappService;
-    public function __construct(WhatsAppService $whatsappService)
-    {
-        $this->whatsappService = $whatsappService;
-    }
-
-
-
-
-
-
-
-
-
-
 
     public function kirimResiWA($id)
     {
@@ -1852,112 +1855,28 @@ class HotelController extends Controller
 
     public function uploadResiWA(Request $request, $id)
     {
-        /*
-        |--------------------------------------------------------------------------
-        | Validasi Request
-        |--------------------------------------------------------------------------
-        */
         $request->validate([
             'image' => 'required'
         ]);
 
         try {
 
-            /*
-            |--------------------------------------------------------------------------
-            | Generate Data Resi
-            |--------------------------------------------------------------------------
-            */
-            $dataPesanan = $this->resiService->generate($id);
-
-            /*
-            |--------------------------------------------------------------------------
-            | Simpan Gambar Resi
-            |--------------------------------------------------------------------------
-            */
-            $hasilResi = $this->resiService->saveImage(
-                $request->image,
-                $dataPesanan
+            $result = $this->resiService->kirimWhatsApp(
+                $id,
+                $request->image
             );
 
-            /*
-            |--------------------------------------------------------------------------
-            | Membuat Pesan WhatsApp
-            |--------------------------------------------------------------------------
-            */
-            $pesan = $this->resiService->buildMessage(
-                $dataPesanan,
-                $hasilResi['url']
+            return response()->json(
+                $result,
+                $result['success'] ? 200 : 500
             );
-
-            /*
-            |--------------------------------------------------------------------------
-            | Kirim Gambar ke WhatsApp
-            |--------------------------------------------------------------------------
-            */
-            $response = $this->whatsappService->sendImage(
-
-                $dataPesanan->no_wa_tamu,
-
-                $pesan,
-
-                $hasilResi['url']
-
-            );
-
-            $result = $response->json();
-
-            /*
-            |--------------------------------------------------------------------------
-            | Berhasil
-            |--------------------------------------------------------------------------
-            */
-            if (
-                isset($result['detail']) &&
-                str_contains(
-                    strtolower($result['detail']),
-                    'success'
-                )
-            ) {
-
-                return response()->json([
-
-                    'success' => true,
-
-                    'message' => 'Resi berhasil dikirim ke WhatsApp.',
-
-                    'url_resi' => $hasilResi['url'],
-
-                    'nama_file' => $hasilResi['nama_file'],
-
-                ]);
-
-            }
-
-            /*
-            |--------------------------------------------------------------------------
-            | Gagal Kirim
-            |--------------------------------------------------------------------------
-            */
-            return response()->json([
-
-                'success' => false,
-
-                'message' => 'Resi gagal dikirim.',
-
-                'response' => $result
-
-            ], 500);
 
         } catch (\Exception $e) {
 
             return response()->json([
-
                 'success' => false,
-
                 'message' => $e->getMessage()
-
-            ], 500);
+            ], 3000);
 
         }
     }

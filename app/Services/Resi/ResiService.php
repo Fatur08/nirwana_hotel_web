@@ -4,9 +4,26 @@ namespace App\Services\Resi;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Services\WhatsApp\WhatsAppService;
 
 class ResiService
 {
+    protected WhatsAppService $whatsappService;
+
+    public function __construct(
+        WhatsAppService $whatsappService
+    ) {
+        $this->whatsappService = $whatsappService;
+    }
+
+
+
+
+
+
+
+
+
     /**
      * Mengambil seluruh data pesanan
      */
@@ -353,5 +370,108 @@ class ResiService
             . "Terima kasih atas kepercayaan Anda.\n\n"
 
             . "*NIRWANA HOTEL KALIANDA*";
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Generate resi kemudian kirim ke WhatsApp
+     */
+    public function kirimWhatsApp($idRincianPesanan, $base64Image)
+    {
+        /*
+        |--------------------------------------------------------------------------
+        | Generate Data Resi
+        |--------------------------------------------------------------------------
+        */
+        $dataPesanan = $this->generate(
+            $idRincianPesanan
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Simpan Gambar Resi
+        |--------------------------------------------------------------------------
+        */
+        $hasilResi = $this->saveImage(
+            $base64Image,
+            $dataPesanan
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Membuat Pesan WhatsApp
+        |--------------------------------------------------------------------------
+        */
+        $pesan = $this->buildMessage(
+            $dataPesanan,
+            $hasilResi['url']
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Kirim Gambar ke WhatsApp
+        |--------------------------------------------------------------------------
+        */
+        $response = $this->whatsappService->sendImage(
+
+            $dataPesanan->no_wa_tamu,
+
+            $pesan,
+
+            $hasilResi['url']
+
+        );
+
+        $result = $response->json();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Berhasil
+        |--------------------------------------------------------------------------
+        */
+        if (
+            isset($result['detail']) &&
+            str_contains(
+                strtolower($result['detail']),
+                'success'
+            )
+        ) {
+
+            return [
+
+                'success' => true,
+
+                'message' => 'Resi berhasil dikirim ke WhatsApp.',
+
+                'url_resi' => $hasilResi['url'],
+
+                'nama_file' => $hasilResi['nama_file'],
+
+            ];
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Gagal
+        |--------------------------------------------------------------------------
+        */
+        return [
+
+            'success' => false,
+
+            'message' => 'Resi gagal dikirim.',
+
+            'response' => $result
+
+        ];
     }
 }
