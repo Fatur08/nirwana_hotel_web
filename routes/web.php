@@ -3,10 +3,34 @@
 use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 use App\Services\WhatsApp\MetaService;
+use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Hash;
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
+
+
+/*
+|--------------------------------------------------------------------------
+| Login
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/login',
+    [LoginController::class, 'index']
+);
+
+Route::post(
+    '/login',
+    [LoginController::class, 'login']
+);
+
+Route::get(
+    '/logout',
+    [LoginController::class, 'logout']
+);
 
 Route::get('/', [HotelController::class, 'index']);
 
@@ -168,5 +192,16 @@ Route::get('/test-image', function () {
         asset('storage/uploads/foto_ktp/Foto_KTP_Google_2026-07-09_12-24-31.jpg')
 
     );
+
+});
+
+
+
+
+
+
+Route::get('/generate-password', function () {
+
+    return Hash::make('kalianda');
 
 });
