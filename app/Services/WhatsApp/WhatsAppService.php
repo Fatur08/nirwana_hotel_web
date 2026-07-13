@@ -137,6 +137,19 @@ class WhatsAppService
 
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi Panjang Nomor
+        |--------------------------------------------------------------------------
+        */
+        if (strlen($number) < 10) {
+
+            throw new \InvalidArgumentException(
+                'Nomor WhatsApp tidak valid.'
+            );
+
+        }
+
         return $number;
     }
 
