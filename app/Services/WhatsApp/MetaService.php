@@ -50,22 +50,13 @@ class MetaService
                 "https://graph.facebook.com/{$this->version}/{$this->phoneNumberId}/messages",
                 [
                     'messaging_product' => 'whatsapp',
-
                     'to' => $target,
-
                     'type' => 'image',
-
                     'image' => [
-
                         'link' => $imageUrl,
-
                         'caption' => $caption,
-
                     ]
-
                 ]
-            )
-            ->json();
+            );
     }
-
 }
