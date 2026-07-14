@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Nirwana Hotel Kalianda</title>
     {{-- Tabler CSS --}}
-    <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('tabler/dist/css/tabler.min.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
     <style>
         body {
@@ -336,7 +336,7 @@
             }, 4000);
         }
     </script>
-    <script src="{{ asset('dist/js/tabler.min.js') }}"></script>
+    <script src="{{ asset('tabler/dist/js/tabler.min.js') }}"></script>
 </body>
 
 </html>
