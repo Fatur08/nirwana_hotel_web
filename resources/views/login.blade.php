@@ -13,7 +13,7 @@
             min-height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.45),
                     rgba(0, 0, 0, 0.45)),
-                url("{{ asset('assets/img/hotel_background.jpg') }}");
+                url("{{ asset('assets/img/hotel_background.png') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
