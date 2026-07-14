@@ -22,10 +22,10 @@ Route::post(
     [LoginController::class, 'login']
 );
 
-Route::get(
+Route::post(
     '/logout',
     [LoginController::class, 'logout']
-);
+)->name('logout');
 
 
 Route::middleware([
