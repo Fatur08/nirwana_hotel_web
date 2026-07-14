@@ -15,6 +15,11 @@ class LoginController extends Controller
      */
     public function index()
     {
+        // Jika sudah login, langsung ke dashboard
+        if (Session::get('login')) {
+            return redirect('/');
+        }
+
         return view('login');
     }
 
