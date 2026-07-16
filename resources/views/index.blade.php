@@ -327,10 +327,10 @@
 
 
         /*
-                                                                                |--------------------------------------------------------------------------
-                                                                                | MENU LOGOUT
-                                                                                |--------------------------------------------------------------------------
-                                                                                */
+                                                                                                    |--------------------------------------------------------------------------
+                                                                                                    | MENU LOGOUT
+                                                                                                    |--------------------------------------------------------------------------
+                                                                                                    */
 
         .kotak-logout {
             background: linear-gradient(to right,
@@ -538,6 +538,101 @@
 
 
 
+
+
+
+
+
+        /* ==========================================================
+                           TOMBOL NOTIFIKASI
+                        ========================================================== */
+
+        .btn-notifikasi {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: none;
+            background: #ffffff;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+            transition: all .25s ease;
+            z-index: 100;
+        }
+
+        .btn-notifikasi:hover {
+
+            transform: translateY(-50%) scale(1.08);
+
+            box-shadow: 0 12px 24px rgba(0, 0, 0, .25);
+
+        }
+
+        .btn-notifikasi:active {
+
+            transform: translateY(-50%) scale(.95);
+
+        }
+
+        .btn-notifikasi svg {
+
+            color: #0d6efd;
+
+        }
+
+
+
+
+
+
+
+
+
+        /* ==========================================================
+           ANIMASI LONCENG
+        ========================================================== */
+
+        @keyframes bellShake {
+
+            0% {
+                transform: rotate(0deg);
+            }
+
+            20% {
+                transform: rotate(-18deg);
+            }
+
+            40% {
+                transform: rotate(18deg);
+            }
+
+            60% {
+                transform: rotate(-12deg);
+            }
+
+            80% {
+                transform: rotate(12deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+
+        }
+
+        .bell-shake {
+
+            animation: bellShake .8s ease;
+
+            transform-origin: top center;
+
+        }
+
+
+
+
         /* ================= PRINT RESI ================= */
 
         @media print {
@@ -580,14 +675,7 @@
                     style="width:290px; height:220px;">
 
                 {{-- Tombol Notifikasi --}}
-                <button id="btnNotifikasi" class="btn btn-light shadow position-absolute" style="
-                                            right:20px;
-                                            top:50%;
-                                            transform:translateY(-50%);
-                                            width:55px;
-                                            height:55px;
-                                            border-radius:50%;
-                                        ">
+                <button id="btnNotifikasi" class="btn-notifikasi">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
                         stroke="#0d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1044,10 +1132,10 @@
                         $('#check_out').val('');
 
                         $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                    <option value="">
-                                                                                                                                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
-                                                                                                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                                                                                                `);
+                                                                                                                                                                                                                                                                                                        <option value="">
+                                                                                                                                                                                                                                                                                                            -- Pilih Tanggal Check Out Dulu --
+                                                                                                                                                                                                                                                                                                        </option>
+                                                                                                                                                                                                                                                                                                    `);
 
                         $('#kamar_tersedia_title').hide();
                         $('#kamar_tersedia_list').hide();
@@ -1082,10 +1170,10 @@
                             for (let i = 1; i <= totalKamar; i++) {
 
                                 opsiJumlah += `
-                                                                                                                                                                                                                                                                                            <option value="${i}">
-                                                                                                                                                                                                                                                                                                ${i} Kamar
-                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                                                                <option value="${i}">
+                                                                                                                                                                                                                                                                                                                    ${i} Kamar
+                                                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                                                            `;
 
                             }
 
@@ -1113,10 +1201,10 @@
                     $("#check_out").val("");
 
                     $("#jumlah_kamar_dipesan").html(`
-                                                                                                                                                                                                                                                                                <option value="">
-                                                                                                                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                                                </option>
-                                                                                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                                                                                                                                        -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                                                `);
 
                     $("#kamar_tersedia_title").hide();
                     $("#kamar_tersedia_list").hide();
@@ -1173,18 +1261,18 @@
                 if ($(this).data('foto')) {
 
                     $("#lama_foto_ktp").html(`
-                                                                                                                                                                                                                                                                                <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
-                                                                                                                                                                                                                                                                                    class="img-fluid rounded"
-                                                                                                                                                                                                                                                                                    style="max-height:250px;">
-                                                                                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                                                                                                    <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
+                                                                                                                                                                                                                                                                                                        class="img-fluid rounded"
+                                                                                                                                                                                                                                                                                                        style="max-height:250px;">
+                                                                                                                                                                                                                                                                                                `);
 
                 } else {
 
                     $("#lama_foto_ktp").html(`
-                                                                                                                                                                                                                                                                                <div class="text-muted">
-                                                                                                                                                                                                                                                                                    Tidak ada Foto KTP
-                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                            `);
+                                                                                                                                                                                                                                                                                                    <div class="text-muted">
+                                                                                                                                                                                                                                                                                                        Tidak ada Foto KTP
+                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                `);
 
                 }
 
@@ -1218,10 +1306,10 @@
                 $("#lama_no_wa").val("");
 
                 $("#lama_foto_ktp").html(`
-                                                                                                                                                                                                                                                                            <div class="text-muted">
-                                                                                                                                                                                                                                                                                Tidak ada Foto KTP
-                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                <div class="text-muted">
+                                                                                                                                                                                                                                                                                                    Tidak ada Foto KTP
+                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                            `);
 
                 $("#hasilCustomer").hide();
                 $("#dataCustomerLama").hide();
@@ -1299,5 +1387,32 @@
                     });
                 });
             }
+
+
+
+
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+                const btn = document.getElementById("btnNotifikasi");
+
+                btn.addEventListener("mouseenter", function () {
+
+                    const icon = this.querySelector("svg");
+
+                    icon.classList.add("bell-shake");
+
+                });
+
+                btn.addEventListener("animationend", function () {
+
+                    const icon = this.querySelector("svg");
+
+                    icon.classList.remove("bell-shake");
+
+                });
+
+            });
         </script>
     @endpush
