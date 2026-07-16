@@ -684,35 +684,73 @@ input[type="file"] {
 HEADER ACTIVITY LOG
 ==================================================*/
 
+/*==================================================
+HEADER ACTIVITY
+==================================================*/
+
 .activity-header {
 
     padding: 18px 20px;
 
     background: #ffffff;
 
+    border-radius: 20px 20px 0 0;
+
+}
+
+.activity-header .d-flex {
+
+    align-items: center;
+
 }
 
 .activity-icon {
 
-    width: 48px;
+    width: 50px;
 
-    height: 48px;
+    height: 50px;
 
     border-radius: 50%;
 
-    background: #eaf4ff;
-
-    color: #0d6efd;
+    background: #eef5ff;
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
 
-    font-size: 22px;
+    align-items: center;
+
+    color: #0d6efd;
+
+    font-size: 24px;
 
     margin-right: 15px;
+
+    flex-shrink: 0;
+
+}
+
+.activity-title h5 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: #2d3748;
+
+}
+
+.activity-title small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 14px;
+
+    color: #7a869a;
 
 }
 
@@ -725,6 +763,50 @@ HEADER ACTIVITY LOG
     background: #fafbfc;
 
 }
+
+
+
+
+.activity-divider {
+
+    height: 1px;
+
+    background: #e9ecef;
+
+}
+
+
+
+.activity-empty {
+
+    text-align: center;
+
+    padding: 55px 20px;
+
+}
+
+.activity-empty i {
+
+    font-size: 64px;
+
+    color: #c5cbd5;
+
+}
+
+.activity-empty p {
+
+    margin-top: 15px;
+
+    font-size: 18px;
+
+    color: #6c757d;
+
+}
+
+
+
+
+
 
 
 
