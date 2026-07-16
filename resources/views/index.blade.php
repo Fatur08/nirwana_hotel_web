@@ -9,159 +9,171 @@
 
                 {{-- Logo Hotel --}}
                 <img src="{{ asset('assets/img/Nirwana_Logo.png') }}" alt="Logo Hotel Nirwana"
-                    style="width:290px; height:220px;">
-
-                {{-- Tombol Notifikasi --}}
-                <div class="dropdown-menu dropdown-menu-end shadow activity-dropdown">
-
-                    <!-- Header -->
-                    <div class="activity-header">
-                        <div style="width:40px;height:40px;background:red;"></div>
-
-                        <div class="activity-title">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-
-                                <path
-                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6.002 6.002 0 0 0-4-5.659V4a2 2 0 1 0-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5" />
-
-                                <path d="M10 21a2 2 0 0 0 4 0" />
-
-                            </svg>
-
-                            Activity Log
-
-                        </div>
-
-                        <a href="#" class="activity-link">
-
-                            Lihat Semua
-
-                        </a>
-
-                    </div>
-
-
-
-                    <!-- Body -->
-
-                    <div class="activity-body" id="activityBody">
+                    style="width:290px;height:220px;">
 
 
 
 
-                        <!-- =============================
-                         CONTOH ITEM
-                    ============================== -->
+                {{-- NOTIFIKASI --}}
+                {{-- =======================================================
+                FLOATING ACTIVITY LOG
+                ======================================================= --}}
 
-                        <div class="activity-item">
+                <div class="position-absolute" style="top:15px; right:20px; z-index:999;">
 
-                            <div class="activity-icon bg-primary-lt">
+                    <!-- Tombol Lonceng -->
 
-                                <i class="ti ti-bed"></i>
+                    <button id="btnNotification" class="btn btn-light rounded-circle shadow-lg position-relative"
+                        style="width:62px;height:62px;">
+
+                        🔔
+
+                        <span id="notificationBadge"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+                            3
+
+                        </span>
+
+                    </button>
+
+
+
+                    <!-- PANEL -->
+
+                    <div id="notificationPanel" class="activity-panel">
+
+                        <!-- HEADER -->
+
+                        <div class="activity-header">
+
+                            <div class="activity-title">
+
+                                Activity Log
 
                             </div>
 
-                            <div class="activity-content">
+                            <a href="#" class="activity-link">
 
-                                <div class="activity-judul">
+                                Lihat Semua
 
-                                    Pesanan Baru
-
-                                </div>
-
-                                <div class="activity-isi">
-
-                                    Customer Ahmad memesan Kamar Deluxe.
-
-                                </div>
-
-                                <div class="activity-waktu">
-
-                                    2 menit yang lalu
-
-                                </div>
-
-                            </div>
+                            </a>
 
                         </div>
 
 
 
+                        <!-- BODY -->
+
+                        <div class="activity-body">
 
 
-                        <div class="activity-item">
 
-                            <div class="activity-icon bg-green-lt">
+                            <div class="activity-item">
 
-                                <i class="ti ti-cash"></i>
+                                <div class="activity-icon bg-primary-lt">
+
+                                    🛏
+
+                                </div>
+
+                                <div class="activity-content">
+
+                                    <div class="activity-judul">
+
+                                        Pesanan Baru
+
+                                    </div>
+
+                                    <div class="activity-isi">
+
+                                        Customer Ahmad memesan Deluxe Room.
+
+                                    </div>
+
+                                    <div class="activity-waktu">
+
+                                        2 menit lalu
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
-                            <div class="activity-content">
 
-                                <div class="activity-judul">
 
-                                    Pembayaran
 
-                                </div>
 
-                                <div class="activity-isi">
+                            <div class="activity-item">
 
-                                    Pembayaran Booking berhasil.
+                                <div class="activity-icon bg-green-lt">
+
+                                    💰
 
                                 </div>
 
-                                <div class="activity-waktu">
+                                <div class="activity-content">
 
-                                    15 menit yang lalu
+                                    <div class="activity-judul">
+
+                                        Pembayaran
+
+                                    </div>
+
+                                    <div class="activity-isi">
+
+                                        Pembayaran berhasil.
+
+                                    </div>
+
+                                    <div class="activity-waktu">
+
+                                        10 menit lalu
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-icon bg-orange-lt">
+
+                                    📱
+
+                                </div>
+
+                                <div class="activity-content">
+
+                                    <div class="activity-judul">
+
+                                        WhatsApp
+
+                                    </div>
+
+                                    <div class="activity-isi">
+
+                                        Resi Hotel berhasil dikirim.
+
+                                    </div>
+
+                                    <div class="activity-waktu">
+
+                                        30 menit lalu
+
+                                    </div>
 
                                 </div>
 
                             </div>
 
                         </div>
-
-
-
-
-
-                        <div class="activity-item">
-
-                            <div class="activity-icon bg-orange-lt">
-
-                                <i class="ti ti-brand-whatsapp"></i>
-
-                            </div>
-
-                            <div class="activity-content">
-
-                                <div class="activity-judul">
-
-                                    WhatsApp
-
-                                </div>
-
-                                <div class="activity-isi">
-
-                                    Resi Hotel berhasil dikirim.
-
-                                </div>
-
-                                <div class="activity-waktu">
-
-                                    30 menit yang lalu
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-
-
 
                     </div>
 
@@ -543,356 +555,368 @@
 
 @endsection
     @push('myscript')
-        <script>
-            // ======================================================
-            // MODAL PESAN KAMAR
-            // ======================================================
-            $(document).on('click', '.PesanKamar', function (e) {
-                e.preventDefault();
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/PesanKamar',
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function (respond) {
-
-                        $("#loadPesanKamar").html(respond);
-
-                        $("#modal-pesan-kamar").modal("show");
-
-                        setTimeout(function () {
-                            initPesanKamar();
-                        }, 200);
-
-                    }
-                });
-            });
-
-
-            // ======================================================
-            // INIT PESAN KAMAR
-            // ======================================================
-            function initPesanKamar() {
-
-                const checkOutPicker = flatpickr("#check_out_pesan_kamar", {
-                    dateFormat: "Y-m-d",
-                    altInput: true,
-                    altFormat: "d F Y",
-                    locale: flatpickr.l10ns.id,
-                    disableMobile: true,
-                    allowInput: false
-                });
-
-                const checkInPicker = flatpickr("#check_in_pesan_kamar", {
-                    dateFormat: "Y-m-d",
-                    altInput: true,
-                    altFormat: "d F Y",
-                    locale: flatpickr.l10ns.id,
-                    disableMobile: true,
-                    allowInput: false,
-
-                    onChange: function (selectedDates) {
-
-                        if (!selectedDates.length) return;
-
-                        let checkInDate = selectedDates[0];
-
-                        $('#check_in').val(
-                            this.formatDate(checkInDate, "Y-m-d")
-                        );
-
-                        let minCheckout = new Date(checkInDate);
-                        minCheckout.setDate(minCheckout.getDate() + 1);
-
-                        checkOutPicker.set('minDate', minCheckout);
-
-                        checkOutPicker.clear();
-                        $('#check_out').val('');
-
-                        $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                                                                                                                    <option value="">
-                                                                                                                                                                                                                                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
-                                                                                                                                                                                                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                                                                                                                                                                                                `);
-
-                        $('#kamar_tersedia_title').hide();
-                        $('#kamar_tersedia_list').hide();
-                        $('#list_nomor_kamar').html('');
-                    }
-                });
-
-                checkOutPicker.config.onChange.push(function (selectedDates) {
-
-                    if (!selectedDates.length) return;
-
-                    $('#check_out').val(
-                        checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
-                    );
+            <script>
+                // ======================================================
+                // MODAL PESAN KAMAR
+                // ======================================================
+                $(document).on('click', '.PesanKamar', function (e) {
+                    e.preventDefault();
 
                     $.ajax({
                         type: 'POST',
-                        url: '/getKamarTersedia',
+                        url: '/PesanKamar',
                         data: {
-                            _token: $('meta[name="csrf-token"]').attr('content'),
-                            check_in: $('#check_in').val(),
-                            check_out: $('#check_out').val()
+                            _token: "{{ csrf_token() }}"
                         },
+                        success: function (respond) {
 
-                        success: function (response) {
+                            $("#loadPesanKamar").html(respond);
 
-                            let totalKamar = response.length;
+                            $("#modal-pesan-kamar").modal("show");
 
-                            let opsiJumlah =
-                                '<option value="">-- Pilih Jumlah Kamar --</option>';
+                            setTimeout(function () {
+                                initPesanKamar();
+                            }, 200);
 
-                            for (let i = 1; i <= totalKamar; i++) {
+                        }
+                    });
+                });
 
-                                opsiJumlah += `
-                                                                                                                                                                                                                                                                                                                                                                                            <option value="${i}">
-                                                                                                                                                                                                                                                                                                                                                                                                ${i} Kamar
-                                                                                                                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                                                                                                                        `;
+
+                // ======================================================
+                // INIT PESAN KAMAR
+                // ======================================================
+                function initPesanKamar() {
+
+                    const checkOutPicker = flatpickr("#check_out_pesan_kamar", {
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "d F Y",
+                        locale: flatpickr.l10ns.id,
+                        disableMobile: true,
+                        allowInput: false
+                    });
+
+                    const checkInPicker = flatpickr("#check_in_pesan_kamar", {
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "d F Y",
+                        locale: flatpickr.l10ns.id,
+                        disableMobile: true,
+                        allowInput: false,
+
+                        onChange: function (selectedDates) {
+
+                            if (!selectedDates.length) return;
+
+                            let checkInDate = selectedDates[0];
+
+                            $('#check_in').val(
+                                this.formatDate(checkInDate, "Y-m-d")
+                            );
+
+                            let minCheckout = new Date(checkInDate);
+                            minCheckout.setDate(minCheckout.getDate() + 1);
+
+                            checkOutPicker.set('minDate', minCheckout);
+
+                            checkOutPicker.clear();
+                            $('#check_out').val('');
+
+                            $('#jumlah_kamar_dipesan').html(`
+                                                                                                                                                                                                                                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                                                                                                                                                                                                                                        -- Pilih Tanggal Check Out Dulu --
+                                                                                                                                                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                                                                                                                                                `);
+
+                            $('#kamar_tersedia_title').hide();
+                            $('#kamar_tersedia_list').hide();
+                            $('#list_nomor_kamar').html('');
+                        }
+                    });
+
+                    checkOutPicker.config.onChange.push(function (selectedDates) {
+
+                        if (!selectedDates.length) return;
+
+                        $('#check_out').val(
+                            checkOutPicker.formatDate(selectedDates[0], "Y-m-d")
+                        );
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '/getKamarTersedia',
+                            data: {
+                                _token: $('meta[name="csrf-token"]').attr('content'),
+                                check_in: $('#check_in').val(),
+                                check_out: $('#check_out').val()
+                            },
+
+                            success: function (response) {
+
+                                let totalKamar = response.length;
+
+                                let opsiJumlah =
+                                    '<option value="">-- Pilih Jumlah Kamar --</option>';
+
+                                for (let i = 1; i <= totalKamar; i++) {
+
+                                    opsiJumlah += `
+                                                                                                                                                                                                                                                                                                                                                                                                            <option value="${i}">
+                                                                                                                                                                                                                                                                                                                                                                                                                ${i} Kamar
+                                                                                                                                                                                                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                                                                                                                                                                                                        `;
+
+                                }
+
+                                $('#jumlah_kamar_dipesan').html(opsiJumlah);
 
                             }
 
-                            $('#jumlah_kamar_dipesan').html(opsiJumlah);
-
-                        }
+                        });
 
                     });
 
-                });
 
+                    // ======================================================
+                    // RESET BOOKING
+                    // ======================================================
+                    function resetFormBooking() {
 
-                // ======================================================
-                // RESET BOOKING
-                // ======================================================
-                function resetFormBooking() {
+                        checkInPicker.clear();
+                        checkOutPicker.clear();
 
-                    checkInPicker.clear();
-                    checkOutPicker.clear();
+                        $("#check_in_pesan_kamar").val("");
+                        $("#check_out_pesan_kamar").val("");
 
-                    $("#check_in_pesan_kamar").val("");
-                    $("#check_out_pesan_kamar").val("");
+                        $("#check_in").val("");
+                        $("#check_out").val("");
 
-                    $("#check_in").val("");
-                    $("#check_out").val("");
+                        $("#jumlah_kamar_dipesan").html(`
+                                                                                                                                                                                                                                                                                                                                                                                                <option value="">
+                                                                                                                                                                                                                                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                                                                                                                                                                </option>
+                                                                                                                                                                                                                                                                                                                                                                                            `);
 
-                    $("#jumlah_kamar_dipesan").html(`
-                                                                                                                                                                                                                                                                                                                                                                                <option value="">
-                                                                                                                                                                                                                                                                                                                                                                                    -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                                                                                                                                                </option>
-                                                                                                                                                                                                                                                                                                                                                                            `);
+                        $("#kamar_tersedia_title").hide();
+                        $("#kamar_tersedia_list").hide();
+                        $("#list_nomor_kamar").html("");
 
-                    $("#kamar_tersedia_title").hide();
-                    $("#kamar_tersedia_list").hide();
-                    $("#list_nomor_kamar").html("");
+                        $("#jumlah_extra_bed").val("");
+                        $("#jumlah_breakfast").val("");
 
-                    $("#jumlah_extra_bed").val("");
-                    $("#jumlah_breakfast").val("");
+                        $("#biaya_container").hide();
+                        $("#biaya_input_container").hide();
 
-                    $("#biaya_container").hide();
-                    $("#biaya_input_container").hide();
+                        $("#biaya_request").val("");
+                        $("#biaya_request_value").val("");
 
-                    $("#biaya_request").val("");
-                    $("#biaya_request_value").val("");
+                        $("#status_pembayaran").val("");
+                        $("#metode_pembayaran").val("");
+                        $("#sumber_pembayaran").val("");
+                        $("#bukti_pembayaran").val("");
 
-                    $("#status_pembayaran").val("");
-                    $("#metode_pembayaran").val("");
-                    $("#sumber_pembayaran").val("");
-                    $("#bukti_pembayaran").val("");
+                        $("#metode_pembayaran_container").hide();
+                        $("#metode_pembayaran_input").hide();
 
-                    $("#metode_pembayaran_container").hide();
-                    $("#metode_pembayaran_input").hide();
+                        $("#sumber_pembayaran_container").hide();
+                        $("#sumber_pembayaran_input").hide();
 
-                    $("#sumber_pembayaran_container").hide();
-                    $("#sumber_pembayaran_input").hide();
+                        $("#bukti_pembayaran_container").hide();
+                        $("#bukti_pembayaran_input").hide();
 
-                    $("#bukti_pembayaran_container").hide();
-                    $("#bukti_pembayaran_input").hide();
+                        $("#formBooking").hide();
 
-                    $("#formBooking").hide();
+                    }
 
-                }
+                    // supaya bisa dipanggil dari luar
+                    window.resetFormBooking = resetFormBooking;
 
-                // supaya bisa dipanggil dari luar
-                window.resetFormBooking = resetFormBooking;
-
-                resetFormBooking();
-
-            }
-
-
-            // ======================================================
-            // PILIH CUSTOMER
-            // ======================================================
-            $(document).off('click', '.pilihCustomer').on('click', '.pilihCustomer', function (e) {
-
-                e.preventDefault();
-
-                $("#id_customer_lama").val($(this).data('id'));
-
-                $("#lama_nama_tamu").val($(this).data('nama'));
-                $("#lama_alamat_tamu").text($(this).data('alamat'));
-                $("#lama_no_wa").val($(this).data('wa'));
-
-                if ($(this).data('foto')) {
-
-                    $("#lama_foto_ktp").html(`
-                                                                                                                                                                                                                                                                                                                                                                                <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
-                                                                                                                                                                                                                                                                                                                                                                                    class="img-fluid rounded"
-                                                                                                                                                                                                                                                                                                                                                                                    style="max-height:250px;">
-                                                                                                                                                                                                                                                                                                                                                                            `);
-
-                } else {
-
-                    $("#lama_foto_ktp").html(`
-                                                                                                                                                                                                                                                                                                                                                                                <div class="text-muted">
-                                                                                                                                                                                                                                                                                                                                                                                    Tidak ada Foto KTP
-                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                            `);
-
-                }
-
-                $("#keyword_customer").val($(this).data('nama'));
-
-                $("#hasilCustomer").hide();
-
-                $("#dataCustomerLama").show();
-
-                $("#formBooking").show();
-
-                $("#gantiCustomer").show();
-
-                $("#keyword_customer").prop("readonly", true);
-
-            });
-
-
-            // ======================================================
-            // GANTI CUSTOMER
-            // ======================================================
-            $(document).off('click', '#gantiCustomer').on('click', '#gantiCustomer', function () {
-
-                $("#keyword_customer").val("");
-                $("#keyword_customer").prop("readonly", false);
-
-                $("#id_customer_lama").val("");
-
-                $("#lama_nama_tamu").val("");
-                $("#lama_alamat_tamu").text("");
-                $("#lama_no_wa").val("");
-
-                $("#lama_foto_ktp").html(`
-                                                                                                                                                                                                                                                                                                                                                                            <div class="text-muted">
-                                                                                                                                                                                                                                                                                                                                                                                Tidak ada Foto KTP
-                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                        `);
-
-                $("#hasilCustomer").hide();
-                $("#dataCustomerLama").hide();
-                $("#gantiCustomer").hide();
-
-                resetFormBooking();
-
-                $("#keyword_customer").focus();
-
-            });
-
-
-            // ======================================================
-            // MODAL DITUTUP
-            // ======================================================
-            $('#modal-pesan-kamar').on('hidden.bs.modal', function () {
-
-                $(this).find('form').trigger('reset');
-
-                if (typeof resetFormBooking === "function") {
                     resetFormBooking();
+
                 }
 
-                $("#hasilCustomer").hide();
-                $("#dataCustomerLama").hide();
 
-            });
+                // ======================================================
+                // PILIH CUSTOMER
+                // ======================================================
+                $(document).off('click', '.pilihCustomer').on('click', '.pilihCustomer', function (e) {
 
-
-
-
-
-            $('#ModalDataPengguna').on('show.bs.modal', function () {
-                $('#nama_pengguna_modal').val(
-                    getNamaPengguna()
-                );
-            });
-
-
-
-            $('#btnGantiPengguna').click(function () {
-                localStorage.removeItem('nama_pengguna');
-                location.reload();
-            });
-
-
-
-
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Logout
-            |--------------------------------------------------------------------------
-            */
-            const btnLogout = document.getElementById('btnLogout');
-            if (btnLogout) {
-                btnLogout.addEventListener('click', function (e) {
                     e.preventDefault();
-                    Swal.fire({
-                        title: 'Logout',
-                        text: 'Apakah Anda yakin ingin keluar dari sistem?',
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d32f2f',
-                        cancelButtonColor: '#6c757d',
-                        confirmButtonText: 'Logout',
-                        cancelButtonText: 'Batal',
-                        reverseButtons: true,
-                        allowOutsideClick: false
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            document.getElementById('logoutForm').submit();
-                        }
+
+                    $("#id_customer_lama").val($(this).data('id'));
+
+                    $("#lama_nama_tamu").val($(this).data('nama'));
+                    $("#lama_alamat_tamu").text($(this).data('alamat'));
+                    $("#lama_no_wa").val($(this).data('wa'));
+
+                    if ($(this).data('foto')) {
+
+                        $("#lama_foto_ktp").html(`
+                                                                                                                                                                                                                                                                                                                                                                                                <img src="/storage/uploads/foto_ktp/${$(this).data('foto')}"
+                                                                                                                                                                                                                                                                                                                                                                                                    class="img-fluid rounded"
+                                                                                                                                                                                                                                                                                                                                                                                                    style="max-height:250px;">
+                                                                                                                                                                                                                                                                                                                                                                                            `);
+
+                    } else {
+
+                        $("#lama_foto_ktp").html(`
+                                                                                                                                                                                                                                                                                                                                                                                                <div class="text-muted">
+                                                                                                                                                                                                                                                                                                                                                                                                    Tidak ada Foto KTP
+                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                            `);
+
+                    }
+
+                    $("#keyword_customer").val($(this).data('nama'));
+
+                    $("#hasilCustomer").hide();
+
+                    $("#dataCustomerLama").show();
+
+                    $("#formBooking").show();
+
+                    $("#gantiCustomer").show();
+
+                    $("#keyword_customer").prop("readonly", true);
+
+                });
+
+
+                // ======================================================
+                // GANTI CUSTOMER
+                // ======================================================
+                $(document).off('click', '#gantiCustomer').on('click', '#gantiCustomer', function () {
+
+                    $("#keyword_customer").val("");
+                    $("#keyword_customer").prop("readonly", false);
+
+                    $("#id_customer_lama").val("");
+
+                    $("#lama_nama_tamu").val("");
+                    $("#lama_alamat_tamu").text("");
+                    $("#lama_no_wa").val("");
+
+                    $("#lama_foto_ktp").html(`
+                                                                                                                                                                                                                                                                                                                                                                                            <div class="text-muted">
+                                                                                                                                                                                                                                                                                                                                                                                                Tidak ada Foto KTP
+                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                        `);
+
+                    $("#hasilCustomer").hide();
+                    $("#dataCustomerLama").hide();
+                    $("#gantiCustomer").hide();
+
+                    resetFormBooking();
+
+                    $("#keyword_customer").focus();
+
+                });
+
+
+                // ======================================================
+                // MODAL DITUTUP
+                // ======================================================
+                $('#modal-pesan-kamar').on('hidden.bs.modal', function () {
+
+                    $(this).find('form').trigger('reset');
+
+                    if (typeof resetFormBooking === "function") {
+                        resetFormBooking();
+                    }
+
+                    $("#hasilCustomer").hide();
+                    $("#dataCustomerLama").hide();
+
+                });
+
+
+
+
+
+                $('#ModalDataPengguna').on('show.bs.modal', function () {
+                    $('#nama_pengguna_modal').val(
+                        getNamaPengguna()
+                    );
+                });
+
+
+
+                $('#btnGantiPengguna').click(function () {
+                    localStorage.removeItem('nama_pengguna');
+                    location.reload();
+                });
+
+
+
+
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Logout
+                |--------------------------------------------------------------------------
+                */
+                const btnLogout = document.getElementById('btnLogout');
+                if (btnLogout) {
+                    btnLogout.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'Logout',
+                            text: 'Apakah Anda yakin ingin keluar dari sistem?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d32f2f',
+                            cancelButtonColor: '#6c757d',
+                            confirmButtonText: 'Logout',
+                            cancelButtonText: 'Batal',
+                            reverseButtons: true,
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.getElementById('logoutForm').submit();
+                            }
+                        });
                     });
-                });
-            }
+                }
 
 
 
 
 
 
-            document.addEventListener("DOMContentLoaded", function () {
+                /*======================================================
+        =      FLOATING ACTIVITY PANEL
+        ======================================================*/
 
-                const btn = document.getElementById("btnNotifikasi");
+                const btnNotification = document.getElementById("btnNotification");
 
-                btn.addEventListener("mouseenter", function () {
+                const notificationPanel = document.getElementById("notificationPanel");
 
-                    const icon = this.querySelector("svg");
 
-                    icon.classList.add("bell-shake");
 
-                });
+                btnNotification.addEventListener("click", function (e) {
 
-                btn.addEventListener("animationend", function () {
+                    e.stopPropagation();
 
-                    const icon = this.querySelector("svg");
-
-                    icon.classList.remove("bell-shake");
+                    notificationPanel.classList.toggle("show");
 
                 });
 
-            });
-        </script>
+
+
+                document.addEventListener("click", function () {
+
+                    notificationPanel.classList.remove("show");
+
+                });
+
+
+
+                notificationPanel.addEventListener("click", function (e) {
+
+                    e.stopPropagation();
+
+                });
+            </script>
     @endpush

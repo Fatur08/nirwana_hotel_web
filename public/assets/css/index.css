@@ -680,283 +680,62 @@ input[type="file"] {
 
 
 
-/*==================================================
-=            DROPDOWN ACTIVITY LOG
-==================================================*/
+/*======================================================
+=           FLOATING ACTIVITY PANEL
+======================================================*/
 
-.activity-dropdown {
+.activity-panel {
+
+    position: absolute;
+
+    top: 75px;
+
+    right: 0;
 
     width: 400px;
 
-    border: none;
+    background: #fff;
 
     border-radius: 18px;
 
     overflow: hidden;
 
-    padding: 0;
-
     box-shadow: 0 18px 45px rgba(0, 0, 0, .18);
 
-}
+    display: none;
 
-
-
-/*==================================================
-=            HEADER
-==================================================*/
-
-.activity-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 18px 20px;
-
-    background: linear-gradient(135deg, #0d6efd, #4f8cff);
-
-    color: #fff;
-
-}
-
-.activity-title {
-
-    display: flex;
-
-    align-items: center;
-
-    font-size: 18px;
-
-    font-weight: 700;
-
-}
-
-.activity-title i {
-
-    font-size: 22px;
-
-    margin-right: 8px;
-
-}
-
-.activity-link {
-
-    color: #fff;
-
-    font-size: 14px;
-
-    text-decoration: none;
-
-    transition: .25s;
-
-}
-
-.activity-link:hover {
-
-    opacity: .8;
+    animation: fadePanel .25s ease;
 
 }
 
 
 
-/*==================================================
-=            BODY
-==================================================*/
 
-.activity-body {
+@keyframes fadePanel {
 
-    background: #ffffff;
+    from {
 
-    max-height: 420px;
+        opacity: 0;
 
-    overflow-y: auto;
+        transform: translateY(-10px);
 
-}
+    }
 
+    to {
 
+        opacity: 1;
 
-/* Scrollbar */
+        transform: translateY(0);
 
-.activity-body::-webkit-scrollbar {
-
-    width: 6px;
-
-}
-
-.activity-body::-webkit-scrollbar-thumb {
-
-    background: #d0d7e2;
-
-    border-radius: 50px;
-
-}
-
-.activity-body::-webkit-scrollbar-track {
-
-    background: transparent;
+    }
 
 }
 
 
 
-/*==================================================
-=            ITEM
-==================================================*/
+.activity-panel.show {
 
-.activity-item {
-
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 15px;
-
-    padding: 18px 20px;
-
-    border-bottom: 1px solid #edf0f5;
-
-    transition: .25s;
-
-    cursor: pointer;
-
-}
-
-.activity-item:last-child {
-
-    border-bottom: none;
-
-}
-
-.activity-item:hover {
-
-    background: #f8fbff;
-
-}
-
-
-
-/*==================================================
-=            ICON
-==================================================*/
-
-.activity-icon {
-
-    width: 48px;
-
-    height: 48px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-shrink: 0;
-
-}
-
-.activity-icon i {
-
-    font-size: 22px;
-
-}
-
-
-
-/*==================================================
-=            CONTENT
-==================================================*/
-
-.activity-content {
-
-    flex: 1;
-
-}
-
-.activity-judul {
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    color: #1f2937;
-
-    margin-bottom: 4px;
-
-}
-
-.activity-isi {
-
-    font-size: 14px;
-
-    color: #6b7280;
-
-    line-height: 1.5;
-
-}
-
-.activity-waktu {
-
-    margin-top: 8px;
-
-    font-size: 12px;
-
-    color: #9ca3af;
-
-}
-
-
-
-/*==================================================
-=            EMPTY STATE
-==================================================*/
-
-.activity-empty {
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    height: 260px;
-
-}
-
-.activity-empty i {
-
-    font-size: 60px;
-
-    color: #d6dce5;
-
-}
-
-.activity-empty h5 {
-
-    margin-top: 18px;
-
-    font-size: 18px;
-
-    font-weight: 700;
-
-    color: #4b5563;
-
-}
-
-.activity-empty p {
-
-    margin-top: 6px;
-
-    font-size: 14px;
-
-    color: #9ca3af;
+    display: block;
 
 }
 
