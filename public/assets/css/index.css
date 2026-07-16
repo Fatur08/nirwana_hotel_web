@@ -680,63 +680,89 @@ input[type="file"] {
 
 
 
-/*======================================================
-=           FLOATING ACTIVITY PANEL
-======================================================*/
+/* ==================================================
+   DROPDOWN ACTIVITY LOG
+================================================== */
 
-.activity-panel {
-
-    position: absolute;
-
-    top: 75px;
-
-    right: 0;
-
-    width: 400px;
-
-    background: #fff;
-
+.activity-dropdown {
+    width: 380px;
+    border: none;
     border-radius: 18px;
-
     overflow: hidden;
-
     box-shadow: 0 18px 45px rgba(0, 0, 0, .18);
-
-    display: none;
-
-    animation: fadePanel .25s ease;
-
 }
 
-
-
-
-@keyframes fadePanel {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(-10px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-    }
-
+/* Header */
+.activity-header {
+    padding: 18px 20px 14px;
+    background: #fff;
 }
 
+.activity-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.2;
+}
 
+.activity-subtitle {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #6b7280;
+}
 
-.activity-panel.show {
+.activity-divider {
+    height: 1px;
+    background: #eceff3;
+}
 
-    display: block;
+/* Body */
+.activity-body {
+    background: #fafbfc;
+    min-height: 220px;
+    max-height: 420px;
+    overflow-y: auto;
+}
 
+/* Empty state */
+.activity-empty {
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+}
+
+.activity-empty-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.activity-empty p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+/* Tombol lonceng */
+.btn-notifikasi {
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+    transition: all .2s ease;
+    font-size: 24px;
+}
+
+.btn-notifikasi:hover {
+    transform: scale(1.05);
+}
+
+.btn-notifikasi:active {
+    transform: scale(.95);
 }
 
 
