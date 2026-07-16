@@ -61,8 +61,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js"></script>
-  <script src="../../assets/js/main.js" defer></script>
-  <script src="../../assets/js/sweetalert.js" defer></script>
+  <script src="{{ asset('assets/js/main.js') }}" defer></script>
+  <script src="{{ asset('assets/js/sweetalert.js') }}" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
