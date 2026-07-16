@@ -1,0 +1,708 @@
+body {
+    background: linear-gradient(to bottom, #e8dbb9, #eaf3ff);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    margin: 0;
+    padding: 15px;
+    min-height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+    overflow-x: auto;
+}
+
+
+
+
+
+
+
+
+/* Parent wajib */
+.input-icon {
+    position: relative;
+}
+
+/* Calendar */
+.flatpickr-calendar {
+    width: auto !important;
+    max-width: none !important;
+}
+
+/* Hari */
+.flatpickr-day {
+    height: 50px;
+    line-height: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Semua input & select */
+.form-control,
+.form-select {
+    height: 55px !important;
+    font-size: 16px !important;
+    line-height: normal !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+/* Khusus text di select biar benar-benar tengah */
+.form-select {
+    display: block !important;
+    line-height: 55px !important;
+}
+
+/* Flatpickr (input hasil clone) */
+.flatpickr-input {
+    height: 55px !important;
+    font-size: 16px !important;
+    line-height: 55px !important;
+}
+
+/* Biar icon tidak ganggu alignment */
+.input-icon .form-control {
+    padding-left: 40px;
+}
+
+/* Optional biar lebih halus */
+.form-control,
+.form-select,
+.flatpickr-input {
+    border-radius: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* BAGIAN STYLE INPUT KTP */
+/* Input file biar sejajar */
+input[type="file"].form-control {
+    height: 55px !important;
+    font-size: 16px !important;
+    line-height: 55px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+/* Tombol "Choose file" */
+input[type="file"]::file-selector-button {
+    height: 55px;
+    margin-right: 10px;
+    border: none;
+    background: #e9ecef;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+
+input[type="file"] {
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+.login-container {
+    text-align: center;
+    background: #e8dbb9;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+}
+
+.login-title {
+    background: linear-gradient(135deg, #3a8dde, #1c6ed5);
+    color: white;
+    padding: 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.login-title h1 {
+    margin: 0;
+    font-size: 35px;
+}
+
+.role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+}
+
+.role-card {
+    background-color: #f8f9fa;
+    color: black;
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+}
+
+.role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 100%;
+    width: 100%;
+}
+
+.role-card img {
+    max-width: 100%;
+    width: 100%;
+    height: 93px;
+    object-fit: contain;
+}
+
+.role-card button {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.kotak-pesan {
+    background-color: rgb(209, 209, 209);
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+}
+
+.kotak-cari {
+    background-color: #4fce05ff;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+}
+
+
+
+.kotak-ketersediaan-kamar {
+    background: linear-gradient(to right, #4facfe, #00c6ff, #43e97b);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.kotak-ketersediaan-kamar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+}
+
+.kotak-ketersediaan-kamar h1 {
+    color: white;
+    font-weight: bold;
+}
+
+
+
+
+
+
+.kotak-informasi-pemesanan {
+    background: linear-gradient(to right, #43e97b, #38ef7d, #11998e);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.kotak-informasi-pemesanan:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+}
+
+.kotak-informasi-pemesanan h1 {
+    color: white;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+.kotak-data-master {
+    background: linear-gradient(to right, #667eea, #764ba2, #6a11cb);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.kotak-data-master:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+}
+
+.kotak-data-master h1 {
+    color: white;
+    font-weight: bold;
+}
+
+
+
+
+
+
+.kotak-data-pengguna {
+    background: linear-gradient(to right, #ffb347, #ff9800, #ff6f00);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.kotak-data-pengguna:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+}
+
+.kotak-data-pengguna h1 {
+    color: white;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+/*
+                                                                                                                    |--------------------------------------------------------------------------
+                                                                                                                    | MENU LOGOUT
+                                                                                                                    |--------------------------------------------------------------------------
+                                                                                                                    */
+
+.kotak-logout {
+    background: linear-gradient(to right,
+            #ff416c,
+            #ff4b2b,
+            #d32f2f);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.kotak-logout:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+}
+
+.kotak-logout h1 {
+    color: white;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+.kotak-dlx {
+    background: linear-gradient(to right, #ea3438, #f39c12, #28a745);
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.kotak-hmsty {
+    background: linear-gradient(to right, #0d6efd, #0dcaf0, #20c997);
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.kotak-spr {
+    background: linear-gradient(to right, #99caeb, #5daee6, #f39c12);
+    color: black;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.kotak-std {
+    background: linear-gradient(to right, #f6df07, #f4c20d, #ff7f50, #c0392b, #8e44ad);
+    color: black;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 100%;
+    font-size: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* === Table Style === */
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+}
+
+.custom-table thead th {
+    background: linear-gradient(135deg, #007bff, #00bcd4);
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    padding: 12px;
+    border: none;
+}
+
+.custom-table thead tr:first-child th {
+    background: linear-gradient(135deg, #0069d9, #17a2b8);
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.custom-table tbody td,
+.custom-table tbody th {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #dee2e6;
+    font-size: 16px;
+    color: #333;
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #e9f5ff;
+    transition: 0.3s;
+}
+
+.table-container {
+    max-width: 1600px;
+}
+
+
+
+
+.table-garis {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-garis th,
+.table-garis td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+
+
+
+.table-custom {
+    width: 100%;
+    border: 1px solid black;
+    /* border luar saja */
+    border-collapse: collapse;
+}
+
+.table-custom td,
+.table-custom th {
+    border: none;
+    /* hilangkan semua garis dalam */
+    padding: 6px;
+}
+
+/* KHUSUS HEADER KAMAR DELUXE */
+.table-custom .header-kamar {
+    border: 1px solid black;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+
+/* KHUSUS SAAT PDF */
+.mode-pdf {
+    width: 105mm !important;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 12px;
+    transform: scale(0.85);
+    transform-origin: top left;
+}
+
+/* kecilkan elemen hanya saat PDF */
+.mode-pdf h1 {
+    font-size: 18px !important;
+}
+
+.mode-pdf h2 {
+    font-size: 16px !important;
+}
+
+.mode-pdf img {
+    max-height: 80px !important;
+}
+
+#area-inner {
+    transform: scale(0.88);
+    /* 🔥 ini bisa kamu adjust */
+    transform-origin: top center;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+                   TOMBOL NOTIFIKASI
+                ========================================================== */
+
+.btn-notifikasi {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: none;
+    background: #ffffff;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+    transition: all .25s ease;
+    z-index: 100;
+}
+
+.btn-notifikasi:hover {
+
+    transform: translateY(-50%) scale(1.08);
+
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .25);
+
+}
+
+.btn-notifikasi:active {
+
+    transform: translateY(-50%) scale(.95);
+
+}
+
+.btn-notifikasi svg {
+
+    color: #0d6efd;
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+                   ANIMASI LONCENG
+                ========================================================== */
+
+@keyframes bellShake {
+
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(-18deg);
+    }
+
+    40% {
+        transform: rotate(18deg);
+    }
+
+    60% {
+        transform: rotate(-12deg);
+    }
+
+    80% {
+        transform: rotate(12deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+
+}
+
+.bell-shake {
+
+    animation: bellShake .8s ease;
+
+    transform-origin: top center;
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================
+           DROPDOWN ACTIVITY LOG
+        ========================================================== */
+
+#dropdownNotifikasi {
+
+    width: 390px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    padding: 0;
+
+    animation: dropdownFade .25s ease;
+
+}
+
+@keyframes dropdownFade {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+
+
+/* ================= PRINT RESI ================= */
+
+@media print {
+
+    body {
+        background: white !important;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        /* kecilkan biar muat A6 */
+    }
+
+    #area-print {
+        width: 100%;
+        max-width: 105mm;
+        margin: auto;
+    }
+
+    table {
+        page-break-inside: avoid;
+    }
+
+    tr,
+    td,
+    th {
+        page-break-inside: avoid;
+    }
+
+}
