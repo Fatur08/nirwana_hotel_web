@@ -771,20 +771,14 @@ input[type="file"] {
 
 
 .activity-icon {
-
     width: 52px;
     height: 52px;
-
     border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
-
     box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
-
 }
 
 
@@ -792,11 +786,8 @@ input[type="file"] {
 
 
 .activity-emoji {
-
     font-size: 24px;
-
     line-height: 1;
-
 }
 
 
@@ -804,25 +795,15 @@ input[type="file"] {
 
 
 .activity-item {
-
     display: flex;
-
     align-items: flex-start;
-
     gap: 15px;
-
     padding: 18px;
-
     margin: 14px;
-
     border-radius: 16px;
-
     background: #ffffff;
-
     border: 1px solid #eef2f7;
-
     transition: .25s;
-
 }
 
 
@@ -830,13 +811,23 @@ input[type="file"] {
 
 
 .activity-item:hover {
-
     transform: translateY(-2px);
-
     box-shadow: 0 10px 25px rgba(13, 110, 253, .10);
-
     border-color: #dbeafe;
+}
 
+
+
+
+
+.activity-waktu {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #9aa4b2;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 
