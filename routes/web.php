@@ -173,6 +173,18 @@ Route::middleware([
     Route::post('/UpdateDataMaster', [HotelController::class, 'UpdateDataMaster']);
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Activity Log
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get(
+        '/Notifikasi',
+        [HotelController::class, 'getNotifikasi']
+    );
+
+
     /*Route::get('/test-meta', function () {
 
         $meta = new MetaService();

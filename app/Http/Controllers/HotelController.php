@@ -3130,4 +3130,34 @@ class HotelController extends Controller
             ]);
         }
     }
+
+
+
+
+
+    /*
+|--------------------------------------------------------------------------
+| Ambil 10 Notifikasi Terbaru
+|--------------------------------------------------------------------------
+*/
+
+    public function getNotifikasi()
+    {
+        $notifikasi = DB::table('notifikasi')
+
+            ->orderBy(
+                'id_notifikasi',
+                'DESC'
+            )
+
+            ->limit(10)
+
+            ->get();
+
+        return response()->json(
+
+            $notifikasi
+
+        );
+    }
 }
