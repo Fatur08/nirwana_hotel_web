@@ -831,7 +831,7 @@ input[type="file"] {
 .notification-wrapper {
     position: absolute;
     top: 50%;
-    left: calc(100% + 25px);
+    left: calc(100% + 40px);
     transform: translateY(-50%);
     z-index: 1000;
 }
