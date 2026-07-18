@@ -541,8 +541,8 @@ input[type="file"] {
 
 
 /* ==========================================================
-                   TOMBOL NOTIFIKASI
-                ========================================================== */
+   TOMBOL NOTIFIKASI
+========================================================== */
 
 .btn-notifikasi {
     position: absolute;
@@ -560,23 +560,17 @@ input[type="file"] {
 }
 
 .btn-notifikasi:hover {
-
     transform: translateY(-50%) scale(1.08);
-
     box-shadow: 0 12px 24px rgba(0, 0, 0, .25);
-
 }
 
 .btn-notifikasi:active {
-
     transform: translateY(-50%) scale(.95);
-
 }
 
 .btn-notifikasi svg {
 
     color: #0d6efd;
-
 }
 
 
@@ -588,11 +582,10 @@ input[type="file"] {
 
 
 /* ==========================================================
-                   ANIMASI LONCENG
-                ========================================================== */
+   ANIMASI LONCENG
+========================================================== */
 
 @keyframes bellShake {
-
     0% {
         transform: rotate(0deg);
     }
@@ -616,15 +609,11 @@ input[type="file"] {
     100% {
         transform: rotate(0deg);
     }
-
 }
 
 .bell-shake {
-
     animation: bellShake .8s ease;
-
     transform-origin: top center;
-
 }
 
 
@@ -635,43 +624,27 @@ input[type="file"] {
 
 
 /* ==========================================================
-           DROPDOWN ACTIVITY LOG
-        ========================================================== */
-
+   DROPDOWN ACTIVITY LOG
+========================================================== */
 #dropdownNotifikasi {
-
     width: 390px;
-
     border: none;
-
     border-radius: 18px;
-
     overflow: hidden;
-
     padding: 0;
-
     animation: dropdownFade .25s ease;
-
 }
 
 @keyframes dropdownFade {
-
     from {
-
         opacity: 0;
-
         transform: translateY(-15px);
-
     }
 
     to {
-
         opacity: 1;
-
         transform: translateY(0);
-
     }
-
 }
 
 
@@ -828,6 +801,39 @@ input[type="file"] {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+
+
+
+
+
+/*==================================================
+=            LOGO HOTEL
+==================================================*/
+.logo-area {
+    position: relative;
+    width: 290px;
+    margin: 0 auto 20px;
+}
+
+.logo-hotel {
+    width: 290px;
+    height: auto;
+    display: block;
+}
+
+
+/*==================================================
+=            BUTTON NOTIFICATION
+==================================================*/
+
+.notification-wrapper {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 25px);
+    transform: translateY(-50%);
+    z-index: 1000;
 }
 
 
