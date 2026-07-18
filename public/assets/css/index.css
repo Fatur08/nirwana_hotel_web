@@ -813,12 +813,12 @@ input[type="file"] {
 ==================================================*/
 .logo-area {
     position: relative;
-    width: 290px;
+    width: 100px;
     margin: 0 auto 20px;
 }
 
 .logo-hotel {
-    width: 290px;
+    width: 100px;
     height: auto;
     display: block;
 }
