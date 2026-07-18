@@ -3136,28 +3136,26 @@ class HotelController extends Controller
 
 
     /*
-|--------------------------------------------------------------------------
-| Ambil 10 Notifikasi Terbaru
-|--------------------------------------------------------------------------
-*/
+    |--------------------------------------------------------------------------
+    | Ambil 15 Notifikasi Terbaru
+    |--------------------------------------------------------------------------
+    */
 
     public function getNotifikasi()
     {
         $notifikasi = DB::table('notifikasi')
-
-            ->orderBy(
+            ->select(
                 'id_notifikasi',
-                'DESC'
+                'judul_notifikasi',
+                'isi_notifikasi',
+                'jenis_notifikasi',
+                'dibuat_oleh',
+                'waktu_notifikasi'
             )
-
-            ->limit(10)
-
+            ->orderByDesc('id_notifikasi')
+            ->limit(15)
             ->get();
 
-        return response()->json(
-
-            $notifikasi
-
-        );
+        return response()->json($notifikasi);
     }
 }
