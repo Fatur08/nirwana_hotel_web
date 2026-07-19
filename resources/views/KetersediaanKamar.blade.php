@@ -1,5 +1,222 @@
 @extends('layouts.index')
 @section('content')
+    <style>
+        .kotak-header-ketersediaan {
+            background: linear-gradient(to right,
+                    #2c3e50,
+                    #3498db,
+                    #5dade2);
+
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        /* === Table Style === */
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
+        }
+
+        .custom-table thead th {
+            background: linear-gradient(135deg, #007bff, #00bcd4);
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            font-size: 20px;
+            letter-spacing: 0.5px;
+            padding: 10px 12px;
+            border: none;
+            position: sticky;
+            border-bottom: 0 !important;
+        }
+
+        .custom-table thead tr:first-child th {
+            background: linear-gradient(135deg, #0069d9, #17a2b8);
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .custom-table tbody td,
+        .custom-table tbody th {
+            padding: 12px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #dee2e6;
+            font-size: 20px;
+            color: #333;
+        }
+
+
+
+
+
+        .custom-table tbody th {
+            position: sticky;
+            left: 0;
+            z-index: 90;
+            background: #f8f9fa;
+        }
+
+        .custom-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: #e9f5ff;
+            transition: 0.3s;
+        }
+
+        .table-container {
+            max-width: 1600px;
+        }
+
+
+
+
+        .table-garis {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table-garis th,
+        .table-garis td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+
+
+
+        .table-custom {
+            width: 100%;
+            border: 1px solid black;
+            /* border luar saja */
+            border-collapse: collapse;
+        }
+
+        .table-custom td,
+        .table-custom th {
+            border: none;
+            /* hilangkan semua garis dalam */
+            padding: 6px;
+        }
+
+
+
+        /* Header nomor kamar */
+        .header-dlx {
+            background: #ffe6e9 !important;
+            color: #000 !important;
+        }
+
+        .header-spr {
+            background: #eaf6ff !important;
+            color: #000 !important;
+        }
+
+        .header-std {
+            background: #fffbed !important;
+            color: #000 !important;
+        }
+
+        .header-hmsty {
+            background: #effff6 !important;
+            color: #000 !important;
+        }
+
+
+
+
+
+
+        /* ===========================================================
+                                               STICKY TABLE
+                                            =========================================================== */
+
+        .sticky-table-wrapper {
+            max-height: 75vh;
+            overflow: auto;
+        }
+
+        /* ================= HEADER BARIS PERTAMA ================= */
+
+        .custom-table thead tr:first-child th {
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: linear-gradient(135deg, #0069d9, #17a2b8);
+
+        }
+
+        /* ================= HEADER BARIS KEDUA ================= */
+
+        .custom-table thead tr:nth-child(2) th {
+            position: sticky;
+            top: 60px;
+            z-index: 99;
+            background: linear-gradient(135deg, #007bff, #00bcd4);
+        }
+
+        /* ================= KOLOM TANGGAL ================= */
+
+        .custom-table tbody th {
+
+            position: sticky;
+
+            left: 0;
+
+            z-index: 98;
+
+            background: #f8f9fa;
+
+            min-width: 80px;
+
+            box-shadow: 2px 0 8px rgba(0, 0, 0, .12);
+
+        }
+
+        /* ================= POJOK KIRI ATAS ================= */
+
+        .custom-table thead tr:first-child th:first-child {
+
+            left: 0;
+
+            z-index: 120;
+
+        }
+
+        /* ================= KOLOM TOTAL ================= */
+
+        .custom-table thead tr:first-child th:last-child {
+
+            z-index: 120;
+
+        }
+
+
+        .custom-table thead tr:first-child th {
+            height: 60px;
+        }
+
+        .custom-table thead tr:nth-child(2) th {
+            height: 60px;
+        }
+
+        .custom-table thead tr:nth-child(2) th {
+            border-top: 0 !important;
+        }
+    </style>
+
+
+
+
     {{-- HEADER --}}
     <div class="kotak-header-ketersediaan text-center mb-3">
         <h1 class="mb-1 fw-bold" style="font-size:25pt;">
@@ -204,12 +421,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
                                             style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
                                         </a>
 
                                     @endif
@@ -309,7 +526,6 @@
             </div>
         </div>
     </div>
-    <link rel="stylesheet" href="{{ asset('assets/css/KetersediaanKamar.css') }}">
 @endsection
 @push('myscript')
     <script>
