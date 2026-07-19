@@ -11,13 +11,11 @@
 
 /* === Table Style === */
 .custom-table {
+    width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
 }
 
 .custom-table thead th {
@@ -27,8 +25,10 @@
     font-weight: 600;
     font-size: 20px;
     letter-spacing: 0.5px;
-    padding: 12px;
+    padding: 10px 12px;
     border: none;
+    position: sticky;
+    border-bottom: 0 !important;
 }
 
 .custom-table thead tr:first-child th {
@@ -46,6 +46,17 @@
     border: 1px solid #dee2e6;
     font-size: 20px;
     color: #333;
+}
+
+
+
+
+
+.custom-table tbody th {
+    position: sticky;
+    left: 0;
+    z-index: 90;
+    background: #f8f9fa;
 }
 
 .custom-table tbody tr:nth-child(even) {
@@ -113,4 +124,88 @@
 .header-hmsty {
     background: #effff6 !important;
     color: #000 !important;
+}
+
+
+
+
+
+
+/* ===========================================================
+                                               STICKY TABLE
+                                            =========================================================== */
+
+.sticky-table-wrapper {
+    max-height: 75vh;
+    overflow: auto;
+}
+
+/* ================= HEADER BARIS PERTAMA ================= */
+
+.custom-table thead tr:first-child th {
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: linear-gradient(135deg, #0069d9, #17a2b8);
+
+}
+
+/* ================= HEADER BARIS KEDUA ================= */
+
+.custom-table thead tr:nth-child(2) th {
+    position: sticky;
+    top: 60px;
+    z-index: 99;
+    background: linear-gradient(135deg, #007bff, #00bcd4);
+}
+
+/* ================= KOLOM TANGGAL ================= */
+
+.custom-table tbody th {
+
+    position: sticky;
+
+    left: 0;
+
+    z-index: 98;
+
+    background: #f8f9fa;
+
+    min-width: 80px;
+
+    box-shadow: 2px 0 8px rgba(0, 0, 0, .12);
+
+}
+
+/* ================= POJOK KIRI ATAS ================= */
+
+.custom-table thead tr:first-child th:first-child {
+
+    left: 0;
+
+    z-index: 120;
+
+}
+
+/* ================= KOLOM TOTAL ================= */
+
+.custom-table thead tr:first-child th:last-child {
+
+    z-index: 120;
+
+}
+
+
+.custom-table thead tr:first-child th {
+    height: 60px;
+}
+
+.custom-table thead tr:nth-child(2) th {
+    height: 60px;
+}
+
+.custom-table thead tr:nth-child(2) th {
+    border-top: 0 !important;
 }
