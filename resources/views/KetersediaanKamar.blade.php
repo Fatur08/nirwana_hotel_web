@@ -1,7 +1,4 @@
 @extends('layouts.index')
-@push('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/KetersediaanKamar.css') }}">
-@endpush
 @section('content')
     {{-- HEADER --}}
     <div class="kotak-header-ketersediaan text-center mb-3">
@@ -207,12 +204,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
                                             style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
                                         </a>
 
                                     @endif
@@ -312,6 +309,7 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="{{ asset('assets/css/KetersediaanKamar.css') }}">
 @endsection
 @push('myscript')
     <script>
