@@ -115,6 +115,7 @@
       color: white;
     }
   </style>
+  @stack('mycss')
 </head>
 
 <body>
@@ -223,6 +224,7 @@
 
     }
   </script>
+  @stack('myscript')
 </body>
 
 </html>
