@@ -224,7 +224,6 @@
 
     }
   </script>
-  @stack('myscript')
 </body>
 
 </html>
