@@ -28,9 +28,10 @@
             font-weight: 600;
             font-size: 20px;
             letter-spacing: 0.5px;
-            padding: 12px;
+            padding: 8px 12px;
             border: none;
             position: sticky;
+            border-bottom: 0 !important;
         }
 
         .custom-table thead tr:first-child th {
@@ -134,8 +135,8 @@
 
 
         /* ===========================================================
-       STICKY TABLE
-    =========================================================== */
+                               STICKY TABLE
+                            =========================================================== */
 
         .sticky-table-wrapper {
             max-height: 75vh;
@@ -157,14 +158,10 @@
         /* ================= HEADER BARIS KEDUA ================= */
 
         .custom-table thead tr:nth-child(2) th {
-
             position: sticky;
-            top: 49px;
-
+            top: 60px;
             z-index: 99;
-
             background: linear-gradient(135deg, #007bff, #00bcd4);
-
         }
 
         /* ================= KOLOM TANGGAL ================= */
@@ -201,6 +198,19 @@
 
             z-index: 120;
 
+        }
+
+
+        .custom-table thead tr:first-child th {
+            height: 60px;
+        }
+
+        .custom-table thead tr:nth-child(2) th {
+            height: 60px;
+        }
+
+        .custom-table thead tr:nth-child(2) th {
+            border-top: 0 !important;
         }
     </style>
 
@@ -411,12 +421,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
                                             style="
-                                                                                                                                                                                                                                                                                    width:30px;
-                                                                                                                                                                                                                                                                                    height:30px;
-                                                                                                                                                                                                                                                                                    padding:0;
-                                                                                                                                                                                                                                                                                    border-radius:4px;
-                                                                                                                                                                                                                                                                                    display:inline-block;
-                                                                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
+                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
+                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
+                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
+                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
+                                                                                                                                                                                                                                                                                                                                                                                ">
                                         </a>
 
                                     @endif
