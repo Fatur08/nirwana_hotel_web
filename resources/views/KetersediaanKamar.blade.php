@@ -135,8 +135,8 @@
 
 
         /* ===========================================================
-                                   STICKY TABLE
-                                =========================================================== */
+                                       STICKY TABLE
+                                    =========================================================== */
 
         .sticky-table-wrapper {
             max-height: 75vh;
@@ -203,10 +203,20 @@
 
         .custom-table thead tr:first-child th {
             height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 12px;
         }
 
         .custom-table thead tr:nth-child(2) th {
             height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 12px;
         }
 
         .custom-table thead tr:nth-child(2) th {
@@ -421,12 +431,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
                                             style="
-                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
-                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
+                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
+                                                                                                                                                                                                                                                                                                                                                                                                                ">
                                         </a>
 
                                     @endif
