@@ -32,6 +32,7 @@
             letter-spacing: 0.5px;
             padding: 12px;
             border: none;
+            position: sticky;
         }
 
         .custom-table thead tr:first-child th {
@@ -116,6 +117,57 @@
         .header-hmsty {
             background: #effff6 !important;
             color: #000 !important;
+        }
+
+
+
+        /* ===========================================================
+       STICKY TABLE (Freeze Panes seperti Excel)
+    =========================================================== */
+
+        .sticky-table-wrapper {
+            max-height: 75vh;
+            overflow: auto;
+        }
+
+        /* Header selalu di atas */
+
+        .custom-table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* Kolom tanggal tetap di kiri */
+
+        .custom-table tbody th {
+            position: sticky;
+            left: 0;
+            z-index: 90;
+            background: #ffffff;
+        }
+
+        /* Sudut kiri atas */
+
+        .custom-table thead tr:first-child th:first-child {
+            left: 0;
+            z-index: 110;
+        }
+
+        /* Header "Tanggal" pada baris pertama */
+
+        .custom-table thead th {
+            background: linear-gradient(135deg, #007bff, #00bcd4);
+        }
+
+        /* Bayangan agar terlihat seperti Excel */
+
+        .custom-table thead th {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+        }
+
+        .custom-table tbody th {
+            box-shadow: 2px 0 5px rgba(0, 0, 0, .10);
         }
     </style>
 
@@ -228,7 +280,7 @@
         $tanggalDipilih = \Carbon\Carbon::create($tahun, $bulan, 1);
     @endphp
     <div class="table-wrapper mt-3">
-        <div class="table-responsive">
+        <div class="table-responsive sticky-table-wrapper">
             <table class="table custom-table">
                 <thead class="table-primary">
 
@@ -324,13 +376,14 @@
                                         @endphp
 
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
-                                            id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}" style="
-                                                                                                width:30px;
-                                                                                                height:30px;
-                                                                                                padding:0;
-                                                                                                border-radius:4px;
-                                                                                                display:inline-block;
-                                                                                            ">
+                                            id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
+                                            style="
+                                                                                                                                                width:30px;
+                                                                                                                                                height:30px;
+                                                                                                                                                padding:0;
+                                                                                                                                                border-radius:4px;
+                                                                                                                                                display:inline-block;
+                                                                                                                                            ">
                                         </a>
 
                                     @endif
