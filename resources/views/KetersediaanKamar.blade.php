@@ -207,7 +207,6 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 12px;
         }
 
         .custom-table thead tr:nth-child(2) th {
@@ -216,7 +215,6 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 12px;
         }
 
         .custom-table thead tr:nth-child(2) th {
