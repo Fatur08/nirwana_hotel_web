@@ -50,6 +50,14 @@
             border: 1px solid #dee2e6;
             font-size: 20px;
             color: #333;
+
+
+            position: sticky;
+            left: 0;
+            z-index: 95;
+            background: #f8f9fa;
+            min-width: 80px;
+            box-shadow: 2px 0 6px rgba(0, 0, 0, .12);
         }
 
         .custom-table tbody tr:nth-child(even) {
@@ -122,8 +130,8 @@
 
 
         /* ===========================================================
-       STICKY TABLE (Freeze Panes seperti Excel)
-    =========================================================== */
+               STICKY TABLE (Freeze Panes seperti Excel)
+            =========================================================== */
 
         .sticky-table-wrapper {
             max-height: 75vh;
@@ -150,8 +158,10 @@
         /* Sudut kiri atas */
 
         .custom-table thead tr:first-child th:first-child {
+            position: sticky;
+            top: 0;
             left: 0;
-            z-index: 110;
+            z-index: 120;
         }
 
         /* Header "Tanggal" pada baris pertama */
@@ -378,12 +388,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
                                             style="
-                                                                                                                                                width:30px;
-                                                                                                                                                height:30px;
-                                                                                                                                                padding:0;
-                                                                                                                                                border-radius:4px;
-                                                                                                                                                display:inline-block;
-                                                                                                                                            ">
+                                                                                                                                                                                width:30px;
+                                                                                                                                                                                height:30px;
+                                                                                                                                                                                padding:0;
+                                                                                                                                                                                border-radius:4px;
+                                                                                                                                                                                display:inline-block;
+                                                                                                                                                                            ">
                                         </a>
 
                                     @endif
