@@ -117,6 +117,81 @@
             background: #effff6 !important;
             color: #000 !important;
         }
+
+
+
+        .sticky-table-wrapper {
+            max-height: 75vh;
+            overflow: auto;
+            border: 1px solid #dee2e6;
+        }
+
+        /* =====================================================
+           HEADER BARIS PERTAMA
+        ===================================================== */
+
+        .custom-table thead tr:first-child th {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+        }
+
+        /* =====================================================
+           HEADER BARIS KEDUA
+        ===================================================== */
+
+        .custom-table thead tr:nth-child(2) th {
+            position: sticky;
+            top: 48px;
+            /* sesuaikan tinggi header pertama */
+            z-index: 29;
+        }
+
+        /* =====================================================
+           KOLOM TANGGAL
+        ===================================================== */
+
+        .custom-table tbody th {
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            background: white;
+        }
+
+        /* =====================================================
+           HEADER TANGGAL
+        ===================================================== */
+
+        .custom-table thead tr:first-child th:first-child {
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 40;
+        }
+
+        /* =====================================================
+           AGAR HEADER TIDAK TRANSPARAN
+        ===================================================== */
+
+        .custom-table thead th {
+            background: #dbeafe;
+        }
+
+        /* =====================================================
+           TOTAL
+        ===================================================== */
+
+        .custom-table td:last-child,
+        .custom-table thead tr:first-child th:last-child {
+            background: white;
+        }
+
+        /* Garis tetap rapi */
+
+        .custom-table th,
+        .custom-table td {
+            white-space: nowrap;
+        }
     </style>
 
 
@@ -325,12 +400,12 @@
 
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}" style="
-                                                                                                width:30px;
-                                                                                                height:30px;
-                                                                                                padding:0;
-                                                                                                border-radius:4px;
-                                                                                                display:inline-block;
-                                                                                            ">
+                                                                                                                                width:30px;
+                                                                                                                                height:30px;
+                                                                                                                                padding:0;
+                                                                                                                                border-radius:4px;
+                                                                                                                                display:inline-block;
+                                                                                                                            ">
                                         </a>
 
                                     @endif
