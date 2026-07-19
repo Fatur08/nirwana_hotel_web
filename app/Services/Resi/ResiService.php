@@ -370,12 +370,11 @@ class ResiService
             "🏨 *NIRWANA HOTEL KALIANDA*\n\n"
             . "Halo *{$dataPesanan->nama_tamu}*,\n\n"
             . "Terima kasih telah memilih *Nirwana Hotel Kalianda* sebagai tempat menginap Anda.\n\n"
-            . "Berikut kami kirimkan *Bukti Pembayaran ( Invoice )* dalam bentuk gambar pada pesan ini.\n\n"
-            . "Silakan simpan gambar tersebut sebagai bukti pembayaran dan tunjukkan saat proses check-in apabila diperlukan.\n\n"
+            . "Berikut kami kirimkan *Bukti Pembayaran ( Invoice )*. Tunjukkan saat proses check-in bila diperlukan.\n\n"
             . "*Detail Reservasi*\n"
             . "Check In  : {$checkIn}\n"
             . "Check Out : {$checkOut}\n\n"
-            . "Apabila terdapat pertanyaan atau membutuhkan bantuan, silakan hubungi resepsionis kami.\n\n"
+            . "Apabila memerlukan informasi lebih lanjut, silahkan hubungi resepsionis kami.\n\n"
             . "Terima kasih atas kepercayaan Anda.\n\n"
             . "*NIRWANA HOTEL KALIANDA*";
     }

@@ -118,12 +118,12 @@ class HotelController extends Controller
             )
             ->get();
         $kamarTersediaDLX = $kamarDLX->whereNull('histori_aktif')->count();
-        $kamarSingleDLX = $kamarDLX
+        $kamarDoubleDLX = $kamarDLX
             ->whereNull('histori_aktif')
             ->where('jenis_bed', 1)
             ->count();
 
-        $kamarDoubleDLX = $kamarDLX
+        $kamarTwinDLX = $kamarDLX
             ->whereNull('histori_aktif')
             ->where('jenis_bed', 2)
             ->count();
@@ -148,12 +148,12 @@ class HotelController extends Controller
             )
             ->get();
         $HomeStayTersedia = $HomeStay->whereNull('histori_aktif')->count();
-        $SingleHMSTY = $HomeStay
+        $DoubleHMSTY = $HomeStay
             ->whereNull('histori_aktif')
             ->where('jenis_bed', 1)
             ->count();
 
-        $DoubleHMSTY = $HomeStay
+        $TwinHMSTY = $HomeStay
             ->whereNull('histori_aktif')
             ->where('jenis_bed', 2)
             ->count();
@@ -182,12 +182,12 @@ class HotelController extends Controller
             )
             ->get();
         $kamarTersediaSPR = $kamarSPR->whereNull('histori_aktif')->count();
-        $kamarSingleSPR = $kamarSPR
+        $kamarDoubleSPR = $kamarSPR
             ->whereNull('histori_aktif')
             ->where('jenis_bed', 1)
             ->count();
 
-        $kamarDoubleSPR = $kamarSPR
+        $kamarTwinSPR = $kamarSPR
             ->whereNull('histori_aktif')
             ->where('jenis_bed', 2)
             ->count();
@@ -214,19 +214,19 @@ class HotelController extends Controller
             )
             ->get();
         $kamarTersediaSTD = $kamarSTD->whereNull('histori_aktif')->count();
-        $kamarSingleSTD = $kamarSTD
+        $kamarDoubleSTD = $kamarSTD
             ->whereNull('histori_aktif')
             ->where('jenis_bed', 1)
             ->count();
 
-        $kamarDoubleSTD = $kamarSTD
+        $kamarTwinSTD = $kamarSTD
             ->whereNull('histori_aktif')
             ->where('jenis_bed', 2)
             ->count();
 
 
 
-        return view('index', compact('kamarDLX', 'kamarSingleDLX', 'kamarDoubleDLX', 'kamarSPR', 'kamarSingleSPR', 'kamarDoubleSPR', 'kamarSTD', 'kamarSingleSTD', 'kamarDoubleSTD', 'SingleHMSTY', 'DoubleHMSTY', 'histori', 'tarifKamar'));
+        return view('index', compact('kamarDLX', 'kamarDoubleDLX', 'kamarTwinDLX', 'kamarSPR', 'kamarDoubleSPR', 'kamarTwinSPR', 'kamarSTD', 'kamarDoubleSTD', 'kamarTwinSTD', 'DoubleHMSTY', 'TwinHMSTY', 'histori', 'tarifKamar'));
     }
 
 
