@@ -807,45 +807,80 @@ class HotelController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | UPLOAD BUKTI PEMBAYARAN
+            | UPLOAD BUKTI DP
             |--------------------------------------------------------------------------
             */
-
-            $bukti_pembayaran = null;
-
-            /*
-            |--------------------------------------------------------------------------
-            | Upload hanya jika:
-            | - Status DP atau Sudah Bayar
-            | - Metode pembayaran Online
-            |--------------------------------------------------------------------------
-            */
-
+            $bukti_dp = null;
             if (
-
-                ($status_pembayaran == 1 || $status_pembayaran == 2) &&
+                $status_pembayaran == 1 &&
                 $request->metode_pembayaran == "online" &&
                 $request->hasFile('bukti_pembayaran')
-
             ) {
-
-                $timestamp =
-                    now()->format('Y-m-d_H-i-s');
-
-                $namaFile =
-                    str_replace(' ', '_', $namaTamu);
-
-                $bukti_pembayaran =
-                    "Bukti_Pembayaran_" .
+                $timestamp = now()->format('Y-m-d_H-i-s');
+                $namaFile = str_replace(' ', '_', $namaTamu);
+                $bukti_dp =
+                    "Bukti_DP_" .
                     $namaFile .
                     "_" .
                     $timestamp .
                     "." .
                     $request->file('bukti_pembayaran')->extension();
 
-                $storagePath =
-                    'public/uploads/bukti_pembayaran/';
+                $storagePath = 'storage/app/uploads/bukti_dp/';
 
+                $request
+                    ->file('bukti_pembayaran')
+                    ->storeAs(
+                        $storagePath,
+                        $bukti_dp
+                    );
+
+                $publicPath = public_path('public/storage/uploads/bukti_dp/');
+
+                if (!is_dir($publicPath)) {
+                    mkdir($publicPath, 0777, true);
+                }
+                copy(
+                    storage_path(
+                        'storage/app/uploads/bukti_dp/' .
+                        $bukti_dp
+                    ),
+
+                    public_path(
+                        'public/storage/uploads/bukti_dp/' .
+                        $bukti_dp
+                    )
+                );
+            }
+
+
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | UPLOAD BUKTI PELUNASAN
+            |--------------------------------------------------------------------------
+            */
+
+            $bukti_pembayaran = null;
+
+            if (
+                $status_pembayaran == 2 &&
+                $request->metode_pembayaran == "online" &&
+                $request->hasFile('bukti_pembayaran')
+            ) {
+                $timestamp = now()->format('Y-m-d_H-i-s');
+                $namaFile = str_replace(' ', '_', $namaTamu);
+                $bukti_pembayaran =
+                    "Bukti_Pelunasan_" .
+                    $namaFile .
+                    "_" .
+                    $timestamp .
+                    "." .
+                    $request->file('bukti_pembayaran')->extension();
+
+                $storagePath = 'storage/app/uploads/bukti_pembayaran/';
                 $request
                     ->file('bukti_pembayaran')
                     ->storeAs(
@@ -853,24 +888,18 @@ class HotelController extends Controller
                         $bukti_pembayaran
                     );
 
-                $publicPath =
-                    public_path(
-                        'storage/uploads/bukti_pembayaran/'
-                    );
-
+                $publicPath = public_path('public/storage/uploads/bukti_pembayaran/');
                 if (!is_dir($publicPath)) {
                     mkdir($publicPath, 0777, true);
                 }
-
                 copy(
                     storage_path(
-                        'app/' .
-                        $storagePath .
+                        'storage/app/uploads/bukti_pembayaran/' .
                         $bukti_pembayaran
                     ),
 
                     public_path(
-                        'storage/uploads/bukti_pembayaran/' .
+                        'public/storage/uploads/bukti_pembayaran/' .
                         $bukti_pembayaran
                     )
                 );
@@ -961,17 +990,11 @@ class HotelController extends Controller
             $idLaporanPerKamar = [];
 
             foreach ($groupKamar as $items) {
-
                 $kamar = $items->first();
-
                 $jumlahPerTipe = $items->count();
-
                 $biaya = $jumlahPerTipe * $kamar->after_10_persen * $lama_inap;
-
                 $pajak = $biaya * 0.19;
-
                 $totalDiterima = $biaya - $pajak;
-
                 $idLaporan = DB::table('laporan_keuangan')->insertGetId([
 
                     'id_rincian_pesanan' => $idRincian,
@@ -1000,6 +1023,7 @@ class HotelController extends Controller
                     'foto_ktp' => $foto_ktp,
 
                     'metode_pembayaran' => $metode_pembayaran,
+                    'bukti_dp' => $bukti_dp,
                     'bukti_pembayaran' => $bukti_pembayaran,
                     'status_pembayaran' => $status_pembayaran
 
