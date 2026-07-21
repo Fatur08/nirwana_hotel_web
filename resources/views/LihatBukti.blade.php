@@ -54,17 +54,6 @@
                             <h5 class="mb-3">
                                 Pembayaran DP dilakukan secara Cash.
                             </h5>
-
-                            <hr>
-
-                            <h4 class="mb-0">
-                                Nominal DP
-                                <br>
-
-                                <strong>
-                                    Rp {{ number_format($bukti->total_dp, 0, ',', '.') }}
-                                </strong>
-                            </h4>
                         </div>
                     @elseif($urlDP)
                         @php
