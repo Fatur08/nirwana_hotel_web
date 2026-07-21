@@ -107,6 +107,9 @@ Route::middleware([
     Route::post('/ModalBelumBayar', [HotelController::class, 'ModalBelumBayar']);
 
 
+    Route::post('/ModalBelumBayar/store_ModalBelumBayar', [HotelController::class, 'store_ModalBelumBayar']);
+
+
     Route::post('/ModalPembayaran', [HotelController::class, 'ModalPembayaran']);
 
 
