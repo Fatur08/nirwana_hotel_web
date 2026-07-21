@@ -1,106 +1,108 @@
 @extends('layouts.ModalPembayaran')
-
 @section('content')
     @php
         use Illuminate\Support\Facades\Storage;
+
+        function getFileUrl($folder, $file)
+        {
+            if (!$file) {
+                return null;
+            }
+
+            if (file_exists(public_path("storage/uploads/$folder/" . $file))) {
+                return asset("storage/uploads/$folder/" . $file);
+            }
+
+            if (Storage::exists("public/uploads/$folder/" . $file)) {
+                return asset("storage/uploads/$folder/" . $file);
+            }
+
+            return null;
+        }
+
+        $urlDP = getFileUrl('bukti_dp', $bukti->bukti_dp ?? null);
+        $urlPelunasan = getFileUrl('bukti_pembayaran', $bukti->bukti_pembayaran ?? null);
     @endphp
 
     <div class="container-fluid">
-
-        @if($bukti && $bukti->bukti_pembayaran)
-
-            @php
-                $file = $bukti->bukti_pembayaran;
-
-                // Prioritas ambil dari public/storage
-                if (file_exists(public_path('storage/uploads/bukti_pembayaran/' . $file))) {
-
-                    $url = asset('storage/uploads/bukti_pembayaran/' . $file);
-
-                }
-
-                // Kalau tidak ada, cek di storage/app/public
-                elseif (Storage::exists('public/uploads/bukti_pembayaran/' . $file)) {
-
-                    $url = asset('storage/uploads/bukti_pembayaran/' . $file);
-
-                } else {
-
-                    $url = null;
-
-                }
-
-                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-
-            @endphp
-
-            @if($url)
-
-                @if(in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
-
-                    <img src="{{ $url }}" class="img-fluid rounded border w-100">
-
-                @elseif($ext == 'pdf')
-
-                    <iframe src="{{ $url }}" width="100%" height="700px">
-                    </iframe>
-
-                @else
-
-                    <div class="alert alert-warning">
-                        Format file tidak didukung.
-                    </div>
-
-                @endif
-
-            @else
-
-                <div class="alert alert-danger">
-                    File bukti pembayaran tidak ditemukan.
+        @if($bukti->status_pembayaran == 1 || $bukti->bukti_dp)
+            <div class="card mb-4">
+                <div class="card-header bg-warning">
+                    <h4 class="mb-0">
+                        Bukti Pembayaran DP
+                    </h4>
                 </div>
 
-            @endif
+                <div class="card-body">
+                    <h5>
+                        Metode Pembayaran :
+                        <b>
+                            {{ $bukti->metode_pembayaran_dp ?? '-' }}
+                        </b>
+                    </h5>
 
-        @else
+                    <hr>
 
-            @if($bukti && $bukti->status_pembayaran == 1 && $bukti->metode_pembayaran == 'Cash')
-
-                <div class="alert alert-success text-center p-4">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3">
-
-                        <path d="M5 12l5 5l10 -10" />
-
-                    </svg>
-
-                    <h3 class="mb-2">Sudah Dibayar Cash</h3>
-
-                    <p class="mb-0">
-                        Pembayaran dilakukan secara tunai sehingga tidak memiliki bukti transfer.
-                    </p>
-
+                    @if($bukti->metode_pembayaran_dp == 'Cash')
+                        <div class="alert alert-success text-center">
+                            Pembayaran DP dilakukan secara Cash.
+                        </div>
+                    @elseif($urlDP)
+                        @php
+                            $ext = strtolower(pathinfo($bukti->bukti_dp, PATHINFO_EXTENSION));
+                        @endphp
+                        @if(in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                            <img src="{{ $urlDP }}" class="img-fluid rounded border w-100">
+                        @elseif($ext == 'pdf')
+                            <iframe src="{{ $urlDP }}" width="100%" height="700px"></iframe>
+                        @endif
+                    @else
+                        <div class="alert alert-warning text-center">
+                            Bukti DP tidak tersedia.
+                        </div>
+                    @endif
                 </div>
-
-            @elseif($bukti && $bukti->status_pembayaran == 1)
-
-                <div class="alert alert-warning text-center">
-                    Bukti pembayaran tidak tersedia.
-                </div>
-
-            @else
-
-                <div class="alert alert-danger text-center">
-                    Bukti pembayaran belum tersedia.
-                </div>
-
-            @endif
-
+            </div>
         @endif
+        @if($bukti->status_pembayaran == 2)
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        Bukti Pelunasan
+                    </h4>
+                </div>
 
+                <div class="card-body">
+                    <h5>
+                        Metode Pembayaran :
+                        <b>
+                            {{ $bukti->metode_pembayaran ?? '-' }}
+                        </b>
+                    </h5>
+
+                    <hr>
+
+                    @if($bukti->metode_pembayaran == 'Cash')
+                        <div class="alert alert-success text-center">
+                            Pelunasan dilakukan secara Cash.
+                        </div>
+                    @elseif($urlPelunasan)
+                        @php
+                            $ext = strtolower(pathinfo($bukti->bukti_pembayaran, PATHINFO_EXTENSION));
+                        @endphp
+
+                        @if(in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                            <img src="{{ $urlPelunasan }}" class="img-fluid rounded border w-100">
+                        @elseif($ext == 'pdf')
+                            <iframe src="{{ $urlPelunasan }}" width="100%" height="700px"></iframe>
+                        @endif
+                    @else
+                        <div class="alert alert-warning text-center">
+                            Bukti Pelunasan tidak tersedia.
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @endif
     </div>
-
 @endsection
-
-@push('myscript')
-@endpush
