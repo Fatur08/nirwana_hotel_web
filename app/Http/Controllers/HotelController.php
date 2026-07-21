@@ -752,6 +752,59 @@ class HotelController extends Controller
 
 
 
+
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | STATUS PEMBAYARAN
+            |--------------------------------------------------------------------------
+            */
+
+            // 0 = Belum Bayar
+            // 1 = DP
+            // 2 = Sudah Bayar
+            $status_pembayaran = (int) $request->status_pembayaran;
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | TOTAL DP
+            |--------------------------------------------------------------------------
+            */
+            $total_dp = 0;
+            if ($status_pembayaran == 1) {
+                $total_dp = $request->total_dp;
+            }
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | METODE PEMBAYARAN
+            |--------------------------------------------------------------------------
+            */
+            $metode_pembayaran = null;
+            if ($status_pembayaran == 1 || $status_pembayaran == 2) {
+                if ($request->metode_pembayaran == "cash") {
+                    $metode_pembayaran = "Cash";
+                }
+
+                if ($request->metode_pembayaran == "online") {
+                    $metode_pembayaran = $request->sumber_pembayaran;
+                }
+            }
+
+
+
+
+
+
+
+
+
+
             /*
             |--------------------------------------------------------------------------
             | UPLOAD BUKTI PEMBAYARAN
@@ -760,7 +813,21 @@ class HotelController extends Controller
 
             $bukti_pembayaran = null;
 
-            if ($request->hasFile('bukti_pembayaran')) {
+            /*
+            |--------------------------------------------------------------------------
+            | Upload hanya jika:
+            | - Status DP atau Sudah Bayar
+            | - Metode pembayaran Online
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+
+                ($status_pembayaran == 1 || $status_pembayaran == 2) &&
+                $request->metode_pembayaran == "online" &&
+                $request->hasFile('bukti_pembayaran')
+
+            ) {
 
                 $timestamp =
                     now()->format('Y-m-d_H-i-s');
@@ -792,13 +859,10 @@ class HotelController extends Controller
                     );
 
                 if (!is_dir($publicPath)) {
-
                     mkdir($publicPath, 0777, true);
-
                 }
 
                 copy(
-
                     storage_path(
                         'app/' .
                         $storagePath .
@@ -809,43 +873,14 @@ class HotelController extends Controller
                         'storage/uploads/bukti_pembayaran/' .
                         $bukti_pembayaran
                     )
-
                 );
-
             }
 
 
 
-            /*
-            |--------------------------------------------------------------------------
-            | STATUS PEMBAYARAN
-            |--------------------------------------------------------------------------
-            */
-            $status_pembayaran = (int) $request->status_pembayaran;
 
-            /*
-            |--------------------------------------------------------------------------
-            | TOTAL DP
-            |--------------------------------------------------------------------------
-            */
-            $total_dp = null;
-            if ($status_pembayaran == 1) {
-                $total_dp = str_replace('.', '', $request->total_dp);
-            }
 
-            /*
-            |--------------------------------------------------------------------------
-            | METODE PEMBAYARAN
-            |--------------------------------------------------------------------------
-            */
-            $metode_pembayaran = null;
-            if ($status_pembayaran == 1 || $status_pembayaran == 2) {
-                if ($request->metode_pembayaran == "cash") {
-                    $metode_pembayaran = "Cash";
-                } else {
-                    $metode_pembayaran = $request->sumber_pembayaran;
-                }
-            }
+
 
             /*
             |--------------------------------------------------------------------------
