@@ -2194,22 +2194,30 @@ class HotelController extends Controller
         try {
             $dataPesanan = DB::table('rincian_pesanan')
                 ->select('nama_tamu')
-                ->where('id_rincian_pesanan', $request->id_rincian_pesanan)
+                ->where(
+                    'id_rincian_pesanan',
+                    $request->id_rincian_pesanan
+                )
                 ->first();
-
             $nama = 'Tanpa_Nama';
-
             if ($dataPesanan) {
                 $nama = str_replace(' ', '_', $dataPesanan->nama_tamu);
             }
 
+
+
+
+
+
+
             /* ===============================
-               UPLOAD BUKTI PEMBAYARAN
+               UPLOAD BUKTI PEMBAYARAN ( KELUNASAN )
             ================================*/
             $bukti_pembayaran = null;
-
-
-            if ($request->hasFile('bukti_pembayaran')) {
+            if (
+                $request->metode_pembayaran == 'online' &&
+                $request->hasFile('bukti_pembayaran')
+            ) {
                 $timestamp = now()->format('Y-m-d_H-i-s');
                 $bukti_pembayaran = "Bukti Pembayaran_" . $nama . "_" . $timestamp . "." . $request->file('bukti_pembayaran')->extension();
                 $storagePath = 'public/uploads/bukti_pembayaran/';
@@ -2223,34 +2231,38 @@ class HotelController extends Controller
                 copy($sourceFile, $destinationFile);
             }
 
+
+
+
+
+
+
+
+
+
             // ==========================
             // TENTUKAN METODE PEMBAYARAN
             // ==========================
-
             if ($request->metode_pembayaran == 'online') {
-
                 $metodePembayaran = $request->sumber_pembayaran;
-
             } elseif ($request->metode_pembayaran == 'cash') {
-
                 $metodePembayaran = 'Cash';
-
             } else {
-
                 $metodePembayaran = null;
-
             }
 
-            // ==========================
-            // UPDATE PEMBAYARAN
-            // ==========================
+
+
+
+
+
             DB::table('laporan_keuangan')
                 ->where(
                     'id_rincian_pesanan',
                     $request->id_rincian_pesanan
                 )
                 ->update([
-                    'status_pembayaran' => 1,
+                    'status_pembayaran' => 2,
                     'metode_pembayaran' => $metodePembayaran,
                     'bukti_pembayaran' => $bukti_pembayaran
                 ]);
@@ -2258,6 +2270,17 @@ class HotelController extends Controller
 
 
 
+
+
+
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | NOTIFIKASI
+            |--------------------------------------------------------------------------
+            */
             NotifikasiService::buat(
                 '💰 Pembayaran Berhasil',
                 'Pembayaran atas nama "' .
@@ -2279,7 +2302,7 @@ class HotelController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], 3000);
+            ], 500);
 
         }
     }
