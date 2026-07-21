@@ -153,8 +153,9 @@
 
                 {{-- GARIS --}}
                 <tr>
-                    <td colspan="5">
-                        <hr style="margin:6px 0;">
+                    <td colspan="3"></td>
+                    <td colspan="2">
+                        <hr style="margin:5px 0;border:3px solid #000000;">
                     </td>
                 </tr>
 
@@ -164,7 +165,7 @@
                         Saldo
                     </td>
 
-                    <td style="width:180px; text-align:left; color:red;">
+                    <td style="width:180px; text-align:left;">
                         = Rp.{{ number_format($saldo, 0, ',', '.') }}
                     </td>
                 </tr>

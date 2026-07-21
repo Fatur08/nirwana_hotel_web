@@ -1841,7 +1841,7 @@ class HotelController extends Controller
         $grandTotal = $subTotal + $pajak;
 
 
-        $totalDP = $rincian->total_dp ?? 0;
+        $totalDP = $data->total_dp ?? 0;
 
         $saldo = $grandTotal - $totalDP;
 
