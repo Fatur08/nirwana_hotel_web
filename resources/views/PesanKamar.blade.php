@@ -129,7 +129,7 @@
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path
                                     d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4
-                                                                                                                                                                                                                                                                                                                                                                                                                                                     a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
                             </svg>
                         </span>
                         <input type="text" id="no_wa_tamu" name="no_wa_tamu" class="form-control"
@@ -182,8 +182,8 @@
 
             <div id="hasilCustomer" class="list-group mb-3"
                 style="display:none;
-                                                                                                                                                                                                                                                                                max-height:250px;
-                                                                                                                                                                                                                                                                                overflow-y:auto;">
+                                                                                                                                                                                                                                                                                    max-height:250px;
+                                                                                                                                                                                                                                                                                    overflow-y:auto;">
 
             </div>
 
@@ -209,10 +209,10 @@
 
                     <div id="lama_alamat_tamu" class="form-control d-flex align-items-center"
                         style="
-                                                                                                                                                                                                                min-height:70px;
-                                                                                                                                                                                                                font-size:16pt;
-                                                                                                                                                                                                                white-space:pre-wrap;
-                                                                                                                                                                                                                word-break:break-word;">
+                                                                                                                                                                                                                    min-height:70px;
+                                                                                                                                                                                                                    font-size:16pt;
+                                                                                                                                                                                                                    white-space:pre-wrap;
+                                                                                                                                                                                                                    word-break:break-word;">
                     </div>
 
                 </div>
@@ -374,12 +374,12 @@
                 <div class="col-12">
                     <textarea id="biaya_request" class="form-control" readonly
                         style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                font-size:16pt;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                min-height:120px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                resize:none;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                overflow:hidden;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    font-size:16pt;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    min-height:120px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    resize:none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    overflow:hidden;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
 
                     <input type="hidden" id="biaya_request_value" name="biaya_request">
                 </div>
@@ -463,18 +463,26 @@
 
             <div class="row mb-6" id="total_dp_input" style="display:none;">
                 <div class="col-12">
-
                     <div class="input-icon">
 
                         <span class="input-icon-addon">
-                            Rp
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="icon">
+
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M17 9v-2a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2v-2" />
+                                <path d="M12 11h.01" />
+                                <path d="M12 14h.01" />
+
+                            </svg>
+
                         </span>
 
                         <input type="text" id="total_dp" name="total_dp" class="form-control" style="font-size:16pt;"
-                            placeholder="Contoh : 500.000">
-
+                            placeholder="Contoh: 500000">
                     </div>
-
                 </div>
             </div>
 
@@ -566,12 +574,12 @@
                             </svg>
                             Simpan
                         </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </form>
+        </form>
 
 @endsection
 @push('myscript')
