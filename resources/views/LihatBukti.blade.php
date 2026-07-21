@@ -41,8 +41,6 @@
                         </b>
                     </h5>
 
-                    <br>
-
                     <h5>
                         Nominal DP : Rp.{{ number_format($bukti->total_dp, 0, ',', '.') }}
                     </h5>
@@ -50,10 +48,8 @@
                     <hr>
 
                     @if($bukti->metode_dp == 'Cash')
-                        <div class="alert alert-success">
-                            <h5 class="mb-3">
-                                Pembayaran DP dilakukan secara Cash.
-                            </h5>
+                        <div class="alert alert-success text-center">
+                            Pelunasan dilakukan secara Cash.
                         </div>
                     @elseif($urlDP)
                         @php
