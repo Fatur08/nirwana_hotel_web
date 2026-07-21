@@ -37,13 +37,13 @@
                     <h5>
                         Metode Pembayaran :
                         <b>
-                            {{ $bukti->metode_pembayaran_dp ?? '-' }}
+                            {{ $bukti->metode_dp ?? '-' }}
                         </b>
                     </h5>
 
                     <hr>
 
-                    @if($bukti->metode_pembayaran_dp == 'Cash')
+                    @if($bukti->metode_dp == 'Cash')
                         <div class="alert alert-success text-center">
                             Pembayaran DP dilakukan secara Cash.
                         </div>
