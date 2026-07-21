@@ -529,11 +529,8 @@ class HotelController extends Controller
             | Gunakan Nomor Kamar Yang Dipilih
             |--------------------------------------------------------------------------
             */
-
             $request->merge([
-
                 'id_nomor_kamar' => $request->id_nomor_kamar
-
             ]);
 
 
@@ -543,7 +540,6 @@ class HotelController extends Controller
             | AMBIL DATA CUSTOMER
             |--------------------------------------------------------------------------
             */
-
             $namaTamu = "";
             $alamatTamu = "";
             $noWaTamu = "";
@@ -551,7 +547,6 @@ class HotelController extends Controller
             $foto_ktp = null;
 
             if ($request->jenis_customer == "baru") {
-
                 $namaTamu = $request->nama_tamu;
                 $alamatTamu = $request->alamat_tamu;
                 $noWaTamu = $request->no_wa_tamu;
@@ -563,11 +558,8 @@ class HotelController extends Controller
                 */
 
                 if ($request->hasFile('foto_ktp')) {
-
                     $timestamp = now()->format('Y-m-d_H-i-s');
-
                     $namaFile = str_replace(' ', '_', $namaTamu);
-
                     $foto_ktp =
                         "Foto_KTP_" .
                         $namaFile .
@@ -577,7 +569,6 @@ class HotelController extends Controller
                         $request->file('foto_ktp')->extension();
 
                     $storagePath = 'public/uploads/foto_ktp/';
-
                     $request
                         ->file('foto_ktp')
                         ->storeAs($storagePath, $foto_ktp);
@@ -586,20 +577,14 @@ class HotelController extends Controller
                         public_path('storage/uploads/foto_ktp/');
 
                     if (!is_dir($publicPath)) {
-
                         mkdir($publicPath, 0777, true);
-
                     }
-
                     copy(
                         storage_path('app/' . $storagePath . $foto_ktp),
                         public_path('storage/uploads/foto_ktp/' . $foto_ktp)
                     );
-
                 }
-
             } else {
-
                 $customer = DB::table('rincian_pesanan as rp')
                     ->select(
                         'rp.nama_tamu',
@@ -617,16 +602,13 @@ class HotelController extends Controller
                     ->first();
 
                 if (!$customer) {
-
                     throw new Exception("Customer lama tidak ditemukan.");
-
                 }
 
                 $namaTamu = $customer->nama_tamu;
                 $alamatTamu = $customer->alamat_tamu;
                 $noWaTamu = $customer->no_wa_tamu;
                 $foto_ktp = $customer->foto_ktp;
-
             }
 
 
@@ -636,9 +618,7 @@ class HotelController extends Controller
             | AMBIL KAMAR
             |--------------------------------------------------------------------------
             */
-
             $kamarDipilih = DB::table('nomor_kamar as nk')
-
                 ->join(
                     'kamar as k',
                     'nk.id_kamar',
@@ -665,16 +645,10 @@ class HotelController extends Controller
                     'k.after_10_persen'
 
                 )
-
                 ->get();
-
-
             if ($kamarDipilih->isEmpty()) {
-
                 throw new Exception("Data kamar tidak ditemukan.");
-
             }
-
 
 
             /*
@@ -682,7 +656,6 @@ class HotelController extends Controller
             | GROUP TIPE KAMAR
             |--------------------------------------------------------------------------
             */
-
             $groupKamar =
                 $kamarDipilih->groupBy('id_kamar');
 
@@ -693,7 +666,6 @@ class HotelController extends Controller
             | LAMA INAP
             |--------------------------------------------------------------------------
             */
-
             $checkIn =
                 \Carbon\Carbon::parse($request->check_in);
 
@@ -710,7 +682,6 @@ class HotelController extends Controller
             | TOTAL KAMAR
             |--------------------------------------------------------------------------
             */
-
             $totalKamar =
                 count($request->id_nomor_kamar);
 
@@ -721,7 +692,6 @@ class HotelController extends Controller
             | HITUNG REQUEST
             |--------------------------------------------------------------------------
             */
-
             $extraBed =
                 DB::table('kamar')
                     ->where('kode_kamar', 'BED')
@@ -782,16 +752,31 @@ class HotelController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | METODE PEMBAYARAN
+            | METODE PEMBAYARAN DP
+            |--------------------------------------------------------------------------
+            */
+            $metode_dp = null;
+
+            /*
+            |--------------------------------------------------------------------------
+            | METODE PEMBAYARAN PELUNASAN
             |--------------------------------------------------------------------------
             */
             $metode_pembayaran = null;
-            if ($status_pembayaran == 1 || $status_pembayaran == 2) {
-                if ($request->metode_pembayaran == "cash") {
+            if ($request->metode_pembayaran == "cash") {
+                if ($status_pembayaran == 1) {
+                    $metode_dp = "Cash";
+                }
+                if ($status_pembayaran == 2) {
                     $metode_pembayaran = "Cash";
                 }
+            }
 
-                if ($request->metode_pembayaran == "online") {
+            if ($request->metode_pembayaran == "online") {
+                if ($status_pembayaran == 1) {
+                    $metode_dp = $request->sumber_pembayaran;
+                }
+                if ($status_pembayaran == 2) {
                     $metode_pembayaran = $request->sumber_pembayaran;
                 }
             }
@@ -966,7 +951,7 @@ class HotelController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | ID RINCIAN
+            | INSERT RINCIAN PESANAN
             |--------------------------------------------------------------------------
             */
 
@@ -988,7 +973,6 @@ class HotelController extends Controller
             // INSERT LAPORAN KEUANGAN
             // SATU DATA PER TIPE KAMAR
             // =====================================
-
             $idLaporanPerKamar = [];
 
             foreach ($groupKamar as $items) {
@@ -1024,9 +1008,12 @@ class HotelController extends Controller
 
                     'foto_ktp' => $foto_ktp,
 
-                    'metode_pembayaran' => $metode_pembayaran,
+                    'metode_dp' => $metode_dp,
                     'bukti_dp' => $bukti_dp,
+
+                    'metode_pembayaran' => $metode_pembayaran,
                     'bukti_pembayaran' => $bukti_pembayaran,
+
                     'status_pembayaran' => $status_pembayaran
 
                 ]);
@@ -2035,15 +2022,35 @@ class HotelController extends Controller
 
 
 
-            // ==========================
-            // TENTUKAN METODE PEMBAYARAN
-            // ==========================
+            /*
+            |--------------------------------------------------------------------------
+            | METODE PEMBAYARAN DP
+            |--------------------------------------------------------------------------
+            */
+            $metodeDP = null;
+
+            /*
+            |--------------------------------------------------------------------------
+            | METODE PEMBAYARAN PELUNASAN
+            |--------------------------------------------------------------------------
+            */
+            $metodePembayaran = null;
+            if ($request->metode_pembayaran == 'cash') {
+                if ($request->status_pembayaran == 1) {
+                    $metodeDP = 'Cash';
+                }
+                if ($request->status_pembayaran == 2) {
+                    $metodePembayaran = 'Cash';
+                }
+            }
+
             if ($request->metode_pembayaran == 'online') {
-                $metodePembayaran = $request->sumber_pembayaran;
-            } elseif ($request->metode_pembayaran == 'cash') {
-                $metodePembayaran = 'Cash';
-            } else {
-                $metodePembayaran = null;
+                if ($request->status_pembayaran == 1) {
+                    $metodeDP = $request->sumber_pembayaran;
+                }
+                if ($request->status_pembayaran == 2) {
+                    $metodePembayaran = $request->sumber_pembayaran;
+                }
             }
 
 
@@ -2078,9 +2085,12 @@ class HotelController extends Controller
                         $request->id_rincian_pesanan
                     )
                     ->update([
+
                         'status_pembayaran' => 1,
-                        'metode_pembayaran' => $metodePembayaran,
+
+                        'metode_pembayaran_dp' => $metodeDP,
                         'bukti_dp' => $bukti_dp
+
                     ]);
             }
 
@@ -2107,6 +2117,7 @@ class HotelController extends Controller
                     )
                     ->update([
                         'status_pembayaran' => 2,
+
                         'metode_pembayaran' => $metodePembayaran,
                         'bukti_pembayaran' => $bukti_pembayaran
                     ]);
