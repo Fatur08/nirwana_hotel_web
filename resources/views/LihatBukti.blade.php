@@ -105,7 +105,7 @@
 
                             <p class="mb-2">
                                 <strong>Metode DP :</strong>
-                                {{ $bukti->metode_pembayaran_dp ?? '-' }}
+                                {{ $bukti->metode_dp ?? '-' }}
                             </p>
 
                             <p class="mb-0">
