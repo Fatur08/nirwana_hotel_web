@@ -49,7 +49,7 @@
 
                     @if($bukti->metode_dp == 'Cash')
                         <div class="alert alert-success text-center">
-                            Pelunasan dilakukan secara Cash.
+                            Pembayaran DP dilakukan secara Cash.
                         </div>
                     @elseif($urlDP)
                         @php
