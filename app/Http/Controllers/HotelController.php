@@ -842,7 +842,8 @@ class HotelController extends Controller
                 }
                 copy(
                     storage_path(
-                        'public/uploads/bukti_dp/' .
+                        'app/' .
+                        $storagePath .
                         $bukti_dp
                     ),
 
@@ -894,7 +895,8 @@ class HotelController extends Controller
                 }
                 copy(
                     storage_path(
-                        'public/uploads/bukti_pembayaran/' .
+                        'app/' .
+                        $storagePath .
                         $bukti_pembayaran
                     ),
 
