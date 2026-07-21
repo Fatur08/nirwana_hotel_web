@@ -821,27 +821,30 @@ class HotelController extends Controller
             | STATUS PEMBAYARAN
             |--------------------------------------------------------------------------
             */
+            $status_pembayaran = (int) $request->status_pembayaran;
 
-            $status_pembayaran =
-                $request->status_pembayaran == "sudah"
-                ? 1
-                : 0;
-
-            $metode_pembayaran = null;
-
+            /*
+            |--------------------------------------------------------------------------
+            | TOTAL DP
+            |--------------------------------------------------------------------------
+            */
+            $total_dp = null;
             if ($status_pembayaran == 1) {
+                $total_dp = str_replace('.', '', $request->total_dp);
+            }
 
-                if ($request->metode_pembayaran == "online") {
-
-                    $metode_pembayaran =
-                        $request->sumber_pembayaran;
-
-                } else {
-
+            /*
+            |--------------------------------------------------------------------------
+            | METODE PEMBAYARAN
+            |--------------------------------------------------------------------------
+            */
+            $metode_pembayaran = null;
+            if ($status_pembayaran == 1 || $status_pembayaran == 2) {
+                if ($request->metode_pembayaran == "cash") {
                     $metode_pembayaran = "Cash";
-
+                } else {
+                    $metode_pembayaran = $request->sumber_pembayaran;
                 }
-
             }
 
             /*
@@ -906,7 +909,8 @@ class HotelController extends Controller
                 'nama_tamu' => $namaTamu,
                 'no_wa_tamu' => $noWaTamu,
                 'total_kamar_dipesan' => $totalKamar,
-                'total_request' => $totalRequest
+                'total_request' => $totalRequest,
+                'total_dp' => $total_dp
 
             ]);
 
