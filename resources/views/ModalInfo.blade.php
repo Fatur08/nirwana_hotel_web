@@ -69,7 +69,7 @@
 
                     @endphp
 
-                    {{ $loop->iteration }}. {{ $k->tipe_kamar }}{{ $k->nomor_kamar }} - {{ $bed }} <br>
+                    {{ $loop->iteration }}. {{ $k->tipe_kamar }} {{ $k->nomor_kamar }} - {{ $bed }} <br>
 
                 @endforeach
             </td>
