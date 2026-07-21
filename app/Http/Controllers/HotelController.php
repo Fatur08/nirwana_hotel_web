@@ -1840,6 +1840,15 @@ class HotelController extends Controller
 
         $grandTotal = $subTotal + $pajak;
 
+
+        $totalDP = $rincian->total_dp ?? 0;
+
+        $saldo = $grandTotal - $totalDP;
+
+        if ($saldo < 0) {
+            $saldo = 0;
+        }
+
         return view('ModalResi', [
             'data' => $data,
             'histori' => $histori,

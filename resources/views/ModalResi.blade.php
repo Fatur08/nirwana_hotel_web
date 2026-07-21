@@ -129,26 +129,6 @@
                     </td>
                 </tr>
 
-                {{-- SUBTOTAL --}}
-                <tr>
-                    <td colspan="4"></td>
-
-                    <td style="width:180px; text-align:left;">
-                        = Rp.{{ number_format($subTotal, 0, ',', '.') }}
-                    </td>
-                </tr>
-
-                {{-- PAJAK --}}
-                <tr>
-                    <td colspan="4" style="text-align:right;">
-                        Pajak
-                    </td>
-
-                    <td style="width:180px; text-align:left;">
-                        = <!--Rp.{{ number_format($pajak, 0, ',', '.') }}-->
-                    </td>
-                </tr>
-
                 {{-- TOTAL --}}
                 <tr style="font-weight:bold;">
                     <td colspan="4" style="text-align:right;">
@@ -157,6 +137,35 @@
 
                     <td style="width:180px; text-align:left;">
                         = Rp.{{ number_format($grandTotal, 0, ',', '.') }}
+                    </td>
+                </tr>
+
+                {{-- DP --}}
+                <tr>
+                    <td colspan="4" style="text-align:right;">
+                        DP
+                    </td>
+
+                    <td style="width:180px; text-align:left;">
+                        = Rp.{{ number_format($totalDP, 0, ',', '.') }}
+                    </td>
+                </tr>
+
+                {{-- GARIS --}}
+                <tr>
+                    <td colspan="5">
+                        <hr style="margin:6px 0;">
+                    </td>
+                </tr>
+
+                {{-- SALDO --}}
+                <tr style="font-weight:bold;">
+                    <td colspan="4" style="text-align:right;">
+                        Saldo
+                    </td>
+
+                    <td style="width:180px; text-align:left; color:red;">
+                        = Rp.{{ number_format($saldo, 0, ',', '.') }}
                     </td>
                 </tr>
 
