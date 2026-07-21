@@ -826,7 +826,7 @@ class HotelController extends Controller
                     "." .
                     $request->file('bukti_pembayaran')->extension();
 
-                $storagePath = 'app/uploads/bukti_dp/';
+                $storagePath = 'app/public/uploads/bukti_dp/';
 
                 $request
                     ->file('bukti_pembayaran')
@@ -835,19 +835,19 @@ class HotelController extends Controller
                         $bukti_dp
                     );
 
-                $publicPath = public_path('public/storage/uploads/bukti_dp/');
+                $publicPath = public_path('storage/uploads/bukti_dp/');
 
                 if (!is_dir($publicPath)) {
                     mkdir($publicPath, 0777, true);
                 }
                 copy(
                     storage_path(
-                        'app/uploads/bukti_dp/' .
+                        'app/public/uploads/bukti_dp/' .
                         $bukti_dp
                     ),
 
                     public_path(
-                        'public/storage/uploads/bukti_dp/' .
+                        'storage/uploads/bukti_dp/' .
                         $bukti_dp
                     )
                 );
@@ -880,7 +880,7 @@ class HotelController extends Controller
                     "." .
                     $request->file('bukti_pembayaran')->extension();
 
-                $storagePath = 'app/uploads/bukti_pembayaran/';
+                $storagePath = 'app/public/uploads/bukti_pembayaran/';
                 $request
                     ->file('bukti_pembayaran')
                     ->storeAs(
@@ -888,18 +888,18 @@ class HotelController extends Controller
                         $bukti_pembayaran
                     );
 
-                $publicPath = public_path('public/storage/uploads/bukti_pembayaran/');
+                $publicPath = public_path('storage/uploads/bukti_pembayaran/');
                 if (!is_dir($publicPath)) {
                     mkdir($publicPath, 0777, true);
                 }
                 copy(
                     storage_path(
-                        'app/uploads/bukti_pembayaran/' .
+                        'app/public/uploads/bukti_pembayaran/' .
                         $bukti_pembayaran
                     ),
 
                     public_path(
-                        'public/storage/uploads/bukti_pembayaran/' .
+                        'storage/uploads/bukti_pembayaran/' .
                         $bukti_pembayaran
                     )
                 );
