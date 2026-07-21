@@ -2178,10 +2178,10 @@ class HotelController extends Controller
 
 
     // Modal Pembayaran
-    public function ModalPembayaran(Request $request)
+    public function ModalDP(Request $request)
     {
         $id_rincian_pesanan = $request->id_rincian_pesanan;
-        return view('ModalPembayaran', compact('id_rincian_pesanan'));
+        return view('ModalDP', compact('id_rincian_pesanan'));
     }
 
 
@@ -2189,7 +2189,7 @@ class HotelController extends Controller
 
 
 
-    public function store_ModalPembayaran(Request $request)
+    public function store_ModalDP(Request $request)
     {
         try {
             $dataPesanan = DB::table('rincian_pesanan')

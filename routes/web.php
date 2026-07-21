@@ -110,10 +110,10 @@ Route::middleware([
     Route::post('/ModalBelumBayar/store_ModalBelumBayar', [HotelController::class, 'store_ModalBelumBayar']);
 
 
-    Route::post('/ModalPembayaran', [HotelController::class, 'ModalPembayaran']);
+    Route::post('/ModalDP', [HotelController::class, 'ModalDP']);
 
 
-    Route::post('/ModalPembayaran/store_ModalPembayaran', [HotelController::class, 'store_ModalPembayaran']);
+    Route::post('/ModalDP/store_ModalDP', [HotelController::class, 'store_ModalDP']);
 
 
     Route::post('/ModalPembayaran/{id}/BatalkanPembayaran', [HotelController::class, 'BatalkanPembayaran']);
