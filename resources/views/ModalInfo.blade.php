@@ -55,11 +55,11 @@
                         switch ($k->jenis_bed) {
 
                             case 1:
-                                $bed = 'Single Bed';
+                                $bed = 'Double';
                                 break;
 
                             case 2:
-                                $bed = 'Double Bed';
+                                $bed = 'Twin';
                                 break;
 
                             default:
