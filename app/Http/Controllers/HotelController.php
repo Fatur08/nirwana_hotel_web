@@ -826,7 +826,7 @@ class HotelController extends Controller
                     "." .
                     $request->file('bukti_pembayaran')->extension();
 
-                $storagePath = 'storage/app/uploads/bukti_dp/';
+                $storagePath = 'app/uploads/bukti_dp/';
 
                 $request
                     ->file('bukti_pembayaran')
@@ -842,7 +842,7 @@ class HotelController extends Controller
                 }
                 copy(
                     storage_path(
-                        'storage/app/uploads/bukti_dp/' .
+                        'app/uploads/bukti_dp/' .
                         $bukti_dp
                     ),
 
@@ -880,7 +880,7 @@ class HotelController extends Controller
                     "." .
                     $request->file('bukti_pembayaran')->extension();
 
-                $storagePath = 'storage/app/uploads/bukti_pembayaran/';
+                $storagePath = 'app/uploads/bukti_pembayaran/';
                 $request
                     ->file('bukti_pembayaran')
                     ->storeAs(
@@ -894,7 +894,7 @@ class HotelController extends Controller
                 }
                 copy(
                     storage_path(
-                        'storage/app/uploads/bukti_pembayaran/' .
+                        'app/uploads/bukti_pembayaran/' .
                         $bukti_pembayaran
                     ),
 
