@@ -1857,7 +1857,9 @@ class HotelController extends Controller
             'requestTambahan' => $requestTambahan,
             'subTotal' => $subTotal,
             'pajak' => $pajak,
-            'grandTotal' => $grandTotal
+            'grandTotal' => $grandTotal,
+            'totalDP' => $totalDP,
+            'saldo' => $saldo
         ]);
     }
 
