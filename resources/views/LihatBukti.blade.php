@@ -95,6 +95,26 @@
 
                     <hr>
 
+                    @if($bukti->total_dp > 0)
+                        <div class="alert alert-warning">
+                            <h5 class="mb-3">
+                                Riwayat Pembayaran DP
+                            </h5>
+
+                            <hr>
+
+                            <p class="mb-2">
+                                <strong>Metode DP :</strong>
+                                {{ $bukti->metode_pembayaran_dp ?? '-' }}
+                            </p>
+
+                            <p class="mb-0">
+                                <strong>Nominal DP :</strong>
+                                Rp {{ number_format($bukti->total_dp, 0, ',', '.') }}
+                            </p>
+                        </div>
+                    @endif
+
                     @if($bukti->metode_pembayaran == 'Cash')
                         <div class="alert alert-success text-center">
                             Pelunasan dilakukan secara Cash.
