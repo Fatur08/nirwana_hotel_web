@@ -1954,22 +1954,65 @@ class HotelController extends Controller
         try {
             $dataPesanan = DB::table('rincian_pesanan')
                 ->select('nama_tamu')
-                ->where('id_rincian_pesanan', $request->id_rincian_pesanan)
+                ->where(
+                    'id_rincian_pesanan',
+                    $request->id_rincian_pesanan
+                )
                 ->first();
-
             $nama = 'Tanpa_Nama';
-
             if ($dataPesanan) {
                 $nama = str_replace(' ', '_', $dataPesanan->nama_tamu);
             }
 
+
+
+
+
+
+
             /* ===============================
-               UPLOAD BUKTI PEMBAYARAN
+               UPLOAD BUKTI DP
+            ================================*/
+            $bukti_dp = null;
+            if (
+                $request->status_pembayaran == 1 &&
+                $request->metode_pembayaran == 'online' &&
+                $request->hasFile('bukti_pembayaran')
+            ) {
+                $timestamp = now()->format('Y-m-d_H-i-s');
+                $bukti_dp = "Bukti DP_" . $nama . "_" . $timestamp . "." . $request->file('bukti_pembayaran')->extension();
+                $storagePath = 'public/uploads/bukti_dp/';
+                $request->file('bukti_pembayaran')->storeAs($storagePath, $bukti_dp);
+                $publicPath = public_path('storage/uploads/bukti_dp/');
+                if (!is_dir($publicPath)) {
+                    mkdir($publicPath, 0777, true);
+                }
+                $sourceFile = storage_path('app/' . $storagePath . $bukti_dp);
+                $destinationFile = public_path('storage/uploads/bukti_dp/' . $bukti_dp);
+                copy($sourceFile, $destinationFile);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /* ===============================
+               UPLOAD BUKTI PEMBAYARAN ( KELUNASAN )
             ================================*/
             $bukti_pembayaran = null;
-
-
-            if ($request->hasFile('bukti_pembayaran')) {
+            if (
+                $request->status_pembayaran == 2 &&
+                $request->metode_pembayaran == 'online' &&
+                $request->hasFile('bukti_pembayaran')
+            ) {
                 $timestamp = now()->format('Y-m-d_H-i-s');
                 $bukti_pembayaran = "Bukti Pembayaran_" . $nama . "_" . $timestamp . "." . $request->file('bukti_pembayaran')->extension();
                 $storagePath = 'public/uploads/bukti_pembayaran/';
@@ -1983,51 +2026,130 @@ class HotelController extends Controller
                 copy($sourceFile, $destinationFile);
             }
 
+
+
+
+
+
+
+
+
+
             // ==========================
             // TENTUKAN METODE PEMBAYARAN
             // ==========================
-
             if ($request->metode_pembayaran == 'online') {
-
                 $metodePembayaran = $request->sumber_pembayaran;
-
             } elseif ($request->metode_pembayaran == 'cash') {
-
                 $metodePembayaran = 'Cash';
-
             } else {
-
                 $metodePembayaran = null;
-
             }
 
-            // ==========================
-            // UPDATE PEMBAYARAN
-            // ==========================
-            DB::table('laporan_keuangan')
-                ->where(
-                    'id_rincian_pesanan',
-                    $request->id_rincian_pesanan
-                )
-                ->update([
-                    'status_pembayaran' => 1,
-                    'metode_pembayaran' => $metodePembayaran,
-                    'bukti_pembayaran' => $bukti_pembayaran
-                ]);
 
 
 
 
-            NotifikasiService::buat(
-                '💰 Pembayaran Berhasil',
-                'Pembayaran atas nama "' .
-                $dataPesanan->nama_tamu .
-                '" berhasil dikonfirmasi melalui ' .
-                $metodePembayaran .
-                '.',
-                'pembayaran',
-                $request->dibuat_oleh
-            );
+
+
+
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | UPDATE JIKA STATUS = DP
+            |--------------------------------------------------------------------------
+            */
+            if ($request->status_pembayaran == 1) {
+                DB::table('rincian_pesanan')
+                    ->where(
+                        'id_rincian_pesanan',
+                        $request->id_rincian_pesanan
+                    )
+                    ->update([
+                        'total_dp' => str_replace('.', '', $request->total_dp)
+                    ]);
+
+
+                DB::table('laporan_keuangan')
+                    ->where(
+                        'id_rincian_pesanan',
+                        $request->id_rincian_pesanan
+                    )
+                    ->update([
+                        'status_pembayaran' => 1,
+                        'metode_pembayaran' => $metodePembayaran,
+                        'bukti_dp' => $bukti_dp
+                    ]);
+            }
+
+
+
+
+
+
+
+
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | UPDATE JIKA STATUS = SUDAH BAYAR
+            |--------------------------------------------------------------------------
+            */
+            if ($request->status_pembayaran == 2) {
+                DB::table('laporan_keuangan')
+                    ->where(
+                        'id_rincian_pesanan',
+                        $request->id_rincian_pesanan
+                    )
+                    ->update([
+                        'status_pembayaran' => 2,
+                        'metode_pembayaran' => $metodePembayaran,
+                        'bukti_pembayaran' => $bukti_pembayaran
+                    ]);
+            }
+
+
+
+
+
+
+
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | NOTIFIKASI
+            |--------------------------------------------------------------------------
+            */
+
+            if ($request->status_pembayaran == 1) {
+                NotifikasiService::buat(
+                    '💰 Pembayaran DP',
+                    'Pembayaran DP atas nama "' .
+                    $dataPesanan->nama_tamu .
+                    '" berhasil diterima melalui ' .
+                    $metodePembayaran .
+                    '.',
+                    'pembayaran',
+                    $request->dibuat_oleh
+                );
+            } else {
+                NotifikasiService::buat(
+                    '💰 Pembayaran Berhasil',
+                    'Pembayaran atas nama "' .
+                    $dataPesanan->nama_tamu .
+                    '" berhasil dikonfirmasi melalui ' .
+                    $metodePembayaran .
+                    '.',
+                    'pembayaran',
+                    $request->dibuat_oleh
+                );
+            }
 
             return response()->json([
                 'success' => true,

@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="row mb-4" id="metode_pembayaran_input" style="display:none;">
+        <div class="row mb-6" id="metode_pembayaran_input" style="display:none;">
             <div class="col-12">
                 <select id="metode_pembayaran" name="metode_pembayaran" class="form-control" style="font-size:16pt;">
                     <option value="">
@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        <div class="row mb-4" id="total_dp_input" style="display:none;">
+        <div class="row mb-6" id="total_dp_input" style="display:none;">
             <div class="col-12">
                 <div class="input-icon">
                     <span class="input-icon-addon">
