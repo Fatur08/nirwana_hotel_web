@@ -2390,7 +2390,20 @@ class HotelController extends Controller
     public function LihatBukti(Request $request)
     {
         $bukti = DB::table('laporan_keuangan')
-            ->where('id_rincian_pesanan', $request->id_rincian_pesanan)
+            ->join(
+                'rincian_pesanan',
+                'laporan_keuangan.id_rincian_pesanan',
+                '=',
+                'rincian_pesanan.id_rincian_pesanan'
+            )
+            ->where(
+                'laporan_keuangan.id_rincian_pesanan',
+                $request->id_rincian_pesanan
+            )
+            ->select(
+                'laporan_keuangan.*',
+                'rincian_pesanan.total_dp'
+            )
             ->first();
 
         return view('LihatBukti', compact('bukti'));
