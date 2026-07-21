@@ -104,6 +104,9 @@ Route::middleware([
     Route::post('/upload-resi-wa/{id}', [HotelController::class, 'uploadResiWA']);
 
 
+    Route::post('/ModalBelumBayar', [HotelController::class, 'ModalBelumBayar']);
+
+
     Route::post('/ModalPembayaran', [HotelController::class, 'ModalPembayaran']);
 
 

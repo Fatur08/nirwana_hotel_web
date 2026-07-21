@@ -1933,6 +1933,128 @@ class HotelController extends Controller
 
 
 
+
+
+
+
+    // Modal Pembayaran
+    public function ModalBelumBayar(Request $request)
+    {
+        $id_rincian_pesanan = $request->id_rincian_pesanan;
+        return view('ModalBelumBayar', compact('id_rincian_pesanan'));
+    }
+
+
+
+
+
+
+    public function store_ModalBelumBayar(Request $request)
+    {
+        try {
+            $dataPesanan = DB::table('rincian_pesanan')
+                ->select('nama_tamu')
+                ->where('id_rincian_pesanan', $request->id_rincian_pesanan)
+                ->first();
+
+            $nama = 'Tanpa_Nama';
+
+            if ($dataPesanan) {
+                $nama = str_replace(' ', '_', $dataPesanan->nama_tamu);
+            }
+
+            /* ===============================
+               UPLOAD BUKTI PEMBAYARAN
+            ================================*/
+            $bukti_pembayaran = null;
+
+
+            if ($request->hasFile('bukti_pembayaran')) {
+                $timestamp = now()->format('Y-m-d_H-i-s');
+                $bukti_pembayaran = "Bukti Pembayaran_" . $nama . "_" . $timestamp . "." . $request->file('bukti_pembayaran')->extension();
+                $storagePath = 'public/uploads/bukti_pembayaran/';
+                $request->file('bukti_pembayaran')->storeAs($storagePath, $bukti_pembayaran);
+                $publicPath = public_path('storage/uploads/bukti_pembayaran/');
+                if (!is_dir($publicPath)) {
+                    mkdir($publicPath, 0777, true);
+                }
+                $sourceFile = storage_path('app/' . $storagePath . $bukti_pembayaran);
+                $destinationFile = public_path('storage/uploads/bukti_pembayaran/' . $bukti_pembayaran);
+                copy($sourceFile, $destinationFile);
+            }
+
+            // ==========================
+            // TENTUKAN METODE PEMBAYARAN
+            // ==========================
+
+            if ($request->metode_pembayaran == 'online') {
+
+                $metodePembayaran = $request->sumber_pembayaran;
+
+            } elseif ($request->metode_pembayaran == 'cash') {
+
+                $metodePembayaran = 'Cash';
+
+            } else {
+
+                $metodePembayaran = null;
+
+            }
+
+            // ==========================
+            // UPDATE PEMBAYARAN
+            // ==========================
+            DB::table('laporan_keuangan')
+                ->where(
+                    'id_rincian_pesanan',
+                    $request->id_rincian_pesanan
+                )
+                ->update([
+                    'status_pembayaran' => 1,
+                    'metode_pembayaran' => $metodePembayaran,
+                    'bukti_pembayaran' => $bukti_pembayaran
+                ]);
+
+
+
+
+            NotifikasiService::buat(
+                '💰 Pembayaran Berhasil',
+                'Pembayaran atas nama "' .
+                $dataPesanan->nama_tamu .
+                '" berhasil dikonfirmasi melalui ' .
+                $metodePembayaran .
+                '.',
+                'pembayaran',
+                $request->dibuat_oleh
+            );
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Pembayaran berhasil disimpan'
+            ]);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 3000);
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     // Modal Pembayaran
     public function ModalPembayaran(Request $request)
     {
