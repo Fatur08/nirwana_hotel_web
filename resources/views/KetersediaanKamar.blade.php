@@ -135,8 +135,8 @@
 
 
         /* ===========================================================
-                                                               STICKY TABLE
-                                                            =========================================================== */
+                                                                   STICKY TABLE
+                                                                =========================================================== */
 
         .sticky-table-wrapper {
             max-height: 75vh;
@@ -212,6 +212,15 @@
         .custom-table thead tr:nth-child(2) th {
             border-top: 0 !important;
         }
+
+
+
+
+        .btn-dp {
+            background-color: #FFD600 !important;
+            border-color: #FFD600 !important;
+            color: #000 !important;
+        }
     </style>
 
 
@@ -275,25 +284,18 @@
 
         <div class="row mt-2">
             <div class="col-12">
-
                 <button type="submit" class="btn btn-primary w-100" style="font-size:20pt;">
-
                     Tampilkan
-
                 </button>
-
             </div>
         </div>
-
     </form>
 
 
 
 
     <div class="mt-4 mb-3">
-
         <table class="table-custom">
-
             <tr>
                 <td width="120" style="font-size:20pt;">
                     <b>Bulan</b>
@@ -311,9 +313,7 @@
                     : {{ $tahun }}
                 </td>
             </tr>
-
         </table>
-
     </div>
 
 
@@ -326,7 +326,6 @@
         <div class="table-responsive sticky-table-wrapper">
             <table class="table custom-table">
                 <thead class="table-primary">
-
                     <tr>
                         <th rowspan="2" class="align-middle" style="min-width:80px;">
                             Tanggal
@@ -348,27 +347,19 @@
                             </th>
                         @endforeach
                     </tr>
-
                 </thead>
                 <tbody>
-
                     @for ($tgl = 1; $tgl <= $jumlahHari; $tgl++)
-
                         @php
                             $totalTerisi = 0;
                             $tanggalCell = \Carbon\Carbon::create($tahun, $bulan, $tgl)->format('Y-m-d');
                         @endphp
-
                         <tr>
-
                             <th class="table-light">
                                 {{ $tgl }}
                             </th>
-
                             @foreach ($nomorKamar as $kamar)
-
                                 @php
-
                                     switch ($kamar->id_kamar) {
                                         case 1:
                                             $warna = 'header-dlx';
@@ -391,17 +382,13 @@
                                             && $tanggalCell >= $item->check_in
                                             && $tanggalCell < $item->check_out;
                                     });
-
                                 @endphp
 
                                 <td class="{{ $warna }}">
-
                                     @if($booking)
-
                                         @php
                                             $hariIni = \Carbon\Carbon::today();
                                             $checkIn = \Carbon\Carbon::parse($booking->check_in);
-
                                             /*
                                             |--------------------------------------------------------------------------
                                             | STATUS PEMBAYARAN
@@ -413,19 +400,14 @@
                                             |
                                             */
                                             if ($booking->status_pembayaran == 0) {
-                                                // Belum Bayar
                                                 $btn = 'btn-warning';
                                             } elseif ($booking->status_pembayaran == 1) {
-                                                // DP
-                                                $btn = 'background-color: #FFD600;';
+                                                $btn = 'btn-dp';
                                                 $totalTerisi++;
                                             } else {
-                                                // Sudah Bayar
                                                 if ($checkIn->gt($hariIni)) {
-                                                    // Booking
                                                     $btn = 'btn-secondary';
                                                 } else {
-                                                    // Sudah Check In
                                                     $btn = 'btn-success';
                                                 }
                                                 $totalTerisi++;
@@ -434,21 +416,11 @@
 
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
-                                            style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
+                                            style="width:30px;height:30px;padding:0;border-radius:4px;display:inline-block;">
                                         </a>
-
                                     @endif
-
                                 </td>
-
                             @endforeach
-
                             <td class="fw-bold bg-light">
                                 {{ $totalTerisi }}
                             </td>
