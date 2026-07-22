@@ -2463,37 +2463,6 @@ class HotelController extends Controller
         DB::beginTransaction();
 
         try {
-            // =====================================
-            // UBAH VALUE HOME STAY MENJADI 2 KAMAR
-            // =====================================
-            $idNomorKamar = [];
-
-            foreach ($request->id_nomor_kamar as $item) {
-
-                if ($item == 'HMSTY') {
-
-                    $homeStay = DB::table('nomor_kamar as nk')
-                        ->join('kamar as k', 'nk.id_kamar', '=', 'k.id_kamar')
-                        ->where('k.kode_kamar', 'HMSTY')
-                        ->pluck('nk.id_nomor_kamar')
-                        ->toArray();
-
-                    $idNomorKamar = array_merge($idNomorKamar, $homeStay);
-
-                } else {
-
-                    $idNomorKamar[] = $item;
-
-                }
-            }
-
-            $request->merge([
-                'id_nomor_kamar' => $idNomorKamar
-            ]);
-
-
-
-
             /*
             |--------------------------------------------------------------------------
             | AMBIL DATA LAMA
@@ -2855,7 +2824,7 @@ class HotelController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], 3000);
+            ], 500);
         }
     }
 
