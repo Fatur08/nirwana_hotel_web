@@ -135,8 +135,8 @@
 
 
         /* ===========================================================
-                                                   STICKY TABLE
-                                                =========================================================== */
+                                                       STICKY TABLE
+                                                    =========================================================== */
 
         .sticky-table-wrapper {
             max-height: 75vh;
@@ -421,12 +421,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
                                             style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
                                         </a>
 
                                     @endif
@@ -458,7 +458,7 @@
 
             <div class="row">
 
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <span class="btn btn-success" style="width:30px;height:30px;padding:0;border-radius:4px;">
                     </span>
 
@@ -467,7 +467,7 @@
                     </span>
                 </div>
 
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <span class="btn btn-secondary" style="width:30px;height:30px;padding:0;border-radius:4px;">
                     </span>
 
@@ -476,7 +476,7 @@
                     </span>
                 </div>
 
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <span class="btn"
                         style="width:30px;height:30px;padding:0;border-radius:4px; background-color: #FFD600;">
                     </span>
@@ -486,7 +486,7 @@
                     </span>
                 </div>
 
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <span class="btn btn-warning" style="width:30px;height:30px;padding:0;border-radius:4px;">
                     </span>
 
