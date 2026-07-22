@@ -135,8 +135,8 @@
 
 
         /* ===========================================================
-                                                       STICKY TABLE
-                                                    =========================================================== */
+                                                               STICKY TABLE
+                                                            =========================================================== */
 
         .sticky-table-wrapper {
             max-height: 75vh;
@@ -399,21 +399,38 @@
                                     @if($booking)
 
                                         @php
-
                                             $hariIni = \Carbon\Carbon::today();
                                             $checkIn = \Carbon\Carbon::parse($booking->check_in);
 
+                                            /*
+                                            |--------------------------------------------------------------------------
+                                            | STATUS PEMBAYARAN
+                                            |--------------------------------------------------------------------------
+                                            |
+                                            | 0 = Belum Bayar
+                                            | 1 = DP
+                                            | 2 = Sudah Bayar
+                                            |
+                                            */
                                             if ($booking->status_pembayaran == 0) {
-
-                                                $btn = 'btn-warning';
-
+                                                // Belum Bayar
+                                                $btnClass = 'btn-warning';
+                                                $btnStyle = '';
+                                            } elseif ($booking->status_pembayaran == 1) {
+                                                // DP
+                                                $btnClass = '';
+                                                $btnStyle = 'background-color:#FFD600; border-color:#FFD600;';
+                                                $totalTerisi++;
                                             } else {
-
+                                                // Sudah Bayar
                                                 if ($checkIn->gt($hariIni)) {
-                                                    $btn = 'btn-secondary';
+                                                    // Booking
+                                                    $btnClass = 'btn-secondary';
                                                 } else {
-                                                    $btn = 'btn-success';
+                                                    // Sudah Check In
+                                                    $btnClass = 'btn-success';
                                                 }
+                                                $btnStyle = '';
                                                 $totalTerisi++;
                                             }
                                         @endphp
@@ -421,12 +438,12 @@
                                         <a href="#" class="ModalInfo btn {{ $btn }}"
                                             id_rincian_pesanan="{{ $booking->id_rincian_pesanan }}"
                                             style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height:30px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    padding:0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius:4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display:inline-block;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ">
                                         </a>
 
                                     @endif
