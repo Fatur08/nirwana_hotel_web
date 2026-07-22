@@ -2099,7 +2099,7 @@ class HotelController extends Controller
 
                         'status_pembayaran' => 1,
 
-                        'metode_pembayaran_dp' => $metodeDP,
+                        'metode_dp' => $metodeDP,
                         'bukti_dp' => $bukti_dp
 
                     ]);
