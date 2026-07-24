@@ -1308,9 +1308,34 @@ class HotelController extends Controller
         // Tanpa Filter Tanggal
         else {
 
-            $query->orderByDesc('hk.check_in')
-                ->orderByDesc('hk.check_out');
+            /*
+            |--------------------------------------------------------------------------
+            | Tampilkan Check-In Hari Ini + Booking Besok
+            |--------------------------------------------------------------------------
+            */
 
+            $today = Carbon::today();
+            $tomorrow = Carbon::tomorrow();
+
+            $query->where(function ($q) use ($today, $tomorrow) {
+
+                // Masih menginap hari ini
+                $q->whereDate('hk.check_out', '>=', $today)
+                    ->whereDate('hk.check_in', '<=', $today);
+
+            })
+                ->orWhereDate('hk.check_in', $tomorrow)
+
+                ->orderByRaw("
+        CASE
+            WHEN DATE(hk.check_in) <= CURDATE()
+                 AND DATE(hk.check_out) >= CURDATE()
+            THEN 0
+            ELSE 1
+        END
+    ")
+
+                ->orderBy('hk.check_in', 'asc');
         }
 
         $histori = $query->get();
