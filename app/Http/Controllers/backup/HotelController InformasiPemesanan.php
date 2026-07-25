@@ -1305,11 +1305,47 @@ class HotelController extends Controller
 
         }
 
-        // Tanpa Filter Tanggal
-        else {
+        /*
+|--------------------------------------------------------------------------
+| TANPA FILTER
+|--------------------------------------------------------------------------
+| Hanya tampilkan Hari Ini + Besok
+| JIKA pengguna tidak mengisi filter apa pun.
+|--------------------------------------------------------------------------
+*/ elseif (
+            !$request->filled('cari_nama_tamu') &&
+            !$request->filled('cari_check_in') &&
+            !$request->filled('cari_check_out')
+        ) {
 
-            $query->orderByDesc('hk.check_in')
-                ->orderByDesc('hk.check_out');
+            $today = Carbon::today();
+            $tomorrow = Carbon::tomorrow();
+
+            $query->where(function ($q) use ($today, $tomorrow) {
+
+                $q->whereDate('hk.check_in', $today)
+                    ->orWhereDate('hk.check_in', $tomorrow);
+
+            })
+
+                ->orderByRaw("
+        CASE
+            WHEN DATE(hk.check_in) = CURDATE()
+            THEN 0
+            ELSE 1
+        END
+    ")
+
+                ->orderBy('hk.check_in', 'asc');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | FILTER NAMA SAJA
+        |--------------------------------------------------------------------------
+        */ else {
+
+            $query->orderByDesc('hk.check_in');
 
         }
 
