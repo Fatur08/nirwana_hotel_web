@@ -1306,14 +1306,17 @@ class HotelController extends Controller
         }
 
         /*
-        |--------------------------------------------------------------------------
-        | TANPA FILTER
-        |--------------------------------------------------------------------------
-        | Menampilkan:
-        | - Check-In Hari Ini
-        | - Booking Besok (H+1)
-        |--------------------------------------------------------------------------
-        */ else {
+|--------------------------------------------------------------------------
+| TANPA FILTER
+|--------------------------------------------------------------------------
+| Hanya tampilkan Hari Ini + Besok
+| JIKA pengguna tidak mengisi filter apa pun.
+|--------------------------------------------------------------------------
+*/ elseif (
+            !$request->filled('cari_nama_tamu') &&
+            !$request->filled('cari_check_in') &&
+            !$request->filled('cari_check_out')
+        ) {
 
             $today = Carbon::today();
             $tomorrow = Carbon::tomorrow();
@@ -1334,6 +1337,16 @@ class HotelController extends Controller
     ")
 
                 ->orderBy('hk.check_in', 'asc');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | FILTER NAMA SAJA
+        |--------------------------------------------------------------------------
+        */ else {
+
+            $query->orderByDesc('hk.check_in');
+
         }
 
         $histori = $query->get();
