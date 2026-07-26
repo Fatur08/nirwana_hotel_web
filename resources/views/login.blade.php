@@ -63,7 +63,7 @@
 
             <p class="login-subtitle">
 
-                Sistem Manajemen Reservasi Nirwana Guest House
+                Sistem Manajemen Reservasi Hotel
 
             </p>
 
