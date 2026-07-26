@@ -165,14 +165,14 @@
 
                 <p>
 
-                    © {{ date('Y') }} Nirwana Hotel Kalianda <br>
-                    Jl. Kesuma Bangsa Way Urang, Kel. Way Urang, Kec. Kalianda <br>
-                    Kab. Lampung Selatan, Prop. Lampung
+                    © {{ date('Y') }} Nirwana Hotel Kalianda
 
                 </p>
 
                 <div class="version">
 
+                    Jl. Kesuma Bangsa Way Urang, Kel. Way Urang, Kec. Kalianda <br>
+                    Kab. Lampung Selatan, Prop. Lampung <br><br>
                     Version 1.0
 
                 </div>
