@@ -57,13 +57,15 @@
 
             <h2 class="login-title">
 
-                NIRWANA HOTEL
+                NIRWANA GUEST HOUSE
 
             </h2>
 
             <p class="login-subtitle">
 
-                Sistem Manajemen Hotel Kalianda
+                Sistem Manajemen Hotel Kalianda <br>
+                Jl. Kesuma Bangsa Way Urang, Kel. Way Urang, Kec. Kalianda <br>
+                Kab. Lampung Selatan, Prop. Lampung
 
             </p>
 
