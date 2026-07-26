@@ -163,19 +163,30 @@
 
             <div class="login-footer">
 
+                <hr>
+
                 <p>
-
-                    © {{ date('Y') }} Nirwana Hotel Kalianda
-
+                    © 2026 NIRWANA GUEST HOUSE
                 </p>
 
-                <div class="version">
+                <p>
+                    Jl. Kesuma Bangsa Way Urang,
+                    Kel. Way Urang, Kec. Kalianda
+                    <br>
+                    Kab. Lampung Selatan, Prop. Lampung
+                </p>
 
-                    <br>Jl. Kesuma Bangsa Way Urang, Kel. Way Urang, Kec. Kalianda <br>
-                    Kab. Lampung Selatan, Prop. Lampung <br><br>
+                <p>
+                    <a href="{{ url('/tentang-kami') }}" class="text-decoration-none">
+                        Tentang Kami
+                    </a>
+
+                    <span class="mx-2">
+                        |
+                    </span>
+
                     Version 1.0
-
-                </div>
+                </p>
 
             </div>
 
