@@ -63,9 +63,7 @@
 
             <p class="login-subtitle">
 
-                Sistem Manajemen Hotel Kalianda <br>
-                Jl. Kesuma Bangsa Way Urang, Kel. Way Urang, Kec. Kalianda <br>
-                Kab. Lampung Selatan, Prop. Lampung
+                Sistem Manajemen Hotel Kalianda
 
             </p>
 
@@ -167,7 +165,9 @@
 
                 <p>
 
-                    © {{ date('Y') }} Nirwana Hotel Kalianda
+                    © {{ date('Y') }} Nirwana Hotel Kalianda <br>
+                    Jl. Kesuma Bangsa Way Urang, Kel. Way Urang, Kec. Kalianda <br>
+                    Kab. Lampung Selatan, Prop. Lampung
 
                 </p>
 
