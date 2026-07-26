@@ -163,8 +163,6 @@
 
             <div class="login-footer">
 
-                <hr>
-
                 <p>
                     © 2026 NIRWANA GUEST HOUSE
                 </p>
