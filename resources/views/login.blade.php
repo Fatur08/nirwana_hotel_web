@@ -171,7 +171,7 @@
 
                 <div class="version">
 
-                    Jl. Kesuma Bangsa Way Urang, Kel. Way Urang, Kec. Kalianda <br>
+                    <br>Jl. Kesuma Bangsa Way Urang, Kel. Way Urang, Kec. Kalianda <br>
                     Kab. Lampung Selatan, Prop. Lampung <br><br>
                     Version 1.0
 
