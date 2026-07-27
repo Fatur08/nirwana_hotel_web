@@ -51,7 +51,7 @@
                         Kecamatan Kalianda, Kabupaten Lampung Selatan,
                         Provinsi Lampung.
 
-                        Website ini digunakan sebagai sistem informasi
+                        Aplikasi ini digunakan sebagai sistem informasi
                         reservasi kamar, pengelolaan tamu,
                         serta administrasi operasional hotel.
 
@@ -266,10 +266,10 @@
                         <h5>Alamat</h5>
 
                         <p class="mb-0">
-                            Jl. Kesuma Bangsa Way Urang<br>
-                            Kelurahan Way Urang<br>
-                            Kecamatan Kalianda<br>
-                            Kabupaten Lampung Selatan<br>
+                            Jl. Kesuma Bangsa Way Urang,<br>
+                            Kelurahan Way Urang,<br>
+                            Kecamatan Kalianda,<br>
+                            Kabupaten Lampung Selatan,<br>
                             Provinsi Lampung
                         </p>
 
