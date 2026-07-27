@@ -221,64 +221,157 @@
             </div>
 
             <div class="card-body">
-                <div class="row align-items-stretch">
-                    {{-- ==========================================
-                    INFORMASI HOTEL
-                    =========================================== --}}
-                    <div class="col-lg-5 mb-4">
-                        <div class="hotel-info-box">
-                            <h3 class="mb-4 text-primary">
-                                NIRWANA GUEST HOUSE
-                            </h3>
 
-                            <div class="info-item">
-                                <h5>Bidang Usaha</h5>
-                                <p>
-                                    Penginapan dan Restoran
-                                </p>
-                            </div>
+                <h2 class="text-primary fw-bold mb-4">
+                    NIRWANA GUEST HOUSE
+                </h2>
 
-                            <div class="info-item">
-                                <h5>Alamat</h5>
-                                <p>
-                                    Jl. Kesuma Bangsa Way Urang<br>
-                                    Kelurahan Way Urang<br>
-                                    Kecamatan Kalianda<br>
-                                    Kabupaten Lampung Selatan<br>
-                                    Provinsi Lampung
-                                </p>
-                            </div>
+                {{-- Bidang Usaha --}}
+                <div class="info-item d-flex mb-4">
 
-                            <div class="info-item">
-                                <h5>Koordinat</h5>
-                                <p>
-                                    -5.728685151672566<br>
-                                    105.58855853311444
-                                </p>
-                            </div>
+                    <div class="info-icon me-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
 
-                            <a href="https://www.google.com/maps?q=-5.728685151672566,105.58855853311444" target="_blank"
-                                class="btn btn-primary btn-lg mt-3">
-                                Buka Google Maps
-                            </a>
-                        </div>
+                            <path d="M3 21h18" />
+                            <path d="M5 21V7l8-4v18" />
+                            <path d="M19 21V11l-6-4" />
+                        </svg>
                     </div>
 
+                    <div>
+                        <h5>Bidang Usaha</h5>
 
-                    {{-- ==========================================
-                    GOOGLE MAPS
-                    =========================================== --}}
-                    <div class="col-lg-7">
-                        <div class="map-wrapper">
-                            <iframe
-                                src="https://www.google.com/maps?q=-5.728685151672566,105.58855853311444&hl=id&z=17&output=embed"
-                                width="100%" height="100%" allowfullscreen loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
-
-                            </iframe>
-                        </div>
+                        <p class="mb-0">
+                            Penginapan dan Restoran
+                        </p>
                     </div>
+
                 </div>
+
+                {{-- Alamat --}}
+                <div class="info-item d-flex mb-4">
+
+                    <div class="info-icon me-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+
+                            <path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z" />
+                            <circle cx="12" cy="10" r="2" />
+                        </svg>
+                    </div>
+
+                    <div>
+
+                        <h5>Alamat</h5>
+
+                        <p class="mb-0">
+                            Jl. Kesuma Bangsa Way Urang<br>
+                            Kelurahan Way Urang<br>
+                            Kecamatan Kalianda<br>
+                            Kabupaten Lampung Selatan<br>
+                            Provinsi Lampung
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {{-- Website --}}
+                <div class="info-item d-flex mb-4">
+
+                    <div class="info-icon me-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M3.6 9h16.8" />
+                            <path d="M3.6 15h16.8" />
+                            <path d="M12 3a15 15 0 0 1 0 18" />
+                            <path d="M12 3a15 15 0 0 0 0 18" />
+                        </svg>
+                    </div>
+
+                    <div>
+
+                        <h5>Website Resmi</h5>
+
+                        <p class="mb-0">
+                            <a href="https://nirwanahotelkalianda.com" target="_blank"
+                                class="text-decoration-none fw-semibold">
+
+                                https://nirwanahotelkalianda.com
+
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {{-- Email --}}
+                <div class="info-item d-flex mb-4">
+
+                    <div class="info-icon me-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+
+                            <rect x="3" y="5" width="18" height="14" rx="2" />
+                            <path d="M3 7l9 6l9-6" />
+                        </svg>
+                    </div>
+
+                    <div>
+
+                        <h5>Email</h5>
+
+                        <p class="mb-0">
+                            <a href="mailto:nirwanahotelkalianda@gmail.com" class="text-decoration-none fw-semibold">
+
+                                nirwanahotelkalianda@gmail.com
+
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {{-- Telepon --}}
+                <div class="info-item d-flex mb-4">
+
+                    <div class="info-icon me-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+
+                            <path
+                                d="M5 4h4l2 5l-2.5 1.5a15 15 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10.8 21 3 13.2 3 6a2 2 0 0 1 2-2z" />
+                        </svg>
+                    </div>
+
+                    <div>
+
+                        <h5>Telepon</h5>
+
+                        <p class="mb-0">
+                            <a href="tel:081272810410" class="text-decoration-none fw-semibold">
+
+                                0812 7281 0410
+
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <a href="https://maps.app.goo.gl/LHWq4wN3ozwMKVCn8" target="_blank"
+                    class="btn btn-primary btn-lg rounded-pill px-5 mt-3">
+
+                    Buka Google Maps
+
+                </a>
+
             </div>
         </div>
 
@@ -288,7 +381,7 @@
 
 
         {{-- BUTTON KEMBALI --}}
-        <a href="{{ url('/') }}" class="btn btn-secondary w-100" style="font-size:20pt;">
+        <a href="{{ url('/') }}" class="btn btn-secondary w-100 mt-4" style="font-size:20pt;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2">
                 <path d="M15 6l-6 6l6 6" />
