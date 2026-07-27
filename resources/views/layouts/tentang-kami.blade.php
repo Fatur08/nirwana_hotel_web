@@ -57,55 +57,6 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <style>
-    @import url('https://rsms.me/inter/inter.css');
-
-    :root {
-      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-    }
-
-    body {
-      font-feature-settings: "cv03", "cv04", "cv11";
-    }
-
-    .colored-toast.swal2-icon-success {
-      background-color: #a5dc86 !important;
-    }
-
-    .colored-toast.swal2-icon-success {
-      background-color: #a5dc86 !important;
-    }
-
-    .colored-toast.swal2-icon-error {
-      background-color: #f27474 !important;
-    }
-
-    .colored-toast.swal2-icon-warning {
-      background-color: #f8bb86 !important;
-    }
-
-    .colored-toast.swal2-icon-info {
-      background-color: #3fc3ee !important;
-    }
-
-    .colored-toast.swal2-icon-question {
-      background-color: #87adbd !important;
-    }
-
-    .colored-toast .swal2-title {
-      color: white;
-    }
-
-    .colored-toast .swal2-close {
-      color: white;
-    }
-
-    .colored-toast .swal2-html-container {
-      color: white;
-    }
-  </style>
-  @stack('mycss')
 </head>
 
 <body>
