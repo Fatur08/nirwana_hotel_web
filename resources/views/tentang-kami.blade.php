@@ -12,7 +12,7 @@
 
                 <div class="logo-area">
 
-                    <img src="{{ asset('img/logo.png') }}" class="logo-hotel">
+                    <img src="{{ asset('assets/img/nirwana_hotel.png') }}" alt="Logo Nirwana Hotel">
 
                 </div>
 
@@ -238,14 +238,17 @@
 
 
 
-        <div class="text-center mt-5">
-
-            <a href="{{ url('/') }}" class="btn btn-primary btn-lg px-5">
-
-                Kembali ke Login
-
-            </a>
-
+        {{-- BUTTON KEMBALI --}}
+        <div class="row mt-4">
+            <div class="col-12">
+                <a href="{{ url('/') }}" class="btn btn-secondary w-100" style="font-size:25pt;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M15 6l-6 6l6 6" />
+                    </svg>
+                    Kembali
+                </a>
+            </div>
         </div>
 
     </div>
