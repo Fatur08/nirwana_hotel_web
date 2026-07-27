@@ -42,7 +42,7 @@ body {
 
 
 .logo-hotel {
-    width: 180px;
+    width: 250px;
     transition: .35s;
 }
 
@@ -273,7 +273,7 @@ body {
     }
 
     .logo-hotel {
-        width: 330px;
+        width: 250px;
     }
 
     .judul-hotel {
