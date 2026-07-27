@@ -68,94 +68,72 @@
 
 
 
-        {{-- ==========================================
-        GALERI HOTEL
-        ========================================== --}}
-        <div class="gallery-card mt-5">
-            <div class="gallery-header">
-                <i class="fas fa-images"></i>
-                Foto Hotel
+        {{-- FOTO HOTEL --}}
+        <div class="card hotel-photo-card mt-4 shadow-sm">
+            <div class="card-header hotel-photo-header">
+                <h3 class="mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    Foto Hotel
+                </h3>
             </div>
-            <div class="gallery-body">
-                <div id="hotelCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
-                    {{-- Indicator --}}
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="0" class="active">
-                        </button>
 
-                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="1">
-                        </button>
 
-                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="2">
-                        </button>
-
-                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="3">
-                        </button>
-
-                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="4">
-                        </button>
-
-                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="5">
-                        </button>
-
-                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="6">
-                        </button>
-
-                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="7">
-                        </button>
-                    </div>
-
-                    {{-- Isi Slide --}}
-                    <div class="carousel-inner rounded-4">
+            <div class="card-body">
+                <div id="carouselHotel" class="carousel slide carousel-fade hotel-carousel" data-bs-ride="carousel"
+                    data-bs-interval="4000">
+                    <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="{{ asset('assets/img/foto_kamar_hotel/deluxe1.jpeg') }}"
-                                class="d-block w-100 gallery-image">
+                                class="d-block w-100 hotel-image">
                         </div>
 
                         <div class="carousel-item">
                             <img src="{{ asset('assets/img/foto_kamar_hotel/deluxe2.jpeg') }}"
-                                class="d-block w-100 gallery-image">
+                                class="d-block w-100 hotel-image">
                         </div>
 
                         <div class="carousel-item">
                             <img src="{{ asset('assets/img/foto_kamar_hotel/superior1.jpeg') }}"
-                                class="d-block w-100 gallery-image">
+                                class="d-block w-100 hotel-image">
                         </div>
 
                         <div class="carousel-item">
                             <img src="{{ asset('assets/img/foto_kamar_hotel/superior2.jpeg') }}"
-                                class="d-block w-100 gallery-image">
+                                class="d-block w-100 hotel-image">
                         </div>
 
                         <div class="carousel-item">
                             <img src="{{ asset('assets/img/foto_kamar_hotel/standart1.jpeg') }}"
-                                class="d-block w-100 gallery-image">
+                                class="d-block w-100 hotel-image">
                         </div>
 
                         <div class="carousel-item">
                             <img src="{{ asset('assets/img/foto_kamar_hotel/standart2.jpeg') }}"
-                                class="d-block w-100 gallery-image">
+                                class="d-block w-100 hotel-image">
                         </div>
 
                         <div class="carousel-item">
                             <img src="{{ asset('assets/img/foto_kamar_hotel/homestay1.jpeg') }}"
-                                class="d-block w-100 gallery-image">
+                                class="d-block w-100 hotel-image">
                         </div>
 
                         <div class="carousel-item">
                             <img src="{{ asset('assets/img/foto_kamar_hotel/homestay2.jpeg') }}"
-                                class="d-block w-100 gallery-image">
+                                class="d-block w-100 hotel-image">
                         </div>
                     </div>
 
-                    {{-- Tombol Kiri --}}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel"
+                    {{-- BUTTON NEXT PREV --}}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselHotel"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </button>
 
-                    {{-- Tombol Kanan --}}
-                    <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel"
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselHotel"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </button>
