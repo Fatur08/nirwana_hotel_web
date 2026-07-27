@@ -68,6 +68,105 @@
 
 
 
+        {{-- ==========================================
+        GALERI HOTEL
+        ========================================== --}}
+        <div class="gallery-card mt-5">
+            <div class="gallery-header">
+                <i class="fas fa-images"></i>
+                Foto Hotel
+            </div>
+            <div class="gallery-body">
+                <div id="hotelCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
+                    {{-- Indicator --}}
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="0" class="active">
+                        </button>
+
+                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="1">
+                        </button>
+
+                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="2">
+                        </button>
+
+                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="3">
+                        </button>
+
+                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="4">
+                        </button>
+
+                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="5">
+                        </button>
+
+                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="6">
+                        </button>
+
+                        <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="7">
+                        </button>
+                    </div>
+
+                    {{-- Isi Slide --}}
+                    <div class="carousel-inner rounded-4">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('img/foto_kamar_hotel/deluxe1.jpeg') }}" class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/foto_kamar_hotel/deluxe2.jpeg') }}" class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/foto_kamar_hotel/superior1.jpeg') }}"
+                                class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/foto_kamar_hotel/superior2.jpeg') }}"
+                                class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/foto_kamar_hotel/standart1.jpeg') }}"
+                                class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/foto_kamar_hotel/standart2.jpeg') }}"
+                                class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/foto_kamar_hotel/homestay1.jpeg') }}"
+                                class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/foto_kamar_hotel/homestay2.jpeg') }}"
+                                class="d-block w-100 gallery-image">
+                        </div>
+                    </div>
+
+                    {{-- Tombol Kiri --}}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+
+                    {{-- Tombol Kanan --}}
+                    <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
         <div class="legal-card mt-4">
 
             <div class="legal-header">
@@ -239,12 +338,12 @@
 
 
         {{-- BUTTON KEMBALI --}}
-        <a href="{{ url('/') }}" class="btn btn-secondary w-100" style="font-size:25pt;">
+        <a href="{{ url('/') }}" class="btn btn-secondary w-100" style="font-size:20pt;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2">
                 <path d="M15 6l-6 6l6 6" />
             </svg>
-            Kembali
+            Kembali ke Login
         </a>
 
     </div>

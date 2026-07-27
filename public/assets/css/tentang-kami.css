@@ -355,3 +355,58 @@ body {
     font-weight: 700;
     color: #222;
 }
+
+
+
+/* ==========================================
+   GALERI HOTEL
+========================================== */
+.gallery-card {
+    margin-top: 35px;
+    background: #ffffff;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, .08);
+    animation: fadeUp .8s ease;
+}
+
+.gallery-header {
+    background: linear-gradient(135deg, #0d6efd, #4dabff);
+    color: #fff;
+    padding: 18px 25px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.gallery-header i {
+    margin-right: 10px;
+}
+
+.gallery-body {
+    padding: 25px;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 18px;
+    transition: transform .4s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.03);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, .45);
+    border-radius: 50%;
+    padding: 22px;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
