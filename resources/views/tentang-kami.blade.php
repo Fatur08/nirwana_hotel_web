@@ -367,7 +367,7 @@
                 </div>
 
                 <a href="https://maps.app.goo.gl/LHWq4wN3ozwMKVCn8" target="_blank"
-                    class="btn btn-primary btn-lg rounded-pill px-5 mt-3">
+                    class="btn btn-primary btn-lg rounded-pill px-5 mb-4">
 
                     Buka Google Maps
 
