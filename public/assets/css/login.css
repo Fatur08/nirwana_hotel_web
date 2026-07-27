@@ -305,24 +305,13 @@ body {
 |--------------------------------------------------------------------------
 */
 
-.login-footer {
-
-    margin-top: 35px;
-
-    padding-top: 20px;
-
-    border-top: 1px solid #ececec;
-
-    text-align: center;
-
+.login-footer a {
+    color: #206bc4;
+    font-weight: 600;
 }
 
-.login-footer p {
-
-    margin-bottom: 4px;
-
-    color: #6b7280;
-
+.login-footer a:hover {
+    text-decoration: underline;
 }
 
 .version {
