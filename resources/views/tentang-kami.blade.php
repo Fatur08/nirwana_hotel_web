@@ -108,40 +108,42 @@
                     {{-- Isi Slide --}}
                     <div class="carousel-inner rounded-4">
                         <div class="carousel-item active">
-                            <img src="{{ asset('img/foto_kamar_hotel/deluxe1.jpeg') }}" class="d-block w-100 gallery-image">
-                        </div>
-
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/foto_kamar_hotel/deluxe2.jpeg') }}" class="d-block w-100 gallery-image">
-                        </div>
-
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/foto_kamar_hotel/superior1.jpeg') }}"
+                            <img src="{{ asset('assets/img/foto_kamar_hotel/deluxe1.jpeg') }}"
                                 class="d-block w-100 gallery-image">
                         </div>
 
                         <div class="carousel-item">
-                            <img src="{{ asset('img/foto_kamar_hotel/superior2.jpeg') }}"
+                            <img src="{{ asset('assets/img/foto_kamar_hotel/deluxe2.jpeg') }}"
                                 class="d-block w-100 gallery-image">
                         </div>
 
                         <div class="carousel-item">
-                            <img src="{{ asset('img/foto_kamar_hotel/standart1.jpeg') }}"
+                            <img src="{{ asset('assets/img/foto_kamar_hotel/superior1.jpeg') }}"
                                 class="d-block w-100 gallery-image">
                         </div>
 
                         <div class="carousel-item">
-                            <img src="{{ asset('img/foto_kamar_hotel/standart2.jpeg') }}"
+                            <img src="{{ asset('assets/img/foto_kamar_hotel/superior2.jpeg') }}"
                                 class="d-block w-100 gallery-image">
                         </div>
 
                         <div class="carousel-item">
-                            <img src="{{ asset('img/foto_kamar_hotel/homestay1.jpeg') }}"
+                            <img src="{{ asset('assets/img/foto_kamar_hotel/standart1.jpeg') }}"
                                 class="d-block w-100 gallery-image">
                         </div>
 
                         <div class="carousel-item">
-                            <img src="{{ asset('img/foto_kamar_hotel/homestay2.jpeg') }}"
+                            <img src="{{ asset('assets/img/foto_kamar_hotel/standart2.jpeg') }}"
+                                class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('assets/img/foto_kamar_hotel/homestay1.jpeg') }}"
+                                class="d-block w-100 gallery-image">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ asset('assets/img/foto_kamar_hotel/homestay2.jpeg') }}"
                                 class="d-block w-100 gallery-image">
                         </div>
                     </div>
