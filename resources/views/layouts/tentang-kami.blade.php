@@ -67,8 +67,8 @@
   </div>
   <!-- Tabler Core -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-  @stack('myscript')
   <script src="{{ asset('tabler/dist/js/tabler.min.js') }}"></script>
+  @stack('myscript')
 </body>
 
 </html>

@@ -410,3 +410,92 @@ body {
     height: 12px;
     border-radius: 50%;
 }
+
+/* =====================================
+   FOTO HOTEL CARD
+===================================== */
+.hotel-photo-card {
+    border-radius: 25px;
+    overflow: hidden;
+    animation: fadeHotel 0.8s ease;
+}
+
+.hotel-photo-header {
+    background: linear-gradient(135deg,
+            #0d6efd,
+            #4da3ff);
+    color: white;
+    padding: 20px 25px;
+}
+
+.hotel-photo-header h3 {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+
+
+/* =====================================
+   CAROUSEL
+===================================== */
+.hotel-carousel {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.hotel-image {
+    height: 550px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+
+/*
+    Membuat perpindahan lebih halus
+*/
+.carousel-item {
+    transition:
+        transform 1.2s ease-in-out;
+}
+
+/*
+    Efek zoom kecil saat gambar muncul
+*/
+.carousel-item.active img {
+    animation:
+        zoomHotel 4s ease;
+}
+
+
+@keyframes zoomHotel {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes fadeHotel {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+ Responsive Tablet / HP
+*/
+@media(max-width:768px) {
+    .hotel-image {
+        height: 350px;
+    }
+}
