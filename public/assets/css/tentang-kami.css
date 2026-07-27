@@ -1,0 +1,357 @@
+/*
+|--------------------------------------------------------------------------
+| BACKGROUND
+|--------------------------------------------------------------------------
+*/
+
+body {
+    background: linear-gradient(135deg, #f7fbff 0%, #edf4ff 100%);
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| HERO
+|--------------------------------------------------------------------------
+*/
+
+.hero-section {
+    animation: fadeDown .8s ease;
+}
+
+.hero-card {
+    background: #ffffff;
+    border-radius: 25px;
+    padding: 45px 30px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .08);
+    transition: .35s;
+}
+
+.hero-card:hover {
+    transform: translateY(-5px);
+}
+
+
+
+
+
+.logo-hotel {
+    width: 180px;
+    transition: .35s;
+}
+
+.logo-hotel:hover {
+    transform: scale(1.05);
+}
+
+
+
+
+
+.judul-hotel {
+    margin-top: 25px;
+    font-size: 40px;
+    font-weight: 700;
+    color: #1b1f24;
+    letter-spacing: 1px;
+}
+
+
+
+
+
+.subjudul {
+    font-size: 20px;
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| CARD
+|--------------------------------------------------------------------------
+*/
+
+.info-card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 40px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
+    animation: fadeUp .8s ease;
+}
+
+
+
+
+
+.info-card h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #206bc4;
+}
+
+
+
+
+
+.info-card hr {
+    width: 90px;
+    height: 4px;
+    border: none;
+    border-radius: 10px;
+    background: #206bc4;
+    opacity: 1;
+}
+
+
+
+
+
+.deskripsi {
+    font-size: 18px;
+    line-height: 1.9;
+    color: #555;
+    text-align: justify;
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| DETAIL CARD
+|--------------------------------------------------------------------------
+*/
+.detail-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px 25px;
+    text-align: center;
+    height: 100%;
+    transition: .35s;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+    animation: fadeUp 1s ease;
+}
+
+
+
+
+
+.detail-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(32, 107, 196, .18);
+}
+
+
+
+
+
+.detail-card h5 {
+    font-weight: 700;
+    margin-top: 18px;
+    color: #1b1f24;
+}
+
+
+
+
+
+.detail-card p {
+    color: #6c757d;
+    margin-top: 15px;
+    line-height: 1.8;
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ICON
+|--------------------------------------------------------------------------
+*/
+.icon-box {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #206bc4, #4ea5ff);
+    color: #fff;
+    font-size: 36px;
+    box-shadow: 0 12px 25px rgba(32, 107, 196, .35);
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| BUTTON
+|--------------------------------------------------------------------------
+*/
+.btn-primary {
+    border-radius: 40px;
+    padding: 14px 50px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: .35s;
+}
+
+
+
+
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ANIMATION
+|--------------------------------------------------------------------------
+*/
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| RESPONSIVE
+|--------------------------------------------------------------------------
+*/
+@media(max-width:768px) {
+    .hero-card {
+        padding: 35px 20px;
+    }
+
+    .logo-hotel {
+        width: 130px;
+    }
+
+    .judul-hotel {
+        font-size: 28px;
+    }
+
+    .subjudul {
+        font-size: 17px;
+    }
+
+    .info-card {
+        padding: 30px 22px;
+    }
+
+    .info-card h2 {
+        font-size: 24px;
+    }
+
+    .deskripsi {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .detail-card {
+        margin-bottom: 20px;
+    }
+}
+
+
+
+
+/* ==========================================
+   LEGALIITAS USAHA
+========================================== */
+
+.legal-card {
+    margin-top: 35px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+    animation: fadeUp .8s ease;
+}
+
+.legal-header {
+    background: linear-gradient(135deg, #0056b3, #007bff);
+    color: #fff;
+    padding: 18px 25px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.legal-header i {
+    margin-right: 10px;
+}
+
+.legal-body {
+    padding: 25px;
+}
+
+.legal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.legal-item:last-child {
+    border-bottom: none;
+}
+
+.legal-title {
+    font-weight: 600;
+    color: #666;
+}
+
+.legal-value {
+    font-weight: 700;
+    color: #222;
+}

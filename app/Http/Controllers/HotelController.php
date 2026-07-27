@@ -30,6 +30,17 @@ class HotelController extends Controller
 
 
 
+    public function tentang_kami(Request $request)
+    {
+        return view('tentang-kami');
+    }
+
+
+
+
+
+
+
 
     public function index(Request $request)
     {

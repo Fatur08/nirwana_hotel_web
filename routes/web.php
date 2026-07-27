@@ -179,6 +179,9 @@ Route::middleware([
     Route::post('/UpdateDataMaster', [HotelController::class, 'UpdateDataMaster']);
 
 
+    Route::post('/tentang-kami', [HotelController::class, 'tentang_kami']);
+
+
     /*
     |--------------------------------------------------------------------------
     | Activity Log
