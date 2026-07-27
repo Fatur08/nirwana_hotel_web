@@ -300,7 +300,6 @@
                         <p class="mb-0">
                             <a href="mailto:nirwanahotelkalianda@gmail.com" class="text-decoration-none fw-semibold">
 
-                                {{--nirwanahotelkalianda@gmail.com --}}
                                 nirwana_email@nirwanahotelkalianda.com
 
                             </a>
@@ -329,7 +328,6 @@
                         <p class="mb-0">
                             <a href="tel:081272810410" class="text-decoration-none fw-semibold">
 
-                                {{--0812 7281 0410--}}
                                 0811 7971 1105
 
                             </a>
