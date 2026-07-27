@@ -356,7 +356,8 @@
                         <p class="mb-0">
                             <a href="tel:081272810410" class="text-decoration-none fw-semibold">
 
-                                0812 7281 0410
+                                {{--0812 7281 0410--}}
+                                0811 7971 1105
 
                             </a>
                         </p>
@@ -371,6 +372,21 @@
                     Buka Google Maps
 
                 </a>
+
+
+                {{-- ==========================================
+                GOOGLE MAPS
+                =========================================== --}}
+                <div class="col-lg-7">
+                    <div class="map-wrapper">
+                        <iframe
+                            src="https://www.google.com/maps?q=-5.728685151672566,105.58855853311444&hl=id&z=17&output=embed"
+                            width="100%" height="100%" allowfullscreen loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+
+                        </iframe>
+                    </div>
+                </div>
 
             </div>
         </div>
