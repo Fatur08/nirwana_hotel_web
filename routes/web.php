@@ -22,10 +22,13 @@ Route::post(
     [LoginController::class, 'login']
 );
 
-Route::get(
+Route::post(
     '/logout',
     [LoginController::class, 'logout']
 )->name('logout');
+
+
+Route::get('/tentang-kami', [HotelController::class, 'tentang_kami']);
 
 
 Route::middleware([
@@ -177,9 +180,6 @@ Route::middleware([
 
 
     Route::post('/UpdateDataMaster', [HotelController::class, 'UpdateDataMaster']);
-
-
-    Route::get('/tentang-kami', [HotelController::class, 'tentang_kami']);
 
 
     /*
