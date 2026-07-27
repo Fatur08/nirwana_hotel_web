@@ -300,7 +300,8 @@
                         <p class="mb-0">
                             <a href="mailto:nirwanahotelkalianda@gmail.com" class="text-decoration-none fw-semibold">
 
-                                nirwanahotelkalianda@gmail.com
+                                {{--nirwanahotelkalianda@gmail.com --}}
+                                nirwana_email@nirwanahotelkalianda.com
 
                             </a>
                         </p>
