@@ -499,3 +499,122 @@ body {
         height: 350px;
     }
 }
+
+
+
+
+/*====================================================
+            MAPS
+====================================================*/
+.hotel-map-card {
+    border-radius: 25px;
+    overflow: hidden;
+    animation: fadeHotel .8s ease;
+}
+
+
+.hotel-map-header {
+    background: linear-gradient(135deg,
+            #198754,
+            #37b36b);
+    color: white;
+    padding: 20px 25px;
+}
+
+
+
+.hotel-map-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+}
+
+
+.map-wrapper {
+    height: 100%;
+    min-height: 520px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+}
+
+
+.map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
+.map-wrapper iframe {
+    display: block;
+}
+
+
+.hotel-map-card .btn {
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-size: 17px;
+    transition: .3s;
+}
+
+.hotel-map-card .btn:hover {
+    transform: translateY(-3px);
+}
+
+
+
+
+
+/*=====================================================
+            INFORMASI HOTEL
+=====================================================*/
+.hotel-info-box {
+    height: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+}
+
+.hotel-info-box h3 {
+    font-weight: 700;
+}
+
+.info-item {
+    margin-bottom: 30px;
+}
+
+.info-item h5 {
+    color: #0d6efd;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.info-item p {
+    margin: 0;
+    color: #555;
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+.hotel-info-box .btn {
+    border-radius: 40px;
+    padding: 12px 30px;
+    font-weight: 600;
+}
+
+
+
+
+@media(max-width:768px) {
+    .map-wrapper {
+        min-height: 350px;
+        margin-top: 20px;
+    }
+
+    .hotel-info-box {
+        margin-bottom: 20px;
+    }
+}

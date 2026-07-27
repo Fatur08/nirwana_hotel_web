@@ -205,6 +205,88 @@
 
 
 
+        {{-- =========================================================
+        LOKASI HOTEL
+        ========================================================= --}}
+        <div class="card hotel-map-card mt-4 shadow-lg">
+            <div class="card-header hotel-map-header">
+                <h3 class="mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Lokasi Hotel
+                </h3>
+            </div>
+
+            <div class="card-body">
+                <div class="row align-items-stretch">
+                    {{-- ==========================================
+                    INFORMASI HOTEL
+                    =========================================== --}}
+                    <div class="col-lg-5 mb-4">
+                        <div class="hotel-info-box">
+                            <h3 class="mb-4 text-primary">
+                                NIRWANA GUEST HOUSE
+                            </h3>
+
+                            <div class="info-item">
+                                <h5>Bidang Usaha</h5>
+                                <p>
+                                    Penginapan dan Restoran
+                                </p>
+                            </div>
+
+                            <div class="info-item">
+                                <h5>Alamat</h5>
+                                <p>
+                                    Jl. Kesuma Bangsa Way Urang<br>
+                                    Kelurahan Way Urang<br>
+                                    Kecamatan Kalianda<br>
+                                    Kabupaten Lampung Selatan<br>
+                                    Provinsi Lampung
+                                </p>
+                            </div>
+
+                            <div class="info-item">
+                                <h5>Koordinat</h5>
+                                <p>
+                                    -5.728685151672566<br>
+                                    105.58855853311444
+                                </p>
+                            </div>
+
+                            <a href="https://www.google.com/maps?q=-5.728685151672566,105.58855853311444" target="_blank"
+                                class="btn btn-primary btn-lg mt-3">
+                                Buka Google Maps
+                            </a>
+                        </div>
+                    </div>
+
+
+                    {{-- ==========================================
+                    GOOGLE MAPS
+                    =========================================== --}}
+                    <div class="col-lg-7">
+                        <div class="map-wrapper">
+                            <iframe
+                                src="https://www.google.com/maps?q=-5.728685151672566,105.58855853311444&hl=id&z=17&output=embed"
+                                width="100%" height="100%" allowfullscreen loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
 
         <div class="row mt-4 justify-content-center">
 
