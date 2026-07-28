@@ -159,30 +159,49 @@
 
             </form>
 
-            <!-- Footer -->
-
+            <!-- ==========================================
+    FOOTER
+========================================== -->
             <div class="login-footer">
 
-                <p>
+                {{-- COPYRIGHT --}}
+                <p class="mb-2 fw-semibold">
                     © 2026 NIRWANA GUEST HOUSE
                 </p>
 
-                <p>
+                {{-- ALAMAT --}}
+                <p class="mb-3">
                     Jl. Kesuma Bangsa Way Urang,
-                    Kel. Way Urang, Kec. Kalianda,
+                    Kel. Way Urang,
+                    Kec. Kalianda,
                     <br>
-                    Kab. Lampung Selatan, Prop. Lampung
+                    Kab. Lampung Selatan,
+                    Prov. Lampung
                 </p>
 
-                <p>
+                {{-- MENU --}}
+                <p class="mb-2">
+
                     <a href="{{ url('/tentang-kami') }}" class="text-decoration-none">
+
                         Tentang Kami
+
                     </a>
 
-                    <span class="mx-2">
-                        |
+                    <span class="mx-2 text-muted">
+                        •
                     </span>
 
+                    <a href="{{ url('/privacy-policy') }}" class="text-decoration-none">
+
+                        Privacy Policy
+
+                    </a>
+
+                </p>
+
+                {{-- VERSION --}}
+                <p class="text-muted mb-0">
                     Version 1.0
                 </p>
 
