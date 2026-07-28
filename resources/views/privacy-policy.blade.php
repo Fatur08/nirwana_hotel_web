@@ -279,7 +279,7 @@
 
 
         {{-- BUTTON KEMBALI --}}
-        <a href="{{ url('/') }}" class="btn btn-secondary w-100 mt-4" style="font-size:20pt;">
+        <a href="{{ url('/') }}" class="btn btn-secondary w-100" style="font-size:20pt;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2">
                 <path d="M15 6l-6 6l6 6" />
