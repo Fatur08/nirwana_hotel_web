@@ -31,6 +31,9 @@ Route::post(
 Route::get('/tentang-kami', [HotelController::class, 'tentang_kami']);
 
 
+Route::get('/privacy-policy', [HotelController::class, 'privacy_policy']);
+
+
 Route::middleware([
     'checklogin',
     'nocache'

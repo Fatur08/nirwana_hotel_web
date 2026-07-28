@@ -42,6 +42,19 @@ class HotelController extends Controller
 
 
 
+
+    public function privacy_policy()
+    {
+        return view('privacy-policy');
+    }
+
+
+
+
+
+
+
+
     public function index(Request $request)
     {
         // ambil data dari form
