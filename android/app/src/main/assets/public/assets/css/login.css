@@ -1,0 +1,436 @@
+/*
+|--------------------------------------------------------------------------
+| GLOBAL
+|--------------------------------------------------------------------------
+*/
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+body {
+
+    font-family: 'Poppins', sans-serif;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| BACKGROUND
+|--------------------------------------------------------------------------
+*/
+
+body {
+
+    background-image:
+        linear-gradient(rgba(0, 0, 0, .45),
+
+            rgba(0, 0, 0, .45)),
+
+        url('../img/hotel_background.png');
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| WRAPPER
+|--------------------------------------------------------------------------
+*/
+
+.login-wrapper {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| LOGIN CARD
+|--------------------------------------------------------------------------
+*/
+
+.login-card {
+
+    width: 100%;
+
+    max-width: 520px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    padding: 45px;
+
+    box-shadow:
+
+        0 15px 40px rgba(0, 0, 0, .20);
+
+    animation: fadeLogin .8s ease;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| LOGO
+|--------------------------------------------------------------------------
+*/
+
+.logo {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+
+}
+
+.logo img {
+
+    width: 120px;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| TITLE
+|--------------------------------------------------------------------------
+*/
+
+.login-title {
+
+    text-align: center;
+
+    font-weight: 700;
+
+    color: #1f2937;
+
+    margin-bottom: 6px;
+
+}
+
+.login-subtitle {
+
+    text-align: center;
+
+    color: #6b7280;
+
+    margin-bottom: 35px;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| FORM
+|--------------------------------------------------------------------------
+*/
+
+.form-label {
+
+    font-weight: 600;
+
+    color: #374151;
+
+    margin-bottom: 8px;
+
+}
+
+.input-icon {
+
+    position: relative;
+
+}
+
+.input-icon .form-control {
+
+    height: 56px;
+
+    border-radius: 14px;
+
+    padding-left: 52px;
+
+    padding-right: 52px;
+
+    border: 1px solid #d6dbe2;
+
+    transition: .3s;
+
+}
+
+.input-icon .form-control:focus {
+
+    border-color: #206bc4;
+
+    box-shadow: 0 0 0 .18rem rgba(32, 107, 196, .15);
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| LEFT ICON
+|--------------------------------------------------------------------------
+*/
+
+.input-icon>i {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 20px;
+
+    color: #6b7280;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| PASSWORD ICON
+|--------------------------------------------------------------------------
+*/
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 16px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 32px;
+
+    height: 32px;
+
+    color: #6b7280;
+
+    z-index: 10;
+
+}
+
+.password-toggle i {
+
+    font-size: 20px;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| BUTTON
+|--------------------------------------------------------------------------
+*/
+
+.btn-primary {
+
+    height: 56px;
+
+    border-radius: 14px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    transition: .25s;
+
+}
+
+.btn-primary:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 24px rgba(32, 107, 196, .25);
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| FOOTER
+|--------------------------------------------------------------------------
+*/
+
+.login-footer {
+
+    margin-top: 35px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #ececec;
+
+    text-align: center;
+
+}
+
+.login-footer p {
+
+    margin-bottom: 4px;
+
+    color: #6b7280;
+
+}
+
+.version {
+
+    font-size: 13px;
+
+    color: #9ca3af;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ALERT
+|--------------------------------------------------------------------------
+*/
+
+.alert {
+
+    border-radius: 12px;
+
+    animation: fadeAlert .4s ease;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ANIMATION
+|--------------------------------------------------------------------------
+*/
+
+@keyframes fadeLogin {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+@keyframes fadeAlert {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-12px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| RESPONSIVE
+|--------------------------------------------------------------------------
+*/
+
+@media(max-width:576px) {
+
+    .login-card {
+
+        padding: 30px 24px;
+
+        border-radius: 18px;
+
+    }
+
+    .logo img {
+
+        width: 100px;
+
+    }
+
+    .login-title {
+
+        font-size: 28px;
+
+    }
+
+    .login-subtitle {
+
+        font-size: 14px;
+
+    }
+
+}
