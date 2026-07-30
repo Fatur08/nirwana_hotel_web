@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.nirwanahotel.kalianda.app-mergeDebugResources-26:/values/values.xml",
+            "outputFile": "com.nirwanahotel.kalianda.app-mergeDebugResources-30:/values/values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\NukamiZe\\.gradle\\caches\\8.14.3\\transforms\\7179ce4c01b9a0b75718a869351620f5\\transformed\\startup-runtime-1.1.1\\res\\values\\values.xml",
@@ -42,9 +42,9 @@
                     "from": {
                         "startLines": "2,5,4,3",
                         "startColumns": "4,4,4,4",
-                        "startOffsets": "55,253,186,115",
+                        "startOffsets": "57,258,190,118",
                         "endColumns": "59,71,66,70",
-                        "endOffsets": "110,320,248,181"
+                        "endOffsets": "112,325,252,184"
                     },
                     "to": {
                         "startLines": "323,331,333,336",
@@ -256,10 +256,10 @@
                     "from": {
                         "startLines": "4,11,18",
                         "startColumns": "4,4,4",
-                        "startOffsets": "93,413,664",
+                        "startOffsets": "97,424,682",
                         "endLines": "9,15,20",
                         "endColumns": "12,12,12",
-                        "endOffsets": "407,657,810"
+                        "endOffsets": "416,672,830"
                     },
                     "to": {
                         "startLines": "342,348,353",
