@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Nirwana Hotel Kalianda</string>
+    <string name="title_activity_main">Nirwana Hotel Kalianda</string>
+    <string name="package_name">com.nirwanahotel.kalianda</string>
+    <string name="custom_url_scheme">com.nirwanahotel.kalianda</string>
+</resources>
