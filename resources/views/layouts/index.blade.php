@@ -225,6 +225,12 @@
 
     }
   </script>
+
+  <script>
+    window.addEventListener("load", () => {
+      alert(typeof window.Capacitor);
+    });
+  </script>
 </body>
 
 </html>
