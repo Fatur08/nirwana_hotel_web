@@ -7,11 +7,14 @@ import android.webkit.WebView;
 import com.getcapacitor.Bridge;
 import com.getcapacitor.BridgeActivity;
 
+import com.nirwanahotel.kalianda.MediaStorePlugin;
+
 public class MainActivity extends BridgeActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerPlugin(MediaStorePlugin.class);
 
         Bridge bridge = getBridge();
 
