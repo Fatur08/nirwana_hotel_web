@@ -46,11 +46,13 @@ public class MediaStorePlugin extends Plugin {
             );
 
             OutputStream outputStream =
-                    getContext().getContentResolver().openOutputStream(uri);
+                getContext().getContentResolver().openOutputStream(uri);
 
-            outputStream.write(bytes);
-            outputStream.flush();
-            outputStream.close();
+            if (outputStream != null) {
+                outputStream.write(bytes);
+                outputStream.flush();
+                outputStream.close();
+            }
 
             JSObject ret = new JSObject();
             ret.put("success", true);
