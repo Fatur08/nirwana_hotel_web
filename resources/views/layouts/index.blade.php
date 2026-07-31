@@ -226,11 +226,11 @@
     }
   </script>
 
-  <script>
+  <!--<script>
     window.addEventListener("load", () => {
       alert(Object.keys(window.Capacitor.Plugins));
     });
-  </script>
+  </script>-->
 </body>
 
 </html>
