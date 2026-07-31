@@ -228,7 +228,7 @@
 
   <script>
     window.addEventListener("load", () => {
-      alert(typeof window.Capacitor);
+      alert(Object.keys(window.Capacitor.Plugins));
     });
   </script>
 </body>
