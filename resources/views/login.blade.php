@@ -57,7 +57,7 @@
 
             <h2 class="login-title">
 
-                NIRWANA GUEST HOUSE
+                NIRWANA GUEST HOUSE1
 
             </h2>
 
