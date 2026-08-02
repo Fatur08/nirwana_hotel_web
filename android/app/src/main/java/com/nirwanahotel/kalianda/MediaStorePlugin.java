@@ -80,10 +80,13 @@ public class MediaStorePlugin extends Plugin {
 
             e.printStackTrace();
 
-            JSObject err = new JSObject();
-            err.put("message", e.toString());
+            JSObject error = new JSObject();
+            error.put("message", e.getMessage());
+            error.put("class", e.getClass().getName());
 
-            call.reject(e.toString(), err);
+            call.reject(
+                    "MediaStore saveImage failed",
+                    error);
 
         }
 
