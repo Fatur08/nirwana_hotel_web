@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
+
+import androidx.annotation.Nullable;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -13,7 +16,6 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
 import java.io.OutputStream;
-import java.util.Base64;
 
 @CapacitorPlugin(name = "MediaStore")
 public class MediaStorePlugin extends Plugin {
@@ -24,44 +26,64 @@ public class MediaStorePlugin extends Plugin {
         String fileName = call.getString("fileName");
         String base64 = call.getString("base64");
 
+        if (fileName == null || base64 == null) {
+            call.reject("fileName atau base64 kosong");
+            return;
+        }
+
         try {
 
-            byte[] bytes;
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                bytes = Base64.getDecoder().decode(base64);
-            } else {
-                bytes = android.util.Base64.decode(base64, android.util.Base64.DEFAULT);
+            // Hilangkan prefix kalau masih ada
+            if (base64.startsWith("data:image")) {
+                base64 = base64.substring(base64.indexOf(",") + 1);
             }
+
+            byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
 
             ContentValues values = new ContentValues();
             values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-            values.put(MediaStore.Images.Media.RELATIVE_PATH,
-                    Environment.DIRECTORY_PICTURES + "/Nirwana Hotel");
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                values.put(
+                        MediaStore.Images.Media.RELATIVE_PATH,
+                        Environment.DIRECTORY_PICTURES + "/Nirwana Hotel");
+            }
 
             Uri uri = getContext().getContentResolver().insert(
                     MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    values
-            );
+                    values);
 
-            OutputStream outputStream =
-                getContext().getContentResolver().openOutputStream(uri);
-
-            if (outputStream != null) {
-                outputStream.write(bytes);
-                outputStream.flush();
-                outputStream.close();
+            if (uri == null) {
+                call.reject("Gagal membuat MediaStore URI");
+                return;
             }
+
+            OutputStream stream = getContext().getContentResolver().openOutputStream(uri);
+
+            if (stream == null) {
+                call.reject("OutputStream null");
+                return;
+            }
+
+            stream.write(bytes);
+            stream.flush();
+            stream.close();
 
             JSObject ret = new JSObject();
             ret.put("success", true);
+            ret.put("uri", uri.toString());
 
             call.resolve(ret);
 
         } catch (Exception e) {
 
-            call.reject(e.getMessage());
+            e.printStackTrace();
+
+            JSObject err = new JSObject();
+            err.put("message", e.toString());
+
+            call.reject(e.toString(), err);
 
         }
 

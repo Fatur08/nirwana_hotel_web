@@ -35,8 +35,7 @@ com.nirwanahotel.kalianda.app-debug-33 C:\xampp\htdocs\nirwana_hotel_web\android
 com.nirwanahotel.kalianda.app-debug-34 C:\xampp\htdocs\nirwana_hotel_web\android\app\src\debug\res
 com.nirwanahotel.kalianda.app-main-35 C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\res
 com.nirwanahotel.kalianda.app-debug-36 C:\xampp\htdocs\nirwana_hotel_web\android\capacitor-cordova-android-plugins\build\intermediates\packaged_res\debug\packageDebugResources
-com.nirwanahotel.kalianda.app-debug-37 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor-community\media\android\build\intermediates\packaged_res\debug\packageDebugResources
-com.nirwanahotel.kalianda.app-debug-38 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\android\capacitor\build\intermediates\packaged_res\debug\packageDebugResources
-com.nirwanahotel.kalianda.app-debug-39 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\filesystem\android\build\intermediates\packaged_res\debug\packageDebugResources
-com.nirwanahotel.kalianda.app-debug-40 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\share\android\build\intermediates\packaged_res\debug\packageDebugResources
-com.nirwanahotel.kalianda.app-debug-41 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\splash-screen\android\build\intermediates\packaged_res\debug\packageDebugResources
+com.nirwanahotel.kalianda.app-debug-37 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\android\capacitor\build\intermediates\packaged_res\debug\packageDebugResources
+com.nirwanahotel.kalianda.app-debug-38 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\filesystem\android\build\intermediates\packaged_res\debug\packageDebugResources
+com.nirwanahotel.kalianda.app-debug-39 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\share\android\build\intermediates\packaged_res\debug\packageDebugResources
+com.nirwanahotel.kalianda.app-debug-40 C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\splash-screen\android\build\intermediates\packaged_res\debug\packageDebugResources
