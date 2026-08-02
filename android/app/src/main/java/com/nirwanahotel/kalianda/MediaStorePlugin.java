@@ -1,5 +1,6 @@
 package com.nirwanahotel.kalianda;
 
+import android.util.Log;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Build;
@@ -22,9 +23,16 @@ public class MediaStorePlugin extends Plugin {
 
     @PluginMethod
     public void saveImage(PluginCall call) {
+        Log.d("FATURR", "saveImage() DIPANGGIL");
 
         String fileName = call.getString("fileName");
+        Log.d("FATURR", "fileName = " + fileName);
         String base64 = call.getString("base64");
+        Log.d("FATURR", "base64 null ? " + (base64 == null));
+
+        if (base64 != null) {
+            Log.d("FATURR", "base64 length = " + base64.length());
+        }
 
         if (fileName == null || base64 == null) {
             call.reject("fileName atau base64 kosong");
@@ -87,6 +95,8 @@ public class MediaStorePlugin extends Plugin {
             call.reject(
                     "MediaStore saveImage failed",
                     error);
+
+            Log.e("FATURR", "ERROR SAVE IMAGE", e);
 
         }
 
