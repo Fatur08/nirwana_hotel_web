@@ -86,18 +86,14 @@ public class MediaStorePlugin extends Plugin {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
-
-            JSObject error = new JSObject();
-            error.put("message", e.getMessage());
-            error.put("class", e.getClass().getName());
+            JSObject err = new JSObject();
+            err.put("message", e.getMessage());
+            err.put("stack", Log.getStackTraceString(e));
 
             call.reject(
-                    "MediaStore saveImage failed",
-                    error);
-
-            Log.e("FATURR", "ERROR SAVE IMAGE", e);
-
+                    e.getClass().getSimpleName(),
+                    e,
+                    err);
         }
 
     }
