@@ -86,8 +86,8 @@
                         Jumlah DP
                     </label>
 
-                    <input type="text" id="jumlah_dp_resi_manual" name="jumlah_dp_resi_manual" class="form-control"
-                        style="font-size:16pt;" placeholder="Contoh: Rp.500.000">
+                    <input type="text" id="total_dp_resi_manual" name="total_dp_resi_manual" class="form-control"
+                        style="font-size:16pt;">
                 </div>
             </div>
 
@@ -295,7 +295,7 @@
         // ==========================
         // FORMAT RUPIAH TOTAL DP
         // ==========================
-        $('#jumlah_dp_resi_manual').on('keyup', function () {
+        $('#total_dp_resi_manual').on('keyup', function () {
             let angka = $(this).val().replace(/[^0-9]/g, '');
             let rupiah = angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             $(this).val(rupiah);
