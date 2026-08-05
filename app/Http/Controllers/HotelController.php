@@ -1429,6 +1429,11 @@ class HotelController extends Controller
 
         }
 
+
+        // Reset ulang key collection setelah semua filter,
+        // supaya penomoran di Blade selalu mulai dari 0 lagi
+        $histori = $histori->values();
+
         return view('InformasiPemesanan', compact('histori'));
     }
 
