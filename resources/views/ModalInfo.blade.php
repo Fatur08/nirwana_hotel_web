@@ -82,7 +82,7 @@
             <td>
                 @if($foto && $foto->foto_ktp)
 
-                    <img src="{{ asset('storage/uploads/foto_ktp/' . $foto->foto_ktp) }}" width="200">
+                    <img src="{{ asset('storage/uploads/foto_ktp/' . $foto->foto_ktp) }}" class="img-fluid" style="width:100%;">
 
                 @else
 
