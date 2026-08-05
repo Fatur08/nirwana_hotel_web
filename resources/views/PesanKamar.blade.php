@@ -129,7 +129,7 @@
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path
                                     d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4
-                                                                                                                                                                                                                                                                                                                                                                                                                                                             a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                             a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
                             </svg>
                         </span>
                         <input type="text" id="no_wa_tamu" name="no_wa_tamu" class="form-control"
@@ -182,8 +182,8 @@
 
             <div id="hasilCustomer" class="list-group mb-3"
                 style="display:none;
-                                                                                                                                                                                                                                                                                        max-height:250px;
-                                                                                                                                                                                                                                                                                        overflow-y:auto;">
+                                                                                                                                                                                                                                                                                                        max-height:250px;
+                                                                                                                                                                                                                                                                                                        overflow-y:auto;">
 
             </div>
 
@@ -209,10 +209,10 @@
 
                     <div id="lama_alamat_tamu" class="form-control d-flex align-items-center"
                         style="
-                                                                                                                                                                                                                        min-height:70px;
-                                                                                                                                                                                                                        font-size:16pt;
-                                                                                                                                                                                                                        white-space:pre-wrap;
-                                                                                                                                                                                                                        word-break:break-word;">
+                                                                                                                                                                                                                                        min-height:70px;
+                                                                                                                                                                                                                                        font-size:16pt;
+                                                                                                                                                                                                                                        white-space:pre-wrap;
+                                                                                                                                                                                                                                        word-break:break-word;">
                     </div>
 
                 </div>
@@ -374,12 +374,12 @@
                 <div class="col-12">
                     <textarea id="biaya_request" class="form-control" readonly
                         style="
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        font-size:16pt;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        min-height:120px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        resize:none;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        overflow:hidden;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        font-size:16pt;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        min-height:120px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        resize:none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        overflow:hidden;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
 
                     <input type="hidden" id="biaya_request_value" name="biaya_request">
                 </div>
@@ -483,6 +483,37 @@
                         <input type="text" id="total_dp" name="total_dp" class="form-control" style="font-size:16pt;"
                             placeholder="Contoh: Rp.500.000">
                     </div>
+                </div>
+            </div>
+
+
+
+            <!-- APAKAH PESANAN DARI TICKET.COM -->
+            <div class="row" id="ticket_dot_com_container" style="display:none;">
+                <div class="col-12">
+                    <h5 class="text-start" style="font-size:16pt;">
+                        Apakah Pesanan dari Ticket.com?
+                    </h5>
+                </div>
+            </div>
+
+            <div class="row mb-6" id="ticket_dot_com_input" style="display:none;">
+                <div class="col-12">
+                    <select id="ticket_dot_com" name="ticket_dot_com" class="form-control" style="font-size:16pt;">
+
+                        <option value="">
+                            -- Pilih --
+                        </option>
+
+                        <option value="1">
+                            Ya
+                        </option>
+
+                        <option value="0">
+                            Tidak
+                        </option>
+
+                    </select>
                 </div>
             </div>
 
@@ -595,6 +626,10 @@
             $('#bukti_pembayaran_input').hide();
 
 
+            $('#ticket_dot_com_container').hide();
+            $('#ticket_dot_com_input').hide();
+
+
             $('#metode_pembayaran_container').hide();
             $('#metode_pembayaran_input').hide();
 
@@ -607,10 +642,10 @@
 
 
             $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option value="">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option value="">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `);
 
             $('#kamar_tersedia_title').hide();
             $('#kamar_tersedia_list').hide();
@@ -655,10 +690,10 @@
                 $('#lama_no_wa').val('');
 
                 $('#lama_foto_ktp').html(`
-                                                                                                                                        <div class="text-muted">
-                                                                                                                                            Tidak ada Foto KTP
-                                                                                                                                        </div>
-                                                                                                                                    `);
+                                                                                                                                                        <div class="text-muted">
+                                                                                                                                                            Tidak ada Foto KTP
+                                                                                                                                                        </div>
+                                                                                                                                                    `);
 
                 // reset input customer baru
                 $('#nama_tamu').val('');
@@ -736,42 +771,42 @@
                         if (response.length == 0) {
 
                             html = `
-                                                                                                                                                                                                                                                                                                                                        <div class="list-group-item text-danger">
-                                                                                                                                                                                                                                                                                                                                            Customer tidak ditemukan
-                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                    `;
+                                                                                                                                                                                                                                                                                                                                                        <div class="list-group-item text-danger">
+                                                                                                                                                                                                                                                                                                                                                            Customer tidak ditemukan
+                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                    `;
 
                         } else {
 
                             response.forEach(function (item) {
 
                                 html += `
-                                                                                                                                                                                                                                                                                                                                            <a href="#"
+                                                                                                                                                                                                                                                                                                                                                            <a href="#"
 
-                                                                                                                                                                                                                                                                                                                                               class="list-group-item list-group-item-action pilihCustomer"
+                                                                                                                                                                                                                                                                                                                                                               class="list-group-item list-group-item-action pilihCustomer"
 
-                                                                                                                                                                                                                                                                                                                                               data-id="${item.id_rincian_pesanan}"
+                                                                                                                                                                                                                                                                                                                                                               data-id="${item.id_rincian_pesanan}"
 
-                                                                                                                                                                                                                                                                                                                                               data-nama="${item.nama_tamu}"
+                                                                                                                                                                                                                                                                                                                                                               data-nama="${item.nama_tamu}"
 
-                                                                                                                                                                                                                                                                                                                                               data-alamat="${item.alamat_tamu ?? ''}"
+                                                                                                                                                                                                                                                                                                                                                               data-alamat="${item.alamat_tamu ?? ''}"
 
-                                                                                                                                                                                                                                                                                                                                               data-wa="${item.no_wa_tamu ?? ''}"
+                                                                                                                                                                                                                                                                                                                                                               data-wa="${item.no_wa_tamu ?? ''}"
 
-                                                                                                                                                                                                                                                                                                                                               data-foto="${item.foto_ktp ?? ''}">
+                                                                                                                                                                                                                                                                                                                                                               data-foto="${item.foto_ktp ?? ''}">
 
-                                                                                                                                                                                                                                                                                                                                                <b>${item.nama_tamu}</b>
+                                                                                                                                                                                                                                                                                                                                                                <b>${item.nama_tamu}</b>
 
-                                                                                                                                                                                                                                                                                                                                                <br>
+                                                                                                                                                                                                                                                                                                                                                                <br>
 
-                                                                                                                                                                                                                                                                                                                                                <small>
+                                                                                                                                                                                                                                                                                                                                                                <small>
 
-                                                                                                                                                                                                                                                                                                                                                    ${item.alamat_tamu ?? '-'}
+                                                                                                                                                                                                                                                                                                                                                                    ${item.alamat_tamu ?? '-'}
 
-                                                                                                                                                                                                                                                                                                                                                </small>
+                                                                                                                                                                                                                                                                                                                                                                </small>
 
-                                                                                                                                                                                                                                                                                                                                            </a>
-                                                                                                                                                                                                                                                                                                                                        `;
+                                                                                                                                                                                                                                                                                                                                                            </a>
+                                                                                                                                                                                                                                                                                                                                                        `;
 
                             });
 
@@ -812,19 +847,19 @@
                 if (foto != '') {
 
                     $('#lama_foto_ktp').html(`
-                                                                                                                                                                                                                                                                                                                            <img
-                                                                                                                                                                                                                                                                                                                                src="/storage/uploads/foto_ktp/${foto}"
-                                                                                                                                                                                                                                                                                                                                class="img-fluid rounded border"
-                                                                                                                                                                                                                                                                                                                                style="max-height:250px;">
-                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                            <img
+                                                                                                                                                                                                                                                                                                                                                src="/storage/uploads/foto_ktp/${foto}"
+                                                                                                                                                                                                                                                                                                                                                class="img-fluid rounded border"
+                                                                                                                                                                                                                                                                                                                                                style="max-height:250px;">
+                                                                                                                                                                                                                                                                                                                                        `);
 
                 } else {
 
                     $('#lama_foto_ktp').html(`
-                                                                                                                                                                                                                                                                                                                            <div class="text-muted">
-                                                                                                                                                                                                                                                                                                                                Tidak ada Foto KTP
-                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                        `);
+                                                                                                                                                                                                                                                                                                                                            <div class="text-muted">
+                                                                                                                                                                                                                                                                                                                                                Tidak ada Foto KTP
+                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                        `);
 
                 }
 
@@ -860,10 +895,10 @@
                 if (!checkIn || !checkOut) {
 
                     $('#jumlah_kamar_dipesan').html(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option value="">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -- Pilih Tanggal Check In Dulu --
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option value="">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -- Pilih Tanggal Check In Dulu --
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `);
 
                     return;
                 }
@@ -887,10 +922,10 @@
                         for (let i = 1; i <= totalKamar; i++) {
 
                             opsiJumlah += `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <option value="${i}">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ${i} Kamar
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <option value="${i}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ${i} Kamar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    `;
                         }
 
                         $('#jumlah_kamar_dipesan').html(opsiJumlah);
@@ -959,23 +994,23 @@
                         for (let i = 1; i <= jumlah; i++) {
 
                             html += `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="mb-4">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="mb-4">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    <label class="form-label fw-bold"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                           style="font-size:16pt;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        Pilih Kamar ${i}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </label>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <label class="form-label fw-bold"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                           style="font-size:16pt;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Pilih Kamar ${i}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </label>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    <select
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        name="id_nomor_kamar[]"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        class="form-control nomor-kamar"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        style="font-size:16pt;"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        required>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <select
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        name="id_nomor_kamar[]"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        class="form-control nomor-kamar"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        style="font-size:16pt;"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        required>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <option value="">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            -- Pilih Kamar --
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </option>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <option value="">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            -- Pilih Kamar --
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </option>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            `;
 
                             response.forEach(function (kamar) {
                                 let bed = '-';
@@ -986,17 +1021,17 @@
                                 }
 
                                 html += `
-                                                                                    <option value="${kamar.id_nomor_kamar}">
-                                                                                        ${kamar.tipe_kamar}
-                                                                                        ${kamar.nomor_kamar}
-                                                                                        (${bed})
-                                                                                    </option>
-                                                                                `;
+                                                                                                    <option value="${kamar.id_nomor_kamar}">
+                                                                                                        ${kamar.tipe_kamar}
+                                                                                                        ${kamar.nomor_kamar}
+                                                                                                        (${bed})
+                                                                                                    </option>
+                                                                                                `;
                             });
                             html += `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            `;
                         }
 
                         $('#list_nomor_kamar').html(html);
@@ -1205,12 +1240,14 @@
                 $('#total_dp').val('');
                 $('#sumber_pembayaran').val('');
                 $('#bukti_pembayaran').val('');
+                $('#ticket_dot_com').val('');
 
                 // Sembunyikan semua
                 $('#metode_pembayaran_container, #metode_pembayaran_input').hide();
                 $('#total_dp_container, #total_dp_input').hide();
                 $('#sumber_pembayaran_container, #sumber_pembayaran_input').hide();
                 $('#bukti_pembayaran_container, #bukti_pembayaran_input').hide();
+                $('#ticket_dot_com_container, #ticket_dot_com_input').hide();
 
                 // Jika DP atau Sudah Bayar
                 if (status === '1' || status === '2') {
@@ -1238,11 +1275,13 @@
                 $('#sumber_pembayaran').val('');
                 $('#bukti_pembayaran').val('');
                 $('#total_dp').val('');
+                $('#ticket_dot_com').val('');
 
                 // Sembunyikan semua tambahan
                 $('#total_dp_container, #total_dp_input').hide();
                 $('#sumber_pembayaran_container, #sumber_pembayaran_input').hide();
                 $('#bukti_pembayaran_container, #bukti_pembayaran_input').hide();
+                $('#ticket_dot_com_container, #ticket_dot_com_input').hide();
 
 
 
@@ -1277,6 +1316,9 @@
 
                     // Jika online
                     if (metode === 'online') {
+
+                        $('#ticket_dot_com_container').show();
+                        $('#ticket_dot_com_input').show();
 
                         $('#sumber_pembayaran_container').show();
                         $('#sumber_pembayaran_input').show();
