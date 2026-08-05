@@ -1465,6 +1465,7 @@ class HotelController extends Controller
 
                 'nama_tamu_resi_manual' => $request->nama_tamu_resi_manual,
                 'alamat_tamu_resi_manual' => $request->alamat_tamu_resi_manual,
+                'no_wa_tamu_resi_manual' => $request->no_wa_tamu_resi_manual,
                 'total_dp_resi_manual' => $totalDP,
 
                 'check_in' => $request->check_in_resi_manual,

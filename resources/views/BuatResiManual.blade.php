@@ -90,7 +90,7 @@
                         No WA Tamu
                     </label>
 
-                    <input type="text" id="no_wa_tamu" name="no_wa_tamu" class="form-control"
+                    <input type="text" id="no_wa_tamu_resi_manual" name="no_wa_tamu_resi_manual" class="form-control"
                         placeholder="Masukkan Nomor WA Tamu" inputmode="numeric" pattern="[0-9]+" minlength="10"
                         maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </div>
