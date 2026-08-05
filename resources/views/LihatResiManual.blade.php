@@ -366,7 +366,7 @@
         </button>
 
         <button type="button" class="btn btn-success w-100 mt-3" onclick="kirimWAResiManual({{ $data->id_resi_manual }})"
-            style="font-size:16pt;">
+            style="font-size:20pt;">
             <i class="bi bi-whatsapp"></i> Kirim ke WhatsApp
         </button>
 
