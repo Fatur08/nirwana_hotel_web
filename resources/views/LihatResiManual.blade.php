@@ -314,22 +314,12 @@
 
                 @endif
 
+                {{-- GARIS --}}
                 <tr>
-
                     <td colspan="3"></td>
-
-                    <td>
-
-                        <hr style="border:3px solid black;">
-
+                    <td colspan="2">
+                        <hr style="margin:5px 0;border:3px solid #000000;">
                     </td>
-
-                    <td>
-
-                        <hr style="border:3px solid black;">
-
-                    </td>
-
                 </tr>
 
                 {{-- TOTAL --}}
@@ -357,9 +347,8 @@
                 {{-- GARIS --}}
                 <tr>
                     <td colspan="3"></td>
-
                     <td colspan="2">
-                        <hr style="margin:5px 0; border:3px solid #000000;">
+                        <hr style="margin:5px 0;border:3px solid #000000;">
                     </td>
                 </tr>
 
