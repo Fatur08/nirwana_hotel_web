@@ -1456,6 +1456,7 @@ class HotelController extends Controller
 
     public function store_BuatResiManual(Request $request)
     {
+        $totalDP = str_replace('.', '', $request->total_dp_resi_manual);
         DB::beginTransaction();
 
         try {
@@ -1464,7 +1465,7 @@ class HotelController extends Controller
 
                 'nama_tamu_resi_manual' => $request->nama_tamu_resi_manual,
                 'alamat_tamu_resi_manual' => $request->alamat_tamu_resi_manual,
-                'total_dp_resi_manual' => $request->total_dp_resi_manual,
+                'total_dp_resi_manual' => $totalDP,
 
                 'check_in' => $request->check_in_resi_manual,
                 'check_out' => $request->check_out_resi_manual,
