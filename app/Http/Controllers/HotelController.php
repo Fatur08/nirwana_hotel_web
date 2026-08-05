@@ -976,15 +976,15 @@ class HotelController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | TICKET.COM
+            | TIKET.COM
             |--------------------------------------------------------------------------
             */
 
             // Hanya relevan saat Status = Sudah Bayar (2) dan Metode = Online
-            $ticket_com = null;
+            $tiket_com = null;
 
             if ($status_pembayaran == 2 && $request->metode_pembayaran == "online") {
-                $ticket_com = (int) $request->ticket_dot_com;
+                $tiket_com = (int) $request->tiket_dot_com;
             }
 
             /*
@@ -999,7 +999,7 @@ class HotelController extends Controller
                 'total_kamar_dipesan' => $totalKamar,
                 'total_request' => $totalRequest,
                 'total_dp' => $total_dp,
-                'ticket_com' => $ticket_com
+                'tiket_com' => $tiket_com
             ]);
 
 
