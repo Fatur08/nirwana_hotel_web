@@ -973,6 +973,20 @@ class HotelController extends Controller
 
             }
 
+
+            /*
+            |--------------------------------------------------------------------------
+            | TICKET.COM
+            |--------------------------------------------------------------------------
+            */
+
+            // Hanya relevan saat Status = Sudah Bayar (2) dan Metode = Online
+            $ticket_com = null;
+
+            if ($status_pembayaran == 2 && $request->metode_pembayaran == "online") {
+                $ticket_com = (int) $request->ticket_dot_com;
+            }
+
             /*
             |--------------------------------------------------------------------------
             | INSERT RINCIAN PESANAN
@@ -980,13 +994,12 @@ class HotelController extends Controller
             */
 
             $idRincian = DB::table('rincian_pesanan')->insertGetId([
-
                 'nama_tamu' => $namaTamu,
                 'no_wa_tamu' => $noWaTamu,
                 'total_kamar_dipesan' => $totalKamar,
                 'total_request' => $totalRequest,
-                'total_dp' => $total_dp
-
+                'total_dp' => $total_dp,
+                'ticket_com' => $ticket_com
             ]);
 
 
