@@ -1289,6 +1289,7 @@ class HotelController extends Controller
                 'rp.nama_tamu',
                 'rp.total_kamar_dipesan',
                 'rp.total_request',
+                'rp.tiket_com',
                 'hk.check_in',
                 'hk.check_out',
                 DB::raw('MIN(lk.status_pembayaran) as status_pembayaran')
@@ -1298,6 +1299,7 @@ class HotelController extends Controller
                 'rp.nama_tamu',
                 'rp.total_kamar_dipesan',
                 'rp.total_request',
+                'rp.tiket_com',
                 'hk.check_in',
                 'hk.check_out'
             );
