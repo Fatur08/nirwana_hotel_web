@@ -365,6 +365,11 @@
             Cetak
         </button>
 
+        <button type="button" class="btn btn-success w-100 mt-3" onclick="kirimWAResiManual({{ $data->id }})"
+            style="font-size:16pt;">
+            <i class="bi bi-whatsapp"></i> Kirim ke WhatsApp
+        </button>
+
         <button type="button" id="btnKosongkanResi" class="btn btn-danger w-100 mt-3" style="font-size:20pt;">
             Kosongkan
         </button>

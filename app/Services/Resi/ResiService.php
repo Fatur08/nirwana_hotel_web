@@ -383,6 +383,50 @@ class ResiService
 
 
 
+    /**
+     * Mengambil data resi manual, dibungkus agar
+     * strukturnya cocok dengan fungsi resi yang sudah ada
+     */
+    public function getDataResiManual($idResiManual)
+    {
+        $data = DB::table('resi_manual')
+            ->where('id', $idResiManual)
+            ->first();
+
+        if (!$data) {
+            return null;
+        }
+
+        return (object) [
+            'nama_tamu' => $data->nama_tamu_resi_manual,
+            'no_wa_tamu' => $data->no_wa_tamu_resi_manual,
+            'check_in' => $data->check_in,
+            'check_out' => $data->check_out,
+        ];
+    }
+
+    /**
+     * Generate resi manual (versi resi_manual dari generate())
+     */
+    public function generateResiManual($idResiManual)
+    {
+        $dataPesanan = $this->getDataResiManual($idResiManual);
+
+        if (!$dataPesanan) {
+            throw new \Exception('Data resi manual tidak ditemukan.');
+        }
+
+        if ($this->exists($dataPesanan)) {
+            $this->delete($dataPesanan);
+        }
+
+        return $dataPesanan;
+    }
+
+
+
+
+
 
 
 
@@ -613,6 +657,87 @@ class ResiService
 
             'response' => $result
 
+        ];
+    }
+
+
+    /**
+     * Generate resi manual kemudian kirim ke WhatsApp
+     */
+    public function kirimWhatsAppResiManual($idResiManual, $base64Image)
+    {
+        $dataPesanan = $this->generateResiManual(
+            $idResiManual
+        );
+
+        $hasilResi = $this->saveImage(
+            $base64Image,
+            $dataPesanan
+        );
+
+        $pesan = $this->buildMessage(
+            $dataPesanan
+        );
+
+        $uploadResponse = $this->whatsappService->uploadMedia(
+            $hasilResi['storage_path']
+        );
+
+        $uploadResult = $uploadResponse->json();
+
+        if (
+            !$uploadResponse->successful()
+            || !isset($uploadResult['id'])
+        ) {
+            throw new \Exception('Upload gambar ke Meta gagal.');
+        }
+
+        $mediaId = $uploadResult['id'];
+
+        $response = $this->whatsappService->sendImage(
+            $dataPesanan->no_wa_tamu,
+            $pesan,
+            $mediaId
+        );
+
+        $result = $response->json();
+
+        $berhasil = $response->successful()
+            && isset($result['messages'][0]['id']);
+
+        Log::info(
+            "\n"
+            . "====================================================\n"
+            . "         WHATSAPP RESI MANUAL HOTEL\n"
+            . "====================================================\n"
+            . "Tanggal      : " . now()->format('d-m-Y H:i:s') . "\n"
+            . "Nama Tamu    : {$dataPesanan->nama_tamu}\n"
+            . "Nomor WA     : {$dataPesanan->no_wa_tamu}\n"
+            . "Nama File    : {$hasilResi['nama_file']}\n"
+            . "URL Resi     : {$hasilResi['url']}\n"
+            . "Status       : " . ($berhasil ? 'BERHASIL' : 'GAGAL') . "\n"
+            . "===================================================="
+        );
+
+        if ($berhasil) {
+            return [
+                'success' => true,
+                'message' => 'Resi berhasil dikirim ke WhatsApp.',
+                'url_resi' => $hasilResi['url'],
+                'nama_file' => $hasilResi['nama_file'],
+            ];
+        }
+
+        Log::error(
+            "\n=============== ERROR META API (RESI MANUAL) ===============\n"
+            . json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+            . "\n=============================================="
+        );
+
+        return [
+            'success' => false,
+            'message' => 'Resi gagal dikirim.',
+            'response' => $result
         ];
     }
 }

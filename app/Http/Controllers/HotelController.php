@@ -2013,6 +2013,37 @@ class HotelController extends Controller
 
 
 
+    public function uploadResiWAResiManual(Request $request, $id)
+    {
+        $request->validate([
+            'image' => 'required'
+        ]);
+
+        try {
+
+            $result = $this->resiService->kirimWhatsAppResiManual(
+                $id,
+                $request->image
+            );
+
+            return response()->json(
+                $result,
+                $result['success'] ? 200 : 500
+            );
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+
+        }
+    }
+
+
+
+
 
 
 
