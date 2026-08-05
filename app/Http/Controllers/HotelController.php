@@ -1270,6 +1270,7 @@ class HotelController extends Controller
         $cari_check_in = $request->cari_check_in;
         $cari_check_out = $request->cari_check_out;
         $status = $request->status;
+        $cari_pembayaran = $request->cari_pembayaran;
 
         $query = DB::table('rincian_pesanan as rp')
             ->join(
@@ -1394,6 +1395,36 @@ class HotelController extends Controller
 
             $histori = $histori->filter(function ($item) use ($status) {
                 return $item->status == $status;
+            });
+
+        }
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | FILTER PEMBAYARAN
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->filled('cari_pembayaran')) {
+
+            $histori = $histori->filter(function ($item) use ($cari_pembayaran) {
+
+                // Sudah Bayar khusus Tiket.com
+                if ($cari_pembayaran === '2_tiket') {
+                    return $item->status_pembayaran == 2 && $item->tiket_com == 1;
+                }
+
+                // Sudah Bayar biasa (BUKAN Tiket.com)
+                if ($cari_pembayaran === '2') {
+                    return $item->status_pembayaran == 2 && $item->tiket_com != 1;
+                }
+
+                // Belum Bayar (0) atau DP (1)
+                return $item->status_pembayaran == $cari_pembayaran;
+
             });
 
         }
