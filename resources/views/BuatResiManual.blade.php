@@ -86,8 +86,8 @@
                         Jumlah DP
                     </label>
 
-                    <input type="number" id="jumlah_dp_resi_manual" name="jumlah_dp_resi_manual" class="form-control"
-                        min="0" value="0" placeholder="Masukkan Jumlah DP">
+                    <input type="text" id="jumlah_dp_resi_manual" name="jumlah_dp_resi_manual" class="form-control"
+                        style="font-size:16pt;" placeholder="Contoh: Rp.500.000">
                 </div>
             </div>
 
@@ -288,6 +288,17 @@
                 formatIndonesia($(this).val())
             );
 
+        });
+
+
+
+        // ==========================
+        // FORMAT RUPIAH TOTAL DP
+        // ==========================
+        $('#jumlah_dp_resi_manual').on('keyup', function () {
+            let angka = $(this).val().replace(/[^0-9]/g, '');
+            let rupiah = angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            $(this).val(rupiah);
         });
 
 
