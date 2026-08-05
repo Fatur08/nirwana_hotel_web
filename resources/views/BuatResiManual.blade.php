@@ -63,15 +63,16 @@
             {{-- ========================= --}}
 
             <div class="row mb-5">
-
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label class="form-label fw-bold" style="font-size:16pt;">
                         Nama Tamu
                     </label>
 
                     <input type="text" id="nama_tamu_resi_manual" name="nama_tamu_resi_manual" class="form-control">
                 </div>
+            </div>
 
+            <div class="row mb-5">
                 <div class="col-md-6">
                     <label class="form-label fw-bold" style="font-size:16pt;">
                         Alamat
@@ -80,7 +81,17 @@
                     <input type="text" id="alamat_tamu_resi_manual" name="alamat_tamu_resi_manual" class="form-control">
                 </div>
 
+                <div class="col-md-6">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
+                        Jumlah DP
+                    </label>
+
+                    <input type="number" id="jumlah_dp_resi_manual" name="jumlah_dp_resi_manual" class="form-control"
+                        min="0" value="0" placeholder="Masukkan Jumlah DP">
+                </div>
             </div>
+
+
 
 
             {{-- ========================= --}}
