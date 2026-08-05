@@ -390,7 +390,7 @@ class ResiService
     public function getDataResiManual($idResiManual)
     {
         $data = DB::table('resi_manual')
-            ->where('id', $idResiManual)
+            ->where('id_resi_manual', $idResiManual)
             ->first();
 
         if (!$data) {
