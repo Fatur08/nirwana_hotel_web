@@ -39,6 +39,14 @@
         $subtotalHM +
         $subtotalEB +
         $subtotalBF;
+
+
+    $totalDP = $data->total_dp_resi_manual ?? 0;
+    $saldo = $grandTotal - $totalDP;
+
+    if ($saldo < 0) {
+        $saldo = 0;
+    }
 @endphp
 @extends('layouts.PesanKamar')
 @section('content')
@@ -324,31 +332,46 @@
 
                 </tr>
 
-                {{-- PAJAK --}}
-                <tr>
-                    <td colspan="3"></td>
-
-                    <td style="text-align:center;">
-                        Pajak
+                {{-- TOTAL --}}
+                <tr style="font-weight:bold;">
+                    <td colspan="4" style="text-align:right;">
+                        Total
                     </td>
 
-                    <td style="text-align:left;">
-                        =
+                    <td style="width:180px; text-align:left;">
+                        = Rp.{{ number_format($grandTotal, 0, ',', '.') }}
                     </td>
                 </tr>
 
-                <tr style="font-weight:bold;">
-
-                    <td colspan="3"></td>
-
-                    <td style="text-align:center;">Total</td>
-
-                    <td>
-
-                        = Rp.{{ number_format($grandTotal, 0, ',', '.') }}
-
+                {{-- DP --}}
+                <tr>
+                    <td colspan="4" style="text-align:right;">
+                        DP
                     </td>
 
+                    <td style="width:180px; text-align:left;">
+                        = Rp.{{ number_format($totalDP, 0, ',', '.') }}
+                    </td>
+                </tr>
+
+                {{-- GARIS --}}
+                <tr>
+                    <td colspan="3"></td>
+
+                    <td colspan="2">
+                        <hr style="margin:5px 0; border:3px solid #000000;">
+                    </td>
+                </tr>
+
+                {{-- SALDO --}}
+                <tr style="font-weight:bold;">
+                    <td colspan="4" style="text-align:right;">
+                        Saldo
+                    </td>
+
+                    <td style="width:180px; text-align:left;">
+                        = Rp.{{ number_format($saldo, 0, ',', '.') }}
+                    </td>
                 </tr>
 
             </table>
