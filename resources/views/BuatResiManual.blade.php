@@ -62,7 +62,7 @@
             {{-- DATA TAMU --}}
             {{-- ========================= --}}
 
-            <div class="row mb-5">
+            <div class="row mb-6">
                 <div class="col-md-12">
                     <label class="form-label fw-bold" style="font-size:16pt;">
                         Nama Tamu
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="row mb-5">
+            <div class="row mb-6">
                 <div class="col-md-6">
                     <label class="form-label fw-bold" style="font-size:16pt;">
                         Alamat
@@ -80,16 +80,20 @@
 
                     <input type="text" id="alamat_tamu_resi_manual" name="alamat_tamu_resi_manual" class="form-control">
                 </div>
+            </div>
 
+            <div class="row mb-6">
                 <div class="col-md-6">
                     <label class="form-label fw-bold" style="font-size:16pt;">
-                        Jumlah DP
+                        No WA
                     </label>
 
-                    <input type="text" id="total_dp_resi_manual" name="total_dp_resi_manual" class="form-control"
-                        style="font-size:16pt;">
+                    <input type="text" id="no_wa_tamu" name="no_wa_tamu" class="form-control"
+                        placeholder="Masukkan Nomor WA Tamu" inputmode="numeric" pattern="[0-9]+" minlength="10"
+                        maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </div>
             </div>
+
 
 
 
@@ -98,7 +102,7 @@
             {{-- CHECK IN / OUT --}}
             {{-- ========================= --}}
 
-            <div class="mb-3">
+            <div class="mb-6">
 
                 <label class="form-label fw-bold" style="font-size:16pt;">
                     Check In
@@ -215,7 +219,7 @@
                 Request Tambahan
             </h4>
 
-            <div class="row">
+            <div class="row mb-4">
 
                 <div class="col-md-6 mb-3">
                     <label style="font-size:16pt;">Ekstra Bed</label>
@@ -229,6 +233,17 @@
                     <input type="number" name="jumlah_breakfast" class="form-control" min="0" value="0">
                 </div>
 
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold" style="font-size:16pt;">
+                        Jumlah DP
+                    </label>
+
+                    <input type="text" id="total_dp_resi_manual" name="total_dp_resi_manual" class="form-control"
+                        style="font-size:16pt;" min="0" value="0">
+                </div>
             </div>
 
 
