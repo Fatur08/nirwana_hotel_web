@@ -80,50 +80,42 @@
 
             <br>
 
-            <table style="width:100%;font-size:16pt;">
+            <table style="width:100%; font-size:14pt;">
 
+                {{-- IDENTITAS --}}
                 <tr>
                     <td style="width:180px;">Nama Tn/Ny</td>
-                    <td style="width:20px;">:</td>
-                    <td>{{ $data->nama_tamu_resi_manual ?? 0 }}</td>
+                    <td style="width:25px;text-align:center;">:</td>
+                    <td colspan="3">{{ $data->nama_tamu_resi_manual ?? 0 }}</td>
                 </tr>
 
                 <tr>
                     <td>Alamat</td>
-                    <td>:</td>
-                    <td>{{ $data->alamat_tamu_resi_manual ?? 0 }}</td>
+                    <td style="text-align:center;">:</td>
+                    <td colspan="3">{{ $data->alamat_tamu_resi_manual ?? 0 }}</td>
                 </tr>
 
                 <tr>
                     <td>Check In</td>
-                    <td>:</td>
+                    <td style="text-align:center;">:</td>
                     <td colspan="3">{{ $checkIn ? $checkIn->translatedFormat('d F Y') : '-' }}</td>
                 </tr>
 
                 <tr>
                     <td>Check Out</td>
-                    <td>:</td>
+                    <td style="text-align:center;">:</td>
                     <td colspan="3">{{ $checkOut ? $checkOut->translatedFormat('d F Y') : '-' }}</td>
                 </tr>
 
                 <tr>
-
                     <td>Hari</td>
-
-                    <td>:</td>
-
-                    <td colspan="3">
-
-                        {{ $lama }} Hari
-
-                    </td>
-
+                    <td style="text-align:center;">:</td>
+                    <td colspan="3">{{ $lama }} Hari</td>
                 </tr>
 
+                {{-- SPASI --}}
                 <tr>
-
-                    <td colspan="5" style="height:25px;"></td>
-
+                    <td colspan="7" style="height:25px;"></td>
                 </tr>
 
 
@@ -144,17 +136,15 @@
 
                         <td>Deluxe</td>
 
-                        <td>:</td>
+                        <td style="text-align:center;">:</td>
 
-                        <td>
+                        <td colspan="2">
 
                             {{ $data->jumlah_kamar_deluxe ?? 0 }}
                             x Rp.{{ number_format($hargaDLX, 0, ',', '.') }}
                             x {{ $lama }} Hari
 
                         </td>
-
-                        <td></td>
 
                         <td>
 
@@ -173,17 +163,15 @@
 
                         <td>Superior</td>
 
-                        <td>:</td>
+                        <td style="text-align:center;">:</td>
 
-                        <td>
+                        <td colspan="2">
 
                             {{ $data->jumlah_kamar_superior ?? 0 }}
                             x Rp.{{ number_format($hargaSPR, 0, ',', '.') }}
                             x {{ $lama }} Hari
 
                         </td>
-
-                        <td></td>
 
                         <td>
 
@@ -202,17 +190,15 @@
 
                         <td>Standart</td>
 
-                        <td>:</td>
+                        <td style="text-align:center;">:</td>
 
-                        <td>
+                        <td colspan="2">
 
                             {{ $data->jumlah_kamar_standart ?? 0 }}
                             x Rp.{{ number_format($hargaSTD, 0, ',', '.') }}
                             x {{ $lama }} Hari
 
                         </td>
-
-                        <td></td>
 
                         <td>
 
@@ -231,17 +217,15 @@
 
                         <td>Home Stay</td>
 
-                        <td>:</td>
+                        <td style="text-align:center;">:</td>
 
-                        <td>
+                        <td colspan="2">
 
                             {{ $data->jumlah_homestay ?? 0 }}
                             x Rp.{{ number_format($hargaHM, 0, ',', '.') }}
                             x {{ $lama }} Hari
 
                         </td>
-
-                        <td></td>
 
                         <td>
 
@@ -255,7 +239,7 @@
 
                 {{-- SPASI --}}
                 <tr>
-                    <td colspan="5" style="height:15px;"></td>
+                    <td colspan="7" style="height:15px;"></td>
                 </tr>
 
                 {{-- Ekstra Bed --}}
@@ -265,16 +249,14 @@
 
                         <td>Ekstra Bed</td>
 
-                        <td>:</td>
+                        <td style="text-align:center;">:</td>
 
-                        <td>
+                        <td colspan="2">
 
                             {{ $data->jumlah_ekstrabed ?? 0 }}
                             x Rp.{{ number_format($hargaEB, 0, ',', '.') }}
 
                         </td>
-
-                        <td></td>
 
                         <td>
 
@@ -293,16 +275,14 @@
 
                         <td>Breakfast</td>
 
-                        <td>:</td>
+                        <td style="text-align:center;">:</td>
 
-                        <td>
+                        <td colspan="2">
 
                             {{ $data->jumlah_breakfast ?? 0 }}
                             x Rp.{{ number_format($hargaBF, 0, ',', '.') }}
 
                         </td>
-
-                        <td></td>
 
                         <td>
 

@@ -58,6 +58,7 @@
                     <td style="text-align:center;">:</td>
                     <td colspan="3">{{ $checkIn->translatedFormat('d F Y') }}</td>
                 </tr>
+
                 <tr>
                     <td>Check Out</td>
                     <td style="text-align:center;">:</td>
@@ -98,7 +99,7 @@
 
                 {{-- SPASI --}}
                 <tr>
-                    <td colspan="5" style="height:15px;"></td>
+                    <td colspan="7" style="height:15px;"></td>
                 </tr>
 
                 {{-- REQUEST --}}
