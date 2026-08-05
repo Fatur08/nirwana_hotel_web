@@ -68,24 +68,26 @@
                         Nama Tamu
                     </label>
 
-                    <input type="text" id="nama_tamu_resi_manual" name="nama_tamu_resi_manual" class="form-control">
+                    <input type="text" id="nama_tamu_resi_manual" name="nama_tamu_resi_manual" class="form-control"
+                        placeholder="Masukkan Nama Tamu">
                 </div>
             </div>
 
             <div class="row mb-6">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label class="form-label fw-bold" style="font-size:16pt;">
-                        Alamat
+                        Alamat Tamu
                     </label>
 
-                    <input type="text" id="alamat_tamu_resi_manual" name="alamat_tamu_resi_manual" class="form-control">
+                    <input type="text" id="alamat_tamu_resi_manual" name="alamat_tamu_resi_manual" class="form-control"
+                        placeholder="Masukkan Alamat Tamu">
                 </div>
             </div>
 
             <div class="row mb-6">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label class="form-label fw-bold" style="font-size:16pt;">
-                        No WA
+                        No WA Tamu
                     </label>
 
                     <input type="text" id="no_wa_tamu" name="no_wa_tamu" class="form-control"
@@ -236,13 +238,13 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label class="form-label fw-bold" style="font-size:16pt;">
                         Jumlah DP
                     </label>
 
                     <input type="text" id="total_dp_resi_manual" name="total_dp_resi_manual" class="form-control"
-                        style="font-size:16pt;" min="0" value="0">
+                        style="font-size:16pt;" min="0" value="0" placeholder="Masukkan Jumlah DP">
                 </div>
             </div>
 
