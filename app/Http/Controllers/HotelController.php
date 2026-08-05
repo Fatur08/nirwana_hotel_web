@@ -782,10 +782,10 @@ class HotelController extends Controller
             $metode_dp = null;
 
             /*
-            |--------------------------------------------------------------------------
-            | METODE PEMBAYARAN PELUNASAN
-            |--------------------------------------------------------------------------
-            */
+|--------------------------------------------------------------------------
+| METODE PEMBAYARAN PELUNASAN
+|--------------------------------------------------------------------------
+*/
             $metode_pembayaran = null;
             if ($request->metode_pembayaran == "cash") {
                 if ($status_pembayaran == 1) {
@@ -801,7 +801,15 @@ class HotelController extends Controller
                     $metode_dp = $request->sumber_pembayaran;
                 }
                 if ($status_pembayaran == 2) {
-                    $metode_pembayaran = $request->sumber_pembayaran;
+
+                    // Jika pesanan dari Tiket.com, otomatis isi "Tiket.com"
+                    // tanpa perlu ambil dari input Sumber Pembayaran
+                    if ($request->tiket_dot_com == 1) {
+                        $metode_pembayaran = "Tiket.com";
+                    } else {
+                        $metode_pembayaran = $request->sumber_pembayaran;
+                    }
+
                 }
             }
 
