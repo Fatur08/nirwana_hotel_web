@@ -2152,6 +2152,26 @@ class HotelController extends Controller
 
             /*
             |--------------------------------------------------------------------------
+            | TIKET.COM
+            |--------------------------------------------------------------------------
+            */
+            $tiket_com = null;
+
+            if ($request->status_pembayaran == 2 && $request->metode_pembayaran == 'online') {
+                $tiket_com = (int) $request->tiket_com;
+            }
+
+
+
+
+
+
+
+
+
+
+            /*
+            |--------------------------------------------------------------------------
             | METODE PEMBAYARAN DP
             |--------------------------------------------------------------------------
             */
@@ -2177,7 +2197,14 @@ class HotelController extends Controller
                     $metodeDP = $request->sumber_pembayaran;
                 }
                 if ($request->status_pembayaran == 2) {
-                    $metodePembayaran = $request->sumber_pembayaran;
+
+                    // Jika pesanan dari Tiket.com, otomatis isi "Tiket.com"
+                    if ($request->tiket_com == 1) {
+                        $metodePembayaran = 'Tiket.com';
+                    } else {
+                        $metodePembayaran = $request->sumber_pembayaran;
+                    }
+
                 }
             }
 
@@ -2238,6 +2265,16 @@ class HotelController extends Controller
             |--------------------------------------------------------------------------
             */
             if ($request->status_pembayaran == 2) {
+
+                DB::table('rincian_pesanan')
+                    ->where(
+                        'id_rincian_pesanan',
+                        $request->id_rincian_pesanan
+                    )
+                    ->update([
+                        'tiket_com' => $tiket_com
+                    ]);
+
                 DB::table('laporan_keuangan')
                     ->where(
                         'id_rincian_pesanan',
@@ -2272,7 +2309,7 @@ class HotelController extends Controller
                     'Pembayaran DP atas nama "' .
                     $dataPesanan->nama_tamu .
                     '" berhasil diterima melalui ' .
-                    $metodePembayaran .
+                    $metodeDP .
                     '.',
                     'pembayaran',
                     $request->dibuat_oleh

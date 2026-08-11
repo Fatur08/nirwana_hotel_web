@@ -88,7 +88,7 @@
                 <select id="tiket_com" name="tiket_com" class="form-control" style="font-size:16pt;">
 
                     <option value="">
-                        -- Pilih --
+                        -- Pilih Ya / Tidak --
                     </option>
 
                     <option value="1">
