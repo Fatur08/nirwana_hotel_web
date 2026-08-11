@@ -309,10 +309,8 @@
                         $('#tiket_com_container').show();
                         $('#tiket_com_input').show();
 
-                        // Bukti Pembayaran langsung muncul
-                        // Sumber Pembayaran menunggu jawaban Tiket.com
-                        $('#bukti_pembayaran_container').show();
-                        $('#bukti_pembayaran_input').show();
+                        // Bukti Pembayaran & Sumber Pembayaran menunggu jawaban Tiket.com
+                        // (lihat handler #tiket_com di bawah)
                     }
                 }
             });
@@ -328,9 +326,21 @@
                 let tiketCom = $(this).val();
 
                 $('#sumber_pembayaran').val('');
+                $('#bukti_pembayaran').val('');
+
                 $('#sumber_pembayaran_container').hide();
                 $('#sumber_pembayaran_input').hide();
 
+                $('#bukti_pembayaran_container').hide();
+                $('#bukti_pembayaran_input').hide();
+
+                // Jika sudah dijawab (Ya atau Tidak), tampilkan Bukti Pembayaran
+                if (tiketCom == '1' || tiketCom == '0') {
+                    $('#bukti_pembayaran_container').show();
+                    $('#bukti_pembayaran_input').show();
+                }
+
+                // Sumber Pembayaran hanya muncul jika jawabannya "Tidak"
                 if (tiketCom == '0') {
                     $('#sumber_pembayaran_container').show();
                     $('#sumber_pembayaran_input').show();
