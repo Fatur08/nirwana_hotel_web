@@ -375,6 +375,7 @@
 
                 let status = $('#status_pembayaran').val();
                 let metode = $('#metode_pembayaran').val();
+                let tiketCom = $('#tiket_dot_com').val();
 
                 let total_dp = $('#total_dp').val();
                 let sumber = $('#sumber_pembayaran').val();
@@ -479,7 +480,18 @@
 
                     if (metode == 'online') {
 
-                        if (sumber == '') {
+                        if (tiketCom == '') {
+
+                            showError(
+                                'Silahkan pilih apakah pesanan dari Tiket.com',
+                                '#tiket_dot_com'
+                            );
+
+                            return;
+
+                        }
+
+                        if (tiketCom == '0' && sumber == '') {
 
                             showError(
                                 'Sumber pembayaran harus diisi',
