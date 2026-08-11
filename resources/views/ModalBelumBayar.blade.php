@@ -74,6 +74,40 @@
 
 
 
+        <!-- APAKAH PESANAN DARI TIKET.COM -->
+        <div class="row" id="tiket_com_container" style="display:none;">
+            <div class="col-12">
+                <h5 class="text-start" style="font-size:16pt;">
+                    Apakah Pesanan dari Tiket.com?
+                </h5>
+            </div>
+        </div>
+
+        <div class="row mb-6" id="tiket_com_input" style="display:none;">
+            <div class="col-12">
+                <select id="tiket_com" name="tiket_com" class="form-control" style="font-size:16pt;">
+
+                    <option value="">
+                        -- Pilih --
+                    </option>
+
+                    <option value="1">
+                        Ya
+                    </option>
+
+                    <option value="0">
+                        Tidak
+                    </option>
+
+                </select>
+            </div>
+        </div>
+
+
+
+
+
+
 
 
 
@@ -203,6 +237,7 @@
                 $('#total_dp').val('');
                 $('#sumber_pembayaran').val('');
                 $('#bukti_pembayaran').val('');
+                $('#tiket_com').val('');
 
                 $('#metode_pembayaran_container').hide();
                 $('#metode_pembayaran_input').hide();
@@ -215,6 +250,9 @@
 
                 $('#bukti_pembayaran_container').hide();
                 $('#bukti_pembayaran_input').hide();
+
+                $('#tiket_com_container').hide();
+                $('#tiket_com_input').hide();
 
                 if (status == '1' || status == '2') {
                     $('#metode_pembayaran_container').show();
@@ -244,6 +282,9 @@
                 $('#bukti_pembayaran_container').hide();
                 $('#bukti_pembayaran_input').hide();
 
+                $('#tiket_com_container').hide();
+                $('#tiket_com_input').hide();
+
                 // ====================================
                 // STATUS DP
                 // ====================================
@@ -265,12 +306,34 @@
                 // ====================================
                 if (status == '2') {
                     if (metode == 'online') {
-                        $('#sumber_pembayaran_container').show();
-                        $('#sumber_pembayaran_input').show();
+                        $('#tiket_com_container').show();
+                        $('#tiket_com_input').show();
 
+                        // Bukti Pembayaran langsung muncul
+                        // Sumber Pembayaran menunggu jawaban Tiket.com
                         $('#bukti_pembayaran_container').show();
                         $('#bukti_pembayaran_input').show();
                     }
+                }
+            });
+
+
+
+
+
+            // ==========================
+            // TIKET.COM
+            // ==========================
+            $(document).on('change', '#tiket_com', function () {
+                let tiketCom = $(this).val();
+
+                $('#sumber_pembayaran').val('');
+                $('#sumber_pembayaran_container').hide();
+                $('#sumber_pembayaran_input').hide();
+
+                if (tiketCom == '0') {
+                    $('#sumber_pembayaran_container').show();
+                    $('#sumber_pembayaran_input').show();
                 }
             });
 
