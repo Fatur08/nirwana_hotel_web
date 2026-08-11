@@ -872,3 +872,38 @@ input[type="file"] {
     }
 
 }
+
+
+
+
+/* Animasi getar untuk lonceng notifikasi */
+@keyframes shakeNotifikasi {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    10%,
+    30%,
+    50%,
+    70% {
+        transform: rotate(-15deg);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: rotate(15deg);
+    }
+
+    90% {
+        transform: rotate(-8deg);
+    }
+}
+
+.btn-notifikasi.has-new-activity {
+    background-color: #dc3545 !important;
+    animation: shakeNotifikasi 0.8s ease-in-out infinite;
+}
