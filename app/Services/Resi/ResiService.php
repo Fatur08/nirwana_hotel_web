@@ -435,6 +435,9 @@ class ResiService
     /**
      * Generate resi kemudian kirim ke WhatsApp
      */
+    /**
+     * Generate resi kemudian kirim ke WhatsApp
+     */
     public function kirimWhatsApp($idRincianPesanan, $base64Image)
     {
         /*
@@ -446,12 +449,6 @@ class ResiService
             $idRincianPesanan
         );
 
-
-
-
-
-
-
         /*
         |--------------------------------------------------------------------------
         | Simpan Gambar Resi
@@ -461,25 +458,6 @@ class ResiService
             $base64Image,
             $dataPesanan
         );
-
-
-
-
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Membuat Pesan WhatsApp
-        |--------------------------------------------------------------------------
-        */
-        $pesan = $this->buildMessage(
-            $dataPesanan
-        );
-
-
-
-
-
 
         /*
         |--------------------------------------------------------------------------
@@ -494,16 +472,7 @@ class ResiService
             $hasilResi['storage_path']
         );
 
-
-
-
-
         $uploadResult = $uploadResponse->json();
-
-
-
-
-
 
         /*
         |--------------------------------------------------------------------------
@@ -521,12 +490,6 @@ class ResiService
 
         }
 
-
-
-
-
-
-
         /*
         |--------------------------------------------------------------------------
         | Ambil Media ID
@@ -534,24 +497,41 @@ class ResiService
         */
         $mediaId = $uploadResult['id'];
 
+        /*
+        |--------------------------------------------------------------------------
+        | Format Tanggal Indonesia (untuk parameter template)
+        |--------------------------------------------------------------------------
+        */
+        \Carbon\Carbon::setLocale('id');
 
+        $checkIn = \Carbon\Carbon::parse(
+            $dataPesanan->check_in
+        )->translatedFormat('l, d F Y');
 
-
-
-
+        $checkOut = \Carbon\Carbon::parse(
+            $dataPesanan->check_out
+        )->translatedFormat('l, d F Y');
 
         /*
         |--------------------------------------------------------------------------
-        | Kirim Gambar ke WhatsApp
+        | Kirim Gambar ke WhatsApp (Menggunakan Template)
         |--------------------------------------------------------------------------
         */
-        $response = $this->whatsappService->sendImage(
+        $response = $this->whatsappService->sendTemplateImage(
 
             $dataPesanan->no_wa_tamu,
 
-            $pesan,
+            $mediaId,
 
-            $mediaId
+            'kirim_resi_hotel',
+
+            'id',
+
+            [
+                $dataPesanan->nama_tamu,
+                $checkIn,
+                $checkOut,
+            ]
 
         );
 
@@ -559,13 +539,6 @@ class ResiService
 
         $berhasil = $response->successful()
             && isset($result['messages'][0]['id']);
-
-
-
-
-
-
-
 
         /*
         |--------------------------------------------------------------------------
@@ -627,12 +600,6 @@ class ResiService
         | Gagal
         |--------------------------------------------------------------------------
         */
-        /*
-        |--------------------------------------------------------------------------
-        | Simpan Response Error Meta
-        |--------------------------------------------------------------------------
-        */
-
         Log::error(
 
             "\n"

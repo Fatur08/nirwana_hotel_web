@@ -83,6 +83,69 @@ class MetaService
 
 
 
+    /**
+     * Kirim pesan menggunakan Template (untuk business-initiated message)
+     */
+    public function sendTemplateImage($target, $mediaId, $templateName, $languageCode, array $bodyParams)
+    {
+        $parameters = array_map(function ($value) {
+            return [
+                'type' => 'text',
+                'text' => $value,
+            ];
+        }, $bodyParams);
+
+        return Http::withToken($this->token)
+            ->post(
+                "https://graph.facebook.com/{$this->version}/{$this->phoneNumberId}/messages",
+                [
+                    'messaging_product' => 'whatsapp',
+
+                    'to' => $target,
+
+                    'type' => 'template',
+
+                    'template' => [
+
+                        'name' => $templateName,
+
+                        'language' => [
+                            'code' => $languageCode,
+                        ],
+
+                        'components' => [
+
+                            [
+                                'type' => 'header',
+                                'parameters' => [
+                                    [
+                                        'type' => 'image',
+                                        'image' => [
+                                            'id' => $mediaId,
+                                        ],
+                                    ],
+                                ],
+                            ],
+
+                            [
+                                'type' => 'body',
+                                'parameters' => $parameters,
+                            ],
+
+                        ],
+
+                    ],
+                ]
+            );
+    }
+
+
+
+
+
+
+
+
 
     /**
      * Upload media ke Meta Cloud API

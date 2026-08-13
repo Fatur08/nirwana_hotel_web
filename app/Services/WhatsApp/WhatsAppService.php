@@ -190,6 +190,23 @@ class WhatsAppService
 
 
 
+    public function sendTemplateImage($target, $mediaId, $templateName, $languageCode, array $bodyParams)
+    {
+        return $this->provider->sendTemplateImage(
+            $this->normalizeNumber($target),
+            $mediaId,
+            $templateName,
+            $languageCode,
+            $bodyParams
+        );
+    }
+
+
+
+
+
+
+
 
 
     /**
