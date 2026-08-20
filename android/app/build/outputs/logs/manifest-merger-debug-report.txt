@@ -11,10 +11,10 @@ INJECTED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidMani
 	android:name
 		ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:25:13-62
 manifest
-ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:2:1-36:12
+ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:2:1-39:12
 MERGED from [:capacitor-community-media] C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor-community\media\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:capacitor-filesystem] C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\filesystem\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:capacitor-share] C:\xampp\htdocs\nirwana_hotel_web\node_modules\@capacitor\share\android\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
@@ -129,6 +129,16 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:35:5-67
 	android:name
 		ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:35:22-64
+uses-permission#android.permission.CAMERA
+ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:36:5-65
+	android:name
+		ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:36:22-62
+uses-feature#android.hardware.camera
+ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:38:5-85
+	android:required
+		ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:38:58-82
+	android:name
+		ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:38:19-57
 meta-data#android.support.FILE_PROVIDER_PATHS
 ADDED from C:\xampp\htdocs\nirwana_hotel_web\android\app\src\main\AndroidManifest.xml:29:13-112
 	android:resource
