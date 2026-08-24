@@ -549,8 +549,8 @@ input[type="file"] {
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    width: 58px;
-    height: 58px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     border: none;
     background: #ffffff;
@@ -915,7 +915,7 @@ input[type="file"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 25px;
     margin-bottom: 15px;
     clear: both;
     position: relative;
@@ -927,8 +927,8 @@ input[type="file"] {
 }
 
 .btn-notifikasi {
-    width: 42px;
-    height: 42px;
+    width: 100px;
+    height: 100px;
     border: none;
     border-radius: 50%;
     background: white;
@@ -972,8 +972,8 @@ input[type="file"] {
     bottom: auto !important;
     transform: none !important;
 
-    width: 42px;
-    height: 42px;
+    width: 100px;
+    height: 100px;
 
     margin: 0 auto !important;
 
