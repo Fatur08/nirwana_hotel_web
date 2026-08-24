@@ -915,7 +915,7 @@ input[type="file"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 25px;
+    margin-top: 40px;
     margin-bottom: 15px;
     clear: both;
     position: relative;
@@ -951,7 +951,7 @@ input[type="file"] {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    margin-top: 25px;
+    margin-top: 40px;
     margin-bottom: 15px;
     clear: both;
     position: relative !important;
