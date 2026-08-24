@@ -939,3 +939,67 @@ input[type="file"] {
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+
+
+/* =========================================
+   NOTIFIKASI DI BAWAH MENU LOGOUT
+   ========================================= */
+
+.notification-bottom {
+    width: 100%;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    clear: both;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+}
+
+/* Paksa tombol mengikuti posisi parent,
+   bukan fixed di layar */
+.notification-bottom .btn-notifikasi {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+
+    width: 42px;
+    height: 42px;
+
+    margin: 0 auto !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+    background: #ffffff;
+
+    font-size: 20px;
+    cursor: pointer;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Wrapper dropdown juga jangan ikut menggeser tombol */
+.notification-bottom .notification-wrapper {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+
+    width: 100%;
+    display: flex !important;
+    justify-content: center !important;
+}
