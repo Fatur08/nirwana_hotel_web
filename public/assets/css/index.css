@@ -912,21 +912,30 @@ input[type="file"] {
 
 .notification-bottom {
     width: 100%;
-    display: block;
-    flex: 0 0 100%;
-    clear: both;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 15px;
-    text-align: center;
+    margin-bottom: 15px;
+    clear: both;
+    position: relative;
+    z-index: 1000;
 }
 
-.notification-bottom .notification-wrapper {
-    width: 100%;
-    display: block;
+.notification-wrapper {
     position: relative;
 }
 
-.notification-bottom .btn-notifikasi {
-    display: inline-flex;
+.btn-notifikasi {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
