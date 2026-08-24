@@ -907,3 +907,26 @@ input[type="file"] {
     background-color: #dc3545 !important;
     animation: shakeNotifikasi 0.8s ease-in-out infinite;
 }
+
+
+
+.notification-bottom {
+    width: 100%;
+    display: block;
+    flex: 0 0 100%;
+    clear: both;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.notification-bottom .notification-wrapper {
+    width: 100%;
+    display: block;
+    position: relative;
+}
+
+.notification-bottom .btn-notifikasi {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
