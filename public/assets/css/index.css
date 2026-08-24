@@ -813,12 +813,12 @@ input[type="file"] {
 ==================================================*/
 .logo-area {
     position: relative;
-    width: 290px;
+    width: 400px;
     margin: 0 auto 20px;
 }
 
 .logo-hotel {
-    width: 290px;
+    width: 400px;
     height: auto;
     display: block;
 }
@@ -951,7 +951,7 @@ input[type="file"] {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    margin-top: 15px;
+    margin-top: 25px;
     margin-bottom: 15px;
     clear: both;
     position: relative !important;
