@@ -1272,6 +1272,10 @@ class HotelController extends Controller
         $status = $request->status;
         $cari_pembayaran = $request->cari_pembayaran;
 
+        // Batas paling lama yang boleh tampil di listing default:
+        // awal bulan sebelumnya (misal sekarang September -> batas mulai 1 Agustus)
+        $batasAwal = Carbon::now()->subMonthNoOverflow()->startOfMonth()->format('Y-m-d');
+
         $query = DB::table('rincian_pesanan as rp')
             ->join(
                 'histori_kamar as hk',
@@ -1328,11 +1332,11 @@ class HotelController extends Controller
 
             $query->whereDate('hk.check_in', $cari_check_in)
                 ->orderByRaw("
-                CASE
-                    WHEN DATE(hk.check_out) = ? THEN 0
-                    ELSE 1
-                END
-            ", [$cari_check_out])
+            CASE
+                WHEN DATE(hk.check_out) = ? THEN 0
+                ELSE 1
+            END
+        ", [$cari_check_out])
                 ->orderBy('hk.check_out', 'asc');
 
         }
@@ -1353,10 +1357,11 @@ class HotelController extends Controller
 
         }
 
-        // Tanpa Filter Tanggal
+        // Tanpa Filter Tanggal (listing default)
         else {
 
-            $query->orderByDesc('hk.check_in')
+            $query->where('hk.check_in', '>=', $batasAwal)
+                ->orderByDesc('hk.check_in')
                 ->orderByDesc('hk.check_out');
 
         }
