@@ -1322,22 +1322,16 @@ class HotelController extends Controller
         }
 
         /*
-        |--------------------------------------------------------------------------
-        | FILTER TANGGAL
-        |--------------------------------------------------------------------------
-        */
+|--------------------------------------------------------------------------
+| FILTER TANGGAL
+|--------------------------------------------------------------------------
+*/
 
-        // Check In + Check Out
+        // Check In + Check Out (rentang tanggal)
         if ($request->filled('cari_check_in') && $request->filled('cari_check_out')) {
 
-            $query->whereDate('hk.check_in', $cari_check_in)
-                ->orderByRaw("
-            CASE
-                WHEN DATE(hk.check_out) = ? THEN 0
-                ELSE 1
-            END
-        ", [$cari_check_out])
-                ->orderBy('hk.check_out', 'asc');
+            $query->whereBetween('hk.check_in', [$cari_check_in, $cari_check_out])
+                ->orderBy('hk.check_in', 'asc');
 
         }
 
