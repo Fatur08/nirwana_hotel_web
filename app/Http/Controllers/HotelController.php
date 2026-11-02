@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Services\WhatsApp\WhatsAppService;
 use App\Services\NotifikasiService;
 use App\Services\Resi\ResiService;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 
 class HotelController extends Controller
 {
@@ -545,9 +547,92 @@ class HotelController extends Controller
 
     public function store_PesanKamar(Request $request)
     {
+        // [BARU] ---------------------------------------------------------------
+        // Validasi dasar. Format respons dibuat sama dengan catch di bawah supaya
+        // frontend yang sudah ada tidak perlu diubah.
+        // ----------------------------------------------------------------------
+        $validator = Validator::make($request->all(), [
+            'id_nomor_kamar' => 'required|array|min:1',
+            'id_nomor_kamar.*' => 'required|distinct',
+            'check_in' => 'required|date',
+            'check_out' => 'required|date|after:check_in',
+        ], [
+            'id_nomor_kamar.required' => 'Pilih minimal satu kamar.',
+            'check_out.after' => 'Tanggal check-out harus setelah check-in.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first()
+            ]);
+        }
+
+        $idempotencyKey = $request->input('idempotency_key'); // [BARU]
+
         DB::beginTransaction();
 
         try {
+
+            // [BARU] -----------------------------------------------------------
+            // 1) KUNCI BARIS KAMAR
+            // Harus dilakukan PALING AWAL, sebelum query SELECT biasa, supaya
+            // request kedua menunggu sampai request pertama selesai (commit),
+            // lalu melihat data terbaru.
+            // orderBy dipakai agar urutan lock konsisten (mencegah deadlock).
+            // ------------------------------------------------------------------
+            DB::table('nomor_kamar')
+                ->whereIn('id_nomor_kamar', $request->id_nomor_kamar)
+                ->orderBy('id_nomor_kamar')
+                ->lockForUpdate()
+                ->get();
+
+            // [BARU] -----------------------------------------------------------
+            // 2) CEK IDEMPOTENCY KEY
+            // Kalau key ini sudah pernah tersimpan, berarti ini request ulang
+            // (double klik / retry). Jangan simpan lagi, balas sukses saja.
+            // ------------------------------------------------------------------
+            if ($idempotencyKey) {
+                $sudahAda = DB::table('rincian_pesanan')
+                    ->where('idempotency_key', $idempotencyKey)
+                    ->lockForUpdate()
+                    ->exists();
+
+                if ($sudahAda) {
+                    DB::rollBack();
+                    return response()->json([
+                        'status' => 'success',
+                        'duplicate' => true
+                    ]);
+                }
+            }
+
+            // [BARU] -----------------------------------------------------------
+            // 3) CEK BENTROK TANGGAL KAMAR
+            // Kamar yang sama tidak boleh dipesan di rentang tanggal yang
+            // beririsan. Ini juga menangkap duplikat tanpa idempotency key.
+            //
+            // CATATAN: kalau histori_kamar menyimpan pesanan yang sudah dibatalkan
+            // atau selesai, tambahkan filter statusnya di sini, misalnya:
+            //   ->where('hk.status', '!=', 'batal')
+            // ------------------------------------------------------------------
+            $bentrok = DB::table('histori_kamar as hk')
+                ->join('nomor_kamar as nk', 'nk.id_nomor_kamar', '=', 'hk.id_nomor_kamar')
+                ->whereIn('hk.id_nomor_kamar', $request->id_nomor_kamar)
+                ->where('hk.check_in', '<', $request->check_out)
+                ->where('hk.check_out', '>', $request->check_in)
+                ->select('nk.nomor_kamar', 'hk.nama_tamu', 'hk.check_in', 'hk.check_out')
+                ->lockForUpdate()
+                ->get();
+
+            if ($bentrok->isNotEmpty()) {
+                $daftar = $bentrok->map(function ($b) {
+                    return "Kamar {$b->nomor_kamar} (a.n. {$b->nama_tamu}, {$b->check_in} s/d {$b->check_out})";
+                })->implode('; ');
+
+                throw new Exception("Kamar sudah terpesan pada tanggal tersebut: " . $daftar);
+            }
+
             /*
             |--------------------------------------------------------------------------
             | Gunakan Nomor Kamar Yang Dipilih
@@ -556,8 +641,6 @@ class HotelController extends Controller
             $request->merge([
                 'id_nomor_kamar' => $request->id_nomor_kamar
             ]);
-
-
 
             /*
             |--------------------------------------------------------------------------
@@ -580,7 +663,6 @@ class HotelController extends Controller
                 | UPLOAD FOTO KTP CUSTOMER BARU
                 |--------------------------------------------------------------------------
                 */
-
                 if ($request->hasFile('foto_ktp')) {
                     $timestamp = now()->format('Y-m-d_H-i-s');
                     $namaFile = str_replace(' ', '_', $namaTamu);
@@ -614,13 +696,13 @@ class HotelController extends Controller
                         'rp.nama_tamu',
                         'rp.no_wa_tamu',
                         DB::raw('(SELECT alamat_tamu
-                  FROM histori_kamar
-                  WHERE id_rincian_pesanan = rp.id_rincian_pesanan
-                  LIMIT 1) as alamat_tamu'),
+              FROM histori_kamar
+              WHERE id_rincian_pesanan = rp.id_rincian_pesanan
+              LIMIT 1) as alamat_tamu'),
                         DB::raw('(SELECT foto_ktp
-                  FROM laporan_keuangan
-                  WHERE id_rincian_pesanan = rp.id_rincian_pesanan
-                  LIMIT 1) as foto_ktp')
+              FROM laporan_keuangan
+              WHERE id_rincian_pesanan = rp.id_rincian_pesanan
+              LIMIT 1) as foto_ktp')
                     )
                     ->where('rp.id_rincian_pesanan', $request->id_customer_lama)
                     ->first();
@@ -635,8 +717,6 @@ class HotelController extends Controller
                 $foto_ktp = $customer->foto_ktp;
             }
 
-
-
             /*
             |--------------------------------------------------------------------------
             | AMBIL KAMAR
@@ -649,14 +729,11 @@ class HotelController extends Controller
                     '=',
                     'k.id_kamar'
                 )
-
                 ->whereIn(
                     'nk.id_nomor_kamar',
                     $request->id_nomor_kamar
                 )
-
                 ->select(
-
                     'nk.id_nomor_kamar',
                     'nk.nomor_kamar',
                     'nk.jenis_bed',
@@ -667,100 +744,61 @@ class HotelController extends Controller
                     'k.tarif_per_hari',
                     'k.before_10_persen',
                     'k.after_10_persen'
-
                 )
                 ->get();
+
             if ($kamarDipilih->isEmpty()) {
                 throw new Exception("Data kamar tidak ditemukan.");
             }
-
 
             /*
             |--------------------------------------------------------------------------
             | GROUP TIPE KAMAR
             |--------------------------------------------------------------------------
             */
-            $groupKamar =
-                $kamarDipilih->groupBy('id_kamar');
-
-
+            $groupKamar = $kamarDipilih->groupBy('id_kamar');
 
             /*
             |--------------------------------------------------------------------------
             | LAMA INAP
             |--------------------------------------------------------------------------
             */
-            $checkIn =
-                \Carbon\Carbon::parse($request->check_in);
-
-            $checkOut =
-                \Carbon\Carbon::parse($request->check_out);
-
-            $lama_inap =
-                $checkOut->diffInDays($checkIn);
-
-
+            $checkIn = \Carbon\Carbon::parse($request->check_in);
+            $checkOut = \Carbon\Carbon::parse($request->check_out);
+            $lama_inap = $checkOut->diffInDays($checkIn);
 
             /*
             |--------------------------------------------------------------------------
             | TOTAL KAMAR
             |--------------------------------------------------------------------------
             */
-            $totalKamar =
-                count($request->id_nomor_kamar);
-
-
+            $totalKamar = count($request->id_nomor_kamar);
 
             /*
             |--------------------------------------------------------------------------
             | HITUNG REQUEST
             |--------------------------------------------------------------------------
             */
-            $extraBed =
-                DB::table('kamar')
-                    ->where('kode_kamar', 'BED')
-                    ->first();
+            $extraBed = DB::table('kamar')->where('kode_kamar', 'BED')->first();
+            $breakfast = DB::table('kamar')->where('kode_kamar', 'FAST')->first();
 
-            $breakfast =
-                DB::table('kamar')
-                    ->where('kode_kamar', 'FAST')
-                    ->first();
+            $jumlahExtraBed = (int) $request->jumlah_extra_bed;
+            $jumlahBreakfast = (int) $request->jumlah_breakfast;
 
-            $jumlahExtraBed =
-                (int) $request->jumlah_extra_bed;
+            $totalExtraBed = $jumlahExtraBed * ($extraBed->tarif_per_hari ?? 0);
+            $totalBreakfast = $jumlahBreakfast * ($breakfast->tarif_per_hari ?? 0);
 
-            $jumlahBreakfast =
-                (int) $request->jumlah_breakfast;
-
-            $totalExtraBed =
-                $jumlahExtraBed *
-                ($extraBed->tarif_per_hari ?? 0);
-
-            $totalBreakfast =
-                $jumlahBreakfast *
-                ($breakfast->tarif_per_hari ?? 0);
-
-            $totalRequest =
-                $totalExtraBed +
-                $totalBreakfast;
-
-
-
-
-
-
+            $totalRequest = $totalExtraBed + $totalBreakfast;
 
             /*
             |--------------------------------------------------------------------------
             | STATUS PEMBAYARAN
             |--------------------------------------------------------------------------
             */
-
             // 0 = Belum Bayar
             // 1 = DP
             // 2 = Sudah Bayar
             $status_pembayaran = (int) $request->status_pembayaran;
-
 
             /*
             |--------------------------------------------------------------------------
@@ -772,21 +810,14 @@ class HotelController extends Controller
                 $total_dp = $request->total_dp;
             }
 
-
-
             /*
             |--------------------------------------------------------------------------
-            | METODE PEMBAYARAN DP
+            | METODE PEMBAYARAN DP & PELUNASAN
             |--------------------------------------------------------------------------
             */
             $metode_dp = null;
-
-            /*
-|--------------------------------------------------------------------------
-| METODE PEMBAYARAN PELUNASAN
-|--------------------------------------------------------------------------
-*/
             $metode_pembayaran = null;
+
             if ($request->metode_pembayaran == "cash") {
                 if ($status_pembayaran == 1) {
                     $metode_dp = "Cash";
@@ -801,26 +832,14 @@ class HotelController extends Controller
                     $metode_dp = $request->sumber_pembayaran;
                 }
                 if ($status_pembayaran == 2) {
-
                     // Jika pesanan dari Tiket.com, otomatis isi "Tiket.com"
-                    // tanpa perlu ambil dari input Sumber Pembayaran
                     if ($request->tiket_dot_com == 1) {
                         $metode_pembayaran = "Tiket.com";
                     } else {
                         $metode_pembayaran = $request->sumber_pembayaran;
                     }
-
                 }
             }
-
-
-
-
-
-
-
-
-
 
             /*
             |--------------------------------------------------------------------------
@@ -847,10 +866,7 @@ class HotelController extends Controller
 
                 $request
                     ->file('bukti_pembayaran')
-                    ->storeAs(
-                        $storagePath,
-                        $bukti_dp
-                    );
+                    ->storeAs($storagePath, $bukti_dp);
 
                 $publicPath = public_path('storage/uploads/bukti_dp/');
 
@@ -858,31 +874,17 @@ class HotelController extends Controller
                     mkdir($publicPath, 0777, true);
                 }
                 copy(
-                    storage_path(
-                        'app/' .
-                        $storagePath .
-                        $bukti_dp
-                    ),
-
-                    public_path(
-                        'storage/uploads/bukti_dp/' .
-                        $bukti_dp
-                    )
+                    storage_path('app/' . $storagePath . $bukti_dp),
+                    public_path('storage/uploads/bukti_dp/' . $bukti_dp)
                 );
             }
-
-
-
-
 
             /*
             |--------------------------------------------------------------------------
             | UPLOAD BUKTI PELUNASAN
             |--------------------------------------------------------------------------
             */
-
             $bukti_pembayaran = null;
-
             if (
                 $status_pembayaran == 2 &&
                 $request->metode_pembayaran == "online" &&
@@ -901,71 +903,43 @@ class HotelController extends Controller
                 $storagePath = 'public/uploads/bukti_pembayaran/';
                 $request
                     ->file('bukti_pembayaran')
-                    ->storeAs(
-                        $storagePath,
-                        $bukti_pembayaran
-                    );
+                    ->storeAs($storagePath, $bukti_pembayaran);
 
                 $publicPath = public_path('storage/uploads/bukti_pembayaran/');
                 if (!is_dir($publicPath)) {
                     mkdir($publicPath, 0777, true);
                 }
                 copy(
-                    storage_path(
-                        'app/' .
-                        $storagePath .
-                        $bukti_pembayaran
-                    ),
-
-                    public_path(
-                        'storage/uploads/bukti_pembayaran/' .
-                        $bukti_pembayaran
-                    )
+                    storage_path('app/' . $storagePath . $bukti_pembayaran),
+                    public_path('storage/uploads/bukti_pembayaran/' . $bukti_pembayaran)
                 );
             }
-
-
-
-
-
-
 
             /*
             |--------------------------------------------------------------------------
             | CUSTOMER BARU / CUSTOMER LAMA
             |--------------------------------------------------------------------------
+            | CATATAN: blok ini mengulang pengambilan data customer yang sudah
+            | dilakukan di atas (hasilnya sama). Dibiarkan agar perilaku tidak
+            | berubah, tetapi aman dihapus kalau mau dirapikan.
             */
-
             if ($request->jenis_customer == "baru") {
-                /*
-                |--------------------------------------------------------------------------
-                | INSERT CUSTOMER BARU
-                |--------------------------------------------------------------------------
-                */
-
                 $namaTamu = $request->nama_tamu;
                 $alamatTamu = $request->alamat_tamu;
                 $noWaTamu = $request->no_wa_tamu;
-
             } else {
-                /*
-                |--------------------------------------------------------------------------
-                | CUSTOMER LAMA
-                |--------------------------------------------------------------------------
-                */
-
                 $customer = DB::table('rincian_pesanan as rp')
                     ->select(
                         'rp.nama_tamu',
                         'rp.no_wa_tamu',
                         DB::raw('(SELECT alamat_tamu
-                FROM histori_kamar
-                WHERE id_rincian_pesanan = rp.id_rincian_pesanan
-                LIMIT 1) as alamat_tamu'),
+            FROM histori_kamar
+            WHERE id_rincian_pesanan = rp.id_rincian_pesanan
+            LIMIT 1) as alamat_tamu'),
                         DB::raw('(SELECT foto_ktp
-                FROM laporan_keuangan
-                WHERE id_rincian_pesanan = rp.id_rincian_pesanan
-                LIMIT 1) as foto_ktp')
+            FROM laporan_keuangan
+            WHERE id_rincian_pesanan = rp.id_rincian_pesanan
+            LIMIT 1) as foto_ktp')
                     )
                     ->where('rp.id_rincian_pesanan', $request->id_customer_lama)
                     ->first();
@@ -978,16 +952,13 @@ class HotelController extends Controller
                 $alamatTamu = $customer->alamat_tamu;
                 $noWaTamu = $customer->no_wa_tamu;
                 $foto_ktp = $customer->foto_ktp;
-
             }
-
 
             /*
             |--------------------------------------------------------------------------
             | TIKET.COM
             |--------------------------------------------------------------------------
             */
-
             // Hanya relevan saat Status = Sudah Bayar (2) dan Metode = Online
             $tiket_com = null;
 
@@ -1000,19 +971,15 @@ class HotelController extends Controller
             | INSERT RINCIAN PESANAN
             |--------------------------------------------------------------------------
             */
-
             $idRincian = DB::table('rincian_pesanan')->insertGetId([
                 'nama_tamu' => $namaTamu,
                 'no_wa_tamu' => $noWaTamu,
                 'total_kamar_dipesan' => $totalKamar,
                 'total_request' => $totalRequest,
                 'total_dp' => $total_dp,
-                'tiket_com' => $tiket_com
+                'tiket_com' => $tiket_com,
+                'idempotency_key' => $idempotencyKey // [BARU]
             ]);
-
-
-
-
 
             // =====================================
             // INSERT LAPORAN KEUANGAN
@@ -1026,8 +993,8 @@ class HotelController extends Controller
                 $biaya = $jumlahPerTipe * $kamar->after_10_persen * $lama_inap;
                 $pajak = $biaya * 0.19;
                 $totalDiterima = $biaya - $pajak;
-                $idLaporan = DB::table('laporan_keuangan')->insertGetId([
 
+                $idLaporan = DB::table('laporan_keuangan')->insertGetId([
                     'id_rincian_pesanan' => $idRincian,
 
                     'kode_kamar' => $kamar->kode_kamar,
@@ -1060,77 +1027,47 @@ class HotelController extends Controller
                     'bukti_pembayaran' => $bukti_pembayaran,
 
                     'status_pembayaran' => $status_pembayaran
-
                 ]);
 
                 foreach ($items as $item) {
-
                     $idLaporanPerKamar[$item->id_nomor_kamar] = $idLaporan;
-
                 }
-
             }
-
-
-
-
-
-
 
             // =====================================
             // INSERT REQUEST TAMBAHAN
             // =====================================
-
             $requestTambahan = [];
 
             if ($jumlahExtraBed > 0) {
-
                 $requestTambahan[] = [
-
                     'id_rincian_pesanan' => $idRincian,
                     'kode_request' => 'BED',
                     'jumlah_request' => $jumlahExtraBed,
                     'total_harga' => $totalExtraBed
-
                 ];
-
             }
 
             if ($jumlahBreakfast > 0) {
-
                 $requestTambahan[] = [
-
                     'id_rincian_pesanan' => $idRincian,
                     'kode_request' => 'FAST',
                     'jumlah_request' => $jumlahBreakfast,
                     'total_harga' => $totalBreakfast
-
                 ];
-
             }
 
             if (!empty($requestTambahan)) {
-
                 DB::table('request')->insert($requestTambahan);
-
             }
-
-
-
-
-
-
 
             // =====================================
             // INSERT HISTORI KAMAR
             // =====================================
-
             $dataHistori = [];
 
             foreach ($request->id_nomor_kamar as $idNomorKamar) {
-
                 $dataHistori[] = [
-
                     'id_rincian_pesanan' => $idRincian,
                     'id_laporan_keuangan' => $idLaporanPerKamar[$idNomorKamar],
                     'id_nomor_kamar' => $idNomorKamar,
@@ -1140,14 +1077,10 @@ class HotelController extends Controller
 
                     'check_in' => $request->check_in,
                     'check_out' => $request->check_out
-
                 ];
-
             }
 
             DB::table('histori_kamar')->insert($dataHistori);
-
-
 
             NotifikasiService::buat(
                 'Pemesanan Baru',
@@ -1156,14 +1089,28 @@ class HotelController extends Controller
                 $request->dibuat_oleh
             );
 
-
-
             DB::commit();
 
             return response()->json([
                 'status' => 'success'
             ]);
 
+        } catch (QueryException $e) {
+            DB::rollBack();
+
+            // [BARU] Pengaman terakhir: unique index idempotency_key menolak
+            // insert kedua (MySQL error 1062). Perlakukan sebagai request ulang.
+            if (($e->errorInfo[1] ?? null) == 1062 && $idempotencyKey) {
+                return response()->json([
+                    'status' => 'success',
+                    'duplicate' => true
+                ]);
+            }
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
