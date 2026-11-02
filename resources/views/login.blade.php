@@ -61,7 +61,7 @@
 
             </h2>
 
-            <p class="login-subtitle">Sistem Manajemen Reservasi Hotel</p>
+            <p class="login-subtitle">Sistem Manajemen Reservasi Hotel AH</p>
 
             <!-- Alert Error -->
 
